@@ -15,6 +15,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/round-about.css" rel="stylesheet">
+     <link href="css/contact.css" rel="stylesheet">
 
   </head>
 
@@ -35,7 +36,7 @@
                  <span class="sr-only">(current)</span>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" href="http://localhost:8080/THESIS-ISPROJ2-PROJECT/contact.jsp">Contact</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="http://localhost:8080/THESIS-ISPROJ2-PROJECT/login.jsp">Log In</a>
@@ -44,16 +45,23 @@
         </div>
       </div>
     </nav>
+    
+    <div class="jumbotron jumbotron-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 col-lg-10">
+                <h1 class="h1">
+                    About Us <small>It's Nice to Meet You!</small></h1>
+                    <p>	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint, explicabo dolores ipsam aliquam inventore corrupti eveniet quisquam quod totam laudantium repudiandae obcaecati ea consectetur debitis velit facere nisi expedita vel?</p>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- Page Content -->
     <div class="container">
 
-      <!-- Introduction Row -->
-      <h1 class="my-5">About Us
-        <small>It's Nice to Meet You!</small>
-      </h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint, explicabo dolores ipsam aliquam inventore corrupti eveniet quisquam quod totam laudantium repudiandae obcaecati ea consectetur debitis velit facere nisi expedita vel?</p>
-
+     
       <!-- Team Members Row -->
       <div class="row">
         <div class="col-lg-12">

@@ -36,7 +36,7 @@
               <a class="nav-link" href="http://localhost:8080/THESIS-ISPROJ2-PROJECT/about.jsp">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" href="http://localhost:8080/THESIS-ISPROJ2-PROJECT/contact.jsp">Contact</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="http://localhost:8080/THESIS-ISPROJ2-PROJECT/login.jsp">Log In</a>

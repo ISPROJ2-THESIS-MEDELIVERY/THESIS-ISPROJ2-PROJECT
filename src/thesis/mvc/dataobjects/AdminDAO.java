@@ -9,6 +9,6 @@ public interface AdminDAO {
 	public void deleteAdmin( int AdminId );
 	public void UpdateAdmin( Admin admin ); 
 	public List<Admin> getAllAdmins();
-	public Admin getAdminById( int AdminId );
+	public Admin getAdminById( int AdminId );ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
 	
 }

@@ -9,5 +9,5 @@ public interface DispatcherDAO {
 	public void deleteDispatcher ( int dispatcherId );
 	public void updateDispatcher ( Dispatcher dispatcher );
 	public List<Dispatcher> getAllDispatchers();
-	public Dispatcher getDispatcherById();
+	public Dispatcher getDispatcherById ( int dispatcherId );
 }

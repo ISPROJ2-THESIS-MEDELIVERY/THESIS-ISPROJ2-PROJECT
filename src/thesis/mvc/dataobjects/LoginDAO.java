@@ -9,6 +9,6 @@ public interface LoginDAO {
 	public void deleteLogin( int loginId );
 	public void updateLogin( Login login );
 	public List<Login> getAllLogins();
-	public Login getLoginByID( int customerId );
+	public Login getLoginByID( int loginId );
 
 }

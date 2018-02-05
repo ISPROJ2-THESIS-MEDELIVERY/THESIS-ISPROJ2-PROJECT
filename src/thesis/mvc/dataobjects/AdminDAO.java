@@ -6,8 +6,8 @@ import thesis.mvc.model.Admin;
 
 public interface AdminDAO {
 	public void addAdmin( Admin admin );
-	public void deleteAdmin( int AdminId );
+	public void deleteAdmin( int adminId );
 	public void UpdateAdmin( Admin admin ); 
 	public List<Admin> getAllAdmins();
-	public Admin getAdminById( int AdminId );
+	public Admin getAdminById( int adminId );
 }

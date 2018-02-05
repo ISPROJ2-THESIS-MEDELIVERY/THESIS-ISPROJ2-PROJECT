@@ -65,9 +65,8 @@ public class LoginImplement implements LoginDAO {
 			preparedStatement.setString( 2, login.getPassword() );
 			preparedStatement.setString( 3, login.getLoginStatus() );
 			preparedStatement.setDate( 4, CurrentDate );
-			preparedStatement.setDate( 5, CurrentDate );
-			preparedStatement.setString( 6, login.getUsertype() );
-			preparedStatement.setInt( 7, login.getUserID() );
+			preparedStatement.setString( 5, login.getUsertype() );
+			preparedStatement.setInt( 6, login.getUserID() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {

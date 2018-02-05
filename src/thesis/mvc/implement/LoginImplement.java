@@ -82,16 +82,16 @@ public class LoginImplement implements LoginDAO {
 		List<Login> logins = new ArrayList<Login>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery( "select * from customer" );
+			//ResultSet resultSet = statement.executeQuery( "select * from customer" );
 			while( resultSet.next() ) {
 				Login login = new Login();
-				login.set( resultSet.getInt( "UserID" ) );
-				login.set( resultSet.getString( "Username" ) );
-				login.set( resultSet.getString( "Password" ) );
-				login.set( resultSet.getString( "LoginStatus" ) );
-				login.set( resultSet.getDate( "LoginLast" ) );
-				login.set( resultSet.getDate( "SignupDate" ) );
-				login.set( resultSet.getString( "Usertype" ) );
+				login.setUserID( resultSet.getInt( "UserID" ) );
+				login.setUsername( resultSet.getString( "Username" ) );
+				login.setPassword( resultSet.getString( "Password" ) );
+				login.setLoginStatus( resultSet.getString( "LoginStatus" ) );
+				login.setLoginLast( resultSet.getDate( "LoginLast" ) );
+				login.setSignupDate( resultSet.getDate( "SignupDate" ) );
+				login.setUsertype( resultSet.getString( "Usertype" ) );
 				logins.add(login);
 			}
 			resultSet.close();
@@ -104,8 +104,27 @@ public class LoginImplement implements LoginDAO {
 
 	@Override
 	public Login getLoginByID(int loginId) {
-		// TODO Auto-generated method stub
-		return null;
+		Login login = new Login();
+		try {
+			//String query = "select * from customer where customerId=?";
+			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			preparedStatement.setInt(1, loginId);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while( resultSet.next() ) {
+				login.setUserID( resultSet.getInt( "UserID" ) );
+				login.setUsername( resultSet.getString( "Username" ) );
+				login.setPassword( resultSet.getString( "Password" ) );
+				login.setLoginStatus( resultSet.getString( "LoginStatus" ) );
+				login.setLoginLast( resultSet.getDate( "LoginLast" ) );
+				login.setSignupDate( resultSet.getDate( "SignupDate" ) );
+				login.setUsertype( resultSet.getString( "Usertype" ) );
+			}
+			resultSet.close();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return login;
 	}
 
 }

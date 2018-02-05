@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.print.attribute.standard.DateTimeAtCompleted;
-
 import thesis.mvc.dataobjects.LoginDAO;
 import thesis.mvc.model.Login;
 import thesis.mvc.utility.DBUtility;
@@ -27,8 +25,8 @@ public class LoginImplement implements LoginDAO {
 	@Override
 	public void addLogin(Login login) {
 		try {
-			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime())
-			//String query = "insert into customer (firstName, lastName, middleName, creditCardNo, billingStreet, billingAddress, phoneNo) values (?,?,?,?,?,?,?)";
+			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+			String query = "";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setString( 1, login.getUsername() );
 			preparedStatement.setString( 2, login.getPassword() );
@@ -47,7 +45,7 @@ public class LoginImplement implements LoginDAO {
 	@Override
 	public void deleteLogin(int loginId) {
 		try {
-			//String query = "delete from customer where customerId=?";
+			String query = "";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, loginId);
 			preparedStatement.executeUpdate();
@@ -60,8 +58,8 @@ public class LoginImplement implements LoginDAO {
 	@Override
 	public void updateLogin(Login login) {
 		try {
-			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime())
-			//String query = "insert into customer (firstName, lastName, middleName, creditCardNo, billingStreet, billingAddress, phoneNo) values (?,?,?,?,?,?,?)";
+			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+			String query = "";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setString( 1, login.getUsername() );
 			preparedStatement.setString( 2, login.getPassword() );
@@ -82,7 +80,7 @@ public class LoginImplement implements LoginDAO {
 		List<Login> logins = new ArrayList<Login>();
 		try {
 			Statement statement = conn.createStatement();
-			//ResultSet resultSet = statement.executeQuery( "select * from customer" );
+			ResultSet resultSet = statement.executeQuery( "" );
 			while( resultSet.next() ) {
 				Login login = new Login();
 				login.setUserID( resultSet.getInt( "UserID" ) );
@@ -106,7 +104,7 @@ public class LoginImplement implements LoginDAO {
 	public Login getLoginByID(int loginId) {
 		Login login = new Login();
 		try {
-			//String query = "select * from customer where customerId=?";
+			String query = "";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, loginId);
 			ResultSet resultSet = preparedStatement.executeQuery();

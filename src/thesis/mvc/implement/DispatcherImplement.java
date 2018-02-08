@@ -88,13 +88,13 @@ public class DispatcherImplement implements DispatcherDAO{
 			while( resultSet.next() ) {
 				Dispatcher dispatcher = new Dispatcher();
 				dispatcher.setDispatcherID( resultSet.getInt( "DispatcherId" ) );
-				dispatcher.setCourierServiceID( resultSet );
-				dispatcher.setUserID( resultSet );
-				dispatcher.setFirstName( resultSet );
-				dispatcher.setLastName( resultSet );
-				dispatcher.setContactNumber( resultSet );
-				dispatcher.setAddress( resultSet );
-				dispatcher.setBirthdate( resultSet );
+				dispatcher.setCourierServiceID( resultSet.getInt( "CourierServiceID" ) );
+				dispatcher.setUserID( resultSet.getInt( "UserID" ) );
+				dispatcher.setFirstName( resultSet.getString( "FirstName" ) );
+				dispatcher.setLastName( resultSet.getString( "LastName" ) );
+				dispatcher.setContactNumber( resultSet.getInt( "ContactNumber" ) );
+				dispatcher.setAddress( resultSet.getString( "Address" ) );
+				dispatcher.setBirthdate( resultSet.getDate( "Birthdate") );
 				dispatchers.add(dispatcher);
 			}
 			resultSet.close();

@@ -1,18 +1,15 @@
 package thesis.mvc.implement;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import thesis.mvc.dataobjects.AdminDAO;
 import thesis.mvc.model.Admin;
-import thesis.mvc.model.Login;
 import thesis.mvc.utility.DBUtility;
 
 public class AdminImplement implements AdminDAO {
@@ -29,10 +26,9 @@ public class AdminImplement implements AdminDAO {
 		try {
 			String query = "";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
-			preparedStatement.setInt( 1, admin.getAdminID() );
-			preparedStatement.setInt( 2, admin.getUserID() );
-			preparedStatement.setString( 3, admin.getFirstName() );
-			preparedStatement.setString( 4, admin.getSurname() );
+			preparedStatement.setInt( 1, admin.getUserID() );
+			preparedStatement.setString( 2, admin.getFirstName() );
+			preparedStatement.setString( 3, admin.getSurname() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
@@ -60,10 +56,10 @@ public class AdminImplement implements AdminDAO {
 		try {
 			String query = "";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
-			preparedStatement.setInt( 1, admin.getAdminID() );
-			preparedStatement.setInt( 2, admin.getUserID() );
-			preparedStatement.setString( 3, admin.getFirstName() );
-			preparedStatement.setString( 4, admin.getSurname() );
+			preparedStatement.setInt( 1, admin.getUserID() );
+			preparedStatement.setString( 2, admin.getFirstName() );
+			preparedStatement.setString( 3, admin.getSurname() );
+			preparedStatement.setInt( 4, admin.getAdminID() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {

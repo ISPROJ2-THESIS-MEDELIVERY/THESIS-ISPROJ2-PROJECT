@@ -10,8 +10,8 @@ public class CourierService {
 	private String CompanyBarangay;
 	private String CompanyCity;
 	private String CompanyProvince;
-	private String CompanyLandline;
-	private String CompanyCellular;
+	private int CompanyLandline;
+	private int CompanyCellular;
 	private String CompanyContact; 
 	private Date DateAdded;
 	public int getCourierServiceID() {
@@ -50,16 +50,16 @@ public class CourierService {
 	public void setCompanyProvince(String companyProvince) {
 		CompanyProvince = companyProvince;
 	}
-	public String getCompanyLandline() {
+	public int getCompanyLandline() {
 		return CompanyLandline;
 	}
-	public void setCompanyLandline(String companyLandline) {
+	public void setCompanyLandline(int companyLandline) {
 		CompanyLandline = companyLandline;
 	}
-	public String getCompanyCellular() {
+	public int getCompanyCellular() {
 		return CompanyCellular;
 	}
-	public void setCompanyCellular(String companyCellular) {
+	public void setCompanyCellular(int companyCellular) {
 		CompanyCellular = companyCellular;
 	}
 	public String getCompanyContact() {

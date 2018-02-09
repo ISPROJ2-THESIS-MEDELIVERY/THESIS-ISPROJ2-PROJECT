@@ -1,10 +1,12 @@
 package thesis.mvc.model;
 
+import java.math.BigDecimal;
+
 public class CityListing {
 	
 	private int CityID;
 	private String CityName;
-	private double CityCost;
+	private BigDecimal CityCost;
 	public int getCityID() {
 		return CityID;
 	}
@@ -17,10 +19,10 @@ public class CityListing {
 	public void setCityName(String cityName) {
 		CityName = cityName;
 	}
-	public double getCityCost() {
+	public BigDecimal getCityCost() {
 		return CityCost;
 	}
-	public void setCityCost(double cityCost) {
+	public void setCityCost(BigDecimal cityCost) {
 		CityCost = cityCost;
 	}
 	

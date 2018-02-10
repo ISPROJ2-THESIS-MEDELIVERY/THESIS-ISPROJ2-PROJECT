@@ -62,7 +62,6 @@ public class CourierServiceImplement implements CourierServiceDAO{
 	@Override
 	public void updateCourierService(CourierService courierService) {
 		try {
-			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 			String query = "";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setString( 1, courierService.getCompanyName() );

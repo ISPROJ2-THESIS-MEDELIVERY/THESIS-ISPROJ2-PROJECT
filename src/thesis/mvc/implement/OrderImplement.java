@@ -1,11 +1,13 @@
 package thesis.mvc.implement;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import thesis.mvc.dataobjects.OrderDAO;
@@ -23,6 +25,7 @@ public class OrderImplement implements OrderDAO{
 	@Override
 	public void addOrder(Order order) {
 		try {
+			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 			String query = "";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, order.getCustomerID() );
@@ -31,7 +34,7 @@ public class OrderImplement implements OrderDAO{
 			preparedStatement.setInt( 4, order.getCityID() );
 			preparedStatement.setInt( 5, order.getPrescriptionID() );
 			preparedStatement.setString( 6, order.getOrderAddress() );
-			preparedStatement.setDate( 7, order.getDateOrdered() );
+			preparedStatement.setDate( 7, CurrentDate );
 			preparedStatement.setDate( 8, order.getDateProcessed() );
 			preparedStatement.setDate( 9, order.getDateDelivered() );
 			preparedStatement.setString( 10, order.getOrderType() );
@@ -63,7 +66,6 @@ public class OrderImplement implements OrderDAO{
 	@Override
 	public void updateOrder(Order order) {
 		try {
-			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 			String query = "";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, order.getCustomerID() );
@@ -72,14 +74,13 @@ public class OrderImplement implements OrderDAO{
 			preparedStatement.setInt( 4, order.getCityID() );
 			preparedStatement.setInt( 5, order.getPrescriptionID() );
 			preparedStatement.setString( 6, order.getOrderAddress() );
-			preparedStatement.setDate( 7, order.getDateOrdered() );
-			preparedStatement.setDate( 8, order.getDateProcessed() );
-			preparedStatement.setDate( 9, order.getDateDelivered() );
-			preparedStatement.setString( 10, order.getOrderType() );
-			preparedStatement.setString( 11, order.getOrderStatus() );
-			preparedStatement.setBoolean( 12, order.getSeniorDiscount() );
-			preparedStatement.setString( 13, order.getPaymentMethod() );
-			preparedStatement.setInt( 14, order.getOrderID() );
+			preparedStatement.setDate( 7, order.getDateProcessed() );
+			preparedStatement.setDate( 8, order.getDateDelivered() );
+			preparedStatement.setString( 9, order.getOrderType() );
+			preparedStatement.setString( 10, order.getOrderStatus() );
+			preparedStatement.setBoolean( 11, order.getSeniorDiscount() );
+			preparedStatement.setString( 12, order.getPaymentMethod() );
+			preparedStatement.setInt( 13, order.getOrderID() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {

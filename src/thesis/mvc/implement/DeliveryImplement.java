@@ -82,6 +82,7 @@ public class DeliveryImplement implements DeliveryDAO{
 				delivery.setDriverID( resultSet.getInt( "DriverID" ) );
 				delivery.setPlateNumber( resultSet.getString( "PlateNumber" ) );
 				delivery.setComments( resultSet.getString( "Comments" ) );
+				deliveries.add(delivery);
 			}
 			resultSet.close();
 			statement.close();

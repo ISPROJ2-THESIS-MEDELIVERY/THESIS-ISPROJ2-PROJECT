@@ -12,7 +12,7 @@ public class Branch {
 	private String BranchOwner;
 	private String PharmacyLogo;
 	private String PharmacyName;
-	private String BranchAvailable;
+	private boolean BranchAvailable;
 	
 	public int getBranchID() {
 		return BranchID;
@@ -74,10 +74,10 @@ public class Branch {
 	public void setPharmacyName(String pharmacyName) {
 		PharmacyName = pharmacyName;
 	}
-	public String getBranchAvailable() {
+	public boolean getBranchAvailable() {
 		return BranchAvailable;
 	}
-	public void setBranchAvailable(String branchAvailable) {
+	public void setBranchAvailable(boolean branchAvailable) {
 		BranchAvailable = branchAvailable;
 	}
 }

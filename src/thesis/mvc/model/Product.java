@@ -14,6 +14,7 @@ public class Product {
 	private String ProductDescription;
 	private String ProductImage;
 	private boolean isRXProduct;
+	private int CounterLimit;
 	
 	public int getProductID() {
 		return ProductID;
@@ -86,6 +87,12 @@ public class Product {
 	}
 	public void setRXProduct(boolean isRXProduct) {
 		this.isRXProduct = isRXProduct;
+	}
+	public int getCounterLimit() {
+		return CounterLimit;
+	}
+	public void setCounterLimit(int counterLimit) {
+		CounterLimit = counterLimit;
 	}
 
 }

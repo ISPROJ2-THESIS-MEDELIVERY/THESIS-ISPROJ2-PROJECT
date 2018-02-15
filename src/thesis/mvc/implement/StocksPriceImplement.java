@@ -1,6 +1,11 @@
 package thesis.mvc.implement;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import thesis.mvc.dataobjects.StocksPriceDAO;
@@ -17,32 +22,98 @@ public class StocksPriceImplement implements StocksPriceDAO{
 
 	@Override
 	public void addStocksPrice(StocksPrice stocksPrice) {
-		// TODO Auto-generated method stub
+		try {
+			String query = "";
+			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			preparedStatement.setInt( 1, stocksPrice.getStockID() );
+			preparedStatement.setDouble( 2, stocksPrice.getPriceSet() );
+			preparedStatement.setDate( 3, stocksPrice.getDateSet() );
+			preparedStatement.setBoolean( 4, stocksPrice.isIsCurrent() );
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
 	@Override
 	public void deleteStocksPrice(int stocksPriceId) {
-		// TODO Auto-generated method stub
+		try {
+			String query = "";
+			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			preparedStatement.setInt(1, stocksPriceId);
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
 	@Override
 	public void updateStocksPrice(StocksPrice stocksPrice) {
-		// TODO Auto-generated method stub
+		try {
+			String query = "";
+			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			preparedStatement.setInt( 1, stocksPrice.getStockID() );
+			preparedStatement.setDouble( 2, stocksPrice.getPriceSet() );
+			preparedStatement.setDate( 3, stocksPrice.getDateSet() );
+			preparedStatement.setBoolean( 4, stocksPrice.isIsCurrent() );
+			preparedStatement.setInt( 5, stocksPrice.getStocksPriceID() );
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
 	@Override
 	public List<StocksPrice> getAllStocksPrice() {
-		// TODO Auto-generated method stub
-		return null;
+		List<StocksPrice> stocksPrices = new ArrayList<StocksPrice>();
+		try {
+			Statement statement = conn.createStatement();
+			ResultSet resultSet = statement.executeQuery( "" );
+			while( resultSet.next() ) {
+				StocksPrice stocksPrice = new StocksPrice();
+				stocksPrice.setStocksPriceID( resultSet.getInt( "StocksPriceID" ) );
+				stocksPrice.setStockID( resultSet.getInt( "StockID" ) );
+				stocksPrice.setPriceSet( resultSet.getDouble( "PriceSet" ) );
+				stocksPrice.setDateSet( resultSet.getDate( "DateSet" ) );
+				stocksPrice.setIsCurrent( resultSet.getBoolean( "IsCurrent" ) );
+				stocksPrices.add(stocksPrice);
+			}
+			resultSet.close();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return stocksPrices;
+
 	}
 
 	@Override
 	public StocksPrice getStocksPricebyId(int stocksPriceId) {
-		// TODO Auto-generated method stub
-		return null;
+		StocksPrice stocksPrice = new StocksPrice();
+		try {
+			String query = "";
+			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			preparedStatement.setInt(1, stocksPriceId);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while( resultSet.next() ) {
+				stocksPrice.setStocksPriceID( resultSet.getInt( "StocksPriceID" ) );
+				stocksPrice.setStockID( resultSet.getInt( "StockID" ) );
+				stocksPrice.setPriceSet( resultSet.getDouble( "PriceSet" ) );
+				stocksPrice.setDateSet( resultSet.getDate( "DateSet" ) );
+				stocksPrice.setIsCurrent( resultSet.getBoolean( "IsCurrent" ) );
+			}
+			resultSet.close();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return stocksPrice;
 	}
 
 }

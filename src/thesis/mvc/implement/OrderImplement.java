@@ -26,7 +26,7 @@ public class OrderImplement implements OrderDAO{
 	public void addOrder(Order order) {
 		try {
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-			String query = "";
+			String query = "INSERT INTO Order (CustomerID, DeliveryID, PharmacistID, CityID, PrescriptionID, OrderAddress, DateOrdered, DateProcessed, DateDelivered, OrderType, OrderStatus, SeniorDiscount, PaymentMethod) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, order.getCustomerID() );
 			preparedStatement.setInt( 2, order.getDeliveryID() );
@@ -52,7 +52,7 @@ public class OrderImplement implements OrderDAO{
 	@Override
 	public void deleteOrder(int orderId) {
 		try {
-			String query = "";
+			String query = "DELETE FROM Order where OrderID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, orderId);
 			preparedStatement.executeUpdate();
@@ -66,7 +66,7 @@ public class OrderImplement implements OrderDAO{
 	@Override
 	public void updateOrder(Order order) {
 		try {
-			String query = "";
+			String query = "UPDATE Order SET CustomerID=?, DeliveryID=?, PharmacistID=?, CityID=?, PrescriptionID=?, OrderAddress=?, DateOrdered=?, DateProcessed=?, DateDelivered=?, OrderType=?, OrderStatus=?, SeniorDiscount=?, PaymentMethod=? WHERE OrderID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, order.getCustomerID() );
 			preparedStatement.setInt( 2, order.getDeliveryID() );
@@ -94,7 +94,7 @@ public class OrderImplement implements OrderDAO{
 		List<Order> orders = new ArrayList<Order>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery( "" );
+			ResultSet resultSet = statement.executeQuery( "SELECT * FROM Order" );
 			while( resultSet.next() ) {
 				Order order = new Order();
 				order.setOrderID( resultSet.getInt( "OrderID" ) );
@@ -125,7 +125,7 @@ public class OrderImplement implements OrderDAO{
 	public Order getOrderById(int orderId) {
 		Order order = new Order();
 		try {
-			String query = "";
+			String query = "SELECT * FROM Order WHERE OrderID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, orderId);
 			ResultSet resultSet = preparedStatement.executeQuery();

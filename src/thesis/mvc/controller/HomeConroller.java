@@ -1,5 +1,5 @@
 package thesis.mvc.controller;
 
-public class CustomerController {
+public class HomeConroller {
 
 }

@@ -86,7 +86,7 @@ public class BranchImplement implements BranchDAO{
 		List<Branch> branches = new ArrayList<Branch>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery( "" );
+			ResultSet resultSet = statement.executeQuery( "SELECT * FROM Branch" );
 			while( resultSet.next() ) {
 				Branch branch = new Branch();
 				branch.setBranchID( resultSet.getInt( "BranchID" ) );
@@ -114,7 +114,7 @@ public class BranchImplement implements BranchDAO{
 	public Branch getBranchById(int branchId) {
 		Branch branch = new Branch();
 		try {
-			String query = "";
+			String query = "SELECT * FROM Branch WHERE BranchID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, branchId);
 			ResultSet resultSet = preparedStatement.executeQuery();

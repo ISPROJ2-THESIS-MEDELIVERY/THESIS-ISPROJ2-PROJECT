@@ -74,7 +74,7 @@ public class AuditImplement implements AuditDAO{
 	List<Audit> audits = new ArrayList<Audit>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery( "" );
+			ResultSet resultSet = statement.executeQuery( "SELECT * FROM Audit" );
 			while( resultSet.next() ) {
 				Audit audit = new Audit();
 				audit.setAuditID( resultSet.getInt( "AuditID" ) );
@@ -95,7 +95,7 @@ public class AuditImplement implements AuditDAO{
 	@Override
 	public Audit getAuditbyId(int auditId) {Audit audit = new Audit();
 		try {
-			String query = "";
+			String query = "SELECT * FROM Audit WHERE AuditID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, auditId);
 			ResultSet resultSet = preparedStatement.executeQuery();

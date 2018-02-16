@@ -73,7 +73,7 @@ public class AdminImplement implements AdminDAO {
 		List<Admin> admins = new ArrayList<Admin>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery( "" );
+			ResultSet resultSet = statement.executeQuery( "SELECT * FROM Admin" );
 			while( resultSet.next() ) {
 				Admin admin = new Admin();
 				admin.setAdminID( resultSet.getInt( "AdminID" ) );
@@ -94,7 +94,7 @@ public class AdminImplement implements AdminDAO {
 	public Admin getAdminById(int adminId) {
 		Admin admin = new Admin();
 		try {
-			String query = "";
+			String query = "SELECT * FROM Admin WHERE AdminID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, adminId);
 			ResultSet resultSet = preparedStatement.executeQuery();

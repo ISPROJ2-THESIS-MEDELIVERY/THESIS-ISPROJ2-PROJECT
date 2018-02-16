@@ -23,7 +23,7 @@ public class CityListingImplement implements CityListingDAO{
 	@Override
 	public void addCityListing(CityListing cityListing) {
 		try {
-		String query = "";
+		String query = "INSERT INTO CityListing (CityName, CityCost) VALUES (?,?)";
 		PreparedStatement preparedStatement = conn.prepareStatement( query );
 		preparedStatement.setString( 1, cityListing.getCityName() );
 		preparedStatement.setBigDecimal( 2, cityListing.getCityCost() );
@@ -38,7 +38,7 @@ public class CityListingImplement implements CityListingDAO{
 	@Override
 	public void deleteCityListing(int cityListingId) {
 		try {
-			String query = "";
+			String query = "DELETE FROM CityListing where CityID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, cityListingId );
 			preparedStatement.executeUpdate();
@@ -52,7 +52,7 @@ public class CityListingImplement implements CityListingDAO{
 	@Override
 	public void updateCityListing(CityListing cityListing) {
 		try {
-		String query = "";
+		String query = "UPDATE CityListing SET CityName=?, CityCost=? WHERE CityID=?";
 		PreparedStatement preparedStatement = conn.prepareStatement( query );
 		preparedStatement.setString( 1, cityListing.getCityName() );
 		preparedStatement.setBigDecimal( 2, cityListing.getCityCost() );
@@ -70,7 +70,7 @@ public class CityListingImplement implements CityListingDAO{
 		List<CityListing> cityListings = new ArrayList<CityListing>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery( "" );
+			ResultSet resultSet = statement.executeQuery( "SELECT * FROM CityListing" );
 			while( resultSet.next() ) {
 				CityListing cityListing = new CityListing();
 				cityListing.setCityID( resultSet.getInt( "CityID" ) );
@@ -90,7 +90,7 @@ public class CityListingImplement implements CityListingDAO{
 	public CityListing getCityListingById(int cityListingId) {
 		CityListing cityListing = new CityListing();
 		try {
-			String query = "";
+			String query = "SELECT * FROM CityListing WHERE CityID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, cityListingId);
 			ResultSet resultSet = preparedStatement.executeQuery();

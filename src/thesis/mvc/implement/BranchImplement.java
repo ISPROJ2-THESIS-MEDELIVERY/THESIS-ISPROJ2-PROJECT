@@ -23,7 +23,7 @@ public class BranchImplement implements BranchDAO{
 	@Override
 	public void addBranch(Branch branch) {
 		try {
-			String query = "";
+			String query = "INSERT INTO Branch (BranchStreet, BranchBarangay, CityID, BranchProvince, BranchLandline, BranchCellular, BranchOwner, PharmacyLogo, PharmacyName, BranchAvailable) VALUES (?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setString( 1, branch.getBranchStreet() );
 			preparedStatement.setString( 2, branch.getBranchBarangay() );
@@ -46,7 +46,7 @@ public class BranchImplement implements BranchDAO{
 	@Override
 	public void deleteBranch(int branchId) {
 		try {
-			String query = "";
+			String query = "DELETE FROM Branch where BranchID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, branchId);
 			preparedStatement.executeUpdate();
@@ -60,7 +60,7 @@ public class BranchImplement implements BranchDAO{
 	@Override
 	public void updateBranch(Branch branch) {
 		try {
-			String query = "";
+			String query = "UPDATE Branch SET BranchStreet=?, BranchBarangay=?, CityID=?, BranchProvince=?, BranchLandline=?, BranchCellular=?, BranchOwner=?, PharmacyLogo=?, PharmacyName=?, BranchAvailable=? WHERE BranchID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setString( 1, branch.getBranchStreet() );
 			preparedStatement.setString( 2, branch.getBranchBarangay() );

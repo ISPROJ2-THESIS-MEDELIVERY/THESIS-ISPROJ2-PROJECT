@@ -26,7 +26,7 @@ public class CourierServiceImplement implements CourierServiceDAO{
 	public void addCourierService(CourierService courierService) {
 		try {
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-			String query = "";
+			String query = "INSERT INTO CourierService (CompanyName, CompanyStreet, CompanyBarangay, CompanyCity, CompanyProvince, CompanyLandline, CompanyCellular, CompanyContact, DateAdded) VALUES (?,?,?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setString( 1, courierService.getCompanyName() );
 			preparedStatement.setString( 2, courierService.getCompanyStreet() );
@@ -48,7 +48,7 @@ public class CourierServiceImplement implements CourierServiceDAO{
 	@Override
 	public void deleteCourierService(int courierServiceId) {
 		try {
-			String query = "";
+			String query = "DELETE FROM CourierService where CourierServiceID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, courierServiceId );
 			preparedStatement.executeUpdate();
@@ -62,7 +62,7 @@ public class CourierServiceImplement implements CourierServiceDAO{
 	@Override
 	public void updateCourierService(CourierService courierService) {
 		try {
-			String query = "";
+			String query = "UPDATE CourierService SET CompanyName=?, CompanyStreet=?, CompanyBarangay=?, CompanyCity=?, CompanyProvince=?, CompanyLandline=?, CompanyCellular=?, CompanyContact=?, DateAdded=? WHERE CourierServiceID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setString( 1, courierService.getCompanyName() );
 			preparedStatement.setString( 2, courierService.getCompanyStreet() );
@@ -87,7 +87,7 @@ public class CourierServiceImplement implements CourierServiceDAO{
 		List<CourierService> courierServices = new ArrayList<CourierService>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery( "" );
+			ResultSet resultSet = statement.executeQuery( "SELECT * FROM CourierService" );
 			while( resultSet.next() ) {
 				CourierService courierService = new CourierService();
 				courierService.setCourierServiceID( resultSet.getInt( "CourierServiceID" ) );
@@ -114,7 +114,7 @@ public class CourierServiceImplement implements CourierServiceDAO{
 	public CourierService getCourierServiceById(int courierServiceId) {
 		CourierService courierService = new CourierService();
 		try {
-			String query = "";
+			String query = "SELECT * FROM CourierService WHERE CourierServiceID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, courierServiceId);
 			ResultSet resultSet = preparedStatement.executeQuery();

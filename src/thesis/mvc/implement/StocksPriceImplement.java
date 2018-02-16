@@ -23,7 +23,7 @@ public class StocksPriceImplement implements StocksPriceDAO{
 	@Override
 	public void addStocksPrice(StocksPrice stocksPrice) {
 		try {
-			String query = "";
+			String query = "INSERT INTO Stocks (ProductID, BranchID, Quantity, Feature) VALUES (?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, stocksPrice.getStockID() );
 			preparedStatement.setDouble( 2, stocksPrice.getPriceSet() );
@@ -40,7 +40,7 @@ public class StocksPriceImplement implements StocksPriceDAO{
 	@Override
 	public void deleteStocksPrice(int stocksPriceId) {
 		try {
-			String query = "";
+			String query = "DELETE FROM Stocks where StockID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, stocksPriceId);
 			preparedStatement.executeUpdate();
@@ -54,7 +54,7 @@ public class StocksPriceImplement implements StocksPriceDAO{
 	@Override
 	public void updateStocksPrice(StocksPrice stocksPrice) {
 		try {
-			String query = "";
+			String query = "UPDATE Stocks SET ProductID=?, BranchID=?, Quantity=?, Feature=? WHERE StockID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, stocksPrice.getStockID() );
 			preparedStatement.setDouble( 2, stocksPrice.getPriceSet() );
@@ -74,7 +74,7 @@ public class StocksPriceImplement implements StocksPriceDAO{
 		List<StocksPrice> stocksPrices = new ArrayList<StocksPrice>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery( "" );
+			ResultSet resultSet = statement.executeQuery( "SELECT * FROM Stocks" );
 			while( resultSet.next() ) {
 				StocksPrice stocksPrice = new StocksPrice();
 				stocksPrice.setStocksPriceID( resultSet.getInt( "StocksPriceID" ) );
@@ -97,7 +97,7 @@ public class StocksPriceImplement implements StocksPriceDAO{
 	public StocksPrice getStocksPricebyId(int stocksPriceId) {
 		StocksPrice stocksPrice = new StocksPrice();
 		try {
-			String query = "";
+			String query = "SELECT * FROM Stocks WHERE StockID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, stocksPriceId);
 			ResultSet resultSet = preparedStatement.executeQuery();

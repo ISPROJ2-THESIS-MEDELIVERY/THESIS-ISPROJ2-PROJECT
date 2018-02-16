@@ -23,7 +23,7 @@ public class StocksImplement implements StocksDAO{
 	@Override
 	public void addStocks(Stocks stocks) {
 		try {
-			String query = "";
+			String query = "INSERT INTO Stocks (ProductID, BranchID, Quantity, Feature) VALUES (?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, stocks.getProductID() );
 			preparedStatement.setInt( 2, stocks.getBranchID() );
@@ -40,7 +40,7 @@ public class StocksImplement implements StocksDAO{
 	@Override
 	public void deleteStocks(int stocksId) {
 		try {
-			String query = "";
+			String query = "DELETE FROM Stocks where StockID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, stocksId);
 			preparedStatement.executeUpdate();
@@ -54,7 +54,7 @@ public class StocksImplement implements StocksDAO{
 	@Override
 	public void updateStocks(Stocks stocks) {
 		try {
-			String query = "";
+			String query = "UPDATE Stocks SET ProductID=?, BranchID=?, Quantity=?, Feature=? WHERE StockID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, stocks.getProductID() );
 			preparedStatement.setInt( 2, stocks.getBranchID() );
@@ -74,7 +74,7 @@ public class StocksImplement implements StocksDAO{
 		List<Stocks> stocks = new ArrayList<Stocks>();
 			try {
 				Statement statement = conn.createStatement();
-				ResultSet resultSet = statement.executeQuery( "" );
+				ResultSet resultSet = statement.executeQuery( "SELECT * FROM Stocks" );
 				while( resultSet.next() ) {
 					Stocks stock = new Stocks();
 					stock.setStockID( resultSet.getInt( "StockID" ) );
@@ -96,7 +96,7 @@ public class StocksImplement implements StocksDAO{
 	public Stocks getStocksById(int stocksId) {
 		Stocks stock = new Stocks();
 			try {
-				String query = "";
+				String query = "SELECT * FROM Stocks WHERE StockID=?";
 				PreparedStatement preparedStatement = conn.prepareStatement( query );
 				preparedStatement.setInt(1, stocksId);
 				ResultSet resultSet = preparedStatement.executeQuery();

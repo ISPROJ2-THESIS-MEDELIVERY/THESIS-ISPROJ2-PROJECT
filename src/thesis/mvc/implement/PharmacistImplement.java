@@ -23,7 +23,7 @@ public class PharmacistImplement implements PharmacistDAO{
 	@Override
 	public void addPharmacist(Pharmacist pharmacist) {
 		try {
-			String query = "";
+			String query = "INSERT INTO Pharmacist (UserID, BranchID, FirstName, LastName, PRCNo, Position) VALUES (?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, pharmacist.getUserID() );
 			preparedStatement.setInt( 2, pharmacist.getBranchID() );
@@ -42,7 +42,7 @@ public class PharmacistImplement implements PharmacistDAO{
 	@Override
 	public void deletePharmacist(int pharmacistId) {
 		try {
-			String query = "";
+			String query = "DELETE FROM Pharmacist where PharmacistID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, pharmacistId );
 			preparedStatement.executeUpdate();
@@ -56,7 +56,7 @@ public class PharmacistImplement implements PharmacistDAO{
 	@Override
 	public void updatePharmacist(Pharmacist pharmacist) {
 		try {
-			String query = "";
+			String query = "UPDATE Pharmacist SET UserID=?, BranchID=?, FirstName=?, LastName=?, PRCNo=? Position=?WHERE PharmacistID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, pharmacist.getUserID() );
 			preparedStatement.setInt( 2, pharmacist.getBranchID() );
@@ -78,7 +78,7 @@ public class PharmacistImplement implements PharmacistDAO{
 		List<Pharmacist> pharmacists = new ArrayList<Pharmacist>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery( "" );
+			ResultSet resultSet = statement.executeQuery( "SELECT * FROM Pharmacist" );
 			while( resultSet.next() ) {
 				Pharmacist pharmacist = new Pharmacist();
 				pharmacist.setPharmacistID( resultSet.getInt( "PharmacistID" ) );
@@ -102,7 +102,7 @@ public class PharmacistImplement implements PharmacistDAO{
 	public Pharmacist getPharmacistById(int pharmacistId) {
 		Pharmacist pharmacist = new Pharmacist();
 		try {
-			String query = "";
+			String query = "SELECT * FROM Pharmacist WHERE PharmacistID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, pharmacistId);
 			ResultSet resultSet = preparedStatement.executeQuery();

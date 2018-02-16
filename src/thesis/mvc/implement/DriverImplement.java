@@ -23,7 +23,7 @@ public class DriverImplement implements DriverDAO {
 	@Override
 	public void addDriver(Driver driver) {
 		try {
-			String query = "";
+			String query = "INSERT INTO Driver (DriverName, DriverAddress, DriverContactNumber) VALUES (?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setString( 1, driver.getDriverName() );
 			preparedStatement.setString( 2, driver.getDriverAddress() );
@@ -39,7 +39,7 @@ public class DriverImplement implements DriverDAO {
 	@Override
 	public void updateDriver(int driverId) {
 		try {
-			String query = "";
+			String query = "UPDATE Driver SET DriverName=?, DriverAddress=?, DriverContactNumber=? WHERE DriverID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, driverId);
 			preparedStatement.executeUpdate();
@@ -53,7 +53,7 @@ public class DriverImplement implements DriverDAO {
 	@Override
 	public void deleteDriver(Driver driver) {
 		try {
-			String query = "";
+			String query = "DELETE FROM Driver where DriverID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setString( 1, driver.getDriverName() );
 			preparedStatement.setString( 2, driver.getDriverAddress() );
@@ -72,7 +72,7 @@ public class DriverImplement implements DriverDAO {
 		List<Driver> drivers = new ArrayList<Driver>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery( "" );
+			ResultSet resultSet = statement.executeQuery( "SELECT * FROM Driver" );
 			while( resultSet.next() ) {
 				Driver driver = new Driver();
 				driver.setDriverID( resultSet.getInt( "DriverID" ) );
@@ -93,7 +93,7 @@ public class DriverImplement implements DriverDAO {
 	public Driver getDriverById(int driverId) {
 		Driver driver = new Driver();
 		try {
-			String query = "";
+			String query = "SELECT * FROM Driver WHERE DriverID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, driverId);
 			ResultSet resultSet = preparedStatement.executeQuery();

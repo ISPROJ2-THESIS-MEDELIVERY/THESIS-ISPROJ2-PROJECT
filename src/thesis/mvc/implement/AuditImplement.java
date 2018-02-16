@@ -23,7 +23,7 @@ public class AuditImplement implements AuditDAO{
 	@Override
 	public void addAudit(Audit audit) {
 		try {
-			String query = "";
+			String query = "INSERT INTO Audit (UserID, LogType, Timestamp, ActionTaken) VALUES (?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, audit.getUserID() );
 			preparedStatement.setString( 2, audit.getLogType() );
@@ -40,7 +40,7 @@ public class AuditImplement implements AuditDAO{
 	@Override
 	public void deleteAudit(int auditId) {
 		try {
-			String query = "";
+			String query = "DELETE FROM Audit where AuditID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, auditId);
 			preparedStatement.executeUpdate();
@@ -54,7 +54,7 @@ public class AuditImplement implements AuditDAO{
 	@Override
 	public void updateAudit(Audit audit) {
 		try {
-			String query = "";
+			String query = "UPDATE Audit SET UserID=?, LogType=?, Timestamp=?, ActionTaken=? WHERE AuditID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, audit.getUserID() );
 			preparedStatement.setString( 2, audit.getLogType() );

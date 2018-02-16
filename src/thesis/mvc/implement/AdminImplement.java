@@ -24,7 +24,7 @@ public class AdminImplement implements AdminDAO {
 	@Override
 	public void addAdmin(Admin admin) {
 		try {
-			String query = "ladeda";
+			String query = "INSERT INTO Admin (UserID, FirstName, Surname) VALUES (?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, admin.getUserID() );
 			preparedStatement.setString( 2, admin.getFirstName() );
@@ -40,7 +40,7 @@ public class AdminImplement implements AdminDAO {
 	@Override
 	public void deleteAdmin(int adminId) {
 		try {
-			String query = "";
+			String query = "DELETE FROM Admin where AdminID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, adminId );
 			preparedStatement.executeUpdate();
@@ -54,7 +54,7 @@ public class AdminImplement implements AdminDAO {
 	@Override
 	public void UpdateAdmin(Admin admin) {
 		try {
-			String query = "";
+			String query = "UPDATE Customer SET UserID=?, FirstName=?, Surname=? WHERE AdminID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, admin.getUserID() );
 			preparedStatement.setString( 2, admin.getFirstName() );

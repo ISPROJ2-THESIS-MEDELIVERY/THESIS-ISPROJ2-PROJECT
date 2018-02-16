@@ -23,7 +23,7 @@ public class OrderDetailImplement implements OrderDetailDAO {
 	@Override
 	public void addOrderDetail(OrderDetail orderDetail) {
 		try {
-			String query = "";
+			String query = "INSERT INTO OrderDetail (OrderID, ProductID, Quantity, CostPerUnit, TotalCost, ActualCost,) VALUES (?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, orderDetail.getOrderID() );
 			preparedStatement.setInt( 2, orderDetail.getProductID() );
@@ -42,7 +42,7 @@ public class OrderDetailImplement implements OrderDetailDAO {
 	@Override
 	public void deleteOrderDetail(int orderDetailId) {
 		try {
-			String query = "";
+			String query = "DELETE FROM OrderDetail where OrderDetailsID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, orderDetailId);
 			preparedStatement.executeUpdate();
@@ -56,7 +56,7 @@ public class OrderDetailImplement implements OrderDetailDAO {
 	@Override
 	public void updateOrderDetail(OrderDetail orderDetail) {
 		try {
-			String query = "";
+			String query = "UPDATE OrderDetail SET OrderID=?, ProductID=?, Quantity=?, CostPerUnit=?, TotalCost=?, ActualCost=? WHERE OrderDetailsID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, orderDetail.getOrderID() );
 			preparedStatement.setInt( 2, orderDetail.getProductID() );
@@ -78,7 +78,7 @@ public class OrderDetailImplement implements OrderDetailDAO {
 		List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery( "" );
+			ResultSet resultSet = statement.executeQuery( "SELECT * FROM OrderDetail" );
 			while( resultSet.next() ) {
 				OrderDetail orderDetail = new OrderDetail();
 				orderDetail.setOrderDetailsID( resultSet.getInt( "OrderDetailsID" ) );
@@ -102,7 +102,7 @@ public class OrderDetailImplement implements OrderDetailDAO {
 	public OrderDetail getOrderDetailById(int orderDetailId) {
 		OrderDetail orderDetail = new OrderDetail();
 		try {
-			String query = "";
+			String query = "SELECT * FROM OrderDetail WHERE OrderDetailsID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, orderDetailId);
 			ResultSet resultSet = preparedStatement.executeQuery();

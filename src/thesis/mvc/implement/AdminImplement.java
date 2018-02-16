@@ -24,7 +24,7 @@ public class AdminImplement implements AdminDAO {
 	@Override
 	public void addAdmin(Admin admin) {
 		try {
-			String query = "";
+			String query = "ladeda";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, admin.getUserID() );
 			preparedStatement.setString( 2, admin.getFirstName() );

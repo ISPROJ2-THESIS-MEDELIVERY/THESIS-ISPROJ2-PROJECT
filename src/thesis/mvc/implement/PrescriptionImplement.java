@@ -23,7 +23,7 @@ public class PrescriptionImplement implements PrescriptionDAO {
 	@Override
 	public void addPrescription(Prescription prescription) {
 		try {
-			String query = "";
+			String query = "INSERT INTO Prescription (PharmacistID, CustomerID, PermissionStatus, Remark, Prescription) VALUES (?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, prescription.getPharmacistID() );
 			preparedStatement.setInt( 2, prescription.getCustomerID() );
@@ -39,9 +39,9 @@ public class PrescriptionImplement implements PrescriptionDAO {
 	}
 
 	@Override
-	public void updatePrescription(int prescriptionId) {
+	public void deletePrescription(int prescriptionId) {
 		try {
-			String query = "";
+			String query = "DELETE FROM Prescription where PrescriptionID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, prescriptionId);
 			preparedStatement.executeUpdate();
@@ -53,9 +53,9 @@ public class PrescriptionImplement implements PrescriptionDAO {
 	}
 
 	@Override
-	public void deletePrescription(Prescription prescription) {
+	public void updatePrescription(Prescription prescription) {
 		try {
-			String query = "";
+			String query = "UPDATE Prescription SET PharmacistID=?, CustomerID=?, PermissionStatus=?, Remark=?, Prescription=? WHERE PrescriptionID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, prescription.getPharmacistID() );
 			preparedStatement.setInt( 2, prescription.getCustomerID() );
@@ -76,7 +76,7 @@ public class PrescriptionImplement implements PrescriptionDAO {
 		List<Prescription> prescriptions = new ArrayList<Prescription>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery( "" );
+			ResultSet resultSet = statement.executeQuery( "SELECT * FROM Prescription" );
 			while( resultSet.next() ) {
 				Prescription prescription = new Prescription();
 				prescription.setPrescriptionID( resultSet.getInt( "PrescriptionID" ) );
@@ -99,7 +99,7 @@ public class PrescriptionImplement implements PrescriptionDAO {
 	public Prescription getPrescriptionByID(int prescriptionId) {
 		Prescription prescription = new Prescription();
 		try {
-			String query = "";
+			String query = "SELECT * FROM Prescription WHERE PrescriptionID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, prescriptionId);
 			ResultSet resultSet = preparedStatement.executeQuery();

@@ -6,8 +6,8 @@ import thesis.mvc.model.Driver;
 
 public interface DriverDAO {
 	public void addDriver ( Driver driver );
-	public void updateDriver ( int driverId );
-	public void deleteDriver ( Driver driver );
+	public void deleteDriver ( int driverId );
+	public void updateDriver ( Driver driver );
 	public List<Driver> getAllDrivers();
 	public Driver getDriverById ( int driverId );
 }

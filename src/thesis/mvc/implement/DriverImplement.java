@@ -37,9 +37,9 @@ public class DriverImplement implements DriverDAO {
 	}
 
 	@Override
-	public void updateDriver(int driverId) {
+	public void deleteDriver(int driverId) {
 		try {
-			String query = "UPDATE Driver SET DriverName=?, DriverAddress=?, DriverContactNumber=? WHERE DriverID=?";
+			String query = "DELETE FROM Driver where DriverID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, driverId);
 			preparedStatement.executeUpdate();
@@ -51,9 +51,9 @@ public class DriverImplement implements DriverDAO {
 	}
 
 	@Override
-	public void deleteDriver(Driver driver) {
+	public void updateDriver(Driver driver) {
 		try {
-			String query = "DELETE FROM Driver where DriverID=?";
+			String query = "UPDATE Driver SET DriverName=?, DriverAddress=?, DriverContactNumber=? WHERE DriverID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setString( 1, driver.getDriverName() );
 			preparedStatement.setString( 2, driver.getDriverAddress() );

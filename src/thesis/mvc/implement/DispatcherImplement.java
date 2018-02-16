@@ -24,7 +24,7 @@ public class DispatcherImplement implements DispatcherDAO{
 	@Override
 	public void addDispatcher(Dispatcher dispatcher) {
 		try {
-			String query = "";
+			String query = "INSERT INTO Dispatcher (CourierServiceID, UserID, FirstName, LastName, ContactNumber, Address, Birthdate) VALUES (?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, dispatcher.getCourierServiceID() );
 			preparedStatement.setInt( 2, dispatcher.getUserID() );
@@ -44,7 +44,7 @@ public class DispatcherImplement implements DispatcherDAO{
 	@Override
 	public void deleteDispatcher(int dispatcherId) {
 		try {
-			String query = "";
+			String query = "DELETE FROM Dispatcher where DispatcherID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, dispatcherId );
 			preparedStatement.executeUpdate();
@@ -58,7 +58,7 @@ public class DispatcherImplement implements DispatcherDAO{
 	@Override
 	public void updateDispatcher(Dispatcher dispatcher) {
 		try {
-			String query = "";
+			String query = "UPDATE Dispatcher SET CourierServiceID=?, UserID=?, FirstName=?, LastName=?, ContactNumber=?, Address=?, Birthdate=? WHERE DispatcherID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, dispatcher.getCourierServiceID() );
 			preparedStatement.setInt( 2, dispatcher.getUserID() );
@@ -81,7 +81,7 @@ public class DispatcherImplement implements DispatcherDAO{
 		List<Dispatcher> dispatchers = new ArrayList<Dispatcher>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery( "" );
+			ResultSet resultSet = statement.executeQuery( "SELECT * FROM Dispatcher" );
 			while( resultSet.next() ) {
 				Dispatcher dispatcher = new Dispatcher();
 				dispatcher.setDispatcherID( resultSet.getInt( "DispatcherId" ) );
@@ -106,7 +106,7 @@ public class DispatcherImplement implements DispatcherDAO{
 	public Dispatcher getDispatcherById(int dispatcherId) {
 		Dispatcher dispatcher = new Dispatcher();
 		try {
-			String query = "";
+			String query = "SELECT * FROM Dispatcher WHERE DispatcherID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, dispatcherId);
 			ResultSet resultSet = preparedStatement.executeQuery();

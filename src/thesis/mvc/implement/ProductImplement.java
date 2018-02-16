@@ -23,7 +23,7 @@ public class ProductImplement implements ProductDAO {
 	@Override
 	public void addProduct(Product product) {
 		try {
-			String query = "";
+			String query = "INSERT INTO Product (ProductName, GenericName, RegistrationNo, ProductStrength, ProductForm, ProductPackaging, ProductManufacturer, ProductOrigin, ProductDescription, ProductImage, isRXProduct, CounterLimit) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setString( 1, product.getProductName() );
 			preparedStatement.setString( 2, product.getGenericName() );
@@ -48,7 +48,7 @@ public class ProductImplement implements ProductDAO {
 	@Override
 	public void deleteProduct(int productId) {
 		try {
-			String query = "";
+			String query = "DELETE FROM Product where ProductID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, productId);
 			preparedStatement.executeUpdate();
@@ -62,7 +62,7 @@ public class ProductImplement implements ProductDAO {
 	@Override
 	public void updateProduct(Product product) {
 		try {
-			String query = "";
+			String query = "UPDATE Product SET ProductName=?, GenericName=?, RegistrationNo=?, ProductStrength=?, ProductForm=?, ProductPackaging=?, ProductManufacturer=?, ProductOrigin=?, ProductDescription=?, ProductImage=?, isRXProduct=?, CounterLimit=? WHERE ProductID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setString( 1, product.getProductName() );
 			preparedStatement.setString( 2, product.getGenericName() );
@@ -90,7 +90,7 @@ public class ProductImplement implements ProductDAO {
 		List<Product> products = new ArrayList<Product>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery( "" );
+			ResultSet resultSet = statement.executeQuery( "SELECT * FROM Product" );
 			while( resultSet.next() ) {
 				Product product = new Product();
 				product.setProductID( resultSet.getInt( "ProductID" ) );
@@ -120,7 +120,7 @@ public class ProductImplement implements ProductDAO {
 	public Product getProductById(int productId) {
 		Product product = new Product();
 		try {
-			String query = "";
+			String query = "SELECT * FROM Product WHERE ProductID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, productId);
 			ResultSet resultSet = preparedStatement.executeQuery();

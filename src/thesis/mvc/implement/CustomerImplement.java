@@ -23,7 +23,7 @@ public class CustomerImplement implements CustomerDAO{
 	@Override
 	public void addCustomer(Customer customer) {
 		try {
-			String query = "";
+			String query = "INSERT INTO Customer (UserID, CustomerName, Address, Email, IsSeniorCitizen, SeniorCitizenID, ContactNumber) VALUES (?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, customer.getUserID() );
 			preparedStatement.setString( 2, customer.getCustomerName() );
@@ -43,7 +43,7 @@ public class CustomerImplement implements CustomerDAO{
 	@Override
 	public void deleteCustomer(int customerId) {
 		try {
-			String query = "";
+			String query = "DELETE FROM Customer where CustomerID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, customerId );
 			preparedStatement.executeUpdate();
@@ -57,7 +57,7 @@ public class CustomerImplement implements CustomerDAO{
 	@Override
 	public void updateCustomer(Customer customer) {
 		try {
-			String query = "";
+			String query = "UPDATE Customer SET UserID=?, CustomerName=?, Address=?, Email=?, IsSeniorCitizen=?, SeniorCitizenID=?, ContactNumber=? WHERE CustomerID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, customer.getUserID() );
 			preparedStatement.setString( 2, customer.getCustomerName() );
@@ -80,7 +80,7 @@ public class CustomerImplement implements CustomerDAO{
 		List<Customer> customers = new ArrayList<Customer>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery( "" );
+			ResultSet resultSet = statement.executeQuery( "SELECT * FROM Customer" );
 			while( resultSet.next() ) {
 				Customer customer = new Customer();
 				customer.setCustomerID( resultSet.getInt( "CustomerID" ) );
@@ -105,7 +105,7 @@ public class CustomerImplement implements CustomerDAO{
 	public Customer getCustomerById(int customerId) {
 		Customer customer = new Customer();
 		try {
-			String query = "";
+			String query = "SELECT * FROM Customer WHERE CustomerID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, customerId);
 			ResultSet resultSet = preparedStatement.executeQuery();

@@ -23,7 +23,7 @@ public class DeliveryImplement implements DeliveryDAO{
 	@Override
 	public void addDelivery(Delivery delivery) {
 		try {
-			String query = "";
+			String query = "INSERT INTO Delivery (DispatcherID, DriverID, PlateNumber, Comments) VALUES (?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, delivery.getDispatcherID() );
 			preparedStatement.setInt( 2, delivery.getDriverID() );
@@ -40,7 +40,7 @@ public class DeliveryImplement implements DeliveryDAO{
 	@Override
 	public void deleteDelivery(int deliveryId) {
 		try {
-			String query = "";
+			String query = "DELETE FROM Delivery where DeliveryID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, deliveryId);
 			preparedStatement.executeUpdate();
@@ -54,7 +54,7 @@ public class DeliveryImplement implements DeliveryDAO{
 	@Override
 	public void updateDelivery(Delivery delivery) {
 		try {
-			String query = "";
+			String query = "UPDATE Delivery SET DispatcherID=?, DriverID=?, PlateNumber=?, Comments=? WHERE DeliveryID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, delivery.getDispatcherID() );
 			preparedStatement.setInt( 2, delivery.getDriverID() );
@@ -74,7 +74,7 @@ public class DeliveryImplement implements DeliveryDAO{
 		List<Delivery> deliveries = new ArrayList<Delivery>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery( "" );
+			ResultSet resultSet = statement.executeQuery( "SELECT * FROM Delivery" );
 			while( resultSet.next() ) {
 				Delivery delivery = new Delivery();
 				delivery.setDeliveryID( resultSet.getInt( "DeliveryID" ) );
@@ -96,7 +96,7 @@ public class DeliveryImplement implements DeliveryDAO{
 	public Delivery getDeliverybyID(int deliveryId) {
 		Delivery delivery = new Delivery();
 		try {
-			String query = "";
+			String query = "SELECT * FROM Delivery WHERE DeliveryID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, deliveryId);
 			ResultSet resultSet = preparedStatement.executeQuery();

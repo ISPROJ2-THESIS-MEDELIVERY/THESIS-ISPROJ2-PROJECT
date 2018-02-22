@@ -1,7 +1,6 @@
 package thesis.mvc.pageaction;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,17 +20,21 @@ public class HomeAction {
 	
 	
 	public void displayStock() {
-		List<Admin> admins = new ArrayList<Admin>();
+		List<Display> displays = new ArrayList<Display>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery( "SELECT * FROM Admin WHERE " );
+			ResultSet resultSet = statement.executeQuery( ""
+					+ "SELECT P.ProductName, B.PharmacyName, S.Quantity\r\n"
+					+ "FROM Stocks S WHERE S.Feature = 1\r\n"
+					+ "INNER JOIN Product P ON S.ProductID = P.ProductID\r\n"
+					+ "INNER JOIN Branch B ON S.BranchID = B.BranchID");
 			while( resultSet.next() ) {
-				Admin admin = new Admin();
+				Display display = new Admin();
 				resultSet.getInt( "AdminID" );
 				resultSet.getInt( "UserID" );
 				resultSet.getString( "FirstName" );
 				resultSet.getString( "Surname" );
-				admins.add(admin);
+				displays.add(display);
 			}
 			resultSet.close();
 			statement.close();

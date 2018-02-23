@@ -8,7 +8,7 @@ public class Customer {
 	private String Address;
 	private String Email;
 	private boolean IsSeniorCitizen;
-	private int SeniorCitizenID;
+	private String SeniorCitizenID;
 	private int ContactNumber;
 	
 	public int getCustomerID() {
@@ -47,10 +47,10 @@ public class Customer {
 	public void setIsSeniorCitizen(boolean isSeniorCitizen) {
 		IsSeniorCitizen = isSeniorCitizen;
 	}
-	public int getSeniorCitizenID() {
+	public String getSeniorCitizenID() {
 		return SeniorCitizenID;
 	}
-	public void setSeniorCitizenID(int seniorCitizenID) {
+	public void setSeniorCitizenID(String seniorCitizenID) {
 		SeniorCitizenID = seniorCitizenID;
 	}
 	public int getContactNumber() {

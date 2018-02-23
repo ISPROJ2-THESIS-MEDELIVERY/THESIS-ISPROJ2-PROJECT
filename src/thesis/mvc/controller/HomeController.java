@@ -9,20 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thesis.mvc.dataobjects.*;
-import thesis.mvc.implement.*;
+import org.apache.tomcat.jni.Local;
+
+import thesis.mvc.model.Customer;
+import thesis.mvc.model.Login;
+import thesis.mvc.pageaction.*;
 
 public class HomeController {
 
-	private ProductDAO pdao;
-	private StocksDAO sdao;
-	private static final long serialVersionUID = 1L;
+	private HomeAction Display;
+	//private static final long serialVersionUID = 1L;
 	public static final String HOMEPAGE = "/Home.jsp";
-	public static final String INSERT_OR_EDIT = "/Customer.jsp";
 	
 	public HomeController() {
-		pdao = new ProductImplement();
-		sdao = new StocksImplement();
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -45,26 +44,25 @@ public class HomeController {
 		}
 		else {
 			forward = HOMEPAGE;
-			request.setAttribute("products", pdao.getAllProducts() );
-			request.setAttribute("stocks", sdao.getAllStocks() );
+			request.setAttribute("Display", Display.displayStock() );
 		}
 		RequestDispatcher view = request.getRequestDispatcher( forward );
 		view.forward(request, response);
 	}
-	/*
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Login login = new Login();
 		Customer customer = new Customer();
-		customer.setFirstName( request.getParameter( "firstName" ) );
-		customer.setLastName( request.getParameter( "lastName" ) );
-		customer.setMiddleName( request.getParameter( "middleName" ) );
-		customer.setCreditCardNo( Double.parseDouble( request.getParameter( "creditCardNo" ) ) );
-		customer.setBillingStreet( request.getParameter( "billingStreet" ) );
-		customer.setBillingAddress( request.getParameter( "billingAddress" ) );
-		customer.setPhoneNo( Integer.parseInt( request.getParameter( "phoneNo" ) ) );
+		customer.set( request.getParameter( "firstName" ) );
+		customer.set( request.getParameter( "lastName" ) );
+		customer.set( request.getParameter( "middleName" ) );
+		customer.set( Double.parseDouble( request.getParameter( "creditCardNo" ) ) );
+		customer.set( request.getParameter( "billingStreet" ) );
+		customer.set( request.getParameter( "billingAddress" ) );
+		customer.set( Integer.parseInt( request.getParameter( "phoneNo" ) ) );
 		String customerId = request.getParameter("customerId");
 		
 		RequestDispatcher view;
-		boolean test = luhnTest( request.getParameter( "creditCardNo" ) );
 		if(!test){
 			customer.setCreditCardNo( 0 );
 			view = request.getRequestDispatcher( "/invalidError.jsp" );
@@ -79,5 +77,4 @@ public class HomeController {
 		request.setAttribute("customers", dao.getAllCustomers());
 		view.forward(request, response);
 	}
-	*/
 }

@@ -30,7 +30,7 @@ public class CustomerImplement implements CustomerDAO{
 			preparedStatement.setString( 3, customer.getAddress() );
 			preparedStatement.setString( 4, customer.getEmail() );
 			preparedStatement.setBoolean( 5, customer.isIsSeniorCitizen() );
-			preparedStatement.setInt( 6, customer.getSeniorCitizenID() );
+			preparedStatement.setString( 6, customer.getSeniorCitizenID() );
 			preparedStatement.setInt( 7, customer.getContactNumber() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
@@ -64,7 +64,7 @@ public class CustomerImplement implements CustomerDAO{
 			preparedStatement.setString( 3, customer.getAddress() );
 			preparedStatement.setString( 4, customer.getEmail() );
 			preparedStatement.setBoolean( 5, customer.isIsSeniorCitizen() );
-			preparedStatement.setInt( 6, customer.getSeniorCitizenID() );
+			preparedStatement.setString( 6, customer.getSeniorCitizenID() );
 			preparedStatement.setInt( 7, customer.getContactNumber() );
 			preparedStatement.setInt( 8, customer.getCustomerID() );
 			preparedStatement.executeUpdate();
@@ -89,7 +89,7 @@ public class CustomerImplement implements CustomerDAO{
 				customer.setAddress( resultSet.getString( "Address" ) );
 				customer.setEmail( resultSet.getString( "Email" ) );
 				customer.setIsSeniorCitizen( resultSet.getBoolean( "IsSeniorCitizen" ) );
-				customer.setSeniorCitizenID( resultSet.getInt( "SeniorCitizenID" ) );
+				customer.setSeniorCitizenID( resultSet.getString( "SeniorCitizenID" ) );
 				customer.setContactNumber( resultSet.getInt( "ContactNumber" ) );
 				customers.add(customer);
 			}
@@ -116,7 +116,7 @@ public class CustomerImplement implements CustomerDAO{
 				customer.setAddress( resultSet.getString( "Address" ) );
 				customer.setEmail( resultSet.getString( "Email" ) );
 				customer.setIsSeniorCitizen( resultSet.getBoolean( "IsSeniorCitizen" ) );
-				customer.setSeniorCitizenID( resultSet.getInt( "SeniorCitizenID" ) );
+				customer.setSeniorCitizenID( resultSet.getString( "SeniorCitizenID" ) );
 				customer.setContactNumber( resultSet.getInt( "ContactNumber" ) );
 			}
 			resultSet.close();

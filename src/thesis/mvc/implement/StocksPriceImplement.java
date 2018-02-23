@@ -1,11 +1,13 @@
 package thesis.mvc.implement;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import thesis.mvc.dataobjects.StocksPriceDAO;
@@ -29,6 +31,18 @@ public class StocksPriceImplement implements StocksPriceDAO{
 			preparedStatement.setDouble( 2, stocksPrice.getPriceSet() );
 			preparedStatement.setDate( 3, stocksPrice.getDateSet() );
 			preparedStatement.setBoolean( 4, stocksPrice.isIsCurrent() );
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} try {
+			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+			String query = "INSERT INTO Audit (UserID, LogType, Timestamp, ActionTaken) VALUES (?,?,?,?)";
+			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			preparedStatement.setInt( 1, 3 ); //3 is a placeholder
+			preparedStatement.setString( 2, "create, update or delete" ); //placeholder
+			preparedStatement.setDate( 3, CurrentDate );
+			preparedStatement.setString( 4, "User with ID " + stocksPrice.getStockID() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {

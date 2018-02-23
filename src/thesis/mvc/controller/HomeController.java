@@ -53,12 +53,12 @@ public class HomeController {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Login login = new Login();
 		Customer customer = new Customer();
-		customer.set( request.getParameter( "firstName" ) );
-		customer.set( request.getParameter( "lastName" ) );
-		customer.set( request.getParameter( "middleName" ) );
-		customer.set( Double.parseDouble( request.getParameter( "creditCardNo" ) ) );
-		customer.set( request.getParameter( "billingStreet" ) );
-		customer.set( request.getParameter( "billingAddress" ) );
+		customer.set( request.getParameter( "" ) );
+		customer.set( request.getParameter( "" ) );
+		customer.set( request.getParameter( "" ) );
+		customer.set( request.getParameter( "" ) );
+		customer.set( request.getParameter( "" ) );
+		customer.set( request.getParameter( "" ) );
 		customer.set( Integer.parseInt( request.getParameter( "phoneNo" ) ) );
 		String customerId = request.getParameter("customerId");
 		

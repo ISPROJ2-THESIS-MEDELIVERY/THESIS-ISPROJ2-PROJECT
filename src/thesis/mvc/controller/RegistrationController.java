@@ -15,6 +15,10 @@ public class RegistrationController {
 	
 	private RegistrationAction Registration;
 	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Login login = new Login();
 		login.setUsername( request.getParameter( "Username" ) );

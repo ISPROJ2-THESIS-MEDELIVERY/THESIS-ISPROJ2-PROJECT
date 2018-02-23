@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Calendar;
 
 import thesis.mvc.model.Customer;
@@ -42,7 +41,7 @@ public class RegistrationAction {
             	+ "VALUES (?,?,?,?,?,?)")) {
             stmt.setString(1, login.getUsername() );
             stmt.setString(2, login.getPassword() );
-            stmt.setString(3, login.getLoginStatus() );
+            stmt.setString(3, "Just Registered" );
             stmt.setDate(4, CurrentDate ); 
             stmt.setDate(5, CurrentDate ); 
             stmt.setString(6, "Customer" );

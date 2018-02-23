@@ -21,7 +21,7 @@ public class RegistrationController {
 		login.setPassword( request.getParameter( "Password" ) );
 
 		Customer customer = new Customer();
-		String Name = request.getParameter( "LastName" ) + ", " + request.getParameter( "FirstName" );
+		String Name = request.getParameter( "LastName" ) + ", " + request.getParameter( "FistName" );
 		customer.setCustomerName( Name );
 		customer.setAddress( request.getParameter( "CAddress" ) );
 		customer.setEmail( request.getParameter( "CusEmail" ) );

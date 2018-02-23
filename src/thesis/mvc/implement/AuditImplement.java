@@ -22,7 +22,7 @@ public class AuditImplement implements AuditDAO{
 
 	@Override
 	public void addAudit(Audit audit) {
-		try {
+		try {	
 			String query = "INSERT INTO Audit (UserID, LogType, Timestamp, ActionTaken) VALUES (?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, audit.getUserID() );

@@ -5,8 +5,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.model.Customer;
 import thesis.mvc.model.Login;
 import thesis.mvc.utility.DBUtility;
@@ -20,10 +23,11 @@ public class RegistrationAction {
 	}
 	
     public boolean makeCustomer(Login login, Customer customer) {
+    	DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 		int UserID = 0;
     	//Check if user-name is used
-    	try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE Username = ?")) {
+    	try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM login WHERE Username = ?")) {
             stmt.setString(1, login.getUsername());
             try(ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -35,6 +39,7 @@ public class RegistrationAction {
             return false;
         }
     	//Insert into Login table
+    	CustomerImplement CI = new CustomerImplement();
         try(PreparedStatement stmt = conn.prepareStatement(""
             	+ "INSERT INTO Login "
             	+ "(Username, Password, LoginStatus, LoginLast, SignupDate, Usertype) "
@@ -43,15 +48,16 @@ public class RegistrationAction {
             stmt.setString(2, login.getPassword() );
             stmt.setString(3, "Just Registered" );
             stmt.setDate(4, CurrentDate ); 
-            stmt.setDate(5, CurrentDate ); 
+            stmt.setDate(5, CurrentDate );
             stmt.setString(6, "Customer" );
+            stmt.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
             return false;
         }
     	//Get the UserID
     	try(PreparedStatement stmt = conn.prepareStatement(""
-    			+ "SELECT UserID FROM users WHERE Username = ? AND Password = ?")) {
+    			+ "SELECT UserID FROM login WHERE Username = ? AND Password = ?")) {
 
             stmt.setString(1, login.getUsername());
             stmt.setString(2, login.getPassword());
@@ -85,7 +91,8 @@ public class RegistrationAction {
 	        	stmt.setBoolean( 5, true );
 	        }
 	        stmt.setString( 6, customer.getSeniorCitizenID() );   
-	        stmt.setInt( 7, customer.getContactNumber() );     
+	        stmt.setInt( 7, customer.getContactNumber() );
+            stmt.executeUpdate(); 
 	    } catch(SQLException e) {
 	        e.printStackTrace();
 	        return false;
@@ -93,19 +100,19 @@ public class RegistrationAction {
         //Audit Log
         try {
 			String query = "INSERT INTO Audit (UserID, LogType, Timestamp, ActionTaken) VALUES (?,?,?,?)";
-			PreparedStatement preparedStatement = conn.prepareStatement( query );
-			preparedStatement.setInt( 1, UserID );
-			preparedStatement.setString( 2, "Registration" );
-			preparedStatement.setDate( 3, CurrentDate );
-			preparedStatement.setString( 4, ""
+			PreparedStatement stmt = conn.prepareStatement( query );
+			stmt.setInt( 1, UserID );
+			stmt.setString( 2, "CustReg" );
+			stmt.setDate( 3, CurrentDate );
+			stmt.setString( 4, ""
 				+ "User ID "
 				+ UserID
 				+ " With the username " 
 				+ login.getUsername() 
 				+ " made an account on " 
-				+ CurrentDate);
-			preparedStatement.executeUpdate();
-			preparedStatement.close();
+				+ df.format(CurrentDate));
+			stmt.executeUpdate();
+			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
             return false;

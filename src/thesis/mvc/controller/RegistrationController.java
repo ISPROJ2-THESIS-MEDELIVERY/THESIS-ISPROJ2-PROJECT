@@ -1,42 +1,62 @@
 package thesis.mvc.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
+//import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import thesis.mvc.model.Customer;
 import thesis.mvc.model.Login;
 import thesis.mvc.pageaction.RegistrationAction;
+import thesis.mvc.utility.DBUtility;
 
-public class RegistrationController {
+@WebServlet("/RegistrationController")
+public class RegistrationController extends HttpServlet {
 	
-	private RegistrationAction Registration;
+	private Connection conn;
+
+	public RegistrationController() {
+		conn = DBUtility.getConnection();
+	}
+	
+	private RegistrationAction Registration = new RegistrationAction();
+	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		conn = DBUtility.getConnection();
 		Login login = new Login();
 		login.setUsername( request.getParameter( "Username" ) );
 		login.setPassword( request.getParameter( "Password" ) );
 
 		Customer customer = new Customer();
-		String Name = request.getParameter( "LastName" ) + ", " + request.getParameter( "FistName" );
-		customer.setCustomerName( Name );
-		customer.setAddress( request.getParameter( "CAddress" ) );
-		customer.setEmail( request.getParameter( "CusEmail" ) );
-		customer.setSeniorCitizenID( request.getParameter( "SenCitID" ) );
-		customer.setContactNumber( Integer.parseInt(request.getParameter( "ContctNo" )) );
+		customer.setCustomerName( request.getParameter( "CustomerName" ) );
+		customer.setAddress( request.getParameter( "Address" ) );
+		customer.setEmail( request.getParameter( "Email" ) );
+		customer.setSeniorCitizenID( request.getParameter( "SeniorCitizenID" ) );
+		customer.setContactNumber( Integer.parseInt(request.getParameter( "ContactNumber" )) );
+		
+		Boolean test = Registration.makeCustomer(login, customer);
 		
 		RequestDispatcher view;
-		if(Registration.makeCustomer(login, customer) == true){
-			view = request.getRequestDispatcher( "/SucessPage.jsp" );
+		if(test){
+			view = request.getRequestDispatcher( "/index.jsp" );
 		} else {
-			view = request.getRequestDispatcher( "/invalidError.jsp" );
+			view = request.getRequestDispatcher( "/index.jsp" );
 		}
 		view.forward(request, response);
 	}

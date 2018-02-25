@@ -14,11 +14,12 @@ public class SearchAction {
 	
 	private Connection conn;
 
-	public RegistrationAction() {
+	public SearchAction() {
 		conn = DBUtility.getConnection();
 	}
 	
 	public List<Product> ProductListing(int Selection) {
+		conn = DBUtility.getConnection();
 		String Query = "";
 		if(Selection == 1){
 			Query = "SELECT * FROM Product"
@@ -49,9 +50,9 @@ public class SearchAction {
 					+ "ORDER BY ProductID";
 		}
 		List<Product> products = new ArrayList<Product>();
-		Statement statement = conn.createStatement();
-		ResultSet resultSet = statement.executeQuery( Query );
 		try {
+			Statement statement = conn.createStatement();
+			ResultSet resultSet = statement.executeQuery( Query );
 			while( resultSet.next() ) {
 				Product product = new Product();
 				product.setProductID( resultSet.getInt( "ProductID" ) );

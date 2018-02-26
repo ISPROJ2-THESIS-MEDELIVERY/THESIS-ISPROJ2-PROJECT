@@ -24,30 +24,19 @@ public class CustomerImplement implements CustomerDAO{
 
 	@Override
 	public void addCustomer(Customer customer) {
-		try {
-			String query = "INSERT INTO Customer (UserID, CustomerName, Address, Email, IsSeniorCitizen, SeniorCitizenID, ContactNumber) VALUES (?,?,?,?,?,?,?)";
-			PreparedStatement preparedStatement = conn.prepareStatement( query );
-			preparedStatement.setInt( 1, customer.getUserID() );
-			preparedStatement.setString( 2, customer.getCustomerName() );
-			preparedStatement.setString( 3, customer.getAddress() );
-			preparedStatement.setString( 4, customer.getEmail() );
-			preparedStatement.setBoolean( 5, customer.isIsSeniorCitizen() );
-			preparedStatement.setString( 6, customer.getSeniorCitizenID() );
-			preparedStatement.setInt( 7, customer.getContactNumber() );
-			preparedStatement.executeUpdate();
-			preparedStatement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} try {
-			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-			String query = "INSERT INTO Audit (UserID, LogType, Timestamp, ActionTaken) VALUES (?,?,?,?)";
-			PreparedStatement preparedStatement = conn.prepareStatement( query );
-			preparedStatement.setInt( 1, 3 ); //3 is a placeholder
-			preparedStatement.setString( 2, "create, update or delete" ); //placeholder
-			preparedStatement.setDate( 3, CurrentDate );
-			preparedStatement.setString( 4, "User with ID " + customer.getUserID() );
-			preparedStatement.executeUpdate();
-			preparedStatement.close();
+		try(PreparedStatement stmt = conn.prepareStatement(""
+        		+ "INSERT INTO Customer "
+        		+ "(UserID, CustomerName, Address, Email, IsSeniorCitizen, SeniorCitizenID, ContactNumber) " 
+        		+ "VALUES (?,?,?,?,?,?,?)")) {
+			stmt.setInt( 1, customer.getUserID() );
+			stmt.setString( 2, customer.getCustomerName() );
+			stmt.setString( 3, customer.getAddress() );
+			stmt.setString( 4, customer.getEmail() );
+			stmt.setBoolean( 5, customer.isIsSeniorCitizen() );
+			stmt.setString( 6, customer.getSeniorCitizenID() );
+			stmt.setInt( 7, customer.getContactNumber() );
+			stmt.executeUpdate();
+			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

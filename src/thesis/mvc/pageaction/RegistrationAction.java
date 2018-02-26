@@ -9,7 +9,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import thesis.mvc.implement.AuditImplement;
 import thesis.mvc.implement.CustomerImplement;
+import thesis.mvc.implement.LoginImplement;
+import thesis.mvc.model.Audit;
 import thesis.mvc.model.Customer;
 import thesis.mvc.model.Login;
 import thesis.mvc.utility.DBUtility;
@@ -26,6 +29,7 @@ public class RegistrationAction {
     	DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 		int UserID = 0;
+		
     	//Check if user-name is used
     	try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM login WHERE Username = ?")) {
             stmt.setString(1, login.getUsername());
@@ -38,23 +42,13 @@ public class RegistrationAction {
             e.printStackTrace();
             return false;
         }
+    	
     	//Insert into Login table
-    	CustomerImplement CI = new CustomerImplement();
-        try(PreparedStatement stmt = conn.prepareStatement(""
-            	+ "INSERT INTO Login "
-            	+ "(Username, Password, LoginStatus, LoginLast, SignupDate, Usertype) "
-            	+ "VALUES (?,?,?,?,?,?)")) {
-            stmt.setString(1, login.getUsername() );
-            stmt.setString(2, login.getPassword() );
-            stmt.setString(3, "Just Registered" );
-            stmt.setDate(4, CurrentDate ); 
-            stmt.setDate(5, CurrentDate );
-            stmt.setString(6, "Customer" );
-            stmt.executeUpdate();
-        } catch(SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
+    	LoginImplement LoginImp = new LoginImplement();
+    	login.setLoginStatus("Just Registered");
+    	login.setUsertype("Customer");
+    	LoginImp.addLogin(login);
+    	
     	//Get the UserID
     	try(PreparedStatement stmt = conn.prepareStatement(""
     			+ "SELECT UserID FROM login WHERE Username = ? AND Password = ?")) {
@@ -75,48 +69,24 @@ public class RegistrationAction {
             e.printStackTrace();
             return false;
         }
+    	
     	//Insert into Customer table
-        try(PreparedStatement stmt = conn.prepareStatement(""
-        		+ "INSERT INTO Customer "
-        		+ "(UserID, CustomerName, Address, Email, IsSeniorCitizen, SeniorCitizenID, ContactNumber) " 
-        		+ "VALUES (?,?,?,?,?,?,?)")) {
-	        stmt.setInt( 1, UserID );            
-	        stmt.setString( 2, customer.getCustomerName() );   
-	        stmt.setString( 3, customer.getAddress() );        
-	        stmt.setString( 4, customer.getEmail() );
-	        if (customer.getSeniorCitizenID() == null) {
-		        stmt.setBoolean( 5, false );
-	        }
-	        else {
-	        	stmt.setBoolean( 5, true );
-	        }
-	        stmt.setString( 6, customer.getSeniorCitizenID() );   
-	        stmt.setInt( 7, customer.getContactNumber() );
-            stmt.executeUpdate(); 
-	    } catch(SQLException e) {
-	        e.printStackTrace();
-	        return false;
-	    }
+    	CustomerImplement CustomerImp = new CustomerImplement();
+        if (customer.getSeniorCitizenID() == null) {
+        	customer.setIsSeniorCitizen(false);
+        } else {
+        	customer.setIsSeniorCitizen(true);
+        }
+        CustomerImp.addCustomer(customer);
+        
         //Audit Log
-        try {
-			String query = "INSERT INTO Audit (UserID, LogType, Timestamp, ActionTaken) VALUES (?,?,?,?)";
-			PreparedStatement stmt = conn.prepareStatement( query );
-			stmt.setInt( 1, UserID );
-			stmt.setString( 2, "CustReg" );
-			stmt.setDate( 3, CurrentDate );
-			stmt.setString( 4, ""
-				+ "User ID "
-				+ UserID
-				+ " With the username " 
-				+ login.getUsername() 
-				+ " made an account on " 
-				+ df.format(CurrentDate));
-			stmt.executeUpdate();
-			stmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-            return false;
-		}
+        Audit audit = null;
+        audit.setUserID(UserID);
+        audit.setLogType("CustReg");
+        audit.setTimestamp(CurrentDate);
+        audit.setActionTaken("User ID " + UserID + " With the username " + login.getUsername() + " made an account on " + df.format(CurrentDate));
+        AuditImplement AuditImp = new AuditImplement();
+        AuditImp.addAudit(audit);
         return true;
     }
 }

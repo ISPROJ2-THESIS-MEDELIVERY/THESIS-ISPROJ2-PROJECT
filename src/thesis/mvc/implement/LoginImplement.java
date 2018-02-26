@@ -24,21 +24,25 @@ public class LoginImplement implements LoginDAO {
 
 	@Override
 	public void addLogin(Login login) {
-		try {
+		
+		try(PreparedStatement stmt = conn.prepareStatement(""
+            	+ "INSERT INTO Login "
+            	+ "(Username, Password, LoginStatus, LoginLast, SignupDate, Usertype) "
+            	+ "VALUES (?,?,?,?,?,?)")) {
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-			String query = "INSERT INTO Login (Username, Password, LoginStatus, LoginLast, SignupDate, Usertype) VALUES (?,?,?,?,?,?)";
-			PreparedStatement preparedStatement = conn.prepareStatement( query );
-			preparedStatement.setString( 1, login.getUsername() );
-			preparedStatement.setString( 2, login.getPassword() );
-			preparedStatement.setString( 3, login.getLoginStatus() );
-			preparedStatement.setDate( 4, CurrentDate );
-			preparedStatement.setDate( 5, CurrentDate );
-			preparedStatement.setString( 6, login.getUsertype() );
-			preparedStatement.executeUpdate();
-			preparedStatement.close();
+			stmt.setString( 1, login.getUsername() );
+			stmt.setString( 2, login.getPassword() );
+			stmt.setString( 3, login.getLoginStatus() );
+			stmt.setDate( 4, CurrentDate );
+			stmt.setDate( 5, CurrentDate );
+			stmt.setString( 6, login.getUsertype() );
+			stmt.executeUpdate();
+			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} try {
+		}
+		
+		try {
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 			String query = "INSERT INTO Audit (UserID, LogType, Timestamp, ActionTaken) VALUES (?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );

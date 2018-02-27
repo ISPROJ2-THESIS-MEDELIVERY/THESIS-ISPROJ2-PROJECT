@@ -10,11 +10,11 @@ import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
 import thesis.mvc.utility.DBUtility;
 
-public class PurchaseController {
+public class PurchaseAction {
 	
 	private Connection conn;
 
-	public PurchaseController() {
+	public PurchaseAction() {
 		conn = DBUtility.getConnection();
 	}
 	

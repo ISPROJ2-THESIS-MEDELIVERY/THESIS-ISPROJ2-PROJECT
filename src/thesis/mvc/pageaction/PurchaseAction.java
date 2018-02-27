@@ -18,7 +18,7 @@ public class PurchaseAction {
 		conn = DBUtility.getConnection();
 	}
 	
-	public void purchaseOrder(Order order, List<OrderDetail> OrderDetails, int UserID) {
+	public void purchaseOrder(Order order, List<OrderDetail> OrderDetails, int UserID, int BranchID) {
 		int Deliverycharge = 0;
 		String CityCustomer = "";
 		String CityPharmacy = "";
@@ -32,9 +32,16 @@ public class PurchaseAction {
             e.printStackTrace();
         }
 		//Add Code here first
-		
+		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Branch WHERE PharmacyName = ?")) {
+			stmt.setInt(1, BranchID);
+			try(ResultSet rs = stmt.executeQuery()) {
+				CityPharmacy = rs.getString(1);
+			}
+		} catch (SQLException e) {
+            e.printStackTrace();
+        }
 		//Stop here
-		if (CityCustomer == CityPharmacy) {
+		if (CityCustomer.equals(CityPharmacy)) {
 			Deliverycharge = 50;
 		} else {
 			Deliverycharge = 100;

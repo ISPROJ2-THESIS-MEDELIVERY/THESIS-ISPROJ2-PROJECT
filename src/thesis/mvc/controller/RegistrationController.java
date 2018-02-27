@@ -38,6 +38,8 @@ public class RegistrationController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Boolean test;
+		
 		conn = DBUtility.getConnection();
 		Login login = new Login();
 		login.setUsername( request.getParameter( "Username" ) );
@@ -50,7 +52,7 @@ public class RegistrationController extends HttpServlet {
 		customer.setSeniorCitizenID( request.getParameter( "SeniorCitizenID" ) );
 		customer.setContactNumber( Integer.parseInt(request.getParameter( "ContactNumber" )) );
 		
-		Boolean test = Registration.makeCustomer(login, customer);
+		test = Registration.makeCustomer(login, customer);
 		
 		RequestDispatcher view;
 		if(test){

@@ -39,19 +39,7 @@ public class DispatcherImplement implements DispatcherDAO{
 			preparedStatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} try {
-			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-			String query = "INSERT INTO Audit (UserID, LogType, Timestamp, ActionTaken) VALUES (?,?,?,?)";
-			PreparedStatement preparedStatement = conn.prepareStatement( query );
-			preparedStatement.setInt( 1, 3 ); //3 is a placeholder
-			preparedStatement.setString( 2, "create, update or delete" ); //placeholder
-			preparedStatement.setDate( 3, CurrentDate );
-			preparedStatement.setString( 4, "User with ID " + dispatcher.getUserID() );
-			preparedStatement.executeUpdate();
-			preparedStatement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		} 
 		
 	}
 

@@ -34,7 +34,7 @@ public class PurchaseController extends HttpServlet {
 		Login login = new Login();
 		
 		//Global variable of customer ID here.
-		
+		/*
 		CustomerID
 		DeliveryID
 		PharmacistID
@@ -59,7 +59,7 @@ public class PurchaseController extends HttpServlet {
 		customer.setContactNumber( Integer.parseInt(request.getParameter( "ContactNumber" )) );
 		
 		Boolean test = Registration.makeCustomer(login, customer);
-		
+		*/
 		RequestDispatcher view;
 		if(test){
 			view = request.getRequestDispatcher( "/index.jsp" );

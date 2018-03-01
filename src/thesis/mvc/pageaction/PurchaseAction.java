@@ -18,37 +18,28 @@ public class PurchaseAction {
 		conn = DBUtility.getConnection();
 	}
 	
-	public void purchaseOrder(Order order, List<OrderDetail> OrderDetails, int UserID, String BranchProvince) {
+	public void purchaseOrder(Order order, List<OrderDetail> OrderDetails, int CustomerID, String BranchProvince) {
 		int Deliverycharge = 0;
-		String CityCustomer = "";
-		String CityPharmacy = "";
+		int CityCustomer = -2;
+		int CityPharmacy = -1;
 		
-		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM login WHERE Username = ?")) {
-            stmt.setInt(1, UserID);
+		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM customer WHERE CustomerID = ?")) {
+            stmt.setInt(1, CustomerID);
             try(ResultSet rs = stmt.executeQuery()) {
-            	CityCustomer = rs.getString(1);
+            	CityCustomer = rs.getInt("CityID");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-		//Add Code here first
+		//Get the Pharmacist
+		int PharmaID = order.getPharmacistID();
 		
-		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Branch WHERE PharmacyName = ?")) {
-			stmt.setString(5, BranchProvince);
-			try(ResultSet rs = stmt.executeQuery()) {
-				while (rs.next()) {
-					CityPharmacy = rs.getString(1);
-				}
-				rs.close();
-				stmt.close();
-			}
-		} catch (SQLException e) {
-            e.printStackTrace();
-        }
+		//What branch ID does the pharmacist come from
+		
+		//Where is the branch located.
 		
 		
-		//Stop here
-		if (CityCustomer.equals(CityPharmacy)) {
+		if (CityCustomer == CityPharmacy) {
 			Deliverycharge = 50;
 		} else {
 			Deliverycharge = 100;

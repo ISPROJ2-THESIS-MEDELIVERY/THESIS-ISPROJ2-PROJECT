@@ -32,14 +32,26 @@ public class PurchaseAction {
             e.printStackTrace();
         }
 		//Add Code here first
+		
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Branch WHERE PharmacyName = ?")) {
 			stmt.setInt(1, BranchID);
 			try(ResultSet rs = stmt.executeQuery()) {
-				CityPharmacy = rs.getString(1);
+				while (rs.next()) {
+					CityPharmacy = rs.getString(1);
+				}
+				rs.close();
+				stmt.close();
 			}
 		} catch (SQLException e) {
             e.printStackTrace();
         }
+		
+		/*Connection connection;
+		PreparedStatement pstmt;
+		ResultSet rs;
+		
+		pstmt = connection.prepareStatement("SELECT * FROM Branch WHERE PharmacyName = ?");*/
+		
 		//Stop here
 		if (CityCustomer.equals(CityPharmacy)) {
 			Deliverycharge = 50;

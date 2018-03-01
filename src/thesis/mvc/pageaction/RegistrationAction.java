@@ -20,9 +20,9 @@ public class RegistrationAction {
 	public RegistrationAction() {
 		conn = DBUtility.getConnection();
 	}
+	DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 	
     public boolean makeCustomer(Login login, Customer customer) {
-    	DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 		int UserID = 0;
 		
@@ -88,7 +88,6 @@ public class RegistrationAction {
     }
     
 	public boolean makeAdmin(Login login, Admin admin) {
-    	DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 		int UserID = 0;
 		
@@ -149,7 +148,6 @@ public class RegistrationAction {
     }
     
     public boolean makeDispatcher(Login login, Dispatcher dispatcher) {
-    	DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 		int UserID = 0;
 		
@@ -210,7 +208,6 @@ public class RegistrationAction {
     }
     
     public boolean makePharmacist(Login login, Pharmacist pharmacist) {
-    	DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 		int UserID = 0;
 		

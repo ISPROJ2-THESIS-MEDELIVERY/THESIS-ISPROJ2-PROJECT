@@ -3,7 +3,7 @@ package thesis.mvc.model;
 public class Pharmacist {
 	
 	private int PharmacistID;
-	private int UserID ;
+	private int UserID;
 	private int BranchID;
 	private String FirstName;
 	private String LastName;

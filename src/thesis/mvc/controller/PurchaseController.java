@@ -10,8 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import thesis.mvc.implement.PharmacistImplement;
+import thesis.mvc.model.Admin;
 import thesis.mvc.model.Customer;
+import thesis.mvc.model.Dispatcher;
 import thesis.mvc.model.Login;
+import thesis.mvc.model.Pharmacist;
 import thesis.mvc.utility.DBUtility;
 
 @WebServlet("/PurchaseController")
@@ -32,6 +36,7 @@ public class PurchaseController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	conn = DBUtility.getConnection();
 		Login login = new Login();
+		Boolean test = false;
 		
 		//Global variable of customer ID here.
 		/*

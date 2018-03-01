@@ -10,11 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thesis.mvc.model.Customer;
 import thesis.mvc.model.Login;
 import thesis.mvc.model.Product;
 import thesis.mvc.pageaction.SearchAction;
-import thesis.mvc.utility.DBUtility;
 
 @WebServlet("/SearchController")
 public class SearchController extends HttpServlet {

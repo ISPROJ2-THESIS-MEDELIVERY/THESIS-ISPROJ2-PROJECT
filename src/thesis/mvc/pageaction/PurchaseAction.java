@@ -18,7 +18,7 @@ public class PurchaseAction {
 		conn = DBUtility.getConnection();
 	}
 	
-	public void purchaseOrder(Order order, List<OrderDetail> OrderDetails, int UserID) {
+	public void purchaseOrder(Order order, List<OrderDetail> OrderDetails, int UserID, String BranchProvince) {
 		int Deliverycharge = 0;
 		String CityCustomer = "";
 		String CityPharmacy = "";

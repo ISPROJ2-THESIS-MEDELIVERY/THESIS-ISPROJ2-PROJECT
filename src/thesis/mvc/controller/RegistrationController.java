@@ -101,9 +101,9 @@ public class RegistrationController extends HttpServlet {
 			test = Registration.makeCustomer(login, customer);
 		}
 		if(test){
-			view = request.getRequestDispatcher( "/index.jsp" );
+			view = request.getRequestDispatcher( "/RegistrationSuccess.jsp" );
 		} else {
-			view = request.getRequestDispatcher( "/index.jsp" );
+			view = request.getRequestDispatcher( "/AccountRecovery.jsp" );
 		}
 		view.forward(request, response);
 	}

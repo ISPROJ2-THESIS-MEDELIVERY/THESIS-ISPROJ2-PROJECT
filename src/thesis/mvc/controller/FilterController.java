@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import thesis.mvc.model.Login;
 import thesis.mvc.model.Product;
-import thesis.mvc.pageaction.SearchAction;
+import thesis.mvc.pageaction.FilterAction;
 
 @WebServlet("/SearchController")
-public class SearchController extends HttpServlet {
+public class FilterController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -25,7 +25,7 @@ public class SearchController extends HttpServlet {
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	List<Product> Results;
-    	SearchAction Search = new SearchAction();
+    	FilterAction Search = new FilterAction();
 		Login login = new Login();
 		int searchfilter = Integer.parseInt(request.getParameter( "SearchFilter" ));
 		

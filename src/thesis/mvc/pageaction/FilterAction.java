@@ -10,46 +10,40 @@ import java.util.List;
 import thesis.mvc.model.Product;
 import thesis.mvc.utility.DBUtility;
 
-public class SearchAction {
+public class FilterAction {
 	
 	private Connection conn;
 
-	public SearchAction() {
+	public FilterAction() {
 		conn = DBUtility.getConnection();
 	}
 	
-	public List<Product> ProductListing(String searchQuerty, int searchFilter) {
+	public List<Product> ProductListing(int Selection) {
 		conn = DBUtility.getConnection();
 		String Query = "";
-		if(searchFilter == 1){
+		if(Selection == 1){
 			Query = "SELECT * FROM Product"
-					+ " ORDER BY ProductName DESC"
-					+ " WHERE ProductName LIKE '%" + searchQuerty + "%'";
+					+ " ORDER BY ProductID DESC";
 		}
-		else if(searchFilter == 2){
+		else if(Selection == 2){
 			Query = "SELECT * FROM Product"
-					+ " ORDER BY GenericName DESC"
-					+ " WHERE GenericName LIKE '%" + searchQuerty + "%'";
+					+ " ORDER BY ProductName DESC";
 		}
-		else if(searchFilter == 3){
+		else if(Selection == 3){
 			Query = "SELECT * FROM Product"
-					+ " ORDER BY RegistrationNumber DESC"
-					+ " WHERE RegistrationNumber LIKE '%" + searchQuerty + "%'";
+					+ " ORDER BY GenericName DESC";
 		}
-		else if(searchFilter == 4){
+		else if(Selection == 4){
 			Query = "SELECT * FROM Product"
-					+ " ORDER BY isRXProduct DESC"
-					+ " WHERE isRXProduct = 1";
+					+ " ORDER BY RegistrationNumber DESC";
 		}
-		else if(searchFilter == 5){
+		else if(Selection == 5){
 			Query = "SELECT * FROM Product"
-					+ " ORDER BY isRXProduct DESC"
-					+ " WHERE isRXProduct = 0";
+					+ " ORDER BY isRXProduct DESC";
 		}
-		else if(searchFilter == 6){
+		else if(Selection == 6){
 			Query = "SELECT * FROM Product"
-					+ " ORDER BY CounterLimit DESC"
-					+ " WHERE CounterLimit LIKE '%" + searchQuerty + "%'";
+					+ " ORDER BY CounterLimit DESC";
 		}
 		else {
 			Query = "SELECT * FROM Product"
@@ -83,4 +77,5 @@ public class SearchAction {
 		}
 		return products;
 	}
+
 }

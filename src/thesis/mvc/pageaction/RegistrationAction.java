@@ -81,7 +81,7 @@ public class RegistrationAction {
         audit.setUserID(UserID);
         audit.setLogType("CustReg");
         audit.setTimestamp(CurrentDate);
-        audit.setActionTaken("User ID " + UserID + " With the username " + login.getUsername() + " made an account on " + df.format(CurrentDate));
+        audit.setActionTaken("User ID " + UserID + " With the username " + login.getUsername() + " made an account.");
         AuditImplement AuditImp = new AuditImplement();
         AuditImp.addAudit(audit);
         return true;
@@ -107,7 +107,7 @@ public class RegistrationAction {
     	//Insert into Login table
     	LoginImplement LoginImp = new LoginImplement();
     	login.setLoginStatus("Just Registered");
-    	login.setUsertype("Customer");
+    	login.setUsertype("Admin");
     	LoginImp.addLogin(login);
     	
     	//Get the UserID
@@ -139,9 +139,9 @@ public class RegistrationAction {
         //Audit Log
         Audit audit = new Audit();
         audit.setUserID(UserID);
-        audit.setLogType("CustReg");
+        audit.setLogType("AdmnReg");
         audit.setTimestamp(CurrentDate);
-        audit.setActionTaken("User ID " + UserID + " With the username " + login.getUsername() + " made an account on " + df.format(CurrentDate));
+        audit.setActionTaken("User ID " + UserID + " With the username " + login.getUsername() + " made an account.");
         AuditImplement AuditImp = new AuditImplement();
         AuditImp.addAudit(audit);
         return true;
@@ -167,7 +167,7 @@ public class RegistrationAction {
     	//Insert into Login table
     	LoginImplement LoginImp = new LoginImplement();
     	login.setLoginStatus("Just Registered");
-    	login.setUsertype("Customer");
+    	login.setUsertype("Dispatcher");
     	LoginImp.addLogin(login);
     	
     	//Get the UserID
@@ -199,9 +199,9 @@ public class RegistrationAction {
         //Audit Log
         Audit audit = new Audit();
         audit.setUserID(UserID);
-        audit.setLogType("CustReg");
+        audit.setLogType("DispReg");
         audit.setTimestamp(CurrentDate);
-        audit.setActionTaken("User ID " + UserID + " With the username " + login.getUsername() + " made an account on " + df.format(CurrentDate));
+        audit.setActionTaken("User ID " + UserID + " With the username " + login.getUsername() + " made an account.");
         AuditImplement AuditImp = new AuditImplement();
         AuditImp.addAudit(audit);
         return true;
@@ -227,7 +227,7 @@ public class RegistrationAction {
     	//Insert into Login table
     	LoginImplement LoginImp = new LoginImplement();
     	login.setLoginStatus("Just Registered");
-    	login.setUsertype("Customer");
+    	login.setUsertype("Pharmacist");
     	LoginImp.addLogin(login);
     	
     	//Get the UserID
@@ -259,9 +259,9 @@ public class RegistrationAction {
         //Audit Log
         Audit audit = new Audit();
         audit.setUserID(UserID);
-        audit.setLogType("CustReg");
+        audit.setLogType("PharReg");
         audit.setTimestamp(CurrentDate);
-        audit.setActionTaken("User ID " + UserID + " With the username " + login.getUsername() + " made an account on " + df.format(CurrentDate));
+        audit.setActionTaken("User ID " + UserID + " With the username " + login.getUsername() + " made an account.");
         AuditImplement AuditImp = new AuditImplement();
         AuditImp.addAudit(audit);
         return true;

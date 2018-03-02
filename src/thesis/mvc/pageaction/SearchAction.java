@@ -23,31 +23,31 @@ public class SearchAction {
 		String Query = "";
 		if(Selection == 1){
 			Query = "SELECT * FROM Product"
-					+ "ORDER BY ProductID DESC";
+					+ " ORDER BY ProductID DESC";
 		}
 		else if(Selection == 2){
 			Query = "SELECT * FROM Product"
-					+ "ORDER BY ProductName DESC";
+					+ " ORDER BY ProductName DESC";
 		}
 		else if(Selection == 3){
 			Query = "SELECT * FROM Product"
-					+ "ORDER BY GenericName DESC";
+					+ " ORDER BY GenericName DESC";
 		}
 		else if(Selection == 4){
 			Query = "SELECT * FROM Product"
-					+ "ORDER BY RegistrationNumber DESC";
+					+ " ORDER BY RegistrationNumber DESC";
 		}
 		else if(Selection == 5){
 			Query = "SELECT * FROM Product"
-					+ "ORDER BY isRXProduct DESC";
+					+ " ORDER BY isRXProduct DESC";
 		}
 		else if(Selection == 6){
 			Query = "SELECT * FROM Product"
-					+ "ORDER BY CounterLimit DESC";
+					+ " ORDER BY CounterLimit DESC";
 		}
 		else {
 			Query = "SELECT * FROM Product"
-					+ "ORDER BY ProductID";
+					+ " ORDER BY ProductID";
 		}
 		List<Product> products = new ArrayList<Product>();
 		try {

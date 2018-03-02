@@ -53,7 +53,7 @@ public class RegistrationController extends HttpServlet {
 		conn = DBUtility.getConnection();
 
 		RequestDispatcher view;
-		if (request.getParameter( "password" ) != request.getParameter( "password-repeat" ))
+		if (request.getParameter( "Password" ) != request.getParameter( "Password-repeat" ))
 		{
 			view = request.getRequestDispatcher( "/index.jsp" );
 			view.forward(request, response);
@@ -62,11 +62,9 @@ public class RegistrationController extends HttpServlet {
 		Login login = new Login();
 		login.setUsername( request.getParameter( "Username" ) );
 		login.setPassword( request.getParameter( "Password" ) );
-		String secretCode = request.getParameter( "secretCode" );
+		String secretCode = request.getParameter( "SecretCode" );
 		
 		if (secretCode == "i3Up8XmH04Jz151") {//Admin
-			login.setUsername( request.getParameter( "Username" ) );
-			login.setPassword( request.getParameter( "Password" ) );
 			Admin admin = new Admin();
 			admin.setUserID( Integer.parseInt( request.getParameter( "UserID" ) ) );
 			admin.setFirstName( request.getParameter( "FirstName" ) );
@@ -74,8 +72,6 @@ public class RegistrationController extends HttpServlet {
 			test = Registration.makeAdmin(login, admin);
 			
 		} else if (secretCode == "5WLjE4Hik2TC85l") {//Dispatcher
-			login.setUsername( request.getParameter( "Username" ) );
-			login.setPassword( request.getParameter( "Password" ) );
 			Dispatcher dispatcher = new Dispatcher();
 			dispatcher.setCourierServiceID( Integer.parseInt( request.getParameter( "CourierServiceID" ) ) );
 			dispatcher.setUserID( Integer.parseInt( request.getParameter( "UserID" ) ) );
@@ -87,8 +83,6 @@ public class RegistrationController extends HttpServlet {
 			test = Registration.makeDispatcher(login, dispatcher);
 			
 		} else if (secretCode == "RjRILW7K7Xz96hD") {//Pharmacist
-			login.setUsername( request.getParameter( "Username" ) );
-			login.setPassword( request.getParameter( "Password" ) );
 			Pharmacist pharmacist = new Pharmacist();
 			pharmacist.setBranchID( Integer.parseInt( request.getParameter( "BranchID" ) ) );
 			pharmacist.setFirstName( request.getParameter( "FirstName" ) );
@@ -98,8 +92,6 @@ public class RegistrationController extends HttpServlet {
 			test = Registration.makePharmacist(login, pharmacist);
 			
 		} else {
-			login.setUsername( request.getParameter( "Username" ) );
-			login.setPassword( request.getParameter( "Password" ) );
 			Customer customer = new Customer();
 			customer.setCustomerName( request.getParameter( "FullName" ) );
 			customer.setAddress( request.getParameter( "CAddress" ) );

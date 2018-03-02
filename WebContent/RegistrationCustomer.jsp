@@ -82,8 +82,8 @@
                     <input class="form-control" type="email" name="CusEmail" required="" placeholder="Email Address *" maxlength="100">
 				</div>
                 	<div class="form-group">
-                	<input class="form-control" type="password" name="password" required="" placeholder="Create Password" maxlength="100"></div>
-                	<input class="form-control" type="password" name="password-repeat" required="" placeholder="Re-enter Password" maxlength="100" style="margin:0px;">
+                	<input class="form-control" type="password" name="Password" required="" placeholder="Create Password" maxlength="100"></div>
+                	<input class="form-control" type="password" name="Password-repeat" required="" placeholder="Re-enter Password" maxlength="100" style="margin:0px;">
                 <div class="form-group" style="margin: ;"></div>
                 <div class="form-group">
                     <div class="form-check"><label class="form-check-label" style="margin:20px;font-size:20px;"><input class="form-check-input" type="checkbox">I agree to the license terms.</label></div>

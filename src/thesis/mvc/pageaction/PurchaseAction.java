@@ -35,6 +35,16 @@ public class PurchaseAction {
 		int PharmaID = order.getPharmacistID();
 		
 		//What branch ID does the pharmacist come from
+		
+		/*try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM branch WHERE BranchID = ?")) {
+			stmt.setInt(1, BranchID);
+			try(ResultSet rs = stmt.executeQuery()) {
+				PharmaID = rs.getInt("BranchID");
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		}*/
+		
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM pharmacist WHERE PharmacistID = ?")) {
 			stmt.setInt(1, PharmacistID);
 			try(ResultSet rs = stmt.executeQuery()) {

@@ -50,7 +50,14 @@ public class RegistrationController extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Boolean test = false;
-		//conn = DBUtility.getConnection();
+		conn = DBUtility.getConnection();
+
+		RequestDispatcher view;
+		if (request.getParameter( "password" ) != request.getParameter( "password-repeat" ))
+		{
+			view = request.getRequestDispatcher( "/index.jsp" );
+			view.forward(request, response);
+		}
 		
 		Login login = new Login();
 		login.setUsername( request.getParameter( "Username" ) );
@@ -94,14 +101,13 @@ public class RegistrationController extends HttpServlet {
 			login.setUsername( request.getParameter( "Username" ) );
 			login.setPassword( request.getParameter( "Password" ) );
 			Customer customer = new Customer();
-			customer.setCustomerName( request.getParameter( "CustomerName" ) );
-			customer.setAddress( request.getParameter( "Address" ) );
-			customer.setEmail( request.getParameter( "Email" ) );
+			customer.setCustomerName( request.getParameter( "FullName" ) );
+			customer.setAddress( request.getParameter( "CAddress" ) );
+			customer.setEmail( request.getParameter( "CusEmail" ) );
 			customer.setSeniorCitizenID( request.getParameter( "SeniorCitizenID" ) );
 			customer.setContactNumber( Integer.parseInt(request.getParameter( "ContactNumber" )) );
 			test = Registration.makeCustomer(login, customer);
 		}
-		RequestDispatcher view;
 		if(test){
 			view = request.getRequestDispatcher( "/index.jsp" );
 		} else {

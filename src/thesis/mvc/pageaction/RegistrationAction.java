@@ -43,7 +43,12 @@ public class RegistrationAction {
     	LoginImplement LoginImp = new LoginImplement();
     	login.setLoginStatus("Just Registered");
     	login.setUsertype("Customer");
-    	LoginImp.addLogin(login);
+    	try {
+        	LoginImp.addLogin(login);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		return false;
+    	}
     	
     	//Get the UserID
     	try(PreparedStatement stmt = conn.prepareStatement(""
@@ -74,7 +79,12 @@ public class RegistrationAction {
         } else {
         	customer.setIsSeniorCitizen(true);
         }
-        CustomerImp.addCustomer(customer);
+        try {
+        	CustomerImp.addCustomer(customer);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
         
         //Audit Log
         Audit audit = new Audit();
@@ -108,7 +118,12 @@ public class RegistrationAction {
     	LoginImplement LoginImp = new LoginImplement();
     	login.setLoginStatus("Just Registered");
     	login.setUsertype("Admin");
-    	LoginImp.addLogin(login);
+    	try {
+    		LoginImp.addLogin(login);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
     	
     	//Get the UserID
     	try(PreparedStatement stmt = conn.prepareStatement(""
@@ -134,7 +149,12 @@ public class RegistrationAction {
     	//Insert into Admin table
     	AdminImplement AdminImp = new AdminImplement();
     	admin.setUserID(UserID);
-    	AdminImp.addAdmin(admin);
+    	try {
+    		AdminImp.addAdmin(admin);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
         
         //Audit Log
         Audit audit = new Audit();
@@ -168,7 +188,12 @@ public class RegistrationAction {
     	LoginImplement LoginImp = new LoginImplement();
     	login.setLoginStatus("Just Registered");
     	login.setUsertype("Dispatcher");
-    	LoginImp.addLogin(login);
+    	try {
+    		LoginImp.addLogin(login);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
     	
     	//Get the UserID
     	try(PreparedStatement stmt = conn.prepareStatement(""
@@ -194,7 +219,12 @@ public class RegistrationAction {
     	//Insert into Dispatcher table
     	DispatcherImplement DispatcherImp = new DispatcherImplement();
     	dispatcher.setUserID(UserID);
-    	DispatcherImp.addDispatcher(dispatcher);
+    	try {
+    		DispatcherImp.addDispatcher(dispatcher);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
         
         //Audit Log
         Audit audit = new Audit();
@@ -228,7 +258,12 @@ public class RegistrationAction {
     	LoginImplement LoginImp = new LoginImplement();
     	login.setLoginStatus("Just Registered");
     	login.setUsertype("Pharmacist");
-    	LoginImp.addLogin(login);
+    	try {
+    		LoginImp.addLogin(login);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
     	
     	//Get the UserID
     	try(PreparedStatement stmt = conn.prepareStatement(""
@@ -254,8 +289,13 @@ public class RegistrationAction {
     	//Insert into Pharmacist table
     	PharmacistImplement PharmacistImp = new PharmacistImplement();
     	pharmacist.setUserID(UserID);
-    	PharmacistImp.addPharmacist(pharmacist);
-        
+    	try {
+    		PharmacistImp.addPharmacist(pharmacist);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	        
         //Audit Log
         Audit audit = new Audit();
         audit.setUserID(UserID);

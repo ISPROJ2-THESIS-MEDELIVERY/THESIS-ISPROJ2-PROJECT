@@ -18,13 +18,15 @@ public class PurchaseAction {
 		conn = DBUtility.getConnection();
 	}
 	
-	public void purchaseOrder(Order order, List<OrderDetail> OrderDetails, int CustomerID, int PharmacistID, int BranchID) {
+	public boolean purchaseOrder(Order order, List<OrderDetail> OrderDetails) {
+		OrderDetails.size();
+		
 		int Deliverycharge = 0;
 		int CityCustomer = -2;
 		int CityPharmacy = -1;
 		
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM customer WHERE CustomerID = ?")) {
-            stmt.setInt(1, CustomerID);
+            stmt.setInt(1, order.getCustomerID());
             try(ResultSet rs = stmt.executeQuery()) {
             	CityCustomer = rs.getInt("CityID");
             }
@@ -32,21 +34,12 @@ public class PurchaseAction {
             e.printStackTrace();
         }
 		//Get the Pharmacist
-		int PharmaID = order.getPharmacistID();
+		int PharmaID = 0;
 		
 		//What branch ID does the pharmacist come from
 		
-		/*try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM branch WHERE BranchID = ?")) {
-			stmt.setInt(1, BranchID);
-			try(ResultSet rs = stmt.executeQuery()) {
-				PharmaID = rs.getInt("BranchID");
-			}
-		} catch (SQLException e){
-			e.printStackTrace();
-		}*/
-		
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM pharmacist WHERE PharmacistID = ?")) {
-			stmt.setInt(1, PharmacistID);
+			stmt.setInt(1, order.getPharmacistID());
 			try(ResultSet rs = stmt.executeQuery()) {
 				PharmaID = rs.getInt("BranchID");
 			}
@@ -55,7 +48,7 @@ public class PurchaseAction {
 		}
 		//Where is the branch located.
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM branch WHERE BranchID = ?")) {
-			stmt.setInt(1, BranchID);
+			stmt.setInt(1, PharmaID);
 			try(ResultSet rs = stmt.executeQuery()){
 				CityPharmacy = rs.getInt("CityID");
 			}
@@ -69,6 +62,7 @@ public class PurchaseAction {
 		} else {
 			Deliverycharge = 100;
 		}
+		return true;
 		
 	
 	}

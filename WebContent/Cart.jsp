@@ -63,27 +63,81 @@
             </div>
         </div>
     </nav>
-    <form action="LoginController" method="post" style="padding:56px;margin:-21px;height:470px;">
-        <h2 class="sr-only">Login Form</h2>
-        <div class="illustration"></div>
-        <div class="form-group"><input class="form-control" type="email" name="Email" required="" placeholder="Email" autocomplete="on" style="width:263px;padding:0px;height:42px;"></div>
-        <div class="form-group"><input class="form-control" type="password" name="Password" required="" placeholder="Password" style="padding:0px;width:264px;height:42px;"></div>
-        <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="width:266px;background-color:#465765;">Log In</button></div>
-        <p style="font-size:13px;">Don't have an account yet? Register <a href="Members.jsp">here</a></p>
-        <p style="font-size:13px;"><a href="AccountRecovery.jsp">Forgot password?</a></p>
-    </form>
-	
+    <div class="col">
+        <h1>MY ORDER</h1>
+    </div>
+    <div class="col"><button class="btn btn-primary" type="button" style="background-color:#222222;padding:12px;">ADD MORE PRODUCTS+</button></div>
+    <div class="col">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Item Description</th>
+                        <th>Quantity</th>
+                        <th>Prescription Required</th>
+                        <th>Dosage Strength</th>
+                        <th>Size</th>
+                        <th>Unit Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Solmux</td>
+                        <td><img>Cell 2</td>
+                        <td>Cell 3<input type="number"></td>
+                        <td><label></label>Label<input type="file" accept="image/*" name="Prescription"><br><br></td>
+                        <td><label><br>Label<br><br></label></td>
+                        <td><br>Label<br><br></td>
+                        <td><br>Label<br><br></td>
+                    </tr>
+                    <tr>
+                        <td>Antihistamine</td>
+                        <td><img>Cell 4</td>
+                        <td>Cell 3<input type="number"></td>
+                        <td><label>Label</label><input type="file" accept="image/*" name="Precription"></td>
+                        <td><br>Label<br><br></td>
+                        <td><br>Label<br><br></td>
+                        <td><br>Label<br><br></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col float-left" style="width:1008px;">
+        <div class="form-group float-left" style="width:974px;">
+            <div class="col float-left" style="width:989px;"><label class="col-form-label float-left">Upload Senior Citizen ID Photo for Discount(s)</label></div>
+        </div>
+        <div class="row" style="padding:15px;margin:0px;">
+            <div class="col"><input type="file" accept="image/*" name="SeniorCitizenID"></div>
+        </div>
+        <div class="form-group float-left" style="width:976px;">
+            <div class="col float-left" style="width:967px;"><button class="btn btn-primary float-left" type="button" style="background-color:#2779a3;font-size:23px;">Apply</button></div>
+        </div>
+        <div class="form-group float-left" style="width:961px;">
+            <div class="col float-left" style="width:274px;"><label class="col-form-label">Subtotal:</label><label class="col-form-label float-right">PXXX.00</label></div>
+        </div>
+        <div class="form-group float-left" style="width:974px;">
+            <div class="col float-left" style="width:271px;"><label class="col-form-label" style="width:159px;">Delivery Surcharge:</label><label class="col-form-label float-right">PXX.00</label></div>
+        </div>
+        <div class="form-group float-left" style="width:965px;">
+            <div class="col float-left" style="width:270px;"><label class="col-form-label">Total:</label><label class="col-form-label float-right">PXXX.00</label></div>
+        </div>
+        <div class="form-group float-left" style="width:958px;">
+            <div class="col float-left"><button class="btn btn-primary float-left" type="submit" style="padding:19px;font-size:25px;background-color:#2779a3;">Checkout</button></div>
+        </div>
+    </div>
     <div class="footer-basic">
         <footer>
             <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
             <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Home</a></li>
-                <li class="list-inline-item"><a href="#">Services</a></li>
-                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="Home.jsp">Home</a></li>
+                <li class="list-inline-item"></li>
+                <li class="list-inline-item"><a href="About.jsp">About</a></li>
                 <li class="list-inline-item"><a href="#">Terms</a></li>
                 <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
             </ul>
-            <p class="copyright">Company Name © 2017</p>
+            <p class="copyright">Medelivery © 2018</p>
         </footer>
     </div>
     <script src="assets/js/jquery.min.js"></script>

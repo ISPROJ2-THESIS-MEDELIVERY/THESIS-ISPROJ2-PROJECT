@@ -63,16 +63,38 @@
             </div>
         </div>
     </nav>
-    <form action="LoginController" method="post" style="padding:56px;margin:-21px;height:470px;">
-        <h2 class="sr-only">Login Form</h2>
-        <div class="illustration"></div>
-        <div class="form-group"><input class="form-control" type="email" name="Email" required="" placeholder="Email" autocomplete="on" style="width:263px;padding:0px;height:42px;"></div>
-        <div class="form-group"><input class="form-control" type="password" name="Password" required="" placeholder="Password" style="padding:0px;width:264px;height:42px;"></div>
-        <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="width:266px;background-color:#465765;">Log In</button></div>
-        <p style="font-size:13px;">Don't have an account yet? Register <a href="Members.jsp">here</a></p>
-        <p style="font-size:13px;"><a href="AccountRecovery.jsp">Forgot password?</a></p>
-    </form>
-	
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-lg-7">
+                    <h3><span class="fa-stack"><i class="fa fa-circle fa-stack-2x text-muted"></i><i class="icon ion-information-circled fa-stack-1x fa-inverse"></i></span> Checkout</h3>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h1>PAYMENT SUMMARY</h1><label class="col-form-label" style="width:445px;">PARACETAMOL[1]</label><label class="col-form-label" style="width:495px;">PXXX.00</label><label class="col-form-label" style="width:444px;">ITEM 2[3]</label>
+                    <label
+                        class="col-form-label" style="width:492px;">PXX.00</label><label class="col-form-label" style="width:445px;">ITEM 3[2]</label><label class="col-form-label" style="width:489px;">PXXX.00</label></div>
+            </div>
+        </div>
+        <div class="card-body">
+		<form action="CheckoutController" method="post">
+            <div class="row">
+                <div class="col">
+                    <h1>PAYMENT DETAILS</h1>
+                    <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-2"><label class="form-check-label" for="formCheck-2">CASH ON DELIVERY</label></div>
+                    <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1"><label class="form-check-label" for="formCheck-1">CREDIT CARD</label></div><label class="col-form-label">Payment Amount:&nbsp;</label><input type="text" placeholder="₱">
+                    <div
+                        class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label class="form-check-label" for="formCheck-3">I agree to the General Conditions of Use to permit and that my information as described on this page and used the Medelivery Privacy Policy</label>
+						</div>
+                <button
+                    class="btn btn-primary" type="button" style="background-color:#222222;">CANCEL</button><button class="btn btn-primary float-right" type="submit" style="background-color:#465765;">PLACE ORDER</button></div>
+        </div>
+		</form>
+    </div>
+    </div>
     <div class="footer-basic">
         <footer>
             <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>

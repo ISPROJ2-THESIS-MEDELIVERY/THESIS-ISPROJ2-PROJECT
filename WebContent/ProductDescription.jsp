@@ -58,32 +58,78 @@
                 </ul>
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Login.jsp">Login</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="Home.jsp">Log Out</a></li>
                 </ul>
             </div>
         </div>
-    </nav>
-    <form action="LoginController" method="post" style="padding:56px;margin:-21px;height:470px;">
-        <h2 class="sr-only">Login Form</h2>
-        <div class="illustration"></div>
-        <div class="form-group"><input class="form-control" type="email" name="Email" required="" placeholder="Email" autocomplete="on" style="width:263px;padding:0px;height:42px;"></div>
-        <div class="form-group"><input class="form-control" type="password" name="Password" required="" placeholder="Password" style="padding:0px;width:264px;height:42px;"></div>
-        <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="width:266px;background-color:#465765;">Log In</button></div>
-        <p style="font-size:13px;">Don't have an account yet? Register <a href="Members.jsp">here</a></p>
-        <p style="font-size:13px;"><a href="AccountRecovery.jsp">Forgot password?</a></p>
-    </form>
+    </nav><div class="row">
+<div class="image-gallery">
+  <aside class="thumbnails">
+    <a href="#" class="selected thumbnail" data-big="http://www.deeez.co/wp-content/uploads/2016/09/medicine-packaging-design-tasnim-01.jpg">
+      <div class="thumbnail-image" style="background-image: url(http://www.deeez.co/wp-content/uploads/2016/09/medicine-packaging-design-tasnim-01.jpg)"></div>
+    </a>
+    <a href="#" class="thumbnail" data-big="https://i.ytimg.com/vi/ToVQfjpq7x4/maxresdefault.jpg">
+      <div class="thumbnail-image" style="background-image: url(https://i.ytimg.com/vi/ToVQfjpq7x4/maxresdefault.jpg)"></div>
+    </a>
+    <a href="#" class="thumbnail" data-big="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSThcuDPbM0El0RkRoIWDYZXuxAS7tFRtxFEJy7l_l0cS-Ib8ZMWA">
+      <div class="thumbnail-image" style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSThcuDPbM0El0RkRoIWDYZXuxAS7tFRtxFEJy7l_l0cS-Ib8ZMWA)"></div>
+    </a>
+  </aside>
+
+  <main class="primary" style="background-image: url('http://www.deeez.co/wp-content/uploads/2016/09/medicine-packaging-design-tasnim-01.jpg');"></main>
+</div>
+</div>
+    <div class="row">
+	<form action="ProductDescriptionController" method="get">
+        <div class="col">
+            <div class="row" style="margin:15px;">
+                <div class="col">
+                    <h1 style="font-size:50px;">Brand Name</h1>
+                </div>
+            </div>
+            <div class="row" style="margin:10px;">
+                <div class="col"><label class="col-form-label" style="font-size:32px;margin:10px;">Generic Name</label></div>
+            </div>
+            <div class="row" style="font-size:20px;margin:25px;">
+                <div class="col"><label class="col-form-label">Price: PXX.XX</label></div>
+            </div>
+            <div class="row" style="margin:10px;">
+                <div class="col">
+                    <h1>Product Details</h1>
+                    <div class="row">
+                        <div class="col"><label class="col-form-label" style="font-size:20px;">Product Detail Summary</label>
+                            <div class="row">
+                                <div class="col"><label class="col-form-label" style="font-size:20px;">Product Strength</label></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><label class="col-form-label" style="font-size:20px;">Product Form</label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><label class="col-form-label" style="font-size:20px;">Manufacturer</label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><label class="col-form-label" style="font-size:20px;">Origin</label></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		</form>
+    </div>
+	
+	
 	
     <div class="footer-basic">
         <footer>
             <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
             <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Home</a></li>
-                <li class="list-inline-item"><a href="#">Services</a></li>
-                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="Home.jsp">Home</a></li>
+                <li class="list-inline-item"></li>
+                <li class="list-inline-item"><a href="About.jsp">About</a></li>
                 <li class="list-inline-item"><a href="#">Terms</a></li>
                 <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
             </ul>
-            <p class="copyright">Company Name © 2017</p>
+            <p class="copyright">Medelivery © 2018</p>
         </footer>
     </div>
     <script src="assets/js/jquery.min.js"></script>

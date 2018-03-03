@@ -3,7 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,7 +43,7 @@
     <link rel="stylesheet" href="assets/css/TR-Form.css">
 </head>
 
-<body><img src="assets/img/MedeliveryLogo.png">
+<body style="height:760px;"><img src="assets/img/MedeliveryLogo.png">
     <nav class="navbar navbar-light navbar-expand-md">
         <div class="container-fluid"><a class="navbar-brand" href="#"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse"
@@ -58,32 +57,39 @@
                 </ul>
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Login.jsp">Login</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="Home.jsp">Log Out</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <form action="LoginController" method="post" style="padding:56px;margin:-21px;height:470px;">
-        <h2 class="sr-only">Login Form</h2>
-        <div class="illustration"></div>
-        <div class="form-group"><input class="form-control" type="email" name="Email" required="" placeholder="Email" autocomplete="on" style="width:263px;padding:0px;height:42px;"></div>
-        <div class="form-group"><input class="form-control" type="password" name="Password" required="" placeholder="Password" style="padding:0px;width:264px;height:42px;"></div>
-        <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="width:266px;background-color:#465765;">Log In</button></div>
-        <p style="font-size:13px;">Don't have an account yet? Register <a href="Members.jsp">here</a></p>
-        <p style="font-size:13px;"><a href="AccountRecovery.jsp">Forgot password?</a></p>
-    </form>
+    <div class="row">
+        <div class="col">
+            <p class="text-center"><br><br>Forgot your password? Enter your login email below. We will send you an email with a link to reset your password.<br><br><br></p>
+        </div>
+    </div>
 	
-    <div class="footer-basic">
+    <div class="form-group" style="margin:64px;width:338px;padding:-31px;height:2px;">
+	<form action="AccountRecoveryController" method="post">
+        <p style="width:185px;">Enter your email address:</p>
+		<input type="email" name="CusEmail" required="" placeholder="Email" autocomplete="on" style="width:263px;padding:0px;height:42px;">
+		</div>
+    <div class="form-group" style="padding:9px;height:99px;width:156px;"><button class="btn btn-primary" type="submit" style="margin:33px;background-color:#2779a3;">Submit</button>
+	</form>
+	</div>
+    
+	
+	
+	
+	<div class="footer-basic">
         <footer>
             <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
             <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Home</a></li>
-                <li class="list-inline-item"><a href="#">Services</a></li>
-                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="Home.jsp">Home</a></li>
+                <li class="list-inline-item"></li>
+                <li class="list-inline-item"><a href="About.jsp">About</a></li>
                 <li class="list-inline-item"><a href="#">Terms</a></li>
                 <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
             </ul>
-            <p class="copyright">Company Name © 2017</p>
+            <p class="copyright">Medelivery © 2018</p>
         </footer>
     </div>
     <script src="assets/js/jquery.min.js"></script>

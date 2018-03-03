@@ -54,24 +54,36 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="About.jsp">About</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="ContactUs.jsp">Contact Us</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Members.jsp">Membership Registration</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="Catalog.jsp">View Products</a></li>
                 </ul>
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Login.jsp">Login</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="Home.jsp">Log Out</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <form action="LoginController" method="post" style="padding:56px;margin:-21px;height:470px;">
-        <h2 class="sr-only">Login Form</h2>
-        <div class="illustration"></div>
-        <div class="form-group"><input class="form-control" type="email" name="Email" required="" placeholder="Email" autocomplete="on" style="width:263px;padding:0px;height:42px;"></div>
-        <div class="form-group"><input class="form-control" type="password" name="Password" required="" placeholder="Password" style="padding:0px;width:264px;height:42px;"></div>
-        <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="width:266px;background-color:#465765;">Log In</button></div>
-        <p style="font-size:13px;">Don't have an account yet? Register <a href="Members.jsp">here</a></p>
-        <p style="font-size:13px;"><a href="AccountRecovery.jsp">Forgot password?</a></p>
-    </form>
+    <div class="register-photo">
+	<form action="RegistrationController" method="post">
+        <div class="form-container">
+            <div class="image-holder" style="background-image:url(&quot;assets/img/Medicine.jpg&quot;);width:501px;margin:18px;height:560px;"></div>
+            <form method="post">
+                <h2 class="text-center"><strong>Create</strong> an account.</h2>
+                <div class="form-group">
+                    <div class="alert alert-danger" role="alert"><span style="color:#eb3b60;"><strong>* Required Fields</strong></span></div><input class="form-control" type="text" name="FullName" required="" placeholder="FullName*"><input class="form-control" type="text" name="ContactNumber" required=""
+                        placeholder="Landline / Cellphone *">
+                    <div class="alert alert-danger" role="alert"><span style="color:#eb3b60;font-size:15px;"><strong>Please Upload a Photo of your Senior Citizen ID/ PWD ID&nbsp;</strong></span></div><input class="visible" type="file"><input class="form-control" type="text" name="Username" required=""
+                        placeholder="Username*"><input class="form-control" type="email" name="CusEmail" required="" placeholder="Email Address *"></div>
+                <div class="form-group"><input class="form-control" type="password" name="Password" required="" placeholder="Create Password"></div><input class="form-control" type="password" name="Password-repeat" required="" placeholder="Re-enter Password" style="margin:0px;">
+                <div
+                    class="form-group" style="margin: ;"></div>
+        <div class="form-group">
+            <div class="form-check"><label class="form-check-label" style="margin:20px;font-size:20px;"><input class="form-check-input" type="checkbox">I agree to the license terms.</label></div>
+        </div>
+        <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background-color:#56c5ff;">Sign Up</button></div><a href="#" class="already" style="color:#282d32;font-size:20px;">Already have an account? Login here.</a></form>
+    </div>
+	</form>
+    </div>
+	
+	
 	
     <div class="footer-basic">
         <footer>

@@ -63,27 +63,30 @@
             </div>
         </div>
     </nav>
-    <form action="LoginController" method="post" style="padding:56px;margin:-21px;height:470px;">
-        <h2 class="sr-only">Login Form</h2>
-        <div class="illustration"></div>
-        <div class="form-group"><input class="form-control" type="email" name="Email" required="" placeholder="Email" autocomplete="on" style="width:263px;padding:0px;height:42px;"></div>
-        <div class="form-group"><input class="form-control" type="password" name="Password" required="" placeholder="Password" style="padding:0px;width:264px;height:42px;"></div>
-        <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="width:266px;background-color:#465765;">Log In</button></div>
-        <p style="font-size:13px;">Don't have an account yet? Register <a href="Members.jsp">here</a></p>
-        <p style="font-size:13px;"><a href="AccountRecovery.jsp">Forgot password?</a></p>
-    </form>
-	
+    <div class="register-photo">
+        <div class="form-container">
+            <form action="EditAccountController" method="post">
+                <h2 class="text-center"><strong>Edit Account Details</strong></h2>
+                <div class="form-group"><input class="form-control" type="text" name="FirstName" placeholder="First Name" autocomplete="off" style="margin:0px;"><input class="form-control" type="text" name="LastName" placeholder="Last Name"><input class="form-control" type="text"
+                        name="CAddress" placeholder="Address"><input class="form-control" type="text" name="ContactNumber" placeholder="Landline / Cellphone"><input class="form-control" type="email" name="CusEmail" placeholder="Email Address"></div>
+                <div class="form-group">
+                    <div class="alert alert-danger" role="alert"><span style="color:#eb3b60;">Your password was incorrect.<br></span></div><input class="form-control" type="password" name="Password" placeholder="Type Old Password"><input class="form-control" type="password" name="Password" placeholder="Enter New Password"
+                        style="margin:0px;width:300px;"><input class="form-control" type="password" name="Password-repeat" placeholder="Re-type New Password"></div>
+                <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background-color:#184e8e;">Update Account</button></div>
+            </form>
+        </div>
+    </div>
     <div class="footer-basic">
         <footer>
             <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
             <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Home</a></li>
-                <li class="list-inline-item"><a href="#">Services</a></li>
-                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="Home.jsp">Home</a></li>
+                <li class="list-inline-item"></li>
+                <li class="list-inline-item"><a href="About.jsp">About</a></li>
                 <li class="list-inline-item"><a href="#">Terms</a></li>
                 <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
             </ul>
-            <p class="copyright">Company Name © 2017</p>
+            <p class="copyright">Medelivery © 2018</p>
         </footer>
     </div>
     <script src="assets/js/jquery.min.js"></script>

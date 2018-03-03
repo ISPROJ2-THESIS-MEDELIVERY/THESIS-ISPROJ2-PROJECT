@@ -58,21 +58,41 @@
                 </ul>
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Login.jsp">Login</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="Home.jsp">Log Out</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <form action="LoginController" method="post" style="padding:56px;margin:-21px;height:470px;">
-        <h2 class="sr-only">Login Form</h2>
-        <div class="illustration"></div>
-        <div class="form-group"><input class="form-control" type="email" name="Email" required="" placeholder="Email" autocomplete="on" style="width:263px;padding:0px;height:42px;"></div>
-        <div class="form-group"><input class="form-control" type="password" name="Password" required="" placeholder="Password" style="padding:0px;width:264px;height:42px;"></div>
-        <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="width:266px;background-color:#465765;">Log In</button></div>
-        <p style="font-size:13px;">Don't have an account yet? Register <a href="Members.jsp">here</a></p>
-        <p style="font-size:13px;"><a href="AccountRecovery.jsp">Forgot password?</a></p>
-    </form>
-	
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 style="font-size:52px;font-family:Lora, serif;">Member Registration</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col">
+                            <h1 style="font-size:28px;font-family:Lora, serif;">Order from us!</h1>
+                        </div>
+                    </div>
+                    <div class="row"><a class="btn btn-primary" role="button" href="RegistrationCustomer.jsp" style="margin:31px;background-color:#56c5ff;color:rgb(255,255,255);height:52px;width:204px;font-size:20px;">Customers</a></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <h3 class="name" style="font-family:Lora, serif;">Help us Deliver!</h3>
+                    </div>
+                    <div class="row"><a class="btn btn-primary" role="button" href="ContactUs.jsp" style="padding:13px;margin:31px;color:#ffffff;background-color:#56c5ff;font-size:20px;width:204px;">For Delivery Services</a></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <h3 class="name" style="font-family:Lora, serif;">Partner with us!</h3>
+                    </div>
+                    <div class="row"><a class="btn btn-primary" role="button" href="ContactUs.jsp" style="margin:35px;color:rgb(255,255,255);background-color:#56c5ff;height:52px;font-size:20px;width:204px;">For Pharmacies&nbsp;</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="footer-basic">
         <footer>
             <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>

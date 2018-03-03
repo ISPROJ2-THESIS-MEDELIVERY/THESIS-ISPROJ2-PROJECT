@@ -44,47 +44,79 @@
     <link rel="stylesheet" href="assets/css/TR-Form.css">
 </head>
 
-<body><img src="assets/img/MedeliveryLogo.png">
+<body><img src="assets/img/adminlogo.png">
     <nav class="navbar navbar-light navbar-expand-md">
         <div class="container-fluid"><a class="navbar-brand" href="#"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse"
                 id="navcol-1">
                 <ul class="nav navbar-nav">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="Home.jsp">Home</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="About.jsp">About</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="ContactUs.jsp">Contact Us</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="Members.jsp">Membership Registration</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="Catalog.jsp">View Products</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="ManageCustomerAccount.jsp">Manage Customer Accounts</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="About.jsp">Manage Pharmeceutical Parters&nbsp;<br></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="ContactUs.jsp">Manage Delivery Service Accounts<br></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="ContactUs.jsp">Inventory</a></li>
                 </ul>
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Login.jsp">Login</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="Home.jsp">Log Out</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <form action="LoginController" method="post" style="padding:56px;margin:-21px;height:470px;">
-        <h2 class="sr-only">Login Form</h2>
-        <div class="illustration"></div>
-        <div class="form-group"><input class="form-control" type="email" name="Email" required="" placeholder="Email" autocomplete="on" style="width:263px;padding:0px;height:42px;"></div>
-        <div class="form-group"><input class="form-control" type="password" name="Password" required="" placeholder="Password" style="padding:0px;width:264px;height:42px;"></div>
-        <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="width:266px;background-color:#465765;">Log In</button></div>
-        <p style="font-size:13px;">Don't have an account yet? Register <a href="Members.jsp">here</a></p>
-        <p style="font-size:13px;"><a href="AccountRecovery.jsp">Forgot password?</a></p>
-    </form>
-	
-    <div class="footer-basic">
-        <footer>
-            <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
-            <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Home</a></li>
-                <li class="list-inline-item"><a href="#">Services</a></li>
-                <li class="list-inline-item"><a href="#">About</a></li>
-                <li class="list-inline-item"><a href="#">Terms</a></li>
-                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-            </ul>
-            <p class="copyright">Company Name © 2017</p>
-        </footer>
+    <div class="features-boxed"></div>
+    <div></div>
+    <div class="simple-slider">
+        <div class="swiper-container">
+            <div class="swiper-wrapper"></div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+    <div class="carousel slide" data-ride="carousel" id="carousel-1">
+        <div class="carousel-inner" role="listbox"></div>
+        <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev"><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-slide="next"><span class="sr-only">Next</span></a></div>
+        <ol
+            class="carousel-indicators"></ol>
+    </div>
+    <div style="padding:20px;margin:10px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Select Month for Record Printing</h1>
+                </div>
+                <div class="col-md-6">
+                    <div class="row" style="padding:15px;">
+                        <div class="col"><input type="date"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding:20px;margin:15px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row" style="padding:15px;">
+                        <div class="col"><button class="btn btn-primary" type="button">Print Audit Trail</button></div>
+                    </div>
+                    <div class="row" style="padding:15px;">
+                        <div class="col"><select><optgroup label="This is a group"><option value="12" selected="">Select Pharmacy</option><option value="13">This is item 2</option><option value="14">This is item 3</option></optgroup></select></div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row" style="padding:15px;">
+                        <div class="col"><button class="btn btn-primary" type="button">Print Sale History</button></div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row" style="padding:15px;">
+                        <div class="col"><button class="btn btn-primary" type="button">Print Order History / Delivery Time</button></div>
+                    </div>
+                    <div class="row" style="padding:15px;">
+                        <div class="col"><select><optgroup label="This is a group"><option value="12" selected="">Select Delivery Service</option><option value="13">This is item 2</option><option value="14">This is item 3</option></optgroup></select></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>

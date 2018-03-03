@@ -63,27 +63,108 @@
             </div>
         </div>
     </nav>
-    <form action="LoginController" method="post" style="padding:56px;margin:-21px;height:470px;">
-        <h2 class="sr-only">Login Form</h2>
-        <div class="illustration"></div>
-        <div class="form-group"><input class="form-control" type="email" name="Email" required="" placeholder="Email" autocomplete="on" style="width:263px;padding:0px;height:42px;"></div>
-        <div class="form-group"><input class="form-control" type="password" name="Password" required="" placeholder="Password" style="padding:0px;width:264px;height:42px;"></div>
-        <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="width:266px;background-color:#465765;">Log In</button></div>
-        <p style="font-size:13px;">Don't have an account yet? Register <a href="Members.jsp">here</a></p>
-        <p style="font-size:13px;"><a href="AccountRecovery.jsp">Forgot password?</a></p>
-    </form>
-	
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <form action="SearchController" class="search-form" method="get">
+                        <div class="input-group" style="width:336px;">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div><input class="form-control" type="text" name="SearchFilter" placeholder="I am looking for..">
+                            <div class="input-group-append"><button class="btn btn-light" type="button">Search </button></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-2"><select class="form-control-lg" name="Over The Counter "><option value="">Categories</option><option value="">Prescription</option><option value="">Over The Counter</option></select></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12"><select class="form-control-lg" name="Medicine"><option value="">Medicine Type</option><option value="">Branded</option><option value="">Generic</option></select></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"><select class="form-control-lg" name="Medicine" style="margin:1px;"><option value="">Filter</option><option value="">Name</option><option value="">Best Selling</option><option value="">Price: Low to High</option><option value="">Price: High to Low</option></select></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12"><select class="form-control-lg" name="Medicine" style="margin:1px;"><option value="">Branch</option><option value="">Mercury</option><option value="">Best Selling</option><option value="">Price: Low to High</option><option value="">Price: High to Low</option></select></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Item Description</th>
+                                    <th>Quantity</th>
+                                    <th>Dosage Strength</th>
+                                    <th>Size</th>
+                                    <th>Unit Price</th>
+                                    <th>Total Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Solmux</td>
+                                    <td><img>Cell 2</td>
+                                    <td>Cell 3<input type="number"></td>
+                                    <td><label><br>Label<br><br></label></td>
+                                    <td><br>Label<br><br></td>
+                                    <td><br>Label<br><br></td>
+                                    <td><br>Label<br><br></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="ProductDescription.jsp">Antihistamine</a></td>
+                                    <td><img>Cell 4</td>
+                                    <td>Cell 3<input type="number"></td>
+                                    <td><br>Label<br><br></td>
+                                    <td><br>Label<br><br></td>
+                                    <td><br>Label<br><br></td>
+                                    <td><br>Label<br><br></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4"><button class="btn btn-primary float-right" type="button" style="background-color:#2779a3;">Add To Cart</button></div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+    </div>
+    <div></div>
+    <div></div>
+    <div></div>
     <div class="footer-basic">
         <footer>
             <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
             <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Home</a></li>
-                <li class="list-inline-item"><a href="#">Services</a></li>
-                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="Home.jsp">Home</a></li>
+                <li class="list-inline-item"></li>
+                <li class="list-inline-item"><a href="About.jsp">About</a></li>
                 <li class="list-inline-item"><a href="#">Terms</a></li>
                 <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
             </ul>
-            <p class="copyright">Company Name © 2017</p>
+            <p class="copyright">Medelivery © 2018</p>
         </footer>
     </div>
     <script src="assets/js/jquery.min.js"></script>

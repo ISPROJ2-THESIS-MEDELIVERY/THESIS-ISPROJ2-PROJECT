@@ -63,15 +63,31 @@
             </div>
         </div>
     </nav>
-    <form action="LoginController" method="post" style="padding:56px;margin:-21px;height:470px;">
-        <h2 class="sr-only">Login Form</h2>
-        <div class="illustration"></div>
-        <div class="form-group"><input class="form-control" type="email" name="Email" required="" placeholder="Email" autocomplete="on" style="width:263px;padding:0px;height:42px;"></div>
-        <div class="form-group"><input class="form-control" type="password" name="Password" required="" placeholder="Password" style="padding:0px;width:264px;height:42px;"></div>
-        <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="width:266px;background-color:#465765;">Log In</button></div>
-        <p style="font-size:13px;">Don't have an account yet? Register <a href="Members.jsp">here</a></p>
-        <p style="font-size:13px;"><a href="AccountRecovery.jsp">Forgot password?</a></p>
-    </form>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p><br>For Deliveries from a pharmacy within the city of your delivery address a&nbsp;₱50.00 delivery charge will be added to your order<br><br>For Deliveries from a pharmacy outside the city of your delivery address a&nbsp;₱100.00 delivery
+                        charge will be added to your order<br><br><br><br></p>
+                </div>
+                <div class="col"><img src="assets/img/location.png"></div>
+            </div>
+            <div class="row">
+			<form action="DeliveryLocationController" method="post">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col">
+                            <div class="alert alert-danger" role="alert"><span><strong>Items with * require entry&nbsp;</strong></span></div><input type="text" name="Barangay" required="" placeholder="Barangay *" style="margin:20px;"><select required="" style="width:300px;margin:20px;"><option value="12" selected="">City / Municipality</option><option value="13">Caloocan</option><option value="14">City of Manila</option><option value="">Las Piñas</option><option value="">Makati</option><option value="">Malabon</option><option value="">Mandaluyong</option><option value="">Marikina</option><option value="">Muntinlupa</option><option value="">Navotas</option><option value="">Parañaque</option><option value="">Pasay</option><option value="">Pasig</option><option value="">Pateros</option><option value="">Quezon City</option><option value="">San Juan</option><option value="">Taguig</option><option value="">Valenzuela</option></select>
+                            <textarea
+                                name="CAddress" required="" placeholder="Complete Address (House Number, Building and Street Name) *" style="height:83px;width:285px;color:rgb(0,0,0);margin:20px;"></textarea><button class="btn btn-primary" type="submit" style="margin:21px;width:287px;background-color:#56c5ff;color:rgb(255,255,255);font-size:18px;">Order Now</button><button class="btn btn-primary" type="submit" style="margin:21px;width:287px;background-color:#56c5ff;color:rgb(255,255,255);font-size:18px;">Use Registration Address</button></div>
+                    </div>
+                </div>
+                <div class="col"></div>
+				</form>
+            </div>
+        </div>
+    </div>
+	
 	
     <div class="footer-basic">
         <footer>

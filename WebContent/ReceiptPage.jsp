@@ -63,27 +63,40 @@
             </div>
         </div>
     </nav>
-    <form action="LoginController" method="post" style="padding:56px;margin:-21px;height:470px;">
-        <h2 class="sr-only">Login Form</h2>
-        <div class="illustration"></div>
-        <div class="form-group"><input class="form-control" type="email" name="Email" required="" placeholder="Email" autocomplete="on" style="width:263px;padding:0px;height:42px;"></div>
-        <div class="form-group"><input class="form-control" type="password" name="Password" required="" placeholder="Password" style="padding:0px;width:264px;height:42px;"></div>
-        <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="width:266px;background-color:#465765;">Log In</button></div>
-        <p style="font-size:13px;">Don't have an account yet? Register <a href="Members.jsp">here</a></p>
-        <p style="font-size:13px;"><a href="AccountRecovery.jsp">Forgot password?</a></p>
-    </form>
+    <div class="row" style="padding:30px;">
+	<form action="ReceiptPageController" method="get">
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <h1 style="font-size:42px;padding:0px;">Thank you for your order</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col"><label class="col-form-label" style="font-size:34px;padding:13px;">Order number is:&nbsp;</label></div>
+            </div>
+            <div class="row">
+                <div class="col"><label class="col-form-label" style="font-size:20px;">You will recieve an email confirmation shortly at example@info.com&nbsp;</label></div>
+            </div>
+            <div class="row">
+                <div class="col"><label class="col-form-label" style="color:#56c5ff;font-size:25px;"><strong><span style="text-decoration: underline;">Print Receipt</span></strong></label></div>
+            </div>
+        </div>
+		</form>
+    </div>
+	
+	
 	
     <div class="footer-basic">
         <footer>
             <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
             <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Home</a></li>
-                <li class="list-inline-item"><a href="#">Services</a></li>
-                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="Home.jsp">Home</a></li>
+                <li class="list-inline-item"></li>
+                <li class="list-inline-item"><a href="About.jsp">About</a></li>
                 <li class="list-inline-item"><a href="#">Terms</a></li>
                 <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
             </ul>
-            <p class="copyright">Company Name © 2017</p>
+            <p class="copyright">Medelivery © 2018</p>
         </footer>
     </div>
     <script src="assets/js/jquery.min.js"></script>

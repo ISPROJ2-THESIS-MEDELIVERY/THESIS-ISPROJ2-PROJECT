@@ -63,16 +63,77 @@
             </div>
         </div>
     </nav>
-    <form action="LoginController" method="post" style="padding:56px;margin:-21px;height:470px;">
-        <h2 class="sr-only">Login Form</h2>
-        <div class="illustration"></div>
-        <div class="form-group"><input class="form-control" type="email" name="Email" required="" placeholder="Email" autocomplete="on" style="width:263px;padding:0px;height:42px;"></div>
-        <div class="form-group"><input class="form-control" type="password" name="Password" required="" placeholder="Password" style="padding:0px;width:264px;height:42px;"></div>
-        <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="width:266px;background-color:#465765;">Log In</button></div>
-        <p style="font-size:13px;">Don't have an account yet? Register <a href="Members.jsp">here</a></p>
-        <p style="font-size:13px;"><a href="AccountRecovery.jsp">Forgot password?</a></p>
-    </form>
-	
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="text-center" style="font-family:Lora, serif;font-size:26px;">For Partnership and Joint Ventures<br></p>
+                    <p class="text-center" style="font-size:14px;font-family:Lora, serif;"><br>Please Contact Denny Yu at # / or #</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="text-center" style="font-family:Lora, serif;font-size:26px;">Get In Touch With Us<br></p>
+                    <p class="text-center" style="font-size:14px;font-family:Lora, serif;"><br>Medelivery is here to provide you with more information, answer any questions you may have and create an effective solution to any of your pharmaceutical delivery needs.<br><br></p>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+    </div>
+    <div class="contact-clean">
+        <form action="ContactController" method="post">
+            <h2 class="text-center">Contact us</h2>
+            <div class="form-group"><input class="form-control" type="text" name="Name" required="" placeholder="Name" style="width:275px;"></div>
+            <div class="form-group"><input class="form-control is-invalid" type="email" name="Email" required="" placeholder="Email" autocomplete="on" style="width:276px;"><small class="form-text text-danger">Please enter a correct email address.</small></div>
+            <div class="form-group"><textarea class="form-control" rows="14" name="Message" placeholder="Message" style="width:275px;"></textarea></div>
+            <div class="form-group"><button class="btn btn-primary" type="submit">send </button></div>
+        </form>
+    </div>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Corporate Headquarters</h4>
+                    <h1 style="font-size:16px;height:93px;"><br><br>71 Main Ave, Manila, 1709 Metro Manila<br><br></h1>
+                </div>
+                <div class="col-md-6">
+                    <h4>General Contact&nbsp;</h4>
+                    <h6><br><br>(632) 911 5071<br><br><br></h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Customer Service Hotline</h4>
+                    <h6><br>(632) 911 5071<br><br></h6>
+                </div>
+                <div class="col-md-6">
+                    <h4>Delivery Couriers</h4>
+                    <h6>+63 917 606 6913<br><br>+63 921 933 8074<br><br><a href="mailto:support@angkas.com">support@angkas.com</a><br><br></h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Pharmaceutical Partners</h4>
+                    <h6><br>7 Mercury Ave. cor. C. P. Garcia Ave., Bagumbayan, Quezon City, 1110 Metro Manila, Philippines<br><br>www.mercurydrug.com<br><br>(632) 911 6673<br><br></h6>
+                </div>
+                <div class="col-md-6">
+                    <h4>Sales Info and Marketing</h4>
+                    <h6><br><br>+63 921 933 8074<br><br></h6>
+                </div>
+            </div>
+        </div>
+    </div><iframe allowfullscreen="" frameborder="0" width="100%" height="400" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCb7FLSwSN-E71cGQcPYn8-K9b3brapo-g&amp;q=Merville+paranaque&amp;zoom=11"></iframe>
+    <div class="map-clean">
+        <div class="container">
+            <div class="intro"></div>
+        </div>
+    </div>
     <div class="footer-basic">
         <footer>
             <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>

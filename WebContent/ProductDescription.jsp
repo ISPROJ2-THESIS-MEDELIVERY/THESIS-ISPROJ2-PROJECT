@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -79,37 +80,37 @@
 </div>
 </div>
     <div class="row">
-	<form action="ProductDescriptionController" method="get">
+	<form action="ProductController" method="get">
         <div class="col">
             <div class="row" style="margin:15px;">
                 <div class="col">
-                    <h1 style="font-size:50px;">Brand Name</h1>
+                    <h1 style="font-size:50px;"><c:out value="${product.productName}" /></h1>
                 </div>
             </div>
             <div class="row" style="margin:10px;">
-                <div class="col"><label class="col-form-label" style="font-size:32px;margin:10px;">Generic Name</label></div>
+                <div class="col"><label class="col-form-label" style="font-size:32px;margin:10px;"><c:out value="${product.genericName}" /></label></div>
             </div>
             <div class="row" style="font-size:20px;margin:25px;">
-                <div class="col"><label class="col-form-label">Price: PXX.XX</label></div>
+                <div class="col"><label class="col-form-label">Price: N/A</label></div>
             </div>
             <div class="row" style="margin:10px;">
                 <div class="col">
                     <h1>Product Details</h1>
                     <div class="row">
-                        <div class="col"><label class="col-form-label" style="font-size:20px;">Product Detail Summary</label>
+                        <div class="col"><label class="col-form-label" style="font-size:20px;"><c:out value="${product.productDescription}" /></label>
                             <div class="row">
-                                <div class="col"><label class="col-form-label" style="font-size:20px;">Product Strength</label></div>
+                                <div class="col"><label class="col-form-label" style="font-size:20px;"><c:out value="${product.productStrength}" /></label></div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col"><label class="col-form-label" style="font-size:20px;">Product Form</label></div>
+                        <div class="col"><label class="col-form-label" style="font-size:20px;"><c:out value="${product.productForm}" /></label></div>
                     </div>
                     <div class="row">
-                        <div class="col"><label class="col-form-label" style="font-size:20px;">Manufacturer</label></div>
+                        <div class="col"><label class="col-form-label" style="font-size:20px;"><c:out value="${product.productManufacturer}" /></label></div>
                     </div>
                     <div class="row">
-                        <div class="col"><label class="col-form-label" style="font-size:20px;">Origin</label></div>
+                        <div class="col"><label class="col-form-label" style="font-size:20px;"><c:out value="${product.productOrigin}" /></label></div>
                     </div>
                 </div>
             </div>

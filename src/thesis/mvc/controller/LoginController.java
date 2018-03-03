@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import javax.faces.bean.ManagedProperty;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import thesis.mvc.pageaction.LoginAction;
 import thesis.mvc.utility.DBUtility;
 
+@WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
 	
 	private Connection conn;
@@ -42,10 +44,10 @@ public class LoginController extends HttpServlet {
 		
 		RequestDispatcher view;
 		if (test) {
-			view = request.getRequestDispatcher( "/Sucess.jsp" );
+			view = request.getRequestDispatcher( "/AdminHome.jsp" );
 		}
 		else {
-			view = request.getRequestDispatcher( "/Fail.jsp" );
+			view = request.getRequestDispatcher( "/AccountRecovery.jsp" );
 		}
 		view.forward(request, response);
 	}

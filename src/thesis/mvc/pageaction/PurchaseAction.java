@@ -25,6 +25,14 @@ public class PurchaseAction {
 		int CityCustomer = -2;
 		int CityPharmacy = -1;
 		
+		for(int q = 0; OrderDetails.size() > q; q++) {
+			if (q == 5) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+		
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM customer WHERE CustomerID = ?")) {
             stmt.setInt(1, order.getCustomerID());
             try(ResultSet rs = stmt.executeQuery()) {
@@ -32,6 +40,7 @@ public class PurchaseAction {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
 		//Get the Pharmacist
 		int PharmaID = 0;
@@ -45,6 +54,7 @@ public class PurchaseAction {
 			}
 		} catch (SQLException e){
 			e.printStackTrace();
+			return false;
 		}
 		//Where is the branch located.
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM branch WHERE BranchID = ?")) {
@@ -54,6 +64,7 @@ public class PurchaseAction {
 			}
 		} catch (SQLException e){
 			e.printStackTrace();
+			return false;
 		}
 		
 		

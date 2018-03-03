@@ -33,6 +33,11 @@ public class PurchaseAction {
 			}
 		}
 		
+		/*PreparedStatement ps1 = conn.prepareStatement("update t1 set a2=? where id=1");
+        Blob blob = conn.createBlob();
+        blob.setBytes(1, str.getBytes());
+        ps1.setBlob(1, blob);
+        ps1.executeUpdate();*/
 		
 		
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM customer WHERE CustomerID = ?")) {

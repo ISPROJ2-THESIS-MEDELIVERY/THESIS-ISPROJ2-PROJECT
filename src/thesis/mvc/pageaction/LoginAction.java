@@ -6,15 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import thesis.mvc.utility.DBUtility;
-import thesis.mvc.utility.UniversalBean;
-
-import javax.faces.bean.ManagedProperty;
 
 public class LoginAction {
-
-	//Global variables
-    @ManagedProperty(value="#{UniversalBean}")
-    private UniversalBean GV;
 	
 	private Connection conn;
 
@@ -23,7 +16,7 @@ public class LoginAction {
 	}
 	
 
-    public boolean loginUser(String Username, String Password) {
+    public int loginUser(String Username, String Password) {
         
     	try(PreparedStatement stmt = conn.prepareStatement(""
     			+ "SELECT UserID FROM login WHERE Username = ? AND Password = ?")) {
@@ -34,18 +27,16 @@ public class LoginAction {
             try(ResultSet rs = stmt.executeQuery()) {
 
                 if (rs.next()) {
-                	GV.setLoggedInId(rs.getInt(1));
-                	GV.setLoggedInUsername(Username);
+                	return rs.getInt(1);
                 }  else {
-                    return false;
+                    return 0;
                 }
 
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return 0;
         }
-    	return true;
     	
     }
 

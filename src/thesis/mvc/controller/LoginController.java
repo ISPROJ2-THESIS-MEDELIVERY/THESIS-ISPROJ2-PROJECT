@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import thesis.mvc.pageaction.LoginAction;
 import thesis.mvc.utility.DBUtility;
@@ -40,10 +41,18 @@ public class LoginController extends HttpServlet {
 		
 		LoginAction loginAction = new LoginAction();
 		conn = DBUtility.getConnection();
-		boolean test = loginAction.loginUser(request.getParameter( "Username" ), request.getParameter( "Password" ));
+		int LoginID = loginAction.loginUser(request.getParameter( "Username" ), request.getParameter( "Password" ));
 		
 		RequestDispatcher view;
-		if (test) {
+		if (LoginID > 0) {
+			HttpSession session = request.getSession();
+			//
+			session.setAttribute("userID", LoginID);
+			
+			session.setAttribute("username", "Trinidad");
+			session.setAttribute("userAccess", 1);
+			String test = (String) session.getAttribute("username");
+			
 			view = request.getRequestDispatcher( "/AdminHome.jsp" );
 		}
 		else {

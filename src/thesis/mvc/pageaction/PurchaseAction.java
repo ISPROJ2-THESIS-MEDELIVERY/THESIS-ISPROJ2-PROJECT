@@ -25,13 +25,20 @@ public class PurchaseAction {
 		int CityCustomer = -2;
 		int CityPharmacy = -1;
 		
-		for(int q = 0; OrderDetails.size() > q; q++) {
-			if (q == 5) {
+		for(int q = 0; OrderDetails.size() > q;) {
+			if (q >= 5) {
 				return false;
 			} else {
 				return true;
 			}
 		}
+		
+		/*PreparedStatement ps1 = conn.prepareStatement("update t1 set a2=? where id=1");
+        Blob blob = conn.createBlob();
+        blob.setBytes(1, str.getBytes());
+        ps1.setBlob(1, blob);
+        ps1.executeUpdate();*/
+		
 		
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM customer WHERE CustomerID = ?")) {
             stmt.setInt(1, order.getCustomerID());

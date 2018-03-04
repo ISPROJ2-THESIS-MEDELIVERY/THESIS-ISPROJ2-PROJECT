@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-import javax.faces.bean.ManagedProperty;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,11 +45,18 @@ public class LoginController extends HttpServlet {
 		RequestDispatcher view;
 		if (LoginID > 0) {
 			HttpSession session = request.getSession();
-			//
-			session.setAttribute("userID", LoginID);
 			
+			//Set ID
+			session.setAttribute("userID", LoginID);
+			//Set Username
 			session.setAttribute("username", "Trinidad");
-			session.setAttribute("userAccess", 1);
+			//Set Access Level
+			//Customer = 1
+			//Dispatcher = 2
+			//Pharmacist = 3
+			//Admin = 4
+			int AL = 0;
+			session.setAttribute("userAccess", AL);
 			String test = (String) session.getAttribute("username");
 			
 			view = request.getRequestDispatcher( "/AdminHome.jsp" );

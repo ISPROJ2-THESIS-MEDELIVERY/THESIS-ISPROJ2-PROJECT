@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import thesis.mvc.dataobjects.OrderDetailDAO;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
 import thesis.mvc.utility.DBUtility;
@@ -21,18 +22,26 @@ public class PurchaseAction {
 	public boolean purchaseOrder(Order order, List<OrderDetail> OrderDetails) {
 		OrderDetails.size();
 		
-		int Deliverycharge = 0;
-		int CityCustomer = -2;
-		int CityPharmacy = -1;
+		if (OrderDetails.size() > 5) {
+			return false;
+		} else if (OrderDetails.size() <= 5) {
+			return true;
+		}
 		
-		for(int q = 0; OrderDetails.size() > q;) {
-			if (q >= 5) {
+		for(int q = 0; q <= 5; q++) {  
+			OrderDetail orderDetail = OrderDetails.get(q);
+			if (orderDetail.getQuantity() >= 5) {
 				return false;
 			} else {
 				return true;
 			}
 		}
 		
+		int Deliverycharge = 0;
+		int CityCustomer = -2;
+		int CityPharmacy = -1;
+		
+			
 		/*PreparedStatement ps1 = conn.prepareStatement("update t1 set a2=? where id=1");
         Blob blob = conn.createBlob();
         blob.setBytes(1, str.getBytes());

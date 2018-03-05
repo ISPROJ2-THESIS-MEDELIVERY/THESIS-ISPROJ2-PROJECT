@@ -54,12 +54,12 @@ public class HomeAction {
 		try {
 			Statement statement = conn.createStatement();
 			ResultSet resultSet = statement.executeQuery( ""
-					+ "SELECT P.ProductName, B.PharmacyName, SP.PriceSet, S.Quantity\r\n"
-					+ "FROM Stocks S WHERE S.Feature = 1 AND SP.CurrentPrice = 1\r\n"
-					+ "INNER JOIN Product P ON S.ProductID = P.ProductID\r\n"
-					+ "INNER JOIN Branch B ON S.BranchID = B.BranchID\r\n"
-					+ "INNER JOIN StockPrice SP ON S.BranchID = B.BranchID\r\n"
-					+ "ORDER BY B.PharmacyName");
+					+ "SELECT ProductName, PharmacyName, PriceSet, Quantity "
+					+ "FROM ((( Stocks "
+					+ "INNER JOIN Product ON Product.ProductID = Stocks.ProductID) "
+					+ "INNER JOIN Branch ON Branch.BranchID = Stocks.BranchID) "
+					+ "INNER JOIN StocksPrice ON StocksPrice.StockID = Stocks.StockID) "
+					+ "WHERE Stocks.Feature = 1 AND StocksPrice.IsCurrent = 1");
 			while( resultSet.next() ) {
 				Display display = new Display();
 				display.setProduct( resultSet.getString(1) );

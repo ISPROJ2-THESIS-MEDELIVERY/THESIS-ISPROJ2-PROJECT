@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import thesis.mvc.implement.LoginImplement;
+import thesis.mvc.model.Login;
 import thesis.mvc.pageaction.LoginAction;
 import thesis.mvc.utility.DBUtility;
 
@@ -43,23 +45,33 @@ public class LoginController extends HttpServlet {
 		int LoginID = loginAction.loginUser(request.getParameter( "Username" ), request.getParameter( "Password" ));
 		
 		RequestDispatcher view;
+		//String test = (String) session.getAttribute("username");
 		if (LoginID > 0) {
 			HttpSession session = request.getSession();
 			
 			//Set ID
 			session.setAttribute("userID", LoginID);
-			//Set Username
-			session.setAttribute("username", "Trinidad");
-			//Set Access Level
-			//Customer = 1
-			//Dispatcher = 2
-			//Pharmacist = 3
-			//Admin = 4
-			int AL = 0;
-			session.setAttribute("userAccess", AL);
-			String test = (String) session.getAttribute("username");
 			
-			view = request.getRequestDispatcher( "/AdminHome.jsp" );
+			//Set Username
+			LoginImplement LoginImp = new LoginImplement();
+			Login login = LoginImp.getLoginByID(LoginID);
+			session.setAttribute("username", login.getUsername());
+			
+			//Set Access Level
+			int AL = loginAction.checkUserType(LoginID);
+			session.setAttribute("userAccess", AL);
+			
+			if (AL == 1) {
+				view = request.getRequestDispatcher( "/CustomerHome.jsp" );
+			} else if (AL == 2) {
+				view = request.getRequestDispatcher( "/DispatcherHome.jsp" );
+			} else if (AL == 3) {
+				view = request.getRequestDispatcher( "/PharmacistHome.jsp" );
+			} else if (AL == 4) {
+				view = request.getRequestDispatcher( "/AdminHome.jsp" );
+			} else {
+				view = request.getRequestDispatcher( "/Error.jsp" );
+			}
 		}
 		else {
 			view = request.getRequestDispatcher( "/AccountRecovery.jsp" );

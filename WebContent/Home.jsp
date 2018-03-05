@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -63,28 +64,37 @@
         </div>
     </nav>
     <h2 class="text-center">Featured Products</h2>
-    <div class="carousel slide" data-ride="carousel" id="carousel-2">
-        <div class="carousel-inner" role="listbox">
-            <div class="carousel-item"><img class="w-100 d-block" src="assets/img/kisdobozok-1.jpg" alt="Slide Image">asd</div>
-            <div class="carousel-item"><img class="w-100 d-block" src="assets/img/medicine-packaging-design-tasnim-04.jpg" alt="Slide Image">zxc</div>
-            <div class="carousel-item active"><img class="w-100 d-block" src="assets/img/ZADA food supplements (1).jpg" alt="Slide Image">qwe</div>
-        </div>
-        <div>
-        	<a class="carousel-control-prev" href="#carousel-2" role="button" data-slide="prev">
-	        	<span class="carousel-control-prev-icon"></span>
-	        	<span class="sr-only">Previous</span>
-        	</a>
-        	<a class="carousel-control-next" href="#carousel-2" role="button" data-slide="next">
-        		<span class="carousel-control-next-icon"></span>
-        		<span class="sr-only">Next</span>
-        	</a>
-        </div>
-        <ol class="carousel-indicators">
-            <li data-target="#carousel-2" data-slide-to="0"></li>
-            <li data-target="#carousel-2" data-slide-to="1"></li>
-            <li data-target="#carousel-2" data-slide-to="2" class="active"></li>
-        </ol>
-    </div>
+    
+    
+    <!-- Carousel loop start  -->
+	<c:forEach items="${FeaturedStock}" var="FStock">
+	    <div class="carousel slide" data-ride="carousel" id="carousel-2">
+	        <div class="carousel-inner" role="listbox">
+	            <div class="carousel-item">asd</div>
+	            <div class="carousel-item">zxc</div>
+	            <div class="carousel-item active">qwe</div>
+	        </div>
+	        <ol class="carousel-indicators">
+	            <li data-target="#carousel-2" data-slide-to="0"></li>
+	            <li data-target="#carousel-2" data-slide-to="1"></li>
+	            <li data-target="#carousel-2" data-slide-to="2" class="active"></li>
+	        </ol>
+	        <div>
+	        	<a class="carousel-control-prev" href="#carousel-2" role="button" data-slide="prev">
+		        	<span class="carousel-control-prev-icon"></span>
+		        	<span class="sr-only">Previous</span>
+	        	</a>
+	        	<a class="carousel-control-next" href="#carousel-2" role="button" data-slide="next">
+	        		<span class="carousel-control-next-icon"></span>
+	        		<span class="sr-only">Next</span>
+	        	</a>
+	        </div>
+	    </div>
+	</c:forEach>
+    
+    <!-- Carousel loop end -->
+    
+    
     <div class="features-boxed">
         <div class="container">
             <div class="intro">

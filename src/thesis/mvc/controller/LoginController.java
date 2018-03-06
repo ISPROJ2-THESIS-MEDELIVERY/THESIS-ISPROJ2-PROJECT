@@ -42,7 +42,9 @@ public class LoginController extends HttpServlet {
 		
 		LoginAction loginAction = new LoginAction();
 		conn = DBUtility.getConnection();
-		int LoginID = loginAction.loginUser(request.getParameter( "Username" ), request.getParameter( "Password" ));
+		String Username = request.getParameter( "Username" );
+		String Password = request.getParameter( "Password" );
+		int LoginID = loginAction.loginUser(Username, Password);
 		
 		RequestDispatcher view;
 		//String test = (String) session.getAttribute("username");
@@ -60,8 +62,8 @@ public class LoginController extends HttpServlet {
 			//Set Access Level
 			int AL = loginAction.checkUserType(LoginID);
 			session.setAttribute("userAccess", AL);
-			
-			if (AL == 1) {
+			view = request.getRequestDispatcher( "/Home.jsp" );
+			/*if (AL == 1) {
 				view = request.getRequestDispatcher( "/CustomerHome.jsp" );
 			} else if (AL == 2) {
 				view = request.getRequestDispatcher( "/DispatcherHome.jsp" );
@@ -71,7 +73,7 @@ public class LoginController extends HttpServlet {
 				view = request.getRequestDispatcher( "/AdminHome.jsp" );
 			} else {
 				view = request.getRequestDispatcher( "/Error.jsp" );
-			}
+			}*/
 		}
 		else {
 			view = request.getRequestDispatcher( "/AccountRecovery.jsp" );

@@ -31,8 +31,8 @@ public class FilterController extends HttpServlet {
 		
 		Results = Search.ProductListing(searchfilter);
 		
-		String link = "/FilterController?ProductID=" + "";
-		RequestDispatcher view = request.getRequestDispatcher( );
+		String link = "/FilterController?ProductID=" + request.getParameter( "SearchID" );
+		RequestDispatcher view = request.getRequestDispatcher( link );
 		view.forward(request, response);
 	}
 

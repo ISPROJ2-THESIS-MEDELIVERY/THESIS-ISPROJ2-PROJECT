@@ -1,11 +1,13 @@
 package thesis.mvc.implement;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import thesis.mvc.dataobjects.StocksPriceDAO;
@@ -25,9 +27,10 @@ public class StocksPriceImplement implements StocksPriceDAO{
 		try {
 			String query = "INSERT INTO StocksPrice (StockID, PriceSet, DateSet, IsCurrent) VALUES (?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 			preparedStatement.setInt( 1, stocksPrice.getStockID() );
 			preparedStatement.setDouble( 2, stocksPrice.getPriceSet() );
-			preparedStatement.setDate( 3, stocksPrice.getDateSet() );
+			preparedStatement.setDate( 3, CurrentDate );
 			preparedStatement.setBoolean( 4, stocksPrice.isIsCurrent() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();

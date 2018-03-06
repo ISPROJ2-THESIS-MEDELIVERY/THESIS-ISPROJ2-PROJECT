@@ -62,7 +62,7 @@ public class LoginController extends HttpServlet {
 			//Set Access Level
 			int AL = loginAction.checkUserType(LoginID);
 			session.setAttribute("userAccess", AL);
-			view = request.getRequestDispatcher( "/Home.jsp" );
+			view = request.getRequestDispatcher( "/ProductController?ProductID=1.jsp" );
 			/*if (AL == 1) {
 				view = request.getRequestDispatcher( "/CustomerHome.jsp" );
 			} else if (AL == 2) {

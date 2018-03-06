@@ -1,10 +1,14 @@
 package thesis.mvc.pageaction;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 
+import thesis.mvc.implement.AuditImplement;
+import thesis.mvc.model.Audit;
 import thesis.mvc.utility.DBUtility;
 
 public class LoginAction {
@@ -27,6 +31,15 @@ public class LoginAction {
             try(ResultSet rs = stmt.executeQuery()) {
 
                 if (rs.next()) {
+                    //Audit Log
+            		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+                    Audit audit = new Audit();
+                    audit.setUserID(rs.getInt(1));
+                    audit.setLogType("CustReg");
+                    audit.setTimestamp(CurrentDate);
+                    audit.setActionTaken("User ID " + rs.getInt(1) + " With the username " + Username + " Logged in.");
+                    AuditImplement AuditImp = new AuditImplement();
+                    AuditImp.addAudit(audit);
                 	return rs.getInt(1);
                 }  else {
                     return 0;

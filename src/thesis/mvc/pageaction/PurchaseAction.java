@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-import thesis.mvc.dataobjects.OrderDetailDAO;
+import thesis.mvc.implement.OrderImplement;
+import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
 import thesis.mvc.model.Product;
@@ -40,12 +42,6 @@ public class PurchaseAction {
 			return false;
 		}
 		
-			
-		/*PreparedStatement ps1 = conn.prepareStatement("update t1 set a2=? where id=1");
-        Blob blob = conn.createBlob();
-        blob.setBytes(1, str.getBytes());
-        ps1.setBlob(1, blob);
-        ps1.executeUpdate();*/
 		
 		int CityCustomer = 0;
 		
@@ -92,11 +88,15 @@ public class PurchaseAction {
 		} else {
 			DeliveryCharge = 100;
 		}
-		return true;
 		
+		OrderImplement OrderImp = new OrderImplement();
+		OrderImp.addOrder(order);
 		
+		OrderDetailImplement OrderDet = new OrderDetailImplement();
+		List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
+		OrderDet.addOrderDetail(orderDetails);
 		
-		
+		return true;	
 	
 	}
 }

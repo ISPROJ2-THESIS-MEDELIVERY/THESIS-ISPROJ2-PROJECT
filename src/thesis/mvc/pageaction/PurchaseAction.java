@@ -9,6 +9,7 @@ import java.util.List;
 import thesis.mvc.dataobjects.OrderDetailDAO;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
+import thesis.mvc.model.Product;
 import thesis.mvc.utility.DBUtility;
 
 public class PurchaseAction {
@@ -19,27 +20,25 @@ public class PurchaseAction {
 		conn = DBUtility.getConnection();
 	}
 	
-	public boolean purchaseOrder(Order order, List<OrderDetail> OrderDetails) {
+	public boolean purchaseOrder(Order order, List<OrderDetail> OrderDetails, Product product) {
 		OrderDetails.size();
 		
 		if (OrderDetails.size() > 5) {
 			return false;
-		} else if (OrderDetails.size() <= 5) {
-			return true;
 		}
 		
 		for(int q = 0; q <= 5; q++) {  
 			OrderDetail orderDetail = OrderDetails.get(q);
-			if (orderDetail.getQuantity() >= 5) {
+			if (orderDetail.getQuantity() > 5) {
 				return false;
-			} else {
-				return true;
 			}
 		}
 		
-		int Deliverycharge = 0;
-		int CityCustomer = -2;
-		int CityPharmacy = -1;
+		boolean rx = product.isRXProduct();
+		
+		if(rx) {
+			return false;
+		}
 		
 			
 		/*PreparedStatement ps1 = conn.prepareStatement("update t1 set a2=? where id=1");
@@ -48,6 +47,7 @@ public class PurchaseAction {
         ps1.setBlob(1, blob);
         ps1.executeUpdate();*/
 		
+		int CityCustomer = 0;
 		
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM customer WHERE CustomerID = ?")) {
             stmt.setInt(1, order.getCustomerID());
@@ -73,6 +73,8 @@ public class PurchaseAction {
 			return false;
 		}
 		//Where is the branch located.
+		int CityPharmacy = -1;
+		
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM branch WHERE BranchID = ?")) {
 			stmt.setInt(1, PharmaID);
 			try(ResultSet rs = stmt.executeQuery()){
@@ -83,13 +85,17 @@ public class PurchaseAction {
 			return false;
 		}
 		
+		int DeliveryCharge = 0;
 		
 		if (CityCustomer == CityPharmacy) {
-			Deliverycharge = 50;
+			DeliveryCharge = 50;
 		} else {
-			Deliverycharge = 100;
+			DeliveryCharge = 100;
 		}
 		return true;
+		
+		
+		
 		
 	
 	}

@@ -10,5 +10,8 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="C:/Users/edenn/Dropbox/To laptop/LoginDemo/lib/mysql-connector-java-6.0.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/edenn/Downloads/javax.mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/edenn/Dropbox/IMORTANTTHINGS/activation.jar"/>
+	<classpathentry kind="lib" path="C:/Users/edenn/Dropbox/IMORTANTTHINGS/mail.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

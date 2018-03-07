@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.model.Product;
+import thesis.mvc.pageaction.EmailAction;
 import thesis.mvc.utility.DBUtility;
 
 @WebServlet("/ProductController")
@@ -31,6 +32,9 @@ public class ProductController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String forward = "";
 		int productID = Integer.parseInt( request.getParameter( "ProductID" ) );
+
+    	EmailAction emailAction = new EmailAction();
+    	emailAction.sendEmail("fajardokier@yahoo.com", "Bitch ass nigga", "I'mma pop a cap in your ass");
 		
 		if( request.getParameter( "ProductID" ) != null ) {//Goto product page
 			forward = "/ProductDescription.jsp";

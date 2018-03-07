@@ -37,29 +37,19 @@ public class PurchaseAction {
 		
 		boolean rx = false;
 		
-		/*
-		for(OrderDetail orderDetail : OrderDetails) {
-		    try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM product WHERE ProductID = ?")){
-			stmt.setInt(1, ((OrderDetail) OrderDetails).getProductID());
-			try(ResultSet rs = stmt.executeQuery()){
-				rx = rs.getBoolean("isRXProduct");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-		}
-		 */
 		
-		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM product WHERE ProductID = ?")){  //Check if items in the order is RX
-			stmt.setInt(1, ((OrderDetail) OrderDetails).getProductID());
-			try(ResultSet rs = stmt.executeQuery()){
-				rx = rs.getBoolean("isRXProduct");
+		for (OrderDetail orderDetail : OrderDetails) {
+			try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM product WHERE ProductID = ?")){  //Check if items in the order is RX
+				stmt.setInt(1,  orderDetail.getProductID() );
+				try(ResultSet rs = stmt.executeQuery()){
+					rx = rs.getBoolean("isRXProduct");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
 		}
+		
 		
 		/*boolean rx = product.isRXProduct();
 		
@@ -117,8 +107,11 @@ public class PurchaseAction {
 		OrderImplement OrderImp = new OrderImplement();    //Add to order
 		OrderImp.addOrder(order);
 		
-		OrderDetailImplement OrderDet = new OrderDetailImplement();    //Add to OrderDetail ? 
-		OrderDet.addOrderDetail((OrderDetail) OrderDetails);           //Added cast to remove error.
+		for (OrderDetail orderDetail : OrderDetails) {
+			OrderDetailImplement OrderDet = new OrderDetailImplement();    
+			OrderDet.addOrderDetail(orderDetail);
+		}
+		          
 				
 		/*try {
 			Connection conn;

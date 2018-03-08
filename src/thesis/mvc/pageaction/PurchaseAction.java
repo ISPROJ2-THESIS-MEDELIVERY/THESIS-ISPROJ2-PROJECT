@@ -22,44 +22,40 @@ public class PurchaseAction {
 	}
 	
 	public boolean purchaseOrder(Order order, List<OrderDetail> OrderDetails) {
-		OrderDetails.size();
-		
 		if (OrderDetails.size() > 5) {          //Check if order has less than 5 items
 			return false;
 		}
 		
-		for(int q = 0; q <= 5; q++) {              //Check if the quantity of each item in the order is less than 5
-			OrderDetail orderDetail = OrderDetails.get(q);
-			if (orderDetail.getQuantity() > 5) {
-				return false;
-			}
-		}
-		
-		boolean rx = false;
-		
-		
 		for (OrderDetail orderDetail : OrderDetails) {
-			try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM product WHERE ProductID = ?")){  //Check if items in the order is RX
+			try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM product WHERE ProductID = ?")){
+				
 				stmt.setInt(1,  orderDetail.getProductID() );
+				
+				int limit;
+				boolean rx = false;
+				
+				//Check if the quantity of each item in the order is less than the limit
+				try(ResultSet rs = stmt.executeQuery()){
+					limit = rs.getInt("CounterLimit");
+				} if (orderDetail.getQuantity() > limit) {
+					return false;
+				}
+				
+				//Check if items in the order is RX
 				try(ResultSet rs = stmt.executeQuery()){
 					rx = rs.getBoolean("isRXProduct");
+				} if (rx == true) {
+					return false;
 				}
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return false;
 			}
-		}
+		}		
 		
-		
-		/*boolean rx = product.isRXProduct();
-		
-		if(rx) {
-			return false;
-		}*/
-		
-		
+		//Get the city of the customer
 		int CityCustomer = 0;
-		
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM customer WHERE CustomerID = ?")) {
             stmt.setInt(1, order.getCustomerID());
             try(ResultSet rs = stmt.executeQuery()) {
@@ -69,11 +65,11 @@ public class PurchaseAction {
             e.printStackTrace();
             return false;
         }
+		
 		//Get the Pharmacist
 		int PharmaID = 0;
 		
 		//What branch ID does the pharmacist come from
-		
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM pharmacist WHERE PharmacistID = ?")) {
 			stmt.setInt(1, order.getPharmacistID());
 			try(ResultSet rs = stmt.executeQuery()) {
@@ -96,37 +92,23 @@ public class PurchaseAction {
 			return false;
 		}
 		
-		int DeliveryCharge = 0;
-		
 		if (CityCustomer == CityPharmacy) {   //Check if city is equal or not
-			DeliveryCharge = 50;
+			order.setOrderType("Intercity Delivery");
 		} else {
-			DeliveryCharge = 100;
+			order.setOrderType("Intracity Delivery");
 		}
 		
-		OrderImplement OrderImp = new OrderImplement();    //Add to order
+		//Add to order
+		OrderImplement OrderImp = new OrderImplement();
 		OrderImp.addOrder(order);
 		
+		//Add to order items
 		for (OrderDetail orderDetail : OrderDetails) {
 			OrderDetailImplement OrderDet = new OrderDetailImplement();    
 			OrderDet.addOrderDetail(orderDetail);
-		}
-		          
-				
-		/*try {
-			Connection conn;
-			{
-				OrderDetailImplement OrderDet = new OrderDetailImplement();
-				OrderDet.addOrderDetail(orderdetail);
-			}
-		} catch (Exception e){
-			e.printStackTrace();
-			return false;
-		}*/
+		}		
 		
-		
-		
-		return true;	
-	
+		return true;
 	}
+	
 }

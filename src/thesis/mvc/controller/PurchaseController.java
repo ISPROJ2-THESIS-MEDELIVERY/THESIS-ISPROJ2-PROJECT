@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import thesis.mvc.model.Login;
+import thesis.mvc.model.Order;
+import thesis.mvc.model.OrderDetail;
 import thesis.mvc.utility.DBUtility;
 
 @WebServlet("/PurchaseController")
@@ -33,24 +35,21 @@ public class PurchaseController extends HttpServlet {
 		Login login = new Login();
 		Boolean test = false;
 		
+		Order order = new Order();
+		order.setCustomerID();
+		order.setOrderAddress( request.getParameter( "OrderAddress" ) );
+		
+		
+		OrderDetail orderDetail1 = new OrderDetail();
+		orderDetail1.setOrderID( request.getParameter( "OrderID1" ));
+		OrderDetail orderDetail2 = new OrderDetail();
+		OrderDetail orderDetail3 = new OrderDetail();
+		OrderDetail orderDetail4 = new OrderDetail();
+		OrderDetail orderDetail5 = new OrderDetail();
+		
+		
 		//Global variable of customer ID here.
 		/*
-		CustomerID
-		DeliveryID
-		PharmacistID
-		CityID
-		PrescriptionID
-		OrderAddress
-		DateOrdered
-		DateProcessed
-		DateDelivered
-		OrderType
-		OrderStatus
-		SeniorDiscount
-		PaymentMethod
-
-		
-		
 		Customer customer = new Customer();
 		customer.setCustomerName( request.getParameter( "CustomerName" ) );
 		customer.setAddress( request.getParameter( "Address" ) );

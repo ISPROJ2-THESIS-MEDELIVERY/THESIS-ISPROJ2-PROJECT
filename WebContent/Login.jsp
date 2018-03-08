@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 
@@ -66,7 +66,7 @@
     <form action="LoginController" method="post" style="padding:56px;margin:-21px;height:470px;">
         <h2 class="sr-only">Login Form</h2>
         <div class="illustration"></div>
-        <div class="form-group"><input class="form-control" type="Username" name="Username" required="" placeholder="Username" style="width:263px;padding:0px;height:42px; autocomplete="on""></div>
+        <div class="form-group"><input class="form-control" type="Username" name="Username" required="" placeholder="Username" style="width:263px;padding:0px;height:42px;" autocomplete="on"></div>
         <div class="form-group"><input class="form-control" type="Password" name="Password" required="" placeholder="Password" style="padding:0px;width:264px;height:42px;"></div>
         <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="width:266px;background-color:#465765;">Log In</button></div>
         <p style="font-size:13px;">Don't have an account yet? Register <a href="Members.jsp">here</a></p>

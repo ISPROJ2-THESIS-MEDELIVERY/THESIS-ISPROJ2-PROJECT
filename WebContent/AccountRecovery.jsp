@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -75,6 +75,7 @@
     <div class="form-group" style="padding:9px;height:99px;width:156px;"><button class="btn btn-primary" type="submit" style="margin:33px;background-color:#2779a3;">Submit</button>
 	</form>
 	</div>
+	
     
 	
 	

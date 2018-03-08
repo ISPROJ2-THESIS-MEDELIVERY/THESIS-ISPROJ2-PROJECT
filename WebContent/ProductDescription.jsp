@@ -65,15 +65,12 @@
     </nav><div class="row">
 <div class="image-gallery">
   <aside class="thumbnails">
-    <a href="#" class="selected thumbnail" data-big="http://www.deeez.co/wp-content/uploads/2016/09/medicine-packaging-design-tasnim-01.jpg">
-      <div class="thumbnail-image" style="background-image: url(http://www.deeez.co/wp-content/uploads/2016/09/medicine-packaging-design-tasnim-01.jpg)"></div>
-    </a>
-    <a href="#" class="thumbnail" data-big="https://i.ytimg.com/vi/ToVQfjpq7x4/maxresdefault.jpg">
-      <div class="thumbnail-image" style="background-image: url(https://i.ytimg.com/vi/ToVQfjpq7x4/maxresdefault.jpg)"></div>
-    </a>
-    <a href="#" class="thumbnail" data-big="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSThcuDPbM0El0RkRoIWDYZXuxAS7tFRtxFEJy7l_l0cS-Ib8ZMWA">
-      <div class="thumbnail-image" style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSThcuDPbM0El0RkRoIWDYZXuxAS7tFRtxFEJy7l_l0cS-Ib8ZMWA)"></div>
-    </a>
+    <a href="#" class="selected thumbnail" data-big="http://www.deeez.co/wp-content/uploads/2016/09/medicine-packaging-design-tasnim-01.jpg"></a>
+    <div class="thumbnail-image" style="background-image: url(http://www.deeez.co/wp-content/uploads/2016/09/medicine-packaging-design-tasnim-01.jpg)"></div>
+    <a href="#" class="thumbnail" data-big="https://i.ytimg.com/vi/ToVQfjpq7x4/maxresdefault.jpg"></a>
+    <div class="thumbnail-image" style="background-image: url(https://i.ytimg.com/vi/ToVQfjpq7x4/maxresdefault.jpg)"></div>
+    <a href="#" class="thumbnail" data-big="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSThcuDPbM0El0RkRoIWDYZXuxAS7tFRtxFEJy7l_l0cS-Ib8ZMWA"></a>
+    <div class="thumbnail-image" style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSThcuDPbM0El0RkRoIWDYZXuxAS7tFRtxFEJy7l_l0cS-Ib8ZMWA)"></div>
   </aside>
 
   <main class="primary" style="background-image: url('http://www.deeez.co/wp-content/uploads/2016/09/medicine-packaging-design-tasnim-01.jpg');"></main>

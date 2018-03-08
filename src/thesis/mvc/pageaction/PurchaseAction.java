@@ -22,27 +22,33 @@ public class PurchaseAction {
 	}
 	
 	public boolean purchaseOrder(Order order, List<OrderDetail> OrderDetails) {
-		OrderDetails.size();
-		
 		if (OrderDetails.size() > 5) {          //Check if order has less than 5 items
 			return false;
 		}
 		
-		for(int q = 0; q <= 5; q++) {              //Check if the quantity of each item in the order is less than 5
-			OrderDetail orderDetail = OrderDetails.get(q);
-			if (orderDetail.getQuantity() > 5) {
+		for (OrderDetail orderDetail : OrderDetails) {             //Check if the quantity of each item in the order is less than the limit
+			try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM product WHERE ProductID = ?")){  //Check if items in the order is RX
+				int limit;
+				stmt.setInt(1,  orderDetail.getProductID() );
+				try(ResultSet rs = stmt.executeQuery()){
+					limit = rs.getInt("CounterLimit");
+				} if (orderDetail.getQuantity() > limit) {
+					return false;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 				return false;
 			}
 		}
 		
-		boolean rx = false;
-		
-		
 		for (OrderDetail orderDetail : OrderDetails) {
 			try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM product WHERE ProductID = ?")){  //Check if items in the order is RX
+				boolean rx = false;
 				stmt.setInt(1,  orderDetail.getProductID() );
 				try(ResultSet rs = stmt.executeQuery()){
 					rx = rs.getBoolean("isRXProduct");
+				} if (rx == true) {
+					return false;
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

@@ -30,7 +30,7 @@ public class EmailAction {
 		
 		 try {    
 	           MimeMessage message = new MimeMessage(session);    
-	           message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));    
+	           message.addRecipient(Message.RecipientType.TO,new InternetAddress(toAddr));    
 	           message.setSubject(subject);    
 	           message.setText(body);    
 	           //send message  

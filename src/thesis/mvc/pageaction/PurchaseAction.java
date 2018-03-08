@@ -1,11 +1,15 @@
 package thesis.mvc.pageaction;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.OrderDetailImplement;
@@ -97,6 +101,12 @@ public class PurchaseAction {
 		} else {
 			order.setOrderType("Intracity Delivery");
 		}
+		//Add nessesary information
+
+		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+		order.setDateOrdered(CurrentDate);
+		
+		order.setOrderStatus( "PENDING" );
 		
 		//Add to order
 		OrderImplement OrderImp = new OrderImplement();
@@ -109,6 +119,32 @@ public class PurchaseAction {
 		}		
 		
 		return true;
+	}
+	
+	public boolean pharmacistApproval(int orderID, boolean aprroval) {
+		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+		if(aprroval) {
+			try(PreparedStatement stmt = conn.prepareStatement("UPDATE order SET OrderStatus = 'APPROVED', DateProcessed = ? WHERE OrderID = ?")) {
+	            stmt.setDate(1, CurrentDate);
+				stmt.setInt(2, orderID);
+				stmt.executeQuery();
+				stmt.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return false;
+	        }
+		} else {
+			try(PreparedStatement stmt = conn.prepareStatement("UPDATE order SET OrderStatus = 'CANCELLED' WHERE OrderID = ?")) {
+	            stmt.setInt(1, orderID);
+	            stmt.executeQuery();
+	            stmt.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return false;
+	        }
+		}
+		
+		return false;
 	}
 	
 }

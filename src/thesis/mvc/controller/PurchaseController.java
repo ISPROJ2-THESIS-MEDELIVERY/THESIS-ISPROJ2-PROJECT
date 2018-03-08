@@ -38,16 +38,55 @@ public class PurchaseController extends HttpServlet {
 		Order order = new Order();
 		order.setCustomerID();
 		order.setOrderAddress( request.getParameter( "OrderAddress" ) );
+		order.setDateOrdered( request.getParameter( " DateOrdered " ) );
+		order.setDateProcessed( request.getParameter( "DateProcessed" ));
+		order.setDateDelivered( request.getParameter( "DateDelivered" ));
+		order.setOrderType( request.getParameter( "OrderType" ));
+		order.setOrderStatus( request.getParameter( "OrderStatus" ));
+		order.setSeniorDiscount( request.getParameter( "SeniorDiscount" ));
+		order.setPaymentMethod( request.getParameter( "PaymentMethod" ));
 		
 		
 		OrderDetail orderDetail1 = new OrderDetail();
 		orderDetail1.setOrderID( request.getParameter( "OrderID1" ));
+		orderDetail1.setProductID( request.getParameter( "ProductID1" ));
+		orderDetail1.setQuantity( request.getIntHeader( "Quantity1" ));
+		orderDetail1.setCostPerUnit( request.getIntHeader( "CostPerUnit1" ));
+		orderDetail1.setTotalCost( request.getIntHeader( "TotalCost1" ));
+		orderDetail1.setActualCost( request.getIntHeader( "ActualCost1" ));
+		
 		OrderDetail orderDetail2 = new OrderDetail();
+		orderDetail2.setOrderID( request.getParameter( "OrderID2" ));
+		orderDetail2.setProductID( request.getParameter( "ProductID2" ));
+		orderDetail2.setQuantity( request.getIntHeader( "Quantity2" ));
+		orderDetail2.setCostPerUnit( request.getIntHeader( "CostPerUnit2" ));
+		orderDetail2.setTotalCost( request.getIntHeader( "TotalCost2" ));
+		orderDetail2.setActualCost( request.getIntHeader( "ActualCost2" ));
+		
 		OrderDetail orderDetail3 = new OrderDetail();
+		orderDetail3.setOrderID( request.getParameter( "OrderID3" ));
+		orderDetail3.setProductID( request.getParameter( "ProductID3" ));
+		orderDetail3.setQuantity( request.getIntHeader( "Quantity3" ));
+		orderDetail3.setCostPerUnit( request.getIntHeader( "CostPerUnit3" ));
+		orderDetail3.setTotalCost( request.getIntHeader( "TotalCost3" ));
+		orderDetail3.setActualCost( request.getIntHeader( "ActualCost3" ));
+		
 		OrderDetail orderDetail4 = new OrderDetail();
+		orderDetail4.setOrderID( request.getParameter( "OrderID4" ));
+		orderDetail4.setProductID( request.getParameter( "ProductID4" ));
+		orderDetail4.setQuantity( request.getIntHeader( "Quantity4" ));
+		orderDetail4.setCostPerUnit( request.getIntHeader( "CostPerUnit4" ));
+		orderDetail4.setTotalCost( request.getIntHeader( "TotalCost4" ));
+		orderDetail4.setActualCost( request.getIntHeader( "ActualCost4" ));
+		
 		OrderDetail orderDetail5 = new OrderDetail();
-		
-		
+		orderDetail5.setOrderID( request.getParameter( "OrderID5" ));
+		orderDetail5.setProductID( request.getParameter( "ProductID5" ));
+		orderDetail5.setQuantity( request.getIntHeader( "Quantity5" ));
+		orderDetail5.setCostPerUnit( request.getIntHeader( "CostPerUnit5" ));
+		orderDetail5.setTotalCost( request.getIntHeader( "TotalCost5" ));
+		orderDetail5.setActualCost( request.getIntHeader( "ActualCost5" ));
+
 		//Global variable of customer ID here.
 		/*
 		Customer customer = new Customer();

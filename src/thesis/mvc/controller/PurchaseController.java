@@ -76,22 +76,31 @@ public class PurchaseController extends HttpServlet {
 			orderDetail2.setTotalCost( CostPerUnit2 * Quantity2 );
 			
 			OrderDetail orderDetail3 = new OrderDetail();
-			orderDetail3.setProductID( Integer.parseInt( request.getParameter( "ProductID3" ) ) );
-			orderDetail3.setQuantity( request.getIntHeader( "Quantity3" ));
-			orderDetail3.setCostPerUnit( request.getIntHeader( "CostPerUnit3" ));
-			orderDetail3.setTotalCost( request.getIntHeader( "TotalCost3" ));
+			int ProductID3 =Integer.parseInt( request.getParameter( "ProductID3" ) );
+			orderDetail3.setProductID( ProductID3 );
+			int Quantity3 = Integer.parseInt( request.getParameter( "Quantity3" ) );
+			orderDetail3.setQuantity( Quantity3 );
+			Double CostPerUnit3 = purchaseAction.getProductCost( order.getPharmacistID(), ProductID3);
+			orderDetail3.setCostPerUnit( CostPerUnit3 );
+			orderDetail3.setTotalCost( CostPerUnit3 * Quantity3 );
 			
 			OrderDetail orderDetail4 = new OrderDetail();
-			orderDetail4.setProductID( Integer.parseInt( request.getParameter( "ProductID4" ) ) );
-			orderDetail4.setQuantity( request.getIntHeader( "Quantity4" ));
-			orderDetail4.setCostPerUnit( request.getIntHeader( "CostPerUnit4" ));
-			orderDetail4.setTotalCost( request.getIntHeader( "TotalCost4" ));
+			int ProductID4 =Integer.parseInt( request.getParameter( "ProductID4" ) );
+			orderDetail4.setProductID( ProductID4 );
+			int Quantity4 = Integer.parseInt( request.getParameter( "Quantity4" ) );
+			orderDetail4.setQuantity( Quantity4 );
+			Double CostPerUnit4 = purchaseAction.getProductCost( order.getPharmacistID(), ProductID4);
+			orderDetail4.setCostPerUnit( CostPerUnit4 );
+			orderDetail4.setTotalCost( CostPerUnit4 * Quantity4 );
 			
 			OrderDetail orderDetail5 = new OrderDetail();
-			orderDetail5.setProductID( Integer.parseInt( request.getParameter( "ProductID5" ) ) );
-			orderDetail5.setQuantity( request.getIntHeader( "Quantity5" ));
-			orderDetail5.setCostPerUnit( request.getIntHeader( "CostPerUnit5" ));
-			orderDetail5.setTotalCost( request.getIntHeader( "TotalCost5" ));
+			int ProductID5 =Integer.parseInt( request.getParameter( "ProductID5" ) );
+			orderDetail5.setProductID( ProductID5 );
+			int Quantity5 = Integer.parseInt( request.getParameter( "Quantity5" ) );
+			orderDetail4.setQuantity( Quantity5 );
+			Double CostPerUnit5 = purchaseAction.getProductCost( order.getPharmacistID(), ProductID5);
+			orderDetail4.setCostPerUnit( CostPerUnit5 );
+			orderDetail4.setTotalCost( CostPerUnit5 * Quantity5 );
 			
 			List<OrderDetail> OrderDetails = new ArrayList<OrderDetail>();
 			OrderDetails.add(orderDetail1);

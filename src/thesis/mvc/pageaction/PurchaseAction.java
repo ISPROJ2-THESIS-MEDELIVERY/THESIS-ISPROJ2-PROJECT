@@ -24,11 +24,53 @@ public class PurchaseAction {
 	public PurchaseAction() {
 		conn = DBUtility.getConnection();
 	}
+	public double getProductCost(int PharmacyID, int ProductID) {
+
+		//What branchID does the pharmacist come from
+		int BranchID = 0;
+		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM pharmacist WHERE PharmacistID = ?")) {
+			stmt.setInt(1, PharmacyID);
+			try(ResultSet rs = stmt.executeQuery()) {
+				BranchID = rs.getInt("BranchID");
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+			return 0.0;
+		}
+		
+		//Look for stocksID with productID and BranchID
+		int stockID;
+		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Stocks WHERE ProductID = ? AND BranchID = ?")) {
+			stmt.setInt(1, ProductID);
+			stmt.setInt(2, BranchID);
+			try(ResultSet rs = stmt.executeQuery()) {
+				stockID = rs.getInt("StockID");
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+			return 0.0;
+		}
+		
+		//Retrieve the price from stocksPrice
+		Double productCost;
+		try(PreparedStatement stmt = conn.prepareStatement("SELECT StocksPriceID FROM product WHERE StockID = ? AND isCurrent = 1 ")){
+			stmt.setInt(1, stockID );
+			//Check if items in the order is RX
+			try(ResultSet rs = stmt.executeQuery()){
+				productCost = rs.getDouble(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0.0;
+		}
+		
+		return productCost;
+	}
+	
 	
 	public boolean purchaseOrder(Order order, List<OrderDetail> OrderDetails) {
-		if (OrderDetails.size() > 5) {          //Check if order has less than 5 items
-			return false;
-		}
+		//Check if order has less than 5 items
+		if (OrderDetails.size() > 5) { return false; }
 		
 		for (OrderDetail orderDetail : OrderDetails) {
 			try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM product WHERE ProductID = ?")){
@@ -83,6 +125,7 @@ public class PurchaseAction {
 			e.printStackTrace();
 			return false;
 		}
+		
 		//Where is the branch located.
 		int CityPharmacy = -1;
 		
@@ -96,26 +139,54 @@ public class PurchaseAction {
 			return false;
 		}
 		
-		if (CityCustomer == CityPharmacy) {   //Check if city is equal or not
+		//Check if city is equal or not
+		Double DeliveryCost;
+		if (CityCustomer == CityPharmacy) {
 			order.setOrderType("Intercity Delivery");
+			DeliveryCost = 50.0;
+			
 		} else {
 			order.setOrderType("Intracity Delivery");
+			DeliveryCost = 100.0;
 		}
+		
 		//Add nessesary information
-
 		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 		order.setDateOrdered(CurrentDate);
-		
 		order.setOrderStatus( "PENDING" );
 		
 		//Add to order
 		OrderImplement OrderImp = new OrderImplement();
 		OrderImp.addOrder(order);
 		
-		//Add to order items
+		//Get orderID
+		int orderID;
+		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Order WHERE BranchID = ? AND CustomerID = ?")) {
+			stmt.setDate(1, CurrentDate);
+			stmt.setInt(2, order.getCustomerID());
+			try(ResultSet rs = stmt.executeQuery()){
+				orderID = rs.getInt("OrderID");
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+			return false;
+		}
+		
+		//Add delivery cost and insert OrderID
+		Double actualcost = 0.0;
 		for (OrderDetail orderDetail : OrderDetails) {
-			OrderDetailImplement OrderDet = new OrderDetailImplement();    
-			OrderDet.addOrderDetail(orderDetail);
+			actualcost += orderDetail.getTotalCost();
+		}
+		actualcost += DeliveryCost;
+		for (OrderDetail orderDetail : OrderDetails) {
+			orderDetail.setActualCost( actualcost );
+			orderDetail.setOrderID( orderID );
+		}
+		
+		//Add to order items
+		OrderDetailImplement OrderDet = new OrderDetailImplement();  
+		for (OrderDetail orderDetail : OrderDetails) {  
+			OrderDet.addOrderDetail( orderDetail );
 		}		
 		
 		return true;

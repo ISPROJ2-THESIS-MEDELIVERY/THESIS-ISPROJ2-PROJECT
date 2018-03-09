@@ -8,7 +8,7 @@
 <title>Purchase an item</title>
 </head>
 <body>
-	<form action="LoginController" method="post">
+	<form action="PurchaseController" method="post">
 		<fieldset>
 			<div align="center">
 				<label for="OrderAddress">Order Address</label>
@@ -16,18 +16,18 @@
 				<label for="PaymentMethod">Payment Method</label>
 				<input type="text" name="PaymentMethod" placeholder="Payment Method" maxlength="25"/><br />
 			</div>&nbsp;
-			<div align="center">
+			<div align="center">2
 				<h3>Order 1:</h3>
 				<label for="Password">First Name</label>
-				<input type="text" name="Password" placeholder="Password" maxlength="25"/><br />
+				<input type="text" name="OrderID1" placeholder="Password" maxlength="25"/><br />
 				<label for="Password">First Name</label>
-				<input type="text" name="Password" placeholder="Password" maxlength="25"/><br />
+				<input type="text" name="ProductID1" placeholder="Password" maxlength="25"/><br />
+				<select>
+					<!-- get this to loop -->
+					<option value="1">test</option>
+				</select>
 				<label for="Password">First Name</label>
-				<input type="text" name="Password" placeholder="Password" maxlength="25"/><br />
-				<label for="Password">First Name</label>
-				<input type="text" name="Password" placeholder="Password" maxlength="25"/><br />
-				<label for="Password">First Name</label>
-				<input type="text" name="Password" placeholder="Password" maxlength="25"/><br />
+				<input type="text" name="Quantity1" placeholder="Password" maxlength="25"/><br />
 			</div>&nbsp;
 			<div align="center">
 				<input type="submit" value="Submit" />

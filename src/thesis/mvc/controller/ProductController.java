@@ -49,7 +49,21 @@ public class ProductController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		conn = DBUtility.getConnection();
+		Product product = new Product();
 		
+		product.setProductName(request.getParameter("ProductName"));
+		product.setGenericName(request.getParameter("GenericName"));
+		product.setRegistrationNo(request.getParameter("RegistrationNo"));
+		product.setProductStrength(request.getParameter("ProductStrength"));
+		product.setProductForm(request.getParameter("ProductForm"));
+		product.setProductPackaging(request.getParameter("ProductPackaging"));
+		product.setProductManufacturer(request.getParameter("ProductManufacturer"));
+		product.setProductOrigin(request.getParameter("ProductOrigin"));
+		product.setProductDescription(request.getParameter("ProductDescription"));
+		product.setProductImage(request.getParameter("ProductImage"));
+		product.setRXProduct(Boolean.getBoolean(request.getParameter("RXProduct")));
+		product.setCounterLimit(Integer.getInteger(request.getParameter("CounterLimit")));
 	}
 
 }

@@ -35,6 +35,8 @@ public class PurchaseController extends HttpServlet {
 		Login login = new Login();
 		Boolean test = false;
 		
+		
+		
 		Order order = new Order();
 		order.setCustomerID();
 		order.setOrderAddress( request.getParameter( "OrderAddress" ) );

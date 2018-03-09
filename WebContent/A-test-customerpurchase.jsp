@@ -16,18 +16,19 @@
 				<label for="PaymentMethod">Payment Method</label>
 				<input type="text" name="PaymentMethod" placeholder="Payment Method" maxlength="25"/><br />
 			</div>&nbsp;
-			<div align="center">2
+			<div align="center">
+				<!-- Copy start -->
 				<h3>Order 1:</h3>
-				<label for="Password">First Name</label>
-				<input type="text" name="OrderID1" placeholder="Password" maxlength="25"/><br />
-				<label for="Password">First Name</label>
-				<input type="text" name="ProductID1" placeholder="Password" maxlength="25"/><br />
-				<select>
+				<label for="Password">Product:</label>
+				<select id="ProductID">
 					<!-- get this to loop -->
+					<!-- Loop start -->
 					<option value="1">test</option>
-				</select>
-				<label for="Password">First Name</label>
+					<!-- Loop end -->
+				</select><br />
+				<label for="Quantity1" >Quantity</label>
 				<input type="text" name="Quantity1" placeholder="Password" maxlength="25"/><br />
+				<!-- Copy end -->
 			</div>&nbsp;
 			<div align="center">
 				<input type="submit" value="Submit" />

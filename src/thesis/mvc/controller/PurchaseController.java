@@ -42,11 +42,12 @@ public class PurchaseController extends HttpServlet {
     	conn = DBUtility.getConnection();
 		Login login = new Login();
 		Boolean test = false;
-		RequestDispatcher view;
+		RequestDispatcher view = null;
 		String action = request.getParameter( "Action" );
-		
-		if (action == "Buy") {
-			HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
+		if(action == "Checkout") {
+			//Ensure that the checkout items are placed here
+		} else if (action == "Buy") {
 			Order order = new Order();
 			order.setCustomerID( 4 );
 			//order.setCustomerID( (int) session.getAttribute("userID") );
@@ -97,10 +98,10 @@ public class PurchaseController extends HttpServlet {
 			int ProductID5 =Integer.parseInt( request.getParameter( "ProductID5" ) );
 			orderDetail5.setProductID( ProductID5 );
 			int Quantity5 = Integer.parseInt( request.getParameter( "Quantity5" ) );
-			orderDetail4.setQuantity( Quantity5 );
+			orderDetail5.setQuantity( Quantity5 );
 			Double CostPerUnit5 = purchaseAction.getProductCost( order.getPharmacistID(), ProductID5);
-			orderDetail4.setCostPerUnit( CostPerUnit5 );
-			orderDetail4.setTotalCost( CostPerUnit5 * Quantity5 );
+			orderDetail5.setCostPerUnit( CostPerUnit5 );
+			orderDetail5.setTotalCost( CostPerUnit5 * Quantity5 );
 			
 			List<OrderDetail> OrderDetails = new ArrayList<OrderDetail>();
 			OrderDetails.add(orderDetail1);

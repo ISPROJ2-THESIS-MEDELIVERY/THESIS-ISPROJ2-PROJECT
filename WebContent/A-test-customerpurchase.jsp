@@ -21,11 +21,10 @@
 				<h3>Order 1:</h3>
 				<label for="Password">Product:</label>
 				<select id="ProductID">
-					<!-- get this to loop -->
-					<!-- Loop start -->
-					<option value="1">test</option>
-					<!-- Loop end -->
-				</select><br />
+					<c:forEach items="${productList}" var="product">
+						<option value="<c:out value="${product.ProductID}" />"><c:out value='${product.ProductName}' /></option>
+					</c:forEach>
+				</select>
 				<label for="Quantity1" >Quantity</label>
 				<input type="text" name="Quantity1" placeholder="Password" maxlength="25"/><br />
 				<!-- Copy end -->

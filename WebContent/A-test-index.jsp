@@ -9,6 +9,6 @@
 
 <!-- This will be used as a jumping point to test the controllers -->
 <body>
-	<jsp:forward page="/HomeController"></jsp:forward>
+	<jsp:forward page="/LoginController"></jsp:forward>
 </body>
 </html>

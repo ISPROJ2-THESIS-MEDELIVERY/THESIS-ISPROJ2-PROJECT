@@ -19,7 +19,7 @@ public class HomeController  extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HomeAction HA = new HomeAction();
 		request.setAttribute("FeaturedStock", HA.displayStock() );
-		RequestDispatcher view = request.getRequestDispatcher( "/Home.jsp" );
+		RequestDispatcher view = request.getRequestDispatcher( "/A-test-home.jsp" );
 		view.forward(request, response);
 	}
 	

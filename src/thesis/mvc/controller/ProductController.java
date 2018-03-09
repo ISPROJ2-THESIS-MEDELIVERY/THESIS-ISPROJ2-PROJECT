@@ -33,8 +33,8 @@ public class ProductController extends HttpServlet {
 		String forward = "";
 		int productID = Integer.parseInt( request.getParameter( "ProductID" ) );
 
-    	EmailAction emailAction = new EmailAction();
-    	emailAction.sendEmail("fajardokier@yahoo.com", "Bitch ass nigga", "I'mma pop a cap in your ass");
+    	//EmailAction emailAction = new EmailAction();
+    	//emailAction.sendEmail("fajardokier@yahoo.com", "Bitch ass nigga", "I'mma pop a cap in your ass");
 		
 		if( request.getParameter( "ProductID" ) != null ) {//Goto product page
 			forward = "/ProductDescription.jsp";

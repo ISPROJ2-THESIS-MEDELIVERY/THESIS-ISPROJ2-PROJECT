@@ -21,12 +21,25 @@ public class PurchaseAction {
 	public PurchaseAction() {
 		conn = DBUtility.getConnection();
 	}
-	public double getProductCost(int PharmacyID, int ProductID) {
+	
+	public double getProductCost(int ProductID, Order order) {
 
-		//What branchID does the pharmacist come from
-		int BranchID = 0;
-		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM pharmacist WHERE PharmacistID = ?")) {
-			stmt.setInt(1, PharmacyID);
+		//Find the city of the customer
+		int CityCustomer = 0;
+		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM customer WHERE CustomerID = ?")) {
+            stmt.setInt(1, order.getCustomerID());
+            try(ResultSet rs = stmt.executeQuery()) {
+            	CityCustomer = rs.getInt("CityID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0.0;
+        }
+		
+		//Find the branch closest to the customer
+		int BranchID;
+		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM branch WHERE CityID = ?")) {
+			stmt.setInt(1, CityCustomer);
 			try(ResultSet rs = stmt.executeQuery()) {
 				BranchID = rs.getInt("BranchID");
 			}
@@ -109,25 +122,11 @@ public class PurchaseAction {
             return false;
         }
 		
-		//Get the Pharmacist
-		int PharmaID = 0;
-		
-		//What branch ID does the pharmacist come from
-		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM pharmacist WHERE PharmacistID = ?")) {
-			stmt.setInt(1, order.getPharmacistID());
-			try(ResultSet rs = stmt.executeQuery()) {
-				PharmaID = rs.getInt("BranchID");
-			}
-		} catch (SQLException e){
-			e.printStackTrace();
-			return false;
-		}
-		
 		//Where is the branch located.
 		int CityPharmacy = -1;
 		
-		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM branch WHERE BranchID = ?")) {
-			stmt.setInt(1, PharmaID);
+		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM branch WHERE CityID = ?")) {
+			stmt.setInt(1, CityCustomer);
 			try(ResultSet rs = stmt.executeQuery()){
 				CityPharmacy = rs.getInt("CityID");
 			}

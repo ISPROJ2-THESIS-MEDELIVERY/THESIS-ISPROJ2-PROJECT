@@ -9,9 +9,8 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="C:/Users/edenn/Downloads/javax.mail.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/edenn/Dropbox/IMORTANTTHINGS/activation.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/edenn/Dropbox/IMORTANTTHINGS/mail.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/edenn/Dropbox/To laptop/LoginDemo/out/artifacts/LoginDemo_war_exploded/WEB-INF/lib/mysql-connector-java-6.0.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="H:/Dropbox/IMORTANTTHINGS/activation.jar"/>
+	<classpathentry exported="true" kind="lib" path="H:/Dropbox/IMORTANTTHINGS/mail.jar"/>
+	<classpathentry exported="true" kind="lib" path="H:/Dropbox/IMORTANTTHINGS/mysql-connector-java-5.1.35-bin.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

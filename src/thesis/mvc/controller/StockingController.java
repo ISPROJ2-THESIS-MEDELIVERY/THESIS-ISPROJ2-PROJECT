@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thesis.mvc.implement.StocksImplement;
 import thesis.mvc.model.Product;
 import thesis.mvc.model.Stocks;
 import thesis.mvc.pageaction.StockingAction;

@@ -17,6 +17,7 @@ import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
+import thesis.mvc.pageaction.ApprovalAction;
 import thesis.mvc.pageaction.PurchaseAction;
 import thesis.mvc.utility.DBUtility;
 
@@ -37,20 +38,20 @@ public class PurchaseController extends HttpServlet {
 		String action = request.getParameter( "action" );
 		HttpSession session = request.getSession();
 		
-    	if (action == "purchase") {
+    	if (action.equalsIgnoreCase("purchase")) {
     		forward = "/A-test-customerpurchase.jsp";
     		ProductImplement productImplement = new ProductImplement();
     		request.setAttribute( "productList", productImplement.getAllProducts() );
-    	} else if (action == "Pharmacist") {
+    	} else if (action.equalsIgnoreCase("Pharmacist")) {
     		forward = "A-test-pharmacistapproval.jsp";
-    		OrderImplement orderImplement = new OrderImplement();
-    		session.setAttribute("orderImplementPharmacist", orderImplement.getOrder() );
-    	} else if (action == "Approve") {
+    		ApprovalAction approvalAction = new ApprovalAction();
+    		session.setAttribute("orderPharmacistCheck", approvalAction.getOrder() );
+    	} else if (action.equalsIgnoreCase("Approve")) {
     		forward = "A-test-pharmacistapprovalsuccess.jsp";
     		PurchaseAction purchaseAction = new PurchaseAction();
     		purchaseAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ), true );
     		
-    	} else if (action == "Reject") {
+    	} else if (action.equalsIgnoreCase("Reject")) {
     		forward = "A-test-pharmacistapprovalsuccess.jsp";
     		PurchaseAction purchaseAction = new PurchaseAction();
     		purchaseAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ) , false );

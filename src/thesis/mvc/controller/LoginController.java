@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import thesis.mvc.implement.LoginImplement;
+import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.model.Login;
 import thesis.mvc.pageaction.LoginAction;
 import thesis.mvc.utility.DBUtility;
@@ -31,7 +32,14 @@ public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String forward = "";
+		//String forward = "A-test-login.jsp";
+		//RequestDispatcher view = request.getRequestDispatcher( forward );
+		//view.forward(request, response);
+		String forward;
+		HttpSession session = request.getSession();
+		forward = "A-test-pharmacistapproval.jsp";
+		OrderImplement orderImplement = new OrderImplement();
+		session.setAttribute("orderImplementPharmacist", orderImplement.getOrder() );
 		RequestDispatcher view = request.getRequestDispatcher( forward );
 		view.forward(request, response);
 		

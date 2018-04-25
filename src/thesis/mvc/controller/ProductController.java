@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.model.Product;
-import thesis.mvc.pageaction.EmailAction;
 import thesis.mvc.utility.DBUtility;
 
 @WebServlet("/ProductController")

@@ -19,20 +19,17 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${ordersList}" var="order">
+			<c:forEach items="${orderPharmacistCheck}" var="order">
 			<tr>
-				<td><c:out value="${order.OrderID}" /></td>
-				<td><c:out value="${order.OrderAddress}" /></td>
-				<td><c:out value="${order.OrderType}" /></td>
-				<td><c:out value="${order.PaymentMethod}" /></td>
-				<td><a href="CustomerController?action=Reject&orderId=<c:out value="${order.orderId}"/>">REJECT</a></td>
-				<td><a href="CustomerController?action=Approve&orderId=<c:out value="${order.orderId}"/>">APPROVE</a></td>
+				<td><c:out value="${order.orderID}" /></td>
+				<td><c:out value="${order.orderAddress}" /></td>
+				<td><c:out value="${order.orderType}" /></td>
+				<td><c:out value="${order.paymentMethod}" /></td>
+				<td><a href="PurchaseController?action=Reject&orderID=<c:out value="${order.orderID}"/>">REJECT</a></td>
+				<td><a href="PurchaseController?action=Approve&orderID=<c:out value="${order.orderID}"/>">APPROVE</a></td>
 			</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	<p>
-		<a href="CustomerController?action=insert">Add Customer</a>
-	</p>
 </body>
 </html>

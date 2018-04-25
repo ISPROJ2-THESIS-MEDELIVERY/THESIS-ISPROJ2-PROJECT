@@ -191,19 +191,20 @@ public class PurchaseAction {
 	public boolean pharmacistApproval(int orderID, boolean aprroval) {
 		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 		if(aprroval) {
-			try(PreparedStatement stmt = conn.prepareStatement("UPDATE order SET OrderStatus = 'APPROVED', DateProcessed = ? WHERE OrderID = ?")) {
+			try(PreparedStatement stmt = conn.prepareStatement("UPDATE `order` SET OrderStatus = 'APPROVED', DateProcessed = ? WHERE OrderID = ?")) {
 	            stmt.setDate(1, CurrentDate);
 				stmt.setInt(2, orderID);
-				stmt.executeQuery();
+				stmt.executeUpdate();
 				stmt.close();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	            return false;
 	        }
 		} else {
-			try(PreparedStatement stmt = conn.prepareStatement("UPDATE order SET OrderStatus = 'CANCELLED' WHERE OrderID = ?")) {
-	            stmt.setInt(1, orderID);
-	            stmt.executeQuery();
+			try(PreparedStatement stmt = conn.prepareStatement("UPDATE `order` SET OrderStatus = 'CANCELLED', DateProcessed = ? WHERE OrderID = ?")) {
+				stmt.setDate(1, CurrentDate);
+				stmt.setInt(2, orderID);
+	            stmt.executeUpdate();
 	            stmt.close();
 	        } catch (SQLException e) {
 	            e.printStackTrace();

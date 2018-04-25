@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thesis.mvc.pageaction.EmailAction;
 import thesis.mvc.utility.DBUtility;
 
 @WebServlet("/LocationController")

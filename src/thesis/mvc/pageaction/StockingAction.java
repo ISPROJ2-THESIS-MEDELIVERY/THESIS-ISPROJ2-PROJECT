@@ -14,7 +14,6 @@ import thesis.mvc.implement.StocksPriceImplement;
 import thesis.mvc.model.Product;
 import thesis.mvc.model.Stocks;
 import thesis.mvc.model.StocksPrice;
-import thesis.mvc.pageaction.HomeAction.Display;
 import thesis.mvc.utility.DBUtility;
 
 public class StockingAction {

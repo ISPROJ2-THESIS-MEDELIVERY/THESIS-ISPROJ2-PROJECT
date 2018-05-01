@@ -19,27 +19,29 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${orderPharmacistCheck}" var="order">
-			<tr>
-				<td><c:out value="${order.orderID}" /></td>
-				<td><c:out value="${order.orderAddress}" /></td>
-				<td><c:out value="${order.orderType}" /></td>
-				<td><c:out value="${order.paymentMethod}" /></td>
-				<td>
-					<select>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-					</select>
-				</td>
-				<td>
-					<a href="Controller?action=Approve&orderID=<c:out value="${order.orderID}"/>">APPROVE</a>
-					<button class='btn btn-outline-primary btn-sm' type='submit' name='add' value="<c:out value="${order.orderID}"/>" style='display: on-hover'>Buy</button>
-				</td>
-			</tr>
-			</c:forEach>
+			<form method='post' action='AddtoCartCheck.php'>
+				<c:forEach items="${productList}" var="item">
+				<tr>
+					<td><c:out value="${item.orderID}" /></td>
+					<td><c:out value="${item.orderAddress}" /></td>
+					<td><c:out value="${item.orderType}" /></td>
+					<td><c:out value="${item.paymentMethod}" /></td>
+					<td>
+						<select>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select>
+					</td>
+					<td>
+						<a href="Controller?action=Approve&orderID=<c:out value="${order.orderID}"/>">APPROVE</a>
+						<button class='btn btn-outline-primary btn-sm' type='submit' name='add' value="<c:out value="${order.orderID}"/>" style='display: on-hover'>Buy</button>
+					</td>
+				</tr>
+				</c:forEach>
+			</form>
 		</tbody>
 	</table>
 </body>

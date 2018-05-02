@@ -39,7 +39,7 @@ public class PurchaseController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
     	if (action.equalsIgnoreCase("Customer")) {
-    		forward = "/A-test-customerpurchase.jsp";
+    		forward = "/A-test-shop.jsp";
     		ProductImplement productImplement = new ProductImplement();
     		request.setAttribute( "productList", productImplement.getAllProducts() );
     	} else if (action.equalsIgnoreCase("Pharmacist")) {

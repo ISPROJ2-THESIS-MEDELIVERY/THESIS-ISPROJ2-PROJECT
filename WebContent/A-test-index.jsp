@@ -10,7 +10,7 @@
 
 <!-- This will be used as a jumping point to test the controllers -->
 <body>
-	<!-- <jsp:forward page="/PurchaseController?action=Pharmacist"></jsp:forward> -->
+	
 	<jsp:forward page="/PurchaseController?action=Customer"></jsp:forward>
 </body>
 </html>

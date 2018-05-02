@@ -37,14 +37,13 @@ public class PurchaseController extends HttpServlet {
 		String forward;
 		String action = request.getParameter( "action" );
 		HttpSession session = request.getSession();
+		ApprovalAction approvalAction = new ApprovalAction();
 		
     	if (action.equalsIgnoreCase("Customer")) {
     		forward = "/A-test-shop.jsp";
-    		ProductImplement productImplement = new ProductImplement();
-    		request.setAttribute( "productList", productImplement.getAllProducts() );
+    		request.setAttribute( "productList", approvalAction.getProducts() );
     	} else if (action.equalsIgnoreCase("Pharmacist")) {
     		forward = "A-test-pharmacistapproval.jsp";
-    		ApprovalAction approvalAction = new ApprovalAction();
     		session.setAttribute("orderPharmacistCheck", approvalAction.getOrder() );
     	} else if (action.equalsIgnoreCase("Approve")) {
     		forward = "A-test-pharmacistapprovalsuccess.jsp";

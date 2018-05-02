@@ -26,33 +26,34 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${productList}" var="item">
-				<tr>
-					<td><c:out value="${item.productID}" /></td>
-					<td><c:out value="${item.productName}" /></td>
-					<td><c:out value="${item.genericName}" /></td>
-					<td><c:out value="${item.registrationNo}" /></td>
-					<td><c:out value="${item.productStrength}" /></td>
-					<td><c:out value="${item.productForm}" /></td>
-					<td><c:out value="${item.productPackaging}" /></td>
-					<td><c:out value="${item.productManufacturer}" /></td>
-					<td><c:out value="${item.productOrigin}" /></td>
-					<td><c:out value="${item.productDescription}" /></td>
-					<td>
-						<select>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-						</select>
-					</td>
-					<td>
-						<a href="Controller?action=Approve&orderID=<c:out value="${item.productID}"/>">APPROVE</a>
-						<button class='btn btn-outline-primary btn-sm' type='submit' name='add' value="<c:out value="${order.productID}"/>" style='display: on-hover'>Buy</button>
-					</td>
-				</tr>
-			</c:forEach>
+			<form action='ProductController' method='post'>
+				<c:forEach items="${productList}" var="item">
+					<tr>
+						<td><c:out value="${item.productID}" /></td>
+						<td><c:out value="${item.productName}" /></td>
+						<td><c:out value="${item.genericName}" /></td>
+						<td><c:out value="${item.registrationNo}" /></td>
+						<td><c:out value="${item.productStrength}" /></td>
+						<td><c:out value="${item.productForm}" /></td>
+						<td><c:out value="${item.productPackaging}" /></td>
+						<td><c:out value="${item.productManufacturer}" /></td>
+						<td><c:out value="${item.productOrigin}" /></td>
+						<td><c:out value="${item.productDescription}" /></td>
+						<td>
+							<select name='Quantity'>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</td>
+						<td>
+							<button class='btn btn-outline-primary btn-sm' type='submit' name='add' value="<c:out value="${order.productID}"/>" style='display: on-hover'>Buy</button>
+						</td>
+					</tr>
+				</c:forEach>
+			</form>
 		</tbody>
 	</table>
 </body>

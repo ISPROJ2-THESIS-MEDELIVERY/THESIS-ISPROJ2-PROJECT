@@ -29,7 +29,7 @@
 			<form action='ProductController' method='post'>
 				<c:forEach items="${productList}" var="item">
 					<tr>
-						<td><c:out value="${item.productID}" /></td>
+						<td><input type="number" name="prodID" value="<c:out value="${item.productID}" />" readonly></td>
 						<td><c:out value="${item.productName}" /></td>
 						<td><c:out value="${item.genericName}" /></td>
 						<td><c:out value="${item.registrationNo}" /></td>

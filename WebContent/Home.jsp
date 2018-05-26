@@ -56,10 +56,14 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Members.jsp">Membership Registration</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Catalog.jsp">View Products</a></li>
                 </ul>
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="Login.jsp">Login</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="Home.jsp">Log Out</a></li>
-                </ul>
+                <c:choose>
+                	<c:otherwise>
+		                <ul class="nav navbar-nav ml-auto">
+		                    <li class="nav-item" role="presentation"><a class="nav-link" href="Login.jsp">Login</a></li>
+		                    <li class="nav-item" role="presentation"><a class="nav-link" href="Home.jsp">Log Out</a></li>
+		                </ul>
+		            </c:otherwise>
+				</c:choose>
             </div>
         </div>
     </nav>

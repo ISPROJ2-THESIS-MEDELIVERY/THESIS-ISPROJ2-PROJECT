@@ -68,22 +68,22 @@ public class PurchaseController extends HttpServlet {
 		Boolean test = false;
 		RequestDispatcher view = null;
 		String action = request.getParameter( "Action" );
-		HttpSession session = request.getSession();
-		Order order = new Order();
-		List<OrderDetail> OrderDetails = new ArrayList<OrderDetail>();
+		HttpSession session = request.getSession(true);
+		List<OrderDetail> OrderDetails;
+		OrderDetails = new ArrayList<OrderDetail>();
 		PurchaseAction purchaseAction = new PurchaseAction();
 		
-		if(action == "Addtocart") {
+		if(action.equalsIgnoreCase("Addtocart")) {
 			
 			//sets order and generates it if it does not exist
-			order = (Order) session.getAttribute("order");
+			Order order = (Order) session.getAttribute("order");
 			if(order == null) {
 				order.setCustomerID( 4 );
 				//order.setCustomerID( session.getAttribute("userID") );
 				order.setOrderAddress( request.getParameter( "orderAddress" ) );
 				order.setSeniorDiscount( false );
 				//order.setSeniorDiscount( session.getAttribute("seniorStatus") );
-				order.setPaymentMethod( request.getParameter( "orderPayment" ) );
+				//order.setPaymentMethod( request.getParameter( "orderPayment" ) );
 				session.setAttribute("order", order );
 			}
 			
@@ -103,11 +103,11 @@ public class PurchaseController extends HttpServlet {
 			session.setAttribute("OrderDetails", OrderDetails );
 			
 			//Refreshes and goes back to the cart
-			view = request.getRequestDispatcher( "/A-test-cart.jsp" );
+			view = request.getRequestDispatcher( "/A-test-customerpurchasecheckout.jsp" );
 			
 			
-		} else if (action == "Checkout") {
-			order = (Order) session.getAttribute("order");
+		} else if (action.equalsIgnoreCase("Checkout")) {
+			Order order = (Order) session.getAttribute("order");
 			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
 			
 			if ( order != null || !OrderDetails.isEmpty()) {
@@ -120,7 +120,7 @@ public class PurchaseController extends HttpServlet {
 			}
 			
 			view = request.getRequestDispatcher( "/A-test-customerpurchasecheckout.jsp" );
-		} else if (action == "Verify") {
+		} else if (action.equalsIgnoreCase("Verify")) {
 			
 		}
 		view.forward(request, response);

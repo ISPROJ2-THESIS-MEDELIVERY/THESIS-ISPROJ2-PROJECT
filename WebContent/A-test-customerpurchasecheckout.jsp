@@ -9,25 +9,27 @@
 </head>
 <body>
 	<h2>Checkout Page</h2>
-	Order:
-	
-	
+	<c:forEach items="${order}" var="order">
+		Order ID: <c:out value="${order.CustomerID}" />
+		Order Address: <c:out value="${order.OrderAddress}" />
+		Senior Discount: <c:out value="${order.SeniorDiscount}" />
+	</c:forEach>
 	<table>
 		<thead>
 			<tr>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
+				<th>ProductID</th>
+				<th>quantity</th>
+				<th>CostPerUnit</th>
+				<th>TotalCost</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${customers}" var="customer">
+			<c:forEach items="${OrderDetails}" var="details">
 				<tr>
-					<td><c:out value="${customer.customerId}" /></td>
-					<td><c:out value="${customer.firstName}" /></td>
-					<td><c:out value="${customer.lastName}" /></td>
-					<td><c:out value="${customer.middleName}" /></td>
+					<td><c:out value="${details.productID}" /></td>
+					<td><c:out value="${details.quantity}" /></td>
+					<td><c:out value="${details.CostPerUnit}" /></td>
+					<td><c:out value="${details.TotalCost}" /></td>
 				</tr>
 			</c:forEach>
 		</tbody>

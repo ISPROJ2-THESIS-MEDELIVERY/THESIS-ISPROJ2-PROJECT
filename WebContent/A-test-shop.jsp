@@ -26,7 +26,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<form action='ProductController' method='post'>
+			<form action='PurchaseController' method='post'>
 				<c:forEach items="${productList}" var="item">
 					<tr>
 						<td><input type="number" name="prodID" value="<c:out value="${item.productID}" />" readonly></td>
@@ -49,7 +49,7 @@
 							</select>
 						</td>
 						<td>
-							<button class='btn btn-outline-primary btn-sm' type='submit' name='add' value="<c:out value="${order.productID}"/>" style='display: on-hover'>Buy</button>
+							<button class='btn btn-outline-primary btn-sm' type='submit' name='Action' value="Addtocart" style='display: on-hover'>Buy</button>
 						</td>
 					</tr>
 				</c:forEach>

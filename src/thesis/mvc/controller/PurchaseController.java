@@ -62,109 +62,63 @@ public class PurchaseController extends HttpServlet {
 		view.forward(request, response);
 	}
     
+	@SuppressWarnings({ "unchecked", "null" })
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	conn = DBUtility.getConnection();
 		Boolean test = false;
 		RequestDispatcher view = null;
 		String action = request.getParameter( "Action" );
 		HttpSession session = request.getSession();
+		Order order = new Order();
+		List<OrderDetail> OrderDetails = new ArrayList<OrderDetail>();
+		PurchaseAction purchaseAction = new PurchaseAction();
 		
-		if(action == "Checkout") {
-			PurchaseAction purchaseAction = new PurchaseAction();
-			//Ensure that the checkout items are placed here
-			Order order = new Order();
-			order.setCustomerID( 4 );
-			//order.setCustomerID( (Hint) session.getAttribute("userID") );
-			order.setOrderAddress( request.getParameter( "orderAddress" ) );
-			order.setSeniorDiscount( false );
-			order.setPaymentMethod( request.getParameter( "orderPayment" ) );
+		if(action == "Addtocart") {
 			
-			//Saving this for later.
-			session.setAttribute("order", order );
-			
-			//Order Listing
-			OrderDetail orderDetail1 = new OrderDetail();
-			int ProductID1 = Integer.parseInt( request.getParameter( "ProductID1" ) );
-			orderDetail1.setProductID( ProductID1 );
-			int Quantity1 = Integer.parseInt( request.getParameter( "Quantity1" ) );
-			orderDetail1.setQuantity( Quantity1 );
-			Double CostPerUnit1 = purchaseAction.getProductCost( ProductID1, order );
-			orderDetail1.setCostPerUnit( CostPerUnit1 );
-			orderDetail1.setTotalCost( CostPerUnit1 * Quantity1 );
-			
-			OrderDetail orderDetail2 = new OrderDetail();
-			int ProductID2 = Integer.parseInt( request.getParameter( "ProductID2" ) );
-			orderDetail2.setProductID( ProductID2 );
-			int Quantity2 = Integer.parseInt( request.getParameter( "Quantity2" ) );
-			orderDetail2.setQuantity( Quantity2 );
-			Double CostPerUnit2 = purchaseAction.getProductCost( ProductID2, order );
-			orderDetail2.setCostPerUnit( CostPerUnit2 );
-			orderDetail2.setTotalCost( CostPerUnit2 * Quantity2 );
-			
-			OrderDetail orderDetail3 = new OrderDetail();
-			int ProductID3 = Integer.parseInt( request.getParameter( "ProductID3" ) );
-			orderDetail3.setProductID( ProductID3 );
-			int Quantity3 = Integer.parseInt( request.getParameter( "Quantity3" ) );
-			orderDetail3.setQuantity( Quantity3 );
-			Double CostPerUnit3 = purchaseAction.getProductCost( ProductID3, order );
-			orderDetail3.setCostPerUnit( CostPerUnit3 );
-			orderDetail3.setTotalCost( CostPerUnit3 * Quantity3 );
-			
-			OrderDetail orderDetail4 = new OrderDetail();
-			int ProductID4 = Integer.parseInt( request.getParameter( "ProductID4" ) );
-			orderDetail4.setProductID( ProductID4 );
-			int Quantity4 = Integer.parseInt( request.getParameter( "Quantity4" ) );
-			orderDetail4.setQuantity( Quantity4 );
-			Double CostPerUnit4 = purchaseAction.getProductCost( ProductID4, order );
-			orderDetail4.setCostPerUnit( CostPerUnit4 );
-			orderDetail4.setTotalCost( CostPerUnit4 * Quantity4 );
-			
-			OrderDetail orderDetail5 = new OrderDetail();
-			int ProductID5 = Integer.parseInt( request.getParameter( "ProductID5" ) );
-			orderDetail5.setProductID( ProductID5 );
-			int Quantity5 = Integer.parseInt( request.getParameter( "Quantity5" ) );
-			orderDetail5.setQuantity( Quantity5 );
-			Double CostPerUnit5 = purchaseAction.getProductCost( ProductID5, order );
-			orderDetail5.setCostPerUnit( CostPerUnit5 );
-			orderDetail5.setTotalCost( CostPerUnit5 * Quantity5 );
-			
-			Double ActualCost = orderDetail1.getTotalCost() + orderDetail2.getTotalCost() + orderDetail3.getTotalCost() + orderDetail4.getTotalCost() + orderDetail5.getTotalCost();
-			//Delivery calculations will be done at a later time.
-			orderDetail1.setActualCost(ActualCost);
-			orderDetail2.setActualCost(ActualCost);
-			orderDetail3.setActualCost(ActualCost);
-			orderDetail4.setActualCost(ActualCost);
-			orderDetail5.setActualCost(ActualCost);
-			
-			session.setAttribute("orderDetail1", orderDetail1 );
-			session.setAttribute("orderDetail2", orderDetail2 );
-			session.setAttribute("orderDetail3", orderDetail3 );
-			session.setAttribute("orderDetail3", orderDetail3 );
-			session.setAttribute("orderDetail5", orderDetail5 );
-			
-			//place the attributes on a reciept
-			view = request.getRequestDispatcher( "/A-test-customerpurchasecheckout.jsp" );
-			
-			
-		} else if (action == "Buy") {
-			Order order = new Order();
+			//sets order and generates it if it does not exist
 			order = (Order) session.getAttribute("order");
+			if(order == null) {
+				order.setCustomerID( 4 );
+				//order.setCustomerID( session.getAttribute("userID") );
+				order.setOrderAddress( request.getParameter( "orderAddress" ) );
+				order.setSeniorDiscount( false );
+				//order.setSeniorDiscount( session.getAttribute("seniorStatus") );
+				order.setPaymentMethod( request.getParameter( "orderPayment" ) );
+				session.setAttribute("order", order );
+			}
+			
+			//Takes the existing order detail if there is and adds the next order detail to there
+			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
+			
+			//Ensure that the checkout items are placed here
+			OrderDetail orderDetail = new OrderDetail();
+			int ProductID = Integer.parseInt( request.getParameter( "ProductID" ) );
+			orderDetail.setProductID( ProductID );
+			int Quantity = Integer.parseInt( request.getParameter( "Quantity" ) );
+			orderDetail.setQuantity( Quantity );
+			Double CostPerUnit = purchaseAction.getProductCost( ProductID, order );
+			orderDetail.setCostPerUnit( CostPerUnit );
+			orderDetail.setTotalCost( CostPerUnit * Quantity );
+			OrderDetails.add( orderDetail );
+			session.setAttribute("OrderDetails", OrderDetails );
+			
+			//Refreshes and goes back to the cart
+			view = request.getRequestDispatcher( "/A-test-cart.jsp" );
 			
 			
-			List<OrderDetail> OrderDetails = new ArrayList<OrderDetail>();
-			OrderDetails.add( (OrderDetail) session.getAttribute("orderDetail1") );
-			OrderDetails.add( (OrderDetail) session.getAttribute("orderDetail2") );
-			OrderDetails.add( (OrderDetail) session.getAttribute("orderDetail3") );
-			OrderDetails.add( (OrderDetail) session.getAttribute("orderDetail3") );
-			OrderDetails.add( (OrderDetail) session.getAttribute("orderDetail5") );
-
-			PurchaseAction purchaseAction = new PurchaseAction();
-			purchaseAction.purchaseOrder(order, OrderDetails);
-			/*if(test){
-				view = request.getRequestDispatcher( "/index.jsp" );
-			} else {
-				view = request.getRequestDispatcher( "/index.jsp" );
-			}*/
+		} else if (action == "Checkout") {
+			order = (Order) session.getAttribute("order");
+			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
+			
+			if ( order != null || !OrderDetails.isEmpty()) {
+				purchaseAction.purchaseOrder(order, OrderDetails);
+				session.setAttribute("orderReciept", order);
+				session.setAttribute("order", null );
+				session.setAttribute("OrderDetailsReciept", OrderDetails);
+				session.setAttribute("OrderDetails", null );
+				
+			}
+			
 			view = request.getRequestDispatcher( "/A-test-customerpurchasecheckout.jsp" );
 		} else if (action == "Verify") {
 			

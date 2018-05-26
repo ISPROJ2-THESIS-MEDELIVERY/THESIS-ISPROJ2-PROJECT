@@ -64,13 +64,11 @@ public class PurchaseController extends HttpServlet {
     
 	@SuppressWarnings({ "unchecked", "null" })
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String forward;
     	conn = DBUtility.getConnection();
-		Boolean test = false;
-		RequestDispatcher view = null;
 		String action = request.getParameter( "Action" );
 		HttpSession session = request.getSession(true);
-		List<OrderDetail> OrderDetails;
-		OrderDetails = new ArrayList<OrderDetail>();
+		List<OrderDetail> OrderDetails = new ArrayList<OrderDetail>();
 		PurchaseAction purchaseAction = new PurchaseAction();
 		
 		if(action.equalsIgnoreCase("Addtocart")) {
@@ -78,7 +76,8 @@ public class PurchaseController extends HttpServlet {
 			//sets order and generates it if it does not exist
 			Order order = (Order) session.getAttribute("order");
 			if(order == null) {
-				order.setCustomerID( 4 );
+				int test = 4;
+				order.setCustomerID( test );
 				//order.setCustomerID( session.getAttribute("userID") );
 				order.setOrderAddress( request.getParameter( "orderAddress" ) );
 				order.setSeniorDiscount( false );
@@ -103,7 +102,7 @@ public class PurchaseController extends HttpServlet {
 			session.setAttribute("OrderDetails", OrderDetails );
 			
 			//Refreshes and goes back to the cart
-			view = request.getRequestDispatcher( "/A-test-customerpurchasecheckout.jsp" );
+			forward = "/A-test-customerpurchasecheckout.jsp";
 			
 			
 		} else if (action.equalsIgnoreCase("Checkout")) {
@@ -119,10 +118,15 @@ public class PurchaseController extends HttpServlet {
 				
 			}
 			
-			view = request.getRequestDispatcher( "/A-test-customerpurchasecheckout.jsp" );
+			forward = "/A-test-customerpurchasecheckout.jsp";
 		} else if (action.equalsIgnoreCase("Verify")) {
-			
+
+			forward = "/A-test-customerpurchasecheckout.jsp";
+		} else {
+
+			forward = "/A-test-customerpurchasecheckout.jsp";
 		}
+		RequestDispatcher view = request.getRequestDispatcher( forward );
 		view.forward(request, response);
 	}
 

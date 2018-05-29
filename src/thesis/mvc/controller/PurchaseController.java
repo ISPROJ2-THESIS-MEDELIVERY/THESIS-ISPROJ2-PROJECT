@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import thesis.mvc.implement.OrderImplement;
-import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
 import thesis.mvc.pageaction.ApprovalAction;
@@ -62,50 +60,71 @@ public class PurchaseController extends HttpServlet {
 		view.forward(request, response);
 	}
     
-	@SuppressWarnings({ "unchecked", "null" })
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String forward;
+		int ProductID = 2;
+		int Quantity = 2;
+		double CostPerUnit = 0.0;
     	conn = DBUtility.getConnection();
 		String action = request.getParameter( "Action" );
 		HttpSession session = request.getSession(true);
 		List<OrderDetail> OrderDetails = new ArrayList<OrderDetail>();
 		PurchaseAction purchaseAction = new PurchaseAction();
 		
-		Order order5 = null;
-		order5.setCustomerID( 4 );
 		if(action.equalsIgnoreCase("Addtocart")) {
 			
 			//sets order and generates it if it does not exist
 			Order order = (Order) session.getAttribute("order");
 			if(order == null) {
 				//order.setCustomerID( session.getAttribute("userID") );
-				//order.setOrderAddress( request.getParameter( "orderAddress" ) );
 				//order.setSeniorDiscount( session.getAttribute("seniorStatus") );
-				//order.setPaymentMethod( request.getParameter( "orderPayment" ) );
 				session.setAttribute("order", purchaseAction.setInitalOrder(4, "test", false, "Cash") );
+				order = (Order) session.getAttribute("order");
+				
+				//ProductID & Quantity & Cost per unit
+				ProductID = Integer.valueOf( request.getParameter( "ProductID" ) );
+				Quantity = Integer.valueOf( request.getParameter( "Quantity" ) );
+				CostPerUnit = purchaseAction.getProductCost( ProductID, action, order );
+				
+				//Takes the existing order detail if there is and adds the next order detail to there
+				OrderDetail orderDetail = new OrderDetail();
+				orderDetail.setProductID(ProductID);
+				orderDetail.setQuantity(Quantity);
+				orderDetail.setCostPerUnit(CostPerUnit);
+				orderDetail.setTotalCost(CostPerUnit * Quantity);
+				OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
+				OrderDetails.add( orderDetail );
+				session.setAttribute("OrderDetails", OrderDetails );
+				
+				//Refreshes and goes back to the cart
+				forward = "/A-test-customerpurchasecheckout.jsp";
+			} else {
+				//ProductID & Quantity & Cost per unit
+				ProductID = Integer.valueOf( request.getParameter( "ProductID" ) );
+				Quantity = Integer.valueOf( request.getParameter( "Quantity" ) );
+				CostPerUnit = purchaseAction.getProductCost( ProductID, action, order );
+				
+				//Takes the existing order detail if there is and adds the next order detail to there
+				OrderDetail orderDetail = new OrderDetail();
+				orderDetail.setProductID(ProductID);
+				orderDetail.setQuantity(Quantity);
+				orderDetail.setCostPerUnit(CostPerUnit);
+				orderDetail.setTotalCost(CostPerUnit * Quantity);
+				OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
+				OrderDetails.add( orderDetail );
+				session.setAttribute("OrderDetails", OrderDetails );
+				
+				//Refreshes and goes back to the cart
+				forward = "/A-test-customerpurchasecheckout.jsp";
 			}
-			
-			//Takes the existing order detail if there is and adds the next order detail to there
-			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
-			
-			//Ensure that the checkout items are placed here
-			OrderDetail orderDetail = new OrderDetail();
-			int ProductID = Integer.parseInt( request.getParameter( "ProductID" ) );
-			orderDetail.setProductID( ProductID );
-			int Quantity = Integer.parseInt( request.getParameter( "Quantity" ) );
-			orderDetail.setQuantity( Quantity );
-			Double CostPerUnit = purchaseAction.getProductCost( ProductID, order );
-			orderDetail.setCostPerUnit( CostPerUnit );
-			orderDetail.setTotalCost( CostPerUnit * Quantity );
-			OrderDetails.add( orderDetail );
-			session.setAttribute("OrderDetails", OrderDetails );
-			
-			//Refreshes and goes back to the cart
-			forward = "/A-test-customerpurchasecheckout.jsp";
 			
 			
 		} else if (action.equalsIgnoreCase("Checkout")) {
 			Order order = (Order) session.getAttribute("order");
+			//order.setOrderAddress( request.getParameter( "orderAddress" ) );
+			//order.setPaymentMethod( request.getParameter( "orderPayment" ) );
+			//order.setDateOrdered(today);
 			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
 			
 			if ( order != null || !OrderDetails.isEmpty()) {
@@ -114,7 +133,6 @@ public class PurchaseController extends HttpServlet {
 				session.setAttribute("order", null );
 				session.setAttribute("OrderDetailsReciept", OrderDetails);
 				session.setAttribute("OrderDetails", null );
-				
 			}
 			
 			forward = "/A-test-customerpurchasecheckout.jsp";

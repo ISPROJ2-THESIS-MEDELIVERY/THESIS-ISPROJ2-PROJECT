@@ -31,7 +31,7 @@ public class PurchaseAction {
 		return order;
 	}
 	
-	public double getProductCost(int ProductID, Order order) {
+	public double getProductCost(int ProductID, String Pharmacy, Order order) {
 
 		//Find the city of the customer
 		int CityCustomer = 0;
@@ -85,7 +85,6 @@ public class PurchaseAction {
 		
 		return productCost;
 	}
-	
 	
 	public boolean purchaseOrder(Order order, List<OrderDetail> OrderDetails) {
 		//Check if order has less than 5 items

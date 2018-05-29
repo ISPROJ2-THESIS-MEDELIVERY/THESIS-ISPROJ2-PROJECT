@@ -71,19 +71,18 @@ public class PurchaseController extends HttpServlet {
 		List<OrderDetail> OrderDetails = new ArrayList<OrderDetail>();
 		PurchaseAction purchaseAction = new PurchaseAction();
 		
+		Order order5 = null;
+		order5.setCustomerID( 4 );
 		if(action.equalsIgnoreCase("Addtocart")) {
 			
 			//sets order and generates it if it does not exist
 			Order order = (Order) session.getAttribute("order");
 			if(order == null) {
-				int test = 4;
-				order.setCustomerID( test );
 				//order.setCustomerID( session.getAttribute("userID") );
-				order.setOrderAddress( request.getParameter( "orderAddress" ) );
-				order.setSeniorDiscount( false );
+				//order.setOrderAddress( request.getParameter( "orderAddress" ) );
 				//order.setSeniorDiscount( session.getAttribute("seniorStatus") );
 				//order.setPaymentMethod( request.getParameter( "orderPayment" ) );
-				session.setAttribute("order", order );
+				session.setAttribute("order", purchaseAction.setInitalOrder(4, "test", false, "Cash") );
 			}
 			
 			//Takes the existing order detail if there is and adds the next order detail to there

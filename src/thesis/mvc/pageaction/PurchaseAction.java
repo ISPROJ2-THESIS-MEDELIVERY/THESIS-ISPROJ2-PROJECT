@@ -22,6 +22,15 @@ public class PurchaseAction {
 		conn = DBUtility.getConnection();
 	}
 	
+	public Order setInitalOrder(int custID, String address, boolean senior, String paymentType) {
+		Order order = new Order();
+		order.setCustomerID(custID);           
+		order.setOrderAddress(address); 
+		order.setSeniorDiscount(senior); 
+		order.setPaymentMethod(paymentType);
+		return order;
+	}
+	
 	public double getProductCost(int ProductID, Order order) {
 
 		//Find the city of the customer

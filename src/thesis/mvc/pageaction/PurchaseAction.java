@@ -1,5 +1,6 @@
 package thesis.mvc.pageaction;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -31,59 +32,34 @@ public class PurchaseAction {
 		return order;
 	}
 	
-	public double getProductCost(int ProductID, String Pharmacy, Order order) {
+	public double getProductCost(int ProductID, int Branch, Order order) {
 
 		//Find the city of the customer
-		int CityCustomer = 0;
-		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM customer WHERE CustomerID = ?")) {
-            stmt.setInt(1, order.getCustomerID());
+		BigDecimal productCost = null;
+		try(PreparedStatement stmt = conn.prepareStatement("SELECT" + 
+														" stocksprice.PriceSet" +
+														" FROM" + 
+														" stocksprice" + 
+														" INNER JOIN stocks ON stocksprice.StockID = stocks.StockID" + 
+														" WHERE" + 
+														" stocksprice.IsCurrent = 1 AND" + 
+														" stocks.ProductID = ? AND" + 
+														" stocks.BranchID = ?")) {
+            stmt.setInt(1, ProductID);
+            stmt.setInt(2, Branch);
             try(ResultSet rs = stmt.executeQuery()) {
-            	CityCustomer = rs.getInt("CityID");
+                if (rs.next()) {
+                	productCost = rs.getBigDecimal("PriceSet");
+                }  else {
+                    return 0.0;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
             return 0.0;
         }
 		
-		//Find the branch closest to the customer
-		int BranchID;
-		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM branch WHERE CityID = ?")) {
-			stmt.setInt(1, CityCustomer);
-			try(ResultSet rs = stmt.executeQuery()) {
-				BranchID = rs.getInt("BranchID");
-			}
-		} catch (SQLException e){
-			e.printStackTrace();
-			return 0.0;
-		}
-		
-		//Look for stocksID with productID and BranchID
-		int stockID;
-		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Stocks WHERE ProductID = ? AND BranchID = ?")) {
-			stmt.setInt(1, ProductID);
-			stmt.setInt(2, BranchID);
-			try(ResultSet rs = stmt.executeQuery()) {
-				stockID = rs.getInt("StockID");
-			}
-		} catch (SQLException e){
-			e.printStackTrace();
-			return 0.0;
-		}
-		
-		//Retrieve the price from stocksPrice
-		Double productCost;
-		try(PreparedStatement stmt = conn.prepareStatement("SELECT StocksPriceID FROM product WHERE StockID = ? AND isCurrent = 1 ")){
-			stmt.setInt(1, stockID );
-			//Check if items in the order is RX
-			try(ResultSet rs = stmt.executeQuery()){
-				productCost = rs.getDouble(1);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return 0.0;
-		}
-		
-		return productCost;
+		return productCost.doubleValue();
 	}
 	
 	public boolean purchaseOrder(Order order, List<OrderDetail> OrderDetails) {

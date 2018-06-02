@@ -9,11 +9,9 @@
 </head>
 <body>
 	<h2>Checkout Page</h2>
-	<c:forEach items="${order}" var="order">
-		Order ID: <c:out value="${order.CustomerID}" />
-		Order Address: <c:out value="${order.OrderAddress}" />
-		Senior Discount: <c:out value="${order.SeniorDiscount}" />
-	</c:forEach>
+		Order ID: <c:out value="${order.customerID}" /><br />
+		Order Address: <c:out value="${order.orderAddress}" /><br />
+		Senior Discount: <c:out value="${order.seniorDiscount}" /><br />
 	<table>
 		<thead>
 			<tr>
@@ -28,16 +26,20 @@
 				<tr>
 					<td><c:out value="${details.productID}" /></td>
 					<td><c:out value="${details.quantity}" /></td>
-					<td><c:out value="${details.CostPerUnit}" /></td>
-					<td><c:out value="${details.TotalCost}" /></td>
+					<td><c:out value="${details.costPerUnit}" /></td>
+					<td><c:out value="${details.totalCost}" /></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	<br />
+	<br />
+	<br />
 	Within city: P50
+	<br />
 	Inter city: P100
 	<p>
-		<a href="CustomerController?action=insert">Add Customer</a>
+		<a href="/PurchaseController?action=Customer">Add Customer</a>
 	</p>
 </body>
 </html>

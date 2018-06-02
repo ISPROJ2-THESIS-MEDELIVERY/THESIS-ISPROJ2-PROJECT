@@ -79,13 +79,13 @@ public class PurchaseController extends HttpServlet {
 			if(order == null) {
 				//order.setCustomerID( session.getAttribute("userID") );
 				//order.setSeniorDiscount( session.getAttribute("seniorStatus") );
-				session.setAttribute("order", purchaseAction.setInitalOrder(4, "test", false, "Cash") );
-				order = (Order) session.getAttribute("order");
+				order = purchaseAction.setInitalOrder(4, "test", false, "Cash");
+				session.setAttribute("Order", order );
 				
 				//ProductID & Quantity & Cost per unit
-				ProductID = Integer.valueOf( request.getParameter( "ProductID" ) );
+				ProductID = Integer.valueOf( request.getParameter( "ProductID[3]" ) );
 				Quantity = Integer.valueOf( request.getParameter( "Quantity" ) );
-				CostPerUnit = purchaseAction.getProductCost( ProductID, action, order );
+				CostPerUnit = purchaseAction.getProductCost( ProductID, 1, order );
 				
 				//Takes the existing order detail if there is and adds the next order detail to there
 				OrderDetail orderDetail = new OrderDetail();
@@ -93,7 +93,6 @@ public class PurchaseController extends HttpServlet {
 				orderDetail.setQuantity(Quantity);
 				orderDetail.setCostPerUnit(CostPerUnit);
 				orderDetail.setTotalCost(CostPerUnit * Quantity);
-				OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
 				OrderDetails.add( orderDetail );
 				session.setAttribute("OrderDetails", OrderDetails );
 				
@@ -103,7 +102,7 @@ public class PurchaseController extends HttpServlet {
 				//ProductID & Quantity & Cost per unit
 				ProductID = Integer.valueOf( request.getParameter( "ProductID" ) );
 				Quantity = Integer.valueOf( request.getParameter( "Quantity" ) );
-				CostPerUnit = purchaseAction.getProductCost( ProductID, action, order );
+				CostPerUnit = purchaseAction.getProductCost( ProductID, 1, order );
 				
 				//Takes the existing order detail if there is and adds the next order detail to there
 				OrderDetail orderDetail = new OrderDetail();

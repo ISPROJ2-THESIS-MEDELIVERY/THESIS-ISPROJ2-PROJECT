@@ -26,10 +26,10 @@
 			</tr>
 		</thead>
 		<tbody>
-			<form action='PurchaseController' method='post'>
-				<c:forEach items="${productList}" var="item">
+			<c:forEach items="${productList}" var="item">
+				<form action='PurchaseController' method='post'>
 					<tr>
-						<td><input type="number" name="ProductID[<c:out value="${item.productID}" />]" value="<c:out value="${item.productID}" />" readonly></td>
+						<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
 						<td><c:out value="${item.productName}" /></td>
 						<td><c:out value="${item.genericName}" /></td>
 						<td><c:out value="${item.registrationNo}" /></td>
@@ -49,11 +49,11 @@
 							</select>
 						</td>
 						<td>
-							<button class='btn btn-outline-primary btn-sm' type='submit' name='Action' value="Addtocart" style='display: on-hover'>Buy</button>
+							<input type='submit' name='Action' value="Addtocart" style='display: on-hover'>Buy</input>
 						</td>
 					</tr>
-				</c:forEach>
-			</form>
+				</form>
+			</c:forEach>
 		</tbody>
 	</table>
 </body>

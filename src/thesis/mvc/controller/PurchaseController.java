@@ -75,7 +75,7 @@ public class PurchaseController extends HttpServlet {
 		if(action.equalsIgnoreCase("Addtocart")) {
 			
 			//sets order and generates it if it does not exist
-			Order order = (Order) session.getAttribute("order");
+			Order order = (Order) session.getAttribute("Order");
 			if(order == null) {
 				//order.setCustomerID( session.getAttribute("userID") );
 				//order.setSeniorDiscount( session.getAttribute("seniorStatus") );
@@ -83,7 +83,7 @@ public class PurchaseController extends HttpServlet {
 				session.setAttribute("Order", order );
 				
 				//ProductID & Quantity & Cost per unit
-				ProductID = Integer.valueOf( request.getParameter( "ProductID[3]" ) );
+				ProductID = Integer.valueOf( request.getParameter( "ProductID" ) );
 				Quantity = Integer.valueOf( request.getParameter( "Quantity" ) );
 				CostPerUnit = purchaseAction.getProductCost( ProductID, 1, order );
 				

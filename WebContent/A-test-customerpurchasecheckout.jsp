@@ -9,9 +9,9 @@
 </head>
 <body>
 	<h2>Checkout Page</h2>
-		Order ID: <c:out value="${order.customerID}" /><br />
-		Order Address: <c:out value="${order.orderAddress}" /><br />
-		Senior Discount: <c:out value="${order.seniorDiscount}" /><br />
+		Order ID: <c:out value="${Order.customerID}" /><br />
+		Order Address: <c:out value="${Order.orderAddress}" /><br />
+		Senior Discount: <c:out value="${Order.seniorDiscount}" /><br />
 	<table>
 		<thead>
 			<tr>

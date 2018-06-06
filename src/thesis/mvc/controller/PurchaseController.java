@@ -13,10 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
+import thesis.mvc.model.Product;
 import thesis.mvc.pageaction.ApprovalAction;
 import thesis.mvc.pageaction.PurchaseAction;
+import thesis.mvc.pageaction.PurchaseAction.CartList;
 import thesis.mvc.utility.DBUtility;
 
 @WebServlet("/PurchaseController")
@@ -96,6 +99,33 @@ public class PurchaseController extends HttpServlet {
 				OrderDetails.add( orderDetail );
 				session.setAttribute("OrderDetails", OrderDetails );
 				
+				//Insert things into cartDetails
+				/*
+				ProductController productController = new ProductController();
+				ProductImplement productImplement = new ProductImplement();
+				Product product = new Product();
+				product = productImplement.getProductById(orderDetail.getOrderID());
+				
+				CartList cartlist = purchaseAction.new CartList();
+				cartlist.setName();
+				cartlist.setDescription();
+				cartlist.setImage();
+				cartlist.setSize();
+				cartlist.setPrescription();
+				cartlist.setQuantity(orderDetail.getQuantity());
+				cartlist.setUnitCost(orderDetail.getCostPerUnit());
+				cartlist.setTotalCost(orderDetail.getTotalCost());
+				*/
+				//Something
+				/*
+				OrderDetail orderDetail = new OrderDetail();
+				orderDetail.setProductID(ProductID);
+				orderDetail.setQuantity(Quantity);
+				orderDetail.setCostPerUnit(CostPerUnit);
+				orderDetail.setTotalCost( Math.round(CostPerUnit * Quantity * 100) / 100 );
+				OrderDetails.add( orderDetail );
+				session.setAttribute("CartDetails", OrderDetails );
+				*/
 				//Refreshes and goes back to the cart
 				forward = "/A-test-customerpurchasecheckout.jsp";
 			} else {

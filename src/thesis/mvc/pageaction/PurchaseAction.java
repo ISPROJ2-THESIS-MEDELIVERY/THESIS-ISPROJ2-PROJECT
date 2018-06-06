@@ -31,6 +31,65 @@ public class PurchaseAction {
 		order.setPaymentMethod(paymentType);
 		return order;
 	}
+	public class CartList {
+		private String Name;
+		private String Description;
+		private String Image;
+		private String Size;
+		private boolean Prescription;
+		private int Quantity;
+		private double UnitCost;
+		private double TotalCost;
+		
+		public String getName() {
+			return Name;
+		}
+		public void setName(String name) {
+			Name = name;
+		}
+		public String getDescription() {
+			return Description;
+		}
+		public void setDescription(String description) {
+			Description = description;
+		}
+		public String getImage() {
+			return Image;
+		}
+		public void setImage(String image) {
+			Image = image;
+		}
+		public String getSize() {
+			return Size;
+		}
+		public void setSize(String size) {
+			Size = size;
+		}
+		public boolean isPrescription() {
+			return Prescription;
+		}
+		public void setPrescription(boolean prescription) {
+			Prescription = prescription;
+		}
+		public int getQuantity() {
+			return Quantity;
+		}
+		public void setQuantity(int quantity) {
+			Quantity = quantity;
+		}
+		public double getUnitCost() {
+			return UnitCost;
+		}
+		public void setUnitCost(double unitCost) {
+			UnitCost = unitCost;
+		}
+		public double getTotalCost() {
+			return TotalCost;
+		}
+		public void setTotalCost(double totalCost) {
+			TotalCost = totalCost;
+		}
+	}
 	
 	public double getProductCost(int ProductID, int Branch, Order order) {
 

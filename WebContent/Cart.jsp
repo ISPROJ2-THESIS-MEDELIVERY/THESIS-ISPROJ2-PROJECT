@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html >
 <html>
 <head>
@@ -74,23 +75,27 @@
                     <tr>
                         <th>Item</th>
                         <th>Item Description</th>
-                        <th>Quantity</th>
-                        <th>Prescription Required</th>
-                        <th>Dosage Strength</th>
+                        <th>Image</th>
                         <th>Size</th>
+                        <th>Prescription Required</th>
+                        <th>Quantity</th>
                         <th>Unit Price</th>
+                        <th>Total Cost</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Solmux</td>
-                        <td><img>Cell 2</td>
-                        <td>Cell 3<input type="number"></td>
-                        <td><label></label>Label<input type="file" accept="image/*" name="Prescription"><br><br></td>
-                        <td><label><br>Label<br><br></label></td>
-                        <td><br>Label<br><br></td>
-                        <td><br>Label<br><br></td>
-                    </tr>
+                	<c:forEach items="${OrderDetails}" var="details">
+	                    <tr>
+	                        <td></td>
+	                        <td></td>
+	                        <td></td>
+	                        <td></td>
+	                        <td></td>
+	                        <td><c:out value="${details.quantity}" /></td>
+	                        <td><c:out value="${details.costPerUnit}" /></td>
+	                        <td><c:out value="${details.totalCost}" /></td>
+	                    </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>

@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,9 +38,18 @@ public class LoginController extends HttpServlet {
 		//view.forward(request, response);
 		String forward;
 		HttpSession session = request.getSession();
-		forward = "A-test-pharmacistapproval.jsp";
-		OrderImplement orderImplement = new OrderImplement();
-		session.setAttribute("orderImplementPharmacist", orderImplement.getOrder() );
+		
+		if ((int) session.getAttribute("userID") > 0) {
+			session.removeAttribute("userID");
+			session.removeAttribute("username");
+			session.removeAttribute("userAccess");
+			forward = "Home.jsp";
+		}
+		else {
+			forward = "A-test-pharmacistapproval.jsp";
+			OrderImplement orderImplement = new OrderImplement();
+			session.setAttribute("orderImplementPharmacist", orderImplement.getOrder() );
+		}
 		RequestDispatcher view = request.getRequestDispatcher( forward );
 		view.forward(request, response);
 		

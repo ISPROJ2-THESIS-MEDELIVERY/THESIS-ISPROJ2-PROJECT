@@ -39,7 +39,12 @@
 	<br />
 	Inter city: P100
 	<p>
-		<a href="/PurchaseController?action=Customer">Add Customer</a>
+		<a href="A-test-index.jsp">Store</a>
 	</p>
 </body>
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
 </html>

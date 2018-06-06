@@ -91,15 +91,6 @@
                         <td><br>Label<br><br></td>
                         <td><br>Label<br><br></td>
                     </tr>
-                    <tr>
-                        <td>Antihistamine</td>
-                        <td><img>Cell 4</td>
-                        <td>Cell 3<input type="number"></td>
-                        <td><label>Label</label><input type="file" accept="image/*" name="Precription"></td>
-                        <td><br>Label<br><br></td>
-                        <td><br>Label<br><br></td>
-                        <td><br>Label<br><br></td>
-                    </tr>
                 </tbody>
             </table>
         </div>

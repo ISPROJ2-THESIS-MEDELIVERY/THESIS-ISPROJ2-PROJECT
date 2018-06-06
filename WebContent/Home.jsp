@@ -50,17 +50,23 @@
         <div class="container-fluid"><a class="navbar-brand" href="#"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="Home.jsp">Home</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="Home.jsp">Home</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="About.jsp">About</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="ContactUs.jsp">Contact Us</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Members.jsp">Membership Registration</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Catalog.jsp">View Products</a></li>
                 </ul>
                 <c:choose>
+                	<c:when test = "${userID > 0}">
+                		<ul class="nav navbar-nav ml-auto">
+		                    <li class="nav-item" role="presentation"><a class="nav-link" href="Cart.jsp">My Cart</a></li>
+		                    <li class="nav-item" role="presentation"><a class="nav-link" href="Logout.jsp">Log out</a></li>
+		                </ul>
+                	</c:when>
                 	<c:otherwise>
 		                <ul class="nav navbar-nav ml-auto">
 		                    <li class="nav-item" role="presentation"><a class="nav-link" href="Login.jsp">Login</a></li>
-		                    <li class="nav-item" role="presentation"><a class="nav-link" href="Home.jsp">Log Out</a></li>
+		                    <li class="nav-item" role="presentation"><a class="nav-link" href="Home.jsp">Register</a></li>
 		                </ul>
 		            </c:otherwise>
 				</c:choose>

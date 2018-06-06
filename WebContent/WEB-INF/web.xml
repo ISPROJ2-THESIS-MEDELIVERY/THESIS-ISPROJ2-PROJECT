@@ -12,12 +12,22 @@
     <servlet-name>RegistrationController</servlet-name>
     <url-pattern>/RegistrationController.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>PurchaseController</servlet-name>
+  	<servlet-class>theisis.mvc.controller.PurchaseController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>PurchaseController</servlet-name>
+  	<url-pattern>/PurchaseController/*</url-pattern>
+  </servlet-mapping>
 <error-page>
 	<exception-type>java.lang.Exception</exception-type>
 	<location>/customError.jsp</location>
 </error-page>
+
 <error-page>
 	<error-code>404</error-code>
 	<location>/serverError.jsp</location>
 </error-page>
 </web-app>
+

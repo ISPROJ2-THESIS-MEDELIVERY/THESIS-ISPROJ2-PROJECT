@@ -92,7 +92,7 @@ public class PurchaseController extends HttpServlet {
 				orderDetail.setProductID(ProductID);
 				orderDetail.setQuantity(Quantity);
 				orderDetail.setCostPerUnit(CostPerUnit);
-				orderDetail.setTotalCost(CostPerUnit * Quantity);
+				orderDetail.setTotalCost( Math.round(CostPerUnit * Quantity * 100) / 100 );
 				OrderDetails.add( orderDetail );
 				session.setAttribute("OrderDetails", OrderDetails );
 				

@@ -84,15 +84,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                	<c:forEach items="${OrderDetails}" var="details">
+                	<c:forEach items="${cartlists}" var="details">
 	                    <tr>
-	                        <td></td>
-	                        <td></td>
-	                        <td></td>
-	                        <td></td>
-	                        <td></td>
-	                        <td><c:out value="${details.quantity}" /></td>
-	                        <td><c:out value="${details.costPerUnit}" /></td>
+	                        <td><c:out value="${details.Name}" /></td>
+	                        <td><c:out value="${details.Description}" /></td>
+	                        <td><c:out value="${details.Image}" /></td>
+	                        <td><c:out value="${details.Size}" /></td>
+	                        <td><c:out value="${details.Prescription}" /></td>
+	                        <td><c:out value="${details.Quantity}" /></td>
+	                        <td><c:out value="${details.UnitCost}" /></td>
 	                        <td><c:out value="${details.totalCost}" /></td>
 	                    </tr>
                     </c:forEach>

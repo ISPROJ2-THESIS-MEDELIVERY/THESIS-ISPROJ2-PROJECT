@@ -20,6 +20,7 @@ import thesis.mvc.model.Product;
 import thesis.mvc.pageaction.ApprovalAction;
 import thesis.mvc.pageaction.PurchaseAction;
 import thesis.mvc.pageaction.PurchaseAction.CartList;
+import thesis.mvc.pageaction.RegistrationAction;
 import thesis.mvc.utility.DBUtility;
 
 @WebServlet("/PurchaseController")
@@ -98,26 +99,28 @@ public class PurchaseController extends HttpServlet {
 				orderDetail.setTotalCost( Math.round(CostPerUnit * Quantity * 100) / 100 );
 				OrderDetails.add( orderDetail );
 				session.setAttribute("OrderDetails", OrderDetails );
+
 				
 				//Insert things into cartDetails
-				/*
-				ProductController productController = new ProductController();
 				ProductImplement productImplement = new ProductImplement();
 				Product product = new Product();
-				product = productImplement.getProductById(orderDetail.getOrderID());
+				product = productImplement.getProductById(orderDetail.getProductID());
 				
+				List<CartList> cartlists = new ArrayList<CartList>();
 				CartList cartlist = purchaseAction.new CartList();
-				cartlist.setName();
-				cartlist.setDescription();
-				cartlist.setImage();
-				cartlist.setSize();
-				cartlist.setPrescription();
+				cartlist.setName(product.getProductName());
+				cartlist.setDescription(product.getProductDescription());
+				cartlist.setImage(product.getProductImage());
+				cartlist.setSize(product.getProductPackaging());
+				cartlist.setPrescription(product.isRXProduct());
 				cartlist.setQuantity(orderDetail.getQuantity());
 				cartlist.setUnitCost(orderDetail.getCostPerUnit());
 				cartlist.setTotalCost(orderDetail.getTotalCost());
-				*/
-				//Something
+				cartlists.add(cartlist);
+				session.setAttribute("CartList", cartlists );
+				
 				/*
+				//Something
 				OrderDetail orderDetail = new OrderDetail();
 				orderDetail.setProductID(ProductID);
 				orderDetail.setQuantity(Quantity);
@@ -127,6 +130,7 @@ public class PurchaseController extends HttpServlet {
 				session.setAttribute("CartDetails", OrderDetails );
 				*/
 				//Refreshes and goes back to the cart
+				//forward = "/cart.jsp";
 				forward = "/A-test-customerpurchasecheckout.jsp";
 			} else {
 				//ProductID & Quantity & Cost per unit
@@ -145,6 +149,7 @@ public class PurchaseController extends HttpServlet {
 				session.setAttribute("OrderDetails", OrderDetails );
 				
 				//Refreshes and goes back to the cart
+				//forward = "/cart.jsp";
 				forward = "/A-test-customerpurchasecheckout.jsp";
 			}
 			
@@ -159,9 +164,9 @@ public class PurchaseController extends HttpServlet {
 			if ( order != null || !OrderDetails.isEmpty()) {
 				purchaseAction.purchaseOrder(order, OrderDetails);
 				session.setAttribute("orderReciept", order);
-				session.setAttribute("order", null );
 				session.setAttribute("OrderDetailsReciept", OrderDetails);
-				session.setAttribute("OrderDetails", null );
+				session.removeAttribute("order");
+				session.removeAttribute("OrderDetails");
 			}
 			
 			forward = "/A-test-customerpurchasecheckout.jsp";

@@ -53,7 +53,7 @@
 							</select>
 						</td>
 						<td>
-							<input type='submit' name='Action' value="Addtocart" style='display: on-hover'>Buy</input>
+							<input type='submit' name='Action' value="Addtocart" style='display: on-hover' />
 						</td>
 					</tr>
 				</form>

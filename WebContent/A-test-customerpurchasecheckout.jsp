@@ -32,6 +32,35 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	<table>
+		<thead>
+			<tr>
+	            <th>Item</th>
+	            <th>Item Description</th>
+	            <th>Image</th>
+	            <th>Size</th>
+	            <th>Prescription Required</th>
+	            <th>Quantity</th>
+	            <th>Unit Price</th>
+	            <th>Total Cost</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${CartList}" var="cartdetails">
+	            <tr>
+	                <td><c:out value="${cartdetails.name}" /></td>
+	                <td><c:out value="${cartdetails.description}" /></td>
+	                <td><img src="data:image/jpeg;base64,${cartdetails.image}" /></td>
+	                <td><c:out value="${cartdetails.size}" /></td>
+	                <td><c:out value="${cartdetails.prescription}" /></td>
+	                <td><c:out value="${cartdetails.quantity}" /></td>
+	                <td><c:out value="${cartdetails.unitCost}" /></td>
+	                <td><c:out value="${cartdetails.totalCost}" /></td>
+	            </tr>
+            </c:forEach>
+		</tbody>
+	</table>
 	<br />
 	<br />
 	<br />
@@ -42,9 +71,4 @@
 		<a href="A-test-index.jsp">Store</a>
 	</p>
 </body>
-<script>
-function goBack() {
-    window.history.back();
-}
-</script>
 </html>

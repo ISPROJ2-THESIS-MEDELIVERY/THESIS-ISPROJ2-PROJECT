@@ -23,7 +23,7 @@ public class LoginImplement implements LoginDAO {
 	}
 
 	@Override
-	public void addLogin(Login login) {
+	public int addLogin(Login login) {
 		
 		try(PreparedStatement stmt = conn.prepareStatement(""
             	+ "INSERT INTO Login "
@@ -36,10 +36,12 @@ public class LoginImplement implements LoginDAO {
 			stmt.setDate( 4, CurrentDate );
 			stmt.setDate( 5, CurrentDate );
 			stmt.setString( 6, login.getUsertype() );
-			stmt.executeUpdate();
+			int NewID = stmt.executeUpdate();
 			stmt.close();
+			return NewID;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		}
 		
 		

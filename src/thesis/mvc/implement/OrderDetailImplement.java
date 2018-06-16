@@ -21,7 +21,7 @@ public class OrderDetailImplement implements OrderDetailDAO {
 	}
 
 	@Override
-	public void addOrderDetail(OrderDetail orderDetail) {
+	public int addOrderDetail(OrderDetail orderDetail) {
 		try {
 			String query = "INSERT INTO OrderDetail (OrderID, ProductID, Quantity, CostPerUnit, TotalCost, ActualCost) VALUES (?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
@@ -30,10 +30,12 @@ public class OrderDetailImplement implements OrderDetailDAO {
 			preparedStatement.setInt( 3, orderDetail.getQuantity() );
 			preparedStatement.setDouble( 4, orderDetail.getCostPerUnit() );
 			preparedStatement.setDouble( 5, orderDetail.getTotalCost() );
-			preparedStatement.executeUpdate();
+			int NewID = preparedStatement.executeUpdate();
 			preparedStatement.close();
+			return NewID;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		} 
 		
 	}

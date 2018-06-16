@@ -21,7 +21,7 @@ public class StocksImplement implements StocksDAO{
 	}
 
 	@Override
-	public void addStocks(Stocks stocks) {
+	public int addStocks(Stocks stocks) {
 		try {
 			String query = "INSERT INTO Stocks (ProductID, BranchID, Quantity, Feature) VALUES (?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
@@ -29,10 +29,12 @@ public class StocksImplement implements StocksDAO{
 			preparedStatement.setInt( 2, stocks.getBranchID() );
 			preparedStatement.setInt( 3, stocks.getQuantity() );
 			preparedStatement.setBoolean( 4, stocks.isFeature() );
-			preparedStatement.executeUpdate();
+			int NewID = preparedStatement.executeUpdate();
 			preparedStatement.close();
+			return NewID;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		} 
 		
 	}

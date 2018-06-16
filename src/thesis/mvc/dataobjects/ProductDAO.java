@@ -5,7 +5,7 @@ import java.util.List;
 import thesis.mvc.model.Product;
 
 public interface ProductDAO {
-	public void addProduct ( Product product );
+	public int addProduct ( Product product );
 	public void deleteProduct ( int productId );
 	public void updateProduct ( Product product );
 	public List<Product> getAllProducts();

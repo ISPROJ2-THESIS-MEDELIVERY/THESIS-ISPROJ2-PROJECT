@@ -78,7 +78,6 @@ public class LoginController extends HttpServlet {
 			LoginImplement LoginImp = new LoginImplement();
 			Login login = LoginImp.getLoginByID(LoginID);
 			session.setAttribute("username", login.getUsername());
-			
 			//Set Access Level
 			int AL = loginAction.checkUserType(LoginID);
 			session.setAttribute("userAccess", AL);

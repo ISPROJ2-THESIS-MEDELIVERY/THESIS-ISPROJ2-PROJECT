@@ -23,7 +23,7 @@ public class CourierServiceImplement implements CourierServiceDAO{
 	}
 
 	@Override
-	public void addCourierService(CourierService courierService) {
+	public int addCourierService(CourierService courierService) {
 		try {
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 			String query = "INSERT INTO CourierService (CompanyName, CompanyStreet, CompanyBarangay, CompanyCity, CompanyProvince, CompanyLandline, CompanyCellular, CompanyContact, DateAdded) VALUES (?,?,?,?,?,?,?,?,?)";
@@ -37,10 +37,12 @@ public class CourierServiceImplement implements CourierServiceDAO{
 			preparedStatement.setInt( 7, courierService.getCompanyCellular() );
 			preparedStatement.setString( 8, courierService.getCompanyContact() );
 			preparedStatement.setDate( 9, CurrentDate );
-			preparedStatement.executeUpdate();
+			int NewID = preparedStatement.executeUpdate();
 			preparedStatement.close();
+			return NewID;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		} 
 		
 	}

@@ -23,7 +23,7 @@ public class OrderImplement implements OrderDAO{
 	}
 
 	@Override
-	public void addOrder(Order order) {
+	public int addOrder(Order order) {
 		try {
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 			String query = "INSERT INTO `order` (CustomerID, DeliveryID, PharmacistID, CityID, PrescriptionID, OrderAddress, DateOrdered, DateProcessed, DateDelivered, OrderType, OrderStatus, SeniorDiscount, PaymentMethod, ActualCost) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -42,10 +42,12 @@ public class OrderImplement implements OrderDAO{
 			preparedStatement.setBoolean( 12, order.getSeniorDiscount() );
 			preparedStatement.setString( 13, order.getPaymentMethod() );
 			preparedStatement.setDouble(14, order.getActualCost() );
-			preparedStatement.executeUpdate();
+			int NewID = preparedStatement.executeUpdate();
 			preparedStatement.close();
+			return NewID;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		} 
 		
 		

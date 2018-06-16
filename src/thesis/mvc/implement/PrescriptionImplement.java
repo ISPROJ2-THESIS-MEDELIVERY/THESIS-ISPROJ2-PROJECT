@@ -21,7 +21,7 @@ public class PrescriptionImplement implements PrescriptionDAO {
 	}
 
 	@Override
-	public void addPrescription(Prescription prescription) {
+	public int addPrescription(Prescription prescription) {
 		try {
 			String query = "INSERT INTO Prescription (PharmacistID, CustomerID, PermissionStatus, Remark, Prescription) VALUES (?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
@@ -30,10 +30,12 @@ public class PrescriptionImplement implements PrescriptionDAO {
 			preparedStatement.setString( 3, prescription.getPermissionStatus() );
 			preparedStatement.setString( 4, prescription.getRemark() );
 			preparedStatement.setString( 5, prescription.getPrescription() );
-			preparedStatement.executeUpdate();
+			int NewID = preparedStatement.executeUpdate();
 			preparedStatement.close();
+			return NewID;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		} 
 		
 	}

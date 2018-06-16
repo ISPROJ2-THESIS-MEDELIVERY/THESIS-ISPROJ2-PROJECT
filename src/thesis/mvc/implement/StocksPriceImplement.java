@@ -23,7 +23,7 @@ public class StocksPriceImplement implements StocksPriceDAO{
 	}
 
 	@Override
-	public void addStocksPrice(StocksPrice stocksPrice) {
+	public int addStocksPrice(StocksPrice stocksPrice) {
 		try {
 			String query = "INSERT INTO StocksPrice (StockID, PriceSet, DateSet, IsCurrent) VALUES (?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
@@ -32,10 +32,13 @@ public class StocksPriceImplement implements StocksPriceDAO{
 			preparedStatement.setDouble( 2, stocksPrice.getPriceSet() );
 			preparedStatement.setDate( 3, CurrentDate );
 			preparedStatement.setBoolean( 4, stocksPrice.isIsCurrent() );
-			preparedStatement.executeUpdate();
+			int NewID = preparedStatement.executeUpdate();
 			preparedStatement.close();
+			return NewID;
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		} 
 		
 	}

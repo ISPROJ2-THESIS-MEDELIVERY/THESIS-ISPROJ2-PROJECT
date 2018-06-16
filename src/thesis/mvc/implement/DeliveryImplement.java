@@ -21,7 +21,7 @@ public class DeliveryImplement implements DeliveryDAO{
 	}
 
 	@Override
-	public void addDelivery(Delivery delivery) {
+	public int addDelivery(Delivery delivery) {
 		try {
 			String query = "INSERT INTO Delivery (DispatcherID, DriverID, PlateNumber, Comments) VALUES (?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
@@ -29,10 +29,12 @@ public class DeliveryImplement implements DeliveryDAO{
 			preparedStatement.setInt( 2, delivery.getDriverID() );
 			preparedStatement.setString( 3, delivery.getPlateNumber() );
 			preparedStatement.setString( 4, delivery.getComments() );
-			preparedStatement.executeUpdate();
+			int NewID = preparedStatement.executeUpdate();
 			preparedStatement.close();
+			return NewID;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		} 
 		
 	}

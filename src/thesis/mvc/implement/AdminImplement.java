@@ -22,17 +22,19 @@ public class AdminImplement implements AdminDAO {
 	
 
 	@Override
-	public void addAdmin(Admin admin) {
+	public int addAdmin(Admin admin) {
 		try {
 			String query = "INSERT INTO Admin (UserID, FirstName, Surname) VALUES (?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, admin.getUserID() );
 			preparedStatement.setString( 2, admin.getFirstName() );
 			preparedStatement.setString( 3, admin.getSurname() );
-			preparedStatement.executeUpdate();
+			int NewID = preparedStatement.executeUpdate();
 			preparedStatement.close();
+			return NewID;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		}
 		
 	}

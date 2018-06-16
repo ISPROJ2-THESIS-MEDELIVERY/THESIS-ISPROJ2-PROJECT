@@ -65,6 +65,20 @@ public class LoginAction {
     	
     }
 
+    public boolean checkSeniorStatus(int loginID) {
+		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Customer WHERE UserID = ?")) {
+	        stmt.setInt(1, loginID);
+	        try(ResultSet rs = stmt.executeQuery()) {
+	           if (rs.next()) {
+	        	   
+	        	   return true;
+	           }
+	        }
+	    } catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+    }
 	public int checkUserType(int loginID) {
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Customer WHERE UserID = ?")) {
 	        stmt.setInt(1, loginID);

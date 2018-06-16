@@ -5,7 +5,7 @@ import java.util.List;
 import thesis.mvc.model.Customer;
 
 public interface CustomerDAO {
-	public void addCustomer ( Customer customer );
+	public int addCustomer ( Customer customer );
 	public void deleteCustomer ( int customerId );
 	public void updateCustomer ( Customer customer );
 	public List<Customer> getAllCustomers();

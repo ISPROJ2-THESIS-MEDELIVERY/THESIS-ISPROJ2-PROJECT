@@ -21,7 +21,7 @@ public class ProductImplement implements ProductDAO {
 	}
 
 	@Override
-	public void addProduct(Product product) {
+	public int addProduct(Product product) {
 		try {
 			String query = "INSERT INTO Product (ProductName, GenericName, RegistrationNo, ProductStrength, ProductForm, ProductPackaging, ProductManufacturer, ProductOrigin, ProductDescription, ProductImage, isRXProduct, CounterLimit) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
@@ -37,10 +37,12 @@ public class ProductImplement implements ProductDAO {
 			preparedStatement.setString( 10, product.getProductImage() );
 			preparedStatement.setBoolean( 11, product.isRXProduct() );
 			preparedStatement.setInt( 12, product.getCounterLimit() );
-			preparedStatement.executeUpdate();
+			int NewID = preparedStatement.executeUpdate();
 			preparedStatement.close();
+			return NewID;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		} 
 		
 	}

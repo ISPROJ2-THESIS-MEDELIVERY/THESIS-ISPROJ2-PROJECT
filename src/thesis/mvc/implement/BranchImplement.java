@@ -21,7 +21,7 @@ public class BranchImplement implements BranchDAO{
 	}
 
 	@Override
-	public void addBranch(Branch branch) {
+	public int addBranch(Branch branch) {
 		try {
 			String query = "INSERT INTO Branch (BranchStreet, BranchBarangay, CityID, BranchProvince, BranchLandline, BranchCellular, BranchOwner, PharmacyLogo, PharmacyName, BranchAvailable) VALUES (?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
@@ -35,10 +35,12 @@ public class BranchImplement implements BranchDAO{
 			preparedStatement.setString( 8, branch.getPharmacyLogo() );
 			preparedStatement.setString( 9, branch.getPharmacyName() );
 			preparedStatement.setBoolean( 10, branch.getBranchAvailable() );
-			preparedStatement.executeUpdate();
+			int NewID = preparedStatement.executeUpdate();
 			preparedStatement.close();
+			return NewID;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		} 
 		
 	}

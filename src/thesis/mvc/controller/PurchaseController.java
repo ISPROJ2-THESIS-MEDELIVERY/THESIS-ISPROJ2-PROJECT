@@ -81,9 +81,12 @@ public class PurchaseController extends HttpServlet {
 			//sets order and generates it if it does not exist
 			Order order = (Order) session.getAttribute("Order");
 			if(order == null) {
-				//order.setCustomerID( session.getAttribute("userID") );
+				int CID = 4;//(int) session.getAttribute("userID");
+				String ADD = "test";//(String) session.getAttribute("userADD");
+				boolean SID = false;//(boolean) session.getAttribute("userSEN");
+				
 				//order.setSeniorDiscount( session.getAttribute("seniorStatus") );
-				order = purchaseAction.setInitalOrder(4, "test", false, "Cash");
+				order = purchaseAction.setInitalOrder(CID, ADD, SID);
 				session.setAttribute("Order", order );
 				
 				//ProductID & Quantity & Cost per unit
@@ -119,16 +122,6 @@ public class PurchaseController extends HttpServlet {
 				cartlists.add(cartlist);
 				session.setAttribute("CartList", cartlists );
 				
-				/*
-				//Something
-				OrderDetail orderDetail = new OrderDetail();
-				orderDetail.setProductID(ProductID);
-				orderDetail.setQuantity(Quantity);
-				orderDetail.setCostPerUnit(CostPerUnit);
-				orderDetail.setTotalCost( Math.round(CostPerUnit * Quantity * 100) / 100 );
-				OrderDetails.add( orderDetail );
-				session.setAttribute("CartDetails", OrderDetails );
-				*/
 				//Refreshes and goes back to the cart
 				forward = "/Cart.jsp";
 				//forward = "/A-test-customerpurchasecheckout.jsp";
@@ -171,29 +164,28 @@ public class PurchaseController extends HttpServlet {
 				//forward = "/A-test-customerpurchasecheckout.jsp";
 			}
 			
-			
 		} else if (action.equalsIgnoreCase("Checkout")) {
+			
 			Order order = (Order) session.getAttribute("order");
 			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
-			
-			
-			order.setActualCost( 123.00 );
+			List<CartList> cartList = (List<CartList>) session.getAttribute("CartList");
+			boolean checker = purchaseAction.purchaseOrder(order, OrderDetails);
+			if(order == null ||OrderDetails.isEmpty() || !checker) {
+				forward = "/index.jsp"; //or an error page
+			} else {
+				session.setAttribute("orderReciept", order);
+				session.setAttribute("CartlistReciept", cartList);
+				session.removeAttribute("order");
+				session.removeAttribute("OrderDetails");
+				session.removeAttribute("CartList");
+				forward = "/A-test-customerpurchasecheckout.jsp";
+			}
 			//order.setOrderAddress( request.getParameter( "orderAddress" ) );
 			//order.setPaymentMethod( request.getParameter( "orderPayment" ) );
 			//order.setDateOrdered(today);
 			
-			if ( order != null || !OrderDetails.isEmpty()) {
-				purchaseAction.purchaseOrder(order, OrderDetails);
-				session.setAttribute("orderReciept", order);
-				session.setAttribute("OrderDetailsReciept", OrderDetails);
-				session.removeAttribute("order");
-				session.removeAttribute("OrderDetails");
-			}
-			
-			forward = "/A-test-customerpurchasecheckout.jsp";
 		} else {
-
-			forward = "/A-test-customerpurchasecheckout.jsp";
+			forward = "/A-test-customerpurchasecheckout.jsp"; // ???
 		}
 		RequestDispatcher view = request.getRequestDispatcher( forward );
 		view.forward(request, response);

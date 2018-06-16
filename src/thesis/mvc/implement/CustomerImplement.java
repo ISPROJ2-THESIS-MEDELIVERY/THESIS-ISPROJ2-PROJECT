@@ -21,7 +21,7 @@ public class CustomerImplement implements CustomerDAO{
 	}
 
 	@Override
-	public void addCustomer(Customer customer) {
+	public int addCustomer(Customer customer) {
 		try(PreparedStatement stmt = conn.prepareStatement(""
         		+ "INSERT INTO Customer "
         		+ "(UserID, CustomerName, Address, Email, IsSeniorCitizen, SeniorCitizenID, ContactNumber) " 
@@ -33,10 +33,12 @@ public class CustomerImplement implements CustomerDAO{
 			stmt.setBoolean( 5, customer.isIsSeniorCitizen() );
 			stmt.setString( 6, customer.getSeniorCitizenID() );
 			stmt.setInt( 7, customer.getContactNumber() );
-			stmt.executeUpdate();
+			int NewID = stmt.executeUpdate();
 			stmt.close();
+			return NewID;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		}
 		
 	}

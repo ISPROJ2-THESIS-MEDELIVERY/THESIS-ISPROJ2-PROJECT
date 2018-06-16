@@ -21,17 +21,19 @@ public class DriverImplement implements DriverDAO {
 	}
 
 	@Override
-	public void addDriver(Driver driver) {
+	public int addDriver(Driver driver) {
 		try {
 			String query = "INSERT INTO Driver (DriverName, DriverAddress, DriverContactNumber) VALUES (?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setString( 1, driver.getDriverName() );
 			preparedStatement.setString( 2, driver.getDriverAddress() );
 			preparedStatement.setString( 3, driver.getDriverContactNumber() );
-			preparedStatement.executeUpdate();
+			int NewID = preparedStatement.executeUpdate();
 			preparedStatement.close();
+			return NewID;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		} 
 		
 	}

@@ -21,16 +21,18 @@ public class AuditImplement implements AuditDAO{
 	}
 
 	@Override
-	public void addAudit(Audit audit) {
+	public int addAudit(Audit audit) {
 		try (PreparedStatement stmt = conn.prepareStatement( "INSERT INTO Audit (UserID, LogType, Timestamp, ActionTaken) VALUES (?,?,?,?)" );){
 			stmt.setInt( 1, audit.getUserID() );
 			stmt.setString( 2, audit.getLogType() );
 			stmt.setDate( 3, audit.getTimestamp() );
 			stmt.setString( 4, audit.getActionTaken() );
-			stmt.executeUpdate();
+			int NewID = stmt.executeUpdate();
 			stmt.close();
+			return NewID;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		}
 		
 	}

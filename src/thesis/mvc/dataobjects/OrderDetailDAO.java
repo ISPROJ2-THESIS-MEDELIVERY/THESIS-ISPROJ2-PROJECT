@@ -5,7 +5,7 @@ import java.util.List;
 import thesis.mvc.model.OrderDetail;
 
 public interface OrderDetailDAO {
-	public void addOrderDetail ( OrderDetail orderDetail );
+	public int addOrderDetail ( OrderDetail orderDetail );
 	public void deleteOrderDetail ( int orderDetailId );
 	public void updateOrderDetail ( OrderDetail orderDetail );
 	public List<OrderDetail> getOrderDetail();

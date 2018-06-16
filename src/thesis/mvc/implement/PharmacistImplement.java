@@ -21,7 +21,7 @@ public class PharmacistImplement implements PharmacistDAO{
 	}
 
 	@Override
-	public void addPharmacist(Pharmacist pharmacist) {
+	public int addPharmacist(Pharmacist pharmacist) {
 		try {
 			String query = "INSERT INTO Pharmacist (UserID, BranchID, FirstName, LastName, PRCNo, Position) VALUES (?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
@@ -31,10 +31,12 @@ public class PharmacistImplement implements PharmacistDAO{
 			preparedStatement.setString( 4, pharmacist.getLastName() );
 			preparedStatement.setInt( 5, pharmacist.getPRCNo() );
 			preparedStatement.setString( 6, pharmacist.getPosition() );
-			preparedStatement.executeUpdate();
+			int NewID = preparedStatement.executeUpdate();
 			preparedStatement.close();
+			return NewID;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		} 
 		
 	}

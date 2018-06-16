@@ -22,7 +22,7 @@ public class DispatcherImplement implements DispatcherDAO{
 		
 
 	@Override
-	public void addDispatcher(Dispatcher dispatcher) {
+	public int addDispatcher(Dispatcher dispatcher) {
 		try {
 			String query = "INSERT INTO Dispatcher (CourierServiceID, UserID, FirstName, LastName, ContactNumber, Address, Birthdate) VALUES (?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
@@ -33,10 +33,12 @@ public class DispatcherImplement implements DispatcherDAO{
 			preparedStatement.setInt( 5, dispatcher.getContactNumber() );
 			preparedStatement.setString( 6, dispatcher.getAddress() );
 			preparedStatement.setDate( 7, dispatcher.getBirthdate() );
-			preparedStatement.executeUpdate();
+			int NewID = preparedStatement.executeUpdate();
 			preparedStatement.close();
+			return NewID;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		} 
 		
 	}

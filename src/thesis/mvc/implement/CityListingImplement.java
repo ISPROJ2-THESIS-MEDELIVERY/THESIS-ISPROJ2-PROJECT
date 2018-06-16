@@ -21,16 +21,18 @@ public class CityListingImplement implements CityListingDAO{
 	}
 
 	@Override
-	public void addCityListing(CityListing cityListing) {
+	public int addCityListing(CityListing cityListing) {
 		try {
 		String query = "INSERT INTO CityListing (CityName, CityCost) VALUES (?,?)";
 		PreparedStatement preparedStatement = conn.prepareStatement( query );
 		preparedStatement.setString( 1, cityListing.getCityName() );
 		preparedStatement.setBigDecimal( 2, cityListing.getCityCost() );
-		preparedStatement.executeUpdate();
+		int NewID = preparedStatement.executeUpdate();
 		preparedStatement.close();
+		return NewID;
 	} catch (SQLException e) {
 		e.printStackTrace();
+		return 0;
 	} 
 		
 	}

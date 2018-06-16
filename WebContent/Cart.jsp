@@ -120,7 +120,9 @@
             <div class="col float-left" style="width:270px;"><label class="col-form-label">Total:</label><label class="col-form-label float-right">PXXX.00</label></div>
         </div>
         <div class="form-group float-left" style="width:958px;">
-            <div class="col float-left"><button class="btn btn-primary float-left" type="submit" style="padding:19px;font-size:25px;background-color:#2779a3;">Checkout</button></div>
+        	<form action="PurchaseController" method="post">
+            	<div class="col float-left"><button class="btn btn-primary float-left" type="submit" style="padding:19px;font-size:25px;background-color:#2779a3;" name="Action" value="Checkout">Checkout</button></div>
+        	</form>
         </div>
     </div>
     <div class="footer-basic">

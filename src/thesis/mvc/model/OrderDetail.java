@@ -8,7 +8,6 @@ public class OrderDetail {
 	private int Quantity;
 	private double CostPerUnit;
 	private double TotalCost;
-	private double ActualCost;
 	
 	public int getOrderDetailsID() {
 		return OrderDetailsID;
@@ -46,13 +45,6 @@ public class OrderDetail {
 	public void setTotalCost(double totalCost) {
 		TotalCost = totalCost;
 	}
-	public double getActualCost() {
-		return ActualCost;
-	}
-	public void setActualCost(double actualCost) {
-		ActualCost = actualCost;
-	}
-	
 	
 
 }

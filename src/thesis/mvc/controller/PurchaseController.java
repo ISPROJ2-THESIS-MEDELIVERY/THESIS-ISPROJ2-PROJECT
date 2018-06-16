@@ -130,8 +130,8 @@ public class PurchaseController extends HttpServlet {
 				session.setAttribute("CartDetails", OrderDetails );
 				*/
 				//Refreshes and goes back to the cart
-				//forward = "/cart.jsp";
-				forward = "/A-test-customerpurchasecheckout.jsp";
+				forward = "/Cart.jsp";
+				//forward = "/A-test-customerpurchasecheckout.jsp";
 			} else {
 				//ProductID & Quantity & Cost per unit
 				ProductID = Integer.valueOf( request.getParameter( "ProductID" ) );
@@ -148,18 +148,39 @@ public class PurchaseController extends HttpServlet {
 				OrderDetails.add( orderDetail );
 				session.setAttribute("OrderDetails", OrderDetails );
 				
+				//Insert things into cartDetails
+				ProductImplement productImplement = new ProductImplement();
+				Product product = new Product();
+				product = productImplement.getProductById(orderDetail.getProductID());
+				
+				List<CartList> cartlists = (List<CartList>) session.getAttribute("CartList");
+				CartList cartlist = purchaseAction.new CartList();
+				cartlist.setName(product.getProductName());
+				cartlist.setDescription(product.getProductDescription());
+				cartlist.setImage(product.getProductImage());
+				cartlist.setSize(product.getProductPackaging());
+				cartlist.setPrescription(product.isRXProduct());
+				cartlist.setQuantity(orderDetail.getQuantity());
+				cartlist.setUnitCost(orderDetail.getCostPerUnit());
+				cartlist.setTotalCost(orderDetail.getTotalCost());
+				cartlists.add(cartlist);
+				session.setAttribute("CartList", cartlists );
+				
 				//Refreshes and goes back to the cart
-				//forward = "/cart.jsp";
-				forward = "/A-test-customerpurchasecheckout.jsp";
+				forward = "/Cart.jsp";
+				//forward = "/A-test-customerpurchasecheckout.jsp";
 			}
 			
 			
 		} else if (action.equalsIgnoreCase("Checkout")) {
 			Order order = (Order) session.getAttribute("order");
+			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
+			
+			
+			order.setActualCost( 123.00 );
 			//order.setOrderAddress( request.getParameter( "orderAddress" ) );
 			//order.setPaymentMethod( request.getParameter( "orderPayment" ) );
 			//order.setDateOrdered(today);
-			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
 			
 			if ( order != null || !OrderDetails.isEmpty()) {
 				purchaseAction.purchaseOrder(order, OrderDetails);
@@ -169,9 +190,6 @@ public class PurchaseController extends HttpServlet {
 				session.removeAttribute("OrderDetails");
 			}
 			
-			forward = "/A-test-customerpurchasecheckout.jsp";
-		} else if (action.equalsIgnoreCase("Verify")) {
-
 			forward = "/A-test-customerpurchasecheckout.jsp";
 		} else {
 

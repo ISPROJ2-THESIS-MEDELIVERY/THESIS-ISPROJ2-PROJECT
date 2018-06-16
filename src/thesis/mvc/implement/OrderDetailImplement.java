@@ -23,14 +23,13 @@ public class OrderDetailImplement implements OrderDetailDAO {
 	@Override
 	public void addOrderDetail(OrderDetail orderDetail) {
 		try {
-			String query = "INSERT INTO OrderDetail (OrderID, ProductID, Quantity, CostPerUnit, TotalCost, ActualCost,) VALUES (?,?,?,?,?,?)";
+			String query = "INSERT INTO OrderDetail (OrderID, ProductID, Quantity, CostPerUnit, TotalCost, ActualCost) VALUES (?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, orderDetail.getOrderID() );
 			preparedStatement.setInt( 2, orderDetail.getProductID() );
 			preparedStatement.setInt( 3, orderDetail.getQuantity() );
 			preparedStatement.setDouble( 4, orderDetail.getCostPerUnit() );
 			preparedStatement.setDouble( 5, orderDetail.getTotalCost() );
-			preparedStatement.setDouble( 6, orderDetail.getActualCost() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
@@ -56,15 +55,14 @@ public class OrderDetailImplement implements OrderDetailDAO {
 	@Override
 	public void updateOrderDetail(OrderDetail orderDetail) {
 		try {
-			String query = "UPDATE OrderDetail SET OrderID=?, ProductID=?, Quantity=?, CostPerUnit=?, TotalCost=?, ActualCost=? WHERE OrderDetailsID=?";
+			String query = "UPDATE OrderDetail SET OrderID=?, ProductID=?, Quantity=?, CostPerUnit=?, TotalCost=? WHERE OrderDetailsID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, orderDetail.getOrderID() );
 			preparedStatement.setInt( 2, orderDetail.getProductID() );
 			preparedStatement.setInt( 3, orderDetail.getQuantity() );
 			preparedStatement.setDouble( 4, orderDetail.getCostPerUnit() );
 			preparedStatement.setDouble( 5, orderDetail.getTotalCost() );
-			preparedStatement.setDouble( 6, orderDetail.getActualCost() );
-			preparedStatement.setInt( 7, orderDetail.getOrderDetailsID() );
+			preparedStatement.setInt( 6, orderDetail.getOrderDetailsID() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
@@ -87,7 +85,6 @@ public class OrderDetailImplement implements OrderDetailDAO {
 				orderDetail.setQuantity( resultSet.getInt( "Quantity" ) );
 				orderDetail.setCostPerUnit( resultSet.getDouble( "CostPerUnit" ) );
 				orderDetail.setTotalCost( resultSet.getDouble( "TotalCost" ) );
-				orderDetail.setActualCost( resultSet.getDouble( "ActualCost" ) );
 				orderDetails.add(orderDetail);
 			}
 			resultSet.close();
@@ -113,7 +110,6 @@ public class OrderDetailImplement implements OrderDetailDAO {
 				orderDetail.setQuantity( resultSet.getInt( "Quantity" ) );
 				orderDetail.setCostPerUnit( resultSet.getDouble( "CostPerUnit" ) );
 				orderDetail.setTotalCost( resultSet.getDouble( "TotalCost" ) );
-				orderDetail.setActualCost( resultSet.getDouble( "ActualCost" ) );
 			}
 			resultSet.close();
 			preparedStatement.close();

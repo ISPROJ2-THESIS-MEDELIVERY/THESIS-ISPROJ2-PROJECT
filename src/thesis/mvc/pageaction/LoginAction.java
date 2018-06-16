@@ -35,7 +35,7 @@ public class LoginAction {
             		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
                     Audit audit = new Audit();
                     audit.setUserID(rs.getInt(1));
-                    audit.setLogType("CustReg");
+                    audit.setLogType("Login");
                     audit.setTimestamp(CurrentDate);
                     audit.setActionTaken("User ID " + rs.getInt(1) + " With the username " + Username + " Logged in.");
                     AuditImplement AuditImp = new AuditImplement();
@@ -53,6 +53,17 @@ public class LoginAction {
     	
     }
 
+    public void logoutUser(int UserID, String Username) {
+		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+		Audit audit = new Audit();
+		audit.setUserID(UserID);
+		audit.setLogType("Logout");
+		audit.setTimestamp(CurrentDate);
+		audit.setActionTaken("User ID " + UserID + " With the username " + Username + " Logged out.");
+		AuditImplement AuditImp = new AuditImplement();
+		AuditImp.addAudit(audit);
+    	
+    }
 
 	public int checkUserType(int loginID) {
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Customer WHERE UserID = ?")) {

@@ -84,18 +84,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                	<c:forEach items="${cartlists}" var="details">
-	                    <tr>
-	                        <td><c:out value="${details.Name}" /></td>
-	                        <td><c:out value="${details.Description}" /></td>
-	                        <td><c:out value="${details.Image}" /></td>
-	                        <td><c:out value="${details.Size}" /></td>
-	                        <td><c:out value="${details.Prescription}" /></td>
-	                        <td><c:out value="${details.Quantity}" /></td>
-	                        <td><c:out value="${details.UnitCost}" /></td>
-	                        <td><c:out value="${details.totalCost}" /></td>
-	                    </tr>
-                    </c:forEach>
+                	<c:forEach items="${CartList}" var="cartdetails">
+			            <tr>
+			                <td><c:out value="${cartdetails.name}" /></td>
+			                <td><c:out value="${cartdetails.description}" /></td>
+			                <td><img src="data:image/jpeg;base64,<c:out value="${cartdetails.image}" />" /></td>
+			                <td><c:out value="${cartdetails.size}" /></td>
+			                <td><c:out value="${cartdetails.prescription}" /></td>
+			                <td><c:out value="${cartdetails.quantity}" /></td>
+			                <td><c:out value="${cartdetails.unitCost}" /></td>
+			                <td><c:out value="${cartdetails.totalCost}" /></td>
+			            </tr>
+					</c:forEach>
                 </tbody>
             </table>
         </div>

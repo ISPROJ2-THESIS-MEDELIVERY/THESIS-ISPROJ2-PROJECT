@@ -26,7 +26,7 @@ public class OrderImplement implements OrderDAO{
 	public void addOrder(Order order) {
 		try {
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-			String query = "INSERT INTO `order` (CustomerID, DeliveryID, PharmacistID, CityID, PrescriptionID, OrderAddress, DateOrdered, DateProcessed, DateDelivered, OrderType, OrderStatus, SeniorDiscount, PaymentMethod) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String query = "INSERT INTO `order` (CustomerID, DeliveryID, PharmacistID, CityID, PrescriptionID, OrderAddress, DateOrdered, DateProcessed, DateDelivered, OrderType, OrderStatus, SeniorDiscount, PaymentMethod, ActualCost) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, order.getCustomerID() );
 			preparedStatement.setInt( 2, order.getDeliveryID() );
@@ -41,6 +41,7 @@ public class OrderImplement implements OrderDAO{
 			preparedStatement.setString( 11, order.getOrderStatus() );
 			preparedStatement.setBoolean( 12, order.getSeniorDiscount() );
 			preparedStatement.setString( 13, order.getPaymentMethod() );
+			preparedStatement.setDouble(14, order.getActualCost() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
@@ -67,7 +68,7 @@ public class OrderImplement implements OrderDAO{
 	@Override
 	public void updateOrder(Order order) {
 		try {
-			String query = "UPDATE `order` SET CustomerID=?, DeliveryID=?, PharmacistID=?, CityID=?, PrescriptionID=?, OrderAddress=?, DateOrdered=?, DateProcessed=?, DateDelivered=?, OrderType=?, OrderStatus=?, SeniorDiscount=?, PaymentMethod=? WHERE OrderID=?";
+			String query = "UPDATE `order` SET CustomerID=?, DeliveryID=?, PharmacistID=?, CityID=?, PrescriptionID=?, OrderAddress=?, DateOrdered=?, DateProcessed=?, DateDelivered=?, OrderType=?, OrderStatus=?, SeniorDiscount=?, PaymentMethod=?, ActualCost=? WHERE OrderID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, order.getCustomerID() );
 			preparedStatement.setInt( 2, order.getDeliveryID() );
@@ -81,7 +82,8 @@ public class OrderImplement implements OrderDAO{
 			preparedStatement.setString( 10, order.getOrderStatus() );
 			preparedStatement.setBoolean( 11, order.getSeniorDiscount() );
 			preparedStatement.setString( 12, order.getPaymentMethod() );
-			preparedStatement.setInt( 13, order.getOrderID() );
+			preparedStatement.setDouble(13, order.getActualCost() );
+			preparedStatement.setInt( 14, order.getOrderID() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
@@ -112,6 +114,7 @@ public class OrderImplement implements OrderDAO{
 				order.setOrderStatus( resultSet.getString( "OrderStatus" ) );
 				order.setSeniorDiscount( resultSet.getBoolean( "SeniorDiscount" ) );
 				order.setPaymentMethod( resultSet.getString( "PaymentMethod" ) );
+				order.setActualCost( resultSet.getDouble( "ActualCost" ) );
 				orders.add(order);
 			}
 			resultSet.close();
@@ -145,6 +148,7 @@ public class OrderImplement implements OrderDAO{
 				order.setOrderStatus( resultSet.getString( "OrderStatus" ) );
 				order.setSeniorDiscount( resultSet.getBoolean( "SeniorDiscount" ) );
 				order.setPaymentMethod( resultSet.getString( "PaymentMethod" ) );
+				order.setActualCost( resultSet.getDouble( "ActualCost" ) );
 			}
 			resultSet.close();
 			preparedStatement.close();

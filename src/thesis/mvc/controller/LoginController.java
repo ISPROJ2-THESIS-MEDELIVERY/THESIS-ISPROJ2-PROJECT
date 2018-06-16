@@ -40,6 +40,8 @@ public class LoginController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		if ((int) session.getAttribute("userID") > 0) {
+			LoginAction loginAction = new LoginAction();
+			loginAction.logoutUser((int)session.getAttribute("userID"), (String)session.getAttribute("username"));
 			session.removeAttribute("userID");
 			session.removeAttribute("username");
 			session.removeAttribute("userAccess");

@@ -17,6 +17,8 @@ public class Order {
 	private String OrderStatus;
 	private Boolean SeniorDiscount;
 	private String PaymentMethod;
+	private double ActualCost;
+	
 	public int getOrderID() {
 		return OrderID;
 	}
@@ -101,7 +103,11 @@ public class Order {
 	public void setPaymentMethod(String paymentMethod) {
 		PaymentMethod = paymentMethod;
 	}
-
-	
+	public double getActualCost() {
+		return ActualCost;
+	}
+	public void setActualCost(double actualCost) {
+		ActualCost = actualCost;
+	}
 	
 }

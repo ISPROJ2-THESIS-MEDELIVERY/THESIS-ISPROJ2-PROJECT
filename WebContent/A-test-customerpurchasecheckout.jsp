@@ -51,7 +51,8 @@
 	            <tr>
 	                <td><c:out value="${cartdetails.name}" /></td>
 	                <td><c:out value="${cartdetails.description}" /></td>
-	                <td><img src="data:image/jpeg;base64,${cartdetails.image}" /></td>
+	                <td>IMAGE HERE</td>
+	                <!-- <td><img src="data:image/jpeg;base64,${cartdetails.image}" /></td>  -->
 	                <td><c:out value="${cartdetails.size}" /></td>
 	                <td><c:out value="${cartdetails.prescription}" /></td>
 	                <td><c:out value="${cartdetails.quantity}" /></td>

@@ -166,16 +166,16 @@ public class PurchaseController extends HttpServlet {
 			
 		} else if (action.equalsIgnoreCase("Checkout")) {
 			
-			Order order = (Order) session.getAttribute("order");
+			Order order = (Order) session.getAttribute("Order");
 			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
 			List<CartList> cartList = (List<CartList>) session.getAttribute("CartList");
 			boolean checker = purchaseAction.purchaseOrder(order, OrderDetails);
-			if(order == null ||OrderDetails.isEmpty() || !checker) {
+			if(order == null || OrderDetails.isEmpty() || !checker) {
 				forward = "/index.jsp"; //or an error page
 			} else {
 				session.setAttribute("orderReciept", order);
 				session.setAttribute("CartlistReciept", cartList);
-				session.removeAttribute("order");
+				session.removeAttribute("Order");
 				session.removeAttribute("OrderDetails");
 				session.removeAttribute("CartList");
 				forward = "/A-test-customerpurchasecheckout.jsp";

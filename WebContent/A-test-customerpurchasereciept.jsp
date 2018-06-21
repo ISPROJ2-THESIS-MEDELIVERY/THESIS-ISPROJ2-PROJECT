@@ -8,6 +8,39 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<div class="col">
+        <div class="table-responsive">
+            <table class="table">
+            	
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Item Description</th>
+                        <th>Image</th>
+                        <th>Size</th>
+                        <th>Prescription Required</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Total Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                	<c:forEach items="${CartListReciept}" var="cartdetails">
+			            <tr>
+			                <td><c:out value="${cartdetails.name}" /></td>
+			                <td><c:out value="${cartdetails.description}" /></td>
+			                <td></td>
+			                <!-- <td><img src="data:image/jpeg;base64,<c:out value="${cartdetails.image}" />" /></td> -->
+			                <td><c:out value="${cartdetails.size}" /></td>
+			                <td><c:out value="${cartdetails.prescription}" /></td>
+			                <td><c:out value="${cartdetails.quantity}" /></td>
+			                <td><c:out value="${cartdetails.unitCost}" /></td>
+			                <td><c:out value="${cartdetails.totalCost}" /></td>
+			            </tr>
+					</c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>

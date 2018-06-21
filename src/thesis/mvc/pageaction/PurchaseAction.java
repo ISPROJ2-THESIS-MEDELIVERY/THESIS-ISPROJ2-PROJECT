@@ -134,10 +134,12 @@ public class PurchaseAction {
 				
 				//Check if the quantity of each item in the order is less than the limit
 				try(ResultSet rs = stmt.executeQuery()){
-					limit = rs.getInt("CounterLimit");
-					rx = rs.getBoolean("isRXProduct");
-					if (orderDetail.getQuantity() > limit || rx == true) {
-						return false;
+					if (rs.next()) {
+						limit = rs.getInt("CounterLimit");
+						rx = rs.getBoolean("isRXProduct");
+						if (orderDetail.getQuantity() > limit || rx == true) {
+							return false;
+						}
 					}
 				}
 				
@@ -149,14 +151,16 @@ public class PurchaseAction {
 		
 		//Get the city of the customer & senior status
 		int CityCustomer = 0;
-		boolean SeniorStatus;
-		String CustoAddress;
+		boolean SeniorStatus = false;
+		String CustoAddress = null;
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM customer WHERE CustomerID = ?")) {
             stmt.setInt(1, order.getCustomerID());
             try(ResultSet rs = stmt.executeQuery()) {
-            	CityCustomer = rs.getInt("CityID");
-				SeniorStatus = rs.getBoolean("IsSeniorCitizen");
-				CustoAddress = rs.getString("Address");
+				if (rs.next()) {
+	            	CityCustomer = rs.getInt("CityID");
+					SeniorStatus = rs.getBoolean("IsSeniorCitizen");
+					CustoAddress = rs.getString("Address");
+				}
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -168,7 +172,9 @@ public class PurchaseAction {
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM branch WHERE CityID = ?")) {
 			stmt.setInt(1, CityCustomer);
 			try(ResultSet rs = stmt.executeQuery()){
-				CityPharmacy = rs.getInt("CityID");
+				if (rs.next()) {
+					CityPharmacy = rs.getInt("CityID");
+				}
 			}
 		} catch (SQLException e){
 			e.printStackTrace();
@@ -180,11 +186,11 @@ public class PurchaseAction {
 		//Check if city is equal or not
 		Double DeliveryCost;
 		if (CityCustomer == CityPharmacy) {
-			order.setOrderType("Intercity Delivery");
+			order.setOrderType("Intercity Regular");
 			DeliveryCost = 50.0;
 			
 		} else {
-			order.setOrderType("Intracity Delivery");
+			order.setOrderType("Intracity Regular");
 			DeliveryCost = 100.0;
 		}
 		
@@ -206,6 +212,9 @@ public class PurchaseAction {
 			return false;
 		}
 		*/
+		
+		
+		//ORGANIZE THIS TO RUN PROPERLY AND ESURE TAHT EVERYTHING NEEDED IS HERE
 		//Add delivery cost and Input order detail
 		Double actualcost = 0.0;
 		OrderDetailImplement OrderDet = new OrderDetailImplement();  

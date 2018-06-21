@@ -23,7 +23,7 @@ public class OrderDetailImplement implements OrderDetailDAO {
 	@Override
 	public int addOrderDetail(OrderDetail orderDetail) {
 		try {
-			String query = "INSERT INTO OrderDetail (OrderID, ProductID, Quantity, CostPerUnit, TotalCost, ActualCost) VALUES (?,?,?,?,?)";
+			String query = "INSERT INTO OrderDetail (OrderID, ProductID, Quantity, CostPerUnit, TotalCost) VALUES (?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, orderDetail.getOrderID() );
 			preparedStatement.setInt( 2, orderDetail.getProductID() );

@@ -91,8 +91,6 @@ public class PurchaseController extends HttpServlet {
 				boolean SID = customer.isIsSeniorCitizen();
 				int CID = customer.getCityID();
 				
-				//HELLO PEOPLE
-				//order.setSeniorDiscount( session.getAttribute("seniorStatus") );
 				order = purchaseAction.setInitalOrder(UID, ADD, SID, CID);
 				session.setAttribute("Order", order );
 				

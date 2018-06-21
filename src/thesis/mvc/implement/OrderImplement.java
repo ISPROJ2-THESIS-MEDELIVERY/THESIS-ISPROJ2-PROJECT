@@ -26,22 +26,23 @@ public class OrderImplement implements OrderDAO{
 	public int addOrder(Order order) {
 		try {
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-			String query = "INSERT INTO `order` (CustomerID, DeliveryID, PharmacistID, CityID, PrescriptionID, OrderAddress, DateOrdered, DateProcessed, DateDelivered, OrderType, OrderStatus, SeniorDiscount, PaymentMethod, ActualCost) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String query = "INSERT INTO `order` (CustomerID, DeliveryID, PharmacistID, BranchID, CityID, PrescriptionID, OrderAddress, DateOrdered, DateProcessed, DateDelivered, OrderType, OrderStatus, SeniorDiscount, PaymentMethod, ActualCost) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, order.getCustomerID() );
 			preparedStatement.setInt( 2, order.getDeliveryID() );
 			preparedStatement.setInt( 3, order.getPharmacistID() );
-			preparedStatement.setInt( 4, order.getCityID() );
-			preparedStatement.setInt( 5, order.getPrescriptionID() );
-			preparedStatement.setString( 6, order.getOrderAddress() );
-			preparedStatement.setDate( 7, CurrentDate );
-			preparedStatement.setDate( 8, order.getDateProcessed() );
-			preparedStatement.setDate( 9, order.getDateDelivered() );
-			preparedStatement.setString( 10, order.getOrderType() );
-			preparedStatement.setString( 11, order.getOrderStatus() );
-			preparedStatement.setBoolean( 12, order.getSeniorDiscount() );
-			preparedStatement.setString( 13, order.getPaymentMethod() );
-			preparedStatement.setDouble(14, order.getActualCost() );
+			preparedStatement.setInt( 4, order.getBranchID() );
+			preparedStatement.setInt( 5, order.getCityID() );
+			preparedStatement.setInt( 6, order.getPrescriptionID() );
+			preparedStatement.setString( 7, order.getOrderAddress() );
+			preparedStatement.setDate( 8, CurrentDate );
+			preparedStatement.setDate( 9, order.getDateProcessed() );
+			preparedStatement.setDate( 10, order.getDateDelivered() );
+			preparedStatement.setString( 11, order.getOrderType() );
+			preparedStatement.setString( 12, order.getOrderStatus() );
+			preparedStatement.setBoolean( 13, order.getSeniorDiscount() );
+			preparedStatement.setString( 14, order.getPaymentMethod() );
+			preparedStatement.setDouble(15, order.getActualCost() );
 			int NewID = preparedStatement.executeUpdate();
 			preparedStatement.close();
 			return NewID;
@@ -67,22 +68,23 @@ public class OrderImplement implements OrderDAO{
 	@Override
 	public void updateOrder(Order order) {
 		try {
-			String query = "UPDATE `order` SET CustomerID=?, DeliveryID=?, PharmacistID=?, CityID=?, PrescriptionID=?, OrderAddress=?, DateOrdered=?, DateProcessed=?, DateDelivered=?, OrderType=?, OrderStatus=?, SeniorDiscount=?, PaymentMethod=?, ActualCost=? WHERE OrderID=?";
+			String query = "UPDATE `order` SET CustomerID=?, DeliveryID=?, PharmacistID=?, CityID=?, BranchID-?, PrescriptionID=?, OrderAddress=?, DateOrdered=?, DateProcessed=?, DateDelivered=?, OrderType=?, OrderStatus=?, SeniorDiscount=?, PaymentMethod=?, ActualCost=? WHERE OrderID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, order.getCustomerID() );
 			preparedStatement.setInt( 2, order.getDeliveryID() );
 			preparedStatement.setInt( 3, order.getPharmacistID() );
 			preparedStatement.setInt( 4, order.getCityID() );
-			preparedStatement.setInt( 5, order.getPrescriptionID() );
-			preparedStatement.setString( 6, order.getOrderAddress() );
-			preparedStatement.setDate( 7, order.getDateProcessed() );
-			preparedStatement.setDate( 8, order.getDateDelivered() );
-			preparedStatement.setString( 9, order.getOrderType() );
-			preparedStatement.setString( 10, order.getOrderStatus() );
-			preparedStatement.setBoolean( 11, order.getSeniorDiscount() );
-			preparedStatement.setString( 12, order.getPaymentMethod() );
-			preparedStatement.setDouble(13, order.getActualCost() );
-			preparedStatement.setInt( 14, order.getOrderID() );
+			preparedStatement.setInt( 5, order.getBranchID() );
+			preparedStatement.setInt( 6, order.getPrescriptionID() );
+			preparedStatement.setString( 7, order.getOrderAddress() );
+			preparedStatement.setDate( 8, order.getDateProcessed() );
+			preparedStatement.setDate( 9, order.getDateDelivered() );
+			preparedStatement.setString( 10, order.getOrderType() );
+			preparedStatement.setString( 11, order.getOrderStatus() );
+			preparedStatement.setBoolean( 12, order.getSeniorDiscount() );
+			preparedStatement.setString( 13, order.getPaymentMethod() );
+			preparedStatement.setDouble(14, order.getActualCost() );
+			preparedStatement.setInt( 15, order.getOrderID() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
@@ -103,6 +105,7 @@ public class OrderImplement implements OrderDAO{
 				order.setDeliveryID( resultSet.getInt( "DeliveryID" ) );
 				order.setPharmacistID( resultSet.getInt( "PharmacistID" ) );
 				order.setCityID( resultSet.getInt( "CityID" ) );
+				order.setBranchID( resultSet.getInt( "BranchID" ));
 				order.setPrescriptionID( resultSet.getInt( "PrescriptionID" ) );
 				order.setOrderAddress( resultSet.getString( "OrderAddress" ) );
 				order.setDateOrdered( resultSet.getDate( "DateOrdered" ) );
@@ -137,6 +140,7 @@ public class OrderImplement implements OrderDAO{
 				order.setDeliveryID( resultSet.getInt( "DeliveryID" ) );
 				order.setPharmacistID( resultSet.getInt( "PharmacistID" ) );
 				order.setCityID( resultSet.getInt( "CityID" ) );
+				order.setBranchID( resultSet.getInt( "BranchID" ));
 				order.setPrescriptionID( resultSet.getInt( "PrescriptionID" ) );
 				order.setOrderAddress( resultSet.getString( "OrderAddress" ) );
 				order.setDateOrdered( resultSet.getDate( "DateOrdered" ) );

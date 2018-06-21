@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2018 at 04:14 PM
+-- Generation Time: Jun 22, 2018 at 12:22 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -319,10 +319,11 @@ CREATE TABLE `order` (
   `CustomerID` int(11) NOT NULL,
   `DeliveryID` int(11) DEFAULT NULL,
   `PharmacistID` int(11) DEFAULT NULL,
+  `BranchID` int(11) NOT NULL,
   `CityID` int(11) NOT NULL,
   `PrescriptionID` int(11) DEFAULT NULL,
   `OrderAddress` varchar(100) NOT NULL,
-  `DateOrdered` datetime NOT NULL,
+  `DateOrdered` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `DateProcessed` datetime DEFAULT NULL,
   `DateDelivered` datetime DEFAULT NULL,
   `OrderType` varchar(25) NOT NULL,
@@ -336,11 +337,20 @@ CREATE TABLE `order` (
 -- Dumping data for table `order`
 --
 
-INSERT INTO `order` (`OrderID`, `CustomerID`, `DeliveryID`, `PharmacistID`, `CityID`, `PrescriptionID`, `OrderAddress`, `DateOrdered`, `DateProcessed`, `DateDelivered`, `OrderType`, `OrderStatus`, `SeniorDiscount`, `PaymentMethod`, `ActualCost`) VALUES
-(1, 2, 1, 1, 1, 1, 'Muntinlupa City', '2018-02-24 16:30:24', '2018-03-10 00:00:00', '2018-02-24 19:31:43', 'Intercity Prescription', 'CANCELLED', b'1', 'Cash', '0.00'),
-(2, 2, 2, 2, 2, 2, 'Caloocan City', '2018-02-24 16:30:24', '2018-03-10 00:00:00', '2018-02-24 19:31:43', 'Intercity Regular', 'APPROVED', b'1', 'Credit Card', '0.00'),
-(3, 3, 3, 3, 3, 3, 'Makati City', '2018-02-24 16:30:24', '2018-04-22 00:00:00', '2018-02-24 19:31:43', 'Intracity Prescription', 'APPROVED', b'1', 'Cash', '0.00'),
-(4, 4, 4, 4, 4, 4, 'MArikina City', '2018-02-24 16:30:24', '2018-03-01 16:30:24', '2018-02-24 19:31:43', 'Intracity Regular', 'PENDING', b'1', 'Credit Card', '0.00');
+INSERT INTO `order` (`OrderID`, `CustomerID`, `DeliveryID`, `PharmacistID`, `BranchID`, `CityID`, `PrescriptionID`, `OrderAddress`, `DateOrdered`, `DateProcessed`, `DateDelivered`, `OrderType`, `OrderStatus`, `SeniorDiscount`, `PaymentMethod`, `ActualCost`) VALUES
+(1, 2, 1, 1, 1, 1, 1, 'Muntinlupa City', '2018-02-24 16:30:24', '2018-03-10 00:00:00', '2018-02-24 19:31:43', 'Intercity Prescription', 'CANCELLED', b'1', 'Cash', '0.00'),
+(2, 2, 2, 2, 1, 2, 2, 'Caloocan City', '2018-02-24 16:30:24', '2018-03-10 00:00:00', '2018-02-24 19:31:43', 'Intercity Regular', 'APPROVED', b'1', 'Credit Card', '0.00'),
+(3, 3, 3, 3, 1, 3, 3, 'Makati City', '2018-02-24 16:30:24', '2018-04-22 00:00:00', '2018-02-24 19:31:43', 'Intracity Prescription', 'APPROVED', b'1', 'Cash', '0.00'),
+(4, 4, 4, 4, 1, 4, 4, 'MArikina City', '2018-02-24 16:30:24', '2018-03-01 16:30:24', '2018-02-24 19:31:43', 'Intracity Regular', 'PENDING', b'1', 'Credit Card', '0.00'),
+(15, 2, NULL, NULL, 1, 1, NULL, 'test', '2018-06-21 23:33:43', NULL, NULL, 'testing', 'PENDING', b'0', NULL, '0.00'),
+(17, 4, NULL, NULL, 1, 3, NULL, 'yui', '2018-06-22 00:00:00', NULL, NULL, 'Intercity Regular', 'PENDING', b'1', NULL, '350.00'),
+(18, 4, NULL, NULL, 1, 3, NULL, 'yui', '2018-06-22 00:00:00', NULL, NULL, 'Intercity Regular', 'PENDING', b'1', NULL, '450.00'),
+(19, 4, NULL, NULL, 1, 3, NULL, 'yui', '2018-06-22 00:00:00', NULL, NULL, 'Intercity Regular', 'PENDING', b'1', NULL, '974.00'),
+(20, 4, NULL, NULL, 1, 3, NULL, 'yui', '2018-06-22 00:00:00', NULL, NULL, 'Intercity Regular', 'PENDING', b'1', NULL, '317.00'),
+(21, 4, NULL, NULL, 1, 3, NULL, 'yui', '2018-06-22 00:00:00', NULL, NULL, 'Intercity Regular', 'PENDING', b'1', NULL, '406.00'),
+(22, 4, NULL, NULL, 1, 3, NULL, 'yui', '2018-06-22 00:00:00', NULL, NULL, 'Intercity Regular', 'PENDING', b'1', NULL, '181.00'),
+(23, 4, NULL, NULL, 1, 3, NULL, 'yui', '2018-06-22 00:00:00', NULL, NULL, 'Intercity Regular', 'PENDING', b'1', NULL, '965.63'),
+(24, 4, NULL, NULL, 1, 3, NULL, 'yui', '2018-06-22 00:00:00', NULL, NULL, 'Intercity Regular', 'PENDING', b'1', NULL, '171.00');
 
 -- --------------------------------------------------------
 
@@ -365,7 +375,15 @@ INSERT INTO `orderdetail` (`OrderDetailsID`, `OrderID`, `ProductID`, `Quantity`,
 (1, 1, 1, 3, '50.00', '150.00'),
 (2, 2, 2, 4, '42.00', '168.00'),
 (3, 3, 3, 5, '65.00', '325.00'),
-(4, 4, 4, 2, '70.00', '140.00');
+(4, 4, 4, 2, '70.00', '140.00'),
+(16, 1, 1, 3, '100.00', '300.00'),
+(17, 1, 1, 4, '100.00', '400.00'),
+(18, 1, 5, 4, '231.23', '924.00'),
+(22, 22, 4, 3, '43.90', '131.00'),
+(23, 23, 1, 1, '100.00', '100.00'),
+(24, 23, 3, 1, '121.94', '121.94'),
+(25, 23, 5, 3, '231.23', '693.69'),
+(29, 24, 3, 1, '121.94', '121.00');
 
 -- --------------------------------------------------------
 
@@ -701,13 +719,13 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `orderdetail`
 --
 ALTER TABLE `orderdetail`
-  MODIFY `OrderDetailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `OrderDetailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `pharmacist`
@@ -788,9 +806,9 @@ ALTER TABLE `dispatcher`
 ALTER TABLE `order`
   ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`CityID`) REFERENCES `citylisting` (`CityID`),
   ADD CONSTRAINT `order_ibfk_2` FOREIGN KEY (`CustomerID`) REFERENCES `customer` (`CustomerID`),
-  ADD CONSTRAINT `order_ibfk_3` FOREIGN KEY (`PharmacistID`) REFERENCES `pharmacist` (`PharmacistID`),
-  ADD CONSTRAINT `order_ibfk_4` FOREIGN KEY (`PrescriptionID`) REFERENCES `prescription` (`PrescriptionID`),
-  ADD CONSTRAINT `order_ibfk_5` FOREIGN KEY (`DeliveryID`) REFERENCES `delivery` (`DeliveryID`);
+  ADD CONSTRAINT `order_ibfk_3` FOREIGN KEY (`PharmacistID`) REFERENCES `pharmacist` (`PharmacistID`) ON UPDATE SET NULL,
+  ADD CONSTRAINT `order_ibfk_4` FOREIGN KEY (`PrescriptionID`) REFERENCES `prescription` (`PrescriptionID`) ON UPDATE SET NULL,
+  ADD CONSTRAINT `order_ibfk_5` FOREIGN KEY (`DeliveryID`) REFERENCES `delivery` (`DeliveryID`) ON UPDATE SET NULL;
 
 --
 -- Constraints for table `orderdetail`

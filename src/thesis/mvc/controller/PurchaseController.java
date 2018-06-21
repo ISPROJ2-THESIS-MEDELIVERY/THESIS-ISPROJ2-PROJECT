@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.ProductImplement;
+import thesis.mvc.model.Branch;
 import thesis.mvc.model.Customer;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
@@ -82,7 +83,8 @@ public class PurchaseController extends HttpServlet {
 			
 			//sets order and generates it if it does not exist
 			Order order = (Order) session.getAttribute("Order");
-			if(order == null) {
+			
+			if(order == null) { // || order.getBranchID() != Current Branch
 				int UID = 4;//(int) session.getAttribute("userID");
 				CustomerImplement customerImplement = new CustomerImplement();
 				Customer customer = new Customer();
@@ -90,14 +92,17 @@ public class PurchaseController extends HttpServlet {
 				String ADD = customer.getAddress();
 				boolean SID = customer.isIsSeniorCitizen();
 				int CID = customer.getCityID();
+				Branch SelectedBranch = new Branch();
+				SelectedBranch = (Branch) session.getAttribute("SelectedBranch");
+				int BID = 1;//SelectedBranch.getBranchID();
 				
-				order = purchaseAction.setInitalOrder(UID, ADD, SID, CID);
+				order = purchaseAction.setInitalOrder(UID, ADD, SID, CID, BID);
 				session.setAttribute("Order", order );
 				
 				//ProductID & Quantity & Cost per unit
 				ProductID = Integer.valueOf( request.getParameter( "ProductID" ) );
 				Quantity = Integer.valueOf( request.getParameter( "Quantity" ) );
-				CostPerUnit = purchaseAction.getProductCost( ProductID, 1, order);
+				CostPerUnit = purchaseAction.getProductCost( ProductID, BID, order);
 				
 				//Takes the existing order detail if there is and adds the next order detail to there
 				OrderDetail orderDetail = new OrderDetail();

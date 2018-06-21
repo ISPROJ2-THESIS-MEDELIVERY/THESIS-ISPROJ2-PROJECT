@@ -28,16 +28,17 @@ public class PurchaseAction {
 	public int addIncompleteOrder(Order order) {
 		try {
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-			String query = "INSERT INTO `order` (CustomerID, CityID, OrderAddress, DateOrdered, OrderType, OrderStatus, SeniorDiscount, ActualCost) VALUES (?,?,?,?,?,?,?,?)";
+			String query = "INSERT INTO `order` (CustomerID, CityID, BranchID, OrderAddress, DateOrdered, OrderType, OrderStatus, SeniorDiscount, ActualCost) VALUES (?,?,?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query, Statement.RETURN_GENERATED_KEYS );
 			preparedStatement.setInt( 1, order.getCustomerID() );
 			preparedStatement.setInt( 2, order.getCityID() );
-			preparedStatement.setString( 3, order.getOrderAddress() );
-			preparedStatement.setDate( 4, CurrentDate );
-			preparedStatement.setString( 5, order.getOrderType() );
-			preparedStatement.setString( 6, order.getOrderStatus() );
-			preparedStatement.setBoolean( 7, order.getSeniorDiscount() );
-			preparedStatement.setDouble( 8, order.getActualCost() );
+			preparedStatement.setInt( 3, order.getBranchID() );
+			preparedStatement.setString( 4, order.getOrderAddress() );
+			preparedStatement.setDate( 5, CurrentDate );
+			preparedStatement.setString( 6, order.getOrderType() );
+			preparedStatement.setString( 7, order.getOrderStatus() );
+			preparedStatement.setBoolean( 8, order.getSeniorDiscount() );
+			preparedStatement.setDouble( 9, order.getActualCost() );
 			
 			preparedStatement.executeUpdate();
 			int NewID = 0;
@@ -53,12 +54,13 @@ public class PurchaseAction {
 		}
 	}
 	
-	public Order setInitalOrder(int custID, String address, boolean senior, int cityID) {
+	public Order setInitalOrder(int custID, String address, boolean senior, int cityID, int branchID) {
 		Order order = new Order();
 		order.setCustomerID(custID);           
 		order.setOrderAddress(address); 
 		order.setSeniorDiscount(senior);
 		order.setCityID(cityID);
+		order.setBranchID(branchID);
 		return order;
 	}
 	public class CartList {

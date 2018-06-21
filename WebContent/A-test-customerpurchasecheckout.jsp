@@ -9,30 +9,9 @@
 </head>
 <body>
 	<h2>Checkout Page</h2>
-		Order ID: <c:out value="${Order.customerID}" /><br />
-		Order Address: <c:out value="${Order.orderAddress}" /><br />
-		Senior Discount: <c:out value="${Order.seniorDiscount}" /><br />
-	<table>
-		<thead>
-			<tr>
-				<th>ProductID</th>
-				<th>quantity</th>
-				<th>CostPerUnit</th>
-				<th>TotalCost</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${OrderDetails}" var="details">
-				<tr>
-					<td><c:out value="${details.productID}" /></td>
-					<td><c:out value="${details.quantity}" /></td>
-					<td><c:out value="${details.costPerUnit}" /></td>
-					<td><c:out value="${details.totalCost}" /></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	
+		Order ID: <c:out value="${orderReciept.customerID}" /><br />
+		Order Address: <c:out value="${orderReciept.orderAddress}" /><br />
+		Senior Discount: <c:out value="${orderReciept.seniorDiscount}" /><br />
 	<table>
 		<thead>
 			<tr>
@@ -47,7 +26,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${CartList}" var="cartdetails">
+			<c:forEach items="${CartlistReciept}" var="cartdetails">
 	            <tr>
 	                <td><c:out value="${cartdetails.name}" /></td>
 	                <td><c:out value="${cartdetails.description}" /></td>

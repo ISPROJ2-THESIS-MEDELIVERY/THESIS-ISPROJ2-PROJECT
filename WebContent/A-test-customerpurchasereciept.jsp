@@ -25,12 +25,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                	<c:forEach items="${CartListReciept}" var="cartdetails">
+                	<c:forEach items="${CartlistReciept}" var="cartdetails">
 			            <tr>
 			                <td><c:out value="${cartdetails.name}" /></td>
 			                <td><c:out value="${cartdetails.description}" /></td>
-			                <td></td>
-			                <!-- <td><img src="data:image/jpeg;base64,<c:out value="${cartdetails.image}" />" /></td> -->
+			                <td></td><!-- <td><img src="data:image/jpeg;base64,<c:out value="${cartdetails.image}" />" /></td> -->
 			                <td><c:out value="${cartdetails.size}" /></td>
 			                <td><c:out value="${cartdetails.prescription}" /></td>
 			                <td><c:out value="${cartdetails.quantity}" /></td>

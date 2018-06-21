@@ -48,9 +48,7 @@ public class OrderImplement implements OrderDAO{
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return 0;
-		} 
-		
-		
+		}
 	}
 
 	@Override
@@ -64,7 +62,6 @@ public class OrderImplement implements OrderDAO{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	@Override
@@ -90,8 +87,7 @@ public class OrderImplement implements OrderDAO{
 			preparedStatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
-		
+		}
 	}
 
 	@Override

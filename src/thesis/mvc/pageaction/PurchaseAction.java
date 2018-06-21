@@ -23,11 +23,12 @@ public class PurchaseAction {
 		conn = DBUtility.getConnection();
 	}
 	
-	public Order setInitalOrder(int custID, String address, boolean senior) {
+	public Order setInitalOrder(int custID, String address, boolean senior, int cityID) {
 		Order order = new Order();
 		order.setCustomerID(custID);           
 		order.setOrderAddress(address); 
-		order.setSeniorDiscount(senior); 
+		order.setSeniorDiscount(senior);
+		order.setCityID(cityID);
 		return order;
 	}
 	public class CartList {
@@ -220,7 +221,6 @@ public class PurchaseAction {
 		OrderDetailImplement OrderDet = new OrderDetailImplement();  
 		for (OrderDetail orderDetail : OrderDetails) {
 			actualcost += orderDetail.getTotalCost();
-			OrderDet.addOrderDetail( orderDetail );
 		}
 		actualcost += DeliveryCost;
 		order.setActualCost( actualcost );
@@ -231,6 +231,7 @@ public class PurchaseAction {
 		//insert OrderID
 		for (OrderDetail orderDetail : OrderDetails) {
 			orderDetail.setOrderID( orderID );
+			OrderDet.addOrderDetail( orderDetail );
 		}
 		
 		return true;

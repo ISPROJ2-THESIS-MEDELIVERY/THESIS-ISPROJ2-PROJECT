@@ -6,6 +6,7 @@ public class Customer {
 	private int UserID;
 	private String CustomerName;
 	private String Address;
+	private int CityID;
 	private String Email;
 	private boolean IsSeniorCitizen;
 	private String SeniorCitizenID;
@@ -34,6 +35,12 @@ public class Customer {
 	}
 	public void setAddress(String address) {
 		Address = address;
+	}
+	public int getCityID() {
+		return CityID;
+	}
+	public void setCityID(int cityID) {
+		CityID = cityID;
 	}
 	public String getEmail() {
 		return Email;

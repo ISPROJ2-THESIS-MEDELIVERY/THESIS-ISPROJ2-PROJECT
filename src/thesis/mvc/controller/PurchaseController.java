@@ -87,18 +87,18 @@ public class PurchaseController extends HttpServlet {
 				CustomerImplement customerImplement = new CustomerImplement();
 				Customer customer = new Customer();
 				customer = customerImplement.getCustomerById(UID);
-				String ADD = "";
-				boolean SID = false;
-				int 
+				String ADD = customer.getAddress();
+				boolean SID = customer.isIsSeniorCitizen();
+				int CID = customer.getCityID();
 				
 				//order.setSeniorDiscount( session.getAttribute("seniorStatus") );
-				order = purchaseAction.setInitalOrder(UID, ADD, SID, );
+				order = purchaseAction.setInitalOrder(UID, ADD, SID, CID);
 				session.setAttribute("Order", order );
 				
 				//ProductID & Quantity & Cost per unit
 				ProductID = Integer.valueOf( request.getParameter( "ProductID" ) );
 				Quantity = Integer.valueOf( request.getParameter( "Quantity" ) );
-				CostPerUnit = purchaseAction.getProductCost( ProductID, 1, order, );
+				CostPerUnit = purchaseAction.getProductCost( ProductID, 1, order);
 				
 				//Takes the existing order detail if there is and adds the next order detail to there
 				OrderDetail orderDetail = new OrderDetail();

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html >
 <html>
 <head>
@@ -128,15 +129,6 @@
                                     <td><br>Label<br><br></td>
                                     <td><br>Label<br><br></td>
                                 </tr>
-                                <tr>
-                                    <td><a href="ProductDescription.jsp">Antihistamine</a></td>
-                                    <td><img>Cell 4</td>
-                                    <td>Cell 3<input type="number"></td>
-                                    <td><br>Label<br><br></td>
-                                    <td><br>Label<br><br></td>
-                                    <td><br>Label<br><br></td>
-                                    <td><br>Label<br><br></td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -144,6 +136,42 @@
             </div>
         </div>
     </div>
+    
+    <c:forEach items="${productList}" var="item">
+				<form action='PurchaseController' method='post'>
+					<tr>
+						<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
+						<td><c:out value="${item.productName}" /></td>
+						<td><c:out value="${item.genericName}" /></td>
+						<td><c:out value="${item.registrationNo}" /></td>
+						<td><c:out value="${item.productStrength}" /></td>
+						<td><c:out value="${item.productForm}" /></td>
+						<td><c:out value="${item.productPackaging}" /></td>
+						<td><c:out value="${item.productManufacturer}" /></td>
+						<td><c:out value="${item.productOrigin}" /></td>
+						<td><c:out value="${item.productDescription}" /></td>
+						<td>
+							<select name='Quantity'>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+							</select>
+						</td>
+						<td>
+							<input type='submit' name='Action' value="Addtocart" style='display: on-hover' />
+						</td>
+					</tr>
+				</form>
+			</c:forEach>
+    
+    
+    
     <div></div>
     <div></div>
     <div></div>

@@ -18,13 +18,54 @@ public class SearchAction {
 		conn = DBUtility.getConnection();
 	}
 	public List<Product> GeneralListing(String searchQuerty, int searchFilter) {
+		conn = DBUtility.getConnection();
 		String Query = "SELECT * FROM Product WHERE";
 		
-		if (searchQuerty != null) {
-			Query += "GenericName LIKE %" + searchQuerty + "%";
-		} if (searchQuerty == null && searchFilter == 0) {
+		if (searchQuerty != null && searchFilter == 0) {
+			Query += "ProductID LIKE '%" + searchQuerty + "%'";
+		} 
+		else if (searchQuerty != null && searchFilter == 1) {
+			Query += "ProductName LIKE '%" + searchQuerty + "%'";
+		} 
+		else if (searchQuerty != null && searchFilter == 2) {
+			Query += "GenericName LIKE '%" + searchQuerty + "%'";
+		} 
+		else if (searchQuerty != null && searchFilter == 3) {
+			Query += "RegistrationNo LIKE '%" + searchQuerty + "%'";
+		} 
+		else if (searchQuerty != null && searchFilter == 4) {
+			Query += "ProductStrength LIKE '%" + searchQuerty + "%'";
+		} 
+		else if (searchQuerty != null && searchFilter == 5) {
+			Query += "ProductForm LIKE '%" + searchQuerty + "%'";
+		} 
+		else if (searchQuerty != null && searchFilter == 6) {
+			Query += "ProductPackaging LIKE '%" + searchQuerty + "%'";
+		} 
+		else if (searchQuerty != null && searchFilter == 7) {
+			Query += "ProductManufacturer LIKE '%" + searchQuerty + "%'";
+		} 
+		else if (searchQuerty != null && searchFilter == 8) {
+			Query += "ProductOrigin LIKE '%" + searchQuerty + "%'";
+		} 
+		else if (searchQuerty != null && searchFilter == 9) {
+			Query += "ProductDescription LIKE '%" + searchQuerty + "%'";
+		} 
+		else if (searchQuerty != null && searchFilter == 10) {
+			Query += "ProductImage LIKE '%" + searchQuerty + "%'";
+		} 
+		else if (searchQuerty != null && searchFilter == 11) {
+			Query += "isRXProduct = 1";
+		} 
+		else if (searchQuerty != null && searchFilter == 12) {
+			Query += "isRXProduct = 0";
+		} 
+		else if (searchQuerty != null && searchFilter == 13) {
+			Query += "CounterLimit LIKE '%" + searchQuerty + "%'";
+		} 
+		else if (searchQuerty == null && searchFilter == 0) {
 			Query += "1";
-		}
+		} 
 		
 		List<Product> products = new ArrayList<Product>();
 		try {

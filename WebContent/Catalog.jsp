@@ -110,25 +110,49 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Item</th>
-                                    <th>Item Description</th>
-                                    <th>Quantity</th>
-                                    <th>Dosage Strength</th>
-                                    <th>Size</th>
-                                    <th>Unit Price</th>
-                                    <th>Total Price</th>
+						            <th>Item</th>
+						            <th>Item Description</th>
+						            <th>Image</th>
+						            <th>Size</th>
+						            <th>Prescription Required</th>
+						            <th>Quantity</th>
+						            <th>Unit Price</th>
+						            <th>Total Cost</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Solmux</td>
-                                    <td><img>Cell 2</td>
-                                    <td>Cell 3<input type="number"></td>
-                                    <td><label><br>Label<br><br></label></td>
-                                    <td><br>Label<br><br></td>
-                                    <td><br>Label<br><br></td>
-                                    <td><br>Label<br><br></td>
-                                </tr>
+                              	<c:forEach items="${productList}" var="item">
+									<form action='PurchaseController' method='post'>
+										<tr>
+											<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
+											<td><c:out value="${item.productName}" /></td>
+											<td><c:out value="${item.genericName}" /></td>
+											<td><c:out value="${item.registrationNo}" /></td>
+											<td><c:out value="${item.productStrength}" /></td>
+											<td><c:out value="${item.productForm}" /></td>
+											<td><c:out value="${item.productPackaging}" /></td>
+											<td><c:out value="${item.productManufacturer}" /></td>
+											<td><c:out value="${item.productOrigin}" /></td>
+											<td><c:out value="${item.productDescription}" /></td>
+											<td>
+												<select name='Quantity'>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+												</select>
+											</td>
+											<td>
+												<input type='submit' name='Action' value="Addtocart" style='display: on-hover' />
+											</td>
+										</tr>
+									</form>
+								</c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -137,40 +161,7 @@
         </div>
     </div>
     
-    <c:forEach items="${productList}" var="item">
-				<form action='PurchaseController' method='post'>
-					<tr>
-						<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
-						<td><c:out value="${item.productName}" /></td>
-						<td><c:out value="${item.genericName}" /></td>
-						<td><c:out value="${item.registrationNo}" /></td>
-						<td><c:out value="${item.productStrength}" /></td>
-						<td><c:out value="${item.productForm}" /></td>
-						<td><c:out value="${item.productPackaging}" /></td>
-						<td><c:out value="${item.productManufacturer}" /></td>
-						<td><c:out value="${item.productOrigin}" /></td>
-						<td><c:out value="${item.productDescription}" /></td>
-						<td>
-							<select name='Quantity'>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-								<option value="7">7</option>
-								<option value="8">8</option>
-								<option value="9">9</option>
-							</select>
-						</td>
-						<td>
-							<input type='submit' name='Action' value="Addtocart" style='display: on-hover' />
-						</td>
-					</tr>
-				</form>
-			</c:forEach>
-    
-    
+  
     
     <div></div>
     <div></div>

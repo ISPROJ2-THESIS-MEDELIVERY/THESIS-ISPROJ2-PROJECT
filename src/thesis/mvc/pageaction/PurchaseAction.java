@@ -6,10 +6,12 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Calendar;
 import java.util.List;
 
 import thesis.mvc.implement.OrderImplement;
+import thesis.mvc.controller.PurchaseController;
 import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
@@ -21,6 +23,34 @@ public class PurchaseAction {
 
 	public PurchaseAction() {
 		conn = DBUtility.getConnection();
+	}
+	
+	public int addIncompleteOrder(Order order) {
+		try {
+			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+			String query = "INSERT INTO `order` (CustomerID, CityID, OrderAddress, DateOrdered, OrderType, OrderStatus, SeniorDiscount, ActualCost) VALUES (?,?,?,?,?,?,?,?)";
+			PreparedStatement preparedStatement = conn.prepareStatement( query, Statement.RETURN_GENERATED_KEYS );
+			preparedStatement.setInt( 1, order.getCustomerID() );
+			preparedStatement.setInt( 2, order.getCityID() );
+			preparedStatement.setString( 3, order.getOrderAddress() );
+			preparedStatement.setDate( 4, CurrentDate );
+			preparedStatement.setString( 5, order.getOrderType() );
+			preparedStatement.setString( 6, order.getOrderStatus() );
+			preparedStatement.setBoolean( 7, order.getSeniorDiscount() );
+			preparedStatement.setDouble( 8, order.getActualCost() );
+			
+			preparedStatement.executeUpdate();
+			int NewID = 0;
+			ResultSet rs = preparedStatement.getGeneratedKeys();
+			if (rs.next()) {
+				NewID = rs.getInt(1);
+			}
+			preparedStatement.close();
+			return NewID;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 	
 	public Order setInitalOrder(int custID, String address, boolean senior, int cityID) {
@@ -200,22 +230,6 @@ public class PurchaseAction {
 		order.setDateOrdered(CurrentDate);
 		order.setOrderStatus( "PENDING" );
 		
-		/*
-		//Get orderID
-		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Order WHERE BranchID = ? AND CustomerID = ?")) {
-			stmt.setInt(1, CurrentDate);
-			stmt.setInt(2, order.getCustomerID());
-			try(ResultSet rs = stmt.executeQuery()){
-				orderID = rs.getInt("OrderID");
-			}
-		} catch (SQLException e){
-			e.printStackTrace();
-			return false;
-		}
-		*/
-		
-		
-		//ORGANIZE THIS TO RUN PROPERLY AND ESURE TAHT EVERYTHING NEEDED IS HERE
 		//Add delivery cost and Input order detail
 		Double actualcost = 0.0;
 		OrderDetailImplement OrderDet = new OrderDetailImplement();  
@@ -226,8 +240,8 @@ public class PurchaseAction {
 		order.setActualCost( actualcost );
 		
 		//Add to order
-		OrderImplement OrderImp = new OrderImplement();
-		int orderID = OrderImp.addOrder(order);
+		PurchaseController purchaseController = new PurchaseController();
+		int orderID = addIncompleteOrder(order);
 		//insert OrderID
 		for (OrderDetail orderDetail : OrderDetails) {
 			orderDetail.setOrderID( orderID );

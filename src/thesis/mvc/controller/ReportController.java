@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import thesis.mvc.pageaction.ApprovalAction;
 import thesis.mvc.pageaction.FilterAction;
 import thesis.mvc.pageaction.PurchaseAction;
+import thesis.mvc.pageaction.SearchAction;
+import thesis.mvc.pageaction.SearchAction.ProductList;
 import thesis.mvc.utility.DBUtility;
 
 @WebServlet("/ReportController")
@@ -29,11 +31,11 @@ public class ReportController {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String forward;
 		int BranchID = Integer.parseInt( request.getParameter( "BranchID" ) );
-		String Pharma = request.getParameter( "BranchID" );
 		HttpSession session = request.getSession();
 		forward = "/Catalog.jsp";
 		
-		String Test = "SELECT product.ProductName, product.GenericName, product.ProductStrength, product.ProductForm, product.ProductPackaging, product.ProductDescription, product.ProductImage, stocks.Quantity, stocksprice.PriceSet FROM stocks INNER JOIN stocksprice ON stocksprice.StockID = stocks.StockID INNER JOIN product ON stocks.ProductID = product.ProductID WHERE stocksprice.IsCurrent = 1 AND stocks.BranchID = ?";
+		SearchAction searchAction = new SearchAction();
+		ProductList productList	= searchAction.GeneralListing(BranchID);
 		
 		RequestDispatcher view = request.getRequestDispatcher( forward );
 		view.forward(request, response);

@@ -1,6 +1,7 @@
 package thesis.mvc.pageaction;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,133 +18,118 @@ public class SearchAction {
 	public SearchAction() {
 		conn = DBUtility.getConnection();
 	}
-	public List<Product> GeneralListing(String searchQuerty, int searchFilter) {
+	public class ProductList {
+		private String ProductName;
+		private String GenericName;
+		private String ProductStrength;
+		private String ProductForm;
+		private String ProductPackaging;
+		private String ProductDescription;
+		private String ProductImage;
+		private String Quantity;
+		private double PriceSet;
+		public String getProductName() {
+			return ProductName;
+		}
+		public void setProductName(String productName) {
+			ProductName = productName;
+		}
+		public String getGenericName() {
+			return GenericName;
+		}
+		public void setGenericName(String genericName) {
+			GenericName = genericName;
+		}
+		public String getProductStrength() {
+			return ProductStrength;
+		}
+		public void setProductStrength(String productStrength) {
+			ProductStrength = productStrength;
+		}
+		public String getProductForm() {
+			return ProductForm;
+		}
+		public void setProductForm(String productForm) {
+			ProductForm = productForm;
+		}
+		public String getProductPackaging() {
+			return ProductPackaging;
+		}
+		public void setProductPackaging(String productPackaging) {
+			ProductPackaging = productPackaging;
+		}
+		public String getProductDescription() {
+			return ProductDescription;
+		}
+		public void setProductDescription(String productDescription) {
+			ProductDescription = productDescription;
+		}
+		public String getProductImage() {
+			return ProductImage;
+		}
+		public void setProductImage(String productImage) {
+			ProductImage = productImage;
+		}
+		public String getQuantity() {
+			return Quantity;
+		}
+		public void setQuantity(String quantity) {
+			Quantity = quantity;
+		}
+		public double getPriceSet() {
+			return PriceSet;
+		}
+		public void setPriceSet(double priceSet) {
+			PriceSet = priceSet;
+		}
+	}
+	
+	public ProductList GeneralListing(int BranchID) {
 		conn = DBUtility.getConnection();
-		String Query = "";
-		
-		FilterAction filteraction = new FilterAction();
-		filteraction.ProductListing(1);
-		
-		filteraction.ProductListing(2);
-		
-		filteraction.ProductListing(3);
-		
-		filteraction.ProductListing(4);
-		
-		filteraction.ProductListing(5);
-		
-		filteraction.ProductListing(6);
-		
-		
-		if (searchQuerty != null && searchFilter == 0) {
-			Query += "SELECT * FROM Product WHERE ProductID LIKE '%" + searchQuerty + "%'";
-		} 
-		else if (searchQuerty != null && searchFilter == 1) {
-			Query += "ProductName LIKE '%" + searchQuerty + "%'";
-		} 
-		else if (searchQuerty != null && searchFilter == 2) {
-			Query += "GenericName LIKE '%" + searchQuerty + "%'";
-		} 
-		else if (searchQuerty != null && searchFilter == 3) {
-			Query += "RegistrationNo LIKE '%" + searchQuerty + "%'";
-		} 
-		else if (searchQuerty != null && searchFilter == 4) {
-			Query += "ProductStrength LIKE '%" + searchQuerty + "%'";
-		} 
-		else if (searchQuerty != null && searchFilter == 5) {
-			Query += "ProductForm LIKE '%" + searchQuerty + "%'";
-		} 
-		else if (searchQuerty != null && searchFilter == 6) {
-			Query += "ProductPackaging LIKE '%" + searchQuerty + "%'";
-		} 
-		else if (searchQuerty != null && searchFilter == 7) {
-			Query += "ProductManufacturer LIKE '%" + searchQuerty + "%'";
-		} 
-		else if (searchQuerty != null && searchFilter == 8) {
-			Query += "ProductOrigin LIKE '%" + searchQuerty + "%'";
-		} 
-		else if (searchQuerty != null && searchFilter == 9) {
-			Query += "ProductDescription LIKE '%" + searchQuerty + "%'";
-		} 
-		else if (searchQuerty != null && searchFilter == 10) {
-			Query += "ProductImage LIKE '%" + searchQuerty + "%'";
-		} 
-		else if (searchQuerty != null && searchFilter == 11) {
-			Query += "isRXProduct = 1";
-		} 
-		else if (searchQuerty != null && searchFilter == 12) {
-			Query += "isRXProduct = 0";
-		} 
-		else if (searchQuerty != null && searchFilter == 13) {
-			Query += "CounterLimit LIKE '%" + searchQuerty + "%'";
-		} 
-		else if (searchQuerty == null && searchFilter == 0) {
-			Query += "1";
-		} 
-		
-		List<Product> products = new ArrayList<Product>();
+		ProductList productList = new ProductList();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery( Query );
+			String Query = "SELECT product.ProductName, product.GenericName, product.ProductStrength, product.ProductForm, product.ProductPackaging, product.ProductDescription, product.ProductImage, stocks.Quantity, stocksprice.PriceSet FROM stocks INNER JOIN stocksprice ON stocksprice.StockID = stocks.StockID INNER JOIN product ON stocks.ProductID = product.ProductID WHERE stocksprice.IsCurrent = 1 AND stocks.BranchID = ?";
+			PreparedStatement preparedStatement = conn.prepareStatement( Query );
+			preparedStatement.setInt( 1, BranchID );
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
 			while( resultSet.next() ) {
-				Product product = new Product();
-				product.setProductID( resultSet.getInt( "ProductID" ) );
-				product.setProductName( resultSet.getString( "ProductName" ) );
-				product.setGenericName( resultSet.getString( "GenericName" ) );
-				product.setRegistrationNo( resultSet.getString( "RegistrationNo" ) );
-				product.setProductStrength( resultSet.getString( "ProductStrength" ) );
-				product.setProductForm( resultSet.getString( "ProductForm" ) );
-				product.setProductPackaging( resultSet.getString( "ProductPackaging" ) );
-				product.setProductManufacturer( resultSet.getString( "ProductManufacturer" ) );
-				product.setProductOrigin( resultSet.getString( "ProductOrigin" ) );
-				product.setProductDescription( resultSet.getString( "ProductDescription" ) );
-				product.setProductImage( resultSet.getString( "ProductImage" ) );
-				product.setRXProduct( resultSet.getBoolean( "isRXProduct" ) );
-				product.setCounterLimit( resultSet.getInt( "CounterLimit" ) );
-				products.add(product);
+				productList.setProductName( resultSet.getString(1) );
+				productList.setGenericName( resultSet.getString(2) );
+				productList.setProductStrength( resultSet.getString(3) );
+				productList.setProductForm( resultSet.getString(4) );
+				productList.setProductPackaging( resultSet.getString(5) );
+				productList.setProductDescription( resultSet.getString(6) );
+				productList.setProductImage( resultSet.getString(7) );
+				productList.setQuantity( resultSet.getString(8) );
+				productList.setPriceSet( resultSet.getDouble(9) );
 			}
 			resultSet.close();
 			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return products;
+		return productList;
 	}
+	
 	public List<Product> ProductListing(String searchQuerty, int searchFilter) {
 		conn = DBUtility.getConnection();
-		String Query = "";
+		String Query = "SELECT * FROM Product";
 		if(searchFilter == 1){
-			Query = "SELECT * FROM Product"
-					+ " ORDER BY ProductName DESC"
-					+ " WHERE ProductName LIKE '%" + searchQuerty + "%'";
+			Query +=" ORDER BY ProductName DESC WHERE ProductName LIKE '%" + searchQuerty + "%'";
 		}
 		else if(searchFilter == 2){
-			Query = "SELECT * FROM Product"
-					+ " ORDER BY GenericName DESC"
-					+ " WHERE GenericName LIKE '%" + searchQuerty + "%'";
+			Query += " ORDER BY GenericName DESC WHERE GenericName LIKE '%" + searchQuerty + "%'";
 		}
 		else if(searchFilter == 3){
-			Query = "SELECT * FROM Product"
-					+ " ORDER BY RegistrationNumber DESC"
-					+ " WHERE RegistrationNumber LIKE '%" + searchQuerty + "%'";
+			Query += " ORDER BY RegistrationNumber DESC WHERE RegistrationNumber LIKE '%" + searchQuerty + "%'";
 		}
 		else if(searchFilter == 4){
-			Query = "SELECT * FROM Product"
-					+ " ORDER BY isRXProduct DESC"
-					+ " WHERE isRXProduct = 1";
-		}
-		else if(searchFilter == 5){
-			Query = "SELECT * FROM Product"
-					+ " ORDER BY isRXProduct DESC"
-					+ " WHERE isRXProduct = 0";
-		}
-		else if(searchFilter == 6){
-			Query = "SELECT * FROM Product"
-					+ " ORDER BY CounterLimit DESC"
-					+ " WHERE CounterLimit LIKE '%" + searchQuerty + "%'";
+			Query += " ORDER BY CounterLimit DESC WHERE CounterLimit LIKE '%" + searchQuerty + "%'";
 		}
 		else {
-			Query = "SELECT * FROM Product"
+			Query += "SELECT * FROM Product"
 					+ " ORDER BY ProductID";
 		}
 		List<Product> products = new ArrayList<Product>();

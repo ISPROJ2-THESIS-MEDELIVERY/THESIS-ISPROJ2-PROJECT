@@ -34,8 +34,8 @@ public class ReportController {
 		HttpSession session = request.getSession();
 		forward = "/Catalog.jsp";
 		
-		SearchAction searchAction = new SearchAction();
-		ProductList productList	= searchAction.GeneralListing(BranchID);
+		SearchAction searchAction = new SearchAction();	
+		session.setAttribute("ProductListing", searchAction.GeneralListing(BranchID) );
 		
 		RequestDispatcher view = request.getRequestDispatcher( forward );
 		view.forward(request, response);

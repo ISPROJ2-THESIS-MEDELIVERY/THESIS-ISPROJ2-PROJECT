@@ -19,10 +19,24 @@ public class SearchAction {
 	}
 	public List<Product> GeneralListing(String searchQuerty, int searchFilter) {
 		conn = DBUtility.getConnection();
-		String Query = "SELECT * FROM Product WHERE";
+		String Query = "";
+		
+		FilterAction filteraction = new FilterAction();
+		filteraction.ProductListing(1);
+		
+		filteraction.ProductListing(2);
+		
+		filteraction.ProductListing(3);
+		
+		filteraction.ProductListing(4);
+		
+		filteraction.ProductListing(5);
+		
+		filteraction.ProductListing(6);
+		
 		
 		if (searchQuerty != null && searchFilter == 0) {
-			Query += "ProductID LIKE '%" + searchQuerty + "%'";
+			Query += "SELECT * FROM Product WHERE ProductID LIKE '%" + searchQuerty + "%'";
 		} 
 		else if (searchQuerty != null && searchFilter == 1) {
 			Query += "ProductName LIKE '%" + searchQuerty + "%'";

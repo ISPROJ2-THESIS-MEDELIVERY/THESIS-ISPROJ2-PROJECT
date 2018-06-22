@@ -45,7 +45,8 @@ public class PurchaseController extends HttpServlet {
 		ApprovalAction approvalAction = new ApprovalAction();
 		
     	if (action.equalsIgnoreCase("Customer")) {
-    		forward = "/A-test-shop.jsp";
+    		//forward = "/A-test-shop.jsp";
+    		forward = "/Catalog.jsp";
     		request.setAttribute( "productList", approvalAction.getProducts() );
     	} else if (action.equalsIgnoreCase("Pharmacist")) {
     		forward = "A-test-pharmacistapproval.jsp";

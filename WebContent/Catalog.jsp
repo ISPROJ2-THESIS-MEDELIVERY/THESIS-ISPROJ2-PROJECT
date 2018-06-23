@@ -98,7 +98,7 @@
                 <div class="col-md-12"><select class="form-control-lg" name="Medicine" style="margin:1px;"><option value="">Filter</option><option value="">Name</option><option value="">Best Selling</option><option value="">Price: Low to High</option><option value="">Price: High to Low</option></select></div>
             </div>
             <div class="row">
-                <div class="col-md-12"><select class="form-control-lg" name="Medicine" style="margin:1px;"><option value="">Branch</option><option value="">Mercury</option><option value="">Best Selling</option><option value="">Price: Low to High</option><option value="">Price: High to Low</option></select></div>
+                <div class="col-md-12"><select class="form-control-lg" name="Medicine" style="margin:1px;"><option value="">Branch</option><option value="">Mercury</option><option value="">Watsons</option><option value="">The Generics Pharmacy</option><option value="">South Star Drug</option></select></div>
             </div>
         </div>
     </div>

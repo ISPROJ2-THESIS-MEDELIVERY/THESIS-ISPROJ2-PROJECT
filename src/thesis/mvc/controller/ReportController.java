@@ -37,6 +37,7 @@ public class ReportController {
 		int UserType = (int) session.getAttribute("userAccess");
 		forward = "/Catalog.jsp";
 		
+<<<<<<< HEAD
 		ReportAction reportAction = new ReportAction();
 		if (ReportTy == 1 && UserType == 2) {
 			request.setAttribute("ReportGenerator", reportAction.ReportCustomerSales(1) );//CustomerID
@@ -49,6 +50,10 @@ public class ReportController {
 		} else {
 			forward = "extra.jsp";
 		}
+=======
+		SearchAction searchAction = new SearchAction();	
+		session.setAttribute("ProductListing", searchAction.GeneralListing(BranchID) );
+>>>>>>> 3d3b8a29593d7906cce3b6258ef96f04cb5d750f
 		
 		RequestDispatcher view = request.getRequestDispatcher( forward );
 		view.forward(request, response);

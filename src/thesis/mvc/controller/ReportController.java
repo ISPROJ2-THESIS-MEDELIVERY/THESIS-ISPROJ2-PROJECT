@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import thesis.mvc.pageaction.ApprovalAction;
 import thesis.mvc.pageaction.FilterAction;
 import thesis.mvc.pageaction.PurchaseAction;
+import thesis.mvc.pageaction.ReportAction;
 import thesis.mvc.pageaction.SearchAction;
 import thesis.mvc.pageaction.SearchAction.ProductList;
 import thesis.mvc.utility.DBUtility;
@@ -29,13 +30,25 @@ public class ReportController {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String forward;
-		int BranchID = Integer.parseInt( request.getParameter( "BranchID" ) );
 		HttpSession session = request.getSession();
+		String forward;
+		int NeededID = Integer.parseInt( request.getParameter( "NeededID" ) );
+		int ReportTy = Integer.parseInt( request.getParameter( "ReportTy" ) );
+		int UserType = (int) session.getAttribute("userAccess");
 		forward = "/Catalog.jsp";
 		
-		SearchAction searchAction = new SearchAction();
-		ProductList productList	= searchAction.GeneralListing(BranchID);
+		ReportAction reportAction = new ReportAction();
+		if (ReportTy == 1 && UserType == 2) {
+			request.setAttribute("ReportGenerator", reportAction.ReportCustomerSales(1) );//CustomerID
+		} else if (ReportTy == 2 && UserType == 4) {
+			request.setAttribute("ReportGenerator", reportAction.ReportPharmacySales(1));//PharmacyID
+		} else if (ReportTy == 3 && UserType == 1) {
+			request.setAttribute("ReportGenerator", reportAction.ReportProductSales(1));//ProductID
+		} else if (ReportTy == 4 && UserType == 4) {
+			request.setAttribute("ReportGenerator", reportAction.ReportTotalSales());
+		} else {
+			forward = "extra.jsp";
+		}
 		
 		RequestDispatcher view = request.getRequestDispatcher( forward );
 		view.forward(request, response);

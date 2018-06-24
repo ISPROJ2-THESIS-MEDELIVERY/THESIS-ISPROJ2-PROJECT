@@ -23,7 +23,9 @@ import thesis.mvc.model.Product;
 import thesis.mvc.pageaction.ApprovalAction;
 import thesis.mvc.pageaction.PurchaseAction;
 import thesis.mvc.pageaction.PurchaseAction.CartList;
+import thesis.mvc.pageaction.SearchAction.ProductList;
 import thesis.mvc.pageaction.RegistrationAction;
+import thesis.mvc.pageaction.SearchAction;
 import thesis.mvc.utility.DBUtility;
 
 @WebServlet("/PurchaseController")
@@ -66,6 +68,18 @@ public class PurchaseController extends HttpServlet {
     	}
 		RequestDispatcher view = request.getRequestDispatcher( forward );
 		view.forward(request, response);
+		/*
+		 String forward;
+		int BranchID = Integer.parseInt( request.getParameter( "BranchID" ) );
+		HttpSession session = request.getSession();
+		forward = "/Catalog.jsp";
+		
+		SearchAction searchAction = new SearchAction();
+		ProductList productList	= searchAction.GeneralListing(BranchID);
+		
+		RequestDispatcher view = request.getRequestDispatcher( forward );
+		view.forward(request, response);
+		 */
 	}
     
 	@SuppressWarnings("unchecked")

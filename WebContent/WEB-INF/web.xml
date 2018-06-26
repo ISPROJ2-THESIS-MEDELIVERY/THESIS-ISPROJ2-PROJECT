@@ -10,7 +10,15 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>RegistrationController</servlet-name>
-    <url-pattern>/RegistrationController.do</url-pattern>
+    <url-pattern>/RegistrationController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LoginController</servlet-name>
+    <servlet-class>thesis.mvc.controller.LoginController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginController</servlet-name>
+    <url-pattern>/LoginController</url-pattern>
   </servlet-mapping>
   <servlet>
   	<servlet-name>PurchaseController</servlet-name>

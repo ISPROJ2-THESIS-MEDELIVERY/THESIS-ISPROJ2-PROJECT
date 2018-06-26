@@ -55,7 +55,11 @@ public class PurchaseController extends HttpServlet {
     		ApprovalAction approvalAction = new ApprovalAction();
     		forward = "A-test-pharmacistapproval.jsp";
     		session.setAttribute("orderPharmacistCheck", approvalAction.getOrder(PharmaID) );
-    	} else if (action.equalsIgnoreCase("Approve")) {
+    	}
+    	
+    	
+    	
+    	else if (action.equalsIgnoreCase("Approve")) {
     		forward = "A-test-pharmacistapprovalsuccess.jsp";
     		PurchaseAction purchaseAction = new PurchaseAction();
     		purchaseAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ), true );

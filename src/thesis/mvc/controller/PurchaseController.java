@@ -43,16 +43,18 @@ public class PurchaseController extends HttpServlet {
 		//Ensures that the person can select what he/she wants to buy
 		String forward;
 		String action = request.getParameter( "action" );
+		int PharmaID = Integer.parseInt( request.getParameter( "PharmaID" ) );
 		HttpSession session = request.getSession();
-		ApprovalAction approvalAction = new ApprovalAction();
 		
     	if (action.equalsIgnoreCase("Customer")) {
+    		SearchAction searchAction = new SearchAction();
     		//forward = "/A-test-shop.jsp";
     		forward = "/Catalog.jsp";
-    		request.setAttribute( "productList", approvalAction.getProducts() );
+    		request.setAttribute( "productList", searchAction.GeneralListing(PharmaID) );
     	} else if (action.equalsIgnoreCase("Pharmacist")) {
+    		ApprovalAction approvalAction = new ApprovalAction();
     		forward = "A-test-pharmacistapproval.jsp";
-    		session.setAttribute("orderPharmacistCheck", approvalAction.getOrder() );
+    		session.setAttribute("orderPharmacistCheck", approvalAction.getOrder(PharmaID) );
     	} else if (action.equalsIgnoreCase("Approve")) {
     		forward = "A-test-pharmacistapprovalsuccess.jsp";
     		PurchaseAction purchaseAction = new PurchaseAction();

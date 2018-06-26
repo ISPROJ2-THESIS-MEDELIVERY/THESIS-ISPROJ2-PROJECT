@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2018 at 12:22 AM
+-- Generation Time: Jun 26, 2018 at 01:55 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -350,7 +350,8 @@ INSERT INTO `order` (`OrderID`, `CustomerID`, `DeliveryID`, `PharmacistID`, `Bra
 (21, 4, NULL, NULL, 1, 3, NULL, 'yui', '2018-06-22 00:00:00', NULL, NULL, 'Intercity Regular', 'PENDING', b'1', NULL, '406.00'),
 (22, 4, NULL, NULL, 1, 3, NULL, 'yui', '2018-06-22 00:00:00', NULL, NULL, 'Intercity Regular', 'PENDING', b'1', NULL, '181.00'),
 (23, 4, NULL, NULL, 1, 3, NULL, 'yui', '2018-06-22 00:00:00', NULL, NULL, 'Intercity Regular', 'PENDING', b'1', NULL, '965.63'),
-(24, 4, NULL, NULL, 1, 3, NULL, 'yui', '2018-06-22 00:00:00', NULL, NULL, 'Intercity Regular', 'PENDING', b'1', NULL, '171.00');
+(24, 4, NULL, NULL, 1, 3, NULL, 'yui', '2018-06-22 00:00:00', NULL, NULL, 'Intercity Regular', 'PENDING', b'1', NULL, '171.00'),
+(25, 4, NULL, NULL, 1, 3, NULL, 'yui', '2018-06-23 00:00:00', NULL, NULL, 'Intercity Regular', 'PENDING', b'1', NULL, '881.64');
 
 -- --------------------------------------------------------
 
@@ -383,7 +384,9 @@ INSERT INTO `orderdetail` (`OrderDetailsID`, `OrderID`, `ProductID`, `Quantity`,
 (23, 23, 1, 1, '100.00', '100.00'),
 (24, 23, 3, 1, '121.94', '121.94'),
 (25, 23, 5, 3, '231.23', '693.69'),
-(29, 24, 3, 1, '121.94', '121.00');
+(29, 24, 3, 1, '121.94', '121.00'),
+(30, 25, 1, 1, '100.00', '100.00'),
+(31, 25, 3, 6, '121.94', '731.64');
 
 -- --------------------------------------------------------
 
@@ -719,13 +722,13 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `orderdetail`
 --
 ALTER TABLE `orderdetail`
-  MODIFY `OrderDetailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `OrderDetailsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `pharmacist`

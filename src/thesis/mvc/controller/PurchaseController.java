@@ -46,30 +46,31 @@ public class PurchaseController extends HttpServlet {
 		int PharmaID = Integer.parseInt( request.getParameter( "PharmaID" ) );
 		HttpSession session = request.getSession();
 		
-    	if (action.equalsIgnoreCase("Customer")) {
+		int access = (int) session.getAttribute("userAccess");
+    	if (access == 1) {
     		SearchAction searchAction = new SearchAction();
     		//forward = "/A-test-shop.jsp";
     		forward = "/Catalog.jsp";
     		request.setAttribute( "productList", searchAction.GeneralListing(PharmaID) );
-    	} else if (action.equalsIgnoreCase("Pharmacist")) {
-    		ApprovalAction approvalAction = new ApprovalAction();
-    		forward = "A-test-pharmacistapproval.jsp";
-    		session.setAttribute("orderPharmacistCheck", approvalAction.getOrder(PharmaID) );
+    	} else if (access == 2) {
+    		if (action.equalsIgnoreCase("Approve")) {
+        		forward = "A-test-pharmacistapprovalsuccess.jsp";
+        		PurchaseAction purchaseAction = new PurchaseAction();
+        		purchaseAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ), true );
+        		
+        	} else if (action.equalsIgnoreCase("Reject")) {
+        		forward = "A-test-pharmacistapprovalsuccess.jsp";
+        		PurchaseAction purchaseAction = new PurchaseAction();
+        		purchaseAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ) , false );
+        		
+        	} else {
+	    		ApprovalAction approvalAction = new ApprovalAction();
+	    		forward = "A-test-pharmacistapproval.jsp";
+	    		session.setAttribute("orderPharmacistCheck", approvalAction.getOrder(PharmaID) );
+        	}
     	}
-    	
-    	
-    	
-    	else if (action.equalsIgnoreCase("Approve")) {
-    		forward = "A-test-pharmacistapprovalsuccess.jsp";
-    		PurchaseAction purchaseAction = new PurchaseAction();
-    		purchaseAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ), true );
-    		
-    	} else if (action.equalsIgnoreCase("Reject")) {
-    		forward = "A-test-pharmacistapprovalsuccess.jsp";
-    		PurchaseAction purchaseAction = new PurchaseAction();
-    		purchaseAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ) , false );
-    		
-    	} else {
+
+    	else {
     		forward = "";
     	}
 		RequestDispatcher view = request.getRequestDispatcher( forward );

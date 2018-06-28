@@ -47,12 +47,15 @@ public class PurchaseController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		int access = (int) session.getAttribute("userAccess");
-    	if (access == 1) {
+    	
+		if (access == 1) {
     		SearchAction searchAction = new SearchAction();
     		//forward = "/A-test-shop.jsp";
     		forward = "/Catalog.jsp";
     		request.setAttribute( "productList", searchAction.GeneralListing(PharmaID) );
-    	} else if (access == 2) {
+    	}
+    	
+    	else if (access == 2) {
     		if (action.equalsIgnoreCase("Approve")) {
         		forward = "A-test-pharmacistapprovalsuccess.jsp";
         		PurchaseAction purchaseAction = new PurchaseAction();

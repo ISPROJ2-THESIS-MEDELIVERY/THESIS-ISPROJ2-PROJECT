@@ -53,6 +53,8 @@ public class ApprovalAction {
 	//Add city in order to 
 	public List<Order> getOrder(int BranchID) {
 		List<Order> orders = new ArrayList<Order>();
+		
+		String Hold = "Select customer.CustomerName, `order`.OrderAddress, citylisting.CityName, `order`.DateOrdered, `order`.OrderType, `order`.SeniorDiscount, `order`.PaymentMethod, `order`.ActualCost, `order`.PrescriptionID From `order` Inner Join customer On `order`.CustomerID = customer.CustomerID Inner Join citylisting On customer.CityID = citylisting.CityID, branch Where `order`.CityID = branch.CityID And `order`.OrderStatus = 'PENDING' And branch.BranchID = ?";
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM `order` WHERE OrderStatus = 'PENDING' AND BranchID = ?")) {
 	        stmt.setInt(1, BranchID);
 	        try(ResultSet resultSet = stmt.executeQuery()) {

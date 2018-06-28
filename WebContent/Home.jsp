@@ -77,12 +77,11 @@
     
     
     <!-- Carousel loop start  -->
-	<c:forEach items="${FeaturedStock}" var="FStock">
 	    <div class="carousel slide" data-ride="carousel" id="carousel-2">
 	        <div class="carousel-inner" role="listbox">
-	            <div class="carousel-item">asd</div>
-	            <div class="carousel-item">zxc</div>
-	            <div class="carousel-item active">qwe</div>
+				<c:forEach items="${FeaturedStock}" var="FStock">
+	            	<div class="carousel-item"><c:out value="${FStock.product}" /></div>
+				</c:forEach>
 	        </div>
 	        <ol class="carousel-indicators">
 	            <li data-target="#carousel-2" data-slide-to="0"></li>
@@ -100,7 +99,6 @@
 	        	</a>
 	        </div>
 	    </div>
-	</c:forEach>
     
     <!-- Carousel loop end -->
     

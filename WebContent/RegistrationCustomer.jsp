@@ -81,7 +81,7 @@
                 <input class="form-control" type="password" name="Password" required="" placeholder="Create Password">
                 <input class="form-control" type="password" name="Password-repeat" required="" placeholder="Re-enter Password" style="margin:0px;">
                 </div>
-                <input class="form-control" type="text" name="Senior" required="" placeholder="Senior Citizen ID">
+                <input class="form-control" type="text" name="SeniorCitizenID" required="" placeholder="Senior Citizen ID">
                 <div class="form-group" style="margin: ;"></div>
         <div class="form-group">
             <div class="form-check"><label class="form-check-label" style="margin:20px;font-size:20px;"><input class="form-check-input" type="checkbox">I agree to the license terms.</label></div>

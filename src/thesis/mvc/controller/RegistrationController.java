@@ -100,7 +100,7 @@ public class RegistrationController extends HttpServlet {
 			test = Registration.makeCustomer(login, customer);
 		}
 		if(test){
-			forward = "/RegistrationSuccess.jsp";
+			forward =  "/RegistrationSuccess.jsp";
 		} else {
 			forward = "/AccountRecovery.jsp";
 		}

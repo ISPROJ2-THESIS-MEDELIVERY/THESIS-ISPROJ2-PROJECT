@@ -11,6 +11,7 @@ import java.util.Calendar;
 
 import thesis.mvc.implement.*;
 import thesis.mvc.model.*;
+import thesis.mvc.pageaction.ReportAction.CustomerSales;
 import thesis.mvc.utility.DBUtility;
 
 public class RegistrationAction {
@@ -74,6 +75,8 @@ public class RegistrationAction {
     	//Insert into Customer table
     	CustomerImplement CustomerImp = new CustomerImplement();
     	customer.setUserID(UserID);
+    	customer.setCityID(1);//Address
+    	customer.setAddress("test");
         if (customer.getSeniorCitizenID() == null) {
         	customer.setIsSeniorCitizen(false);
         } else {

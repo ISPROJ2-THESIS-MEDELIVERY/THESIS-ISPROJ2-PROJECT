@@ -66,7 +66,6 @@
 	<form action="RegistrationController" method="post">
         <div class="form-container">
             <div class="image-holder" style="background-image:url(&quot;assets/img/Medicine.jpg&quot;);width:501px;margin:18px;height:560px;"></div>
-            <form method="post">
                 <h2 class="text-center"><strong>Create</strong> an account.</h2>
                 <div class="form-group">
                     <div class="alert alert-danger" role="alert"><span style="color:#eb3b60;"><strong>* Required Fields</strong></span></div>
@@ -75,7 +74,7 @@
                     <input class="form-control" type="text" name="CAddress" required="" placeholder="Address *">
                     <!-- <div class="alert alert-danger" role="alert"><span style="color:#eb3b60;font-size:15px;"><strong>Please Upload a Photo of your Senior Citizen ID/ PWD ID&nbsp;</strong></span></div><input class="visible" type="file"> -->
                     <input class="form-control" type="email" name="CusEmail" required="" placeholder="Email *">
-                    <input class="form-control" type="text" name="ContactNumber" required="" placeholder="Contact Number *">
+                    <input class="form-control" type="number" name="ContactNumber" required="" placeholder="Contact Number *">
                     </div>
                 <div class="form-group">
                 <input class="form-control" type="password" name="Password" required="" placeholder="Create Password">

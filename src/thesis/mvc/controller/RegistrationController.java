@@ -51,12 +51,11 @@ public class RegistrationController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Boolean test = false;
 		conn = DBUtility.getConnection();
+		String forward;
 
-		RequestDispatcher view;
 		if (request.getParameter( "Password" ) != request.getParameter( "Password-repeat" ))
 		{
-			view = request.getRequestDispatcher( "/index.jsp" );
-			view.forward(request, response);
+			forward = "/index.jsp";
 		}
 		
 		Login login = new Login();
@@ -101,10 +100,11 @@ public class RegistrationController extends HttpServlet {
 			test = Registration.makeCustomer(login, customer);
 		}
 		if(test){
-			view = request.getRequestDispatcher( "/RegistrationSuccess.jsp" );
+			forward = "/RegistrationSuccess.jsp";
 		} else {
-			view = request.getRequestDispatcher( "/AccountRecovery.jsp" );
+			forward = "/AccountRecovery.jsp";
 		}
+		RequestDispatcher view = request.getRequestDispatcher( forward );
 		view.forward(request, response);
 	}
 }

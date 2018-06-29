@@ -118,27 +118,6 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td><label>Label</label></td>
-                                    <td><label>Label</label></td>
-                                    <td><label>Label</label></td>
-                                    <td>&nbsp;<label>Label</label></td>
-                                    <td><label>Label</label></td>
-                                    <td><a href="#">Download Image</a>
-                                        <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-4"><label class="form-check-label" for="formCheck-4">Approve</label></div>
-                                        <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-3"><label class="form-check-label" for="formCheck-3">Disapprove</label></div><label>Comment&nbsp;</label>
-                                        <div class="row">
-                                            <div class="col"><textarea name="CommentProductSale"></textarea></div>
-                                        </div>
-                                    </td>
-                                    <td><a href="#">Download Image</a>
-                                        <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Approve</label></div>
-                                        <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-2"><label class="form-check-label" for="formCheck-2">Disapprove</label></div><label>Comment&nbsp;</label>
-                                        <div class="row">
-                                            <div class="col"><textarea name="CommentPWD"></textarea></div>
-                                        </div>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>

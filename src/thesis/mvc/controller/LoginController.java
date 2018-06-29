@@ -46,8 +46,7 @@ public class LoginController extends HttpServlet {
 			session.removeAttribute("username");
 			session.removeAttribute("userAccess");
 			forward = "Home.jsp";
-		}
-		else {
+		} else {
 			forward = "A-test-pharmacistapproval.jsp";
 			OrderImplement orderImplement = new OrderImplement();
 			session.setAttribute("orderImplementPharmacist", orderImplement.getOrder() );
@@ -81,13 +80,13 @@ public class LoginController extends HttpServlet {
 			//Set Access Level
 			int AL = loginAction.checkUserType(LoginID);
 			session.setAttribute("userAccess", AL);
-			view = request.getRequestDispatcher( "/A-test-loginsuccess.jsp" );
+			view = request.getRequestDispatcher( "/Home.jsp" );
 			/*if (AL == 1) {
-				view = request.getRequestDispatcher( "/CustomerHome.jsp" );
+				view = request.getRequestDispatcher( "/Home.jsp" );
 			} else if (AL == 2) {
-				view = request.getRequestDispatcher( "/DispatcherHome.jsp" );
+				view = request.getRequestDispatcher( "/DeliveryPersonel.jsp" );
 			} else if (AL == 3) {
-				view = request.getRequestDispatcher( "/PharmacistHome.jsp" );
+				view = request.getRequestDispatcher( "/PharmacistPage.jsp" );
 			} else if (AL == 4) {
 				view = request.getRequestDispatcher( "/AdminHome.jsp" );
 			} else {

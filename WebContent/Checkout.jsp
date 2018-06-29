@@ -73,13 +73,19 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="row">
-                <div class="col">
-                    <h1>PAYMENT SUMMARY</h1><label class="col-form-label" style="width:445px;">PARACETAMOL[1]</label><label class="col-form-label" style="width:495px;">PXXX.00</label><label class="col-form-label" style="width:444px;">ITEM 2[3]</label>
-                    <label
-                        class="col-form-label" style="width:492px;">PXX.00</label><label class="col-form-label" style="width:445px;">ITEM 3[2]</label><label class="col-form-label" style="width:489px;">PXXX.00</label></div>
-            </div>
-        </div>
+        <h1>PAYMENT SUMMARY</h1>
+        	<!--
+            <c:forEach items="${CartList}" var="cartdetails">
+	    	<div class="row">
+		        <div class="col-sm-1"></div>
+		        <div class="col-sm-3">PARACETAMOL[1]</div>
+		        <div class="col-sm-2">PXXX.00</div>
+		        <div class="col-sm-3">PXXX.00</div>
+		        <div class="col-sm-3"></div>
+		    </div>
+		    </c:forEach>
+		    -->
+	    </div>
         <div class="card-body">
 		<form action="CheckoutController" method="post">
             <div class="row">

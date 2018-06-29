@@ -24,7 +24,6 @@ public class HomeController  extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		RequestDispatcher view;
 		view = request.getRequestDispatcher( "/invalidError.jsp" );
 		//request.setAttribute("customers", dao.getAllCustomers());

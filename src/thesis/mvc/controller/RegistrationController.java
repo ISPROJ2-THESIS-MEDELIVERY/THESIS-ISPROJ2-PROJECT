@@ -96,8 +96,8 @@ public class RegistrationController extends HttpServlet {
 			customer.setCustomerName( request.getParameter( "FullName" ) );
 			customer.setAddress( request.getParameter( "CAddress" ) );
 			customer.setEmail( request.getParameter( "CusEmail" ) );
-			customer.setSeniorCitizenID( request.getParameter( "SeniorCitizenID" ) );
 			customer.setContactNumber( Integer.parseInt(request.getParameter( "ContactNumber" )) );
+			customer.setSeniorCitizenID( request.getParameter( "SeniorCitizenID" ) );
 			test = Registration.makeCustomer(login, customer);
 		}
 		if(test){

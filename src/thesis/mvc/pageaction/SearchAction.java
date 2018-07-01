@@ -88,7 +88,8 @@ public class SearchAction {
 		conn = DBUtility.getConnection();
 		ProductList productList = new ProductList();
 		try {
-			Statement statement = conn.createStatemen0ductName, product.GenericName, product.ProductStrength, product.ProductForm, product.ProductPackaging, product.ProductDescription, product.ProductImage, stocks.Quantity, stocksprice.PriceSet FROM stocks INNER JOIN stocksprice ON stocksprice.StockID = stocks.StockID INNER JOIN product ON stocks.ProductID = product.ProductID WHERE stocksprice.IsCurrent = 1 AND stocks.BranchID = ?";
+			Statement statement = conn.createStatement();
+			String Query = "SELECT product.ProductName, product.GenericName, product.ProductStrength, product.ProductForm, product.ProductPackaging, product.ProductDescription, product.ProductImage, stocks.Quantity, stocksprice.PriceSet FROM stocks INNER JOIN stocksprice ON stocksprice.StockID = stocks.StockID INNER JOIN product ON stocks.ProductID = product.ProductID WHERE stocksprice.IsCurrent = 1 AND stocks.BranchID = ?";
 			PreparedStatement preparedStatement = conn.prepareStatement( Query );
 			preparedStatement.setInt( 1, BranchID );
 			ResultSet resultSet = preparedStatement.executeQuery();

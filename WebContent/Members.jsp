@@ -51,10 +51,10 @@
             <div class="collapse navbar-collapse"
                 id="navcol-1">
                 <ul class="nav navbar-nav">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="Home.jsp">Home</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="Home.jsp">Home</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="About.jsp">About</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="ContactUs.jsp">Contact Us</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="Members.jsp">Membership Registration</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="Members.jsp">Membership Registration</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Catalog.jsp">View Products</a></li>
                 </ul>
                 <ul class="nav navbar-nav ml-auto">

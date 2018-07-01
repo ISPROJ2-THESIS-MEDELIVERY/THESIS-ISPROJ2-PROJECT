@@ -52,9 +52,9 @@
                 id="navcol-1">
                 <ul class="nav navbar-nav">
                     <li class="nav-item" role="presentation"><a class="nav-link active" href="ManageCustomerAccount.jsp">Manage Customer Accounts</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="About.jsp">Manage Pharmeceutical Parters&nbsp;<br></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="ContactUs.jsp">Manage Delivery Service Accounts<br></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="ContactUs.jsp">Inventory</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="ManagePharmacyAccount.jsp">Manage Pharmeceutical Parters&nbsp;<br></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="ManageDeliveryCourierAccount.jsp">Manage Delivery Service Accounts<br></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="ManageInventory.jsp">Inventory</a></li>
                 </ul>
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Login.jsp">Login</a></li>

@@ -24,12 +24,16 @@ public class DeliveryImplement implements DeliveryDAO{
 	public int addDelivery(Delivery delivery) {
 		try {
 			String query = "INSERT INTO Delivery (DispatcherID, DriverID, PlateNumber, Comments) VALUES (?,?,?,?)";
-			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			PreparedStatement preparedStatement = conn.prepareStatement( query , Statement.RETURN_GENERATED_KEYS );
 			preparedStatement.setInt( 1, delivery.getDispatcherID() );
 			preparedStatement.setInt( 2, delivery.getDriverID() );
 			preparedStatement.setString( 3, delivery.getPlateNumber() );
 			preparedStatement.setString( 4, delivery.getComments() );
 			int NewID = preparedStatement.executeUpdate();
+			ResultSet rs = preparedStatement.getGeneratedKeys();
+			if (rs.next()) {
+				NewID = rs.getInt(1);
+			}
 			preparedStatement.close();
 			return NewID;
 		} catch (SQLException e) {

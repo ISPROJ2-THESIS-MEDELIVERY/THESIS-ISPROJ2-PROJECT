@@ -1,6 +1,7 @@
 package thesis.mvc.pageaction;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import thesis.mvc.implement.DeliveryImplement;
@@ -19,22 +20,25 @@ public class DispatcherAction {
 		conn = DBUtility.getConnection();
 	}
 	
-	public boolean DispatcherAction(int OrderID, int DispatcherID, int DriverID, String Comments) {
-		Delivery delivery = null;
-		delivery.setComments(Comments);
-		delivery.setDriverID(DriverID);
-		delivery.setDispatcherID(DispatcherID);
-		delivery.setComments(Comments);
-		
-		DeliveryImplement deliveryImplement = new DeliveryImplement();
-		int DeliveryID = deliveryImplement.addDelivery(delivery);
-		OrderImplement orderImplement = new OrderImplement();
-		Order updateOrder = null;
-		orderImplement.getOrderById( OrderID );
-		if (OrderID == 1 && DriverID == 1) {
+	public boolean DispatcherOrder(int OrderID, int DispatcherID, int DriverID, String Comments) {
+		try {
+			Delivery delivery = null;
+			delivery.setComments(Comments);
+			delivery.setDriverID(DriverID);
+			delivery.setDispatcherID(DispatcherID);
+			delivery.setComments(Comments);
+			
+			DeliveryImplement deliveryImplement = new DeliveryImplement();
+			int DeliveryID = deliveryImplement.addDelivery(delivery);
+			
+			OrderImplement orderImplement = new OrderImplement();
+			Order updateOrder = orderImplement.getOrderById(OrderID);
+			updateOrder.setDeliveryID( DeliveryID );
+			
+			orderImplement.updateOrder(updateOrder);
 			
 			return true;
-		} else {
+		} catch (Exception e) {
 			return false;			
 		}
 	}

@@ -66,7 +66,7 @@
                 	<c:otherwise>
 		                <ul class="nav navbar-nav ml-auto">
 		                    <li class="nav-item" role="presentation"><a class="nav-link" href="Login.jsp">Login</a></li>
-		                    <li class="nav-item" role="presentation"><a class="nav-link" href="Home.jsp">Register</a></li>
+		                    <li class="nav-item" role="presentation"><a class="nav-link" href="RegistrationCustomer.jsp">Register</a></li>
 		                </ul>
 		            </c:otherwise>
 				</c:choose>

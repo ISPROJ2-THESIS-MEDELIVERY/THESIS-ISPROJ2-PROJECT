@@ -3,6 +3,7 @@ package thesis.mvc.pageaction;
 import java.sql.Connection;
 import java.util.List;
 
+import thesis.mvc.implement.DeliveryImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.model.Delivery;
 import thesis.mvc.model.Dispatcher;
@@ -23,12 +24,15 @@ public class DispatcherAction {
 		delivery.setComments(Comments);
 		delivery.setDriverID(DriverID);
 		delivery.setDispatcherID(DispatcherID);
+		delivery.setComments(Comments);
 		
+		DeliveryImplement deliveryImplement = new DeliveryImplement();
+		int DeliveryID = deliveryImplement.addDelivery(delivery);
 		OrderImplement orderImplement = new OrderImplement();
 		Order updateOrder = null;
 		orderImplement.getOrderById( OrderID );
 		if (OrderID == 1 && DriverID == 1) {
-			orderImplement.updateOrder( updateOrder );
+			
 			return true;
 		} else {
 			return false;			

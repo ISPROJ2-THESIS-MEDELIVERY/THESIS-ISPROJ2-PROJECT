@@ -72,7 +72,7 @@
                     <input class="form-control" type="text" name="FullName" required="" placeholder="FullName *">
                     <input class="form-control" type="text" name="Username" required="" placeholder="Username *">
                     <input class="form-control" type="text" name="CAddress" required="" placeholder="Address *">
-                    <!-- <div class="alert alert-danger" role="alert"><span style="color:#eb3b60;font-size:15px;"><strong>Please Upload a Photo of your Senior Citizen ID/ PWD ID&nbsp;</strong></span></div><input class="visible" type="file"> -->
+                    <div class="alert alert-danger" role="alert"><span style="color:#eb3b60;font-size:15px;"><strong>Please Upload a Photo of your Senior Citizen ID/ PWD ID&nbsp;</strong></span></div><input class="visible" type="file">
                     <input class="form-control" type="email" name="CusEmail" required="" placeholder="Email *">
                     <input class="form-control" type="number" name="ContactNumber" required="" placeholder="Contact Number *">
                     </div>

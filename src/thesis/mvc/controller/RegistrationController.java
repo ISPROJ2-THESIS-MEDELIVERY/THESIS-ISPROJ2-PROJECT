@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+
 import javax.servlet.RequestDispatcher;
 //import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -62,6 +63,7 @@ public class RegistrationController extends HttpServlet {
 		login.setUsername( request.getParameter( "Username" ) );
 		login.setPassword( request.getParameter( "Password" ) );
 		String secretCode = request.getParameter( "SecretCode" );
+		Object Image = request.getParameter("image");
 		
 		if (secretCode == "i3Up8XmH04Jz151") {//Admin
 			Admin admin = new Admin();

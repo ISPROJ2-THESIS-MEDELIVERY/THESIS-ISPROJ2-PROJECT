@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import thesis.mvc.implement.DriverImplement;
 import thesis.mvc.implement.OrderImplement;
+import thesis.mvc.pageaction.DispatcherAction;
 import thesis.mvc.utility.DBUtility;
 
 @WebServlet("/DispatcherController")
@@ -48,7 +49,8 @@ public class DispatcherController {
     	boolean DoCheck = false;
     	
     	//Insert logic here
-
+    	DispatcherAction dispatcherAction = new DispatcherAction();
+    	
     	String forward = "";
     	if (DoCheck) {
     		forward = "/DeliverySuccess";

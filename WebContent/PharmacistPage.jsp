@@ -43,6 +43,10 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/Team-Boxed.css">
     <link rel="stylesheet" href="assets/css/TR-Form.css">
+    <link rel="stylesheet" href="assets/css/Custom.css">
+    <link rel="stylesheet" type="text/css" href="js/data_table/reset-min.css">
+	<link rel="stylesheet" type="text/css" href="js/data_table/complete.css">
+	
 </head>
 
 <body><img src="assets/img/MedeliveryLogo.png">
@@ -51,7 +55,7 @@
             <div class="collapse navbar-collapse"
                 id="navcol-1">
                 <ul class="nav navbar-nav">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="Home.jsp">Home</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="Home.jsp">Home</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="About.jsp">About</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="ContactUs.jsp">Contact Us</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Members.jsp">Membership Registration</a></li>
@@ -67,91 +71,153 @@
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-md-4"><button class="btn btn-primary" type="button" style="background-color:#56c5ff;">Button</button></div>
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col">
-                            <h1 class="text-center" style="font-family:Lora, serif;font-size:28px;">For Pharmacists<br></h1>
+                            <h1 class="text-center" style="font-family:Lora, serif;font-size:28px;">For Pharmacists Approval<br></h1>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4"></div>
             </div>
         </div>
     </div>
     <div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="table-responsive">
-                        <table class="table">
+        <div class="container">                           
+                    <div>
+                    <!-- First Table -->
+                    <h1 class="text-center" style="font-family:Lora, serif;font-size:28px;">Over the counter<br></h1>
+                        <table id="OTC" class="display nowrap pretty" style="width:100%">
+                            <thead>
+      <tr>
+      	  <th>Approval Status</th>
+      	  <th>Customer ID</th>
+      	  <th>Customer Name</th>
+      	  <th>Order ID</th>
+      	  <th>Address</th>
+      	  <th>Senior Discount</th>
+	      <th>Order Items</th>
+	      <th>Remarks</th>
+      </tr>
+		</thead>
+    
+    
+    
+    <tbody>
+	    <tr>
+	      <td>Approved/Rejected</td>
+	      <td>001</td>
+	      <td>Kyrie Fajardo</td>
+	      <td>1001</td>
+	      <td>Mandaluyong, Pioneer Woodlands</td>
+	      <td>N/A</td>
+        <td>
+          <table border = 4>
+              <thead>
+                <tr>
+                  <th>Medicine Name</th>
+                  <th>Medicine Description</th>
+                  <th>Order Quantity</th>
+                  <th>Order Cost</th>
+                  <th>Product Image</th>
+                  <th>Packaging</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Paracetamol</td>
+                  <td>For cough</td>
+                  <td>10</td>
+                  <td>P90</td>
+                  <td><image src="img/paracetamol.jpg"></td>
+                  <td>Capsule</td>
+                </tr>
+                <tr>
+                  <td>Advil</td>
+                  <td>For headache</td>
+                  <td>5</td>
+                  <td>P50</td>
+                  <td><image src="img/advil.jpg"></td>
+                  <td>Capsule</td>
+                </tr>
+                <tr>
+                  <td>Viagra</td>
+                  <td>For personal use</td>
+                  <td>50</td>
+                  <td>P20,000</td>
+                  <td><image src="img/viagra.jpg"></td>
+                  <td>tablet</td>
+                </tr>
+              </tbody>
+          </table>
+        </td>
+      <td><textarea rows="4" cols="50">
+</textarea></td>
+      </tr>
+	</tbody>
+                        </table>
+                        <br>
+                 <!-- Second Table -->
+                 <h1 class="text-center" style="font-family:Lora, serif;font-size:28px;">Prescription requests<br></h1>
+                        <table id="Prescription" class="pretty">
                             <thead>
                                 <tr>
-                                    <th>CustomerID</th>
-                                    <th>Customer Name</th>
-                                    <th>Medicine Name</th>
-                                    <th>Medicine Description</th>
-                                    <th>Amount / Qty</th>
-                                    <th>Product Sale Approval /prescription Approval</th>
-                                    <th>Senior Citizen/ Person With Disability - &nbsp;ID Approval for Discount</th>
+						            <th>ProductName</th>
+						            <th>GenericName</th>
+						            <th>ProductStrength</th>
+						            <th>ProductForm</th>
+						            <th>ProductPackaging</th>
+						            <th>ProductDescription</th>
+						            <th>ProductImage</th>
+						            <th>Quantity</th>
+						            <th>PriceSet</th>
+						            <th>Quantity & Buy</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><label>Label</label></td>
-                                    <td><label>Label</label></td>
-                                    <td><label>Label</label></td>
-                                    <td>&nbsp;&nbsp;<label>Label</label></td>
-                                    <td>&nbsp;<label>Label</label></td>
-                                    <td><a href="#">Download Image</a>
-                                        <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Approve</label></div>
-                                        <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-2"><label class="form-check-label" for="formCheck-2">Disapprove</label></div><label>Comment&nbsp;</label>
-                                        <div class="row">
-                                            <div class="col"><textarea name="CommentProductSale"></textarea></div>
-                                        </div>
-                                    </td>
-                                    <td><a href="#">Download Image</a>
-                                        <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Approve</label></div>
-                                        <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-2"><label class="form-check-label" for="formCheck-2">Disapprove</label></div><label>Comment&nbsp;</label>
-                                        <div class="row">
-                                            <div class="col"><textarea name="CommentPWD"></textarea></div>
-                                        </div>
-                                    </td>
-                                </tr>
+                              	<c:forEach items="${productList}" var="item">
+										<tr>
+											<td><c:out value="${item.productName}" /></td>
+											<td><c:out value="${item.genericName}" /></td>
+											<td><c:out value="${item.productStrength}" /></td>
+											<td><c:out value="${item.productForm}" /></td>
+											<td><c:out value="${item.productPackaging}" /></td>
+											<td><c:out value="${item.productDescription}" /></td>
+											<td><c:out value="${item.productImage}" /></td>
+											<td><c:out value="${item.quantity}" /></td>
+											<td><c:out value="${item.priceSet}" /></td>											
+											<td>
+												<form action='PurchaseController' method='post'>
+												<input type="hidden" name="ProductID" value="<c:out value="${item.productID}" />"/>
+												<select name='Quantity'>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+												</select>
+												<input type='submit' name='Action' value="Addtocart" style='display: on-hover' />
+												</form>
+											</td>
+										</tr>
+								</c:forEach>
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div></div>
-    <div></div>
+      </div>
+      </div>
+      <br>
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4"><button class="btn btn-primary" type="submit" style="background-color:#56c5ff;">Update Changes</button></div>
+                <div class="col-md-4"><button class="btn btn-primary" type="button" style="color:rgb(255,255,255);background-color:#56c5ff;width:212px;">Update Changes<br></button></div>
             </div>
         </div>
     </div>
     <div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4"><button class="btn btn-primary" type="button" style="background-color:#56c5ff;color:rgb(255,255,255);width:210px;">Print Financial Reports<br></button></div>
-                <div class="col-md-4"><button class="btn btn-primary" type="button" style="color:rgb(255,255,255);background-color:#56c5ff;width:212px;">Print Sale History<br></button></div>
-            </div>
-        </div>
-    </div>
-    <div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4"></div>
-                <div class="col-md-4"></div>
-            </div>
-        </div>
     </div>
 	
 	
@@ -176,6 +242,26 @@
     <script src="assets/js/index.js"></script>
     <script src="assets/js/multi-item-carousel.js"></script>
     <script src="assets/js/Simple-Slider1.js"></script>
+        <script type="text/javascript"  src="js/jquery-1.8.3.js"></script>
+<script type="text/javascript"  src="js/data_table/jquery.dataTables.min.js"></script>
+<script type="text/javascript"  src="js/data_table/jquery.dataTables.plugins.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#OTC").dataTable({
+                "sPaginationType": "full_numbers",
+                "bJQueryUI": true,
+                "scrollX": true
+            });
+        });
+        </script>
+        <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Prescription").dataTable({
+                "sPaginationType": "full_numbers",
+                "bJQueryUI": true
+            });
+        });
+        </script>
 </body>
 
 </html>

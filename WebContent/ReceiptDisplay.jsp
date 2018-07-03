@@ -156,7 +156,7 @@
         $(document).ready(function () {
             $("#Products").dataTable({
                 "sPaginationType": "full_numbers",
-                "bJQueryUI": true
+                "bJQueryUI": true ,,
                 "searching": false
             });
         });

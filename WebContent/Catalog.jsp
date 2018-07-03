@@ -70,7 +70,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6"><select class="form-control" name="Over The Counter "><option value="">Categories</option><option value="">Prescription</option><option value="">Over The Counter</option></select></div>          
-                <div class="col-md-6"><select class="form-control" name="Medicine"><option value="">Medicine Type</option><option value="">Branded</option><option value="">Generic</option></select></div>
             </div>
         </div>
     </div>
@@ -78,7 +77,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6"><select class="form-control" name="Medicine" style="margin:1px;"><option value="">Filter</option><option value="">Name</option><option value="">Best Selling</option><option value="">Price: Low to High</option><option value="">Price: High to Low</option></select></div>            
-                <div class="col-md-6"><select class="form-control" name="Medicine" style="margin:1px;"><option value="">Branch</option><option value="">Mercury</option><option value="">Watsons</option><option value="">The Generics Pharmacy</option><option value="">South Star Drug</option></select></div>
             </div>
         </div>
     </div>
@@ -148,7 +146,7 @@
       </div>
       </div>
       <div style="text-align:center;">
-      <a href="Cart.jsp" class="button">Proceed to Checkout</a>
+      <a href="Cart.jsp" class="button">Proceed to Cart</a>
       </div>
       
             

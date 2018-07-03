@@ -43,6 +43,8 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/Team-Boxed.css">
     <link rel="stylesheet" href="assets/css/TR-Form.css">
+    <link rel="stylesheet" type="text/css" href="js/data_table/reset-min.css">
+	<link rel="stylesheet" type="text/css" href="js/data_table/complete.css">
 </head>
 
 <body><img src="assets/img/adminlogo.png">
@@ -60,69 +62,63 @@
                 <ul class="nav navbar-nav ml-auto"></ul>
             </div>
         </div>
-    </nav><select><optgroup label="This is a group"><option value="12" selected="">Filter</option><option value="13">Courier Service ID</option><option value="14">Company Name</option><option value="">Company Street</option><option value="">Company Barangay</option><option value="">Company City</option><option value="">Date Added</option></optgroup></select>
-    <div
-        class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Courier Service ID</th>
-                    <th>Company Name</th>
-                    <th>Company Street</th>
-                    <th>Company Barangay</th>
-                    <th>Company City</th>
-                    <th>Company Contact/Landline</th>
-                    <th>Date Added</th>
-                    <th>Contact Number</th>
-                    <th>Business License / Document (Proof of Operation)</th>
-                    <th>Function</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><label>Label</label></td>
-                    <td><label>Label</label></td>
-                    <td><label>Label</label></td>
-                    <td><label>Label</label></td>
-                    <td><label>Label</label></td>
-                    <td><label>Label</label></td>
-                    <td><label>Label</label></td>
-                    <td><label>Label</label></td>
-                    <td><button class="btn btn-primary" type="submit">View</button></td>
-                    <td><button class="btn btn-primary" type="submit">Delete</button><button class="btn btn-primary" type="submit">Update</button></td>
-                </tr>
-                <tr>
-                    <td><label>Label</label></td>
-                    <td><label>Label</label></td>
-                    <td><label>Label</label></td>
-                    <td><label>Label</label></td>
-                    <td><label>Label</label></td>
-                    <td><label>Label</label></td>
-                    <td><label>Label</label></td>
-                    <td><label>Label</label></td>
-                    <td><button class="btn btn-primary" type="submit">View</button></td>
-                    <td><button class="btn btn-primary" type="submit">Delete</button><button class="btn btn-primary" type="submit">Update</button></td>
-                </tr>
-            </tbody>
-        </table>
-        </div>
-        <div class="features-boxed"></div>
-        <div class="simple-slider">
-            <div class="swiper-container">
-                <div class="swiper-wrapper"></div>
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
+    </nav>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6"><select class="form-control" name="Over The Counter "><option value="">Filter</option><option value="13">Courier Service ID</option><option value="14">Company Name</option><option value="">Company Street</option><option value="">Company Barangay</option><option value="">Company City</option><option value="">Date Added</option></select></div>          
             </div>
         </div>
-        <div class="carousel slide" data-ride="carousel" id="carousel-1">
-            <div class="carousel-inner" role="listbox"></div>
-            <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev"><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-slide="next"><span class="sr-only">Next</span></a></div>
-            <ol
-                class="carousel-indicators"></ol>
-        </div>
+    </div>
+    <br>
+    <div>
+        <div class="container">                           
+                    <div>
+                        <table id="DeliveryAccount" class="pretty">
+                            <thead>
+                                <tr>
+						            <th>Courier Service ID</th>
+						            <th>Company Name</th>
+						            <th>Company Street</th>
+						            <th>Company Barangay</th>
+						            <th>Company City</th>
+						            <th>Company Province</th>
+						            <th>Company Landline</th>
+						            <th>Company Cellular</th>
+						            <th>Company Contact</th>
+						            <th>Date Added</th>
+						            <th>Edit Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              	<c:forEach items="${productList}" var="item">
+										<tr>
+											<td><c:out value="${item.CourierServiceID}" /></td>
+											<td><c:out value="${item.CompanyName}" /></td>
+											<td><c:out value="${item.CompanyStreet}" /></td>
+											<td><c:out value="${item.CompanyBarangay}" /></td>
+											<td><c:out value="${item.CompanyCity}" /></td>
+											<td><c:out value="${item.CompanyProvince}" /></td>
+											<td><c:out value="${item.CompanyLandline}" /></td>
+											<td><c:out value="${item.CompanyCellular}" /></td>
+											<td><c:out value="${item.CompanyContact}" /></td>											
+											<td>
+												<form action='' method='post'>
+												<input type="hidden" name="" value="<c:out value="" />"/>
+												<input type='submit' name='Action' value="Update" style='display: on-hover' />
+												</form>
+											</td>
+											
+										</tr>
+								</c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+      </div>
+      </div>
         <form action="ManageDeliveryCourierAccountController" method="post">
-            <h2 class="text-center"><strong>Register Company(Dispatcher)</strong></h2>
+            <h1 class="text-center">Register Company(Dispatcher)</h1>
             <div class="form-row" style="padding:40px;">
                 <div class="col"><input class="form-control" type="text" name="CourierService" required="" placeholder="Courier Service"></div>
             </div>
@@ -166,6 +162,17 @@
         <script src="assets/js/index.js"></script>
         <script src="assets/js/multi-item-carousel.js"></script>
         <script src="assets/js/Simple-Slider1.js"></script>
+            <script type="text/javascript"  src="js/jquery-1.8.3.js"></script>
+<script type="text/javascript"  src="js/data_table/jquery.dataTables.min.js"></script>
+<script type="text/javascript"  src="js/data_table/jquery.dataTables.plugins.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#DeliveryAccount").dataTable({
+                "sPaginationType": "full_numbers",
+                "bJQueryUI": true
+            });
+        });
+        </script>
 </body>
 
 </html>

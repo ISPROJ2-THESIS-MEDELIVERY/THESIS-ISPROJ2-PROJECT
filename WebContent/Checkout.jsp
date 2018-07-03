@@ -43,6 +43,8 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/Team-Boxed.css">
     <link rel="stylesheet" href="assets/css/TR-Form.css">
+    <link rel="stylesheet" type="text/css" href="js/data_table/reset-min.css">
+	<link rel="stylesheet" type="text/css" href="js/data_table/complete.css">
 </head>
 
 <body><img src="assets/img/MedeliveryLogo.png">
@@ -73,7 +75,60 @@
             </div>
         </div>
         <div class="card-body">
-        <h1>PAYMENT SUMMARY</h1>
+        <h1>Purchase Summary</h1>
+        <br>
+        <div class="container">                           
+                    <div>
+                        <table id="Receipt" class="pretty">
+                            <thead>
+                                <tr>
+						            <th>Item</th>
+						            <th>Item Description</th>
+						            <th>Image</th>
+						            <th>Size</th>
+						            <th>Prescription Required</th>
+						            <th>Quantity</th>
+						            <th>Unit Price</th>
+						            <th>Total Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              	<c:forEach items="${productList}" var="item">
+									<!--  <form action='PurchaseController' method='post'>-->
+										<tr>
+											<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
+											<td><c:out value="${item.Item}" /></td>
+											<td><c:out value="${item.ItemDescription}" /></td>
+											<td><c:out value="${item.Image}" /></td>
+											<td><c:out value="${item.Size}" /></td>
+											<td><c:out value="${item.PrescriptionRequired}" /></td>
+											<td><c:out value="${item.Quantity}" /></td>
+											<td><c:out value="${item.UnitPrice}" /></td>
+											<td><c:out value="${item.Total}" /></td>
+											<td><c:out value="${item.Cost}" /></td>											
+											<td>
+												<select name='Quantity'>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+												</select>
+											</td>
+											<td>
+												<input type='submit' name='Action' value="Addtocart" style='display: on-hover' />
+											</td>
+										</tr>
+									<!--  </form>-->
+								</c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
         	<!--
             <c:forEach items="${CartList}" var="cartdetails">
 	    	<div class="row">
@@ -90,9 +145,9 @@
 		<form action="CheckoutController" method="post">
             <div class="row">
                 <div class="col">
-                    <h1>PAYMENT DETAILS</h1>
+                    <h1>Payment Details</h1>
                     <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-2"><label class="form-check-label" for="formCheck-2">CASH ON DELIVERY</label></div>
-                    <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1"><label class="form-check-label" for="formCheck-1">CREDIT CARD</label></div><label class="col-form-label">Payment Amount:&nbsp;</label><input type="text" placeholder="₱">
+                    <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1"><label class="form-check-label" for="formCheck-1">CREDIT CARD</label></div><label class="col-form-label">Payment Amount:&nbsp;</label><input type="text">
                     <div
                         class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label class="form-check-label" for="formCheck-3">I agree to the General Conditions of Use to permit and that my information as described on this page and used the Medelivery Privacy Policy</label>
 						</div>
@@ -122,6 +177,18 @@
     <script src="assets/js/index.js"></script>
     <script src="assets/js/multi-item-carousel.js"></script>
     <script src="assets/js/Simple-Slider1.js"></script>
+    <script type="text/javascript"  src="js/jquery-1.8.3.js"></script>
+<script type="text/javascript"  src="js/data_table/jquery.dataTables.min.js"></script>
+<script type="text/javascript"  src="js/data_table/jquery.dataTables.plugins.js"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            $("#Receipt").dataTable({
+                "sPaginationType": "full_numbers",
+                "bJQueryUI": true ,,
+                "searching": false
+            });
+        });
+        </script>
 </body>
 
 </html>

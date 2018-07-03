@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import thesis.mvc.implement.CustomerImplement;
+import thesis.mvc.implement.LoginImplement;
 import thesis.mvc.model.Admin;
 import thesis.mvc.model.Customer;
 import thesis.mvc.model.Dispatcher;
@@ -43,8 +45,10 @@ public class RegistrationController extends HttpServlet {
 		
 		String forward = "";
 		
-		if () {
-			
+		if (RegisterUnique) {
+			LoginImplement loginImplement = new LoginImplement();
+			loginImplement.ConfirmLogin(ConfirmID);
+			forward = "/Login.jsp";
 		} else if (IDcheck){
 			forward = "";//page to the admin's registration
 		} else {

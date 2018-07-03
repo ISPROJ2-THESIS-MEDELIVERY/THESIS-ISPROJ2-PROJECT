@@ -23,7 +23,7 @@ public class RegistrationAction {
 	}
 	DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 	
-    public boolean makeCustomer(Login login, Customer customer) {
+    public int makeCustomer(Login login, Customer customer) {
 		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 		int UserID = 0;
 		
@@ -32,12 +32,12 @@ public class RegistrationAction {
             stmt.setString(1, login.getUsername());
             try(ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    return false;
+                    return 0;
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return 0;
         }
     	
     	//Insert into Login table
@@ -48,7 +48,7 @@ public class RegistrationAction {
         	LoginImp.addLogin(login);
     	} catch (Exception e) {
     		e.printStackTrace();
-    		return false;
+    		return 0;
     	}
     	
     	//Get the UserID
@@ -63,13 +63,13 @@ public class RegistrationAction {
                 if (rs.next()) {
                 	UserID = rs.getInt(1);
                 }  else {
-                    return false;
+                    return 0;
                 }
 
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return 0;
         }
     	
     	//Insert into Customer table
@@ -86,7 +86,7 @@ public class RegistrationAction {
         	CustomerImp.addCustomer(customer);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return 0;
 		}
         
         //Audit Log
@@ -97,7 +97,7 @@ public class RegistrationAction {
         audit.setActionTaken("User ID " + UserID + " With the username " + login.getUsername() + " made an account.");
         AuditImplement AuditImp = new AuditImplement();
         AuditImp.addAudit(audit);
-        return true;
+        return UserID;
     }
     
 	public boolean makeAdmin(Login login, Admin admin) {

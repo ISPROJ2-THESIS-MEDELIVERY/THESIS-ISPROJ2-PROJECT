@@ -16,7 +16,7 @@ public class HomeAction {
 	public HomeAction() {
 		conn = DBUtility.getConnection();
 	}
-	
+	/*
 	public class Display {
 		private String Product;
 		private String Pharmacy;
@@ -75,5 +75,6 @@ public class HomeAction {
 		}
 		return displays;
 	}
+	*/
 	
 }

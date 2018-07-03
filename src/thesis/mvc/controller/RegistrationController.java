@@ -115,10 +115,9 @@ public class RegistrationController extends HttpServlet {
 			customer.setContactNumber( Integer.parseInt(request.getParameter( "ContactNumber" )) );
 			customer.setSeniorCitizenID( request.getParameter( "SeniorCitizenID" ) );
 			SendEmail sendEmail = new SendEmail();
-			test = Registration.makeCustomer(login, customer);
-			String ConfirmLink = "http://localhost:8080/THESIS-ISPROJ2-PROJECT/RegistrationController?SpecialKey=true&UserID=" + 1;
-			//customer.getEmail()
-			sendEmail.send("edennyyu@gmail.com", "Medilivery Account Confirmation", ""
+			int ID = Registration.makeCustomer(login, customer);
+			String ConfirmLink = "http://localhost:8080/THESIS-ISPROJ2-PROJECT/RegistrationController?SpecialKey=true&UserID=" + ID;
+			sendEmail.send(customer.getEmail(), "Medilivery Account Confirmation", ""
 					+ "Dear ," + 
 					"<p>" + 
 					"Thank you for creating your Medelivery Account." + 

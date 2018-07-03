@@ -76,7 +76,7 @@
     <h2 class="text-center">Featured Products</h2>
     
     
-    <!-- Carousel loop start  -->
+    <!-- Carousel loop start
 	    <div class="carousel slide" data-ride="carousel" id="carousel-2">
 	        <div class="carousel-inner" role="listbox">
 				<c:forEach items="${FeaturedStock}" var="FStock">
@@ -100,18 +100,26 @@
 	        </div>
 	    </div>
     
-    <!-- Carousel loop end -->
-    <h1 align="center" style="font-family:Lora, serif;font-size:55px;">Select your pharmacy</h1>
-    <div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3"><a href="Catalog.jsp"><img src="assets/img/mercury_drug.jpg" style="width:100px;"></a></div>
-                <div class="col-md-3"><a href="Catalog.jsp"><img src="assets/img/MANSON-Drug-Logo-Philippines.jpg" width="200px"></a></div>
-                <div class="col-md-3"><a href="Catalog.jsp"><img src="assets/img/South_star_drug.png" width="200px" style="margin:0px;"></a></div>
-                <div class="col-md-3"><a href="Catalog.jsp"><img src="assets/img/watsons.png" width="200px" style="margin:0px;"></a></div>
-            </div>
-        </div>
-    </div>
+    Carousel loop end -->
+    <c:choose>
+	    <c:when test = "${userID > 0}">
+		    <h1 align="center" style="font-family:Lora, serif;font-size:55px;">Select your pharmacy</h1>
+			<div>
+			    <div class="container">
+			        <div class="row">
+				    <c:forEach items="${PharmaList}" var="FStock">
+						<div class="col-md-3"><a href="Catalog.jsp&"></a></div>
+					</c:forEach>
+			        </div>
+			    </div>
+			</div>
+		</c:when>
+	    <c:otherwise>
+    		<h1 align="center" style="font-family:Lora, serif;font-size:55px;">PLEASE LOG IN OR REGISTER FIRST</h1>
+		</c:otherwise>
+	</c:choose>
+    
+    
     
     <div class="features-boxed">
         <div class="container">

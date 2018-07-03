@@ -215,9 +215,9 @@ public class PurchaseController extends HttpServlet {
 			String CustomerEmail = customerImplement.getCustomerById(0).getEmail();
 
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-			boolean checker = purchaseAction.purchaseOrder(order, OrderDetails) && sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, "This is a test message");
-			
-			if(order == null || OrderDetails.isEmpty() || !checker) {
+			//boolean checker = purchaseAction.purchaseOrder(order, OrderDetails) && sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, "This is a test message");
+			purchaseAction.purchaseOrder(order, OrderDetails);
+			if(order == null || OrderDetails.isEmpty()) {
 				forward = "/index.jsp"; //or an error page
 			} else {
 				session.setAttribute("orderReciept", order);

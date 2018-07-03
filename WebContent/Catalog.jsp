@@ -136,9 +136,19 @@
                             </tbody>
                         </table>
                     </div>
+                    <br>
+                    <li class="form-line" data-type="control_text" id="id_14">
+        <div id="cid_14" class="form-input-wide alert alert-info"  role="alert">
+          <div id="text_14" class="form-html" data-component="text">
+            <p><em>NOTE: Prescription is <span style="color: #ff0000;"><strong>required</strong></span> to purchase a new medicine that is not yet found on your previous medication record.</em></p>
+          <br>
+          <input class="visible" type="file">
+          </div>
+        </div>
+      </li>
                 </div>
             </div>
-    
+            
   
     
     <div></div>

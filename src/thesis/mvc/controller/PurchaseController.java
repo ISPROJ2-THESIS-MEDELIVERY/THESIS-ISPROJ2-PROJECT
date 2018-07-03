@@ -52,23 +52,22 @@ public class PurchaseController extends HttpServlet {
 			action = request.getParameter( "action" );			
 		}
 		
-		int PharmaID = Integer.parseInt( request.getParameter( "PharmaID" ) );
+		int PharmaID = 1;
 		if (request.getParameter("PharmaID") != null && !request.getParameter("PharmaID").isEmpty()) {
 			PharmaID = Integer.parseInt( request.getParameter( "PharmaID" ) );	
 		}
 		HttpSession session = request.getSession();
 		
-		//int access = (int) session.getAttribute("userAccess");
+		int access = 1;//(int) session.getAttribute("userAccess");
 		
 		boolean test = true;
     	
-		/*if (access == 1) {
+		if (access == 1) {
     		SearchAction searchAction = new SearchAction();
     		//forward = "/A-test-shop.jsp";
     		forward = "/Catalog.jsp";
-    		//request.setAttribute( "productList", searchAction.GeneralListing(PharmaID) );
-    		request.setAttribute( "productList", searchAction.GeneralListing(1) );
-    	} else if (test) { */
+    		request.setAttribute( "productList", searchAction.GeneralListing(PharmaID) );
+    	} else if (access == 2) {
     		if (action.equalsIgnoreCase("Approve")) {
         		forward = "A-test-pharmacistapprovalsuccess.jsp";
         		PurchaseAction purchaseAction = new PurchaseAction();
@@ -86,11 +85,10 @@ public class PurchaseController extends HttpServlet {
         	} else {
             	forward = "index.jsp";
             }
-    	//}
-
-    	//else {
-    	//	forward = "index.jsp";
-    	//}
+    	}
+    	else {
+    		forward = "index.jsp";
+    	}
 		RequestDispatcher view = request.getRequestDispatcher( forward );
 		view.forward(request, response);
 		/*

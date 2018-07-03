@@ -77,4 +77,19 @@ public class HomeAction {
 	}
 	*/
 	
+	public List<String> getPharmacy() {
+		List<String> Pharmacy = new ArrayList<String>();
+		try {
+			Statement statement = conn.createStatement();
+			ResultSet resultSet = statement.executeQuery( "SELECT DISTINCT `PharmacyName` FROM `branch`");
+			while( resultSet.next() ) {
+				Pharmacy.add(resultSet.getString(1));
+			}
+			resultSet.close();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Pharmacy;
+	}
 }

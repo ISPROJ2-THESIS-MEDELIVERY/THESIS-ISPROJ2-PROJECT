@@ -107,8 +107,8 @@
 			<div>
 			    <div class="container">
 			        <div class="row">
-				    <c:forEach items="${PharmaList}" var="FStock">
-						<div class="col-md-3"><a href="Catalog.jsp&"></a></div>
+				    <c:forEach items="${Pharmacy}" var="FStock">
+						<div class="col-md-3"><a href="Catalog.jsp?"></a></div>
 					</c:forEach>
 			        </div>
 			    </div>

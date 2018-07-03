@@ -97,13 +97,11 @@
 						            <th>ProductImage</th>
 						            <th>Quantity</th>
 						            <th>PriceSet</th>
-						            <th>Quantity</th>
-						            <th>Action</th>
+						            <th>Quantity & Buy</th>
                                 </tr>
                             </thead>
                             <tbody>
                               	<c:forEach items="${productList}" var="item">
-									<!--  <form action='PurchaseController' method='post'> -->
 										<tr>
 											<td><c:out value="${item.productName}" /></td>
 											<td><c:out value="${item.genericName}" /></td>
@@ -115,6 +113,8 @@
 											<td><c:out value="${item.quantity}" /></td>
 											<td><c:out value="${item.priceSet}" /></td>											
 											<td>
+												<form action='PurchaseController' method='post'>
+												<input type="hidden" name="ProductID" value="<c:out value="${item.productID}" />"/>
 												<select name='Quantity'>
 													<option value="1">1</option>
 													<option value="2">2</option>
@@ -126,12 +126,10 @@
 													<option value="8">8</option>
 													<option value="9">9</option>
 												</select>
-											</td>
-											<td>
 												<input type='submit' name='Action' value="Addtocart" style='display: on-hover' />
+												</form>
 											</td>
 										</tr>
-									<!--  </form> -->
 								</c:forEach>
                             </tbody>
                         </table>

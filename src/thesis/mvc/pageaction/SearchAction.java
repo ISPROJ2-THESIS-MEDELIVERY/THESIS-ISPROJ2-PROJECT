@@ -19,6 +19,7 @@ public class SearchAction {
 		conn = DBUtility.getConnection();
 	}
 	public class ProductList {
+		private int ProductID;
 		private String ProductName;
 		private String GenericName;
 		private String ProductStrength;
@@ -28,6 +29,12 @@ public class SearchAction {
 		private String ProductImage;
 		private String Quantity;
 		private double PriceSet;
+		public int getProductID() {
+			return ProductID;
+		}
+		public void setProductID(int productID) {
+			ProductID = productID;
+		}
 		public String getProductName() {
 			return ProductName;
 		}
@@ -89,22 +96,23 @@ public class SearchAction {
 		List<ProductList> productLists = new ArrayList<ProductList>();
 		try {
 			Statement statement = conn.createStatement();
-			String Query = "SELECT product.ProductName, product.GenericName, product.ProductStrength, product.ProductForm, product.ProductPackaging, product.ProductDescription, product.ProductImage, stocks.Quantity, stocksprice.PriceSet FROM stocks INNER JOIN stocksprice ON stocksprice.StockID = stocks.StockID INNER JOIN product ON stocks.ProductID = product.ProductID WHERE stocksprice.IsCurrent = 1 AND stocks.BranchID = ?";
+			String Query = "SELECT product.ProductID, product.ProductName, product.GenericName, product.ProductStrength, product.ProductForm, product.ProductPackaging, product.ProductDescription, product.ProductImage, stocks.Quantity, stocksprice.PriceSet FROM stocks INNER JOIN stocksprice ON stocksprice.StockID = stocks.StockID INNER JOIN product ON stocks.ProductID = product.ProductID WHERE stocksprice.IsCurrent = 1 AND stocks.BranchID = ?";
 			PreparedStatement preparedStatement = conn.prepareStatement( Query );
 			preparedStatement.setInt( 1, BranchID );
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			while( resultSet.next() ) {
 				ProductList productList = new ProductList();
-				productList.setProductName( resultSet.getString(1) );
-				productList.setGenericName( resultSet.getString(2) );
-				productList.setProductStrength( resultSet.getString(3) );
-				productList.setProductForm( resultSet.getString(4) );
-				productList.setProductPackaging( resultSet.getString(5) );
-				productList.setProductDescription( resultSet.getString(6) );
-				productList.setProductImage( resultSet.getString(7) );
-				productList.setQuantity( resultSet.getString(8) );
-				productList.setPriceSet( resultSet.getDouble(9) );
+				productList.setProductID( resultSet.getInt(1) );
+				productList.setProductName( resultSet.getString(2) );
+				productList.setGenericName( resultSet.getString(3) );
+				productList.setProductStrength( resultSet.getString(4) );
+				productList.setProductForm( resultSet.getString(5) );
+				productList.setProductPackaging( resultSet.getString(6) );
+				productList.setProductDescription( resultSet.getString(7) );
+				productList.setProductImage( resultSet.getString(8) );
+				productList.setQuantity( resultSet.getString(9) );
+				productList.setPriceSet( resultSet.getDouble(10) );
 				productLists.add(productList);
 			}
 			resultSet.close();

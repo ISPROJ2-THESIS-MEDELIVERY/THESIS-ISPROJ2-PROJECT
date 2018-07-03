@@ -123,7 +123,7 @@ public class PurchaseController extends HttpServlet {
 				boolean SID = customer.isIsSeniorCitizen();
 				int CID = customer.getCityID();
 				Branch SelectedBranch = new Branch();
-				SelectedBranch = (Branch) session.getAttribute("SelectedBranch");
+				//SelectedBranch = (Branch) session.getAttribute("SelectedBranch");
 				int BID = 1;//SelectedBranch.getBranchID();
 				
 				order = purchaseAction.setInitalOrder(UID, ADD, SID, CID, BID);

@@ -54,6 +54,7 @@
                     <li class="nav-item" role="presentation"><a class="nav-link active" href="About.jsp">About</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="ContactUs.jsp">Contact Us</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Members.jsp">Membership Registration</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="Catalog.jsp">View Products</a></li>
                 </ul>
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Login.jsp">Login</a></li>

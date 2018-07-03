@@ -67,7 +67,9 @@
     <div class="col">
         <h1>MY ORDER</h1>
     </div>
-    <div class="col"><button class="btn btn-primary" type="button" style="background-color:#222222;padding:12px;">ADD MORE PRODUCTS+</button></div>
+    <div class="col">
+    <a href="Catalog.jsp"><button class="btn btn-primary" type="button" style="background-color:#222222;padding:12px;">ADD MORE PRODUCTS+</button></a>
+    </div>
     <div class="col">
         <div class="table-responsive">
             <table class="table">
@@ -101,15 +103,6 @@
         </div>
     </div>
     <div class="col float-left" style="width:1008px;">
-        <div class="form-group float-left" style="width:974px;">
-            <div class="col float-left" style="width:989px;"><label class="col-form-label float-left">Upload Senior Citizen ID Photo for Discount(s)</label></div>
-        </div>
-        <div class="row" style="padding:15px;margin:0px;">
-            <div class="col"><input type="file" accept="image/*" name="SeniorCitizenID"></div>
-        </div>
-        <div class="form-group float-left" style="width:976px;">
-            <div class="col float-left" style="width:967px;"><button class="btn btn-primary float-left" type="button" style="background-color:#2779a3;font-size:23px;">Apply</button></div>
-        </div>
         <div class="form-group float-left" style="width:961px;">
             <div class="col float-left" style="width:274px;"><label class="col-form-label">Subtotal:</label><label class="col-form-label float-right">PXXX.00</label></div>
         </div>
@@ -122,23 +115,10 @@
         <div class="form-group float-left" style="width:958px;">
         	<form action="PurchaseController" method="post">
             	<div class="col float-left">
-            		<input class="btn btn-primary float-left" type="submit" style="padding:19px;font-size:25px;background-color:#2779a3;" name="Action" value="Checkout">Checkout</input>
+            		<input class="btn btn-primary float-left" type="submit" style="padding:19px;font-size:25px;background-color:#2779a3;" name="Action" value="Checkout"></input>
             	</div>
         	</form>
         </div>
-    </div>
-    <div class="footer-basic">
-        <footer>
-            <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
-            <ul class="list-inline">
-                <li class="list-inline-item"><a href="Home.jsp">Home</a></li>
-                <li class="list-inline-item"></li>
-                <li class="list-inline-item"><a href="About.jsp">About</a></li>
-                <li class="list-inline-item"><a href="#">Terms</a></li>
-                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-            </ul>
-            <p class="copyright">Medelivery © 2018</p>
-        </footer>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>

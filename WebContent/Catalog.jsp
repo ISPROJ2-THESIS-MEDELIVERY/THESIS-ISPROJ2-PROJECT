@@ -40,7 +40,8 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/Team-Boxed.css">
-    <link rel="stylesheet" href="assets/css/TR-Form.css">    
+    <link rel="stylesheet" href="assets/css/TR-Form.css">
+    <link rel="stylesheet" href="assets/css/Custom.css">       
     <link rel="stylesheet" type="text/css" href="js/data_table/reset-min.css">
 	<link rel="stylesheet" type="text/css" href="js/data_table/complete.css">
 </head>
@@ -144,8 +145,12 @@
           </div>
         </div>
       </li>
-                </div>
-            </div>
+      </div>
+      </div>
+      <div style="text-align:center;">
+      <a href="Cart.jsp" class="button">Proceed to Checkout</a>
+      </div>
+      
             
   
     
@@ -162,7 +167,7 @@
                 <li class="list-inline-item"><a href="#">Terms</a></li>
                 <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
             </ul>
-            <p class="copyright">Medelivery Â© 2018</p>
+            <p class="copyright">Medelivery © 2018</p>
         </footer>
     </div>
     <script src="assets/js/jquery.min.js"></script>

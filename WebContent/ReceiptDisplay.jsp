@@ -43,6 +43,8 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/Team-Boxed.css">
     <link rel="stylesheet" href="assets/css/TR-Form.css">
+    <link rel="stylesheet" type="text/css" href="js/data_table/reset-min.css">
+	<link rel="stylesheet" type="text/css" href="js/data_table/complete.css">
 </head>
 
 <body><img src="assets/img/MedeliveryLogo.png">
@@ -51,7 +53,7 @@
             <div class="collapse navbar-collapse"
                 id="navcol-1">
                 <ul class="nav navbar-nav">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="Home.jsp">Home</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="Home.jsp">Home</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="About.jsp">About</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="ContactUs.jsp">Contact Us</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Members.jsp">Membership Registration</a></li>
@@ -64,202 +66,64 @@
             </div>
         </div>
     </nav>
+ 
     <div>
-        <div class="container">
-		<form action="SearchController" method="get">
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <form class="search-form">
-                        <div class="input-group" style="width:336px;">
-                            <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div><input class="form-control" type="text" name="SearchFilter" placeholder="I am looking for.." autocomplete="on">
-                            <div class="input-group-append"><button class="btn btn-light" type="button">Search </button></div>
-                        </div>
-                    </form>
+    <h1 align="center" style="font-family:Lora, serif;font-size:55px;">Checkout Page</h1>
+        <div class="container">                           
+                    <div>
+                        <table id="Products" class="pretty">
+                            <thead>
+                                <tr>
+						            <th>Item</th>
+						            <th>Item Description</th>
+						            <th>Image</th>
+						            <th>Size</th>
+						            <th>Prescription Required</th>
+						            <th>Quantity</th>
+						            <th>Unit Price</th>
+						            <th>Total Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              	<c:forEach items="${productList}" var="item">
+									<!--  <form action='PurchaseController' method='post'>-->
+										<tr>
+											<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
+											<td><c:out value="${item.Item}" /></td>
+											<td><c:out value="${item.ItemDescription}" /></td>
+											<td><c:out value="${item.Image}" /></td>
+											<td><c:out value="${item.Size}" /></td>
+											<td><c:out value="${item.PrescriptionRequired}" /></td>
+											<td><c:out value="${item.Quantity}" /></td>
+											<td><c:out value="${item.UnitPrice}" /></td>
+											<td><c:out value="${item.Total}" /></td>
+											<td><c:out value="${item.Cost}" /></td>											
+											<td>
+												<select name='Quantity'>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+												</select>
+											</td>
+											<td>
+												<input type='submit' name='Action' value="Addtocart" style='display: on-hover' />
+											</td>
+										</tr>
+									<!--  </form>-->
+								</c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="col-md-4"></div>
             </div>
-			</form>
-        </div>
-    </div>
 
-    
-    
-    <!-- Pharmacy Sales-->
-    <div> 
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-						            <th>Pharmacy Name</th>
-						            <th>Product Name</th>
-						            <th>Registration No</th>
-						            <th>Quantity</th>
-						            <th>Cost per Unit</th>
-						            <th>Total Cost</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                              	<c:forEach items="${productList}" var="item">
-									<form action='PurchaseController' method='post'>
-										<tr>
-											<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
-											<td><c:out value="${item.productName}" /></td>
-											<td><c:out value="${item.genericName}" /></td>
-											<td><c:out value="${item.registrationNo}" /></td>
-											<td><c:out value="${item.productStrength}" /></td>
-											<td><c:out value="${item.productForm}" /></td>
-											<td><c:out value="${item.productPackaging}" /></td>
-											<td><c:out value="${item.productManufacturer}" /></td>
-											<td><c:out value="${item.productOrigin}" /></td>
-											<td><c:out value="${item.productDescription}" /></td>
-											
-										</tr>
-									</form>
-								</c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Product Sales -->
-    
-    <div> 
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-						            <th>Product Name</th>
-						            <th>Registration No</th>
-						            <th>Quantity</th>
-						            <th>Cost per Unit</th>
-						            <th>Total Cost</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                              	<c:forEach items="${productList}" var="item">
-									<form action='PurchaseController' method='post'>
-										<tr>
-											<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
-											<td><c:out value="${item.productName}" /></td>
-											<td><c:out value="${item.genericName}" /></td>
-											<td><c:out value="${item.registrationNo}" /></td>
-											<td><c:out value="${item.productStrength}" /></td>
-											<td><c:out value="${item.productForm}" /></td>
-											<td><c:out value="${item.productPackaging}" /></td>
-											<td><c:out value="${item.productManufacturer}" /></td>
-											<td><c:out value="${item.productOrigin}" /></td>
-											<td><c:out value="${item.productDescription}" /></td>
-											
-										</tr>
-									</form>
-								</c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Purchases of User -->
-    
-    <div> 
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-						            <th>Customer ID</th>
-						            <th>Customer Name</th>
-						            <th>Date Ordered</th>
-						            <th>Date Processed</th>
-						            <th>Date Delivered</th>
-						            <th>Product Name</th>
-						            <th>Registration No</th>
-						            <th>Quantity</th>
-						            <th>Total Cost</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                              	<c:forEach items="${productList}" var="item">
-									<form action='PurchaseController' method='post'>
-										<tr>
-											<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
-											<td><c:out value="${item.productName}" /></td>
-											<td><c:out value="${item.genericName}" /></td>
-											<td><c:out value="${item.registrationNo}" /></td>
-											<td><c:out value="${item.productStrength}" /></td>
-											<td><c:out value="${item.productForm}" /></td>
-											<td><c:out value="${item.productPackaging}" /></td>
-											<td><c:out value="${item.productManufacturer}" /></td>
-											<td><c:out value="${item.productOrigin}" /></td>
-											<td><c:out value="${item.productDescription}" /></td>
-											
-										</tr>
-									</form>
-								</c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Total Sales -->
-    
-    <div> 
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-						            <th>Product Name</th>
-						            <th>Registration No</th>
-						            <th>Quantity</th>
-						            <th>Cost per Unit</th>
-						            <th>Total Cost</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                              	<c:forEach items="${productList}" var="item">
-									<form action='PurchaseController' method='post'>
-										<tr>
-											<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
-											<td><c:out value="${item.productName}" /></td>
-											<td><c:out value="${item.genericName}" /></td>
-											<td><c:out value="${item.registrationNo}" /></td>
-											<td><c:out value="${item.productStrength}" /></td>
-											<td><c:out value="${item.productForm}" /></td>
-											<td><c:out value="${item.productPackaging}" /></td>
-											<td><c:out value="${item.productManufacturer}" /></td>
-											<td><c:out value="${item.productOrigin}" /></td>
-											<td><c:out value="${item.productDescription}" /></td>
-											
-										</tr>
-									</form>
-								</c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     
     
     <div></div>
@@ -285,6 +149,18 @@
     <script src="assets/js/index.js"></script>
     <script src="assets/js/multi-item-carousel.js"></script>
     <script src="assets/js/Simple-Slider1.js"></script>
+        <script type="text/javascript"  src="js/jquery-1.8.3.js"></script>
+<script type="text/javascript"  src="js/data_table/jquery.dataTables.min.js"></script>
+<script type="text/javascript"  src="js/data_table/jquery.dataTables.plugins.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Products").dataTable({
+                "sPaginationType": "full_numbers",
+                "bJQueryUI": true,
+                "searching": false
+            });
+        });
+        </script>
 </body>
 
 </html>

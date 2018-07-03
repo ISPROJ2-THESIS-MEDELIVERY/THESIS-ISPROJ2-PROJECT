@@ -101,7 +101,17 @@
 	    </div>
     
     <!-- Carousel loop end -->
-    
+    <h1 align="center" style="font-family:Lora, serif;font-size:55px;">Select your pharmacy</h1>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3"><a href="Catalog.jsp"><img src="assets/img/mercury_drug.jpg" style="width:100px;"></a></div>
+                <div class="col-md-3"><a href="Catalog.jsp"><img src="assets/img/MANSON-Drug-Logo-Philippines.jpg" width="200px"></a></div>
+                <div class="col-md-3"><a href="Catalog.jsp"><img src="assets/img/South_star_drug.png" width="200px" style="margin:0px;"></a></div>
+                <div class="col-md-3"><a href="Catalog.jsp"><img src="assets/img/watsons.png" width="200px" style="margin:0px;"></a></div>
+            </div>
+        </div>
+    </div>
     
     <div class="features-boxed">
         <div class="container">
@@ -161,10 +171,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3"><img src="assets/img/mercury_drug.jpg" style="width:100px;"><img src="assets/img/2GO_Group_Logo.png" width="100px"></div>
-                <div class="col-md-3"><img src="assets/img/MANSON-Drug-Logo-Philippines.jpg" width="200px"><img src="assets/img/South_star_drug.png" width="200px" style="margin:0px;"></div>
-                <div class="col-md-3"><img src="assets/img/watsons.png" width="200px" style="margin:0px;"></div>
-                <div class="col-md-3"><img src="assets/img/grab-bike.jpg" width="200px" style="color:#000000;"></div>
+                <div class="col-md-12"><img src="assets/img/2GO_Group_Logo.png" width="100px"><img src="assets/img/grab-bike.jpg" width="150px" style="color:#000000;"></div>
             </div>
         </div>
     </div>
@@ -178,7 +185,7 @@
                 <li class="list-inline-item"><a href="#">Terms</a></li>
                 <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
             </ul>
-            <p class="copyright">Medelivery Â© 2018</p>
+            <p class="copyright">Medelivery © 2018</p>
         </footer>
     </div>
     <script src="assets/js/jquery.min.js"></script>

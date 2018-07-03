@@ -118,7 +118,7 @@ public class RegistrationController extends HttpServlet {
 			int ID = Registration.makeCustomer(login, customer);
 			String ConfirmLink = "http://localhost:8080/THESIS-ISPROJ2-PROJECT/RegistrationController?SpecialKey=true&UserID=" + ID;
 			sendEmail.send(customer.getEmail(), "Medilivery Account Confirmation", ""
-					+ "Dear ," + 
+					+ "Dear " + customer.getCustomerName() + "," +  
 					"<p>" + 
 					"Thank you for creating your Medelivery Account." + 
 					"<br>" + 

@@ -17,11 +17,6 @@ public class HomeController  extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HomeAction HA = new HomeAction();
-		request.setAttribute("FeaturedStock", HA.displayStock() );
-		
-		
-		
 		RequestDispatcher view = request.getRequestDispatcher( "/Home.jsp" );
 		view.forward(request, response);
 	}

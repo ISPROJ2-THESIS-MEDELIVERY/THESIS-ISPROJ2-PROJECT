@@ -75,8 +75,7 @@ public class RegistrationAction {
     	//Insert into Customer table
     	CustomerImplement CustomerImp = new CustomerImplement();
     	customer.setUserID(UserID);
-    	customer.setCityID(1);//Address
-    	customer.setAddress("test");
+    	customer.setCityID(1);//Address]
         if (customer.getSeniorCitizenID() == null) {
         	customer.setIsSeniorCitizen(false);
         } else {

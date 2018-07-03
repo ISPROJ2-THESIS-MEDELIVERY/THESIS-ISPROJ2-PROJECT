@@ -4,7 +4,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import thesis.mvc.controller.DispatcherController;
 import thesis.mvc.implement.DeliveryImplement;
+import thesis.mvc.implement.DispatcherImplement;
+import thesis.mvc.implement.LoginImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.model.Delivery;
 import thesis.mvc.model.Dispatcher;
@@ -20,8 +25,11 @@ public class DispatcherAction {
 		conn = DBUtility.getConnection();
 	}
 	
-	public boolean DispatcherOrder(int OrderID, int DispatcherID, int DriverID, String Comments) {
+	public boolean DispatcherOrder(int OrderID, int UserID, int DriverID, String Comments) {
 		try {
+			DispatcherImplement dispatcherImplement = new DispatcherImplement();
+			int DispatcherID = dispatcherImplement.getDispatcherByLogin(UserID).getDispatcherID();
+
 			Delivery delivery = null;
 			delivery.setComments(Comments);
 			delivery.setDriverID(DriverID);

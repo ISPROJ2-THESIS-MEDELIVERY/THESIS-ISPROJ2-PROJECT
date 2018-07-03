@@ -19,6 +19,7 @@ import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.model.Login;
 import thesis.mvc.pageaction.LoginAction;
 import thesis.mvc.utility.DBUtility;
+import thesis.mvc.utility.SendEmail;
 
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
@@ -64,6 +65,10 @@ public class LoginController extends HttpServlet {
 		String Username = request.getParameter( "Username" );
 		String Password = request.getParameter( "Password" );
 		int LoginID = loginAction.loginUser(Username, Password);
+		
+		//This is a test
+		SendEmail sendEmail = new SendEmail();
+		sendEmail.send("fajardokier@yahoo.com", "Bitch ass nigga", "<br>This is a Holdup,<br>.I'mma pop a cap in your ass");
 		
 		RequestDispatcher view;
 		//String test = (String) session.getAttribute("username");

@@ -74,7 +74,16 @@
                 <div class="col-md-6">
                     <div>
                         <h1 class="text-center" style="font-family:Lora, serif;font-size:40px;">Our Mission</h1>
-                        <p class="text-center align-items-center" style="font-size:16PX;font-family:Lora, serif;"><br><br><em>Our mission is to create a measurable, sustainable and profitable link between pharmacies, couriers and customers. Our operation is also to bring convenience to customers by filtering their</em><br><em>needs according to the type of payment they want and the type of delivery schedule that fits their respective timeframes.</em><br><em>● To create connections</em><br><em>● To deliver on time</em><br><em>● To promote efficiency</em><br></p>
+                        <p class="text-center align-items-center" style="font-size:16PX;font-family:Lora, serif;"><br><br><em>Our mission is to create a measurable, sustainable and profitable link between pharmacies, couriers and customers. Our operation is also to bring convenience to customers by filtering their</em><br><em>needs according to the type of payment they want and the type of delivery schedule that fits their respective timeframes.</em>
+                        <ul class="text-center">                 
+                        <em>To create connections</em>
+                        <br>
+                        <em>To deliver on time</em>
+                        <br>
+                        <em>To promote efficiency</em>
+                        <br>
+                        </ul>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -103,7 +112,22 @@
                         <h1 class="text-center" style="font-family:Lora, serif;font-size:33px;"><br>Products and Services<br><br></h1>
                     </div>
                     <div>
-                        <p class="text-left" style="font-size:16px;font-family:Lora, serif;"><em>Our online system offers the following services:</em><br><em>● Order and delivery status for customers</em><br><em>● Verification of prescription legitimacy</em><br><em>● Ordering and delivery for over the counter medication</em><br><em>● Notification to couriers on orders to be delivered</em><br><em>● Single transaction deliveries from the nearest branch of the customers choosing</em><br><em>● Senior and PWD discounts</em><br></p>
+                        <p class="text-left" style="font-size:16px;font-family:Lora, serif;"><em>Our online system offers the following services:</em><br>
+                        <ul>
+                        <li><em>Order and delivery status for customers</em></li>
+                        <br>
+                        <li><em>Verification of prescription legitimacy</em></li>
+                        <br>
+                        <li><em>Ordering and delivery for over the counter medication</em></li>
+                        <br>
+                        <li><em>Notification to couriers on orders to be delivered</em></li>
+                        <br>
+                        <li><em>Single transaction deliveries from the nearest branch of the customers choosing</em></li>
+                        <br>
+                        <li><em>Senior and PWD discounts</em></li>
+                        <br>
+                        </ul>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -166,7 +190,7 @@
                 <li class="list-inline-item"><a href="#">Terms</a></li>
                 <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
             </ul>
-            <p class="copyright">Medelivery © 2018</p>
+            <p class="copyright">Medelivery � 2018</p>
         </footer>
     </div>
     <script src="assets/js/jquery.min.js"></script>

@@ -51,10 +51,11 @@
             <div class="collapse navbar-collapse"
                 id="navcol-1">
                 <ul class="nav navbar-nav">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="ManageCustomerAccount.jsp" style="color:rgba(0,0,0,0.5);">Manage Customer Accounts</a></li>
+                	 <li class="nav-item" role="presentation"><a class="nav-link" href="AdminHome.jsp">Home</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="ManageCustomerAccount.jsp" style="color:rgba(0,0,0,0.5);">Manage Customer Accounts</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="ManagePharmacyAccount.jsp">Manage Pharmeceutical Parters&nbsp;<br></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="ManageDeliveryCourierAccount.jsp">Manage Delivery Service Accounts<br></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="ManageInventory.jsp" style="color:rgba(0,0,0,0.9);">Inventory Management<br></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="ManageInventory.jsp" style="color:rgba(0,0,0,0.9);">Inventory Management<br></a></li>
                 </ul>
                 <ul class="nav navbar-nav ml-auto"></ul>
             </div>

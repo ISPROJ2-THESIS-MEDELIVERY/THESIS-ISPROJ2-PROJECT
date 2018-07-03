@@ -27,6 +27,8 @@
     <link rel="stylesheet" href="assets/css/Good-login-dropdown-menu.css">
     <link rel="stylesheet" href="assets/css/Good-login-dropdown-menu1.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
+    <link rel="stylesheet" href="assets/css/Gallery.css">
+    <link rel="stylesheet" href="assets/css/Gallery1.css">
     <link rel="stylesheet" href="assets/css/Login-Form-Clean.css">
     <link rel="stylesheet" href="assets/css/Pretty-Search-Form.css">
     <link rel="stylesheet" href="assets/css/Map-Clean.css">
@@ -40,9 +42,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/Team-Boxed.css">
-    <link rel="stylesheet" href="assets/css/TR-Form.css">    
-    <link rel="stylesheet" type="text/css" href="js/data_table/reset-min.css">
-	<link rel="stylesheet" type="text/css" href="js/data_table/complete.css">
+    <link rel="stylesheet" href="assets/css/TR-Form.css">
 </head>
 
 <body><img src="assets/img/MedeliveryLogo.png">
@@ -64,28 +64,50 @@
             </div>
         </div>
     </nav>
-    <br/>
+    <div>
+        <div class="container">
+		<form action="SearchController" method="get">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <form class="search-form">
+                        <div class="input-group" style="width:336px;">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div><input class="form-control" type="text" name="SearchFilter" placeholder="I am looking for.." autocomplete="on">
+                            <div class="input-group-append"><button class="btn btn-light" type="button">Search </button></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+			</form>
+        </div>
+    </div>
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-md-6"><select class="form-control" name="Over The Counter "><option value="">Categories</option><option value="">Prescription</option><option value="">Over The Counter</option></select></div>          
-                <div class="col-md-6"><select class="form-control" name="Medicine"><option value="">Medicine Type</option><option value="">Branded</option><option value="">Generic</option></select></div>
+                <div class="col-md-12 col-lg-2"><select class="form-control-lg" name="Over The Counter "><option value="">Categories</option><option value="">Prescription</option><option value="">Over The Counter</option></select></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12"><select class="form-control-lg" name="Medicine"><option value="">Medicine Type</option><option value="">Branded</option><option value="">Generic</option></select></div>
             </div>
         </div>
     </div>
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-md-6"><select class="form-control" name="Medicine" style="margin:1px;"><option value="">Filter</option><option value="">Name</option><option value="">Best Selling</option><option value="">Price: Low to High</option><option value="">Price: High to Low</option></select></div>            
-                <div class="col-md-6"><select class="form-control" name="Medicine" style="margin:1px;"><option value="">Branch</option><option value="">Mercury</option><option value="">Watsons</option><option value="">The Generics Pharmacy</option><option value="">South Star Drug</option></select></div>
+                <div class="col-md-12"><select class="form-control-lg" name="Medicine" style="margin:1px;"><option value="">Filter</option><option value="">Name</option><option value="">Best Selling</option><option value="">Price: Low to High</option><option value="">Price: High to Low</option></select></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12"><select class="form-control-lg" name="Medicine" style="margin:1px;"><option value="">Branch</option><option value="">Mercury</option><option value="">Watsons</option><option value="">The Generics Pharmacy</option><option value="">South Star Drug</option></select></div>
             </div>
         </div>
     </div>
-    <br/>
     <div>
-        <div class="container">                           
-                    <div>
-                        <table id="Products" class="pretty">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table class="table">
                             <thead>
                                 <tr>
 						            <th>Item</th>
@@ -100,7 +122,7 @@
                             </thead>
                             <tbody>
                               	<c:forEach items="${productList}" var="item">
-									<!--  <form action='PurchaseController' method='post'>-->
+									<form action='PurchaseController' method='post'>
 										<tr>
 											<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
 											<td><c:out value="${item.productName}" /></td>
@@ -129,13 +151,15 @@
 												<input type='submit' name='Action' value="Addtocart" style='display: on-hover' />
 											</td>
 										</tr>
-									<!--  </form>-->
+									</form>
 								</c:forEach>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
     
   
     
@@ -157,21 +181,11 @@
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <!--   <script src="assets/js/Gallery.js"></script>--> 
+    <script src="assets/js/Gallery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
     <script src="assets/js/index.js"></script>
     <script src="assets/js/multi-item-carousel.js"></script>
     <script src="assets/js/Simple-Slider1.js"></script>
-    <script type="text/javascript"  src="js/jquery-1.8.3.js"></script>
-<script type="text/javascript"  src="js/data_table/jquery.dataTables.min.js"></script>
-<script type="text/javascript"  src="js/data_table/jquery.dataTables.plugins.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#Products").dataTable({
-                "sPaginationType": "full_numbers",
-                "bJQueryUI": true
-            });
-        });
-        </script>
 </body>
+
 </html>

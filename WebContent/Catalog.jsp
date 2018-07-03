@@ -88,30 +88,32 @@
                         <table id="Products" class="pretty">
                             <thead>
                                 <tr>
-						            <th>Item</th>
-						            <th>Item Description</th>
-						            <th>Image</th>
-						            <th>Size</th>
-						            <th>Prescription Required</th>
+						            <th>ProductName</th>
+						            <th>GenericName</th>
+						            <th>ProductStrength</th>
+						            <th>ProductForm</th>
+						            <th>ProductPackaging</th>
+						            <th>ProductDescription</th>
+						            <th>ProductImage</th>
 						            <th>Quantity</th>
-						            <th>Unit Price</th>
-						            <th>Total Cost</th>
+						            <th>PriceSet</th>
+						            <th>Quantity</th>
+						            <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                               	<c:forEach items="${productList}" var="item">
-									<!--  <form action='PurchaseController' method='post'>-->
+									<!--  <form action='PurchaseController' method='post'> -->
 										<tr>
-											<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
-											<td><c:out value="${item.ProductName       }" /></td>
-											<td><c:out value="${item.GenericName       }" /></td>
-											<td><c:out value="${item.ProductStrength   }" /></td>
-											<td><c:out value="${item.ProductForm       }" /></td>
-											<td><c:out value="${item.ProductPackaging  }" /></td>
-											<td><c:out value="${item.ProductDescription}" /></td>
-											<td><c:out value="${item.ProductImage      }" /></td>
-											<td><c:out value="${item.Quantity          }" /></td>
-											<td><c:out value="${item.PriceSet          }" /></td>											
+											<td><c:out value="${item.productName}" /></td>
+											<td><c:out value="${item.genericName}" /></td>
+											<td><c:out value="${item.productStrength}" /></td>
+											<td><c:out value="${item.productForm}" /></td>
+											<td><c:out value="${item.productPackaging}" /></td>
+											<td><c:out value="${item.productDescription}" /></td>
+											<td><c:out value="${item.productImage}" /></td>
+											<td><c:out value="${item.quantity}" /></td>
+											<td><c:out value="${item.priceSet}" /></td>											
 											<td>
 												<select name='Quantity'>
 													<option value="1">1</option>
@@ -129,7 +131,7 @@
 												<input type='submit' name='Action' value="Addtocart" style='display: on-hover' />
 											</td>
 										</tr>
-									<!--  </form>-->
+									<!--  </form> -->
 								</c:forEach>
                             </tbody>
                         </table>

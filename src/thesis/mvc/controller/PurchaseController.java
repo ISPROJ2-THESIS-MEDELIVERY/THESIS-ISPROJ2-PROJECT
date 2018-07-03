@@ -48,7 +48,7 @@ public class PurchaseController extends HttpServlet {
 		String forward;
 		//String action = request.getParameter( "action" );
 		//int PharmaID = Integer.parseInt( request.getParameter( "PharmaID" ) );
-		HttpSession session = request.getSession();
+		//HttpSession session = request.getSession();
 		
 		//int access = (int) session.getAttribute("userAccess");
 		

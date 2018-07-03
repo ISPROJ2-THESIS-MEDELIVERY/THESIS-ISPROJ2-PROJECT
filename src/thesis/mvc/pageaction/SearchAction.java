@@ -84,9 +84,9 @@ public class SearchAction {
 		}
 	}
 	
-	public ProductList GeneralListing(int BranchID) {
+	public List<ProductList> GeneralListing(int BranchID) {
 		conn = DBUtility.getConnection();
-		ProductList productList = new ProductList();
+		List<ProductList> productLists = new ArrayList<ProductList>();
 		try {
 			Statement statement = conn.createStatement();
 			String Query = "SELECT product.ProductName, product.GenericName, product.ProductStrength, product.ProductForm, product.ProductPackaging, product.ProductDescription, product.ProductImage, stocks.Quantity, stocksprice.PriceSet FROM stocks INNER JOIN stocksprice ON stocksprice.StockID = stocks.StockID INNER JOIN product ON stocks.ProductID = product.ProductID WHERE stocksprice.IsCurrent = 1 AND stocks.BranchID = ?";
@@ -95,6 +95,7 @@ public class SearchAction {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			while( resultSet.next() ) {
+				ProductList productList = new ProductList();
 				productList.setProductName( resultSet.getString(1) );
 				productList.setGenericName( resultSet.getString(2) );
 				productList.setProductStrength( resultSet.getString(3) );
@@ -104,13 +105,14 @@ public class SearchAction {
 				productList.setProductImage( resultSet.getString(7) );
 				productList.setQuantity( resultSet.getString(8) );
 				productList.setPriceSet( resultSet.getDouble(9) );
+				productLists.add(productList);
 			}
 			resultSet.close();
 			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return productList;
+		return productLists;
 	}
 	
 	public List<Product> ProductListing(String searchQuerty, int searchFilter) {

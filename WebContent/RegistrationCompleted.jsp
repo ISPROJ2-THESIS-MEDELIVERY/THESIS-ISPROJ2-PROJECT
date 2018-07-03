@@ -54,31 +54,34 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Home.jsp">Home</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="About.jsp">About</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="ContactUs.jsp">Contact Us</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="Members.jsp">Membership Registration</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="ViewOrderStatus.jsp">View Products</a></li>
-                </ul>
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="Login.jsp">Login</a></li>
+            <!--         <li class="nav-item" role="presentation"><a class="nav-link" href="Members.jsp">Membership Registration</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="Catalog.jsp">View Products</a></li> -->
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="row" style="height:310px;">
-        <div class="col" style="height:310px;padding:6px;">
-            <h1 class="text-center" style="font-size:33px;padding:14px;">You have Registered Successfully!&nbsp;<br>A confirmation link has been sent to your Email Address<br>Please confirm your Account<br><br></h1>
-        </div>
-    </div>
+    <form action="LoginController" method="post" style="padding:56px;margin:-21px;height:470px;">
+    <div class="alert alert-success" role="alert" style="width: 264px;"><span><strong>Registration complete! Please log in.</strong></span></div>  
+        <h2 class="sr-only">Login Form</h2>
+        <div class="illustration"></div>
+        <div class="form-group"><input class="form-control" type="Username" name="Username" required="" placeholder="Username" style="width:263px;padding:0px;height:42px;" autocomplete="on"></div>
+        <div class="form-group"><input class="form-control" type="Password" name="Password" required="" placeholder="Password" style="padding:0px;width:264px;height:42px;"></div>
+        <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="width:266px;background-color:#465765;">Log In</button></div>
+        <p style="font-size:13px;">Don't have an account yet? Register <a href="Members.jsp">here</a></p>
+        <p style="font-size:13px;"><a href="AccountRecovery.jsp">Forgot password?</a></p>
+    </form>
+	
     <div class="footer-basic">
         <footer>
             <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
             <ul class="list-inline">
-                <li class="list-inline-item"><a href="Home.jsp">Home</a></li>
-                <li class="list-inline-item"></li>
-                <li class="list-inline-item"><a href="About.jsp">About</a></li>
+                <li class="list-inline-item"><a href="#">Home</a></li>
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
                 <li class="list-inline-item"><a href="#">Terms</a></li>
                 <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
             </ul>
-            <p class="copyright">Medelivery Â© 2018</p>
+            <p class="copyright">Company Name © 2017</p>
         </footer>
     </div>
     <script src="assets/js/jquery.min.js"></script>

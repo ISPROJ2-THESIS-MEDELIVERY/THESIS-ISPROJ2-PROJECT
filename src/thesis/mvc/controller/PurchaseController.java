@@ -46,20 +46,21 @@ public class PurchaseController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Ensures that the person can select what he/she wants to buy
 		String forward;
-		String action = request.getParameter( "action" );
-		int PharmaID = Integer.parseInt( request.getParameter( "PharmaID" ) );
+		//String action = request.getParameter( "action" );
+		//int PharmaID = Integer.parseInt( request.getParameter( "PharmaID" ) );
 		HttpSession session = request.getSession();
 		
-		int access = (int) session.getAttribute("userAccess");
+		//int access = (int) session.getAttribute("userAccess");
+		
+		boolean test = true;
     	
-		if (access == 1) {
+		if (test) {
     		SearchAction searchAction = new SearchAction();
     		//forward = "/A-test-shop.jsp";
     		forward = "/Catalog.jsp";
-    		request.setAttribute( "productList", searchAction.GeneralListing(PharmaID) );
-    	}
-    	
-    	else if (access == 2) {
+    		//request.setAttribute( "productList", searchAction.GeneralListing(PharmaID) );
+    		request.setAttribute( "productList", searchAction.GeneralListing(1) );
+    	}/* else if (access == 2) {
     		if (action.equalsIgnoreCase("Approve")) {
         		forward = "A-test-pharmacistapprovalsuccess.jsp";
         		PurchaseAction purchaseAction = new PurchaseAction();
@@ -73,9 +74,9 @@ public class PurchaseController extends HttpServlet {
         	} else {
 	    		ApprovalAction approvalAction = new ApprovalAction();
 	    		forward = "A-test-pharmacistapproval.jsp";
-	    		session.setAttribute("orderPharmacistCheck", approvalAction.getOrder(PharmaID) );
+	    		//session.setAttribute("orderPharmacistCheck", approvalAction.getOrder(PharmaID) );
         	}
-    	}
+    	}*/
 
     	else {
     		forward = "index.jsp";

@@ -21,8 +21,10 @@ import thesis.mvc.model.Customer;
 import thesis.mvc.model.Dispatcher;
 import thesis.mvc.model.Login;
 import thesis.mvc.model.Pharmacist;
+import thesis.mvc.pageaction.EmailAction;
 import thesis.mvc.pageaction.RegistrationAction;
 import thesis.mvc.utility.DBUtility;
+import thesis.mvc.utility.SendEmail;
 
 @WebServlet("/RegistrationController")
 public class RegistrationController extends HttpServlet {
@@ -47,7 +49,10 @@ public class RegistrationController extends HttpServlet {
 		
 		if (RegisterUnique) {
 			LoginImplement loginImplement = new LoginImplement();
-			loginImplement.ConfirmLogin(ConfirmID);
+			if (loginImplement.getLoginByID(ConfirmID).getLoginStatus().equalsIgnoreCase("Just Registered")) {
+				loginImplement.ConfirmLogin(ConfirmID);				
+			}
+
 			forward = "/Login.jsp";
 		} else if (IDcheck){
 			forward = "";//page to the admin's registration
@@ -109,7 +114,32 @@ public class RegistrationController extends HttpServlet {
 			customer.setEmail( request.getParameter( "CusEmail" ) );
 			customer.setContactNumber( Integer.parseInt(request.getParameter( "ContactNumber" )) );
 			customer.setSeniorCitizenID( request.getParameter( "SeniorCitizenID" ) );
+			SendEmail sendEmail = new SendEmail();
 			test = Registration.makeCustomer(login, customer);
+			String ConfirmLink = "http://localhost:8080/THESIS-ISPROJ2-PROJECT/RegistrationController?SpecialKey=true&UserID=" + 1;
+			//customer.getEmail()
+			sendEmail.send("edennyyu@gmail.com", "Medilivery Account Confirmation", ""
+					+ "Dear ," + 
+					"<p>" + 
+					"Thank you for creating your Medelivery Account." + 
+					"<br>" + 
+					"</p>" + 
+					"<p>" + 
+					"To complete your registration, click the link below:" + 
+					"<br>" + 
+					"<a href=\"" +
+					ConfirmLink +
+					"\" target=\"_blank\" data-saferedirecturl=\"\"><span class=\"il\">Confirm</span> your account</a>" + 
+					"</p>" + 
+					"<p>" + 
+					"Yours truly," + 
+					"<br>" + 
+					"Medelivery Admin Team" + 
+					"<br>" + 
+					"<a href=\" <!–– INSERT Medelivery HOME LINK HERE––>\" target=\"_blank\" data-saferedirecturl=\"\"></a>" + 
+					"<br>" + 
+					"The Medelivery Team Thanks you for your patronage" + 
+					"<br>");
 		}
 		if(test){
 			forward =  "/RegistrationSuccess.jsp";

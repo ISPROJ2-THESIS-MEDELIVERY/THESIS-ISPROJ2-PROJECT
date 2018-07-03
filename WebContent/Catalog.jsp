@@ -103,15 +103,15 @@
 									<!--  <form action='PurchaseController' method='post'>-->
 										<tr>
 											<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
-											<td><c:out value="${item.productName}" /></td>
-											<td><c:out value="${item.genericName}" /></td>
-											<td><c:out value="${item.registrationNo}" /></td>
-											<td><c:out value="${item.productStrength}" /></td>
-											<td><c:out value="${item.productForm}" /></td>
-											<td><c:out value="${item.productPackaging}" /></td>
-											<td><c:out value="${item.productManufacturer}" /></td>
-											<td><c:out value="${item.productOrigin}" /></td>
-											<td><c:out value="${item.productDescription}" /></td>
+											<td><c:out value="${item.ProductName       }" /></td>
+											<td><c:out value="${item.GenericName       }" /></td>
+											<td><c:out value="${item.ProductStrength   }" /></td>
+											<td><c:out value="${item.ProductForm       }" /></td>
+											<td><c:out value="${item.ProductPackaging  }" /></td>
+											<td><c:out value="${item.ProductDescription}" /></td>
+											<td><c:out value="${item.ProductImage      }" /></td>
+											<td><c:out value="${item.Quantity          }" /></td>
+											<td><c:out value="${item.PriceSet          }" /></td>											
 											<td>
 												<select name='Quantity'>
 													<option value="1">1</option>

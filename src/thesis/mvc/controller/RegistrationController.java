@@ -36,10 +36,16 @@ public class RegistrationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		Boolean IDcheck = false;
+		Boolean RegisterUnique = Boolean.parseBoolean(request.getParameter( "SpecialKey" ));
+		int ConfirmID = Integer.parseInt( request.getParameter("UserID") );
+		
 		String forward = "";
 		
-		if (IDcheck){
+		if () {
+			
+		} else if (IDcheck){
 			forward = "";//page to the admin's registration
 		} else {
 			forward = "";//page to the customer's registration

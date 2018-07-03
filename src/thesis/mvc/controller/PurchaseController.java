@@ -2,7 +2,9 @@ package thesis.mvc.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -21,12 +23,14 @@ import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
 import thesis.mvc.model.Product;
 import thesis.mvc.pageaction.ApprovalAction;
+import thesis.mvc.pageaction.EmailAction;
 import thesis.mvc.pageaction.PurchaseAction;
 import thesis.mvc.pageaction.PurchaseAction.CartList;
 import thesis.mvc.pageaction.SearchAction.ProductList;
 import thesis.mvc.pageaction.RegistrationAction;
 import thesis.mvc.pageaction.SearchAction;
 import thesis.mvc.utility.DBUtility;
+import thesis.mvc.utility.SendEmail;
 
 @WebServlet("/PurchaseController")
 public class PurchaseController extends HttpServlet {
@@ -74,7 +78,7 @@ public class PurchaseController extends HttpServlet {
     	}
 
     	else {
-    		forward = "";
+    		forward = "index.jsp";
     	}
 		RequestDispatcher view = request.getRequestDispatcher( forward );
 		view.forward(request, response);
@@ -204,7 +208,14 @@ public class PurchaseController extends HttpServlet {
 			Order order = (Order) session.getAttribute("Order");
 			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
 			List<CartList> cartList = (List<CartList>) session.getAttribute("CartList");
-			boolean checker = purchaseAction.purchaseOrder(order, OrderDetails);
+			SendEmail sendEmail = new SendEmail();
+			CustomerImplement customerImplement = new CustomerImplement();
+			
+			String CustomerEmail = customerImplement.getCustomerById(0).getEmail();
+
+			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+			boolean checker = purchaseAction.purchaseOrder(order, OrderDetails) && sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, "This is a test message");
+			
 			if(order == null || OrderDetails.isEmpty() || !checker) {
 				forward = "/index.jsp"; //or an error page
 			} else {
@@ -214,6 +225,8 @@ public class PurchaseController extends HttpServlet {
 				session.removeAttribute("OrderDetails");
 				session.removeAttribute("CartList");
 				forward = "/A-test-customerpurchasecheckout.jsp";
+
+				
 			}
 			//order.setOrderAddress( request.getParameter( "orderAddress" ) );
 			//order.setPaymentMethod( request.getParameter( "orderPayment" ) );

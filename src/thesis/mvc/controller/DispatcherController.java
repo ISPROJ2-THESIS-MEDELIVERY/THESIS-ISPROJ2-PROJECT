@@ -45,11 +45,16 @@ public class DispatcherController {
 	}
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
     	int OrderID = Integer.parseInt( request.getParameter( "OrderID" ) );
+    	int DriverID = Integer.parseInt( request.getParameter( "DriverID" ) );
+    	String Comments = request.getParameter( "Comments" );
+    	int UserID = (int) session.getAttribute("userID") ;
     	boolean DoCheck = false;
     	
     	//Insert logic here
     	DispatcherAction dispatcherAction = new DispatcherAction();
+    	DoCheck = dispatcherAction.DispatcherOrder(OrderID, UserID, DriverID, Comments);
     	
     	String forward = "";
     	if (DoCheck) {

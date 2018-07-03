@@ -129,5 +129,29 @@ public class DispatcherImplement implements DispatcherDAO{
 		}
 		return dispatcher;
 	}
-
+	
+	public Dispatcher getDispatcherByLogin(int dispatcherId) {
+		Dispatcher dispatcher = new Dispatcher();
+		try {
+			String query = "SELECT * FROM Dispatcher WHERE UserID=?";
+			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			preparedStatement.setInt(1, dispatcherId);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while( resultSet.next() ) {
+				dispatcher.setDispatcherID( resultSet.getInt( "DispatcherId" ) );
+				dispatcher.setCourierServiceID( resultSet.getInt( "CourierServiceID" ) );
+				dispatcher.setUserID( resultSet.getInt( "UserID" ) );
+				dispatcher.setFirstName( resultSet.getString( "FirstName" ) );
+				dispatcher.setLastName( resultSet.getString( "LastName" ) );
+				dispatcher.setContactNumber( resultSet.getInt( "ContactNumber" ) );
+				dispatcher.setAddress( resultSet.getString( "Address" ) );
+				dispatcher.setBirthdate( resultSet.getDate( "Birthdate") );
+			}
+			resultSet.close();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dispatcher;
+	}
 }

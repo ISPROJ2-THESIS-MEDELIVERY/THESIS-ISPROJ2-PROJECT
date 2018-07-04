@@ -101,6 +101,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 7621562... undoooooooooo
 =======
 >>>>>>> parent of 7621562... undoooooooooo
 =======
@@ -120,6 +123,7 @@
 =======
 											
 >>>>>>> e0bc041909c7ef0318268bb34a29a7918a9d4dca
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -169,6 +173,8 @@
 >>>>>>> parent of 81d5ddf... Push Minor UI and parameters changes
 =======
 >>>>>>> parent of 81d5ddf... Push Minor UI and parameters changes
+=======
+>>>>>>> parent of 7621562... undoooooooooo
 										</tr>
 									<!--  </form>-->
 								</c:forEach>

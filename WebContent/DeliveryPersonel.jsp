@@ -43,6 +43,8 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/Team-Boxed.css">
     <link rel="stylesheet" href="assets/css/TR-Form.css">
+    <link rel="stylesheet" type="text/css" href="js/data_table/reset-min.css">
+	<link rel="stylesheet" type="text/css" href="js/data_table/complete.css">
 </head>
 
 <body><img src="assets/img/MedeliveryLogo.png">
@@ -72,6 +74,49 @@
             </div>
         </div>
     </div><select name="Filters"><optgroup label="This is a group"><option value="12" selected="">Filters</option><option value="13">Delivery ID</option><option value="14">Delivery Post Date</option><option value="">Date Delivered</option><option value="">Driver Name</option><option value="">Driver Address</option><option value="">Plate Number</option></optgroup></select>
+    
+    <div>
+        <div class="container">                           
+                    <div>
+                    <!-- First Table -->
+                    <h1 class="text-center" style="font-family:Lora, serif;font-size:28px;">Over the counter<br></h1>
+                        <table id="DeliveryPersonel" class="pretty"">
+                            <thead>
+      <tr>
+      	  <th>Delivery ID</th>
+      	  <th>Delivery Post Date</th>
+      	  <th>Date Delivered</th>
+      	  <th>Driver Name</th>
+      	  <th>Driver Address</th>
+	      <th>Driver Contact Number</th>
+	      <th>Plate Number</th>
+	      <th>Comments</th>
+	      <th>Status</th>
+      </tr>
+		</thead>
+    
+    
+    
+    <tbody>
+	    <tr>
+	      <td>001</td>
+	      <td>N/A</td>
+	      <td>N/A</td>
+	      <td>Juan Kenito</td>
+	      <td>Mandaluyong</td>
+	      <td>0917123456</td>
+	      <td>ABC123</td>
+          <td><textarea name="Comments"></textarea></td>
+		  <td><select name="Filters"><optgroup label="This is a group"><option value="12" selected="">Processing</option><option value="13">In - Transit</option><option value="14">Delivered</option><option value="">Rescheduled</option></optgroup></select></td>
+      </tr>
+	</tbody>
+                        </table>
+                        <br>
+               
+                    </div>
+      </div>
+      </div>
+    
     <div
         class="table-responsive">
         <table class="table">
@@ -160,6 +205,18 @@
         <script src="assets/js/index.js"></script>
         <script src="assets/js/multi-item-carousel.js"></script>
         <script src="assets/js/Simple-Slider1.js"></script>
+        <script type="text/javascript"  src="js/jquery-1.8.3.js"></script>
+<script type="text/javascript"  src="js/data_table/jquery.dataTables.min.js"></script>
+<script type="text/javascript"  src="js/data_table/jquery.dataTables.plugins.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#DeliveryPersonel").dataTable({
+                "sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+            });
+        });
+        </script>
 </body>
 
 </html>

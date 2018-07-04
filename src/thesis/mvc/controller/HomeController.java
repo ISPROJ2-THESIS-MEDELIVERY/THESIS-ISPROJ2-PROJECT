@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.pageaction.*;
 
 @WebServlet("/HomeController")
@@ -18,8 +17,8 @@ public class HomeController  extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BranchImplement branchImplement = new BranchImplement();
-		request.setAttribute( "Pharmacy", branchImplement.getAllBranch());
+		HomeAction homeAction = new HomeAction();
+		request.setAttribute( "Pharmacy",  homeAction.getPharmacy() );
 		RequestDispatcher view = request.getRequestDispatcher( "/Home.jsp" );
 		view.forward(request, response);
 	}

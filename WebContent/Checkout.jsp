@@ -93,7 +93,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              	<c:forEach items="${CartlistReciept}" var="cartdetails">
+                              	<c:forEach items="${productList}" var="item">
 									<!--  <form action='PurchaseController' method='post'>-->
 										<tr>
 <<<<<<< HEAD
@@ -106,6 +106,8 @@
 =======
 >>>>>>> parent of 7621562... undoooooooooo
 											<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
+<<<<<<< HEAD
+<<<<<<< HEAD
 											<td><c:out value="${cartdetails.name}" /></td>
 											<td><c:out value="${cartdetails.description}" /></td>
 											<td>IMAGE HERE</td>
@@ -124,6 +126,10 @@
 =======
 >>>>>>> parent of e0bc041... changes
 											<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
+=======
+>>>>>>> parent of 81d5ddf... Push Minor UI and parameters changes
+=======
+>>>>>>> parent of 81d5ddf... Push Minor UI and parameters changes
 											<td><c:out value="${item.Item}" /></td>
 											<td><c:out value="${item.ItemDescription}" /></td>
 											<td><c:out value="${item.Image}" /></td>
@@ -150,6 +156,8 @@
 												<input type='submit' name='Action' value="Addtocart" style='display: on-hover' />
 											</td>
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> parent of e0bc041... changes
 =======
 >>>>>>> parent of e0bc041... changes
@@ -157,6 +165,10 @@
 >>>>>>> parent of 7621562... undoooooooooo
 =======
 >>>>>>> parent of 7621562... undoooooooooo
+=======
+>>>>>>> parent of 81d5ddf... Push Minor UI and parameters changes
+=======
+>>>>>>> parent of 81d5ddf... Push Minor UI and parameters changes
 										</tr>
 									<!--  </form>-->
 								</c:forEach>

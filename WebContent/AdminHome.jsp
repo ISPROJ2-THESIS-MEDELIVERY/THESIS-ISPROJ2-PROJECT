@@ -316,7 +316,7 @@
         $(document).ready(function () {
             $("#PharmacySales").dataTable({
                 "sPaginationType": "full_numbers",
-                "bJQueryUI": false
+                "bJQueryUI": true
             });
         });
         </script>
@@ -325,7 +325,7 @@
         $(document).ready(function () {
             $("#ProductSales").dataTable({
                 "sPaginationType": "full_numbers",
-                "bJQueryUI": false
+                "bJQueryUI": true
             });
         });
         </script>
@@ -333,9 +333,8 @@
 	<script type="text/javascript">
         $(document).ready(function () {
             $("#Purchases").dataTable({
-            	"sPaginationType": "full_numbers",
-                "bJQueryUI": true, "sScrollX": "100%",
-                "bScrollCollapse": true
+                "sPaginationType": "full_numbers",
+                "bJQueryUI": true
             });
         });
         </script>
@@ -344,7 +343,7 @@
         $(document).ready(function () {
             $("#TotalSales").dataTable({
                 "sPaginationType": "full_numbers",
-                "bJQueryUI": false
+                "bJQueryUI": true
             });
         });
         </script>

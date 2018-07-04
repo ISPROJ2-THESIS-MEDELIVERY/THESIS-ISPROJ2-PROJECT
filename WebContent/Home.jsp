@@ -4,36 +4,6 @@
 <!DOCTYPE html >
 <html>
 <head>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> e0bc041909c7ef0318268bb34a29a7918a9d4dca
-=======
-	<jsp:forward page="/HomeController"></jsp:forward>
->>>>>>> parent of e0bc041... changes
-=======
-	<jsp:forward page="/HomeController"></jsp:forward>
->>>>>>> parent of e0bc041... changes
-=======
-=======
->>>>>>> e0bc041909c7ef0318268bb34a29a7918a9d4dca
->>>>>>> parent of 7621562... undoooooooooo
-=======
-=======
->>>>>>> e0bc041909c7ef0318268bb34a29a7918a9d4dca
->>>>>>> parent of 7621562... undoooooooooo
-=======
-=======
->>>>>>> e0bc041909c7ef0318268bb34a29a7918a9d4dca
->>>>>>> parent of 7621562... undoooooooooo
-=======
-	<jsp:forward page="/HomeController"></jsp:forward>
->>>>>>> parent of 673f0d1... Revert "push things"
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

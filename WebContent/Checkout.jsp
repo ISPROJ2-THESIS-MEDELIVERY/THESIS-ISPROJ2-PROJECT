@@ -96,6 +96,7 @@
                               	<c:forEach items="${CartlistReciept}" var="cartdetails">
 									<!--  <form action='PurchaseController' method='post'>-->
 										<tr>
+<<<<<<< HEAD
 											<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
 											<td><c:out value="${cartdetails.name}" /></td>
 											<td><c:out value="${cartdetails.description}" /></td>
@@ -106,6 +107,9 @@
 											<td><c:out value="${cartdetails.quantity}" /></td>
 											<td><c:out value="${cartdetails.unitCost}" /></td>
 											<td><c:out value="${cartdetails.totalCost}" /></td>											
+=======
+											
+>>>>>>> e0bc041909c7ef0318268bb34a29a7918a9d4dca
 										</tr>
 									<!--  </form>-->
 								</c:forEach>

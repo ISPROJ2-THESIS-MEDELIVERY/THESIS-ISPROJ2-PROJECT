@@ -68,7 +68,7 @@
         <h1>MY ORDER</h1>
     </div>
     <div class="col">
-    <a href="Catalog.jsp"><button class="btn btn-primary" type="button" style="background-color:#222222;padding:12px;">ADD MORE PRODUCTS+</button></a>
+    <a href="PurchaseController?PharmaID=<c:out value="${SelectedBranch.branchID}" />"><button class="btn btn-primary" type="button" style="background-color:#222222;padding:12px;">ADD MORE PRODUCTS+</button></a>
     </div>
     <div class="col">
         <div class="table-responsive">

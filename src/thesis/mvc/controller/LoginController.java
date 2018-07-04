@@ -46,14 +46,14 @@ public class LoginController extends HttpServlet {
 			session.removeAttribute("userID");
 			session.removeAttribute("username");
 			session.removeAttribute("userAccess");
-			forward = "Home.jsp";
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else {
 			forward = "A-test-pharmacistapproval.jsp";
 			OrderImplement orderImplement = new OrderImplement();
 			session.setAttribute("orderImplementPharmacist", orderImplement.getOrder() );
+			RequestDispatcher view = request.getRequestDispatcher( forward );
+			view.forward(request, response);
 		}
-		RequestDispatcher view = request.getRequestDispatcher( forward );
-		view.forward(request, response);
 		
 	}
 	
@@ -85,8 +85,8 @@ public class LoginController extends HttpServlet {
 			//Set Access Level
 			int AL = loginAction.checkUserType(LoginID);
 			session.setAttribute("userAccess", AL);
-			//view = request.getRequestDispatcher( "/Home.jsp" );
-			view = request.getRequestDispatcher( "/A-test-loginsuccess.jsp" );
+
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
 			/*if (AL == 1) {
 				view = request.getRequestDispatcher( "/Home.jsp" );
 			} else if (AL == 2) {
@@ -101,7 +101,7 @@ public class LoginController extends HttpServlet {
 		}
 		else {
 			view = request.getRequestDispatcher( "/AccountRecovery.jsp" );
+			view.forward(request, response);
 		}
-		view.forward(request, response);
 	}
 }

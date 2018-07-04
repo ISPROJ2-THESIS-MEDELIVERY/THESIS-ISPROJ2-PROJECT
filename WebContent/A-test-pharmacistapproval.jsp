@@ -23,9 +23,15 @@
 			<c:forEach items="${orderPharmacistCheck}" var="order">
 			<tr>
 				<td><c:out value="${order.orderID}" /></td>
+				<td><c:out value="${order.customerInfo}" /></td>
+				<td><c:out value="${order.cityName}" /></td>
+				<td><c:out value="${order.prescriptionID}" /></td>
 				<td><c:out value="${order.orderAddress}" /></td>
-				<td><c:out value="${order.orderType}" /></td>
-				<td><c:out value="${order.paymentMethod}" /></td>
+				<td><c:out value="${order.dateOrdered}" /></td>
+				<td><c:out value="${order.orderStatus}" /></td>
+				<td><c:out value="${order.seniorDiscount}" /></td>
+				<td><c:out value="${order.orderDetails}" /></td>
+				<td><c:out value="${order.actualCost}" /></td>
 				<td><a href="PurchaseController?action=Reject&orderID=<c:out value="${order.orderID}"/>">REJECT</a></td>
 				<td><a href="PurchaseController?action=Approve&orderID=<c:out value="${order.orderID}"/>">APPROVE</a></td>
 			</tr>

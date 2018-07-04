@@ -67,8 +67,8 @@ public class LoginController extends HttpServlet {
 		int LoginID = loginAction.loginUser(Username, Password);
 		
 		//This is a test
-		SendEmail sendEmail = new SendEmail();
-		sendEmail.send("fajardokier@yahoo.com", "Bitch ass nigga", "<br>This is a Holdup,<br>.I'mma pop a cap in your ass");
+		//SendEmail sendEmail = new SendEmail();
+		//sendEmail.send("fajardokier@yahoo.com", "Bitch ass nigga", "<br>This is a Holdup,<br>.I'mma pop a cap in your ass");
 		
 		RequestDispatcher view;
 		//String test = (String) session.getAttribute("username");

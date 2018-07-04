@@ -76,7 +76,7 @@ public class PurchaseController extends HttpServlet {
     		request.setAttribute( "productList", searchAction.GeneralListing(PharmaID) );
     		RequestDispatcher view = request.getRequestDispatcher( forward );
     		view.forward(request, response);
-    	} else if (access == 2) {
+    	} else if (access == 0) {
     		if (action.equalsIgnoreCase("Approve")) {
         		forward = "A-test-pharmacistapprovalsuccess.jsp";
         		PurchaseAction purchaseAction = new PurchaseAction();
@@ -93,7 +93,7 @@ public class PurchaseController extends HttpServlet {
         		
         	} else if (PharmaID != 0) {
 	    		ApprovalAction approvalAction = new ApprovalAction();
-	    		session.setAttribute("orderPharmacistCheck", approvalAction.getOrder(PharmaID) );
+	    		session.setAttribute("orderPharmacistCheck", approvalAction.getRegularOrder(PharmaID) );
 	    		forward = "A-test-pharmacistapproval.jsp";
 	    		RequestDispatcher view = request.getRequestDispatcher( forward );
 	    		view.forward(request, response);

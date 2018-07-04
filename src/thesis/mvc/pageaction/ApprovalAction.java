@@ -1,6 +1,7 @@
 package thesis.mvc.pageaction;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -51,33 +52,129 @@ public class ApprovalAction {
 	}
 	
 	//Add city in order to 
-	public List<Order> getOrder(int BranchID) {
-		List<Order> orders = new ArrayList<Order>();
+	public class PharmaOrder {
+		private int OrderID;
+		private String CustomerInfo;//CustomerID;
+		private String CityName;//CityID;
+		private int PrescriptionID;
+		private String OrderAddress;
+		private Date DateOrdered;
+		private String OrderStatus;
+		private Boolean SeniorDiscount;
+		private String orderDetails;//Order List
+		private double ActualCost;
+		public int getOrderID() {
+			return OrderID;
+		}
+		public void setOrderID(int orderID) {
+			OrderID = orderID;
+		}
+		public String getCustomerInfo() {
+			return CustomerInfo;
+		}
+		public void setCustomerInfo(String customerInfo) {
+			CustomerInfo = customerInfo;
+		}
+		public String getCityName() {
+			return CityName;
+		}
+		public void setCityName(String cityName) {
+			CityName = cityName;
+		}
+		public int getPrescriptionID() {
+			return PrescriptionID;
+		}
+		public void setPrescriptionID(int prescriptionID) {
+			PrescriptionID = prescriptionID;
+		}
+		public String getOrderAddress() {
+			return OrderAddress;
+		}
+		public void setOrderAddress(String orderAddress) {
+			OrderAddress = orderAddress;
+		}
+		public Date getDateOrdered() {
+			return DateOrdered;
+		}
+		public void setDateOrdered(Date dateOrdered) {
+			DateOrdered = dateOrdered;
+		}
+		public String getOrderStatus() {
+			return OrderStatus;
+		}
+		public void setOrderStatus(String orderStatus) {
+			OrderStatus = orderStatus;
+		}
+		public Boolean getSeniorDiscount() {
+			return SeniorDiscount;
+		}
+		public void setSeniorDiscount(Boolean seniorDiscount) {
+			SeniorDiscount = seniorDiscount;
+		}
+		public String getOrderDetails() {
+			return orderDetails;
+		}
+		public void setOrderDetails(String orderDetails) {
+			this.orderDetails = orderDetails;
+		}
+		public double getActualCost() {
+			return ActualCost;
+		}
+		public void setActualCost(double actualCost) {
+			ActualCost = actualCost;
+		}
+	}
+	public List<PharmaOrder> getRegularOrder(int BranchID) {
+		List<PharmaOrder> PharmaOrders = new ArrayList<PharmaOrder>();
 		
-		String Hold = "Select customer.CustomerName, `order`.OrderAddress, citylisting.CityName, `order`.DateOrdered, `order`.OrderType, `order`.SeniorDiscount, `order`.PaymentMethod, `order`.ActualCost, `order`.PrescriptionID From `order` Inner Join customer On `order`.CustomerID = customer.CustomerID Inner Join citylisting On customer.CityID = citylisting.CityID, branch Where `order`.CityID = branch.CityID And `order`.OrderStatus = 'PENDING' And branch.BranchID = ?";
+		//String Hold = "Select `order`.* From `order` Inner Join customer On `order`.CustomerID = customer.CustomerID Inner Join citylisting On customer.CityID = citylisting.CityID, branch Where `order`.CityID = branch.CityID And `order`.OrderStatus = 'PENDING' And branch.BranchID = ?";
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM `order` WHERE OrderStatus = 'PENDING' AND BranchID = ?")) {
 	        stmt.setInt(1, BranchID);
 	        try(ResultSet resultSet = stmt.executeQuery()) {
 	        	while( resultSet.next() ) {
-					Order order = new Order();
-					order.setOrderID( resultSet.getInt( "OrderID" ) );
-					order.setCustomerID( resultSet.getInt( "CustomerID" ) );
-					order.setDeliveryID( resultSet.getInt( "DeliveryID" ) );
-					order.setPharmacistID( resultSet.getInt( "PharmacistID" ) );
-					order.setCityID( resultSet.getInt( "CityID" ) );
-					order.setPrescriptionID( resultSet.getInt( "PrescriptionID" ) );
-					order.setOrderAddress( resultSet.getString( "OrderAddress" ) );
-					order.setDateOrdered( resultSet.getDate( "DateOrdered" ) );
-					order.setDateProcessed( resultSet.getDate( "DateProcessed" ) );
-					order.setDateDelivered( resultSet.getDate( "DateDelivered" ) );
-					order.setOrderType( resultSet.getString( "OrderType" ) );
-					order.setOrderStatus( resultSet.getString( "OrderStatus" ) );
-					order.setSeniorDiscount( resultSet.getBoolean( "SeniorDiscount" ) );
-					order.setPaymentMethod( resultSet.getString( "PaymentMethod" ) );
-					orders.add(order);
+					PharmaOrder pharmaOrder = new PharmaOrder();
+					//Order ID
+					pharmaOrder.setOrderID(resultSet.getInt("OrderID"));
+					//Customer Information
+					String CustomerInfo = "";
+					PreparedStatement preparedStatement = conn.prepareStatement( "SELECT customer.CustomerName, customer.Address, customer.Email, customer.ContactNumber FROM customer where CustomerID = ?" );
+					preparedStatement.setInt(1, resultSet.getInt("CustomerID"));
+					ResultSet resultSet1 = preparedStatement.executeQuery();
+					while( resultSet1.next() ) {
+						CustomerInfo = resultSet1.getString(1) + " | " + resultSet1.getString(2)  + " | " + resultSet1.getString(3)  + " | " + resultSet1.getString(4);
+					}
+					resultSet1.close();
+					pharmaOrder.setCustomerInfo(CustomerInfo);
+					preparedStatement.close();
+					//City Name
+					pharmaOrder.setCityName(resultSet.getString("CityID"));
+					//Order Address
+					pharmaOrder.setOrderAddress(resultSet.getString("OrderAddress"));
+					//Date Ordered
+					pharmaOrder.setDateOrdered(resultSet.getDate("DateOrdered"));
+					//Order Status
+					pharmaOrder.setOrderStatus(resultSet.getString("OrderStatus"));
+					//Senior Discount
+					pharmaOrder.setSeniorDiscount(resultSet.getBoolean("SeniorDiscount"));
+					//Order Details
+					String OrderInfo = "<br>";
+					PreparedStatement preparedStatement1 = conn.prepareStatement( "SELECT product.ProductName, orderdetail.Quantity FROM orderdetail INNER JOIN product ON orderdetail.ProductID = product.ProductID WHERE orderdetail.OrderID = ?" );
+					preparedStatement1.setInt(1, resultSet.getInt("CustomerID"));
+					ResultSet resultSet2 = preparedStatement1.executeQuery();
+					while( resultSet2.next() ) {
+						CustomerInfo += resultSet2.getString(1) + "<br>" + resultSet2.getString(2) + "<br><br>";
+					}
+					resultSet2.close();
+					pharmaOrder.setOrderDetails(OrderInfo);
+					preparedStatement1.close();
+					//Actual Cost 
+					pharmaOrder.setActualCost(resultSet.getDouble("ActualCost"));
+									
+					
+					PharmaOrders.add(pharmaOrder);
 				}
 	        }
-	        return orders;
+	        return PharmaOrders;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;

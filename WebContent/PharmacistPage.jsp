@@ -55,7 +55,7 @@
             <div class="collapse navbar-collapse"
                 id="navcol-1">
                 <ul class="nav navbar-nav">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="Home.jsp">Home</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.jsp">Home</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="About.jsp">About</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="ContactUs.jsp">Contact Us</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Members.jsp">Membership Registration</a></li>
@@ -86,7 +86,7 @@
                     <div>
                     <!-- First Table -->
                     <h1 class="text-center" style="font-family:Lora, serif;font-size:28px;">Over the counter<br></h1>
-                        <table id="OTC" class="display nowrap pretty" style="width:100%">
+                        <table id="OTC" class="pretty"">
                             <thead>
       <tr>
       	  <th>Approval Status</th>
@@ -104,14 +104,14 @@
     
     <tbody>
 	    <tr>
-	      <td>Approved/Rejected</td>
+	      <td>Approved</td>
 	      <td>001</td>
 	      <td>Kyrie Fajardo</td>
 	      <td>1001</td>
 	      <td>Mandaluyong, Pioneer Woodlands</td>
 	      <td>N/A</td>
         <td>
-          <table border = 4>
+          <table>
               <thead>
                 <tr>
                   <th>Medicine Name</th>
@@ -249,8 +249,8 @@
         $(document).ready(function () {
             $("#OTC").dataTable({
                 "sPaginationType": "full_numbers",
-                "bJQueryUI": true,
-                "scrollX": true
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
             });
         });
         </script>
@@ -258,7 +258,7 @@
         $(document).ready(function () {
             $("#Prescription").dataTable({
                 "sPaginationType": "full_numbers",
-                "bJQueryUI": true
+                "bJQueryUI": false
             });
         });
         </script>

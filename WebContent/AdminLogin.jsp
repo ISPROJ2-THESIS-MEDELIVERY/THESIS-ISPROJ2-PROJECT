@@ -51,7 +51,7 @@
             <div class="collapse navbar-collapse"
                 id="navcol-1">
                 <ul class="nav navbar-nav">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="Home.jsp">Main Site</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="index.jsp">Main Site</a></li>
                 </ul>
                 <ul class="nav navbar-nav ml-auto"></ul>
             </div>

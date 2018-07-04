@@ -53,7 +53,7 @@
             <div class="collapse navbar-collapse"
                 id="navcol-1">
                 <ul class="nav navbar-nav">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="Home.jsp">Home</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="index.jsp">Home</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="About.jsp">About</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="ContactUs.jsp">Contact Us</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Members.jsp">Membership Registration</a></li>
@@ -184,8 +184,7 @@
         $(document).ready(function () {
             $("#Receipt").dataTable({
                 "sPaginationType": "full_numbers",
-                "bJQueryUI": true ,,
-                "searching": false
+                "bJQueryUI": true, bFilter: false, bInfo: false, bPaginate: false
             });
         });
         </script>

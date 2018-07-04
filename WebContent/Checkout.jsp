@@ -99,6 +99,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 7621562... undoooooooooo
 											<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
 											<td><c:out value="${cartdetails.name}" /></td>
 											<td><c:out value="${cartdetails.description}" /></td>
@@ -112,6 +115,7 @@
 =======
 											
 >>>>>>> e0bc041909c7ef0318268bb34a29a7918a9d4dca
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of e0bc041... changes
@@ -145,6 +149,8 @@
 >>>>>>> parent of e0bc041... changes
 =======
 >>>>>>> parent of e0bc041... changes
+=======
+>>>>>>> parent of 7621562... undoooooooooo
 										</tr>
 									<!--  </form>-->
 								</c:forEach>

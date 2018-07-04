@@ -71,6 +71,7 @@
             <div class="row">
                 <div class="col-12 col-sm-6 col-lg-7">
                     <h3><span class="fa-stack"><i class="fa fa-circle fa-stack-2x text-muted"></i><i class="icon ion-information-circled fa-stack-1x fa-inverse"></i></span> Checkout</h3>
+                	<p>Orders that have not been evaluated within 24 hours are automatically disapproved by the chosen branch</p>
                 </div>
             </div>
         </div>

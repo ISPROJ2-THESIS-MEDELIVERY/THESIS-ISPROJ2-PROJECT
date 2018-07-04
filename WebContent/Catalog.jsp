@@ -73,13 +73,6 @@
             </div>
         </div>
     </div>
-    <div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6"><select class="form-control" name="Medicine" style="margin:1px;"><option value="">Filter</option><option value="">Name</option><option value="">Best Selling</option><option value="">Price: Low to High</option><option value="">Price: High to Low</option></select></div>            
-            </div>
-        </div>
-    </div>
     <br/>
     <div>
         <div class="container">                           

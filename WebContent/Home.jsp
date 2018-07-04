@@ -42,6 +42,7 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/Team-Boxed.css">
     <link rel="stylesheet" href="assets/css/TR-Form.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>
 
 <body><img src="assets/img/MedeliveryLogo.png">
@@ -114,7 +115,12 @@
 			</div>
 		</c:when>
 	    <c:otherwise>
-    		<h1 align="center" style="font-family:Lora, serif;font-size:55px;">PLEASE LOG IN OR REGISTER FIRST</h1>
+	    <div id="cid_14" class="col-md-3 form-input-wide alert alert-info"  role="alert">
+          <div id="text_14" class="form-html" data-component="text">
+            <i class="fas fa-exclamation-circle"></i><p>To view our list of available pharmacies, please register and login</p>
+          <br>
+          </div>
+        </div>
 		</c:otherwise>
 	</c:choose>
     

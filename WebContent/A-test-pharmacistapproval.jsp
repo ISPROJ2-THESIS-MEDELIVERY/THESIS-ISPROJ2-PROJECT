@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table>
+	<table border = "2">
 		<thead>
 			<tr>
 				<th>Order ID</th>
@@ -30,7 +30,7 @@
 				<td><c:out value="${order.dateOrdered}" /></td>
 				<td><c:out value="${order.orderStatus}" /></td>
 				<td><c:out value="${order.seniorDiscount}" /></td>
-				<td><c:out value="${order.orderDetails}" /></td>
+				<td>${order.orderDetails}</td>
 				<td><c:out value="${order.actualCost}" /></td>
 				<td><a href="PurchaseController?action=Reject&orderID=<c:out value="${order.orderID}"/>">REJECT</a></td>
 				<td><a href="PurchaseController?action=Approve&orderID=<c:out value="${order.orderID}"/>">APPROVE</a></td>

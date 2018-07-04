@@ -125,4 +125,28 @@ public class PharmacistImplement implements PharmacistDAO{
 		return pharmacist;
 	}
 
+	public Pharmacist getPharmacistByUserId(int loginID) {
+		Pharmacist pharmacist = new Pharmacist();
+		try {
+			String query = "SELECT * FROM Pharmacist WHERE UserID=?";
+			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			preparedStatement.setInt(1, loginID);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while( resultSet.next() ) {
+				pharmacist.setPharmacistID( resultSet.getInt( "PharmacistID" ) );
+				pharmacist.setUserID( resultSet.getInt( "UserID" ) );
+				pharmacist.setBranchID( resultSet.getInt( "BranchID" ) );
+				pharmacist.setFirstName( resultSet.getString( "FirstName" ) );
+				pharmacist.setLastName( resultSet.getString( "LastName" ) );
+				pharmacist.setPRCNo( resultSet.getInt( "PRCNo" ) );
+				pharmacist.setPosition( resultSet.getString( "Position" ) );
+			}
+			resultSet.close();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return pharmacist;
+	}
+
 }

@@ -103,51 +103,23 @@
     
     
     <tbody>
-	    <tr>
-	      <td>Approved</td>
-	      <td>001</td>
-	      <td>Kyrie Fajardo</td>
-	      <td>1001</td>
-	      <td>Mandaluyong, Pioneer Woodlands</td>
-	      <td>N/A</td>
-        <td>
-          <table>
-              <thead>
-                <tr>
-                  <th>Medicine Name</th>
-                  <th>Medicine Description</th>
-                  <th>Order Quantity</th>
-                  <th>Order Cost</th>
-                  <th>Product Image</th>
-                  <th>Packaging</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Paracetamol</td>
-                  <td>For cough</td>
-                  <td>10</td>
-                  <td>P90</td>
-                  <td><image src="img/paracetamol.jpg"></td>
-                  <td>Capsule</td>
-                </tr>
-                <tr>
-                  <td>Advil</td>
-                  <td>For headache</td>
-                  <td>5</td>
-                  <td>P50</td>
-                  <td><image src="img/advil.jpg"></td>
-                  <td>Capsule</td>
-                </tr>
-                <tr>
-                  <td>Viagra</td>
-                  <td>For personal use</td>
-                  <td>50</td>
-                  <td>P20,000</td>
-                  <td><image src="img/viagra.jpg"></td>
-                  <td>tablet</td>
-                </tr>
-              </tbody>
+    	<c:forEach items="${orderPharmacistCheck}" var="order">
+			<tr>
+				<td><c:out value="${order.orderID}" /></td>
+				<td><c:out value="${order.customerInfo}" /></td>
+				<td><c:out value="${order.cityName}" /></td>
+				<td><c:out value="${order.prescriptionID}" /></td>
+				<td><c:out value="${order.orderAddress}" /></td>
+				<td><c:out value="${order.dateOrdered}" /></td>
+				<td><c:out value="${order.orderStatus}" /></td>
+				<td><c:out value="${order.seniorDiscount}" /></td>
+				<td>${order.orderDetails}</td>
+				<td><c:out value="${order.actualCost}" /></td>
+				<td><a href="PurchaseController?action=Reject&orderID=<c:out value="${order.orderID}"/>">REJECT</a></td>
+				<td><a href="PurchaseController?action=Approve&orderID=<c:out value="${order.orderID}"/>">APPROVE</a></td>
+			</tr>
+		</c:forEach>
+	</tbody>
           </table>
         </td>
       <td><textarea>

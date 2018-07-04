@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.manager.DummyProxySession;
+
 import thesis.mvc.implement.DriverImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.pageaction.DispatcherAction;
@@ -28,6 +30,7 @@ public class DispatcherController {
 	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	int AccessLevel = Integer.parseInt( request.getParameter( "ProductID" ) );
+    	DispatcherAction dispatcherAction = new DispatcherAction();
 		HttpSession session = request.getSession();
     	String forward = "";
     	if (AccessLevel == 2) {
@@ -36,7 +39,7 @@ public class DispatcherController {
     		DriverImplement driverImplement = new DriverImplement();
     		OrderImplement orderImplement = new OrderImplement();
     		session.setAttribute("DriverList", driverImplement.getAllDrivers() );
-    		session.setAttribute("OrderList", orderImplement.getOrder() );
+    		session.setAttribute("OrderList", dispatcherAction.getapprovedOrder() );
     	} else {
     		forward = "/Home.jsp";
     	}
@@ -49,12 +52,13 @@ public class DispatcherController {
     	int OrderID = Integer.parseInt( request.getParameter( "OrderID" ) );
     	int DriverID = Integer.parseInt( request.getParameter( "DriverID" ) );
     	String Comments = request.getParameter( "Comments" );
+    	String Status = request.getParameter( "Status" );
     	int UserID = (int) session.getAttribute("userID") ;
     	boolean DoCheck = false;
     	
     	//Insert logic here
     	DispatcherAction dispatcherAction = new DispatcherAction();
-    	DoCheck = dispatcherAction.DispatcherOrder(OrderID, UserID, DriverID, Comments);
+    	DoCheck = dispatcherAction.DispatcherOrder(OrderID, UserID, DriverID, Comments, Status);
     	
     	String forward = "";
     	if (DoCheck) {

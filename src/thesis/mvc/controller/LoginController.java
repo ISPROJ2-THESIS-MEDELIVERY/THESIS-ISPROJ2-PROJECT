@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import thesis.mvc.implement.LoginImplement;
 import thesis.mvc.implement.OrderImplement;
+import thesis.mvc.implement.PharmacistImplement;
 import thesis.mvc.model.Login;
 import thesis.mvc.pageaction.LoginAction;
 import thesis.mvc.utility.DBUtility;
@@ -86,18 +87,22 @@ public class LoginController extends HttpServlet {
 			int AL = loginAction.checkUserType(LoginID);
 			session.setAttribute("userAccess", AL);
 
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
-			/*if (AL == 1) {
-				view = request.getRequestDispatcher( "/Home.jsp" );
+			
+			if (AL == 1) {
+				response.sendRedirect(request.getContextPath() + "/index.jsp");
 			} else if (AL == 2) {
 				view = request.getRequestDispatcher( "/DeliveryPersonel.jsp" );
+				view.forward(request, response);
 			} else if (AL == 3) {
-				view = request.getRequestDispatcher( "/PharmacistPage.jsp" );
+				PharmacistImplement pharmacistImplement = new PharmacistImplement();
+				response.sendRedirect(request.getContextPath() + "/PurchaseController?PharmaID=" + pharmacistImplement.getPharmacistByUserId(LoginID).getBranchID());
 			} else if (AL == 4) {
 				view = request.getRequestDispatcher( "/AdminHome.jsp" );
+				view.forward(request, response);
 			} else {
 				view = request.getRequestDispatcher( "/Error.jsp" );
-			}*/
+				view.forward(request, response);
+			}
 		}
 		else {
 			view = request.getRequestDispatcher( "/AccountRecovery.jsp" );

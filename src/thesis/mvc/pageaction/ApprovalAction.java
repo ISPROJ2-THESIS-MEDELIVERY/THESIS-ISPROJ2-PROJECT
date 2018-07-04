@@ -159,10 +159,10 @@ public class ApprovalAction {
 					//Order Details
 					String OrderInfo = "<br>";
 					PreparedStatement preparedStatement1 = conn.prepareStatement( "SELECT product.ProductName, orderdetail.Quantity FROM orderdetail INNER JOIN product ON orderdetail.ProductID = product.ProductID WHERE orderdetail.OrderID = ?" );
-					preparedStatement1.setInt(1, resultSet.getInt("CustomerID"));
+					preparedStatement1.setInt(1, resultSet.getInt("OrderID"));
 					ResultSet resultSet2 = preparedStatement1.executeQuery();
 					while( resultSet2.next() ) {
-						CustomerInfo += resultSet2.getString(1) + "<br>" + resultSet2.getString(2) + "<br><br>";
+						OrderInfo += resultSet2.getString(1) + "<br>" + resultSet2.getString(2) + "<br><br>";
 					}
 					resultSet2.close();
 					pharmaOrder.setOrderDetails(OrderInfo);

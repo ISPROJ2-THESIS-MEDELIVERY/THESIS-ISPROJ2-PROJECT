@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.model.Branch;
@@ -46,19 +47,25 @@ public class PurchaseController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Ensures that the person can select what he/she wants to buy
 		String forward;
+		HttpSession session = request.getSession();
 		
 		String action = "";
 		if (request.getParameter("action") != null && !request.getParameter("action").isEmpty()) {
 			action = request.getParameter( "action" );			
 		}
 		
-		int PharmaID = 1;
+		int PharmaID = 0;
 		if (request.getParameter("PharmaID") != null && !request.getParameter("PharmaID").isEmpty()) {
-			PharmaID = Integer.parseInt( request.getParameter( "PharmaID" ) );	
+			PharmaID = Integer.parseInt( request.getParameter( "PharmaID" ) );
+			BranchImplement branchImplement = new BranchImplement();
+			session.setAttribute("SelectedBranch", branchImplement.getBranchById(PharmaID));
 		}
-		HttpSession session = request.getSession();
 		
-		int access = 1;//(int) session.getAttribute("userAccess");
+		int access = 0;
+		if (session.getAttribute("userAccess") != null) {
+			access = (int) session.getAttribute("userAccess");	
+		}
+		
 		
 		boolean test = true;
     	
@@ -67,30 +74,38 @@ public class PurchaseController extends HttpServlet {
     		//forward = "/A-test-shop.jsp";
     		forward = "/Catalog.jsp";
     		request.setAttribute( "productList", searchAction.GeneralListing(PharmaID) );
+    		RequestDispatcher view = request.getRequestDispatcher( forward );
+    		view.forward(request, response);
     	} else if (access == 2) {
     		if (action.equalsIgnoreCase("Approve")) {
         		forward = "A-test-pharmacistapprovalsuccess.jsp";
         		PurchaseAction purchaseAction = new PurchaseAction();
         		purchaseAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ), true );
+        		RequestDispatcher view = request.getRequestDispatcher( forward );
+        		view.forward(request, response);
         		
         	} else if (action.equalsIgnoreCase("Reject")) {
         		forward = "A-test-pharmacistapprovalsuccess.jsp";
         		PurchaseAction purchaseAction = new PurchaseAction();
         		purchaseAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ) , false );
+        		RequestDispatcher view = request.getRequestDispatcher( forward );
+        		view.forward(request, response);
         		
         	} else if (PharmaID != 0) {
 	    		ApprovalAction approvalAction = new ApprovalAction();
 	    		session.setAttribute("orderPharmacistCheck", approvalAction.getOrder(PharmaID) );
 	    		forward = "A-test-pharmacistapproval.jsp";
+	    		RequestDispatcher view = request.getRequestDispatcher( forward );
+	    		view.forward(request, response);
         	} else {
             	forward = "index.jsp";
             }
     	}
     	else {
-    		forward = "index.jsp";
+    		response.sendRedirect("/THESIS-ISPROJ2-PROJECT/index.jsp");  
     	}
-		RequestDispatcher view = request.getRequestDispatcher( forward );
-		view.forward(request, response);
+		
+		
 		/*
 		 String forward;
 		int BranchID = Integer.parseInt( request.getParameter( "BranchID" ) );
@@ -116,14 +131,22 @@ public class PurchaseController extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		List<OrderDetail> OrderDetails = new ArrayList<OrderDetail>();
 		PurchaseAction purchaseAction = new PurchaseAction();
+		Boolean SurgeCheck;
 		
-		if(action.equalsIgnoreCase("Addtocart")) {
+		//Safety measure
+		if (session.getAttribute("userID") != null && session.getAttribute("SelectedBranch") != null) {
+			SurgeCheck = true;		
+		} else {
+			SurgeCheck = false;
+		}
+		
+		if(action.equalsIgnoreCase("Addtocart") && SurgeCheck) {
 			
 			//sets order and generates it if it does not exist
 			Order order = (Order) session.getAttribute("Order");
 			
 			if(order == null) { // || order.getBranchID() != Current Branch
-				int UID = 4;//(int) session.getAttribute("userID");
+				int UID = (int) session.getAttribute("userID");
 				CustomerImplement customerImplement = new CustomerImplement();
 				Customer customer = new Customer();
 				customer = customerImplement.getCustomerById(UID);
@@ -131,8 +154,9 @@ public class PurchaseController extends HttpServlet {
 				boolean SID = customer.isIsSeniorCitizen();
 				int CID = customer.getCityID();
 				Branch SelectedBranch = new Branch();
-				//SelectedBranch = (Branch) session.getAttribute("SelectedBranch");
-				int BID = 1;//SelectedBranch.getBranchID();
+				SelectedBranch = (Branch) session.getAttribute("SelectedBranch");
+				int BID = SelectedBranch.getBranchID();
+				session.setAttribute("OrderDetails", OrderDetails );
 				
 				order = purchaseAction.setInitalOrder(UID, ADD, SID, CID, BID);
 				session.setAttribute("Order", order );
@@ -212,7 +236,7 @@ public class PurchaseController extends HttpServlet {
 				//forward = "/A-test-customerpurchasecheckout.jsp";
 			}
 			
-		} else if (action.equalsIgnoreCase("Checkout")) {
+		} else if (action.equalsIgnoreCase("Checkout") && SurgeCheck) {
 			
 			Order order = (Order) session.getAttribute("Order");
 			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
@@ -244,10 +268,14 @@ public class PurchaseController extends HttpServlet {
 			//order.setDateOrdered(today);
 			
 		} else {
-			forward = "/A-test-customerpurchasecheckout.jsp"; // ???
+			forward = "/index.jsp"; // ???
 		}
 		RequestDispatcher view = request.getRequestDispatcher( forward );
-		view.forward(request, response);
+		if (SurgeCheck) {
+			view.forward(request, response);
+		} else {
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
+		}
 	}
 
 }

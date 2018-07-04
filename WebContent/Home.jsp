@@ -10,6 +10,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> e0bc041909c7ef0318268bb34a29a7918a9d4dca
 =======
@@ -30,6 +31,9 @@
 =======
 >>>>>>> e0bc041909c7ef0318268bb34a29a7918a9d4dca
 >>>>>>> parent of 7621562... undoooooooooo
+=======
+	<jsp:forward page="/HomeController"></jsp:forward>
+>>>>>>> parent of 673f0d1... Revert "push things"
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -132,8 +136,8 @@
 			<div>
 			    <div class="container">
 			        <div class="row">
-				    <c:forEach items="${Pharmacy}" var="FStock">
-						<div class="col-md-3"><a href="Catalog.jsp?"></a></div>
+				    <c:forEach items="${Pharmacy}" var="pharma">
+						<div class="col-md-3"><a href="PurchaseController?PharmaID=<c:out value="${pharma.branchID}" />"><c:out value="${pharma.pharmacyName}" /> - <c:out value="${pharma.branchStreet}" />, <c:out value="${pharma.branchBarangay}" /></a></div>
 					</c:forEach>
 			        </div>
 			    </div>

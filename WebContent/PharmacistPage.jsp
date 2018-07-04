@@ -150,7 +150,7 @@
               </tbody>
           </table>
         </td>
-      <td><textarea rows="4" cols="50">
+      <td><textarea>
 </textarea></td>
       </tr>
 	</tbody>

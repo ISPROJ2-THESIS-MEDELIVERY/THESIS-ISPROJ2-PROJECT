@@ -93,24 +93,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              	<c:forEach items="${productList}" var="item">
+                            <c:forEach items="${CartlistReciept}" var="cartdetails">
 									<!--  <form action='PurchaseController' method='post'>-->
 										<tr>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 7621562... undoooooooooo
-=======
->>>>>>> parent of 7621562... undoooooooooo
-=======
->>>>>>> parent of 7621562... undoooooooooo
-											<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
-<<<<<<< HEAD
-<<<<<<< HEAD
+											<%-- <td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td> --%>
 											<td><c:out value="${cartdetails.name}" /></td>
 											<td><c:out value="${cartdetails.description}" /></td>
 											<td>IMAGE HERE</td>
@@ -120,67 +106,15 @@
 											<td><c:out value="${cartdetails.quantity}" /></td>
 											<td><c:out value="${cartdetails.unitCost}" /></td>
 											<td><c:out value="${cartdetails.totalCost}" /></td>											
-=======
-											
->>>>>>> e0bc041909c7ef0318268bb34a29a7918a9d4dca
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of e0bc041... changes
-											<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
-=======
->>>>>>> parent of 81d5ddf... Push Minor UI and parameters changes
-=======
->>>>>>> parent of 81d5ddf... Push Minor UI and parameters changes
-											<td><c:out value="${item.Item}" /></td>
-											<td><c:out value="${item.ItemDescription}" /></td>
-											<td><c:out value="${item.Image}" /></td>
-											<td><c:out value="${item.Size}" /></td>
-											<td><c:out value="${item.PrescriptionRequired}" /></td>
-											<td><c:out value="${item.Quantity}" /></td>
-											<td><c:out value="${item.UnitPrice}" /></td>
-											<td><c:out value="${item.Total}" /></td>
-											<td><c:out value="${item.Cost}" /></td>											
-											<td>
-												<select name='Quantity'>
-													<option value="1">1</option>
-													<option value="2">2</option>
-													<option value="3">3</option>
-													<option value="4">4</option>
-													<option value="5">5</option>
-													<option value="6">6</option>
-													<option value="7">7</option>
-													<option value="8">8</option>
-													<option value="9">9</option>
-												</select>
-											</td>
-											<td>
-												<input type='submit' name='Action' value="Addtocart" style='display: on-hover' />
-											</td>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of e0bc041... changes
-=======
->>>>>>> parent of e0bc041... changes
-=======
->>>>>>> parent of 7621562... undoooooooooo
-=======
->>>>>>> parent of 7621562... undoooooooooo
-=======
->>>>>>> parent of 81d5ddf... Push Minor UI and parameters changes
-=======
->>>>>>> parent of 81d5ddf... Push Minor UI and parameters changes
-=======
->>>>>>> parent of 7621562... undoooooooooo
 										</tr>
 									<!--  </form>-->
 								</c:forEach>
                             </tbody>
                         </table>
                     </div>
+                    Order ID: <c:out value="${orderReciept.customerID}" /><br />
+					Order Address: <c:out value="${orderReciept.orderAddress}" /><br />
+					Senior Discount: <c:out value="${orderReciept.seniorDiscount}" /><br />
                 </div>
         	<!--
             <c:forEach items="${CartList}" var="cartdetails">
@@ -199,13 +133,10 @@
             <div class="row">
                 <div class="col">
                     <h1>Payment Details</h1>
-                    <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-2"><label class="form-check-label" for="formCheck-2">CASH ON DELIVERY</label></div>
-                    <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1"><label class="form-check-label" for="formCheck-1">CREDIT CARD</label></div><label class="col-form-label">Payment Amount:&nbsp;</label><input type="text">
-                    <div
-                        class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label class="form-check-label" for="formCheck-3">I agree to the General Conditions of Use to permit and that my information as described on this page and used the Medelivery Privacy Policy</label>
-						</div>
-                <button
-                    class="btn btn-primary" type="button" style="background-color:#222222;">CANCEL</button><button class="btn btn-primary float-right" type="submit" style="background-color:#465765;">PLACE ORDER</button></div>
+                <button class="btn btn-primary float-right" type="submit" style="background-color:#465765;">Credit Card</button>
+                <button class="btn btn-primary float-right" type="submit" style="background-color:#465765;">Cash</button>
+                </div>
+                </div>
         </div>
 		</form>
     </div>

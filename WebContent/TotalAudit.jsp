@@ -67,7 +67,7 @@
 			<div class="collapse navbar-collapse" id="navcol-1">
 				<ul class="nav navbar-nav">
 					<li class="nav-item" role="presentation"><a
-						class="nav-link active" href="AdminHome.jsp">Home</a></li>
+						class="nav-link active" href="TotalAudit.jsp">Home</a></li>
 					<li class="nav-item" role="presentation"><a class="nav-link"
 						href="ManageCustomerAccount.jsp">Manage Customer Accounts</a></li>
 					<li class="nav-item" role="presentation"><a class="nav-link"

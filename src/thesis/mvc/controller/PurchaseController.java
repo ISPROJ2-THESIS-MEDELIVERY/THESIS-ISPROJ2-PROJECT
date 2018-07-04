@@ -268,7 +268,7 @@ public class PurchaseController extends HttpServlet {
 			//order.setDateOrdered(today);
 			
 		} else {
-			forward = "/index.jsp"; // ???
+			forward = "/index.jsp";
 		}
 		RequestDispatcher view = request.getRequestDispatcher( forward );
 		if (SurgeCheck) {

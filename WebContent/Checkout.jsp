@@ -129,17 +129,17 @@
 		    -->
 	    </div>
         <div class="card-body">
-		<form action="CheckoutController" method="post">
             <div class="row">
                 <div class="col">
                     <h1>Payment Details</h1>
-                <button class="btn btn-primary float-right" type="submit" style="background-color:#465765;">Credit Card</button>
-                <button class="btn btn-primary float-right" type="submit" style="background-color:#465765;">Cash</button>
+					<form action="PurchaseController" method="post">
+					<input type="hidden" name="ProductID" value="<c:out value="${productID}" />"/>
+		            <button class="btn btn-primary float-center" type="submit" style="background-color:#465765;" name="Payment" value="Card">Credit Card</button>
+		            <button class="btn btn-primary float-center" type="submit" style="background-color:#465765;" name="Payment" value="Cash">Cash</button>
+					</form>
                 </div>
-                </div>
+            </div>
         </div>
-		</form>
-    </div>
     </div>
     <div class="footer-basic">
         <footer>

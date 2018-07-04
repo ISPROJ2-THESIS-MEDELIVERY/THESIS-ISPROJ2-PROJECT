@@ -219,13 +219,11 @@ public class PurchaseController extends HttpServlet {
 			List<CartList> cartList = (List<CartList>) session.getAttribute("CartList");
 			SendEmail sendEmail = new SendEmail();
 			CustomerImplement customerImplement = new CustomerImplement();
-			int userID = (int) session.getAttribute("userID");
 			
-			
-			String CustomerEmail = customerImplement.getCustomerById(userID).getEmail();
+			String CustomerEmail = customerImplement.getCustomerById(0).getEmail();
 
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-			boolean checker = purchaseAction.purchaseOrder(order, OrderDetails) && sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, "This is a test message");
+			//boolean checker = purchaseAction.purchaseOrder(order, OrderDetails) && sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, "This is a test message");
 			purchaseAction.purchaseOrder(order, OrderDetails);
 			if(order == null || OrderDetails.isEmpty()) {
 				forward = "/index.jsp"; //or an error page
@@ -235,7 +233,7 @@ public class PurchaseController extends HttpServlet {
 				session.removeAttribute("Order");
 				session.removeAttribute("OrderDetails");
 				session.removeAttribute("CartList");
-				forward = "Checkout.jsp";
+				forward = "/A-test-customerpurchasecheckout.jsp";
 
 				
 			}

@@ -97,6 +97,7 @@
 									<!--  <form action='PurchaseController' method='post'>-->
 										<tr>
 <<<<<<< HEAD
+<<<<<<< HEAD
 											<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
 											<td><c:out value="${cartdetails.name}" /></td>
 											<td><c:out value="${cartdetails.description}" /></td>
@@ -110,6 +111,34 @@
 =======
 											
 >>>>>>> e0bc041909c7ef0318268bb34a29a7918a9d4dca
+=======
+											<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
+											<td><c:out value="${item.Item}" /></td>
+											<td><c:out value="${item.ItemDescription}" /></td>
+											<td><c:out value="${item.Image}" /></td>
+											<td><c:out value="${item.Size}" /></td>
+											<td><c:out value="${item.PrescriptionRequired}" /></td>
+											<td><c:out value="${item.Quantity}" /></td>
+											<td><c:out value="${item.UnitPrice}" /></td>
+											<td><c:out value="${item.Total}" /></td>
+											<td><c:out value="${item.Cost}" /></td>											
+											<td>
+												<select name='Quantity'>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+												</select>
+											</td>
+											<td>
+												<input type='submit' name='Action' value="Addtocart" style='display: on-hover' />
+											</td>
+>>>>>>> parent of e0bc041... changes
 										</tr>
 									<!--  </form>-->
 								</c:forEach>

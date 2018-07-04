@@ -98,6 +98,7 @@
 										<tr>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 											<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
 											<td><c:out value="${cartdetails.name}" /></td>
 											<td><c:out value="${cartdetails.description}" /></td>
@@ -112,6 +113,8 @@
 											
 >>>>>>> e0bc041909c7ef0318268bb34a29a7918a9d4dca
 =======
+=======
+>>>>>>> parent of e0bc041... changes
 											<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
 											<td><c:out value="${item.Item}" /></td>
 											<td><c:out value="${item.ItemDescription}" /></td>
@@ -138,6 +141,9 @@
 											<td>
 												<input type='submit' name='Action' value="Addtocart" style='display: on-hover' />
 											</td>
+<<<<<<< HEAD
+>>>>>>> parent of e0bc041... changes
+=======
 >>>>>>> parent of e0bc041... changes
 										</tr>
 									<!--  </form>-->

@@ -90,6 +90,7 @@
 	      <th>Plate Number</th>
 	      <th>Comment</th>
 	      <th>Status</th>
+	      <th></th>
       </tr>
 		</thead>
     
@@ -107,7 +108,10 @@
         <td>
           <textarea></textarea>
         </td>
-      <td><select name="Filters"><optgroup><option value="13">In - Transit</option><option value="14">Delivered</option><option value="">Rescheduled</option></optgroup></select></td>
+      <td><select name="Filters"><optgroup><option value=pending>PENDING</option><option value="approved">APPROVED</option><option value="cancelled">CANCELLED</option></optgroup></select></td>
+      <td>
+        <button class="btn btn-primary" type="submit" style="font-size:15px;">Update</button>
+        </td>
       </tr>
 	</tbody>
               </table>
@@ -115,62 +119,18 @@
                     </div>
       </div>
       </div>
-    <div
-        class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Customer ID</th>
-                    <th>Delivery ID</th>
-                    <th>Branch ID</th>
-                    <th>City ID</th>
-                    <th>Order Address</th>
-                    <th>Date Ordered</th>
-                    <th>Date Process</th>
-                    <th>Date Delivered</th>
-                    <th>Order Type</th>
-                    <th>Order Status</th>
-                    <th>Payment Method</th>
-                    <th>Order Type</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><label>Label</label></td>
-                    <td>&nbsp;&nbsp;<label>Label</label></td>
-                    <td>&nbsp;<label>Label</label></td>
-                    <td>&nbsp;<label>Label</label></td>
-                    <td>&nbsp;&nbsp;<label>Label</label></td>
-                    <td>&nbsp;<label>Label</label></td>
-                    <td>&nbsp;<label>Label</label></td>
-                    <td>&nbsp;<label>Label</label></td>
-                    <td>Cell 3<textarea name="Comments"></textarea></td>
-                    <td><select name="Filters"><optgroup label="This is a group"><option value="12" selected="">Processing</option><option value="13">In - Transit</option><option value="14">Delivered</option><option value="">Rescheduled</option></optgroup></select>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>&nbsp;<label>Label</label></td>
-                    <td>&nbsp;&nbsp;<label>Label</label></td>
-                    <td>&nbsp;<label>Label</label></td>
-                    <td>&nbsp;<label>Label</label></td>
-                    <td>&nbsp;<label>Label</label></td>
-                    <td>&nbsp;<label>Label</label></td>
-                    <td>&nbsp;&nbsp;<label>Label</label></td>
-                    <td>Cell 3<label>Label</label></td>
-                    <td>Cell 3<textarea name="Comments"></textarea></td>
-                    <td>&nbsp;<select name="Filters"><optgroup label="This is a group"><option value="12" selected="">Processing</option><option value="13">In - Transit</option><option value="14">Delivered</option><option value="">Rescheduled</option></optgroup></select></td>
-                </tr>
-            </tbody>
-        </table>
-        </div>
         <div>
-		<form action="DeliveryPersonelController" method="post">
+        
+        <!-- Buttons -->
+<!-- 		<form action="DeliveryPersonelController" method="post">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12"><button class="btn btn-primary" type="submit" style="font-size:25px;margin:10px;">Update</button><button class="btn btn-primary" type="submit" style="font-size:25px;margin:10px;">Delivery History</button></div>
                 </div>
             </div>
-			</form>
+			</form> -->
+			
+			
         </div>
         <div class="footer-basic">
             <footer>

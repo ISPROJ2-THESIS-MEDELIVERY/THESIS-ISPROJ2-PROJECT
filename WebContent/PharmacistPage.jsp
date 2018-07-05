@@ -89,14 +89,18 @@
                         <table id="OTC" class="pretty"">
                             <thead>
       <tr>
-      	  <th>Approval Status</th>
-      	  <th>Customer ID</th>
-      	  <th>Customer Name</th>
       	  <th>Order ID</th>
-      	  <th>Address</th>
-      	  <th>Senior Discount</th>
-	      <th>Order Items</th>
-	      <th>Remarks</th>
+      	  <th>Customer Information</th>
+      	  <th>City Name</th>
+      	  <th>Prescription ID</th>
+      	  <th>Order Address</th>
+      	  <th>Date Ordered </th>
+	      <th>Order Status</th>
+	      <th>Senior Discount</th>
+	      <th>Order Details</th>
+	      <th>Total Cost</th>
+	      <th></th>
+	      <th></th>
       </tr>
 		</thead>
     
@@ -121,12 +125,6 @@
 		</c:forEach>
 	</tbody>
           </table>
-        </td>
-      <td><textarea>
-</textarea></td>
-      </tr>
-	</tbody>
-                        </table>
                         <br>
                  <!-- Second Table -->
                  <h1 class="text-center" style="font-family:Lora, serif;font-size:28px;">Prescription requests<br></h1>
@@ -156,24 +154,7 @@
 											<td><c:out value="${item.productDescription}" /></td>
 											<td><c:out value="${item.productImage}" /></td>
 											<td><c:out value="${item.quantity}" /></td>
-											<td><c:out value="${item.priceSet}" /></td>											
-											<td>
-												<form action='PurchaseController' method='post'>
-												<input type="hidden" name="ProductID" value="<c:out value="${item.productID}" />"/>
-												<select name='Quantity'>
-													<option value="1">1</option>
-													<option value="2">2</option>
-													<option value="3">3</option>
-													<option value="4">4</option>
-													<option value="5">5</option>
-													<option value="6">6</option>
-													<option value="7">7</option>
-													<option value="8">8</option>
-													<option value="9">9</option>
-												</select>
-												<input type='submit' name='Action' value="Addtocart" style='display: on-hover' />
-												</form>
-											</td>
+											<td><c:out value="${item.priceSet}" /></td>													
 										</tr>
 								</c:forEach>
                             </tbody>

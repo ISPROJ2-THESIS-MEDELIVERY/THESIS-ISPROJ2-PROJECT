@@ -91,8 +91,7 @@ public class LoginController extends HttpServlet {
 			if (AL == 1) {
 				response.sendRedirect(request.getContextPath() + "/index.jsp");
 			} else if (AL == 2) {
-				view = request.getRequestDispatcher( "/DeliveryPersonel.jsp" );
-				view.forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/DispatcherController" );
 			} else if (AL == 3) {
 				PharmacistImplement pharmacistImplement = new PharmacistImplement();
 				response.sendRedirect(request.getContextPath() + "/PurchaseController?PharmaID=" + pharmacistImplement.getPharmacistByUserId(LoginID).getBranchID());

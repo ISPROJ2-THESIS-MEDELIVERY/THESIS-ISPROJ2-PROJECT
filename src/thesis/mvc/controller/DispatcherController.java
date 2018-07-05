@@ -6,6 +6,7 @@ import java.sql.Connection;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,7 +19,7 @@ import thesis.mvc.pageaction.DispatcherAction;
 import thesis.mvc.utility.DBUtility;
 
 @WebServlet("/DispatcherController")
-public class DispatcherController {
+public class DispatcherController extends HttpServlet{
 	
 	private Connection conn;
 
@@ -29,22 +30,21 @@ public class DispatcherController {
 	private static final long serialVersionUID = 1L;
 	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	int AccessLevel = Integer.parseInt( request.getParameter( "ProductID" ) );
-    	DispatcherAction dispatcherAction = new DispatcherAction();
 		HttpSession session = request.getSession();
-    	String forward = "";
+    	int AccessLevel = (int) session.getAttribute("userAccess");
+		String forward = "";
     	if (AccessLevel == 2) {
-    		forward = "/DeliveryHome.jsp";
+    		forward = "/DeliveryPersonel.jsp";
     		//Insert needed things here
     		DriverImplement driverImplement = new DriverImplement();
-    		OrderImplement orderImplement = new OrderImplement();
+        	DispatcherAction dispatcherAction = new DispatcherAction();
     		session.setAttribute("DriverList", driverImplement.getAllDrivers() );
     		session.setAttribute("OrderList", dispatcherAction.getapprovedOrder() );
+    		RequestDispatcher view = request.getRequestDispatcher( forward );
+    		view.forward(request, response);
     	} else {
-    		forward = "/Home.jsp";
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
     	}
-		RequestDispatcher view = request.getRequestDispatcher( forward );
-		view.forward(request, response);
 	}
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

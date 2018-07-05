@@ -78,14 +78,13 @@ public class PurchaseController extends HttpServlet {
     		view.forward(request, response);
     	} else if (access == 3) {
     		if (action.equalsIgnoreCase("Approve")) {
-        		forward = "A-test-pharmacistapprovalsuccess.jsp";
+	    		forward = "PharmacistPage.jsp";
         		PurchaseAction purchaseAction = new PurchaseAction();
         		purchaseAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ), true );
         		RequestDispatcher view = request.getRequestDispatcher( forward );
         		view.forward(request, response);
-        		
         	} else if (action.equalsIgnoreCase("Reject")) {
-        		forward = "A-test-pharmacistapprovalsuccess.jsp";
+	    		forward = "PharmacistPage.jsp";
         		PurchaseAction purchaseAction = new PurchaseAction();
         		purchaseAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ) , false );
         		RequestDispatcher view = request.getRequestDispatcher( forward );
@@ -98,11 +97,10 @@ public class PurchaseController extends HttpServlet {
 	    		RequestDispatcher view = request.getRequestDispatcher( forward );
 	    		view.forward(request, response);
         	} else {
-            	forward = "index.jsp";
+				response.sendRedirect(request.getContextPath() + "/index.jsp");
             }
-    	}
-    	else {
-    		response.sendRedirect("/THESIS-ISPROJ2-PROJECT/index.jsp");  
+    	} else {
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
     	}
 		
 		

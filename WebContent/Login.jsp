@@ -61,7 +61,7 @@
         </div>
     </nav>
     <form action="LoginController" method="post" style="padding:56px;margin:-21px;height:470px;">
-    <div class="alert alert-success" role="alert" style="width: 264px;"><span><strong>Registration complete! Please log in.</strong></span></div>
+    	<div class="alert alert-success" role="alert" style="width: 264px;"><span><strong>Registration complete! Please log in.</strong></span></div>
         <h2 class="sr-only">Login Form</h2>
         <div class="illustration"></div>
         <div class="form-group"><input class="form-control" type="Username" name="Username" required="" placeholder="Username" style="width:263px;padding:0px;height:42px;" autocomplete="on"></div>

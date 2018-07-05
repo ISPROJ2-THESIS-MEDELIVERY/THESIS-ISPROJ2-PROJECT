@@ -50,9 +50,11 @@ public class DispatcherController extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
     	int OrderID = Integer.parseInt( request.getParameter( "OrderID" ) );
-    	int DriverID = Integer.parseInt( request.getParameter( "DriverID" ) );
-    	String Comments = request.getParameter( "Comments" );
-    	String Status = request.getParameter( "Status" );
+    	//int DriverID = Integer.parseInt( request.getParameter( "DriverID" ) );
+    	int DriverID = 1;
+    	//String Comments = request.getParameter( "Comments" );
+    	String Comments = "There Might be a delay";
+    	String Status = request.getParameter( "Filters" );
     	int UserID = (int) session.getAttribute("userID") ;
     	boolean DoCheck = false;
     	
@@ -62,9 +64,9 @@ public class DispatcherController extends HttpServlet{
     	
     	String forward = "";
     	if (DoCheck) {
-    		forward = "/DeliverySuccess";
+    		forward = "/DeliveryPersonel.jsp";
     	} else {
-    		forward = "/DeliveryFail";
+    		forward = "/DeliveryPersonel.jsp";
     	}
     	
 		RequestDispatcher view = request.getRequestDispatcher( forward );

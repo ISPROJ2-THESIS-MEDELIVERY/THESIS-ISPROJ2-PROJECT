@@ -67,21 +67,18 @@ public class DispatcherAction {
 			DispatcherImplement dispatcherImplement = new DispatcherImplement();
 			int DispatcherID = dispatcherImplement.getDispatcherByLogin(UserID).getDispatcherID();
 
-			Delivery delivery = null;
+			Delivery delivery = new Delivery();
 			delivery.setComments(Comments);
 			delivery.setDriverID(DriverID);
 			delivery.setDispatcherID(DispatcherID);
 			delivery.setComments(Comments);
+			delivery.setPlateNumber("ASD123");
 			
 			DeliveryImplement deliveryImplement = new DeliveryImplement();
 			int DeliveryID = deliveryImplement.addDelivery(delivery);
 			
 			OrderImplement orderImplement = new OrderImplement();
-			Order updateOrder = orderImplement.getOrderById(OrderID);
-			updateOrder.setDeliveryID( DeliveryID );
-			updateOrder.setOrderStatus( Status );
-			
-			orderImplement.updateOrder(updateOrder);
+			orderImplement.updateOrderStatus(OrderID, Status);
 			
 			return true;
 		} catch (Exception e) {

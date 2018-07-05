@@ -97,22 +97,38 @@
     
     
     <tbody>
+    	<c:forEach items="${OrderList}" var="item">
 	    <tr>
-	      <td>001</td>
-	      <td>NA</td>
-	      <td>NA</td>
-	      <td>Juan Trinidad</td>
-	      <td>Mandaluyong, Pioneer Woodlands</td>
-	      <td>0917123456</td>
-	      <td>RMY249</td>
-        <td>
-          <textarea></textarea>
-        </td>
-      <td><select name="Filters"><optgroup><option value=pending>PENDING</option><option value="approved">APPROVED</option><option value="cancelled">CANCELLED</option></optgroup></select></td>
-      <td>
-        <button class="btn btn-primary" type="submit" style="font-size:15px;">Update</button>
-        </td>
-      </tr>
+	      <td><c:out value="${item.orderID}" /></td>
+	      <td><c:out value="${item.customerID}" /></td>
+	      <td><c:out value="${item.deliveryID}" /></td>
+	      <td><c:out value="${item.pharmacistID}" /></td>
+	      <td><c:out value="${item.cityID}" /></td>
+	      <td><c:out value="${item.branchID}" /></td>
+	      <td><c:out value="${item.orderAddress}" /></td>
+	      <td><c:out value="${item.dateOrdered}" /></td>
+	      <td><c:out value="${item.dateProcessed}" /></td>
+	      <td><c:out value="${item.dateDelivered}" /></td>
+	      <td><c:out value="${item.orderType}" /></td>
+	      <td><c:out value="${item.orderStatus}" /></td>
+	      <td><c:out value="${item.seniorDiscount}" /></td>
+	      <td><c:out value="${item.paymentMethod}" /></td>
+	      <td><c:out value="${item.actualCost}" /></td>
+		  <td>
+		  	<form action="DispatcherController" method="post">
+		  		<input type="hidden" name="OrderID" value="<c:out value="${item.orderID}" />"/>
+				<select name="Filters">
+					<optgroup>
+						<option value=pending>PENDING</option>
+						<option value="approved">APPROVED</option>
+						<option value="cancelled">CANCELLED</option>
+					</optgroup>
+				</select>
+	        	<button class="btn btn-primary" type="submit" style="font-size:15px;">Update</button>
+        	</form>
+           </td>
+      	</tr>
+      	</c:forEach>
 	</tbody>
               </table>
                         <br>

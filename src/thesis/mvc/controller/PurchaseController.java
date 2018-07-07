@@ -267,7 +267,64 @@ public class PurchaseController extends HttpServlet {
 			//order.setOrderAddress( request.getParameter( "orderAddress" ) );
 			//order.setPaymentMethod( request.getParameter( "orderPayment" ) );
 			//order.setDateOrdered(today);
+
+		} else if (action.equalsIgnoreCase("PrescriptionCheckout") && SurgeCheck) {
+			/*
+			Order order = (Order) session.getAttribute("Order");
+			int UID = (int) session.getAttribute("userID");
+			CustomerImplement customerImplement = new CustomerImplement();
+			Customer customer = new Customer();
+			customer = customerImplement.getCustomerById(UID);
+			String ADD = customer.getAddress();
+			boolean SID = customer.isIsSeniorCitizen();
+			int CID = customer.getCityID();
+			Branch SelectedBranch = new Branch();
+			SelectedBranch = (Branch) session.getAttribute("SelectedBranch");
+			int BID = SelectedBranch.getBranchID();
+			session.setAttribute("OrderDetails", OrderDetails );
 			
+			order = purchaseAction.setInitalOrder(UID, ADD, SID, CID, BID);
+			session.setAttribute("Order", order );
+			
+			//ProductID & Quantity & Cost per unit
+			ProductID = Integer.valueOf( request.getParameter( "ProductID" ) );
+			Quantity = Integer.valueOf( request.getParameter( "Quantity" ) );
+			CostPerUnit = purchaseAction.getProductCost( ProductID, BID, order);
+			
+			//Takes the existing order detail if there is and adds the next order detail to there
+			OrderDetail orderDetail = new OrderDetail();
+			orderDetail.setProductID(ProductID);
+			orderDetail.setQuantity(Quantity);
+			orderDetail.setCostPerUnit(CostPerUnit);
+			orderDetail.setTotalCost( Math.round(CostPerUnit * Quantity * 100) / 100 );
+			OrderDetails.add( orderDetail );
+			session.setAttribute("OrderDetails", OrderDetails );
+
+			
+			//Insert things into cartDetails
+			ProductImplement productImplement = new ProductImplement();
+			Product product = new Product();
+			product = productImplement.getProductById(orderDetail.getProductID());
+			
+			List<CartList> cartlists = new ArrayList<CartList>();
+			CartList cartlist = purchaseAction.new CartList();
+			cartlist.setName(product.getProductName());
+			cartlist.setDescription(product.getProductDescription());
+			cartlist.setImage(product.getProductImage());
+			cartlist.setSize(product.getProductPackaging());
+			cartlist.setPrescription(product.isRXProduct());
+			cartlist.setQuantity(orderDetail.getQuantity());
+			cartlist.setUnitCost(orderDetail.getCostPerUnit());
+			cartlist.setTotalCost(orderDetail.getTotalCost());
+			cartlists.add(cartlist);
+			session.setAttribute("CartList", cartlists );
+			
+			//Refreshes and goes back to the cart
+			forward = "/Cart.jsp";
+			//forward = "/A-test-customerpurchasecheckout.jsp";
+			 */
+
+			forward = "/Cart.jsp";
 		} else {
 			forward = "/index.jsp";
 		}

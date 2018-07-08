@@ -114,6 +114,9 @@
 			        </div>
 			    </div>
 			</div>
+			<c:forEach items="${PurchasePending}" var="pharma">
+				<div class="col-md-3"><a href="PurchaseController?PharmaID=<c:out value="${pharma.orderID}" />"><c:out value="${pharma.orderID}" /></a></div>
+			</c:forEach>
 		</c:when>
 	    <c:otherwise>
 	    <div id="cid_14" class="col-md-3 form-input-wide alert alert-info"  role="alert">
@@ -124,9 +127,7 @@
         </div>
 		</c:otherwise>
 	</c:choose>
-    <c:forEach items="${Pharmacy}" var="pharma">
-		<div class="col-md-3"><a href="PurchaseController?PharmaID=<c:out value="${pharma.branchID}" />"><c:out value="${pharma.pharmacyName}" /> - <c:out value="${pharma.branchStreet}" />, <c:out value="${pharma.branchBarangay}" /></a></div>
-	</c:forEach>
+    
     
     
     <div class="features-boxed">

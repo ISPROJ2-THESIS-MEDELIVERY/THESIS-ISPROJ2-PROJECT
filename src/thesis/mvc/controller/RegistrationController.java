@@ -1,6 +1,8 @@
 package thesis.mvc.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Date;
 import java.text.DateFormat;
@@ -9,10 +11,12 @@ import java.text.SimpleDateFormat;
 import javax.servlet.RequestDispatcher;
 //import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.LoginImplement;
@@ -27,9 +31,14 @@ import thesis.mvc.utility.DBUtility;
 import thesis.mvc.utility.SendEmail;
 
 @WebServlet("/RegistrationController")
+@MultipartConfig(fileSizeThreshold = 6291456, // 6 MB
+maxFileSize = 10485760L, // 10 MB
+maxRequestSize = 20971520L // 20 MB
+)
 public class RegistrationController extends HttpServlet {
 	
 	private Connection conn;
+	private static final String UPLOAD_DIR = "images";
 	DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
 	public RegistrationController() {
@@ -68,7 +77,8 @@ public class RegistrationController extends HttpServlet {
 		Boolean test = false;
 		conn = DBUtility.getConnection();
 		String forward;
-
+		
+		
 		if (request.getParameter( "Password" ) != request.getParameter( "Password-repeat" ))
 		{
 			forward = "/index.jsp";
@@ -78,7 +88,13 @@ public class RegistrationController extends HttpServlet {
 		login.setUsername( request.getParameter( "Username" ) );
 		login.setPassword( request.getParameter( "Password" ) );
 		String secretCode = request.getParameter( "SecretCode" );
-		Object Image = request.getParameter("image");
+		
+		//Image Saving Start
+		
+		
+		
+		
+		
 		
 		if (secretCode == "i3Up8XmH04Jz151") {//Admin
 			Admin admin = new Admin();
@@ -116,6 +132,37 @@ public class RegistrationController extends HttpServlet {
 			customer.setSeniorCitizenID( request.getParameter( "SeniorCitizenID" ) );
 			SendEmail sendEmail = new SendEmail();
 			int ID = Registration.makeCustomer(login, customer);
+			
+			//Save Image Start			
+			String applicationPath = "C:\\uploads"//request.getServletContext().getRealPath("/") + "images";
+			// constructs path of the directory to save uploaded file			
+			// creates upload folder if it does not exists
+			File uploadFolder = new File(applicationPath);
+			if (!uploadFolder.exists()) {
+				uploadFolder.mkdirs();
+			}
+			
+			PrintWriter writer = response.getWriter();
+			// write all files in upload folder
+			for (Part part : request.getParts()) {
+				if (part != null && part.getSize() > 0) {
+					String fileName = ID + ".jpg";
+					String contentType = part.getContentType();
+					
+					// allows only JPEG files to be uploaded
+					if(contentType != null) {
+					if (!contentType.equalsIgnoreCase("image/jpeg")) {
+						continue;
+					}				
+					part.write(uploadFolder + File.separator + fileName);
+					}
+				}
+			}
+			
+			//Save Image End
+			
+			
+			
 			String ConfirmLink = "http://localhost:8080/THESIS-ISPROJ2-PROJECT/RegistrationController?SpecialKey=true&UserID=" + ID;
 			sendEmail.send(customer.getEmail(), "Medilivery Account Confirmation", ""
 					+ "Dear " + customer.getCustomerName() + "," +  
@@ -141,6 +188,7 @@ public class RegistrationController extends HttpServlet {
 					"<br>");
 		}
 		if(test){
+			
 			forward =  "/RegistrationSuccess.jsp";
 		} else {
 			forward = "/AccountRecovery.jsp";

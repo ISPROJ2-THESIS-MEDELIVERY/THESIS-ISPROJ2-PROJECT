@@ -101,7 +101,7 @@
 											<td><c:out value="${item.productForm}" /></td>
 											<td><c:out value="${item.productPackaging}" /></td>
 											<td><c:out value="${item.productDescription}" /></td>
-											<td><c:out value="${item.productImage}" /></td>
+											<td><img src="file/2.jpg" height="50px" width="50px"><a href="Download/2.jpg">Download</a></td>
 											<td><c:out value="${item.quantity}" /></td>
 											<td><c:out value="${item.priceSet}" /></td>											
 											<td>

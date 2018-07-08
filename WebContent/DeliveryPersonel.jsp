@@ -84,23 +84,31 @@
             </div>
         </div>
     </div>
+    
+    <!-- First Table -->
+    <h1>Pending Deliveries</h1>
     <div>
         <div class="container">                           
                     <div>
-                    <!-- First Table -->
                         <table id="OTC" class="pretty"">
                             <thead>
       <tr>
+      	  <th>Order ID</th>
+      	  <th>Customer ID</th>
       	  <th>Delivery ID</th>
-      	  <th>Delivery Post Date</th>
-      	  <th>Date Delivered</th>
-      	  <th>Driver Name</th>
-      	  <th>Driver Address</th>
-      	  <th>Driver Contact Number</th>
-	      <th>Plate Number</th>
-	      <th>Comment</th>
-	      <th>Status</th>
-	      <th></th>
+      	  <th>Pharmacist ID</th>
+      	  <th>City ID</th>
+      	  <th>Branch ID</th>
+	      <th>Order Address</th>
+	      <th>Date Ordered</th>
+	      <th>Date Processed</th>
+	      <th>Date Delivered</th>
+	      <th>Order Type</th>
+	      <th>Order Status</th>
+	      <th>Senior Discount</th>
+	      <th>Payment Method</th>
+	      <th>Actual Cost</th>
+	      <th>Delivery Status</th>
       </tr>
 		</thead>
     
@@ -127,13 +135,85 @@
 		  <td>
 		  	<form action="DispatcherController" method="post">
 		  		<input type="hidden" name="OrderID" value="<c:out value="${item.orderID}" />"/>
-				<select name="Filters">
+				<select class="form-control" name="DeliveryStatus">
+                <option value="pending">PENDING</option>
+                <option value="approved">APPROVED</option>
+                <option value="cancelled">CANCELLED</option>
+                </select>				
+	        	<button class="btn btn-primary" type="submit" style="font-size:15px;">Update</button>
+        	</form>
+           </td>
+      	</tr>
+      	</c:forEach>
+	</tbody>
+              </table>
+                        <br>
+                    </div>
+      </div>
+      </div>
+      
+      <br>
+      <h1>Active Delivery</h1>
+      
+      <!-- Second Table -->
+      <div>
+        <div class="container">                           
+                    <div>
+                        <table id="Table2" class="pretty"">
+                            <thead>
+      <tr>
+      	  <th>Order ID</th>
+      	  <th>Customer ID</th>
+      	  <th>Delivery ID</th>
+      	  <th>Pharmacist ID</th>
+      	  <th>City ID</th>
+      	  <th>Branch ID</th>
+	      <th>Order Address</th>
+	      <th>Date Ordered</th>
+	      <th>Date Processed</th>
+	      <th>Date Delivered</th>
+	      <th>Order Type</th>
+	      <th>Order Status</th>
+	      <th>Senior Discount</th>
+	      <th>Payment Method</th>
+	      <th>Actual Cost</th>
+	      <th>Delivery Status</th>
+      </tr>
+		</thead>
+    
+    
+    
+    <tbody>
+    	<c:forEach items="${OrderList}" var="item">
+	    <tr>
+	      <td><c:out value="${item.orderID}" /></td>
+	      <td><c:out value="${item.customerID}" /></td>
+	      <td><c:out value="${item.deliveryID}" /></td>
+	      <td><c:out value="${item.pharmacistID}" /></td>
+	      <td><c:out value="${item.cityID}" /></td>
+	      <td><c:out value="${item.branchID}" /></td>
+	      <td><c:out value="${item.orderAddress}" /></td>
+	      <td><c:out value="${item.dateOrdered}" /></td>
+	      <td><c:out value="${item.dateProcessed}" /></td>
+	      <td><c:out value="${item.dateDelivered}" /></td>
+	      <td><c:out value="${item.orderType}" /></td>
+	      <td><c:out value="${item.orderStatus}" /></td>
+	      <td><c:out value="${item.seniorDiscount}" /></td>
+	      <td><c:out value="${item.paymentMethod}" /></td>
+	      <td><c:out value="${item.actualCost}" /></td>
+		  <td>
+		  	<form action="DispatcherController" method="post">
+		  		<input type="hidden" name="OrderID" value="<c:out value="${item.orderID}" />"/>
+				
+					<!-- Commented just to disable the dropdown -->				
+				<!-- <select name="Filters">
 					<optgroup>
 						<option value=pending>PENDING</option>
 						<option value="approved">APPROVED</option>
 						<option value="cancelled">CANCELLED</option>
 					</optgroup>
-				</select>
+				</select> -->
+				
 	        	<button class="btn btn-primary" type="submit" style="font-size:15px;">Update</button>
         	</form>
            </td>
@@ -198,6 +278,16 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#OTC").dataTable({
+                "sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+            });
+        });
+        </script>
+        
+        <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Table2").dataTable({
                 "sPaginationType": "full_numbers",
                 "bJQueryUI": true, "sScrollX": "100%",
                 "bScrollCollapse": true

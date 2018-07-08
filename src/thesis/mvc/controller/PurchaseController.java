@@ -60,6 +60,10 @@ public class PurchaseController extends HttpServlet {
 			PharmaID = (int) session.getAttribute("PharmaID");
 			BranchImplement branchImplement = new BranchImplement();
 			session.setAttribute("SelectedBranch", branchImplement.getBranchById(PharmaID));
+		} else if (request.getParameter("PharmaID") != null && !request.getParameter("PharmaID").isEmpty()){
+			PharmaID = Integer.parseInt( request.getParameter( "PharmaID" ) );
+			BranchImplement branchImplement = new BranchImplement();
+			session.setAttribute("SelectedBranch", branchImplement.getBranchById(PharmaID));
 		}
 		
 		int access = 0;

@@ -133,7 +133,10 @@ public class RegistrationController extends HttpServlet {
 			SendEmail sendEmail = new SendEmail();
 			
 			//Save Image Start
-			if (Boolean.parseBoolean( request.getParameter( "seniorbool" ) ) == true) {
+			boolean Seniorcheck = false;
+			if (request.getParameter( "seniorbool" ) != null) {
+				Seniorcheck = true;
+			} if (Seniorcheck) {
 				//Initial Info
 				RegistrationAction registrationAction = new RegistrationAction();
 				String SeniorSalt = registrationAction.getSaltString();
@@ -141,7 +144,7 @@ public class RegistrationController extends HttpServlet {
 				customer.setIsSeniorCitizen(true);
 				
 				//Input into Folder
-				String applicationPath = "C:\\uploads";//request.getServletContext().getRealPath("/") + "images";
+				String applicationPath = request.getServletContext().getRealPath("/") + "images";
 				// constructs path of the directory to save uploaded file			
 				// creates upload folder if it does not exists
 				File uploadFolder = new File(applicationPath);

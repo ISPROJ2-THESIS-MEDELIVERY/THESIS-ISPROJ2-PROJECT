@@ -94,12 +94,8 @@
                 <h2>Form control: inline radio buttons</h2>
                   <p>Please Select:</p>
                     <label class="radio-inline">
-                      <input type="radio" name="seniorbool"> Senior/PWD Discount
-                    </label>
-                    <p>  </p>
-                    <label class="radio-inline">
-                      <input type="radio" name="standardbool"> Standard 
-                    </label>               
+                      <input type="radio" name="seniorbool" value="weaponizingoldmen"> Senior/PWD Discount
+                    </label>            
                 
                 <div class="alert alert-danger" role="alert"><span style="color:#eb3b60;font-size:15px;"><strong>Please Upload a Photo of your Senior Citizen ID/ PWD ID&nbsp;</strong></span></div><input class="visible" type="file" id="Photo" name="Photo">
                 <input class="form-control" type="text" name="SeniorCitizenID" placeholder="Senior Citizen ID">                

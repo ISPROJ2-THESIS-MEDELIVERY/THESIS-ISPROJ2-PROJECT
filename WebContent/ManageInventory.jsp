@@ -43,6 +43,8 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/Team-Boxed.css">
     <link rel="stylesheet" href="assets/css/TR-Form.css">
+    <link rel="stylesheet" type="text/css" href="js/data_table/reset-min.css">
+	<link rel="stylesheet" type="text/css" href="js/data_table/complete.css">
 </head>
 
 <body><img src="assets/img/adminlogo.png">
@@ -61,7 +63,59 @@
             </div>
         </div>
     </nav>
-    <h2 class="text-center"><strong>Product Register</strong></h2><select><optgroup label="This is a group"><option value="12" selected="">Filter</option><option value="13">Product ID</option><option value="14">Product Name</option><option value="">Generic Name</option><option value="">Registration Number</option><option value="">Rx Products</option><option value="">Over The Counter Products</option></optgroup></select>
+    <h2 class="text-center"><strong>Product Register</strong></h2>
+    <!-- <select><optgroup label="This is a group"><option value="12" selected="">Filter</option><option value="13">Product ID</option><option value="14">Product Name</option><option value="">Generic Name</option><option value="">Registration Number</option><option value="">Rx Products</option><option value="">Over The Counter Products</option></optgroup></select> -->
+    
+    <div>
+        <div class="container">                           
+                    <div>
+                    <!-- First Table -->
+                        <table id="Inventory" class="pretty"">
+                            <thead>
+      <tr>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Generic Name</th>
+                    <th>Registration No</th>
+                    <th>Product Image(s)</th>
+                    <th>Product Strength</th>
+                    <th>Product Form</th>
+                    <th>Product Packaging</th>
+                    <th>Manufacturer</th>
+                    <th>Origin</th>
+                    <th><br><strong>Product Description</strong><br></th>
+                    <th><br><strong>IsRxProduct</strong><br></th>
+                    <th>Maximum Per Order</th>
+                    <th>Functions</th>
+                </tr>
+		</thead>
+    
+    
+    
+    <tbody>
+    	<tr>
+                    <td><label>Label</label></td>
+                    <td><label>Label</label></td>
+                    <td><label>Label</label>&nbsp;</td>
+                    <td><label>Label</label></td>
+                    <td><input type="file" name="ProductImage"></td>
+                    <td><label>Label</label></td>
+                    <td><label>Label</label></td>
+                    <td><label>Label</label></td>
+                    <td><label>Label</label></td>
+                    <td><label>Label</label></td>
+                    <td><label>Label</label></td>
+                    <td><label>Label</label></td>
+                    <td>Cell 12<input type="number"></td>
+                    <td><button class="btn btn-primary" type="button">Delete</button><button class="btn btn-primary" type="button">Update</button></td>
+                </tr>
+	</tbody>
+              </table>
+                        <br>
+                    </div>
+      </div>
+      </div>
+    
     <div
         class="table-responsive">
         <table class="table">
@@ -246,6 +300,18 @@
         <script src="assets/js/index.js"></script>
         <script src="assets/js/multi-item-carousel.js"></script>
         <script src="assets/js/Simple-Slider1.js"></script>
+        <script type="text/javascript"  src="js/jquery-1.8.3.js"></script>
+<script type="text/javascript"  src="js/data_table/jquery.dataTables.min.js"></script>
+<script type="text/javascript"  src="js/data_table/jquery.dataTables.plugins.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Inventory").dataTable({
+                "sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+            });
+        });
+        </script>
 </body>
 
 </html>

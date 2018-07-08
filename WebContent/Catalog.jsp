@@ -79,7 +79,12 @@
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-md-6"><select class="form-control" name="Over The Counter "><option value="">Categories</option><option value="">Prescription</option><option value="">Over The Counter</option></select></div>          
+                <div class="col-md-6"><select class="form-control" name="Over The Counter ">
+                <option value="">Categories</option>
+                <option value="">Prescription</option>
+                <option value="">Over The Counter</option>
+                </select>
+                </div>          
             </div>
         </div>
     </div>

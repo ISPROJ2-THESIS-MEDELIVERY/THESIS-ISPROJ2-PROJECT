@@ -55,6 +55,7 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="ContactUs.jsp">Contact Us</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Members.jsp">Membership Registration</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Catalog.jsp">View Products</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Link</a></li>
                 </ul>
                 <c:choose>
                 	<c:when test = "${userID > 0}">

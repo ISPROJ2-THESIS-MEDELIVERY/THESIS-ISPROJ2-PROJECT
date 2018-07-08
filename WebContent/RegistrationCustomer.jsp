@@ -80,6 +80,16 @@
                 <input class="form-control" type="password" name="Password" required="" placeholder="Create Password">
                 <input class="form-control" type="password" name="Password-repeat" required="" placeholder="Re-enter Password" style="margin:0px;">
                 
+                <h2>Form control: inline radio buttons</h2>
+                  <p>Please Select:</p>
+                    <label class="radio-inline">
+                      <input type="radio" name="optradio"> Senior/PWD Discount
+                    </label>
+                    <p>  </p>
+                    <label class="radio-inline">
+                      <input type="radio" name="optradio"> Standard 
+                    </label>               
+                
                 <div class="alert alert-danger" role="alert"><span style="color:#eb3b60;font-size:15px;"><strong>Please Upload a Photo of your Senior Citizen ID/ PWD ID&nbsp;</strong></span></div><input class="visible" type="file" id="Photo" name="Photo">
                 <input class="form-control" type="text" name="SeniorCitizenID" placeholder="Senior Citizen ID">                
        

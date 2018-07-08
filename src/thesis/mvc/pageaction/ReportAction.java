@@ -221,7 +221,23 @@ public class ReportAction {
 	public CustomerSales ReportCustomerSales(int UserID) {
 		CustomerSales customerSales = new CustomerSales();
 		
-		try(PreparedStatement stmt = conn.prepareStatement("")) {
+		try(PreparedStatement stmt = conn.prepareStatement("SELECT" + 
+														" order.CustomerID," + 
+														" order.DateOrdered," + 
+														" order.DateProcessed," + 
+														" order.DateDelivered," + 
+														" order.OrderType," + 
+														" order.OrderStatus," + 
+														" order.PaymentMethod," + 
+														" order.ActualCost," + 
+														" orderdetail.ProductID," + 
+														" orderdetail.Quantity," + 
+														" orderdetail.CostPerUnit," + 
+														" orderdetail.TotalCost" + 
+														" FROM" + 
+														" order" + 
+														" INNER JOIN orderdetail ON orderdetail.OrderID = order.OrderID" + 
+														" where CustomerID = 2")) {
 		    try(ResultSet rs = stmt.executeQuery()) {
 		        if (rs.next()) {
 		        	customerSales.setDateOrdered(rs.getDate(1));

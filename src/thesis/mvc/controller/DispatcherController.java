@@ -56,23 +56,11 @@ public class DispatcherController extends HttpServlet{
     	String Comments = "There Might be a delay";
     	String Status = request.getParameter( "Filters" );
     	int UserID = (int) session.getAttribute("userID") ;
-    	boolean DoCheck = false;
     	
     	//Insert logic here
     	DispatcherAction dispatcherAction = new DispatcherAction();
-    	DoCheck = dispatcherAction.DispatcherOrder(OrderID, UserID, DriverID, Comments, Status);
+    	dispatcherAction.DispatcherOrder(OrderID, UserID, DriverID, Comments, Status);
     	
-    	String forward = "";
-    	if (DoCheck) {
-    		forward = "/DeliveryPersonel.jsp";
-    	} else {
-    		forward = "/DeliveryPersonel.jsp";
-    	}
-    	
-		RequestDispatcher view = request.getRequestDispatcher( forward );
-		view.forward(request, response);
-    	
+		response.sendRedirect(request.getContextPath() + "/DispatcherController");	
 	}
-
-
 }

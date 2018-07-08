@@ -123,7 +123,9 @@
         </div>
 		</c:otherwise>
 	</c:choose>
-    
+    <c:forEach items="${Pharmacy}" var="pharma">
+		<div class="col-md-3"><a href="PurchaseController?PharmaID=<c:out value="${pharma.branchID}" />"><c:out value="${pharma.pharmacyName}" /> - <c:out value="${pharma.branchStreet}" />, <c:out value="${pharma.branchBarangay}" /></a></div>
+	</c:forEach>
     
     
     <div class="features-boxed">

@@ -41,9 +41,9 @@ public class ReportController {
 		if (ReportTy == 1 && UserType == 2) {
 			request.setAttribute("ReportGenerator", reportAction.ReportCustomerSales(1) );//CustomerID
 		} else if (ReportTy == 2 && UserType == 4) {
-			request.setAttribute("ReportGenerator", reportAction.ReportPharmacySales(1));//PharmacyID
+			request.setAttribute("ReportGenerator", reportAction.ReportPharmacySales(1) );//PharmacyID
 		} else if (ReportTy == 3 && UserType == 1) {
-			request.setAttribute("ReportGenerator", reportAction.ReportProductSales(1));//ProductID
+			request.setAttribute("ReportGenerator", reportAction.ReportProductSales(1) );//ProductID
 		} else if (ReportTy == 4 && UserType == 4) {
 			request.setAttribute("ReportGenerator", reportAction.ReportTotalSales());
 		} else {

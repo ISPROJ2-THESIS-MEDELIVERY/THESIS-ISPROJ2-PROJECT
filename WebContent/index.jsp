@@ -7,9 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
-
-<!-- This will be used as a jumping point to test the controllers -->
-<body>
-	<jsp:forward page="/HomeController"></jsp:forward>
-</body>
+	<!-- This will be used as a jumping point to test the controllers -->
+	<body>
+		<jsp:forward page="/HomeController"></jsp:forward>
+	</body>
 </html>

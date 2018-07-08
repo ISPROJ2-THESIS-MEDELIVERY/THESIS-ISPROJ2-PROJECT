@@ -171,4 +171,39 @@ public class OrderImplement implements OrderDAO{
 			e.printStackTrace();
 		}
 	}
+	public List<Order> getPendingOrder(int CID) {
+		List<Order> orders = new ArrayList<Order>();
+		try {
+			String query = "SELECT * FROM `order` WHERE OrderStatus='APPROVED' AND OrderID=?";
+			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			preparedStatement.setInt(1, CID);			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while( resultSet.next() ) {
+				Order order = new Order();
+				order.setOrderID( resultSet.getInt( "OrderID" ) );
+				order.setCustomerID( resultSet.getInt( "CustomerID" ) );
+				order.setDeliveryID( resultSet.getInt( "DeliveryID" ) );
+				order.setPharmacistID( resultSet.getInt( "PharmacistID" ) );
+				order.setCityID( resultSet.getInt( "CityID" ) );
+				order.setBranchID( resultSet.getInt( "BranchID" ));
+				order.setPrescriptionID( resultSet.getInt( "PrescriptionID" ) );
+				order.setOrderAddress( resultSet.getString( "OrderAddress" ) );
+				order.setDateOrdered( resultSet.getDate( "DateOrdered" ) );
+				order.setDateProcessed( resultSet.getDate( "DateProcessed" ) );
+				order.setDateDelivered( resultSet.getDate( "DateDelivered" ) );
+				order.setOrderType( resultSet.getString( "OrderType" ) );
+				order.setOrderStatus( resultSet.getString( "OrderStatus" ) );
+				order.setSeniorDiscount( resultSet.getBoolean( "SeniorDiscount" ) );
+				order.setPaymentMethod( resultSet.getString( "PaymentMethod" ) );
+				order.setActualCost( resultSet.getDouble( "ActualCost" ) );
+				orders.add(order);
+			}
+			resultSet.close();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return orders;
+	}
+	
 }

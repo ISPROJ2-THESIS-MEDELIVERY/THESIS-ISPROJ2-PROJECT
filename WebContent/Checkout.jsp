@@ -127,26 +127,15 @@
 					Order Address: <c:out value="${orderReciept.orderAddress}" /><br />
 					Senior Discount: <c:out value="${orderReciept.seniorDiscount}" /><br />
                 </div>
-        	<!--
-            <c:forEach items="${CartList}" var="cartdetails">
-	    	<div class="row">
-		        <div class="col-sm-1"></div>
-		        <div class="col-sm-3">PARACETAMOL[1]</div>
-		        <div class="col-sm-2">PXXX.00</div>
-		        <div class="col-sm-3">PXXX.00</div>
-		        <div class="col-sm-3"></div>
-		    </div>
-		    </c:forEach>
-		    -->
 	    </div>
         <div class="card-body">
             <div class="row">
                 <div class="col">
                     <h1>Payment Details</h1>
 					<form action="PurchaseController" method="post">
-					<input type="hidden" name="ProductID" value="<c:out value="${productID}" />"/>
-		            <button class="btn btn-primary float-center" type="submit" style="background-color:#465765;" name="Payment" value="Card">Credit Card</button>
-		            <button class="btn btn-primary float-center" type="submit" style="background-color:#465765;" name="Payment" value="Cash">Cash</button>
+						<input type="hidden" name="ProductID" value="<c:out value="${productID}" />"/>
+			            <button class="btn btn-primary float-center" type="submit" style="background-color:#465765;" name="Payment" value="Card">Credit Card</button>
+			            <button class="btn btn-primary float-center" type="submit" style="background-color:#465765;" name="Payment" value="Cash">Cash</button>
 					</form>
                 </div>
             </div>

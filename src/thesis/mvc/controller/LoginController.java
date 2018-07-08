@@ -47,6 +47,10 @@ public class LoginController extends HttpServlet {
 			session.removeAttribute("userID");
 			session.removeAttribute("username");
 			session.removeAttribute("userAccess");
+			if(session.getAttribute("PharmaID") == null) {
+				session.removeAttribute("PharmaID");
+			}
+			
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else {
 			forward = "A-test-pharmacistapproval.jsp";
@@ -94,7 +98,8 @@ public class LoginController extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/DispatcherController" );
 			} else if (AL == 3) {
 				PharmacistImplement pharmacistImplement = new PharmacistImplement();
-				response.sendRedirect(request.getContextPath() + "/PurchaseController?PharmaID=" + pharmacistImplement.getPharmacistByUserId(LoginID).getBranchID());
+				session.setAttribute("PharmaID", pharmacistImplement.getPharmacistByUserId(LoginID).getBranchID());
+				response.sendRedirect(request.getContextPath() + "/PurchaseController");
 			} else if (AL == 4) {
 				view = request.getRequestDispatcher( "/AdminHome.jsp" );
 				view.forward(request, response);

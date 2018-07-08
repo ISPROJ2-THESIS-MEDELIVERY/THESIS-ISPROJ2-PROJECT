@@ -1,5 +1,6 @@
 package thesis.mvc.controller;
 
+import java.awt.Window;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
@@ -55,8 +56,8 @@ public class PurchaseController extends HttpServlet {
 		}
 		
 		int PharmaID = 0;
-		if (request.getParameter("PharmaID") != null && !request.getParameter("PharmaID").isEmpty()) {
-			PharmaID = Integer.parseInt( request.getParameter( "PharmaID" ) );
+		if (session.getAttribute("PharmaID") != null) {
+			PharmaID = (int) session.getAttribute("PharmaID");
 			BranchImplement branchImplement = new BranchImplement();
 			session.setAttribute("SelectedBranch", branchImplement.getBranchById(PharmaID));
 		}
@@ -78,19 +79,12 @@ public class PurchaseController extends HttpServlet {
     		view.forward(request, response);
     	} else if (access == 3) {
     		if (action.equalsIgnoreCase("Approve")) {
-	    		forward = "PharmacistPage.jsp";
         		PurchaseAction purchaseAction = new PurchaseAction();
         		purchaseAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ), true );
-        		RequestDispatcher view = request.getRequestDispatcher( forward );
-        		view.forward(request, response);
         	} else if (action.equalsIgnoreCase("Reject")) {
-	    		forward = "PharmacistPage.jsp";
         		PurchaseAction purchaseAction = new PurchaseAction();
         		purchaseAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ) , false );
-        		RequestDispatcher view = request.getRequestDispatcher( forward );
-        		view.forward(request, response);
-        		
-        	} else if (PharmaID != 0) {
+        	} if (PharmaID != 0) {
 	    		ApprovalAction approvalAction = new ApprovalAction();
 	    		session.setAttribute("orderPharmacistCheck", approvalAction.getRegularOrder(PharmaID) );
 	    		forward = "PharmacistPage.jsp";

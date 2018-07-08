@@ -58,8 +58,20 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Catalog.jsp">View Products</a></li>
                 </ul>
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="Login.jsp">Login</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="Home.jsp">Log Out</a></li>
+                    <c:choose>
+	                	<c:when test = "${userID > 0}">
+	                		<ul class="nav navbar-nav ml-auto">
+			                    <li class="nav-item" role="presentation"><a class="nav-link" href="Cart.jsp">My Cart</a></li>
+			                    <li class="nav-item" role="presentation"><a class="nav-link" href="Logout.jsp">Log out</a></li>
+			                </ul>
+	                	</c:when>
+	                	<c:otherwise>
+			                <ul class="nav navbar-nav ml-auto">
+			                    <li class="nav-item" role="presentation"><a class="nav-link" href="Login.jsp">Login</a></li>
+			                    <li class="nav-item" role="presentation"><a class="nav-link" href="RegistrationCustomer.jsp">Register</a></li>
+			                </ul>
+			            </c:otherwise>
+					</c:choose>
                 </ul>
             </div>
         </div>

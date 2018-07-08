@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Random;
 
 import thesis.mvc.implement.*;
 import thesis.mvc.model.*;
@@ -75,12 +76,14 @@ public class RegistrationAction {
     	//Insert into Customer table
     	CustomerImplement CustomerImp = new CustomerImplement();
     	customer.setUserID(UserID);
-    	customer.setCityID(1);//Address]
+    	customer.setCityID(1);//Address
+    	/*
         if (customer.getSeniorCitizenID() == null) {
         	customer.setIsSeniorCitizen(false);
         } else {
         	customer.setIsSeniorCitizen(true);
         }
+        */
         try {
         	CustomerImp.addCustomer(customer);
 		} catch (Exception e) {
@@ -97,6 +100,14 @@ public class RegistrationAction {
         AuditImplement AuditImp = new AuditImplement();
         AuditImp.addAudit(audit);
         return UserID;
+    }
+    
+    public void InsertSenior (int CID, String SeniorID, String SeniorPath) {
+    	OrderImplement orderImplement = new OrderImplement();
+    	Order order = orderImplement.getOrderById(CID);
+    	order.setSeniorDiscount(true);
+    	
+    	
     }
     
 	public boolean makeAdmin(Login login, Admin admin) {
@@ -307,6 +318,18 @@ public class RegistrationAction {
         AuditImplement AuditImp = new AuditImplement();
         AuditImp.addAudit(audit);
         return true;
+    }
+    public String getSaltString() {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 10) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
+
     }
     
 }

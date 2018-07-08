@@ -129,38 +129,48 @@ public class RegistrationController extends HttpServlet {
 			customer.setAddress( request.getParameter( "CAddress" ) );
 			customer.setEmail( request.getParameter( "CusEmail" ) );
 			customer.setContactNumber( Integer.parseInt(request.getParameter( "ContactNumber" )) );
-			customer.setSeniorCitizenID( request.getParameter( "SeniorCitizenID" ) );
+			customer.setIsSeniorCitizen(false);
 			SendEmail sendEmail = new SendEmail();
-			int ID = Registration.makeCustomer(login, customer);
 			
-			//Save Image Start			
-			String applicationPath = "C:\\uploads"//request.getServletContext().getRealPath("/") + "images";
-			// constructs path of the directory to save uploaded file			
-			// creates upload folder if it does not exists
-			File uploadFolder = new File(applicationPath);
-			if (!uploadFolder.exists()) {
-				uploadFolder.mkdirs();
-			}
-			
-			PrintWriter writer = response.getWriter();
-			// write all files in upload folder
-			for (Part part : request.getParts()) {
-				if (part != null && part.getSize() > 0) {
-					String fileName = ID + ".jpg";
-					String contentType = part.getContentType();
-					
-					// allows only JPEG files to be uploaded
-					if(contentType != null) {
-					if (!contentType.equalsIgnoreCase("image/jpeg")) {
-						continue;
-					}				
-					part.write(uploadFolder + File.separator + fileName);
+			//Save Image Start
+			if (Boolean.parseBoolean( request.getParameter( "seniorbool" ) ) == true) {
+				//Initial Info
+				RegistrationAction registrationAction = new RegistrationAction();
+				String SeniorSalt = registrationAction.getSaltString();
+				customer.setSeniorCitizenID( SeniorSalt );
+				customer.setIsSeniorCitizen(true);
+				
+				//Input into Folder
+				String applicationPath = "C:\\uploads";//request.getServletContext().getRealPath("/") + "images";
+				// constructs path of the directory to save uploaded file			
+				// creates upload folder if it does not exists
+				File uploadFolder = new File(applicationPath);
+				if (!uploadFolder.exists()) {
+					uploadFolder.mkdirs();
+				}
+				
+				//Writing the file
+				PrintWriter writer = response.getWriter();
+				// write all files in upload folder
+				for (Part part : request.getParts()) {
+					if (part != null && part.getSize() > 0) {
+						String fileName = SeniorSalt + ".jpg";
+						String contentType = part.getContentType();
+						
+						// allows only JPEG files to be uploaded
+						if(contentType != null) {
+						if (!contentType.equalsIgnoreCase("image/jpeg")) {
+							continue;
+						}				
+						part.write(uploadFolder + File.separator + fileName);
+						}
 					}
 				}
 			}
+
+			int ID = Registration.makeCustomer(login, customer);
 			
 			//Save Image End
-			
 			
 			
 			String ConfirmLink = "http://localhost:8080/THESIS-ISPROJ2-PROJECT/RegistrationController?SpecialKey=true&UserID=" + ID;
@@ -185,7 +195,7 @@ public class RegistrationController extends HttpServlet {
 					"<a href=\" <!–– INSERT Medelivery HOME LINK HERE––>\" target=\"_blank\" data-saferedirecturl=\"\"></a>" + 
 					"<br>" + 
 					"The Medelivery Team Thanks you for your patronage" + 
-					"<br>");
+					"<br>" + customer.getSeniorCitizenID());
 		}
 		if(test){
 			

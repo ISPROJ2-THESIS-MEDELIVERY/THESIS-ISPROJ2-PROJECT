@@ -185,7 +185,7 @@ public class PurchaseAction {
 		//Get the city of the customer & senior status
 		int CityCustomer = 0;
 		boolean SeniorStatus = false;
-		String CustoAddress = null;
+		String CustoAddress = "Error";
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM customer WHERE CustomerID = ?")) {
             stmt.setInt(1, order.getCustomerID());
             try(ResultSet rs = stmt.executeQuery()) {

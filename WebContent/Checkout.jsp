@@ -124,6 +124,7 @@
                         </table>
                     </div>
                     Order ID: <c:out value="${orderReciept.orderID}" /><br />
+                    Customer ID: <c:out value="${orderReciept.customerID}" /><br />
 					Order Address: <c:out value="${orderReciept.orderAddress}" /><br />
 					Senior Discount: <c:out value="${orderReciept.seniorDiscount}" /><br />
                 </div>

@@ -194,8 +194,8 @@ public class PurchaseController extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String forward;
-		int ProductID = 2;
-		int Quantity = 2;
+		int ProductID = 0;
+		int Quantity = 0;
 		double CostPerUnit = 0.0;
     	conn = DBUtility.getConnection();
 		String action = "";
@@ -210,6 +210,8 @@ public class PurchaseController extends HttpServlet {
 		//Safety measure
 		if (session.getAttribute("userID") != null && session.getAttribute("SelectedBranch") != null) {
 			SurgeCheck = true;		
+		} else if (action.equalsIgnoreCase("OrderPay")) {
+			SurgeCheck = true;		
 		} else {
 			SurgeCheck = false;
 		}
@@ -217,8 +219,8 @@ public class PurchaseController extends HttpServlet {
 		if(action.equalsIgnoreCase("OrderPay")) {
 			int orderID =Integer.parseInt(request.getParameter("OrdertoUpdate"));
 			OrderImplement orderImplement = new OrderImplement();
-			orderImplement.updateOrderStatus((int) session.getAttribute("OrdertoUpdate"), (String) session.getAttribute("Payment"));
-			forward = "/index.jsp";
+			orderImplement.updateOrderPayment( orderID, request.getParameter("Payment"));
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		
 		} else if(action.equalsIgnoreCase("Addtocart") && SurgeCheck) {
 			
@@ -229,7 +231,8 @@ public class PurchaseController extends HttpServlet {
 				int UID = (int) session.getAttribute("userID");
 				CustomerImplement customerImplement = new CustomerImplement();
 				Customer customer = new Customer();
-				customer = customerImplement.getCustomerById(UID);
+				customer = customerImplement.getCustomerByUserId(UID);
+				int CusID = customer.getCustomerID();
 				String ADD = customer.getAddress();
 				boolean SID = customer.isIsSeniorCitizen();
 				int CID = customer.getCityID();
@@ -238,13 +241,13 @@ public class PurchaseController extends HttpServlet {
 				int BID = SelectedBranch.getBranchID();
 				session.setAttribute("OrderDetails", OrderDetails );
 				
-				order = purchaseAction.setInitalOrder(UID, ADD, SID, CID, BID);
+				order = purchaseAction.setInitalOrder(CusID, ADD, SID, CID, BID);
 				session.setAttribute("Order", order );
 				
 				//ProductID & Quantity & Cost per unit
 				ProductID = Integer.valueOf( request.getParameter( "ProductID" ) );
 				Quantity = Integer.valueOf( request.getParameter( "Quantity" ) );
-				CostPerUnit = purchaseAction.getProductCost( ProductID, BID, order);
+				CostPerUnit = purchaseAction.getProductCost( ProductID, BID, order );
 				
 				//Takes the existing order detail if there is and adds the next order detail to there
 				OrderDetail orderDetail = new OrderDetail();
@@ -277,6 +280,8 @@ public class PurchaseController extends HttpServlet {
 				//Refreshes and goes back to the cart
 				forward = "/Cart.jsp";
 				//forward = "/A-test-customerpurchasecheckout.jsp";
+				RequestDispatcher view = request.getRequestDispatcher( forward );
+				view.forward(request, response);
 			} else {
 				//ProductID & Quantity & Cost per unit
 				ProductID = Integer.valueOf( request.getParameter( "ProductID" ) );
@@ -314,6 +319,8 @@ public class PurchaseController extends HttpServlet {
 				//Refreshes and goes back to the cart
 				forward = "/Cart.jsp";
 				//forward = "/A-test-customerpurchasecheckout.jsp";
+				RequestDispatcher view = request.getRequestDispatcher( forward );
+				view.forward(request, response);
 			}
 			
 		} else if (action.equalsIgnoreCase("Checkout") && SurgeCheck) {
@@ -325,28 +332,26 @@ public class PurchaseController extends HttpServlet {
 			CustomerImplement customerImplement = new CustomerImplement();
 			int userID = (int) session.getAttribute("userID");
 			
-			
 			String CustomerEmail = customerImplement.getCustomerByUserId(userID).getEmail();
 
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 			boolean checker = purchaseAction.purchaseOrder(order, OrderDetails) && sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, "This is a test message");
-			purchaseAction.purchaseOrder(order, OrderDetails);
 			if(order == null || OrderDetails.isEmpty()) {
 				forward = "/index.jsp"; //or an error page
 			} else {
-				session.setAttribute("orderReciept", order);
 				session.setAttribute("CartlistReciept", cartList);
+				session.setAttribute("orderReciept", order);
 				session.setAttribute("ApproveChecker", false);
 				session.removeAttribute("Order");
 				session.removeAttribute("OrderDetails");
 				session.removeAttribute("CartList");
 				forward = "Checkout.jsp";
-
-				
 			}
 			//order.setOrderAddress( request.getParameter( "orderAddress" ) );
 			//order.setPaymentMethod( request.getParameter( "orderPayment" ) );
 			//order.setDateOrdered(today);
+			RequestDispatcher view = request.getRequestDispatcher( forward );
+			view.forward(request, response);
 
 		} else if (action.equalsIgnoreCase("PrescriptionCheckout") && SurgeCheck) {
 			/*
@@ -405,13 +410,14 @@ public class PurchaseController extends HttpServlet {
 			 */
 
 			forward = "/Cart.jsp";
-		} else {
-			forward = "/index.jsp";
-		}
-		RequestDispatcher view = request.getRequestDispatcher( forward );
-		if (SurgeCheck) {
+			RequestDispatcher view = request.getRequestDispatcher( forward );
 			view.forward(request, response);
 		} else {
+			forward = "/index.jsp";
+			RequestDispatcher view = request.getRequestDispatcher( forward );
+			view.forward(request, response);
+		}
+		if (!SurgeCheck) {
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}
 	}

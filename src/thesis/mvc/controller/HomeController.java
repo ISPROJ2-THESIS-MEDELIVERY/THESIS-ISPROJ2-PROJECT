@@ -27,7 +27,8 @@ public class HomeController  extends HttpServlet {
 		request.setAttribute( "Pharmacy", branchImplement.getAllBranch());
 		if (session.getAttribute("userID") != null) {
 			CustomerImplement customerImplement = new CustomerImplement();
-			request.setAttribute( "PurchasePending", orderImplement.getPendingOrder(customerImplement.getCustomerByUserId((int) session.getAttribute("userID")).getCustomerID()));
+			int test = customerImplement.getCustomerByUserId((int) session.getAttribute("userID")).getCustomerID();
+			request.setAttribute( "PurchasePending", orderImplement.getPendingOrder(test)) ;
 		}
 		RequestDispatcher view = request.getRequestDispatcher( "/Home.jsp" );
 		view.forward(request, response);

@@ -173,7 +173,7 @@ public class OrderImplement implements OrderDAO{
 	}
 	public void updateOrderPayment(int OrderID, String Payment) {
 		try {
-			String query = "UPDATE `order` SET PaymentMethod=? WHERE OrderID=?";
+			String query = "UPDATE `order` SET PaymentMethod=?, OrderStatus='PAID' WHERE OrderID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setString( 1, Payment );
 			preparedStatement.setInt( 2, OrderID );

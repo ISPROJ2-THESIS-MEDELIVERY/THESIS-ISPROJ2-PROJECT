@@ -82,7 +82,7 @@ public class ReportAction {
 														+ " INNER JOIN orderdetail ON orderdetail.ProductID = product.ProductID"
 														+ " INNER JOIN `order` ON orderdetail.OrderID = `order`.OrderID"
 														+ " INNER JOIN pharmacist ON `order`.PharmacistID = pharmacist.PharmacistID"
-														+ " INNER JOIN branch ON pharmacist.BranchID = branch.BranchID WHERE branch.BranchID = ?")) {
+														+ " INNER JOIN branch ON pharmacist.BranchID = branch.BranchID WHERE branch.BranchID = " +Integer.toString(BranchID) ) ) {
 		    stmt.setInt(1, BranchID);
 		    try(ResultSet rs = stmt.executeQuery()) {
 		        if (rs.next()) {
@@ -237,7 +237,7 @@ public class ReportAction {
 														" FROM" + 
 														" order" + 
 														" INNER JOIN orderdetail ON orderdetail.OrderID = order.OrderID" + 
-														" where CustomerID = 2")) {
+														" where CustomerID = " + UserID)) {
 		    try(ResultSet rs = stmt.executeQuery()) {
 		        if (rs.next()) {
 		        	customerSales.setDateOrdered(rs.getDate(1));

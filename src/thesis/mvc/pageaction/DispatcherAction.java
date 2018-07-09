@@ -61,11 +61,11 @@ public class DispatcherAction {
 		}
 		return orders;
 	}
-	public List<Order> getapprovedOrder() {
+	public List<Order> gettransitOrder() {
 		List<Order> orders = new ArrayList<Order>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery( "SELECT * FROM `order` WHERE OrderStatus = 'APPROVED'" );
+			ResultSet resultSet = statement.executeQuery( "SELECT * FROM `order` WHERE OrderStatus = 'PAID'" );
 			while( resultSet.next() ) {
 				Order order = new Order();
 				order.setOrderID( resultSet.getInt( "OrderID" ) );
@@ -94,7 +94,7 @@ public class DispatcherAction {
 		return orders;
 	}
 	
-	public boolean DispatcherOrder(int OrderID, int UserID, int DriverID, String Comments, String Status) {
+	public boolean DispatcherOrder(int OrderID, int UserID, int DriverID, String Comments) {
 		try {
 			DispatcherImplement dispatcherImplement = new DispatcherImplement();
 			int DispatcherID = dispatcherImplement.getDispatcherByLogin(UserID).getDispatcherID();
@@ -110,7 +110,7 @@ public class DispatcherAction {
 			int DeliveryID = deliveryImplement.addDelivery(delivery);
 			
 			OrderImplement orderImplement = new OrderImplement();
-			orderImplement.updateOrderStatus(OrderID, Status);
+			orderImplement.updateOrderStatus(OrderID, "TRANSIT");
 			
 			return true;
 		} catch (Exception e) {

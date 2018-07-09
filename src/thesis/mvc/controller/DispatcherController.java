@@ -40,7 +40,7 @@ public class DispatcherController extends HttpServlet{
         	DispatcherAction dispatcherAction = new DispatcherAction();
     		session.setAttribute("DriverList", driverImplement.getAllDrivers() );
     		session.setAttribute("OrderList", dispatcherAction.getpaidOrder() );
-    		session.setAttribute("TransitList", dispatcherAction.getapprovedOrder() );
+    		session.setAttribute("TransitList", dispatcherAction.gettransitOrder() );
     		RequestDispatcher view = request.getRequestDispatcher( forward );
     		view.forward(request, response);
     	} else {
@@ -51,17 +51,20 @@ public class DispatcherController extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
     	int OrderID = Integer.parseInt( request.getParameter( "OrderID" ) );
-    	//int DriverID = Integer.parseInt( request.getParameter( "DriverID" ) );
-    	int DriverID = 1;
-    	//String Comments = request.getParameter( "Comments" );
-    	String Comments = "There Might be a delay";
-    	String Status = request.getParameter( "Filters" );
-    	int UserID = (int) session.getAttribute("userID") ;
-    	
-    	//Insert logic here
-    	DispatcherAction dispatcherAction = new DispatcherAction();
-    	dispatcherAction.DispatcherOrder(OrderID, UserID, DriverID, Comments, Status);
-    	
+    	if (request.getParameter( "Filters" ).equalsIgnoreCase("TRANSIT")) {
+	    	//int DriverID = Integer.parseInt( request.getParameter( "DriverID" ) );
+	    	int DriverID = 1;
+	    	//String Comments = request.getParameter( "Comments" );
+	    	String Comments = "There Might be a delay";
+	    	int UserID = (int) session.getAttribute("userID");
+	    	//Insert logic here
+	    	DispatcherAction dispatcherAction = new DispatcherAction();
+	    	dispatcherAction.DispatcherOrder(OrderID, UserID, DriverID, Comments);
+    	} else if (request.getParameter( "Filters" ).equalsIgnoreCase("DELIVERED") || request.getParameter( "Filters" ).equalsIgnoreCase("DELAYED")) {
+    		String Status = request.getParameter( "Filters" );
+    		OrderImplement orderImplement = new OrderImplement();
+    		orderImplement.updateOrderStatus(OrderID, request.getParameter( "Filters" ));
+    	}
 		response.sendRedirect(request.getContextPath() + "/DispatcherController");	
 	}
 }

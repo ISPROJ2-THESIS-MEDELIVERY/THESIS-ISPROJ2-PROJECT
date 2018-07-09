@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import thesis.mvc.implement.BranchImplement;
+import thesis.mvc.implement.CustomerImplement;
+import thesis.mvc.implement.PharmacistImplement;
 import thesis.mvc.pageaction.ApprovalAction;
 import thesis.mvc.pageaction.FilterAction;
 import thesis.mvc.pageaction.PurchaseAction;
@@ -39,10 +42,15 @@ public class ReportController {
 		
 		ReportAction reportAction = new ReportAction();
 		if (ReportTy == 1 && UserType == 2) {
-			request.setAttribute("ReportGenerator", reportAction.ReportCustomerSales(1) );//CustomerID
+			CustomerImplement customerImplement = new CustomerImplement();
+	    	int customerID = customerImplement.getCustomerByUserId((int) session.getAttribute("userID")).getCustomerID();
+			request.setAttribute("ReportGenerator", reportAction.ReportCustomerSales(customerID) );//CustomerID
 		} else if (ReportTy == 2 && UserType == 4) {
-			request.setAttribute("ReportGenerator", reportAction.ReportPharmacySales(1) );//PharmacyID
+			PharmacistImplement pharmacistImplement = new PharmacistImplement();
+			int BranchID = pharmacistImplement.getPharmacistByUserId((int) session.getAttribute("userID")).getBranchID();
+			request.setAttribute("ReportGenerator", reportAction.ReportPharmacySales(BranchID) );//PharmacyID
 		} else if (ReportTy == 3 && UserType == 1) {
+			
 			request.setAttribute("ReportGenerator", reportAction.ReportProductSales(1) );//ProductID
 		} else if (ReportTy == 4 && UserType == 4) {
 			request.setAttribute("ReportGenerator", reportAction.ReportTotalSales());

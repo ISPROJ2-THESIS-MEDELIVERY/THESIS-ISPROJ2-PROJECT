@@ -122,7 +122,7 @@
 	<div class="container">
 		<!-- First Table -->
 		<h1>Pharmacy Sales</h1>
-		<c:when test = "${ReportType = 1}">
+		<c:when test = "${ReportType == 1}">
 		<div>
 			<table id="PharmacySales" class="pretty">
 				<thead>
@@ -169,7 +169,7 @@
 		<!-- Second Table -->
 		<br>
 		<h1>Product Sales</h1>
-		<c:when test = "${ReportType = 2}">
+		<c:when test = "${ReportType == 2}">
 		<div>
 			<table id="ProductSales" class="pretty">
 				<thead>
@@ -213,7 +213,7 @@
 		<!-- Third Table -->
 		<br>
 		<h1>Purchase per user</h1>
-		<c:when test = "${ReportType = 3}">
+		<c:when test = "${ReportType == 3}">
 		<div>
 			<table id="Purchases" class="pretty">
 				<thead>

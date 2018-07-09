@@ -184,7 +184,7 @@
     
     
     <tbody>
-    	<c:forEach items="${OrderList}" var="item">
+    	<c:forEach items="${TransitList}" var="item">
 	    <tr>
 	      <td><c:out value="${item.orderID}" /></td>
 	      <td><c:out value="${item.customerID}" /></td>

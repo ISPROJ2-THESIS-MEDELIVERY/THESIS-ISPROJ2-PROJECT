@@ -174,7 +174,7 @@ public class OrderImplement implements OrderDAO{
 	public List<Order> getPendingOrder(int CID) {
 		List<Order> orders = new ArrayList<Order>();
 		try {
-			String query = "SELECT * FROM `order` WHERE OrderStatus='APPROVED' AND OrderID=?";
+			String query = "SELECT * FROM `order` WHERE OrderStatus='APPROVED' AND CustomerID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, CID);			
 			ResultSet resultSet = preparedStatement.executeQuery();

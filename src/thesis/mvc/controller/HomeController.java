@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import thesis.mvc.implement.BranchImplement;
+import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.pageaction.*;
 
@@ -25,7 +26,8 @@ public class HomeController  extends HttpServlet {
 		OrderImplement orderImplement = new OrderImplement();
 		request.setAttribute( "Pharmacy", branchImplement.getAllBranch());
 		if (session.getAttribute("userID") != null) {
-			request.setAttribute( "PurchasePending", orderImplement.getPendingOrder((int) session.getAttribute("userID")));
+			CustomerImplement customerImplement = new CustomerImplement();
+			request.setAttribute( "PurchasePending", orderImplement.getPendingOrder(customerImplement.getCustomerByUserId((int) session.getAttribute("userID")).getCustomerID()));
 		}
 		RequestDispatcher view = request.getRequestDispatcher( "/Home.jsp" );
 		view.forward(request, response);

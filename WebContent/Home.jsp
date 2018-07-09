@@ -77,7 +77,8 @@
     <h2 class="text-center">Featured Products</h2>
     
     
-    <!-- Carousel loop start
+    <!-- 
+    Carousel loop start
 	    <div class="carousel slide" data-ride="carousel" id="carousel-2">
 	        <div class="carousel-inner" role="listbox">
 				<c:forEach items="${FeaturedStock}" var="FStock">
@@ -101,7 +102,8 @@
 	        </div>
 	    </div>
     
-    Carousel loop end -->
+    Carousel loop end
+     -->
     <c:choose>
 	    <c:when test = "${userID > 0}">
 		    <h1 align="center" style="font-family:Lora, serif;font-size:55px;">Select your pharmacy</h1>
@@ -115,8 +117,17 @@
 			    </div>
 			</div>
 			<c:forEach items="${PurchasePending}" var="pharma">
-				<div class="col-md-3"><a href="PurchaseController?PharmaID=<c:out value="${pharma.orderID}" />"><c:out value="${pharma.orderID}" /></a></div>
+			    <div class="container">
+			        <div class="row">
+						<div class="col-md-3"><a href="PurchaseController?action=<c:out value="${pharma.orderID}" />">ORDER NUMBER: <c:out value="${pharma.orderID}" /></a></div>
+					</div>
+				</div>
 			</c:forEach>
+			<div class="container">
+			    <div class="row">
+					<div class="col-md-3"><a href="PurchaseController?action=PrintReport />">PRINT THINGS<c:out value="${pharma.orderID}" /></a></div>
+				</div>
+			</div>
 		</c:when>
 	    <c:otherwise>
 	    <div id="cid_14" class="col-md-3 form-input-wide alert alert-info"  role="alert">

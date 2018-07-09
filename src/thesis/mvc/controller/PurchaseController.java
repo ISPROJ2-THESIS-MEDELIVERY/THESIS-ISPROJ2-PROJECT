@@ -18,6 +18,8 @@ import javax.servlet.http.HttpSession;
 
 import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.CustomerImplement;
+import thesis.mvc.implement.OrderDetailImplement;
+import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.model.Branch;
 import thesis.mvc.model.Customer;
@@ -75,12 +77,81 @@ public class PurchaseController extends HttpServlet {
 		boolean test = true;
     	
 		if (access == 1) {
-    		SearchAction searchAction = new SearchAction();
-    		//forward = "/A-test-shop.jsp";
-    		forward = "/Catalog.jsp";
-    		request.setAttribute( "productList", searchAction.GeneralListing(PharmaID) );
-    		RequestDispatcher view = request.getRequestDispatcher( forward );
-    		view.forward(request, response);
+			if (action.equalsIgnoreCase( "PrintReport") ) {
+				SendEmail sendEmail = new SendEmail();
+				CustomerImplement customerImplement = new CustomerImplement();
+				String message = "";
+				
+				sendEmail.send(customerImplement.getCustomerByUserId((int) session.getAttribute("userID")).getEmail(), "Customer Order List", message);
+				response.sendRedirect(request.getContextPath() + "/index.jsp");
+			} else if (isInteger(action)) {
+				//Get the order
+				OrderImplement orderImplement = new OrderImplement();
+	    		Order order = orderImplement.getOrderById(Integer.parseInt(action));
+	    		
+	    		//Get the Details
+	    		OrderDetailImplement orderDetailImplement = new OrderDetailImplement();
+	    		List<OrderDetail> OrderDetails = new ArrayList<OrderDetail>();
+				OrderDetails = orderDetailImplement.getspecificOrderDetail(Integer.parseInt(action));
+				
+				//Ready the Cart List
+				PurchaseAction purchaseAction = new PurchaseAction();
+				List<CartList> cartlists = new ArrayList<CartList>();
+				ProductImplement productImplement = new ProductImplement();
+				for (OrderDetail orderDetail : OrderDetails) {
+					CartList cartlist = purchaseAction.new CartList();
+					//Product Info
+					Product product = productImplement.getProductById(orderDetail.getProductID());
+					cartlist.setName(product.getProductName());
+					cartlist.setDescription(product.getProductDescription());
+					cartlist.setImage(product.getProductImage());
+					cartlist.setSize(product.getProductPackaging());
+					cartlist.setPrescription(product.isRXProduct());
+					
+					//Other Details
+					cartlist.setQuantity(orderDetail.getQuantity());
+					cartlist.setUnitCost(orderDetail.getCostPerUnit());
+					cartlist.setTotalCost(orderDetail.getTotalCost());
+					cartlists.add(cartlist);
+				}
+				/*
+				PurchaseAction purchaseAction = new PurchaseAction();
+				ProductImplement productImplement = new ProductImplement();
+				Product product = new Product();
+				product = productImplement.getProductById(orderDetail.getProductID());
+				
+				List<CartList> cartlists = new ArrayList<CartList>();
+				CartList cartlist = purchaseAction.new CartList();
+				cartlist.setName(product.getProductName());
+				cartlist.setDescription(product.getProductDescription());
+				cartlist.setImage(product.getProductImage());
+				cartlist.setSize(product.getProductPackaging());
+				cartlist.setPrescription(product.isRXProduct());
+				cartlist.setQuantity(orderDetail.getQuantity());
+				cartlist.setUnitCost(orderDetail.getCostPerUnit());
+				cartlist.setTotalCost(orderDetail.getTotalCost());
+				cartlists.add(cartlist);
+				session.setAttribute("CartList", cartlists );
+
+				CartList cartlist = purchaseAction.new CartList();
+				SendEmail sendEmail = new SendEmail();
+				CustomerImplement customerImplement = new CustomerImplement();
+				*/
+				
+				//Set The UserID
+				session.setAttribute("orderReciept", order);
+				session.setAttribute("CartlistReciept", cartlists);
+				forward = "/Checkout.jsp";
+	    		RequestDispatcher view = request.getRequestDispatcher( forward );
+	    		view.forward(request, response);
+			} else {
+	    		SearchAction searchAction = new SearchAction();
+	    		forward = "/Catalog.jsp";
+	    		request.setAttribute( "productList", searchAction.GeneralListing(PharmaID) );
+	    		RequestDispatcher view = request.getRequestDispatcher( forward );
+	    		view.forward(request, response);
+			}
+    		
     	} else if (access == 3) {
     		if (action.equalsIgnoreCase("Approve")) {
         		PurchaseAction purchaseAction = new PurchaseAction();
@@ -138,8 +209,10 @@ public class PurchaseController extends HttpServlet {
 		} else {
 			SurgeCheck = false;
 		}
+
+		if(action.equalsIgnoreCase("") && SurgeCheck) {
 		
-		if(action.equalsIgnoreCase("Addtocart") && SurgeCheck) {
+		} if(action.equalsIgnoreCase("Addtocart") && SurgeCheck) {
 			
 			//sets order and generates it if it does not exist
 			Order order = (Order) session.getAttribute("Order");
@@ -245,7 +318,7 @@ public class PurchaseController extends HttpServlet {
 			int userID = (int) session.getAttribute("userID");
 			
 			
-			String CustomerEmail = customerImplement.getCustomerById(userID).getEmail();
+			String CustomerEmail = customerImplement.getCustomerByUserId(userID).getEmail();
 
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 			boolean checker = purchaseAction.purchaseOrder(order, OrderDetails) && sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, "This is a test message");
@@ -255,6 +328,7 @@ public class PurchaseController extends HttpServlet {
 			} else {
 				session.setAttribute("orderReciept", order);
 				session.setAttribute("CartlistReciept", cartList);
+				session.setAttribute("ApproveChecker", false);
 				session.removeAttribute("Order");
 				session.removeAttribute("OrderDetails");
 				session.removeAttribute("CartList");
@@ -332,6 +406,18 @@ public class PurchaseController extends HttpServlet {
 		} else {
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}
+	}
+	
+	public static boolean isInteger(String s) {
+	    try { 
+	        Integer.parseInt(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
 	}
 
 }

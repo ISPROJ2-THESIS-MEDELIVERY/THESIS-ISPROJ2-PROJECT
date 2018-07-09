@@ -96,6 +96,31 @@ public class OrderDetailImplement implements OrderDetailDAO {
 		}
 		return orderDetails;
 	}
+	
+	public List<OrderDetail> getspecificOrderDetail(int OrderID) {
+		List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
+		try {
+			String query = "SELECT * FROM OrderDetail WHERE OrderID = ?";
+			PreparedStatement preparedStatement = conn.prepareStatement(query);
+			preparedStatement.setInt(1, OrderID);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while( resultSet.next() ) {
+				OrderDetail orderDetail = new OrderDetail();
+				orderDetail.setOrderDetailsID( resultSet.getInt( "OrderDetailsID" ) );
+				orderDetail.setOrderID( resultSet.getInt( "OrderID" ) );
+				orderDetail.setProductID( resultSet.getInt( "ProductID" ) );
+				orderDetail.setQuantity( resultSet.getInt( "Quantity" ) );
+				orderDetail.setCostPerUnit( resultSet.getDouble( "CostPerUnit" ) );
+				orderDetail.setTotalCost( resultSet.getDouble( "TotalCost" ) );
+				orderDetails.add(orderDetail);
+			}
+			resultSet.close();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return orderDetails;
+	}
 
 	@Override
 	public OrderDetail getOrderDetailById(int orderDetailId) {

@@ -39,7 +39,8 @@ public class DispatcherController extends HttpServlet{
     		DriverImplement driverImplement = new DriverImplement();
         	DispatcherAction dispatcherAction = new DispatcherAction();
     		session.setAttribute("DriverList", driverImplement.getAllDrivers() );
-    		session.setAttribute("OrderList", dispatcherAction.getapprovedOrder() );
+    		session.setAttribute("OrderList", dispatcherAction.getpaidOrder() );
+    		session.setAttribute("TransitList", dispatcherAction.getapprovedOrder() );
     		RequestDispatcher view = request.getRequestDispatcher( forward );
     		view.forward(request, response);
     	} else {

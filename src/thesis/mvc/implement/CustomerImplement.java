@@ -133,5 +133,30 @@ public class CustomerImplement implements CustomerDAO{
 		}
 		return customer;
 	}
+	public Customer getCustomerByUserId(int UserID) {
+		Customer customer = new Customer();
+		try {
+			String query = "SELECT * FROM Customer WHERE UserID=?";
+			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			preparedStatement.setInt(1, UserID);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while( resultSet.next() ) {
+				customer.setCustomerID( resultSet.getInt( "CustomerID" ) );
+				customer.setUserID( resultSet.getInt( "UserID" ) );
+				customer.setCustomerName( resultSet.getString( "CustomerName" ) );
+				customer.setAddress( resultSet.getString( "Address" ) );
+				customer.setCityID(resultSet.getInt( "CityID" ) ); 
+				customer.setEmail( resultSet.getString( "Email" ) );
+				customer.setIsSeniorCitizen( resultSet.getBoolean( "IsSeniorCitizen" ) );
+				customer.setSeniorCitizenID( resultSet.getString( "SeniorCitizenID" ) );
+				customer.setContactNumber( resultSet.getInt( "ContactNumber" ) );
+			}
+			resultSet.close();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return customer;
+	}
 
 }

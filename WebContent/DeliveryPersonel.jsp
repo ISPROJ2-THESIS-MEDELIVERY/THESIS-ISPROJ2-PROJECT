@@ -133,14 +133,19 @@
 	      <td><c:out value="${item.paymentMethod}" /></td>
 	      <td><c:out value="${item.actualCost}" /></td>
 		  <td>
-		  	<form action="DispatcherController" method="post">
+		  <form action="DispatcherController" method="post">
 		  		<input type="hidden" name="OrderID" value="<c:out value="${item.orderID}" />"/>
-				<select class="form-control" name="DeliveryStatus">
-                <option value="pending">PENDING</option>
-                <option value="approved">APPROVED</option>
-                <option value="cancelled">CANCELLED</option>
-                </select>				
-	        	<button class="btn btn-primary" type="submit" style="font-size:15px;">Update</button>
+				
+					<!-- Commented just to disable the dropdown -->				
+				<!-- <select name="Filters">
+					<optgroup>
+						<option value=pending>PENDING</option>
+						<option value="approved">APPROVED</option>
+						<option value="cancelled">CANCELLED</option>
+					</optgroup>
+				</select> -->
+				
+	        	<button class="btn btn-primary" type="submit" style="font-size:15px;">Transit</button>
         	</form>
            </td>
       	</tr>
@@ -202,18 +207,12 @@
 	      <td><c:out value="${item.paymentMethod}" /></td>
 	      <td><c:out value="${item.actualCost}" /></td>
 		  <td>
-		  	<form action="DispatcherController" method="post">
+        	<form action="DispatcherController" method="post">
 		  		<input type="hidden" name="OrderID" value="<c:out value="${item.orderID}" />"/>
-				
-					<!-- Commented just to disable the dropdown -->				
-				<!-- <select name="Filters">
-					<optgroup>
-						<option value=pending>PENDING</option>
-						<option value="approved">APPROVED</option>
-						<option value="cancelled">CANCELLED</option>
-					</optgroup>
-				</select> -->
-				
+				<select class="form-control" name="DeliveryStatus">
+                <option value="finished">FINISHED</option>
+                <option value="delayed">DELAYED</option>
+                </select>				
 	        	<button class="btn btn-primary" type="submit" style="font-size:15px;">Update</button>
         	</form>
            </td>

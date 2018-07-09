@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="assets/css/Team-Boxed.css">
     <link rel="stylesheet" href="assets/css/TR-Form.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+	<link rel="stylesheet" href="assets/css/Custom.css">
 </head>
 
 <body><img src="assets/img/MedeliveryLogo.png">
@@ -111,23 +112,27 @@
 			    <div class="container">
 			        <div class="row">
 				    <c:forEach items="${Pharmacy}" var="pharma">
-						<div class="col-md-3"><a href="PurchaseController?PharmaID=<c:out value="${pharma.branchID}" />"><c:out value="${pharma.pharmacyName}" /> - <c:out value="${pharma.branchStreet}" />, <c:out value="${pharma.branchBarangay}" /></a></div>
+						<div class="col-md-3">
+						<a class="button" href="PurchaseController?PharmaID=<c:out value="${pharma.branchID}" />"><c:out value="${pharma.pharmacyName}" /> - <c:out value="${pharma.branchStreet}" />, <c:out value="${pharma.branchBarangay}" /></a>
+						</div>
 					</c:forEach>
 			        </div>
 			    </div>
 			</div>
+			<br>
 			    <div class="container">
 			        <div class="row">
 						<c:forEach items="${PurchasePending}" var="pharma">
-							<div class="col-md-3"><a href="PurchaseController?action=<c:out value="${pharma.orderID}" />">ORDER NUMBER: <c:out value="${pharma.orderID}" /></a></div>
+							<div class="col-md-6" align="Center"><a class="button blue" href="PurchaseController?action=<c:out value="${pharma.orderID}" />">ORDER NUMBER: <c:out value="${pharma.orderID}" /></a></div>
+							<div class="col-md-6" align="Center"><a class="button blue" href="PurchaseController?action=PrintReport />">PRINT THINGS<c:out value="${pharma.orderID}" /></a></div>
 						</c:forEach>
 					</div>
 				</div>
-			<div class="container">
+			<%-- <div class="container">
 			    <div class="row">
-					<div class="col-md-3"><a href="PurchaseController?action=PrintReport />">PRINT THINGS<c:out value="${pharma.orderID}" /></a></div>
+					<div class="col-md-3"><a class="button" href="PurchaseController?action=PrintReport />">PRINT THINGS<c:out value="${pharma.orderID}" /></a></div>
 				</div>
-			</div>
+			</div> --%>
 		</c:when>
 	    <c:otherwise>
 	    <div id="cid_14" class="col-md-3 form-input-wide alert alert-info"  role="alert">

@@ -123,7 +123,7 @@
                             </tbody>
                         </table>
                     </div>
-                    Order ID: <c:out value="${orderReciept.customerID}" /><br />
+                    Order ID: <c:out value="${orderReciept.orderID}" /><br />
 					Order Address: <c:out value="${orderReciept.orderAddress}" /><br />
 					Senior Discount: <c:out value="${orderReciept.seniorDiscount}" /><br />
                 </div>
@@ -132,23 +132,19 @@
             <div class="row">
                 <div class="col">
                     <h1>Payment Details</h1>
-                    
                     <c:choose>
-	                	<c:when test = "${ApproveChecker = true}">
+	                	<c:when test = "${ApproveChecker == true}">
 	                		<form action="PurchaseController" method="post">
-								<input type="hidden" name="Action" value="OrderPay"/>
+								<input type="hidden" name="Action" value="OrderPay"/>>
+								<input type="hidden" name="OrdertoUpdate" value="<c:out value="${orderReciept.orderID}" />"/>
 					            <button class="btn btn-primary float-center" type="submit" style="background-color:#465765;" name="Payment" value="Card">Card</button>
 					            <button class="btn btn-primary float-center" type="submit" style="background-color:#465765;" name="Payment" value="Cash">Cash</button>
 							</form>
 	                	</c:when>
 	                	<c:otherwise>
-			                <h2>THANK YOU FOR YOUR ORDER, YOUR PURCHASE WILL NOW BE PROCESSED BY A PHARMACIST</h2>
+			                <h2>IF YOU ARE SEEING THIS, THEN YOUR ORDER IS CURRENTLY BEING EVALUATED, REJECTED OR HAS BEEN PAID FOR</h2>
 			            </c:otherwise>
 					</c:choose>
-                    
-                    
-                    
-						
                 </div>
             </div>
         </div>

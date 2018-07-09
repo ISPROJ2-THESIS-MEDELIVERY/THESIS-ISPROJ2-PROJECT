@@ -171,6 +171,18 @@ public class OrderImplement implements OrderDAO{
 			e.printStackTrace();
 		}
 	}
+	public void updateOrderPayment(int OrderID, String Payment) {
+		try {
+			String query = "UPDATE `order` SET PaymentMethod=? WHERE OrderID=?";
+			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			preparedStatement.setString( 1, Payment );
+			preparedStatement.setInt( 2, OrderID );
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	public List<Order> getPendingOrder(int CID) {
 		List<Order> orders = new ArrayList<Order>();
 		try {

@@ -116,13 +116,13 @@
 			        </div>
 			    </div>
 			</div>
-			<c:forEach items="${PurchasePending}" var="pharma">
 			    <div class="container">
 			        <div class="row">
-						<div class="col-md-3"><a href="PurchaseController?action=<c:out value="${pharma.orderID}" />">ORDER NUMBER: <c:out value="${pharma.orderID}" /></a></div>
+						<c:forEach items="${PurchasePending}" var="pharma">
+							<div class="col-md-3"><a href="PurchaseController?action=<c:out value="${pharma.orderID}" />">ORDER NUMBER: <c:out value="${pharma.orderID}" /></a></div>
+						</c:forEach>
 					</div>
 				</div>
-			</c:forEach>
 			<div class="container">
 			    <div class="row">
 					<div class="col-md-3"><a href="PurchaseController?action=PrintReport />">PRINT THINGS<c:out value="${pharma.orderID}" /></a></div>

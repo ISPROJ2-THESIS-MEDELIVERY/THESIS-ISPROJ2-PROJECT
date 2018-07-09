@@ -84,11 +84,15 @@ public class PurchaseController extends HttpServlet {
 				
 				sendEmail.send(customerImplement.getCustomerByUserId((int) session.getAttribute("userID")).getEmail(), "Customer Order List", message);
 				response.sendRedirect(request.getContextPath() + "/index.jsp");
-			} else if (isInteger(action)) {
+			} else if (isInteger(action) && Integer.parseInt(action) > 0) {
 				//Get the order
 				OrderImplement orderImplement = new OrderImplement();
 	    		Order order = orderImplement.getOrderById(Integer.parseInt(action));
-	    		
+	    		if (order.getOrderStatus().equalsIgnoreCase("APPROVED")) {
+	    			session.setAttribute("ApproveChecker", true);
+	    		} else {
+	    			session.setAttribute("ApproveChecker", false);
+	    		}
 	    		//Get the Details
 	    		OrderDetailImplement orderDetailImplement = new OrderDetailImplement();
 	    		List<OrderDetail> OrderDetails = new ArrayList<OrderDetail>();
@@ -210,9 +214,13 @@ public class PurchaseController extends HttpServlet {
 			SurgeCheck = false;
 		}
 
-		if(action.equalsIgnoreCase("") && SurgeCheck) {
+		if(action.equalsIgnoreCase("OrderPay")) {
+			int orderID =Integer.parseInt(request.getParameter("OrdertoUpdate"));
+			OrderImplement orderImplement = new OrderImplement();
+			orderImplement.updateOrderStatus((int) session.getAttribute("OrdertoUpdate"), (String) session.getAttribute("Payment"));
+			forward = "/index.jsp";
 		
-		} if(action.equalsIgnoreCase("Addtocart") && SurgeCheck) {
+		} else if(action.equalsIgnoreCase("Addtocart") && SurgeCheck) {
 			
 			//sets order and generates it if it does not exist
 			Order order = (Order) session.getAttribute("Order");

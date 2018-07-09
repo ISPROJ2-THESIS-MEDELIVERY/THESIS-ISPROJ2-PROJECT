@@ -118,9 +118,11 @@
 		</div>
 		<ol class="carousel-indicators"></ol>
 	</div>
+	<c:choose>
 	<div class="container">
 		<!-- First Table -->
 		<h1>Pharmacy Sales</h1>
+		<c:when test = "${ReportType = 1}">
 		<div>
 			<table id="PharmacySales" class="pretty">
 				<thead>
@@ -163,9 +165,11 @@
 				</tbody>
 			</table>
 		</div>
+		</c:when>
 		<!-- Second Table -->
 		<br>
 		<h1>Product Sales</h1>
+		<c:when test = "${ReportType = 2}">
 		<div>
 			<table id="ProductSales" class="pretty">
 				<thead>
@@ -205,9 +209,11 @@
 				</tbody>
 			</table>
 		</div>
+		</c:when>
 		<!-- Third Table -->
 		<br>
 		<h1>Purchase per user</h1>
+		<c:when test = "${ReportType = 3}">
 		<div>
 			<table id="Purchases" class="pretty">
 				<thead>
@@ -260,9 +266,11 @@
 				</tbody>
 			</table>
 		</div>
+		</c:when>
 		<!-- Fourth Table -->
 		<br>
 		<h1>Total Sales</h1>
+		<c:otherwise>
 		<div>
 			<table id="TotalSales" class="pretty">
 				<thead>
@@ -304,7 +312,9 @@
 				</tbody>
 			</table>
 		</div>
+		</c:otherwise>
 	</div>
+	</c:choose>
 
 
 

@@ -136,7 +136,7 @@ public class ReportAction {
 	public ProductSales ReportProductSales(int ProductID) {
 		ProductSales productSales = new ProductSales();
 			
-		try(PreparedStatement stmt = conn.prepareStatement("SELECT\r\n" + 
+		try(PreparedStatement stmt = conn.prepareStatement("SELECT" + 
 				" product.ProductName," + 
 				" product.RegistrationNo," + 
 				" Sum(orderdetail.Quantity) AS TotalQuantity," + 

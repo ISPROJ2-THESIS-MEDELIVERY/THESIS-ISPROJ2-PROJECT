@@ -91,6 +91,13 @@
             </div>
         </div>
     </div>
+    <div class="container">
+		<div class="row">
+			<div class="col-md-4" align="Center"><a class="button blue" href="ReportController?ReportTy=2">PRINT THINGS</a></div>
+			<div class="col-md-4" align="Center"><a class="button blue" href="ReportController?ReportTy=3">PRINT THINGS</a></div>
+			<div class="col-md-4" align="Center"><a class="button blue" href="ReportController?ReportTy=4">PRINT THINGS</a></div>
+		</div>
+	</div>
     <div>
         <div class="container">                           
                     <div>

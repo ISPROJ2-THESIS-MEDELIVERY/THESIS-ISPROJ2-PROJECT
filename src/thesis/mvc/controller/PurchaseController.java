@@ -77,14 +77,7 @@ public class PurchaseController extends HttpServlet {
 		boolean test = true;
     	
 		if (access == 1) {
-			if (action.equalsIgnoreCase( "PrintReport") ) {
-				SendEmail sendEmail = new SendEmail();
-				CustomerImplement customerImplement = new CustomerImplement();
-				String message = "";
-				
-				sendEmail.send(customerImplement.getCustomerByUserId((int) session.getAttribute("userID")).getEmail(), "Customer Order List", message);
-				response.sendRedirect(request.getContextPath() + "/index.jsp");
-			} else if (isInteger(action) && Integer.parseInt(action) > 0) {
+			if (isInteger(action) && Integer.parseInt(action) > 0) {
 				//Get the order
 				OrderImplement orderImplement = new OrderImplement();
 	    		Order order = orderImplement.getOrderById(Integer.parseInt(action));

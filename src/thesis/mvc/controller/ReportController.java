@@ -20,6 +20,7 @@ import thesis.mvc.pageaction.ReportAction;
 import thesis.mvc.pageaction.SearchAction;
 import thesis.mvc.pageaction.SearchAction.ProductList;
 import thesis.mvc.utility.DBUtility;
+import thesis.mvc.utility.SendEmail;
 
 @WebServlet("/ReportController")
 public class ReportController {
@@ -35,24 +36,23 @@ public class ReportController {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String forward;
-		int NeededID = Integer.parseInt( request.getParameter( "NeededID" ) );
 		int ReportTy = Integer.parseInt( request.getParameter( "ReportTy" ) );
 		int UserType = (int) session.getAttribute("userAccess");
 		forward = "/Catalog.jsp";
 		
 		ReportAction reportAction = new ReportAction();
-		if (ReportTy == 1 && UserType == 2) {
+		if (ReportTy == 1 && UserType == 1) {
 			CustomerImplement customerImplement = new CustomerImplement();
 	    	int customerID = customerImplement.getCustomerByUserId((int) session.getAttribute("userID")).getCustomerID();
 			request.setAttribute("ReportGenerator", reportAction.ReportCustomerSales(customerID) );//CustomerID
-		} else if (ReportTy == 2 && UserType == 4) {
+		} else if (ReportTy == 2 && UserType == 2) {
 			PharmacistImplement pharmacistImplement = new PharmacistImplement();
 			int BranchID = pharmacistImplement.getPharmacistByUserId((int) session.getAttribute("userID")).getBranchID();
 			request.setAttribute("ReportGenerator", reportAction.ReportPharmacySales(BranchID) );//PharmacyID
-		} else if (ReportTy == 3 && UserType == 1) {
+		} else if (ReportTy == 3 && UserType == 2) {
 			
 			request.setAttribute("ReportGenerator", reportAction.ReportProductSales(1) );//ProductID
-		} else if (ReportTy == 4 && UserType == 4) {
+		} else if (ReportTy == 4 && UserType == 2) {
 			request.setAttribute("ReportGenerator", reportAction.ReportTotalSales());
 		} else {
 			forward = "extra.jsp";
@@ -70,6 +70,15 @@ public class ReportController {
 	//FilterAction filteraction = new FilterAction();
 	//request.setAttribute( "SearchList", filteraction.ProductListing(1) );
 	//session.setAttribute("orderPharmacistCheck", approvalAction.getOrder() );
+	/*
+	 * SendEmail sendEmail = new SendEmail();
+				CustomerImplement customerImplement = new CustomerImplement();
+				String message = "";
+				
+				sendEmail.send(customerImplement.getCustomerByUserId((int) session.getAttribute("userID")).getEmail(), "Customer Order List", message);
+				response.sendRedirect(request.getContextPath() + "/index.jsp");
+	 * 
+	 */
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

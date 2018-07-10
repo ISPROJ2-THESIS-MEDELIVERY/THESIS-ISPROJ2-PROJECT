@@ -137,28 +137,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${productList}" var="item">
+					<c:forEach items="${ReportGenerator}" var="item">
 						<!--  <form action='PurchaseController' method='post'>-->
 						<tr>
-							<td><input type="number" name="ProductID"
-								value="<c:out value="${item.productID}" />" readonly></td>
 							<td><c:out value="${item.PharmacyName}" /></td>
 							<td><c:out value="${item.ProductName}" /></td>
 							<td><c:out value="${item.RegistrationNo}" /></td>
 							<td><c:out value="${item.Quantity}" /></td>
 							<td><c:out value="${item.CostPerUnit}" /></td>
 							<td><c:out value="${item.TotalCost}" /></td>
-							<td><select name='Quantity'>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-									<option value="6">6</option>
-									<option value="7">7</option>
-									<option value="8">8</option>
-									<option value="9">9</option>
-							</select></td>
 						</tr>
 						<!--  </form>-->
 					</c:forEach>
@@ -182,27 +169,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${productList}" var="item">
+					<c:forEach items="${ReportGenerator}" var="item">
 						<!--  <form action='PurchaseController' method='post'>-->
 						<tr>
-							<td><input type="number" name="ProductID"
-								value="<c:out value="${item.productID}" />" readonly></td>
 							<td><c:out value="${item.ProductName}" /></td>
 							<td><c:out value="${item.RegistrationNo}" /></td>
 							<td><c:out value="${item.Quantity}" /></td>
 							<td><c:out value="${item.CostPerUnit}" /></td>
 							<td><c:out value="${item.TotalCost}" /></td>
-							<td><select name='Quantity'>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-									<option value="6">6</option>
-									<option value="7">7</option>
-									<option value="8">8</option>
-									<option value="9">9</option>
-							</select></td>
 						</tr>
 						<!--  </form>-->
 					</c:forEach>
@@ -233,11 +207,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${productList}" var="item">
+					<c:forEach items="${ReportGenerator}" var="item">
 						<!--  <form action='PurchaseController' method='post'>-->
 						<tr>
-							<td><input type="number" name="ProductID"
-								value="<c:out value="${item.productID}" />" readonly></td>
 							<td><c:out value="${item.CustomerID}" /></td>
 							<td><c:out value="${item.CustomerName}" /></td>
 							<td><c:out value="${item.DateOrdered}" /></td>
@@ -249,17 +221,6 @@
 							<td><c:out value="${item.CostPerUnit}" /></td>
 							<td><c:out value="${item.TotalCost}" /></td>
 							<td><c:out value="${item.ActualCost}" /></td>
-							<td><select name='Quantity'>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-									<option value="6">6</option>
-									<option value="7">7</option>
-									<option value="8">8</option>
-									<option value="9">9</option>
-							</select></td>
 						</tr>
 						<!--  </form>-->
 					</c:forEach>
@@ -284,28 +245,16 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${productList}" var="item">
+					<c:forEach items="${ReportGenerator}" var="item">
 						<!--  <form action='PurchaseController' method='post'>-->
 						<tr>
-							<td><input type="number" name="ProductID"
-								value="<c:out value="${item.productID}" />" readonly></td>
 							<td><c:out value="${item.ProductName}" /></td>
 							<td><c:out value="${item.RegistrationNo}" /></td>
 							<td><c:out value="${item.Quantity}" /></td>
 							<td><c:out value="${item.CostPerUnit}" /></td>
 							<td><c:out value="${item.TotalCost}" /></td>
 							<td><c:out value="${item.ActualCost}" /></td>
-							<td><select name='Quantity'>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-									<option value="6">6</option>
-									<option value="7">7</option>
-									<option value="8">8</option>
-									<option value="9">9</option>
-							</select></td>
+							<td></td>
 						</tr>
 						<!--  </form>-->
 					</c:forEach>

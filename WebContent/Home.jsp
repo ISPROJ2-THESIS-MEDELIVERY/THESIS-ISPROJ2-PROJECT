@@ -120,19 +120,17 @@
 			    </div>
 			</div>
 			<br>
-			    <div class="container">
-			        <div class="row">
-						<c:forEach items="${PurchasePending}" var="pharma">
-							<div class="col-md-6" align="Center"><a class="button blue" href="PurchaseController?action=<c:out value="${pharma.orderID}" />">ORDER NUMBER: <c:out value="${pharma.orderID}" /></a></div>
-							<div class="col-md-6" align="Center"><a class="button blue" href="PurchaseController?action=PrintReport />">PRINT THINGS<c:out value="${pharma.orderID}" /></a></div>
-						</c:forEach>
-					</div>
-				</div>
-			<%-- <div class="container">
+			<div class="container">
 			    <div class="row">
-					<div class="col-md-3"><a class="button" href="PurchaseController?action=PrintReport />">PRINT THINGS<c:out value="${pharma.orderID}" /></a></div>
+				<c:forEach items="${PurchasePending}" var="pharma">
+					<div class="col-md-6" align="Center"><a class="button blue" href="PurchaseController?action=<c:out value="${pharma.orderID}" />">ORDER NUMBER: <c:out value="${pharma.orderID}" /></a></div>
+				</c:forEach>
+			</div>
+			<div class="container">
+			    <div class="row">
+					<div class="col-md-12" align="Center"><a class="button blue" href="ReportController?ReportTy=1">PRINT THINGS</a></div>
 				</div>
-			</div> --%>
+			</div>
 		</c:when>
 	    <c:otherwise>
 	    <div id="cid_14" class="col-md-3 form-input-wide alert alert-info"  role="alert">

@@ -51,7 +51,7 @@ public class DispatcherController extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
     	int OrderID = Integer.parseInt( request.getParameter( "OrderID" ) );
-    	if (request.getParameter( "Filters" ).equalsIgnoreCase("TRANSIT")) {
+    	if (request.getParameter( "DeliveryStatus" ).equalsIgnoreCase("TRANSIT")) {
 	    	//int DriverID = Integer.parseInt( request.getParameter( "DriverID" ) );
 	    	int DriverID = 1;
 	    	//String Comments = request.getParameter( "Comments" );
@@ -60,10 +60,10 @@ public class DispatcherController extends HttpServlet{
 	    	//Insert logic here
 	    	DispatcherAction dispatcherAction = new DispatcherAction();
 	    	dispatcherAction.DispatcherOrder(OrderID, UserID, DriverID, Comments);
-    	} else if (request.getParameter( "Filters" ).equalsIgnoreCase("DELIVERED") || request.getParameter( "Filters" ).equalsIgnoreCase("DELAYED")) {
-    		String Status = request.getParameter( "Filters" );
+    	} else if (request.getParameter( "DeliveryStatus" ).equalsIgnoreCase("FINISHED") || request.getParameter( "DeliveryStatus" ).equalsIgnoreCase("DELAYED")) {
+    		String Status = request.getParameter( "DeliveryStatus" );
     		OrderImplement orderImplement = new OrderImplement();
-    		orderImplement.updateOrderStatus(OrderID, request.getParameter( "Filters" ));
+    		orderImplement.updateOrderStatus(OrderID, Status);
     	}
 		response.sendRedirect(request.getContextPath() + "/DispatcherController");	
 	}

@@ -161,10 +161,12 @@ public class OrderImplement implements OrderDAO{
 	}
 	public void updateOrderStatus(int OrderID, String Status) {
 		try {
-			String query = "UPDATE `order` SET OrderStatus=? WHERE OrderID=?";
+			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+			String query = "UPDATE `order` SET OrderStatus=?, DateDelivered=? WHERE OrderID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setString( 1, Status );
-			preparedStatement.setInt( 2, OrderID );
+			preparedStatement.setDate( 2, CurrentDate );
+			preparedStatement.setInt( 3, OrderID );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {

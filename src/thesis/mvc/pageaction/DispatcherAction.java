@@ -65,7 +65,7 @@ public class DispatcherAction {
 		List<Order> orders = new ArrayList<Order>();
 		try {
 			Statement statement = conn.createStatement();
-			ResultSet resultSet = statement.executeQuery( "SELECT * FROM `order` WHERE OrderStatus = 'PAID'" );
+			ResultSet resultSet = statement.executeQuery( "SELECT * FROM `order` WHERE OrderStatus = 'TRANSIT'" );
 			while( resultSet.next() ) {
 				Order order = new Order();
 				order.setOrderID( resultSet.getInt( "OrderID" ) );

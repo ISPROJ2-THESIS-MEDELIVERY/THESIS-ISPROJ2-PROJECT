@@ -145,7 +145,7 @@
 					</optgroup>
 				</select> -->
 				
-	        	<button class="btn btn-primary" type="submit" style="font-size:15px;">Transit</button>
+	        	<button class="btn btn-primary" type="submit" style="font-size:15px;" name="DeliveryStatus" value="TRANSIT">Transit</button>
         	</form>
            </td>
       	</tr>
@@ -210,8 +210,8 @@
         	<form action="DispatcherController" method="post">
 		  		<input type="hidden" name="OrderID" value="<c:out value="${item.orderID}" />"/>
 				<select class="form-control" name="DeliveryStatus">
-                <option value="finished">FINISHED</option>
-                <option value="delayed">DELAYED</option>
+	                <option value="FINISHED">FINISHED</option>
+	                <option value="DELAYED">DELAYED</option>
                 </select>				
 	        	<button class="btn btn-primary" type="submit" style="font-size:15px;">Update</button>
         	</form>

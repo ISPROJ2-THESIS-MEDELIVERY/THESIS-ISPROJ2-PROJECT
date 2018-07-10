@@ -136,7 +136,20 @@ public class ReportAction {
 	public ProductSales ReportProductSales(int ProductID) {
 		ProductSales productSales = new ProductSales();
 			
-		try(PreparedStatement stmt = conn.prepareStatement("")) {
+		try(PreparedStatement stmt = conn.prepareStatement("SELECT\r\n" + 
+				" product.ProductName," + 
+				" product.RegistrationNo," + 
+				" Sum(orderdetail.Quantity) AS TotalQuantity," + 
+				" Sum(orderdetail.TotalCost) AS TotalCost" + 
+				" FROM" + 
+				" orderdetail" + 
+				" INNER JOIN product ON orderdetail.ProductID = product.ProductID" + 
+				" INNER JOIN `order` ON orderdetail.OrderID = `order`.OrderID" + 
+				" GROUP BY" + 
+				" orderdetail.ProductID," + 
+				" product.ProductName" + 
+				" ORDER BY" + 
+				" orderdetail.ProductID")) {
 		    try(ResultSet rs = stmt.executeQuery()) {
 		        if (rs.next()) {
 		        	productSales.setProductName(rs.getString(1));

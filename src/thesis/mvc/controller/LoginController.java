@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +19,6 @@ import thesis.mvc.implement.PharmacistImplement;
 import thesis.mvc.model.Login;
 import thesis.mvc.pageaction.LoginAction;
 import thesis.mvc.utility.DBUtility;
-import thesis.mvc.utility.SendEmail;
 
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
@@ -35,9 +33,6 @@ public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//String forward = "A-test-login.jsp";
-		//RequestDispatcher view = request.getRequestDispatcher( forward );
-		//view.forward(request, response);
 		String forward;
 		HttpSession session = request.getSession();
 		
@@ -63,20 +58,13 @@ public class LoginController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Boolean test = false;
-		
 		LoginAction loginAction = new LoginAction();
 		conn = DBUtility.getConnection();
 		String Username = request.getParameter( "Username" );
 		String Password = request.getParameter( "Password" );
 		int LoginID = loginAction.loginUser(Username, Password);
 		
-		//This is a test
-		//SendEmail sendEmail = new SendEmail();
-		//sendEmail.send("fajardokier@yahoo.com", "Bitch ass nigga", "<br>This is a Holdup,<br>.I'mma pop a cap in your ass");
-		
 		RequestDispatcher view;
-		//String test = (String) session.getAttribute("username");
 		if (LoginID > 0) {
 			HttpSession session = request.getSession();
 			
@@ -87,26 +75,33 @@ public class LoginController extends HttpServlet {
 			LoginImplement LoginImp = new LoginImplement();
 			Login login = LoginImp.getLoginByID(LoginID);
 			session.setAttribute("username", login.getUsername());
+			
 			//Set Access Level
 			int AL = loginAction.checkUserType(LoginID);
 			session.setAttribute("userAccess", AL);
 
-			
-			if (AL == 1) {
-				response.sendRedirect(request.getContextPath() + "/index.jsp");
-			} else if (AL == 2) {
-				response.sendRedirect(request.getContextPath() + "/DispatcherController" );
-			} else if (AL == 3) {
+			switch(AL) {
+			case 1: //Customer
+				break;
+			case 2: //Dispatcher
+				//response.sendRedirect(request.getContextPath() + "/DispatcherController" );
+				break;
+			case 3: //Pharmacist
+				/*
 				PharmacistImplement pharmacistImplement = new PharmacistImplement();
 				session.setAttribute("PharmaID", pharmacistImplement.getPharmacistByUserId(LoginID).getBranchID());
 				response.sendRedirect(request.getContextPath() + "/PurchaseController");
-			} else if (AL == 4) {
+				*/
+				break;
+			case 4: //Admin
+				/*
 				view = request.getRequestDispatcher( "/AdminHome.jsp" );
 				view.forward(request, response);
-			} else {
-				view = request.getRequestDispatcher( "/Error.jsp" );
-				view.forward(request, response);
+				*/
+				break;
 			}
+
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}
 		else {
 			view = request.getRequestDispatcher( "/AccountRecovery.jsp" );

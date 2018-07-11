@@ -12,7 +12,6 @@ import java.util.Random;
 
 import thesis.mvc.implement.*;
 import thesis.mvc.model.*;
-import thesis.mvc.pageaction.ReportAction.CustomerSales;
 import thesis.mvc.utility.DBUtility;
 
 public class RegistrationAction {

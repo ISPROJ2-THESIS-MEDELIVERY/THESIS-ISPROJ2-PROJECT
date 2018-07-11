@@ -18,14 +18,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.LoginImplement;
 import thesis.mvc.model.Admin;
 import thesis.mvc.model.Customer;
 import thesis.mvc.model.Dispatcher;
 import thesis.mvc.model.Login;
 import thesis.mvc.model.Pharmacist;
-import thesis.mvc.pageaction.EmailAction;
 import thesis.mvc.pageaction.RegistrationAction;
 import thesis.mvc.utility.DBUtility;
 import thesis.mvc.utility.SendEmail;

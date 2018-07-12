@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.LoginImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacistImplement;
@@ -82,6 +83,9 @@ public class LoginController extends HttpServlet {
 
 			switch(AL) {
 			case 1: //Customer
+				CustomerImplement customerImplement = new CustomerImplement();
+				int CID = customerImplement.getCustomerByUserId(LoginID).getCustomerID();
+				session.setAttribute("CustomerID", CID);
 				break;
 			case 2: //Dispatcher
 				//response.sendRedirect(request.getContextPath() + "/DispatcherController" );

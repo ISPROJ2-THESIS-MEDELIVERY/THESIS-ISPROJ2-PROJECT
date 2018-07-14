@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import thesis.mvc.implement.AdminImplement;
 import thesis.mvc.implement.CustomerImplement;
+import thesis.mvc.implement.DispatcherImplement;
 import thesis.mvc.implement.LoginImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacistImplement;
@@ -40,21 +42,29 @@ public class LoginController extends HttpServlet {
 		if ((int) session.getAttribute("userID") > 0) {
 			LoginAction loginAction = new LoginAction();
 			loginAction.logoutUser((int)session.getAttribute("userID"), (String)session.getAttribute("username"));
+			switch((int) session.getAttribute("userAccess")) {
+			case 1:
+				//Customer
+				session.removeAttribute("CustomerID");
+				break;
+			case 2:
+				//Dispatcher
+				session.removeAttribute("DispatcherID");
+				break;
+			case 3:
+				//Pharmacist
+				session.removeAttribute("PharmacistID");
+				break;
+			case 4:
+				//Admin
+				session.removeAttribute("AdminID");
+				break;
+			}
 			session.removeAttribute("userID");
 			session.removeAttribute("username");
 			session.removeAttribute("userAccess");
-			if(session.getAttribute("PharmaID") == null) {
-				session.removeAttribute("PharmaID");
-			}
-			
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
-		} else {
-			forward = "A-test-pharmacistapproval.jsp";
-			OrderImplement orderImplement = new OrderImplement();
-			session.setAttribute("orderImplementPharmacist", orderImplement.getOrder() );
-			RequestDispatcher view = request.getRequestDispatcher( forward );
-			view.forward(request, response);
 		}
+		response.sendRedirect(request.getContextPath() + "/index.jsp");
 		
 	}
 	
@@ -75,33 +85,36 @@ public class LoginController extends HttpServlet {
 			//Set Username
 			LoginImplement LoginImp = new LoginImplement();
 			Login login = LoginImp.getLoginByID(LoginID);
-			session.setAttribute("username", login.getUsername());
+			session.setAttribute("username", login.getUsername()); 
 			
 			//Set Access Level
 			int AL = loginAction.checkUserType(LoginID);
 			session.setAttribute("userAccess", AL);
 
 			switch(AL) {
-			case 1: //Customer
+			case 1:
+				//Customer
 				CustomerImplement customerImplement = new CustomerImplement();
 				int CID = customerImplement.getCustomerByUserId(LoginID).getCustomerID();
 				session.setAttribute("CustomerID", CID);
 				break;
-			case 2: //Dispatcher
-				//response.sendRedirect(request.getContextPath() + "/DispatcherController" );
+			case 2:
+				//Dispatcher
+				DispatcherImplement dispatcherImplement = new DispatcherImplement();
+				int DID = dispatcherImplement.getDispatcherByUserID(LoginID).getDispatcherID();
+				session.setAttribute("DispatcherID", DID);
 				break;
-			case 3: //Pharmacist
-				/*
+			case 3:
+				//Pharmacist
 				PharmacistImplement pharmacistImplement = new PharmacistImplement();
-				session.setAttribute("PharmaID", pharmacistImplement.getPharmacistByUserId(LoginID).getBranchID());
-				response.sendRedirect(request.getContextPath() + "/PurchaseController");
-				*/
+				int PID = pharmacistImplement.getPharmacistByUserId(LoginID).getPharmacistID();
+				session.setAttribute("PharmacistID", PID);
 				break;
-			case 4: //Admin
-				/*
-				view = request.getRequestDispatcher( "/AdminHome.jsp" );
-				view.forward(request, response);
-				*/
+			case 4:
+				//Admin
+				AdminImplement adminImplement = new AdminImplement();
+				int AID = adminImplement.getAdminByUserId(LoginID).getAdminID();
+				session.setAttribute("AdminID", AID);
 				break;
 			}
 

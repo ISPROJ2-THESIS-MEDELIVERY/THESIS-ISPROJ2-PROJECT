@@ -130,7 +130,7 @@ public class DispatcherImplement implements DispatcherDAO{
 		return dispatcher;
 	}
 	
-	public Dispatcher getDispatcherByLogin(int dispatcherId) {
+	public Dispatcher getDispatcherByUserID(int dispatcherId) {
 		Dispatcher dispatcher = new Dispatcher();
 		try {
 			String query = "SELECT * FROM Dispatcher WHERE UserID=?";

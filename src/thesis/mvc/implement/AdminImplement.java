@@ -113,6 +113,26 @@ public class AdminImplement implements AdminDAO {
 		}
 		return admin;
 	}
+	public Admin getAdminByUserId(int UserId) {
+		Admin admin = new Admin();
+		try {
+			String query = "SELECT * FROM Admin WHERE UserID=?";
+			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			preparedStatement.setInt(1, UserId);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while( resultSet.next() ) {
+				admin.setAdminID( resultSet.getInt( "AdminID" ) );
+				admin.setUserID( resultSet.getInt( "UserID" ) );
+				admin.setFirstName( resultSet.getString( "FirstName" ) );
+				admin.setSurname( resultSet.getString( "Surname" ) );
+			}
+			resultSet.close();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return admin;
+	}
 	
 
 }

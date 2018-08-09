@@ -117,7 +117,6 @@ public class LoginController extends HttpServlet {
 				session.setAttribute("AdminID", AID);
 				break;
 			}
-
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}
 		else {

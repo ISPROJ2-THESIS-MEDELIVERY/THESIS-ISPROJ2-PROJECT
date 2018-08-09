@@ -10,9 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import thesis.mvc.implement.AdminImplement;
 import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.CustomerImplement;
+import thesis.mvc.implement.DispatcherImplement;
 import thesis.mvc.implement.OrderImplement;
+import thesis.mvc.implement.PharmacistImplement;
 
 @WebServlet("/HomeController")
 public class HomeController  extends HttpServlet {
@@ -21,13 +24,23 @@ public class HomeController  extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		BranchImplement branchImplement = new BranchImplement();
-		OrderImplement orderImplement = new OrderImplement();
-		request.setAttribute( "Pharmacy", branchImplement.getAllBranch());
-		if (session.getAttribute("userID") != null) {
-			CustomerImplement customerImplement = new CustomerImplement();
-			int test = customerImplement.getCustomerByUserId((int) session.getAttribute("userID")).getCustomerID();
-			request.setAttribute( "PurchasePending", orderImplement.getPendingOrder(test)) ;
+		
+		switch((int) session.getAttribute("userAccess")) {
+		case 1:
+			//Customer
+			break;
+		case 2:
+			//Dispatcher
+			break;
+		case 3:
+			//Pharmacist
+			break;
+		case 4:
+			//Admin
+			break;
+		default:
+			
+			break;
 		}
 		RequestDispatcher view = request.getRequestDispatcher( "/Home.jsp" );
 		view.forward(request, response);

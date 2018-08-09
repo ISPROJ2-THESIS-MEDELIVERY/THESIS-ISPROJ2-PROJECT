@@ -24,6 +24,7 @@ public class HomeController  extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+<<<<<<< HEAD
 		
 		switch((int) session.getAttribute("userAccess")) {
 		case 1:
@@ -41,6 +42,18 @@ public class HomeController  extends HttpServlet {
 		default:
 			
 			break;
+=======
+		int AL = 0;
+		switch(AL) {
+			case 1:
+				PharmacistImplement pharmacistImplement = new PharmacistImplement();
+				OrderImplement orderImplement = new OrderImplement();
+				request.setAttribute( "PurchasePending", orderImplement.getPendingOrder((int) session.getAttribute("CustomerID"))) ;0
+				//Remember to add a report button
+				break;
+			default:
+				break;
+>>>>>>> b30e2f9924fd684d24e72d8632721de8f9ddd75c
 		}
 		RequestDispatcher view = request.getRequestDispatcher( "/Home.jsp" );
 		view.forward(request, response);

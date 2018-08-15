@@ -16,6 +16,8 @@ import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.DispatcherImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacistImplement;
+import thesis.mvc.implement.PharmacyImplement;
+import thesis.mvc.model.Customer;
 
 @WebServlet("/HomeController")
 public class HomeController  extends HttpServlet {
@@ -27,18 +29,33 @@ public class HomeController  extends HttpServlet {
 		
 		switch((int) session.getAttribute("userAccess")) {
 		case 1:
-			PharmacistImplement pharmacistImplement = new PharmacistImplement();
+			//Customer Information
+			CustomerImplement customerImplement = new CustomerImplement();
+			request.setAttribute("CustomerDetails", session.getAttribute("Customer") );
+			//
 			OrderImplement orderImplement = new OrderImplement();
-			request.setAttribute( "PurchasePending", orderImplement.getPendingOrder((int) session.getAttribute("CustomerID"))) ;
+			Customer customer = (Customer) session.getAttribute("Customer");
+			request.setAttribute( "PurchasePending", customer);
+			//
+			PharmacyImplement pharmacyImplement = new PharmacyImplement();
+			request.setAttribute("PharmcyList", pharmacyImplement.getAllPharmacys());
 			//Remember to add a report button
 			break;
 		case 2:
+			DispatcherImplement dispatcherImplement = new DispatcherImplement();
+			request.setAttribute("DispatcherDetails", session.getAttribute("Dispatcher") );
 			//Dispatcher
 			break;
 		case 3:
+			PharmacistImplement pharmacistImplement = new PharmacistImplement();
+			request.setAttribute("PharmacistDetails", session.getAttribute("Pharmacist") );
+			PharmacyImplement pharmacyImplement1 = new PharmacyImplement();
+			request.setAttribute("PharmcyofPharmacist", pharmacyImplement1.getPharmacyById(1));
 			//Pharmacist
 			break;
 		case 4:
+			AdminImplement adminImplement = new AdminImplement();
+			request.setAttribute("AdminDetails", adminImplement.getAdminById( (int) session.getAttribute("AdminID") ) );
 			//Admin
 			break;
 		default:

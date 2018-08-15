@@ -5,6 +5,7 @@ public class Pharmacy {
 	private int PharmacyID;
 	private String PharmacyName;
 	private String PharmacyLogo;
+	
 	public int getPharmacyID() {
 		return PharmacyID;
 	}

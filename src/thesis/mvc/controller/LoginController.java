@@ -95,26 +95,25 @@ public class LoginController extends HttpServlet {
 			case 1:
 				//Customer
 				CustomerImplement customerImplement = new CustomerImplement();
-				int CID = customerImplement.getCustomerByUserId(LoginID).getCustomerID();
-				session.setAttribute("CustomerID", CID);
+				session.setAttribute("Customer", customerImplement.getCustomerByUserId(LoginID));
 				break;
 			case 2:
 				//Dispatcher
 				DispatcherImplement dispatcherImplement = new DispatcherImplement();
 				int DID = dispatcherImplement.getDispatcherByUserID(LoginID).getDispatcherID();
-				session.setAttribute("DispatcherID", DID);
+				session.setAttribute("Dispatcher", DID);
 				break;
 			case 3:
 				//Pharmacist
 				PharmacistImplement pharmacistImplement = new PharmacistImplement();
 				int PID = pharmacistImplement.getPharmacistByUserId(LoginID).getPharmacistID();
-				session.setAttribute("PharmacistID", PID);
+				session.setAttribute("Pharmacist", PID);
 				break;
 			case 4:
 				//Admin
 				AdminImplement adminImplement = new AdminImplement();
 				int AID = adminImplement.getAdminByUserId(LoginID).getAdminID();
-				session.setAttribute("AdminID", AID);
+				session.setAttribute("Admin", AID);
 				break;
 			}
 			response.sendRedirect(request.getContextPath() + "/index.jsp");

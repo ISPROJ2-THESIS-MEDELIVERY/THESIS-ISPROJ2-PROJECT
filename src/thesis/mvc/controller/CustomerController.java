@@ -25,6 +25,7 @@ import thesis.mvc.pageaction.PurchaseAction;
 import thesis.mvc.pageaction.PurchaseAction.CartList;
 import thesis.mvc.pageaction.SearchAction;
 import thesis.mvc.utility.DBUtility;
+import thesis.mvc.utility.GeneralFunctions;
 
 @WebServlet("/CustomerController")
 public class CustomerController extends HttpServlet{
@@ -41,34 +42,24 @@ public class CustomerController extends HttpServlet{
 
 		//Ensures that the person can select what he/she wants to buy
 		String forward;
+		int PharmaID = 0;
+		int access = 0;
 		HttpSession session = request.getSession();
 		
 		String action = "";
-		if (request.getParameter("action") != null && !request.getParameter("action").isEmpty()) {
-			action = request.getParameter( "action" );			
-		}
-		
-		int PharmaID = 0;
-		if (session.getAttribute("PharmaID") != null) {
-			PharmaID = (int) session.getAttribute("PharmaID");
-			BranchImplement branchImplement = new BranchImplement();
-			session.setAttribute("SelectedBranch", branchImplement.getBranchById(PharmaID));
-		} else if (request.getParameter("PharmaID") != null && !request.getParameter("PharmaID").isEmpty()){
-			PharmaID = Integer.parseInt( request.getParameter( "PharmaID" ) );
-			BranchImplement branchImplement = new BranchImplement();
-			session.setAttribute("SelectedBranch", branchImplement.getBranchById(PharmaID));
-		}
-		
-		int access = 0;
-		if (session.getAttribute("userAccess") != null) {
-			access = (int) session.getAttribute("userAccess");	
-		}
+		if (request.getParameter("action") != null && !request.getParameter("action").isEmpty()) { action = request.getParameter( "action" ); }
+
+		BranchImplement branchImplement = new BranchImplement();
+		if (session.getAttribute("PharmaID") != null) {	session.setAttribute("SelectedBranch", branchImplement.getBranchById((int) session.getAttribute("PharmaID"))); }
+		else if (request.getParameter("PharmaID") != null && !request.getParameter("PharmaID").isEmpty()){ session.setAttribute("SelectedBranch", branchImplement.getBranchById(Integer.parseInt( request.getParameter( "PharmaID" ) ))); }
+		if (session.getAttribute("userAccess") != null) { access = (int) session.getAttribute("userAccess"); }
 		
 		
 		boolean test = true;
     	
+		//Customer
 		if (access == 1) {
-			if (isInteger(action) && Integer.parseInt(action) > 0) {
+			if (GeneralFunctions.isInteger(action) && Integer.parseInt(action) > 0) {
 				//Get the order
 				OrderImplement orderImplement = new OrderImplement();
 	    		Order order = orderImplement.getOrderById(Integer.parseInt(action));
@@ -106,7 +97,7 @@ public class CustomerController extends HttpServlet{
 				//Set The UserID
 				session.setAttribute("orderReciept", order);
 				session.setAttribute("CartlistReciept", cartlists);
-				forward = "/Checkout.jsp";
+	    		forward = "/Catalog.jsp";
 	    		RequestDispatcher view = request.getRequestDispatcher( forward );
 	    		view.forward(request, response);
 			} else {
@@ -117,15 +108,20 @@ public class CustomerController extends HttpServlet{
 	    		view.forward(request, response);
 			}
     		
-    	} else if (access == 3) {
+    	}
+		
+		//Pharmacist
+		else if (access == 3) {
+    		ApprovalAction approvalAction = new ApprovalAction();
+    		
+    		
     		if (action.equalsIgnoreCase("Approve")) {
-	    		ApprovalAction approvalAction = new ApprovalAction();
 	    		approvalAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ), true );
         	} else if (action.equalsIgnoreCase("Reject")) {
-	    		ApprovalAction approvalAction = new ApprovalAction();
 	    		approvalAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ) , false );
-        	} if (PharmaID != 0) {
-	    		ApprovalAction approvalAction = new ApprovalAction();
+        	}
+    		
+    		if (PharmaID != 0) {
 	    		session.setAttribute("orderPharmacistCheck", approvalAction.getRegularOrder(PharmaID) );
 	    		forward = "PharmacistPage.jsp";
 	    		RequestDispatcher view = request.getRequestDispatcher( forward );

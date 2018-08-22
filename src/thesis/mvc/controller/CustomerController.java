@@ -20,6 +20,10 @@ import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
 import thesis.mvc.model.Product;
+import thesis.mvc.pageaction.ApprovalAction;
+import thesis.mvc.pageaction.PurchaseAction;
+import thesis.mvc.pageaction.PurchaseAction.CartList;
+import thesis.mvc.pageaction.SearchAction;
 import thesis.mvc.utility.DBUtility;
 
 @WebServlet("/CustomerController")
@@ -115,11 +119,11 @@ public class CustomerController extends HttpServlet{
     		
     	} else if (access == 3) {
     		if (action.equalsIgnoreCase("Approve")) {
-        		PurchaseAction purchaseAction = new PurchaseAction();
-        		purchaseAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ), true );
+	    		ApprovalAction approvalAction = new ApprovalAction();
+	    		approvalAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ), true );
         	} else if (action.equalsIgnoreCase("Reject")) {
-        		PurchaseAction purchaseAction = new PurchaseAction();
-        		purchaseAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ) , false );
+	    		ApprovalAction approvalAction = new ApprovalAction();
+	    		approvalAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ) , false );
         	} if (PharmaID != 0) {
 	    		ApprovalAction approvalAction = new ApprovalAction();
 	    		session.setAttribute("orderPharmacistCheck", approvalAction.getRegularOrder(PharmaID) );

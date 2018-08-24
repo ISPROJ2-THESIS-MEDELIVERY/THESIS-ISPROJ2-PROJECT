@@ -32,11 +32,11 @@ public class HomeController  extends HttpServlet {
 			//Customer Information
 			CustomerImplement customerImplement = new CustomerImplement();
 			request.setAttribute("CustomerDetails", session.getAttribute("Customer") );
-			//
+			//Listing pending orders
 			OrderImplement orderImplement = new OrderImplement();
 			Customer customer = (Customer) session.getAttribute("Customer");
 			request.setAttribute( "PurchasePending", customer);
-			//
+			//List all the pharmacies
 			PharmacyImplement pharmacyImplement = new PharmacyImplement();
 			request.setAttribute("PharmcyList", pharmacyImplement.getAllPharmacys());
 			//Remember to add a report button

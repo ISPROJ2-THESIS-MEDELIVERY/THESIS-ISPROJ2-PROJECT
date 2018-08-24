@@ -38,38 +38,6 @@ public class AuditImplement implements AuditDAO{
 	}
 
 	@Override
-	public void deleteAudit(int auditId) {
-		try {
-			String query = "DELETE FROM Audit where AuditID=?";
-			PreparedStatement preparedStatement = conn.prepareStatement( query );
-			preparedStatement.setInt(1, auditId);
-			preparedStatement.executeUpdate();
-			preparedStatement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-	}
-
-	@Override
-	public void updateAudit(Audit audit) {
-		try {
-			String query = "UPDATE Audit SET UserID=?, LogType=?, Timestamp=?, ActionTaken=? WHERE AuditID=?";
-			PreparedStatement preparedStatement = conn.prepareStatement( query );
-			preparedStatement.setInt( 1, audit.getUserID() );
-			preparedStatement.setString( 2, audit.getLogType() );
-			preparedStatement.setDate( 3, audit.getTimestamp() );
-			preparedStatement.setString( 4, audit.getActionTaken() );
-			preparedStatement.setInt( 5, audit.getAuditID() );
-			preparedStatement.executeUpdate();
-			preparedStatement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-	}
-
-	@Override
 	public List<Audit> getAllAudit() {	
 	List<Audit> audits = new ArrayList<Audit>();
 		try {

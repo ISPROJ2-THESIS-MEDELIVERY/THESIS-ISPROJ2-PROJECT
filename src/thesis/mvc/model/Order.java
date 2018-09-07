@@ -7,7 +7,7 @@ public class Order {
 	private int CustomerID;
 	private int DeliveryID;
 	private int PharmacistID;
-	private int BranchID;
+	private int PharmacyID;
 	private int CityID;
 	private int PrescriptionID;
 	private String OrderAddress;
@@ -44,11 +44,11 @@ public class Order {
 	public void setPharmacistID(int pharmacistID) {
 		PharmacistID = pharmacistID;
 	}
-	public int getBranchID() {
-		return BranchID;
+	public int getPharmacyID() {
+		return PharmacyID;
 	}
-	public void setBranchID(int branchID) {
-		BranchID = branchID;
+	public void setPharmacyID(int pharmacyID) {
+		PharmacyID = pharmacyID;
 	}
 	public int getCityID() {
 		return CityID;

@@ -57,63 +57,61 @@ public class CustomerController extends HttpServlet{
 
 		BranchImplement branchImplement = new BranchImplement();
 		if (session.getAttribute("PharmaID") != null) {	session.setAttribute("SelectedBranch", branchImplement.getBranchById((int) session.getAttribute("PharmaID"))); }
-		if (session.getAttribute("userAccess") != null) { access = (int) session.getAttribute("userAccess"); }
-		
-		
+		//Redo the database
 		boolean test = true;
     	
 		//Customer
-		if (access == 1) {
-			if (GeneralFunctions.isInteger(action) && Integer.parseInt(action) > 0) {
-				//Get the order
-				OrderImplement orderImplement = new OrderImplement();
-	    		Order order = orderImplement.getOrderById(Integer.parseInt(action));
-	    		if (order.getOrderStatus().equalsIgnoreCase("APPROVED")) {
-	    			session.setAttribute("ApproveChecker", true);
-	    		} else {
-	    			session.setAttribute("ApproveChecker", false);
-	    		}
-	    		//Get the Details
-	    		OrderDetailImplement orderDetailImplement = new OrderDetailImplement();
-	    		List<OrderDetail> OrderDetails = new ArrayList<OrderDetail>();
-				OrderDetails = orderDetailImplement.getspecificOrderDetail(Integer.parseInt(action));
+		if (GeneralFunctions.isInteger(action) && Integer.parseInt(action) > 0) {
+			//Get the order
+			OrderImplement orderImplement = new OrderImplement();
+	    	Order order = orderImplement.getOrderById(Integer.parseInt(action));
+	    	
+	    	if (order.getOrderStatus().equalsIgnoreCase("APPROVED")) {
+	    		session.setAttribute("ApproveChecker", true);
+	    	} else {
+	    		session.setAttribute("ApproveChecker", false);
+	    	}
+	    	
+	    	//Get the Details
+	    	OrderDetailImplement orderDetailImplement = new OrderDetailImplement();
+	    	List<OrderDetail> OrderDetails = new ArrayList<OrderDetail>();
+			OrderDetails = orderDetailImplement.getspecificOrderDetail(Integer.parseInt(action));
+			
+			//Ready the Cart List
+			PurchaseAction purchaseAction = new PurchaseAction();
+			List<CartList> cartlists = new ArrayList<CartList>();
+			ProductImplement productImplement = new ProductImplement();
+			for (OrderDetail orderDetail : OrderDetails) {
+				CartList cartlist = purchaseAction.new CartList();
+				//Product Info
+				Product product = productImplement.getProductById(orderDetail.getProductID());
+				cartlist.setName(product.getProductName());
+				cartlist.setDescription(product.getProductDescription());
+				cartlist.setImage(product.getProductImage());
+				cartlist.setSize(product.getProductPackaging());
+				cartlist.setPrescription(product.isRXProduct());
 				
-				//Ready the Cart List
-				PurchaseAction purchaseAction = new PurchaseAction();
-				List<CartList> cartlists = new ArrayList<CartList>();
-				ProductImplement productImplement = new ProductImplement();
-				for (OrderDetail orderDetail : OrderDetails) {
-					CartList cartlist = purchaseAction.new CartList();
-					//Product Info
-					Product product = productImplement.getProductById(orderDetail.getProductID());
-					cartlist.setName(product.getProductName());
-					cartlist.setDescription(product.getProductDescription());
-					cartlist.setImage(product.getProductImage());
-					cartlist.setSize(product.getProductPackaging());
-					cartlist.setPrescription(product.isRXProduct());
-					
-					//Other Details
-					cartlist.setQuantity(orderDetail.getQuantity());
-					cartlist.setUnitCost(orderDetail.getCostPerUnit());
-					cartlist.setTotalCost(orderDetail.getTotalCost());
-					cartlists.add(cartlist);
-				}
-				
-				//Set The UserID
-				session.setAttribute("orderReciept", order);
-				session.setAttribute("CartlistReciept", cartlists);
-	    		forward = "/Catalog.jsp";
-	    		RequestDispatcher view = request.getRequestDispatcher( forward );
-	    		view.forward(request, response);
-			} else {
-	    		SearchAction searchAction = new SearchAction();
-	    		forward = "/Catalog.jsp";
-	    		request.setAttribute( "productList", searchAction.GeneralListing(PharmaID) );
-	    		RequestDispatcher view = request.getRequestDispatcher( forward );
-	    		view.forward(request, response);
+				//Other Details
+				cartlist.setQuantity(orderDetail.getQuantity());
+				cartlist.setUnitCost(orderDetail.getCostPerUnit());
+				cartlist.setTotalCost(orderDetail.getTotalCost());
+				cartlists.add(cartlist);
 			}
-    		
-    	}
+				
+			//Set The UserID
+			session.setAttribute("orderReciept", order);
+			session.setAttribute("CartlistReciept", cartlists);
+	    	forward = "/Catalog.jsp";
+	    	RequestDispatcher view = request.getRequestDispatcher( forward );
+	    	view.forward(request, response);
+	    		
+		} else {
+	    	SearchAction searchAction = new SearchAction();
+	    	forward = "/Catalog.jsp";
+	    	request.setAttribute( "productList", searchAction.GeneralListing(PharmaID) );
+	    	RequestDispatcher view = request.getRequestDispatcher( forward );
+	    	view.forward(request, response);
+		}
     }
 
 	@SuppressWarnings("unchecked")

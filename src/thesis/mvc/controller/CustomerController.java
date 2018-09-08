@@ -116,6 +116,8 @@ public class CustomerController extends HttpServlet{
 
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//Initializing
 		String forward;
 		int ProductID = 0;
 		int Quantity = 0;

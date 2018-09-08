@@ -8,6 +8,7 @@ public class Order {
 	private int DeliveryID;
 	private int PharmacistID;
 	private int PharmacyID;
+	private int BranchID;
 	private int CityID;
 	private int PrescriptionID;
 	private String OrderAddress;
@@ -49,6 +50,12 @@ public class Order {
 	}
 	public void setPharmacyID(int pharmacyID) {
 		PharmacyID = pharmacyID;
+	}
+	public int getBranchID() {
+		return BranchID;
+	}
+	public void setBranchID(int branchID) {
+		BranchID = branchID;
 	}
 	public int getCityID() {
 		return CityID;

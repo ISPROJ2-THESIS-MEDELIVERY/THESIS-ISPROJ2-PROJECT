@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import javax.mail.Session;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,6 +40,7 @@ public class LoginController extends HttpServlet {
 		String forward;
 		HttpSession session = request.getSession();
 		
+		//Logout
 		if ((int) session.getAttribute("userID") > 0) {
 			LoginAction loginAction = new LoginAction();
 			loginAction.logoutUser((int)session.getAttribute("userID"), (String)session.getAttribute("username"));
@@ -69,15 +71,30 @@ public class LoginController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//Initializing
 		LoginAction loginAction = new LoginAction();
 		conn = DBUtility.getConnection();
+		HttpSession session = request.getSession();
+		RequestDispatcher view;
+		
+		//Username and password check
 		String Username = request.getParameter( "Username" );
 		String Password = request.getParameter( "Password" );
 		int LoginID = loginAction.loginUser(Username, Password);
 		
-		RequestDispatcher view;
-		if (LoginID > 0) {
-			HttpSession session = request.getSession();
+		//Capcha Check
+		String Capcha = request.getParameter( "Capcha" );
+		
+		//Retry Check
+		if (session.getAttribute( "LoginTry" ) != null) {
+			int x = (int) session.getAttribute( "LoginTry" ) + 1;
+			session.setAttribute("LoginTry", x);
+		} else {
+			session.setAttribute("LoginTry", 1);
+		}
+		
+		if (LoginID > 0 && Capcha == "") {
 			
 			//Set ID
 			session.setAttribute("userID", LoginID);
@@ -95,30 +112,29 @@ public class LoginController extends HttpServlet {
 			case 1:
 				//Customer
 				CustomerImplement customerImplement = new CustomerImplement();
-				session.setAttribute("Customer", customerImplement.getCustomerByUserId(LoginID));
+				session.setAttribute("Customer", customerImplement.getCustomerByUserId(LoginID).getCustomerID());
 				break;
 			case 2:
 				//Dispatcher
 				DispatcherImplement dispatcherImplement = new DispatcherImplement();
-				int DID = dispatcherImplement.getDispatcherByUserID(LoginID).getDispatcherID();
-				session.setAttribute("Dispatcher", DID);
+				session.setAttribute("Dispatcher", dispatcherImplement.getDispatcherByUserID(LoginID).getDispatcherID());
 				break;
 			case 3:
 				//Pharmacist
 				PharmacistImplement pharmacistImplement = new PharmacistImplement();
-				int PID = pharmacistImplement.getPharmacistByUserId(LoginID).getPharmacistID();
-				session.setAttribute("Pharmacist", PID);
+				session.setAttribute("Pharmacist", pharmacistImplement.getPharmacistByUserId(LoginID).getPharmacistID());
 				break;
 			case 4:
 				//Admin
 				AdminImplement adminImplement = new AdminImplement();
-				int AID = adminImplement.getAdminByUserId(LoginID).getAdminID();
-				session.setAttribute("Admin", AID);
+				session.setAttribute("Admin", adminImplement.getAdminByUserId(LoginID).getAdminID());
 				break;
 			}
+			session.removeAttribute("LoginTry");
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
-		}
-		else {
+		} else if ((int) session.getAttribute( "LoginTry" ) >= 5) {
+			session.setAttribute("RetryLogin", 1);
+		} else {
 			view = request.getRequestDispatcher( "/AccountRecovery.jsp" );
 			view.forward(request, response);
 		}

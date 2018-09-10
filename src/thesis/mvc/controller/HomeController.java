@@ -26,16 +26,17 @@ public class HomeController  extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		int Switch = (int) session.getAttribute("userAccess");
 		
-		switch((int) session.getAttribute("userAccess")) {
+		
+		switch(Switch) {
 		case 1:
 			//Customer Information
 			CustomerImplement customerImplement = new CustomerImplement();
 			request.setAttribute("CustomerDetails", session.getAttribute("Customer") );
 			//Listing pending orders
 			OrderImplement orderImplement = new OrderImplement();
-			Customer customer = (Customer) session.getAttribute("Customer");
-			request.setAttribute( "PurchasePending", customer);
+			request.setAttribute( "PurchasePending", (Customer) session.getAttribute("Customer"));
 			//List all the pharmacies
 			PharmacyImplement pharmacyImplement = new PharmacyImplement();
 			request.setAttribute("PharmcyList", pharmacyImplement.getAllPharmacys());

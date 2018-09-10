@@ -49,12 +49,14 @@ public class RegistrationController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Boolean IDcheck = false;
-		Boolean RegisterUnique = Boolean.parseBoolean(request.getParameter( "SpecialKey" ));
+		String RegisterUnique = request.getParameter( "SpecialKey" );
+		
+		//Boolean.parseBoolean(request.getParameter( "SpecialKey" ));
 		int ConfirmID = Integer.parseInt( request.getParameter("UserID") );
 		
 		String forward = "";
 		
-		if (RegisterUnique) {
+		if (RegisterUnique == "SKMhY0NCmNzJ4y5hjdS1") {
 			LoginImplement loginImplement = new LoginImplement();
 			if (loginImplement.getLoginByID(ConfirmID).getLoginStatus().equalsIgnoreCase("Just Registered")) {
 				loginImplement.ConfirmLogin(ConfirmID);				
@@ -88,12 +90,6 @@ public class RegistrationController extends HttpServlet {
 		String secretCode = request.getParameter( "SecretCode" );
 		
 		//Image Saving Start
-		
-		
-		
-		
-		
-		
 		if (secretCode == "i3Up8XmH04Jz151") {//Admin
 			Admin admin = new Admin();
 			admin.setUserID( Integer.parseInt( request.getParameter( "UserID" ) ) );
@@ -174,7 +170,7 @@ public class RegistrationController extends HttpServlet {
 			//Save Image End
 			
 			
-			String ConfirmLink = "http://localhost:8080/THESIS-ISPROJ2-PROJECT/RegistrationController?SpecialKey=true&UserID=" + ID;
+			String ConfirmLink = "http://localhost:8080/THESIS-ISPROJ2-PROJECT/RegistrationController?SpecialKey=SKMhY0NCmNzJ4y5hjdS1&UserID=" + ID;
 			sendEmail.send(customer.getEmail(), "Medilivery Account Confirmation", ""
 					+ "Dear " + customer.getCustomerName() + "," +  
 					"<p>" + 
@@ -193,8 +189,8 @@ public class RegistrationController extends HttpServlet {
 					"<br>" + 
 					"Medelivery Admin Team" + 
 					"<br>" + 
-					"<a href=\" <!–– INSERT Medelivery HOME LINK HERE––>\" target=\"_blank\" data-saferedirecturl=\"\"></a>" + 
-					"<br>" + 
+					//"<a href=\" <!–– INSERT Medelivery HOME LINK HERE––>\" target=\"_blank\" data-saferedirecturl=\"\"></a>" + 
+					//"<br>" + 
 					"The Medelivery Team Thanks you for your patronage" + 
 					"<br>" + customer.getSeniorCitizenID());
 		}

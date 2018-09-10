@@ -94,7 +94,7 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("LoginTry", 1);
 		}
 		
-		if (LoginID > 0 && Capcha == "") {
+		if (LoginID > 0 && Capcha == null) {
 			
 			//Set ID
 			session.setAttribute("userID", LoginID);

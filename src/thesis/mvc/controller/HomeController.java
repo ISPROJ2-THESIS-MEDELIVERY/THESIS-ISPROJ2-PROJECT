@@ -26,8 +26,13 @@ public class HomeController  extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		int Switch = (int) session.getAttribute("userAccess");
+		int Switch;
 		
+		if (session.getAttribute("userAccess") != null) {
+			Switch = (int) session.getAttribute("userAccess");
+		} else {
+			Switch = 0;
+		}
 		
 		switch(Switch) {
 		case 1:

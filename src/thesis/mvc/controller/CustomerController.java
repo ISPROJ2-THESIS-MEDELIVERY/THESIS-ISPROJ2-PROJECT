@@ -56,7 +56,7 @@ public class CustomerController extends HttpServlet{
 		if (request.getParameter("action") != null && !request.getParameter("action").isEmpty()) { action = request.getParameter( "action" ); }
 
 		BranchImplement branchImplement = new BranchImplement();
-		if (session.getAttribute("PharmaID") != null) {	session.setAttribute("SelectedBranch", branchImplement.getBranchById((int) session.getAttribute("PharmaID"))); }
+		if (session.getAttribute("PharmaID") != null) {	session.setAttribute("SelectedPharmacy", branchImplement.getBranchById((int) session.getAttribute("PharmaID"))); }
 		//Redo the database
 		boolean test = true;
     	

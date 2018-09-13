@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/Team-Boxed.css">
     <link rel="stylesheet" href="assets/css/TR-Form.css">
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body><img src="assets/img/MedeliveryLogo.png">
@@ -99,8 +100,12 @@
                 
                 <div class="alert alert-danger" role="alert"><span style="color:#eb3b60;font-size:15px;"><strong>Please Upload a Photo of your Senior Citizen ID/ PWD ID&nbsp;</strong></span></div><input class="visible" type="file" id="Photo" name="Photo">
                 <input class="form-control" type="text" name="SeniorCitizenID" placeholder="Senior Citizen ID">                
-       
+       		
+       		
+       		
             <div class="form-check"><label class="form-check-label" style="margin:20px;font-size:20px;"><input class="form-check-input" type="checkbox">I agree to the license terms.</label></div>
+            
+            <div class="g-recaptcha" data-sitekey="6Ld-CHAUAAAAAA5oeWgfBIU2xWrCFitjhWtN_QLP"></div>
        
         	<div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background-color:#56c5ff;">Sign Up</button></div><a href="#" class="already" style="color:#282d32;font-size:20px;">Already have an account? Login here.</a>
         

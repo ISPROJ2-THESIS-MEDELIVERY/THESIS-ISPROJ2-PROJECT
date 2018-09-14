@@ -5,10 +5,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Home Page</title>
 </head>
-	<!-- This will be used as a jumping point to test the controllers -->
 	<body>
-		<jsp:forward page="/HomeController"></jsp:forward>
+	<!-- This will be used as a jumping point to test the controllers -->
+		<a href="LoginController">test1</a><br>
+		<a href="/Login">test2</a><br>
+		<a href="/Login">test3</a><br>
+		<a href="/Login">test4</a><br>
+		<a href="/Login">test5</a><br>
 	</body>
 </html>

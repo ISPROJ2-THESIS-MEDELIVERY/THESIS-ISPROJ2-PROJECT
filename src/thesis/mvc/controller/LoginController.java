@@ -45,22 +45,10 @@ public class LoginController extends HttpServlet {
 			LoginAction loginAction = new LoginAction();
 			loginAction.logoutUser((int)session.getAttribute("userID"), (String)session.getAttribute("username"));
 			switch((int) session.getAttribute("userAccess")) {
-			case 1:
-				//Customer
-				session.removeAttribute("CustomerID");
-				break;
-			case 2:
-				//Dispatcher
-				session.removeAttribute("DispatcherID");
-				break;
-			case 3:
-				//Pharmacist
-				session.removeAttribute("PharmacistID");
-				break;
-			case 4:
-				//Admin
-				session.removeAttribute("AdminID");
-				break;
+			case 1: session.removeAttribute("CustomerID"); break;
+			case 2: session.removeAttribute("DispatcherID"); break;
+			case 3: session.removeAttribute("PharmacistID"); break;
+			case 4:	session.removeAttribute("AdminID");	break;
 			}
 			session.removeAttribute("userID");
 			session.removeAttribute("username");
@@ -74,9 +62,9 @@ public class LoginController extends HttpServlet {
 		
 		//Initializing
 		LoginAction loginAction = new LoginAction();
-		conn = DBUtility.getConnection();
 		HttpSession session = request.getSession();
 		RequestDispatcher view;
+		int Attempt = (int) session.getAttribute( "LoginTry" );
 		
 		//Username and password check
 		String Username = request.getParameter( "Username" );
@@ -84,17 +72,16 @@ public class LoginController extends HttpServlet {
 		int LoginID = loginAction.loginUser(Username, Password);
 		
 		//Capcha Check
-		String Capcha = request.getParameter( "Capcha" );
+		//boolean Capcha = request.getParameter( "CapchaLogin" ) == "true";
 		
 		//Retry Check
-		if (session.getAttribute( "LoginTry" ) != null) {
-			int x = (int) session.getAttribute( "LoginTry" ) + 1;
-			session.setAttribute("LoginTry", x);
+		if (Attempt != 0) {
+			session.setAttribute("LoginTry", Attempt + 1);
 		} else {
 			session.setAttribute("LoginTry", 1);
 		}
 		
-		if (LoginID > 0 && Capcha == null) {
+		if (LoginID > 0 && Attempt <= 6) {
 			
 			//Set ID
 			session.setAttribute("userID", LoginID);
@@ -132,8 +119,8 @@ public class LoginController extends HttpServlet {
 			}
 			session.removeAttribute("LoginTry");
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
-		} else if ((int) session.getAttribute( "LoginTry" ) >= 5) {
-			session.setAttribute("RetryLogin", 1);
+		} else if (Attempt >= 3) {
+			session.setAttribute("LoginWarning", 1);
 		} else {
 			view = request.getRequestDispatcher( "/AccountRecovery.jsp" );
 			view.forward(request, response);

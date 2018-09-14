@@ -98,7 +98,7 @@ public class CustomerController extends HttpServlet{
 				cartlists.add(cartlist);
 			}
 				
-			//Set The UserID
+			//Set the attributes
 			session.setAttribute("orderReciept", order);
 			session.setAttribute("CartlistReciept", cartlists);
 	    	forward = "/Catalog.jsp";

@@ -64,8 +64,11 @@ public class LoginController extends HttpServlet {
 		LoginAction loginAction = new LoginAction();
 		HttpSession session = request.getSession();
 		RequestDispatcher view;
-		int Attempt = (int) session.getAttribute( "LoginTry" );
+		int Attempt = 0;
 		
+		if (session.getAttribute( "LoginTry" ) != null) {
+			Attempt = (int) session.getAttribute( "LoginTry" );
+		}
 		//Username and password check
 		String Username = request.getParameter( "Username" );
 		String Password = request.getParameter( "Password" );

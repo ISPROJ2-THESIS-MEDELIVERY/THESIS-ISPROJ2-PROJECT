@@ -101,7 +101,7 @@ public class RegistrationController extends HttpServlet {
 			//response.sendRedirect(request.getContextPath() + "/RegistrationCustomer.jsp");
 		} else if (secretCode == null) { //Customer
 			//Parameter to Variable
-			String customerFName = request.getParameter( "Fullname" );
+			String customerFName = request.getParameter( "FullName" );
 			String customerAddrs = request.getParameter( "CAddress" );
 			String customerEMail = request.getParameter( "CusEmail" );
 			String customerConNo = request.getParameter( "ContactNumber" );

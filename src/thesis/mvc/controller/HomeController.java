@@ -38,13 +38,13 @@ public class HomeController  extends HttpServlet {
 		case 1:
 			//Customer Information
 			CustomerImplement customerImplement = new CustomerImplement();
-			request.setAttribute("CustomerDetails", session.getAttribute("Customer") );
+			//request.setAttribute("CustomerDetails", session.getAttribute("Customer") );
 			//Listing pending orders
 			OrderImplement orderImplement = new OrderImplement();
-			request.setAttribute( "PurchasePending", (Customer) session.getAttribute("Customer"));
+			//request.setAttribute( "PurchasePending", (Customer) session.getAttribute("Customer"));
 			//List all the pharmacies
 			PharmacyImplement pharmacyImplement = new PharmacyImplement();
-			request.setAttribute("PharmcyList", pharmacyImplement.getAllPharmacys());
+			//request.setAttribute("PharmcyList", pharmacyImplement.getAllPharmacys());
 			//Remember to add a report button
 			break;
 		case 2:

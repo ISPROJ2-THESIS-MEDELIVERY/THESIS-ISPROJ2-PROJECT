@@ -9,10 +9,42 @@
 </head>
 	<body>
 	<!-- This will be used as a jumping point to test the controllers -->
-		<a href="LoginController">test1</a><br>
-		<a href="/Login">test2</a><br>
-		<a href="/Login">test3</a><br>
-		<a href="/Login">test4</a><br>
-		<a href="/Login">test5</a><br>
+		<a href="login.jsp">Login</a><br>
+		<c:if test="${userAccess == 1}">
+			<hr>
+			Customer<br>
+			<c:out value="${userID}" /><br>
+			<c:out value="${username}" /><br>
+			<c:out value="${userAccess}" /><br>
+			<a href="LoginController">Logout</a><br>
+			<hr>
+		</c:if>
+		<c:if test="${userAccess == 2}">
+			<hr>
+			Dispatcher<br>
+			<c:out value="${userID}" /><br>
+			<c:out value="${username}" /><br>
+			<c:out value="${userAccess}" /><br>
+			<a href="LoginController">Logout</a><br>
+			<hr>
+		</c:if>
+		<c:if test="${userAccess == 3}">
+			<hr>
+			Pharmacist<br>
+			<c:out value="${userID}" /><br>
+			<c:out value="${username}" /><br>
+			<c:out value="${userAccess}" /><br>
+			<a href="LoginController">Logout</a><br>
+			<hr>
+		</c:if>
+		<c:if test="${userAccess == 4}">
+			<hr>
+			Admin<br>
+			<c:out value="${userID}" /><br>
+			<c:out value="${username}" /><br>
+			<c:out value="${userAccess}" /><br>
+			<a href="LoginController">Logout</a><br>
+			<hr>
+		</c:if>
 	</body>
 </html>

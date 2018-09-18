@@ -33,21 +33,21 @@ public class PharmacistController extends HttpServlet{
 		String action = "";
 		String forward;
 		if (request.getParameter("action") != null && !request.getParameter("action").isEmpty()) { action = request.getParameter( "action" ); }
-		//if (request.getParameter("PharmaID") != null && !request.getParameter("PharmaID").isEmpty()){ session.setAttribute("SelectedBranch", branchImplement.getBranchById(Integer.parseInt( request.getParameter( "PharmaID" ) ))); }
-
+		
 		int PharmaID = 0;
-	    ApprovalAction approvalAction = new ApprovalAction();
-	    
-	    if (action.equalsIgnoreCase("Approve")) {
-		   	approvalAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ), true );
-	       } else if (action.equalsIgnoreCase("Reject")) {
-		   	approvalAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ) , false );
-	       }
-	    
+		if (request.getParameter("PharmaID") != null && !request.getParameter("PharmaID").isEmpty()){ session.setAttribute("SelectedBranch", request.getParameter( "UserBranch" ) ); }
+		
 	    if (PharmaID != 0) {
-		   	session.setAttribute("orderPharmacistCheck", approvalAction.getRegularOrder(PharmaID) );
-		   	forward = "PharmacistPage.jsp";
-		   	RequestDispatcher view = request.getRequestDispatcher( forward );
+	    	ApprovalAction approvalAction = new ApprovalAction();
+	    
+		    if (action.equals(null)) {
+			   	session.setAttribute("orderPharmacistCheck", approvalAction.getRegularOrder(PharmaID) );
+			} else if (action.equalsIgnoreCase("Approve")) {
+		    	approvalAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ), true );
+		    } else if (action.equalsIgnoreCase("Reject")) {
+			   	approvalAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ) , false );
+		    }
+		   	RequestDispatcher view = request.getRequestDispatcher( "PharmacistPage.jsp" );
 		   	view.forward(request, response);
 		} else {
 	    	   response.sendRedirect(request.getContextPath() + "/index.jsp");

@@ -67,7 +67,7 @@ public class HomeController  extends HttpServlet {
 		default:
 			break;
 		}
-		RequestDispatcher view = request.getRequestDispatcher( "/Home.jsp" );
+		RequestDispatcher view = request.getRequestDispatcher( "/home.jsp" );
 		view.forward(request, response);
 	}
 	

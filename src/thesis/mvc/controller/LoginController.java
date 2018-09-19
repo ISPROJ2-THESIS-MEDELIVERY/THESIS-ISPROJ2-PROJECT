@@ -87,11 +87,11 @@ public class LoginController extends HttpServlet {
 		String Capcha = request.getParameter( "Capcha" );
 		
 		//Retry Check
-		if (session.getAttribute( "LoginTry" ) != null) {
+		if (session.getAttribute( "LoginTry" ) == null) {
+			session.setAttribute("LoginTry", 1);
+		} else {
 			int x = (int) session.getAttribute( "LoginTry" ) + 1;
 			session.setAttribute("LoginTry", x);
-		} else {
-			session.setAttribute("LoginTry", 1);
 		}
 		
 		if (LoginID > 0 && Capcha == null) {
@@ -132,11 +132,15 @@ public class LoginController extends HttpServlet {
 			}
 			session.removeAttribute("LoginTry");
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
-		} else if ((int) session.getAttribute( "LoginTry" ) >= 5) {
+		} else if ((int) session.getAttribute( "LoginTry" ) <= 4) {
 			session.setAttribute("RetryLogin", 1);
+			response.sendRedirect(request.getContextPath() + "/login.jsp");
 		} else {
-			view = request.getRequestDispatcher( "/AccountRecovery.jsp" );
-			view.forward(request, response);
+			session.removeAttribute("LoginTry");
+			session.removeAttribute("RetryLogin");
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
+			//view = request.getRequestDispatcher( "/AccountRecovery.jsp" );
+			//view.forward(request, response);
 		}
 	}
 }

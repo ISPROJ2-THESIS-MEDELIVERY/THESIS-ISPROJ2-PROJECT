@@ -19,11 +19,13 @@ import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.implement.OrderImplement;
+import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.model.Branch;
 import thesis.mvc.model.Customer;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
+import thesis.mvc.model.Pharmacy;
 import thesis.mvc.model.Product;
 import thesis.mvc.pageaction.ApprovalAction;
 import thesis.mvc.pageaction.PurchaseAction;
@@ -55,8 +57,8 @@ public class CustomerController extends HttpServlet{
 		String action = "";
 		if (request.getParameter("action") != null && !request.getParameter("action").isEmpty()) { action = request.getParameter( "action" ); }
 
-		BranchImplement branchImplement = new BranchImplement();
-		if (session.getAttribute("PharmaID") != null) {	session.setAttribute("SelectedPharmacy", branchImplement.getBranchById((int) session.getAttribute("PharmaID"))); }
+		PharmacyImplement pharmacyImplement = new PharmacyImplement();
+		if (session.getAttribute("PharmaID") != null) {	session.setAttribute("SelectedPharmacy", pharmacyImplement.getPharmacyById( (int) session.getAttribute( "PharmaID" ) ) ); }
 		//Redo the database
 		boolean test = true;
     	

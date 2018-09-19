@@ -20,8 +20,8 @@
 			<c:out value="${username}" /><br>
 			<c:out value="${userAccess}" /><br>
 			<a href="LoginController">Logout</a><br>
-			<c:forEach items="${productList}" var="product">
-				<option value="<c:out value="${product.ProductID}" />"><c:out value='${product.ProductName}' /></option>
+			<c:forEach items="${PharmcyList}" var="pharmacy">
+				<a href="CustomerController?PharmaID=<c:out value="${pharmacy.pharmacyID}" />"><c:out value="${pharmacy.pharmacyName}" /></a><br>
 			</c:forEach>
 			<hr>
 		</c:if>

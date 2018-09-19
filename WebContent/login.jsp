@@ -10,6 +10,10 @@
 </head>
 <body>
 	<form action="LoginController" method="post">
+		<c:if test="${RetryLogin != null}">
+			Failed Login Attempts: <c:out value="${LoginTry}" /><br>
+			Only 5 attempts are allowed
+		</c:if>
 		<fieldset>
 			<div align="center">
 				<label for="Username">Username</label><br />

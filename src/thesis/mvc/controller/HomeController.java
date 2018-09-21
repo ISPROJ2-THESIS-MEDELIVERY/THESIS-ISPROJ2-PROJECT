@@ -18,6 +18,7 @@ import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacistImplement;
 import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.model.Customer;
+import thesis.mvc.utility.EncryptionFunction;
 
 @WebServlet("/HomeController")
 public class HomeController  extends HttpServlet {
@@ -33,6 +34,8 @@ public class HomeController  extends HttpServlet {
 		} else {
 			Switch = 0;
 		}
+		
+		EncryptionFunction encryptionFunction = new EncryptionFunction();
 		
 		switch(Switch) {
 		case 1:
@@ -65,6 +68,12 @@ public class HomeController  extends HttpServlet {
 			//Admin
 			break;
 		default:
+			//String Test = "1234";
+			//String EnSt = encryptionFunction.encrypt(Test);
+			//String DeSt = encryptionFunction.decrypt(EnSt);
+			//request.setAttribute("Thcode", Test );
+			//request.setAttribute("Encode", EnSt );
+			//request.setAttribute("Decode", DeSt );
 			break;
 		}
 		RequestDispatcher view = request.getRequestDispatcher( "/home.jsp" );

@@ -23,6 +23,7 @@ import thesis.mvc.implement.PharmacistImplement;
 import thesis.mvc.model.Login;
 import thesis.mvc.pageaction.LoginAction;
 import thesis.mvc.utility.DBUtility;
+import thesis.mvc.utility.EncryptionFunction;
 
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
@@ -81,7 +82,7 @@ public class LoginController extends HttpServlet {
 		//Username and password check
 		String Username = request.getParameter( "Username" );
 		String Password = request.getParameter( "Password" );
-		int LoginID = loginAction.loginUser(Username, Password);
+		int LoginID = loginAction.loginUser(Username, new EncryptionFunction().encrypt(Password));
 		
 		//Capcha Check
 		String Capcha = request.getParameter( "Capcha" );

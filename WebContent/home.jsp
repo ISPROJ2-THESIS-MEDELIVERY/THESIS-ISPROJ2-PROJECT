@@ -11,10 +11,10 @@
 	<!-- This will be used as a jumping point to test the controllers -->
 		<c:if test="${userAccess == null}">
 			<a href="login.jsp">Login</a><br>
-			<a href="register.jsp">Login</a><br>
-			<!-- <c:out value="${Thcode}" /><br> -->
-			<!-- <c:out value="${Encode}" /><br> -->
-			<!-- <c:out value="${Decode}" /><br> -->
+			<a href="register.jsp">Registration</a><br>
+			<c:out value="${Thcode}" /><br>
+			<c:out value="${Encode}" /><br>
+			<c:out value="${Decode}" /><br>
 		</c:if>
 		
 		<c:if test="${userAccess == 1}">

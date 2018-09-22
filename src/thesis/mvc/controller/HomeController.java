@@ -51,29 +51,29 @@ public class HomeController  extends HttpServlet {
 			//Remember to add a report button
 			break;
 		case 2:
-			DispatcherImplement dispatcherImplement = new DispatcherImplement();
-			request.setAttribute("DispatcherDetails", session.getAttribute("Dispatcher") );
+			//DispatcherImplement dispatcherImplement = new DispatcherImplement();
+			//request.setAttribute("DispatcherDetails", session.getAttribute("Dispatcher") );
 			//Dispatcher
 			break;
 		case 3:
-			PharmacistImplement pharmacistImplement = new PharmacistImplement();
-			request.setAttribute("PharmacistDetails", session.getAttribute("Pharmacist") );
-			PharmacyImplement pharmacyImplement1 = new PharmacyImplement();
-			request.setAttribute("PharmcyofPharmacist", pharmacyImplement1.getPharmacyById(1));
+			//PharmacistImplement pharmacistImplement = new PharmacistImplement();
+			//request.setAttribute("PharmacistDetails", session.getAttribute("Pharmacist") );
+			//PharmacyImplement pharmacyImplement1 = new PharmacyImplement();
+			//request.setAttribute("PharmcyofPharmacist", pharmacyImplement1.getPharmacyById(1));
 			//Pharmacist
 			break;
 		case 4:
-			AdminImplement adminImplement = new AdminImplement();
-			request.setAttribute("AdminDetails", adminImplement.getAdminById( (int) session.getAttribute("AdminID") ) );
+			//AdminImplement adminImplement = new AdminImplement();
+			//request.setAttribute("AdminDetails", adminImplement.getAdminById( (int) session.getAttribute("AdminID") ) );
 			//Admin
 			break;
 		default:
-			//String Test = "1234";
-			//String EnSt = encryptionFunction.encrypt(Test);
-			//String DeSt = encryptionFunction.decrypt(EnSt);
-			//request.setAttribute("Thcode", Test );
-			//request.setAttribute("Encode", EnSt );
-			//request.setAttribute("Decode", DeSt );
+			String Test = "1234";
+			String EnSt = encryptionFunction.encrypt(Test);
+			String DeSt = encryptionFunction.decrypt(EnSt);
+			request.setAttribute("Thcode", Test );
+			request.setAttribute("Encode", EnSt );
+			request.setAttribute("Decode", DeSt );
 			break;
 		}
 		RequestDispatcher view = request.getRequestDispatcher( "/home.jsp" );

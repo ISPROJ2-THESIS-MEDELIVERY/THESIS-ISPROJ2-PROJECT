@@ -10,7 +10,7 @@ public class Login {
 	private String LoginStatus;
 	private Date LoginLast;
 	private Date SignupDate;
-	private String Usertype;
+	private int UsertypeID;
 	
 	public int getUserID() {
 		return UserID;
@@ -48,11 +48,11 @@ public class Login {
 	public void setSignupDate(Date signupDate) {
 		SignupDate = signupDate;
 	}
-	public String getUsertype() {
-		return Usertype;
+	public int getUsertypeID() {
+		return UsertypeID;
 	}
-	public void setUsertype(String usertype) {
-		Usertype = usertype;
+	public void setUsertypeID(int usertypeID) {
+		UsertypeID = usertypeID;
 	}
 	
 	

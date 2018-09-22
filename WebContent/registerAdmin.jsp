@@ -8,13 +8,11 @@
 </head>
 <body>
 <form action="RegistrationController" method="post" enctype="multipart/form-data">
-	<input type="text" 		name="FullName" 		required="" placeholder="FullName *">
-	<input type="text" 		name="Username" 		required="" placeholder="Username *">
-	<input type="text" 		name="CAddress" 		required="" placeholder="Address *">
-	<input type="email" 	name="CusEmail" 		required="" placeholder="Email *">
-	<input type="number" 	name="ContactNumber" 	required="" placeholder="Contact Number *">
-	<input type="password" 	name="Password" 		required="" placeholder="Create Password">
-	<input type="password" 	name="Password-repeat" 	required="" placeholder="Re-enter Password" style="margin:0px;">
+	<input type="text" 		name="FistName" 		required="" 	placeholder="FullName *">
+	<input type="text" 		name="Lastname" 		required="" 	placeholder="Username *">
+	<input type="password" 	name="Password" 		required="" 	placeholder="Create Password">
+	<input type="password" 	name="Password-repeat" 	required="" 	placeholder="Re-enter Password" style="margin:0px;">
+	<input type="hidden"	name="SecretCode"		value="i3Up8XmH04Jz151">
 	<button type="submit" style="background-color:#56c5ff;">Sign Up</button></div>
 	<a href="/login.jsp" class="already" style="color:#282d32;font-size:20px;">back</a>
 </form>

@@ -27,7 +27,7 @@ public class LoginImplement implements LoginDAO {
 		
 		try(PreparedStatement stmt = conn.prepareStatement(""
             	+ "INSERT INTO Login "
-            	+ "(Username, Password, LoginStatus, LoginLast, SignupDate, Usertype) "
+            	+ "(Username, Password, LoginStatus, LoginLast, SignupDate, UsertypeID) "
             	+ "VALUES (?,?,?,?,?,?)")) {
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 			stmt.setString( 1, login.getUsername() );
@@ -35,7 +35,7 @@ public class LoginImplement implements LoginDAO {
 			stmt.setString( 3, login.getLoginStatus() );
 			stmt.setDate( 4, CurrentDate );
 			stmt.setDate( 5, CurrentDate );
-			stmt.setString( 6, login.getUsertype() );
+			stmt.setInt( 6, login.getUsertypeID() );
 			int NewID = stmt.executeUpdate();
 			stmt.close();
 			return NewID;
@@ -65,13 +65,13 @@ public class LoginImplement implements LoginDAO {
 	public void updateLogin(Login login) {
 		try {
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-			String query = "UPDATE Login SET Username=?, Password=?, LoginStatus=?, LoginLast=?, SignupDate=?, Usertype=? WHERE UserID=?";
+			String query = "UPDATE Login SET Username=?, Password=?, LoginStatus=?, LoginLast=?, SignupDate=?, UsertypeID=? WHERE UserID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setString( 1, login.getUsername() );
 			preparedStatement.setString( 2, login.getPassword() );
 			preparedStatement.setString( 3, login.getLoginStatus() );
 			preparedStatement.setDate( 4, CurrentDate );
-			preparedStatement.setString( 5, login.getUsertype() );
+			preparedStatement.setInt( 5, login.getUsertypeID() );
 			preparedStatement.setInt( 6, login.getUserID() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
@@ -94,7 +94,7 @@ public class LoginImplement implements LoginDAO {
 				login.setLoginStatus( resultSet.getString( "LoginStatus" ) );
 				login.setLoginLast( resultSet.getDate( "LoginLast" ) );
 				login.setSignupDate( resultSet.getDate( "SignupDate" ) );
-				login.setUsertype( resultSet.getString( "Usertype" ) );
+				login.setUsertypeID( resultSet.getInt( "UsertypeID" ) );
 				logins.add(login);
 			}
 			resultSet.close();
@@ -120,7 +120,7 @@ public class LoginImplement implements LoginDAO {
 				login.setLoginStatus( resultSet.getString( "LoginStatus" ) );
 				login.setLoginLast( resultSet.getDate( "LoginLast" ) );
 				login.setSignupDate( resultSet.getDate( "SignupDate" ) );
-				login.setUsertype( resultSet.getString( "Usertype" ) );
+				login.setUsertypeID( resultSet.getInt( "UsertypeID" ) );
 			}
 			resultSet.close();
 			preparedStatement.close();

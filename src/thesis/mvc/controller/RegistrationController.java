@@ -119,7 +119,7 @@ public class RegistrationController extends HttpServlet {
 			
 			//Email of Confirmation
 			SendEmail sendEmail = new SendEmail();
-			String confirmLink = request.getContextPath() + "/RegistrationController?SpecialKey=SKMhY0NCmNzJ4y5hjdS1&UserID=" + ID;
+			String confirmLink = "http://localhost:8080/" + request.getContextPath() + "/RegistrationController?SpecialKey=SKMhY0NCmNzJ4y5hjdS1&UserID=" + ID;
 			sendEmail.send(customer.getEmail(), "Medilivery Account Confirmation",
 					"Dear " + customerFName + "," +  
 					"<p>Thank you for creating your Medelivery Account.<br></p>" + 

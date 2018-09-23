@@ -68,7 +68,7 @@ public class HomeController  extends HttpServlet {
 			//Admin
 			break;
 		default:
-			String Test = "1234";
+			String Test = "1";
 			String EnSt = encryptionFunction.encrypt(Test);
 			String DeSt = encryptionFunction.decrypt(EnSt);
 			request.setAttribute("Thcode", Test );

@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import thesis.mvc.implement.AdminImplement;
 import thesis.mvc.implement.LoginImplement;
 import thesis.mvc.model.Admin;
 import thesis.mvc.model.Customer;
@@ -28,6 +29,7 @@ import thesis.mvc.model.Pharmacist;
 import thesis.mvc.pageaction.LoginAction;
 import thesis.mvc.pageaction.RegistrationAction;
 import thesis.mvc.utility.DBUtility;
+import thesis.mvc.utility.EncryptionFunction;
 import thesis.mvc.utility.SendEmail;
 
 @WebServlet("/RegistrationController")
@@ -49,22 +51,19 @@ public class RegistrationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Boolean IDcheck = false;
-		String RegisterUnique = request.getParameter( "SpecialKey" );
-		
-		//Boolean.parseBoolean(request.getParameter( "SpecialKey" ));
-		int ConfirmID = Integer.parseInt( request.getParameter("UserID") );
+		String ConfirmID = request.getParameter("UserID");
 		
 		String forward = "";
 		
-		if (RegisterUnique == "SKMhY0NCmNzJ4y5hjdS1") {
+		if (ConfirmID != null) {
 			LoginImplement loginImplement = new LoginImplement();
-			if (loginImplement.getLoginByID(ConfirmID).getLoginStatus().equalsIgnoreCase("Just Registered")) {
-				loginImplement.ConfirmLogin(ConfirmID);				
+			int ID = Integer.parseInt(new EncryptionFunction().encrypt(ConfirmID));
+			if (loginImplement.getLoginByID(ID).getLoginStatus().equalsIgnoreCase("Just Registered")) {
+				loginImplement.ConfirmLogin(ID);				
 			}
 
 			forward = "/Login.jsp";
-		} else if (IDcheck){
+		} else if (true){
 			forward = "";//page to the admin's registration
 		} else {
 			forward = "";//page to the customer's registration
@@ -123,10 +122,10 @@ public class RegistrationController extends HttpServlet {
 			
 			//Registration
 			int ID = Registration.makeCustomer(login, customer);
-			
 			//Email of Confirmation
 			SendEmail sendEmail = new SendEmail();
-			String confirmLink = "http://localhost:8080/" + request.getContextPath() + "/RegistrationController?SpecialKey=SKMhY0NCmNzJ4y5hjdS1&UserID=" + ID;
+			
+			String confirmLink = "http://localhost:8080/" + request.getContextPath() + "/RegistrationController?UserID=" + new EncryptionFunction().encrypt(Integer.toString(ID));
 			sendEmail.send(customer.getEmail(), "Medilivery Account Confirmation",
 					"Dear " + customerFName + "," +  
 					"<p>Thank you for creating your Medelivery Account.<br></p>" + 
@@ -139,13 +138,17 @@ public class RegistrationController extends HttpServlet {
 
 		} else if (secretCode == "i3Up8XmH04Jz151") {//Admin
 			//Parameter to Variable
-			String FistName = "";
-			String LastName = "";
+			String FistName = request.getParameter( "Fistname" );
+			String LastName = request.getParameter( "Lastname" );
 			
+			//Inital Information
 			Admin admin = new Admin();
-			admin.setFirstName( request.getParameter( "FirstName" ) );
-			admin.setSurname( request.getParameter( "SurName" ) );
+			admin.setFirstName( FistName );
+			admin.setSurname( LastName );
 			test = Registration.makeAdmin(login, admin);
+			
+			AdminImplement adminImplement = new AdminImplement();
+			session.setAttribute("AdminList", adminImplement.getAllAdmins());
 		}
 		
 		if(test){

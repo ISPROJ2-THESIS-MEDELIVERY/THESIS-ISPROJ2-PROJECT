@@ -136,19 +136,16 @@ public class RegistrationController extends HttpServlet {
 					"The Medelivery Team Thanks you for your patronage");
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 
-		} else if (secretCode == "i3Up8XmH04Jz151") {//Admin
+		} else if (secretCode.equalsIgnoreCase( "i3Up8XmH04Jz151")) {//Admin
 			//Parameter to Variable
-			String FistName = request.getParameter( "Fistname" );
-			String LastName = request.getParameter( "Lastname" );
+			String FistName = request.getParameter( "FistName" );
+			String LastName = request.getParameter( "LastName" );
 			
 			//Inital Information
 			Admin admin = new Admin();
 			admin.setFirstName( FistName );
 			admin.setSurname( LastName );
 			test = Registration.makeAdmin(login, admin);
-			
-			AdminImplement adminImplement = new AdminImplement();
-			session.setAttribute("AdminList", adminImplement.getAllAdmins());
 		}
 		
 		if(test){

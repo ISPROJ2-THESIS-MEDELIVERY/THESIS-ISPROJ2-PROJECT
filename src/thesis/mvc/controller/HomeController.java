@@ -66,6 +66,8 @@ public class HomeController  extends HttpServlet {
 			//AdminImplement adminImplement = new AdminImplement();
 			//request.setAttribute("AdminDetails", adminImplement.getAdminById( (int) session.getAttribute("AdminID") ) );
 			//Admin
+			//AdminImplement adminImplement = new AdminImplement();
+			//session.setAttribute("AdminList", adminImplement.getAllAdmins());
 			break;
 		default:
 			String Test = "1";

@@ -57,8 +57,11 @@
 			<br>Add a new User:<br>
 			<a href="registerDispatcher.jsp">Register a new Dispatcher</a><br>
 			<a href="registerPharmacist.jsp">Register a new Pharmacist</a><br>
-			<a href="registerPharmacy.jsp">Register a new Pharmacy</a><br>
 			<a href="registerAdmin.jsp">Register a new Admin</a><br>
+			<br>Add a new User:<br>
+			<a href="registerPharmacy.jsp">Add a new Pharmacy</a><br>
+			<a href="registerBranch.jsp">Add a new Branch</a><br>
+			<br>Log out:<br>
 			<a href="LoginController">Logout</a><br>
 			<hr>
 		</c:if>

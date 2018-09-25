@@ -54,14 +54,14 @@
 			<c:out value="${userID}" /><br>
 			<c:out value="${username}" /><br>
 			<c:out value="${userAccess}" /><br>
-			<br>Add a new User:<br>
-			<a href="registerDispatcher.jsp">Register a new Dispatcher</a><br>
-			<a href="registerPharmacist.jsp">Register a new Pharmacist</a><br>
-			<a href="registerAdmin.jsp">Register a new Admin</a><br>
-			<br>Add a new User:<br>
-			<a href="registerPharmacy.jsp">Add a new Pharmacy</a><br>
-			<a href="registerBranch.jsp">Add a new Branch</a><br>
-			<br>Log out:<br>
+			<hr>Add a new User:<br>
+			<a href="RegistrationController?Action=AddDispatcher">Register a new Dispatcher</a><br>
+			<a href="RegistrationController?Action=AddPharmacist">Register a new Pharmacist</a><br>
+			<a href="RegistrationController?Action=AddAdmin">Register a new Admin</a><br>
+			<hr>Add a new User:<br>
+			<a href="RegistrationController?Action=AddPharmacy">Add a new Pharmacy</a><br>
+			<a href="RegistrationController?Action=AddBranch">Add a new Branch</a><br>
+			<hr>Log out:<br>
 			<a href="LoginController">Logout</a><br>
 			<hr>
 		</c:if>

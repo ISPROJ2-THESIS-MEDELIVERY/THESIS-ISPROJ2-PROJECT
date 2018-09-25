@@ -8,7 +8,7 @@
 </head>
 <body>
 	<form action="RegistrationController" method="post" enctype="multipart/form-data">
-		<input type="text" 		name="FistName" 		required="" 	placeholder="Full Name *">
+		<input type="text" 		name="FistName" 		required="" 	placeholder="First Name *">
 		<input type="text" 		name="LastName" 		required="" 	placeholder="Last Name *">
 		<input type="text" 		name="Username" 		required="" 	placeholder="User Name *">
 		<input type="password" 	name="Password" 		required="" 	placeholder="Create Password">

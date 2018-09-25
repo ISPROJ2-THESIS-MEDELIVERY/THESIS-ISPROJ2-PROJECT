@@ -51,11 +51,13 @@ public class RegistrationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String ConfirmID = request.getParameter("UserID");
+		String Action = request.getParameter("Action");
+		
 		
 		String forward = "";
 		
-		if (ConfirmID != null) {
+		if (Action.equalsIgnoreCase("ConfirmUser")) {
+			String ConfirmID = request.getParameter("UserID");
 			LoginImplement loginImplement = new LoginImplement();
 			int ID = Integer.parseInt(new EncryptionFunction().encrypt(ConfirmID));
 			if (loginImplement.getLoginByID(ID).getLoginStatus().equalsIgnoreCase("Just Registered")) {
@@ -63,13 +65,30 @@ public class RegistrationController extends HttpServlet {
 			}
 
 			forward = "/Login.jsp";
-		} else if (true){
-			forward = "";//page to the admin's registration
+			
+			
+		//Add Users
+		} else if (Action.equalsIgnoreCase("AddCustomer")){
+			response.sendRedirect(request.getContextPath() + "/register.jsp");
+		} else if (Action.equalsIgnoreCase("AddDispatcher")){
+			response.sendRedirect(request.getContextPath() + "/registerDispatcher.jsp");
+		} else if (Action.equalsIgnoreCase("AddPharmacist")){
+			response.sendRedirect(request.getContextPath() + "/registerPharmacist.jsp");
+		} else if (Action.equalsIgnoreCase("AddAdmin")){
+			response.sendRedirect(request.getContextPath() + "/registerAdmin.jsp");
+			
+		//Add Other items
+		} else if (Action.equalsIgnoreCase("AddPharmacy")){
+			response.sendRedirect(request.getContextPath() + "/addPharmacy.jsp");
+		} else if (Action.equalsIgnoreCase("AddBranch")){
+			response.sendRedirect(request.getContextPath() + "/addBranch.jsp");
+			
+		//Fall Back
 		} else {
-			forward = "";//page to the customer's registration
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}
-		RequestDispatcher view = request.getRequestDispatcher( forward );
-		view.forward(request, response);
+		//RequestDispatcher view = request.getRequestDispatcher( forward );
+		//view.forward(request, response);
 
 		
 	}
@@ -136,6 +155,25 @@ public class RegistrationController extends HttpServlet {
 					"The Medelivery Team Thanks you for your patronage");
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 
+		} else if (secretCode == "5WLjE4Hik2TC85l") {//Dispatcher
+			Dispatcher dispatcher = new Dispatcher();
+			dispatcher.setCourierServiceID( Integer.parseInt( request.getParameter( "CourierServiceID" ) ) );
+			dispatcher.setUserID( Integer.parseInt( request.getParameter( "UserID" ) ) );
+			dispatcher.setFirstName( request.getParameter( "FirstName" ) );
+			dispatcher.setLastName( request.getParameter( "LastName" ) );
+			dispatcher.setContactNumber( Integer.parseInt( request.getParameter( "ContactNumber" ) ) );
+			dispatcher.setAddress( request.getParameter( "Address" ) );
+			dispatcher.setBirthdate( Date.valueOf( request.getParameter( "Birthdate" ) ) );
+			test = Registration.makeDispatcher(login, dispatcher);
+			
+		} else if (secretCode == "RjRILW7K7Xz96hD") {//Pharmacist
+			Pharmacist pharmacist = new Pharmacist();
+			pharmacist.setBranchID( Integer.parseInt( request.getParameter( "BranchID" ) ) );
+			pharmacist.setFirstName( request.getParameter( "FirstName" ) );
+			pharmacist.setLastName( request.getParameter( "LastName" ) );
+			pharmacist.setPRCNo( Integer.parseInt( request.getParameter( "PRCNo" ) ) );
+			pharmacist.setPosition( request.getParameter( "Position" ) );
+			test = Registration.makePharmacist(login, pharmacist);
 		} else if (secretCode.equalsIgnoreCase( "i3Up8XmH04Jz151")) {//Admin
 			//Parameter to Variable
 			String FistName = request.getParameter( "FistName" );

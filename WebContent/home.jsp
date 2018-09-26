@@ -56,7 +56,9 @@
 			<c:out value="${userAccess}" /><br>
 			<hr>Add a new User:<br>
 			<a href="RegistrationController?Action=AddDispatcher">Register a new Dispatcher</a><br>
-			<a href="RegistrationController?Action=AddPharmacist">Register a new Pharmacist</a><br>
+			<c:forEach items="${PharmcyList}" var="pharmacy">
+				<a href="RegistrationController?Action=AddPharmacist&PharmacyID=<c:out value="${pharmacy.pharmacyID}" />">Register a new Pharmacist in <c:out value="${pharmacy.pharmacyName}" /></a><br>
+			</c:forEach>
 			<a href="RegistrationController?Action=AddAdmin">Register a new Admin</a><br>
 			<hr>Add a new User:<br>
 			<a href="RegistrationController?Action=AddPharmacy">Add a new Pharmacy</a><br>

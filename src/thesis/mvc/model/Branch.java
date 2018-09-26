@@ -10,8 +10,7 @@ public class Branch {
 	private String BranchLandline;
 	private String BranchCellular;
 	private String BranchOwner;
-	private String PharmacyLogo;
-	private String PharmacyName;
+	private int PharmacyID;
 	private boolean BranchAvailable;
 	
 	public int getBranchID() {
@@ -62,17 +61,11 @@ public class Branch {
 	public void setBranchOwner(String branchOwner) {
 		BranchOwner = branchOwner;
 	}
-	public String getPharmacyLogo() {
-		return PharmacyLogo;
+	public int getPharmacyID() {
+		return PharmacyID;
 	}
-	public void setPharmacyLogo(String pharmacyLogo) {
-		PharmacyLogo = pharmacyLogo;
-	}
-	public String getPharmacyName() {
-		return PharmacyName;
-	}
-	public void setPharmacyName(String pharmacyName) {
-		PharmacyName = pharmacyName;
+	public void setPharmacyID(int pharmacyID) {
+		PharmacyID = pharmacyID;
 	}
 	public boolean getBranchAvailable() {
 		return BranchAvailable;

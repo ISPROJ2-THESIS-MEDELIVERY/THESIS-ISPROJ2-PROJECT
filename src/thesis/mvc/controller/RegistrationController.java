@@ -18,9 +18,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import javax.websocket.Session;
 
 import thesis.mvc.implement.AdminImplement;
+import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.LoginImplement;
+import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.model.Admin;
 import thesis.mvc.model.Customer;
 import thesis.mvc.model.Dispatcher;
@@ -51,6 +54,7 @@ public class RegistrationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		String Action = request.getParameter("Action");
 		
 		
@@ -73,6 +77,9 @@ public class RegistrationController extends HttpServlet {
 		} else if (Action.equalsIgnoreCase("AddDispatcher")){
 			response.sendRedirect(request.getContextPath() + "/registerDispatcher.jsp");
 		} else if (Action.equalsIgnoreCase("AddPharmacist")){
+			int PharmacyID = Integer.parseInt(request.getParameter("PharmacyID"));
+			session.setAttribute("PharmacySelect", new PharmacyImplement().getPharmacyById(PharmacyID));
+			session.setAttribute("PharmacyBranch", new BranchImplement().getBranchByPharmacy(PharmacyID));
 			response.sendRedirect(request.getContextPath() + "/registerPharmacist.jsp");
 		} else if (Action.equalsIgnoreCase("AddAdmin")){
 			response.sendRedirect(request.getContextPath() + "/registerAdmin.jsp");
@@ -155,7 +162,7 @@ public class RegistrationController extends HttpServlet {
 					"The Medelivery Team Thanks you for your patronage");
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 
-		} else if (secretCode == "5WLjE4Hik2TC85l") {//Dispatcher
+		} else if (secretCode.equalsIgnoreCase( "5WLjE4Hik2TC85l" ) ) {//Dispatcher
 			Dispatcher dispatcher = new Dispatcher();
 			dispatcher.setCourierServiceID( Integer.parseInt( request.getParameter( "CourierServiceID" ) ) );
 			dispatcher.setUserID( Integer.parseInt( request.getParameter( "UserID" ) ) );
@@ -166,9 +173,15 @@ public class RegistrationController extends HttpServlet {
 			dispatcher.setBirthdate( Date.valueOf( request.getParameter( "Birthdate" ) ) );
 			test = Registration.makeDispatcher(login, dispatcher);
 			
-		} else if (secretCode == "RjRILW7K7Xz96hD") {//Pharmacist
+		} else if (secretCode.equalsIgnoreCase( "RjRILW7K7Xz96hD" ) ) {//Pharmacist
+			//Parameter To Variable
+			String FistName = request.getParameter( "FistName" );
+			String LastName = request.getParameter( "LastName" );
+			int BrchNumb = Integer.parseInt( request.getParameter( "BranchID" ) );
+			
+			//Initial Information
 			Pharmacist pharmacist = new Pharmacist();
-			pharmacist.setBranchID( Integer.parseInt( request.getParameter( "BranchID" ) ) );
+			pharmacist.setBranchID( BrchNumb );
 			pharmacist.setFirstName( request.getParameter( "FirstName" ) );
 			pharmacist.setLastName( request.getParameter( "LastName" ) );
 			pharmacist.setPRCNo( Integer.parseInt( request.getParameter( "PRCNo" ) ) );
@@ -179,7 +192,7 @@ public class RegistrationController extends HttpServlet {
 			String FistName = request.getParameter( "FistName" );
 			String LastName = request.getParameter( "LastName" );
 			
-			//Inital Information
+			//Initial Information
 			Admin admin = new Admin();
 			admin.setFirstName( FistName );
 			admin.setSurname( LastName );

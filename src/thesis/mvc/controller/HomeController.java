@@ -68,6 +68,8 @@ public class HomeController  extends HttpServlet {
 			//Admin
 			//AdminImplement adminImplement = new AdminImplement();
 			//session.setAttribute("AdminList", adminImplement.getAllAdmins());
+			PharmacyImplement pharmacyImplement1 = new PharmacyImplement();
+			request.setAttribute("PharmcyList", pharmacyImplement1.getAllPharmacys());
 			break;
 		default:
 			String Test = "1";

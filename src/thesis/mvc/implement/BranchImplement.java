@@ -23,7 +23,7 @@ public class BranchImplement implements BranchDAO{
 	@Override
 	public int addBranch(Branch branch) {
 		try {
-			String query = "INSERT INTO Branch (BranchStreet, BranchBarangay, CityID, BranchProvince, BranchLandline, BranchCellular, BranchOwner, PharmacyLogo, PharmacyName, BranchAvailable) VALUES (?,?,?,?,?,?,?,?,?,?)";
+			String query = "INSERT INTO Branch (BranchStreet, BranchBarangay, CityID, BranchProvince, BranchLandline, BranchCellular, BranchOwner, PharmacyID, BranchAvailable) VALUES (?,?,?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setString( 1, branch.getBranchStreet() );
 			preparedStatement.setString( 2, branch.getBranchBarangay() );
@@ -32,9 +32,8 @@ public class BranchImplement implements BranchDAO{
 			preparedStatement.setString( 5, branch.getBranchLandline() );
 			preparedStatement.setString( 6, branch.getBranchCellular() );
 			preparedStatement.setString( 7, branch.getBranchOwner() );
-			preparedStatement.setString( 8, branch.getPharmacyLogo() );
-			preparedStatement.setString( 9, branch.getPharmacyName() );
-			preparedStatement.setBoolean( 10, branch.getBranchAvailable() );
+			preparedStatement.setInt( 8, branch.getPharmacyID() );
+			preparedStatement.setBoolean( 9, branch.getBranchAvailable() );
 			int NewID = preparedStatement.executeUpdate();
 			preparedStatement.close();
 			return NewID;
@@ -62,7 +61,7 @@ public class BranchImplement implements BranchDAO{
 	@Override
 	public void updateBranch(Branch branch) {
 		try {
-			String query = "UPDATE Branch SET BranchStreet=?, BranchBarangay=?, CityID=?, BranchProvince=?, BranchLandline=?, BranchCellular=?, BranchOwner=?, PharmacyLogo=?, PharmacyName=?, BranchAvailable=? WHERE BranchID=?";
+			String query = "UPDATE Branch SET BranchStreet=?, BranchBarangay=?, CityID=?, BranchProvince=?, BranchLandline=?, BranchCellular=?, BranchOwner=?, PharmacyID=?, BranchAvailable=? WHERE BranchID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setString( 1, branch.getBranchStreet() );
 			preparedStatement.setString( 2, branch.getBranchBarangay() );
@@ -71,10 +70,9 @@ public class BranchImplement implements BranchDAO{
 			preparedStatement.setString( 5, branch.getBranchLandline() );
 			preparedStatement.setString( 6, branch.getBranchCellular() );
 			preparedStatement.setString( 7, branch.getBranchOwner() );
-			preparedStatement.setString( 8, branch.getPharmacyLogo() );
-			preparedStatement.setString( 9, branch.getPharmacyName() );
-			preparedStatement.setBoolean( 10, branch.getBranchAvailable() );
-			preparedStatement.setInt( 11, branch.getBranchID() );
+			preparedStatement.setInt( 8, branch.getPharmacyID() );
+			preparedStatement.setBoolean( 9, branch.getBranchAvailable() );
+			preparedStatement.setInt( 10, branch.getBranchID() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
@@ -99,8 +97,7 @@ public class BranchImplement implements BranchDAO{
 				branch.setBranchLandline( resultSet.getString( "BranchLandline" ) );
 				branch.setBranchCellular( resultSet.getString( "BranchCellular" ) );
 				branch.setBranchOwner( resultSet.getString( "BranchOwner" ) );
-				branch.setPharmacyLogo( resultSet.getString( "PharmacyLogo" ) );
-				branch.setPharmacyName( resultSet.getString( "PharmacyName" ) );
+				branch.setPharmacyID( resultSet.getInt( "PharmacyID" ) );
 				branch.setBranchAvailable( resultSet.getBoolean( "BranchAvailable" ) );
 				branches.add(branch);
 			}
@@ -129,8 +126,7 @@ public class BranchImplement implements BranchDAO{
 				branch.setBranchLandline( resultSet.getString( "BranchLandline" ) );
 				branch.setBranchCellular( resultSet.getString( "BranchCellular" ) );
 				branch.setBranchOwner( resultSet.getString( "BranchOwner" ) );
-				branch.setPharmacyLogo( resultSet.getString( "PharmacyLogo" ) );
-				branch.setPharmacyName( resultSet.getString( "PharmacyName" ) );
+				branch.setPharmacyID( resultSet.getInt( "PharmacyID" ) );
 				branch.setBranchAvailable( resultSet.getBoolean( "BranchAvailable" ) );
 			}
 			resultSet.close();
@@ -141,4 +137,30 @@ public class BranchImplement implements BranchDAO{
 	return branch;
 	}
 
+	public Branch getBranchByPharmacy(int pharmacyID) {
+		Branch branch = new Branch();
+		try {
+			String query = "SELECT * FROM Branch WHERE PharmacyID=?";
+			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			preparedStatement.setInt(1, pharmacyID);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while( resultSet.next() ) {
+				branch.setBranchID( resultSet.getInt( "BranchID" ) );
+				branch.setBranchStreet( resultSet.getString( "BranchStreet" ) );
+				branch.setBranchBarangay( resultSet.getString( "BranchBarangay" ) );
+				branch.setCityID( resultSet.getInt( "CityID" ) );
+				branch.setBranchProvince( resultSet.getString( "BranchProvince" ) );
+				branch.setBranchLandline( resultSet.getString( "BranchLandline" ) );
+				branch.setBranchCellular( resultSet.getString( "BranchCellular" ) );
+				branch.setBranchOwner( resultSet.getString( "BranchOwner" ) );
+				branch.setPharmacyID( resultSet.getInt( "PharmacyID" ) );
+				branch.setBranchAvailable( resultSet.getBoolean( "BranchAvailable" ) );
+			}
+			resultSet.close();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	return branch;
+	}
 }

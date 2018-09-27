@@ -45,27 +45,7 @@ public class LoginController extends HttpServlet {
 		if ((int) session.getAttribute("userID") > 0) {
 			LoginAction loginAction = new LoginAction();
 			loginAction.logoutUser((int)session.getAttribute("userID"), (String)session.getAttribute("username"));
-			switch((int) session.getAttribute("userAccess")) {
-			case 1:
-				//Customer
-				session.removeAttribute("CustomerID");
-				break;
-			case 2:
-				//Dispatcher
-				session.removeAttribute("DispatcherID");
-				break;
-			case 3:
-				//Pharmacist
-				session.removeAttribute("PharmacistID");
-				break;
-			case 4:
-				//Admin
-				session.removeAttribute("AdminID");
-				break;
-			}
-			session.removeAttribute("userID");
-			session.removeAttribute("username");
-			session.removeAttribute("userAccess");
+			session.invalidate();
 		}
 		response.sendRedirect(request.getContextPath() + "/index.jsp");
 		

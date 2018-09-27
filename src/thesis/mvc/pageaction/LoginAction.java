@@ -8,7 +8,9 @@ import java.sql.SQLException;
 import java.util.Calendar;
 
 import thesis.mvc.implement.AuditImplement;
+import thesis.mvc.implement.LoginImplement;
 import thesis.mvc.model.Audit;
+import thesis.mvc.model.Login;
 import thesis.mvc.utility.DBUtility;
 
 public class LoginAction {
@@ -40,6 +42,12 @@ public class LoginAction {
                     audit.setActionTaken("User ID " + rs.getInt(1) + " With the username " + Username + " Logged in.");
                     AuditImplement AuditImp = new AuditImplement();
                     AuditImp.addAudit(audit);
+                	
+            		Login login = new Login();
+            		LoginImplement loginImplement = new LoginImplement();
+            		login = loginImplement.getLoginByID(rs.getInt(1));
+            		login.setLoginStatus("Logged In");
+            		
                 	return rs.getInt(1);
                 }  else {
                     return 0;
@@ -54,7 +62,8 @@ public class LoginAction {
     }
 
     public void logoutUser(int UserID, String Username) {
-		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+		//Audit
+    	Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 		Audit audit = new Audit();
 		audit.setUserID(UserID);
 		audit.setLogType("Logout");
@@ -63,6 +72,11 @@ public class LoginAction {
 		AuditImplement AuditImp = new AuditImplement();
 		AuditImp.addAudit(audit);
     	
+		Login login = new Login();
+		LoginImplement loginImplement = new LoginImplement();
+		login = loginImplement.getLoginByID(UserID);
+		login.setLoginStatus("Logged Out");
+		
     }
 
     public boolean checkSeniorStatus(int loginID) {

@@ -78,6 +78,7 @@ public class RegistrationController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/registerDispatcher.jsp");
 		} else if (Action.equalsIgnoreCase("AddPharmacist")){
 			int PharmacyID = Integer.parseInt(request.getParameter("PharmacyID"));
+			
 			session.setAttribute("PharmacySelect", new PharmacyImplement().getPharmacyById(PharmacyID));
 			session.setAttribute("PharmacyBranch", new BranchImplement().getBranchByPharmacy(PharmacyID));
 			response.sendRedirect(request.getContextPath() + "/registerPharmacist.jsp");
@@ -177,15 +178,17 @@ public class RegistrationController extends HttpServlet {
 			//Parameter To Variable
 			String FistName = request.getParameter( "FistName" );
 			String LastName = request.getParameter( "LastName" );
-			int BrchNumb = Integer.parseInt( request.getParameter( "BranchID" ) );
+			String PharNumb = request.getParameter( "PharNumb" );
+			int PharSele = Integer.getInteger( request.getParameter( "PharSele" ) );
+			String PharPosi = request.getParameter( "PharPosi" );
 			
 			//Initial Information
 			Pharmacist pharmacist = new Pharmacist();
-			pharmacist.setBranchID( BrchNumb );
-			pharmacist.setFirstName( request.getParameter( "FirstName" ) );
-			pharmacist.setLastName( request.getParameter( "LastName" ) );
-			pharmacist.setPRCNo( Integer.parseInt( request.getParameter( "PRCNo" ) ) );
-			pharmacist.setPosition( request.getParameter( "Position" ) );
+			pharmacist.setBranchID( PharSele );
+			pharmacist.setFirstName( FistName );
+			pharmacist.setLastName( LastName );
+			pharmacist.setPRCNo( PharNumb );
+			pharmacist.setPosition( PharPosi );
 			test = Registration.makePharmacist(login, pharmacist);
 		} else if (secretCode.equalsIgnoreCase( "i3Up8XmH04Jz151")) {//Admin
 			//Parameter to Variable

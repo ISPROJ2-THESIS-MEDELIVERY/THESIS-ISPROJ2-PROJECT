@@ -8,13 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="InformationController" method="post" enctype="multipart/form-data">
+	<form action="RegistrationController" method="post" enctype="multipart/form-data">
 		<input type="text" 		name="Username" 	required="" 	placeholder="User Name *"><br>
 		<input type="password" 	name="Password" 	required="" 	placeholder="Create Password"><br>
 		<hr>
 		<input type="text" 		name="FistName" 	required="" 	placeholder="First Name *"><br>
 		<input type="text" 		name="LastName" 	required="" 	placeholder="Last Name *"><br>
 		<input type="text" 		name="PharNumb" 	required="" 	placeholder="PRC Number *"><br>
+		<input type="text" 		name="PharPosi`" 	required="" 	placeholder="Position *"><br>
 		<input type="text" 		name="PharText" 	required="" 	value="<c:out value="${PharmacySelect.pharmacyName}" />" disabled><br>
 		<input type="hidden"	name="PharEyeD" 	required=""		value="<c:out value="${PharmacySelect.pharmacyID}" />">
 		<select name="PharSele">
@@ -27,10 +28,10 @@
 				</option>
 			</c:forEach>
 		</select>
-		<hr>
+		<hr>i
 		<input type="hidden"	name="SecretCode" 	value="RjRILW7K7Xz96hD">
 		<button type="submit" 	style="background-color:#56c5ff;">Sign Up</button></div>
-		<a href="/login.jsp" class="already" style="color:#282d32;font-size:20px;">back</a>
+		<a href="index.jsp" class="already" style="color:#282d32;font-size:20px;">back</a>
 	</form>
 </body>
 </html>

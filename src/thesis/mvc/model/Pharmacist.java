@@ -7,7 +7,7 @@ public class Pharmacist {
 	private int BranchID;
 	private String FirstName;
 	private String LastName;
-	private int PRCNo;
+	private String PRCNo;
 	private String Position;
 	public int getPharmacistID() {
 		return PharmacistID;
@@ -39,10 +39,10 @@ public class Pharmacist {
 	public void setLastName(String lastName) {
 		LastName = lastName;
 	}
-	public int getPRCNo() {
+	public String getPRCNo() {
 		return PRCNo;
 	}
-	public void setPRCNo(int pRCNo) {
+	public void setPRCNo(String pRCNo) {
 		PRCNo = pRCNo;
 	}
 	public String getPosition() {

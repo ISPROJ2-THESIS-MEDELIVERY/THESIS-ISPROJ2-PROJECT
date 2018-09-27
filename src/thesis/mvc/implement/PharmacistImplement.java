@@ -29,7 +29,7 @@ public class PharmacistImplement implements PharmacistDAO{
 			preparedStatement.setInt( 2, pharmacist.getBranchID() );
 			preparedStatement.setString( 3, pharmacist.getFirstName() );
 			preparedStatement.setString( 4, pharmacist.getLastName() );
-			preparedStatement.setInt( 5, pharmacist.getPRCNo() );
+			preparedStatement.setString( 5, pharmacist.getPRCNo() );
 			preparedStatement.setString( 6, pharmacist.getPosition() );
 			int NewID = preparedStatement.executeUpdate();
 			preparedStatement.close();
@@ -64,7 +64,7 @@ public class PharmacistImplement implements PharmacistDAO{
 			preparedStatement.setInt( 2, pharmacist.getBranchID() );
 			preparedStatement.setString( 3, pharmacist.getFirstName() );
 			preparedStatement.setString( 4, pharmacist.getLastName() );
-			preparedStatement.setInt( 5, pharmacist.getPRCNo() );
+			preparedStatement.setString( 5, pharmacist.getPRCNo() );
 			preparedStatement.setString( 6, pharmacist.getPosition() );
 			preparedStatement.setInt( 7, pharmacist.getPharmacistID() );
 			preparedStatement.executeUpdate();
@@ -88,7 +88,7 @@ public class PharmacistImplement implements PharmacistDAO{
 				pharmacist.setBranchID( resultSet.getInt( "BranchID" ) );
 				pharmacist.setFirstName( resultSet.getString( "FirstName" ) );
 				pharmacist.setLastName( resultSet.getString( "LastName" ) );
-				pharmacist.setPRCNo( resultSet.getInt( "PRCNo" ) );
+				pharmacist.setPRCNo( resultSet.getString( "PRCNo" ) );
 				pharmacist.setPosition( resultSet.getString( "Position" ) );
 				pharmacists.add(pharmacist);
 			}
@@ -114,7 +114,7 @@ public class PharmacistImplement implements PharmacistDAO{
 				pharmacist.setBranchID( resultSet.getInt( "BranchID" ) );
 				pharmacist.setFirstName( resultSet.getString( "FirstName" ) );
 				pharmacist.setLastName( resultSet.getString( "LastName" ) );
-				pharmacist.setPRCNo( resultSet.getInt( "PRCNo" ) );
+				pharmacist.setPRCNo( resultSet.getString( "PRCNo" ) );
 				pharmacist.setPosition( resultSet.getString( "Position" ) );
 			}
 			resultSet.close();
@@ -138,7 +138,7 @@ public class PharmacistImplement implements PharmacistDAO{
 				pharmacist.setBranchID( resultSet.getInt( "BranchID" ) );
 				pharmacist.setFirstName( resultSet.getString( "FirstName" ) );
 				pharmacist.setLastName( resultSet.getString( "LastName" ) );
-				pharmacist.setPRCNo( resultSet.getInt( "PRCNo" ) );
+				pharmacist.setPRCNo( resultSet.getString( "PRCNo" ) );
 				pharmacist.setPosition( resultSet.getString( "Position" ) );
 			}
 			resultSet.close();

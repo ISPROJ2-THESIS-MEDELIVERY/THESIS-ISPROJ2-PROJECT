@@ -18,8 +18,8 @@
 		<input type="text" 		name="UAddress" 	required="" 	placeholder="Dispatch Adress *"><br>
 		<input type="date" 		name="BrthDate" 	required="" 	placeholder="Birthday *"><br>
 		<select name="PharSele">
-			<c:forEach items="${PharmacyList}" var="pharmacy">
-				<option value ="<c:out value="${pharmacy.pharmacyID}" />"><c:out value="${pharmacy.pharmacyName}" /></option>
+			<c:forEach items="${CourierServiceList}" var="courier">
+				<option value ="<c:out value="${courier.courierServiceID}" />"><c:out value="${courier.companyName}" /></option>
 			</c:forEach>
 		</select>
 		<hr>

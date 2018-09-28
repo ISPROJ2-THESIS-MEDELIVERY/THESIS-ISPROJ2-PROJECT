@@ -25,6 +25,11 @@ public class InformationController {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String Action = request.getParameter( "Action" );
+		if (Action.isEmpty()) {
+			
+		}
 		
 	}
 }

@@ -61,9 +61,10 @@
 				<a href="RegistrationController?Action=AddPharmacist&PharmacyID=<c:out value="${pharmacy.pharmacyID}" />">Register a new Pharmacist in <c:out value="${pharmacy.pharmacyName}" /></a><br>
 			</c:forEach>
 			<a href="RegistrationController?Action=AddAdmin">Register a new Admin</a><br>
-			<hr>Add a new User:<br>
+			<hr>Add a new Itemr:<br>
 			<a href="RegistrationController?Action=AddPharmacy">Add a new Pharmacy</a><br>
 			<a href="RegistrationController?Action=AddBranch">Add a new Branch</a><br>
+			<a href="RegistrationController?Action=AddCourier">Add a new Courier branch</a><br>
 			<hr>Log out:<br>
 			<a href="LoginController">Logout</a><br>
 			<hr>

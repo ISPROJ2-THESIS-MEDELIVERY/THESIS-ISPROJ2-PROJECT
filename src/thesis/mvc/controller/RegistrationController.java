@@ -6,7 +6,9 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Date;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
 //import javax.servlet.RequestDispatcher;
@@ -22,9 +24,11 @@ import javax.websocket.Session;
 
 import thesis.mvc.implement.AdminImplement;
 import thesis.mvc.implement.BranchImplement;
+import thesis.mvc.implement.CourierServiceImplement;
 import thesis.mvc.implement.LoginImplement;
 import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.model.Admin;
+import thesis.mvc.model.CourierService;
 import thesis.mvc.model.Customer;
 import thesis.mvc.model.Dispatcher;
 import thesis.mvc.model.Login;
@@ -75,10 +79,10 @@ public class RegistrationController extends HttpServlet {
 		} else if (Action.equalsIgnoreCase("AddCustomer")){
 			response.sendRedirect(request.getContextPath() + "/register.jsp");
 		} else if (Action.equalsIgnoreCase("AddDispatcher")){
+			session.setAttribute("CourierService", new CourierServiceImplement().getAllCourierService());
 			response.sendRedirect(request.getContextPath() + "/registerDispatcher.jsp");
 		} else if (Action.equalsIgnoreCase("AddPharmacist")){
 			int PharmacyID = Integer.parseInt(request.getParameter("PharmacyID"));
-			
 			session.setAttribute("PharmacySelect", new PharmacyImplement().getPharmacyById(PharmacyID));
 			session.setAttribute("PharmacyBranch", new BranchImplement().getBranchByPharmacy(PharmacyID));
 			response.sendRedirect(request.getContextPath() + "/registerPharmacist.jsp");
@@ -126,7 +130,7 @@ public class RegistrationController extends HttpServlet {
 		//Input the login variables
 		Login login = new Login();
 		login.setUsername( Username );
-		login.setPassword( Password );
+		login.setPassword( new EncryptionFunction().encrypt(Password) );
 		
 		//Image Saving Start
 		if (!Capcha) {
@@ -161,17 +165,30 @@ public class RegistrationController extends HttpServlet {
 					"<p>Yours truly,</p><br>" + 
 					"<p>Medelivery Admin Team</p>" + 
 					"The Medelivery Team Thanks you for your patronage");
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
 
 		} else if (secretCode.equalsIgnoreCase( "5WLjE4Hik2TC85l" ) ) {//Dispatcher
+			//Parameter To Variable
+			String FistName = request.getParameter( "FistName" );
+			String LastName = request.getParameter( "LastName" );
+			int PhoneNum = Integer.parseInt(request.getParameter( "PhoneNum" ));
+			String UAddress = request.getParameter( "UAddress" );
+			DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
+			Date date = null;
+			try {
+				date = (Date) format.parse( request.getParameter( "BrthDate" ) );
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			int CourSele = Integer.parseInt( request.getParameter( "CourSele" ) );
+			
 			Dispatcher dispatcher = new Dispatcher();
-			dispatcher.setCourierServiceID( Integer.parseInt( request.getParameter( "CourierServiceID" ) ) );
-			dispatcher.setUserID( Integer.parseInt( request.getParameter( "UserID" ) ) );
-			dispatcher.setFirstName( request.getParameter( "FirstName" ) );
-			dispatcher.setLastName( request.getParameter( "LastName" ) );
-			dispatcher.setContactNumber( Integer.parseInt( request.getParameter( "ContactNumber" ) ) );
-			dispatcher.setAddress( request.getParameter( "Address" ) );
-			dispatcher.setBirthdate( Date.valueOf( request.getParameter( "Birthdate" ) ) );
+			dispatcher.setCourierServiceID( CourSele );
+			dispatcher.setFirstName( FistName );
+			dispatcher.setLastName( LastName );
+			dispatcher.setContactNumber( PhoneNum );
+			dispatcher.setAddress( UAddress );
+			dispatcher.setBirthdate( date );
 			test = Registration.makeDispatcher(login, dispatcher);
 			
 		} else if (secretCode.equalsIgnoreCase( "RjRILW7K7Xz96hD" ) ) {//Pharmacist
@@ -179,12 +196,12 @@ public class RegistrationController extends HttpServlet {
 			String FistName = request.getParameter( "FistName" );
 			String LastName = request.getParameter( "LastName" );
 			String PharNumb = request.getParameter( "PharNumb" );
-			int PharSele = Integer.getInteger( request.getParameter( "PharSele" ) );
+			int PharSele = Integer.parseInt(request.getParameter( "PharSele" ));
 			String PharPosi = request.getParameter( "PharPosi" );
 			
 			//Initial Information
 			Pharmacist pharmacist = new Pharmacist();
-			pharmacist.setBranchID( PharSele );
+			pharmacist.setBranchID( PharSele );//PharSele
 			pharmacist.setFirstName( FistName );
 			pharmacist.setLastName( LastName );
 			pharmacist.setPRCNo( PharNumb );
@@ -203,12 +220,9 @@ public class RegistrationController extends HttpServlet {
 		}
 		
 		if(test){
-			forward = "/login.jsp";//"/RegistrationSuccess.jsp";
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else {
-			forward = "/AccountRecovery.jsp";
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}
-		
-		RequestDispatcher view = request.getRequestDispatcher( forward );
-		view.forward(request, response);
 	}
 }

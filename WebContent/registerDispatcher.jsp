@@ -17,9 +17,11 @@
 		<input type="number" 	name="PhoneNum" 	required="" 	placeholder="Phone Number *"><br>
 		<input type="text" 		name="UAddress" 	required="" 	placeholder="Dispatch Adress *"><br>
 		<input type="date" 		name="BrthDate" 	required="" 	placeholder="Birthday *"><br>
-		<select name="PharSele">
-			<c:forEach items="${CourierServiceList}" var="courier">
-				<option value ="<c:out value="${courier.courierServiceID}" />"><c:out value="${courier.companyName}" /></option>
+		<select name="CourSele">
+			<c:forEach items="${CourierService}" var="courier">
+				<option value=<c:out value="${courier.courierserviceID}"/>>
+					<c:out value="${courier.companyname}" />
+				</option>
 			</c:forEach>
 		</select>
 		<hr>

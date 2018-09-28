@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,48 +9,49 @@
 </head>
 <body>
 	<h1>CART:</h1>
-	<table>
-		<thead>
-			<tr>
-	            <th>Item</th>
-	            <th>Item Description</th>
-	            <th>Image</th>
-	            <th>Size</th>
-	            <th>Prescription Required</th>
-	            <th>Quantity</th>
-	            <th>Unit Price</th>
-	            <th>Total Cost</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${CartlistReciept}" var="cartdetails">
-	            <tr>
-	                <td><c:out value="${cartdetails.name}" /></td>
-	                <td><c:out value="${cartdetails.description}" /></td>
-	                <td>IMAGE HERE</td>
-	                <!-- <td><img src="data:image/jpeg;base64,${cartdetails.image}" /></td>  -->
-	                <td><c:out value="${cartdetails.size}" /></td>
-	                <td><c:out value="${cartdetails.prescription}" /></td>
-	                <td><c:out value="${cartdetails.quantity}" /></td>
-	                <td><c:out value="${cartdetails.unitCost}" /></td>
-	                <td><c:out value="${cartdetails.totalCost}" /></td>
-	            </tr>
-            </c:forEach>
-		</tbody>
-	</table>
+	<c:if test="${Cartlist != null}">
+		<table border=1>
+			<thead>
+				<tr>
+		            <th>Item</th>
+		            <th>Item Description</th>
+		            <th>Image</th>
+		            <th>Size</th>
+		            <th>Prescription Required</th>
+		            <th>Quantity</th>
+		            <th>Unit Price</th>
+		            <th>Total Cost</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${Cartlist}" var="details">
+		            <tr>
+		                <td><c:out value="${details.name}" /></td>
+		                <td><c:out value="${details.description}" /></td>
+		                <td><c:out value="${details.size}" /></td>
+		                <td><c:out value="${details.prescription}" /></td>
+		                <td><c:out value="${details.quantity}" /></td>
+		                <td><c:out value="${details.unitCost}" /></td>
+		                <td><c:out value="${details.totalCost}" /></td>
+		            </tr>
+	            </c:forEach>
+			</tbody>
+		</table>
+	</c:if>
+	<c:if test="${Cartlist == null}">
+		<h2>NOTHING ORDERED YET</h2>
+	</c:if>
+	
 	<h1>SHOP:</h1>
-	<table>
+	<table border=1>
 		<thead>
 			<tr>
 				<th>Product ID</th>
 				<th>Product Name</th>
 				<th>Generic Name</th>
-				<th>Registration No</th>
 				<th>Product Strength</th>
 				<th>Product Form</th>
 				<th>Product Packaging</th>
-				<th>Product Manufacturer</th>
-				<th>Product Origin</th>
 				<th>Product Description</th>
 				<th>Quantity</th>
 				<th>Buy</th>
@@ -62,12 +64,9 @@
 						<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
 						<td><c:out value="${item.productName}" /></td>
 						<td><c:out value="${item.genericName}" /></td>
-						<td><c:out value="${item.registrationNo}" /></td>
 						<td><c:out value="${item.productStrength}" /></td>
 						<td><c:out value="${item.productForm}" /></td>
 						<td><c:out value="${item.productPackaging}" /></td>
-						<td><c:out value="${item.productManufacturer}" /></td>
-						<td><c:out value="${item.productOrigin}" /></td>
 						<td><c:out value="${item.productDescription}" /></td>
 						<td>
 							<select name='Quantity'>

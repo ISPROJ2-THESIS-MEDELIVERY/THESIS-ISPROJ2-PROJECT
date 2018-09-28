@@ -50,29 +50,27 @@ public class CustomerController extends HttpServlet{
 
 		//Ensures that the person can select what he/she wants to buy
 		String forward;
-		int PharmaID = 0;
-		int access = 0;
 		HttpSession session = request.getSession();
+		int PharmaID = Integer.parseInt(request.getParameter( "PharmaID" ));
 		
 		String action = "";
-		if (request.getParameter("action") != null && !request.getParameter("action").isEmpty()) { action = request.getParameter( "action" ); }
+		//if (request.getParameter("action") != null && !request.getParameter("action").isEmpty()) { action = request.getParameter( "action" ); }
 
-		PharmacyImplement pharmacyImplement = new PharmacyImplement();
-		if (session.getAttribute("PharmaID") != null) {	session.setAttribute("SelectedPharmacy", pharmacyImplement.getPharmacyById( (int) session.getAttribute( "PharmaID" ) ) ); }
-		//Redo the database
-		boolean test = true;
+		//PharmacyImplement pharmacyImplement = new PharmacyImplement();
+		//session.setAttribute("SelectedPharmacy", pharmacyImplement.getPharmacyById( (int) session.getAttribute( "PharmaID" ) ) );
+
     	
 		//Customer
-		if (GeneralFunctions.isInteger(action) && Integer.parseInt(action) > 0) {
+		if (false) { //(GeneralFunctions.isInteger(action) && Integer.parseInt(action) > 0) {
 			//Get the order
 			OrderImplement orderImplement = new OrderImplement();
 	    	Order order = orderImplement.getOrderById(Integer.parseInt(action));
 	    	
-	    	if (order.getOrderStatus().equalsIgnoreCase("APPROVED")) {
+	    	/*if (order.getOrderStatus().equalsIgnoreCase("APPROVED")) {
 	    		session.setAttribute("ApproveChecker", true);
 	    	} else {
 	    		session.setAttribute("ApproveChecker", false);
-	    	}
+	    	}*/
 	    	
 	    	//Get the Details
 	    	OrderDetailImplement orderDetailImplement = new OrderDetailImplement();
@@ -109,10 +107,12 @@ public class CustomerController extends HttpServlet{
 	    		
 		} else {
 	    	SearchAction searchAction = new SearchAction();
-	    	forward = "/Catalog.jsp";
-	    	request.setAttribute( "productList", searchAction.GeneralListing(PharmaID) );
-	    	RequestDispatcher view = request.getRequestDispatcher( forward );
-	    	view.forward(request, response);
+	    	Object test = searchAction.GeneralListing(PharmaID);
+	    	session.setAttribute( "productList", searchAction.GeneralListing(PharmaID) );
+			response.sendRedirect(request.getContextPath() + "/CatalogBasic.jsp");
+	    	//forward = "/Catalog.jsp";
+	    	//RequestDispatcher view = request.getRequestDispatcher( forward );
+	    	//view.forward(request, response);
 		}
     }
 

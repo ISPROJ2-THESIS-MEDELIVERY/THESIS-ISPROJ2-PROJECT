@@ -16,7 +16,7 @@
 	<input type="password" 	name="Password" 		required="" placeholder="Create Password">
 	<input type="password" 	name="Password-repeat" 	required="" placeholder="Re-enter Password" style="margin:0px;">
 	<button type="submit" style="background-color:#56c5ff;">Sign Up</button></div>
-	<a href="/login.jsp" class="already" style="color:#282d32;font-size:20px;">back</a>
+	<a href="login.jsp" class="already" style="color:#282d32;font-size:20px;">back</a>
 </form>
 </body>
 </html>

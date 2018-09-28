@@ -48,7 +48,7 @@ public class RegistrationController extends HttpServlet {
 	
 	private Connection conn;
 	private static final String UPLOAD_DIR = "images";
-	DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
 	public RegistrationController() {
 		conn = DBUtility.getConnection();
@@ -172,10 +172,10 @@ public class RegistrationController extends HttpServlet {
 			String LastName = request.getParameter( "LastName" );
 			int PhoneNum = Integer.parseInt(request.getParameter( "PhoneNum" ));
 			String UAddress = request.getParameter( "UAddress" );
-			DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
 			Date date = null;
 			try {
-				date = (Date) format.parse( request.getParameter( "BrthDate" ) );
+				java.util.Date utilDate = df.parse(request.getParameter( "BrthDate" ));
+				date = new java.sql.Date(utilDate.getTime());
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -201,7 +201,7 @@ public class RegistrationController extends HttpServlet {
 			
 			//Initial Information
 			Pharmacist pharmacist = new Pharmacist();
-			pharmacist.setBranchID( PharSele );//PharSele
+			pharmacist.setBranchID( PharSele );
 			pharmacist.setFirstName( FistName );
 			pharmacist.setLastName( LastName );
 			pharmacist.setPRCNo( PharNumb );

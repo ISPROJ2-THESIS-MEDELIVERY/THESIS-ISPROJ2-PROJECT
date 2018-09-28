@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import thesis.mvc.implement.AdminImplement;
 import thesis.mvc.implement.BranchImplement;
+import thesis.mvc.implement.CourierServiceImplement;
 import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.DispatcherImplement;
 import thesis.mvc.implement.OrderImplement;
@@ -36,6 +37,7 @@ public class HomeController  extends HttpServlet {
 		}
 		
 		EncryptionFunction encryptionFunction = new EncryptionFunction();
+		PharmacyImplement pharmacyImplement = new PharmacyImplement();
 		
 		switch(Switch) {
 		case 1:
@@ -46,7 +48,6 @@ public class HomeController  extends HttpServlet {
 			//OrderImplement orderImplement = new OrderImplement();
 			//request.setAttribute( "PurchasePending", (Customer) session.getAttribute("Customer"));
 			//List all the pharmacies
-			PharmacyImplement pharmacyImplement = new PharmacyImplement();
 			request.setAttribute("PharmcyList", pharmacyImplement.getAllPharmacys());
 			//Remember to add a report button
 			break;
@@ -68,16 +69,18 @@ public class HomeController  extends HttpServlet {
 			//Admin
 			//AdminImplement adminImplement = new AdminImplement();
 			//session.setAttribute("AdminList", adminImplement.getAllAdmins());
-			PharmacyImplement pharmacyImplement1 = new PharmacyImplement();
-			request.setAttribute("PharmcyList", pharmacyImplement1.getAllPharmacys());
+			//Users
+			request.setAttribute("CustomerList", new CustomerImplement().getAllCustomers());
+			request.setAttribute("DispatcherList", new DispatcherImplement().getAllDispatchers());
+			request.setAttribute("PharmacistList", new PharmacistImplement().getAllPharmacists());
+			request.setAttribute("AdminList", new AdminImplement().getAllAdmins());
+			//Items
+			request.setAttribute("PharmcyList", pharmacyImplement.getAllPharmacys());
+			request.setAttribute("BranchList", new BranchImplement().getAllBranch());
+			request.setAttribute("CourierList", new CourierServiceImplement().getAllCourierService());
+			
 			break;
 		default:
-			String Test = "1";
-			String EnSt = encryptionFunction.encrypt(Test);
-			String DeSt = encryptionFunction.decrypt(EnSt);
-			request.setAttribute("Thcode", Test );
-			request.setAttribute("Encode", EnSt );
-			request.setAttribute("Decode", DeSt );
 			break;
 		}
 		RequestDispatcher view = request.getRequestDispatcher( "/home.jsp" );

@@ -52,7 +52,13 @@ public class InformationController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/addCourier.jsp");
 		} else if (Action.equalsIgnoreCase("AddPharmacy")){
 			response.sendRedirect(request.getContextPath() + "/addPharmacy.jsp");
-			
+		
+		//Insert/Add Product
+		} else if (Action.equalsIgnoreCase("InsertProduct")){
+			response.sendRedirect(request.getContextPath() + "/insertProduct.jsp");
+		} else if (Action.equalsIgnoreCase("InsertNewProduct")){
+			response.sendRedirect(request.getContextPath() + "/insertNewProduct.jsp");
+		
 		//Fall Back
 		} else {
 			response.sendRedirect(request.getContextPath() + "/index.jsp");

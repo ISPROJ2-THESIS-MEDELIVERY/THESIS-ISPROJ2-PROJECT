@@ -68,6 +68,8 @@
 						<td><c:out value="${item.productForm}" /></td>
 						<td><c:out value="${item.productPackaging}" /></td>
 						<td><c:out value="${item.productDescription}" /></td>
+						
+						<c:if test="${item.isRXProduct == false}">
 						<td>
 							<select name='Quantity'>
 								<option value="1">1</option>
@@ -84,6 +86,12 @@
 						<td>
 							<input type='submit' name='Action' value="Addtocart" style='display: on-hover' />
 						</td>
+						</c:if>
+						
+						<c:if test="${item.isRXProduct == true}">
+						<td>UNAVAILABLE</td>
+						<td>PRESCRIPTION ONLY</td>
+						</c:if>
 					</tr>
 				</form>
 			</c:forEach>

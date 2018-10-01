@@ -27,6 +27,7 @@ public class SearchAction {
 		private String ProductPackaging;
 		private String ProductDescription;
 		private String ProductImage;
+		private boolean IsRXProduct;
 		private double PriceSet;
 		public int getProductID() {
 			return ProductID;
@@ -76,6 +77,12 @@ public class SearchAction {
 		public void setProductImage(String productImage) {
 			ProductImage = productImage;
 		}
+		public boolean isIsRXProduct() {
+			return IsRXProduct;
+		}
+		public void setIsRXProduct(boolean isRXProduct) {
+			IsRXProduct = isRXProduct;
+		}
 		public double getPriceSet() {
 			return PriceSet;
 		}
@@ -89,7 +96,7 @@ public class SearchAction {
 		List<ProductList> productLists = new ArrayList<ProductList>();
 		try {
 			Statement statement = conn.createStatement();
-			String Query = "SELECT product.ProductID, product.ProductName, product.GenericName, product.ProductStrength, product.ProductForm, product.ProductPackaging, product.ProductDescription, product.ProductImage, stocksprice.PriceSet FROM stocks INNER JOIN stocksprice ON stocksprice.StockID = stocks.StockID INNER JOIN product ON stocks.ProductID = product.ProductID WHERE stocksprice.IsCurrent = 1 AND stocks.PharmacyID = ?";
+			String Query = "SELECT product.ProductID, product.ProductName, product.GenericName, product.ProductStrength, product.ProductForm, product.ProductPackaging, product.ProductDescription, product.ProductImage, product.isRXProduct, stocksprice.PriceSet FROM stocks INNER JOIN stocksprice ON stocksprice.StockID = stocks.StockID INNER JOIN product ON stocks.ProductID = product.ProductID WHERE stocksprice.IsCurrent = 1 AND stocks.PharmacyID = ?";
 			PreparedStatement preparedStatement = conn.prepareStatement( Query );
 			preparedStatement.setInt( 1, PharmacyID );
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -104,7 +111,8 @@ public class SearchAction {
 				productList.setProductPackaging( resultSet.getString(6) );
 				productList.setProductDescription( resultSet.getString(7) );
 				productList.setProductImage( resultSet.getString(8) );
-				productList.setPriceSet( resultSet.getDouble(9) );
+				productList.setIsRXProduct( resultSet.getBoolean(9) );
+				productList.setPriceSet( resultSet.getDouble(10) );
 				productLists.add(productList);
 			}
 			resultSet.close();

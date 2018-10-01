@@ -27,7 +27,7 @@
 		</select>
 		<input type="hidden"	name="Actionthing" value="addBranch">
 		<button type="submit" 	style="background-color:#56c5ff;">Sign Up</button></div>
-		<a href="/login.jsp" class="already" style="color:#282d32;font-size:20px;">back</a>
+		<a href="login.jsp" class="already" style="color:#282d32;font-size:20px;">back</a>
 	</form>
 </body>
 </html>

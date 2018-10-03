@@ -8,6 +8,6 @@
 <title>Home Page</title>
 </head>
 	<body>
-		<jsp:forward page="/InformationController?Action=InsertProduct"></jsp:forward>
+		<jsp:forward page="/HomeController"></jsp:forward>
 	</body>
 </html>

@@ -19,10 +19,13 @@ import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.CityListingImplement;
 import thesis.mvc.implement.CourierServiceImplement;
 import thesis.mvc.implement.PharmacyImplement;
+import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.implement.StocksImplement;
+import thesis.mvc.implement.StocksPriceImplement;
 import thesis.mvc.model.Branch;
 import thesis.mvc.model.CityListing;
 import thesis.mvc.model.CourierService;
+import thesis.mvc.model.Pharmacist;
 import thesis.mvc.model.Pharmacy;
 import thesis.mvc.model.Product;
 import thesis.mvc.model.Stocks;
@@ -59,6 +62,7 @@ public class InformationController extends HttpServlet {
 		
 		//Insert/Add Product
 		} else if (Action.equalsIgnoreCase("InsertProduct")){
+			session.setAttribute("ProductList", new ProductImplement().getAllProducts() );
 			response.sendRedirect(request.getContextPath() + "/insertProduct.jsp");
 		} else if (Action.equalsIgnoreCase("InsertNewProduct")){
 			response.sendRedirect(request.getContextPath() + "/insertNewProduct.jsp");
@@ -130,8 +134,51 @@ public class InformationController extends HttpServlet {
 			courierService.setDateAdded( DateAded );
 			new CourierServiceImplement().addCourierService( courierService );
 		} else if (Action.equalsIgnoreCase("addStock")) { //Stock
+			Pharmacist pharmacist = (Pharmacist) session.getAttribute("Pharmacist");
+			int PharmaID = new BranchImplement().getBranchById(pharmacist.getBranchID()).getPharmacyID();
+			String ProducID = request.getParameter("123");
+			double Price = Double.parseDouble( request.getParameter("Price"));
+			boolean Feat = Boolean.parseBoolean(request.getParameter("Feat"));
+			Stocks stocks = new Stocks();
+			stocks.setPharmacyID( PharmaID );
+			//stocks.setProductID( ProducID );
+			stocks.setFeature( Feat );
+			int StockID = new StocksImplement().addStocks(stocks);
+    		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+			StocksPrice stocksPrice = new StocksPrice();
+			stocksPrice.setIsCurrent(true);
+			stocksPrice.setStockID(StockID);
+			stocksPrice.setDateSet(CurrentDate);
+			stocksPrice.setPriceSet(Price);
+			new StocksPriceImplement().addStocksPrice(stocksPrice);
+		} else if (Action.equalsIgnoreCase("addProduct")) { //Product
+			String ProductName = request.getParameter("ProductName");
+			String GenericName = request.getParameter("GenericName");
+			String RegistrNumn = request.getParameter("RegistrNumn");
+			String ProductStrg = request.getParameter("ProductStrg");
+			String ProductForm = request.getParameter("ProductForm");
+			String ProductPack = request.getParameter("ProductPack");
+			String ProductManu = request.getParameter("ProductManu");
+			String ProductOrgi = request.getParameter("ProductOrgi");
+			String ProductDesc = request.getParameter("ProductDesc");
+			String ProductImag = request.getParameter("ProductImag");
+			boolean ProductIsRX = Boolean.getBoolean(request.getParameter("ProductIsRX"));
+			int ProductLimt = Integer.parseInt(request.getParameter("ProductLimt"));
+			Product product = new Product();
+			product.setProductName( ProductName );
+			product.setGenericName( GenericName );
+			product.setRegistrationNo( RegistrNumn );
+			product.setProductStrength( ProductStrg );
+			product.setProductForm( ProductForm );
+			product.setProductPackaging( ProductPack );
+			product.setProductManufacturer( ProductManu );
+			product.setProductOrigin( ProductOrgi );
+			product.setProductDescription( ProductDesc );
+			product.setProductImage( ProductImag );
+			product.setRXProduct(ProductIsRX);
+			product.setCounterLimit(ProductLimt);
+			int ProducID = new ProductImplement().addProduct(product);
 			int PharmaID = Integer.parseInt(request.getParameter("PharmaID"));
-			int ProducID = Integer.parseInt(request.getParameter("ProducID"));
 			double Price = Double.parseDouble( request.getParameter("Price"));
 			boolean Feat = Boolean.parseBoolean(request.getParameter("Feat"));
 			Stocks stocks = new Stocks();
@@ -144,16 +191,8 @@ public class InformationController extends HttpServlet {
 			stocksPrice.setIsCurrent(true);
 			stocksPrice.setStockID(StockID);
 			stocksPrice.setDateSet(CurrentDate);
-			stocksPrice.setPriceSet(2);
-		} else if (Action.equalsIgnoreCase("addProduct")) { //Product
-			int ProducID = 1;
-			int PharmaID = Integer.parseInt(request.getParameter("PharmaID"));
-			boolean Feat = Boolean.parseBoolean(request.getParameter("Feat"));
-			Stocks stocks = new Stocks();
-			stocks.setPharmacyID( PharmaID );
-			stocks.setProductID( ProducID );
-			stocks.setFeature( Feat );
-			new StocksImplement().addStocks(stocks);
+			stocksPrice.setPriceSet(Price);
+			new StocksPriceImplement().addStocksPrice(stocksPrice);
 		}
 		response.sendRedirect(request.getContextPath() + "/index.jsp");
 		

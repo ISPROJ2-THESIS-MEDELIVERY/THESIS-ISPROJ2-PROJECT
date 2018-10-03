@@ -43,7 +43,7 @@
 			<c:out value="${username}" /><br>
 			<c:out value="${userAccess}" /><br>
 			<a href="LoginController">Logout</a><br>
-			<a href="ProductController">Add Product</a><br>
+			<a href="ProductController?Action=AddProduct">Add Product</a><br>
 			<hr>
 		</c:if>
 		<c:if test="${userAccess == 4}">

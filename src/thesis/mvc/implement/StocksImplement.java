@@ -23,12 +23,11 @@ public class StocksImplement implements StocksDAO{
 	@Override
 	public int addStocks(Stocks stocks) {
 		try {
-			String query = "INSERT INTO Stocks (ProductID, BranchID, Quantity, Feature) VALUES (?,?,?,?)";
+			String query = "INSERT INTO Stocks (ProductID, PharmacyID, Feature) VALUES (?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, stocks.getProductID() );
-			preparedStatement.setInt( 2, stocks.getBranchID() );
-			preparedStatement.setInt( 3, stocks.getQuantity() );
-			preparedStatement.setBoolean( 4, stocks.isFeature() );
+			preparedStatement.setInt( 2, stocks.getPharmacyID() );
+			preparedStatement.setBoolean( 3, stocks.isFeature() );
 			int NewID = preparedStatement.executeUpdate();
 			preparedStatement.close();
 			return NewID;
@@ -56,13 +55,12 @@ public class StocksImplement implements StocksDAO{
 	@Override
 	public void updateStocks(Stocks stocks) {
 		try {
-			String query = "UPDATE Stocks SET ProductID=?, BranchID=?, Quantity=?, Feature=? WHERE StockID=?";
+			String query = "UPDATE Stocks SET ProductID=?, PharmacyID=?, Feature=? WHERE StockID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, stocks.getProductID() );
-			preparedStatement.setInt( 2, stocks.getBranchID() );
-			preparedStatement.setInt( 3, stocks.getQuantity() );
-			preparedStatement.setBoolean( 4, stocks.isFeature() );
-			preparedStatement.setInt( 5, stocks.getStockID() );
+			preparedStatement.setInt( 2, stocks.getPharmacyID() );
+			preparedStatement.setBoolean( 3, stocks.isFeature() );
+			preparedStatement.setInt( 4, stocks.getStockID() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
@@ -81,8 +79,7 @@ public class StocksImplement implements StocksDAO{
 					Stocks stock = new Stocks();
 					stock.setStockID( resultSet.getInt( "StockID" ) );
 					stock.setProductID( resultSet.getInt( "ProductID" ) );
-					stock.setBranchID( resultSet.getInt( "BranchID" ) );
-					stock.setQuantity( resultSet.getInt( "Quantity" ) );
+					stock.setPharmacyID( resultSet.getInt( "PharmacyID" ) );
 					stock.setFeature( resultSet.getBoolean( "Feature" ) );
 					stocks.add(stock);
 				}
@@ -105,8 +102,7 @@ public class StocksImplement implements StocksDAO{
 				while( resultSet.next() ) {
 					stock.setStockID( resultSet.getInt( "StockID" ) );
 					stock.setProductID( resultSet.getInt( "ProductID" ) );
-					stock.setBranchID( resultSet.getInt( "BranchID" ) );
-					stock.setQuantity( resultSet.getInt( "Quantity" ) );
+					stock.setPharmacyID( resultSet.getInt( "PharmacyID" ) );
 					stock.setFeature( resultSet.getBoolean( "Feature" ) );
 				}
 				resultSet.close();

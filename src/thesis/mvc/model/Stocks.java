@@ -4,8 +4,7 @@ public class Stocks {
 	
 	private int StockID;
 	private int ProductID;
-	private int BranchID;
-	private int Quantity;
+	private int PharmacyID;
 	private boolean Feature;
 	
 	public int getStockID() {
@@ -20,17 +19,11 @@ public class Stocks {
 	public void setProductID(int productID) {
 		ProductID = productID;
 	}
-	public int getBranchID() {
-		return BranchID;
+	public int getPharmacyID() {
+		return PharmacyID;
 	}
-	public void setBranchID(int branchID) {
-		BranchID = branchID;
-	}
-	public int getQuantity() {
-		return Quantity;
-	}
-	public void setQuantity(int quantity) {
-		Quantity = quantity;
+	public void setPharmacyID(int pharmacyID) {
+		PharmacyID = pharmacyID;
 	}
 	public boolean isFeature() {
 		return Feature;

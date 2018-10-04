@@ -58,6 +58,8 @@ public class ShopController extends HttpServlet {
 		if (session.getAttribute("PharmaID") != null) {
 			PharmaID = (int) session.getAttribute("PharmaID");
 			session.setAttribute("SelectedPharmacy", new PharmacyImplement().getPharmacyById(PharmaID));
+		} else {
+			//Go home
 		}
 		
 		
@@ -79,7 +81,7 @@ public class ShopController extends HttpServlet {
 		   	} else {
 		   		session.setAttribute("ApproveChecker", false);
 		   	}
-	   	//Get the Details
+		   	//Get the Details
 		   	OrderDetailImplement orderDetailImplement = new OrderDetailImplement();
 		   	List<OrderDetail> OrderDetails = new ArrayList<OrderDetail>();
 			OrderDetails = orderDetailImplement.getspecificOrderDetail(Integer.parseInt(action));
@@ -104,34 +106,16 @@ public class ShopController extends HttpServlet {
 				cartlist.setTotalCost(orderDetail.getTotalCost());
 				cartlists.add(cartlist);
 			}
-			/*
-			PurchaseAction purchaseAction = new PurchaseAction();
-			ProductImplement productImplement = new ProductImplement();
-			Product product = new Product();
-			product = productImplement.getProductById(orderDetail.getProductID());
-			
-			List<CartList> cartlists = new ArrayList<CartList>();
-			CartList cartlist = purchaseAction.new CartList();
-			cartlist.setName(product.getProductName());
-			cartlist.setDescription(product.getProductDescription());
-			cartlist.setImage(product.getProductImage());
-			cartlist.setSize(product.getProductPackaging());
-			cartlist.setPrescription(product.isRXProduct());
-			cartlist.setQuantity(orderDetail.getQuantity());
-			cartlist.setUnitCost(orderDetail.getCostPerUnit());
-			cartlist.setTotalCost(orderDetail.getTotalCost());
-			cartlists.add(cartlist);
-			session.setAttribute("CartList", cartlists );
-	
-			CartList cartlist = purchaseAction.new CartList();
-			SendEmail sendEmail = new SendEmail();
-			CustomerImplement customerImplement = new CustomerImplement();
-			*/
 			
 			//Set The UserID
 			session.setAttribute("orderReciept", order);
 			session.setAttribute("CartlistReciept", cartlists);
-			forward = "/Checkout.jsp";
+			//if (true) {
+			//	forward = "/Checkout.jsp";
+			//} else {
+			//	forward = "/shop";
+			//}
+			forward = "/Catalog.jsp";
 		   	RequestDispatcher view = request.getRequestDispatcher( forward );
 		   	view.forward(request, response);
 		} else {
@@ -173,17 +157,6 @@ public class ShopController extends HttpServlet {
 		PurchaseAction purchaseAction = new PurchaseAction();
 		//Boolean SurgeCheck;
 		
-		//Safety measure
-		/*
-		if (session.getAttribute("userID") != null && session.getAttribute("SelectedBranch") != null) {
-			SurgeCheck = true;		
-		} else if (action.equalsIgnoreCase("OrderPay")) {
-			SurgeCheck = true;		
-		} else {
-			SurgeCheck = false;
-		}
-		*/
-		
 		if(action.equalsIgnoreCase("OrderPay")) {
 			int orderID =Integer.parseInt(request.getParameter("OrdertoUpdate"));
 			OrderImplement orderImplement = new OrderImplement();
@@ -195,6 +168,12 @@ public class ShopController extends HttpServlet {
 			//sets order and generates it if it does not exist
 			Order order = (Order) session.getAttribute("Order");
 			
+			//Gets the Branch of the store
+			//Branch SelectedBranch = new Branch();
+			//int BID = SelectedBranch.getBranchID();
+			int PID = (int) session.getAttribute("SelectedPharmacy");
+			
+			
 			if(order == null) { // || order.getBranchID() != Current Branch
 				int UID = (int) session.getAttribute("userID");
 				CustomerImplement customerImplement = new CustomerImplement();
@@ -204,26 +183,26 @@ public class ShopController extends HttpServlet {
 				String ADD = customer.getAddress();
 				boolean SID = customer.isIsSeniorCitizen();
 				int CID = customer.getCityID();
-				Branch SelectedBranch = new Branch();
-				SelectedBranch = (Branch) session.getAttribute("SelectedBranch");
-				int BID = SelectedBranch.getBranchID();
 				session.setAttribute("OrderDetails", OrderDetails );
 				
-				order = purchaseAction.setInitalOrder(CusID, ADD, SID, CID, BID);
+				order = purchaseAction.setInitalOrder(CusID, ADD, SID, CID, PID);
 				session.setAttribute("Order", order );
 			}
+			
 			//ProductID & Quantity & Cost per unit
 			ProductID = Integer.valueOf( request.getParameter( "ProductID" ) );
 			Quantity = Integer.valueOf( request.getParameter( "Quantity" ) );
-			CostPerUnit = purchaseAction.getProductCost( ProductID, 1, order );
+				CostPerUnit = purchaseAction.getProductCost( ProductID, PID, order );
 			
 			//Takes the existing order detail if there is and adds the next order detail to there
+			if(session.getAttribute("OrderDetails") == null) {
+				OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
+			}
 			OrderDetail orderDetail = new OrderDetail();
 			orderDetail.setProductID(ProductID);
 			orderDetail.setQuantity(Quantity);
 			orderDetail.setCostPerUnit(CostPerUnit);
-			orderDetail.setTotalCost(CostPerUnit * Quantity);
-			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
+			orderDetail.setTotalCost( Math.round(CostPerUnit * Quantity * 100) / 100 );
 			OrderDetails.add( orderDetail );
 			session.setAttribute("OrderDetails", OrderDetails );
 			
@@ -232,7 +211,12 @@ public class ShopController extends HttpServlet {
 			Product product = new Product();
 			product = productImplement.getProductById(orderDetail.getProductID());
 			
-			List<CartList> cartlists = (List<CartList>) session.getAttribute("CartList");
+			List<CartList> cartlists;
+			if (session.getAttribute("CartList") == null) {
+				cartlists = new ArrayList<CartList>();
+			} else {
+				cartlists = (List<CartList>) session.getAttribute("CartList");
+			}
 			CartList cartlist = purchaseAction.new CartList();
 			cartlist.setName(product.getProductName());
 			cartlist.setDescription(product.getProductDescription());
@@ -244,7 +228,7 @@ public class ShopController extends HttpServlet {
 			cartlist.setTotalCost(orderDetail.getTotalCost());
 			cartlists.add(cartlist);
 			session.setAttribute("CartList", cartlists );
-				
+			
 			//Refreshes and goes back to the cart
 			forward = "/Cart.jsp";
 			//forward = "/A-test-customerpurchasecheckout.jsp";

@@ -26,11 +26,11 @@ public class PurchaseAction {
 	public int addIncompleteOrder(Order order) {
 		try {
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-			String query = "INSERT INTO `order` (CustomerID, CityID, BranchID, OrderAddress, DateOrdered, OrderType, OrderStatus, SeniorDiscount, ActualCost) VALUES (?,?,?,?,?,?,?,?,?)";
+			String query = "INSERT INTO `order` (CustomerID, CityID, PharmacyID, OrderAddress, DateOrdered, OrderType, OrderStatus, SeniorDiscount, ActualCost) VALUES (?,?,?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query, Statement.RETURN_GENERATED_KEYS );
 			preparedStatement.setInt( 1, order.getCustomerID() );
 			preparedStatement.setInt( 2, order.getCityID() );
-			preparedStatement.setInt( 3, order.getBranchID() );
+			preparedStatement.setInt( 3, order.getPharmacyID() );
 			preparedStatement.setString( 4, order.getOrderAddress() );
 			preparedStatement.setDate( 5, CurrentDate );
 			preparedStatement.setString( 6, order.getOrderType() );

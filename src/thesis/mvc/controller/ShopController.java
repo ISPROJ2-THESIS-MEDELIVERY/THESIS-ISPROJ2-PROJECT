@@ -25,6 +25,7 @@ import thesis.mvc.model.Branch;
 import thesis.mvc.model.Customer;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
+import thesis.mvc.model.Pharmacy;
 import thesis.mvc.model.Product;
 import thesis.mvc.pageaction.ApprovalAction;
 import thesis.mvc.pageaction.PurchaseAction;
@@ -33,7 +34,7 @@ import thesis.mvc.pageaction.SearchAction;
 import thesis.mvc.utility.DBUtility;
 import thesis.mvc.utility.SendEmail;
 
-@WebServlet("/PurchaseController")
+@WebServlet("/ShopController")
 public class ShopController extends HttpServlet {
 	
 	private Connection conn;
@@ -143,38 +144,27 @@ public class ShopController extends HttpServlet {
     
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String forward = null;
-		int ProductID = 0;
-		int Quantity = 0;
-		double CostPerUnit = 0.0;
-    	conn = DBUtility.getConnection();
-		String action = "";
+		HttpSession session = request.getSession(true);
+		List<OrderDetail> OrderDetails = new ArrayList<OrderDetail>();
+		if (session.getAttribute("OrderDetails") != null) {
+			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
+		}
+		
+		String action = null;
 		if (request.getParameter( "Action" ) != null) {
 			action = request.getParameter( "Action" );	
 		}
-		HttpSession session = request.getSession(true);
-		List<OrderDetail> OrderDetails = new ArrayList<OrderDetail>();
-		PurchaseAction purchaseAction = new PurchaseAction();
-		//Boolean SurgeCheck;
 		
-		if(action.equalsIgnoreCase("OrderPay")) {
-			int orderID =Integer.parseInt(request.getParameter("OrdertoUpdate"));
-			OrderImplement orderImplement = new OrderImplement();
-			orderImplement.updateOrderPayment( orderID, request.getParameter("Payment"));
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
-		
-		} else if(action.equalsIgnoreCase("Addtocart")) {
-			
+		if (action.equalsIgnoreCase("AddtoCart")) {
 			//sets order and generates it if it does not exist
 			Order order = (Order) session.getAttribute("Order");
+
+			//Set the branch 
+			Pharmacy selectedPharmacy = new Pharmacy();
+			selectedPharmacy = (Pharmacy) session.getAttribute("SelectedPharmacy");
+			int PID = selectedPharmacy.getPharmacyID();
 			
-			//Gets the Branch of the store
-			//Branch SelectedBranch = new Branch();
-			//int BID = SelectedBranch.getBranchID();
-			int PID = (int) session.getAttribute("SelectedPharmacy");
-			
-			
-			if(order == null) { // || order.getBranchID() != Current Branch
+			if (order == null) {
 				int UID = (int) session.getAttribute("userID");
 				CustomerImplement customerImplement = new CustomerImplement();
 				Customer customer = new Customer();
@@ -183,111 +173,14 @@ public class ShopController extends HttpServlet {
 				String ADD = customer.getAddress();
 				boolean SID = customer.isIsSeniorCitizen();
 				int CID = customer.getCityID();
-				session.setAttribute("OrderDetails", OrderDetails );
-				
-				order = purchaseAction.setInitalOrder(CusID, ADD, SID, CID, PID);
+
+				order = new PurchaseAction().setInitalOrder(CusID, ADD, SID, CID, PID);
 				session.setAttribute("Order", order );
 			}
-			
 			//ProductID & Quantity & Cost per unit
-			ProductID = Integer.valueOf( request.getParameter( "ProductID" ) );
-			Quantity = Integer.valueOf( request.getParameter( "Quantity" ) );
-				CostPerUnit = purchaseAction.getProductCost( ProductID, PID, order );
-			
-			//Takes the existing order detail if there is and adds the next order detail to there
-			if(session.getAttribute("OrderDetails") == null) {
-				OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
-			}
-			OrderDetail orderDetail = new OrderDetail();
-			orderDetail.setProductID(ProductID);
-			orderDetail.setQuantity(Quantity);
-			orderDetail.setCostPerUnit(CostPerUnit);
-			orderDetail.setTotalCost( Math.round(CostPerUnit * Quantity * 100) / 100 );
-			OrderDetails.add( orderDetail );
-			session.setAttribute("OrderDetails", OrderDetails );
-			
-			//Insert things into cartDetails
-			ProductImplement productImplement = new ProductImplement();
-			Product product = new Product();
-			product = productImplement.getProductById(orderDetail.getProductID());
-			
-			List<CartList> cartlists;
-			if (session.getAttribute("CartList") == null) {
-				cartlists = new ArrayList<CartList>();
-			} else {
-				cartlists = (List<CartList>) session.getAttribute("CartList");
-			}
-			CartList cartlist = purchaseAction.new CartList();
-			cartlist.setName(product.getProductName());
-			cartlist.setDescription(product.getProductDescription());
-			cartlist.setImage(product.getProductImage());
-			cartlist.setSize(product.getProductPackaging());
-			cartlist.setPrescription(product.isRXProduct());
-			cartlist.setQuantity(orderDetail.getQuantity());
-			cartlist.setUnitCost(orderDetail.getCostPerUnit());
-			cartlist.setTotalCost(orderDetail.getTotalCost());
-			cartlists.add(cartlist);
-			session.setAttribute("CartList", cartlists );
-			
-			//Refreshes and goes back to the cart
-			forward = "/Cart.jsp";
-			//forward = "/A-test-customerpurchasecheckout.jsp";
-			RequestDispatcher view = request.getRequestDispatcher( forward );
-			view.forward(request, response);
-			
-		} else if (action.equalsIgnoreCase("Checkout")/* && SurgeCheck */) {
-			
-			Order order = (Order) session.getAttribute("Order");
-			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
-			List<CartList> cartList = (List<CartList>) session.getAttribute("CartList");
-			SendEmail sendEmail = new SendEmail();
-			CustomerImplement customerImplement = new CustomerImplement();
-			int userID = (int) session.getAttribute("userID");
-			
-			String CustomerEmail = customerImplement.getCustomerByUserId(userID).getEmail();
-
-			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-			purchaseAction.purchaseOrder(order, OrderDetails);
-			sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, "This is a test message");
-			if(order == null || OrderDetails.isEmpty()) {
-				forward = "/index.jsp"; //or an error page
-			} else {
-				session.setAttribute("CartlistReciept", cartList);
-				session.setAttribute("orderReciept", order);
-				session.setAttribute("ApproveChecker", false);
-				session.removeAttribute("Order");
-				session.removeAttribute("OrderDetails");
-				session.removeAttribute("CartList");
-				forward = "Checkout.jsp";
-			}
-			//order.setOrderAddress( request.getParameter( "orderAddress" ) );
-			//order.setPaymentMethod( request.getParameter( "orderPayment" ) );
-			//order.setDateOrdered(today);
-			RequestDispatcher view = request.getRequestDispatcher( forward );
-			view.forward(request, response);
-
-		} else if (action.equalsIgnoreCase("PrescriptionCheckout")) {
-			/*
-			Order order = (Order) session.getAttribute("Order");
-			int UID = (int) session.getAttribute("userID");
-			CustomerImplement customerImplement = new CustomerImplement();
-			Customer customer = new Customer();
-			customer = customerImplement.getCustomerById(UID);
-			String ADD = customer.getAddress();
-			boolean SID = customer.isIsSeniorCitizen();
-			int CID = customer.getCityID();
-			Branch SelectedBranch = new Branch();
-			SelectedBranch = (Branch) session.getAttribute("SelectedBranch");
-			int BID = SelectedBranch.getBranchID();
-			session.setAttribute("OrderDetails", OrderDetails );
-			
-			order = purchaseAction.setInitalOrder(UID, ADD, SID, CID, BID);
-			session.setAttribute("Order", order );
-			
-			//ProductID & Quantity & Cost per unit
-			ProductID = Integer.valueOf( request.getParameter( "ProductID" ) );
-			Quantity = Integer.valueOf( request.getParameter( "Quantity" ) );
-			CostPerUnit = purchaseAction.getProductCost( ProductID, BID, order);
+			int ProductID = Integer.valueOf( request.getParameter( "ProductID" ) );
+			int Quantity = Integer.valueOf( request.getParameter( "Quantity" ) );
+			double CostPerUnit = new PurchaseAction().getProductCost( ProductID, PID, order);
 			
 			//Takes the existing order detail if there is and adds the next order detail to there
 			OrderDetail orderDetail = new OrderDetail();
@@ -305,7 +198,10 @@ public class ShopController extends HttpServlet {
 			product = productImplement.getProductById(orderDetail.getProductID());
 			
 			List<CartList> cartlists = new ArrayList<CartList>();
-			CartList cartlist = purchaseAction.new CartList();
+			if (session.getAttribute("CartList") != null) {
+				cartlists = (List<CartList>) session.getAttribute("CartList");
+			}
+			CartList cartlist = new PurchaseAction().new CartList();
 			cartlist.setName(product.getProductName());
 			cartlist.setDescription(product.getProductDescription());
 			cartlist.setImage(product.getProductImage());
@@ -317,20 +213,8 @@ public class ShopController extends HttpServlet {
 			cartlists.add(cartlist);
 			session.setAttribute("CartList", cartlists );
 			
-			//Refreshes and goes back to the cart
-			forward = "/Cart.jsp";
-			//forward = "/A-test-customerpurchasecheckout.jsp";
-			 */
-
-			forward = "/CatalogBasic.jsp";
-		} else {
-			forward = "/index.jsp";
+			response.sendRedirect(request.getContextPath() + "/CatalogBasic.jsp");
 		}
-		RequestDispatcher view = request.getRequestDispatcher( forward );
-		view.forward(request, response);
-		/*if (!SurgeCheck) {
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
-		}*/
 	}
 	
 	public static boolean isInteger(String s) {

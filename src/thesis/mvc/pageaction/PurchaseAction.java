@@ -52,13 +52,13 @@ public class PurchaseAction {
 		}
 	}
 	
-	public Order setInitalOrder(int custID, String address, boolean senior, int cityID, int branchID) {
+	public Order setInitalOrder(int custID, String address, boolean senior, int cityID, int pharmacyID) {
 		Order order = new Order();
 		order.setCustomerID(custID);           
 		order.setOrderAddress(address); 
 		order.setSeniorDiscount(senior);
 		order.setCityID(cityID);
-		order.setBranchID(branchID);
+		order.setPharmacyID(pharmacyID);
 		return order;
 	}
 	public class CartList {
@@ -121,7 +121,7 @@ public class PurchaseAction {
 		}
 	}
 	
-	public double getProductCost(int ProductID, int Branch, Order order) {
+	public double getProductCost(int ProductID, int Pharmacy, Order order) {
 
 		//Find the city of the customer
 		BigDecimal productCost = null;
@@ -133,9 +133,9 @@ public class PurchaseAction {
 														" WHERE" + 
 														" stocksprice.IsCurrent = 1 AND" + 
 														" stocks.ProductID = ? AND" + 
-														" stocks.BranchID = ?")) {
+														" stocks.PharmacyID = ?")) {
             stmt.setInt(1, ProductID);
-            stmt.setInt(2, Branch);
+            stmt.setInt(2, Pharmacy);
             try(ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                 	productCost = rs.getBigDecimal("PriceSet");

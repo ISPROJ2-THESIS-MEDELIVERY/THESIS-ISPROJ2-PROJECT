@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>CART:</h1>
-	<c:if test="${Cartlist != null}">
+	<c:if test="${CartList != null}">
 		<table border=1>
 			<thead>
 				<tr>
@@ -24,7 +24,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${Cartlist}" var="details">
+				<c:forEach items="${CartList}" var="details">
 		            <tr>
 		                <td><c:out value="${details.name}" /></td>
 		                <td><c:out value="${details.description}" /></td>
@@ -38,7 +38,7 @@
 			</tbody>
 		</table>
 	</c:if>
-	<c:if test="${Cartlist == null}">
+	<c:if test="${CartList == null}">
 		<h2>NOTHING ORDERED YET</h2>
 	</c:if>
 	
@@ -59,7 +59,7 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${productList}" var="item">
-				<form action='PurchaseController' method='post'>
+				<form action='ShopController' method='post'>
 					<tr>
 						<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
 						<td><c:out value="${item.productName}" /></td>

@@ -23,8 +23,10 @@
 			<a href="LoginController">Logout</a><br>
 			<br>Pharmacies:<br>
 			<c:forEach items="${PharmcyList}" var="pharmacy">
-				<a href="CustomerController?PharmaID=<c:out value="${pharmacy.pharmacyID}" />"><c:out value="${pharmacy.pharmacyName}" /></a><br>
+				<a href="CustomerController?action=GoToCatalog&PharmaID=<c:out value="${pharmacy.pharmacyID}" />"><c:out value="${pharmacy.pharmacyName}" /></a><br>
 			</c:forEach>
+			Order History:
+				<a href="CustomerController?action=GoToOrders" />To to Order History</a><br>
 			<hr>
 		</c:if>
 		<c:if test="${userAccess == 2}">

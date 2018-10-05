@@ -5,16 +5,32 @@
 
 <html>
 <head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="assets/css/Login-Form-Clean.css" />
+<link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
+	<div class="login-clean">
 	<form action="LoginController" method="post">
 		<c:if test="${RetryLogin != null}">
 			Failed Login Attempts: <c:out value="${LoginTry}" /><br>
 			Only 5 attempts are allowed
 		</c:if>
-		<fieldset>
+		<h2 class="sr-only">Login Form</h2>
+        <div class="form-group">
+        	<input type="text" name="Username" placeholder="Username" class="form-control" maxlength="25"/>
+        </div>
+        <div class="form-group">
+        	<input type="password" name="Password" placeholder="Password" class="form-control" maxlength="25"/>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary btn-block" type="submit">Log In</button>
+        </div>
+		<!--  <fieldset>
 			<div align="center">
 				<label for="Username">Username</label><br />
 				<input type="text" name="Username" placeholder="Username" maxlength="25"/>
@@ -26,7 +42,8 @@
 			<div align="center">
 				<input type="submit" value="Submit" />
 			</div>
-		</fieldset>
+		</fieldset>  -->
 	</form>
+	</div>
 </body>
 </html>

@@ -4,15 +4,39 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 <title>Home Page</title>
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" />
+<link rel="stylesheet" href="assets/css/Header-Blue.css" />
+<link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 	<body>
 	<!-- This will be used as a jumping point to test the controllers -->
-		<c:if test="${userAccess == null}">
+	 <div>
+        <div class="header-blue">
+            <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
+                <div class="container"><a href="home.jsp" class="navbar-brand">Medelivery</a>
+                    <div class="collapse navbar-collapse" id="navcol-1">
+                        <ul class="nav navbar-nav"></ul>
+                        <form target="_self" class="form-inline mr-auto">
+                            <div class="form-group"><label for="search-field"></label></div>
+                        </form>
+                        <c:if test="${userAccess == null}">
+                        <span class="navbar-text"><a href="login.jsp" class="login">Log In</a></span>
+                        <a class="btn btn-light action-button" role="button" href="register.jsp">Registration</a>
+                        </c:if>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div> 
+		<!-- <c:if test="${userAccess == null}">
 			<a href="login.jsp">Login</a><br>
 			<a href="register.jsp">Registration</a><br>
-		</c:if>
+		</c:if> -->
 		
 		<c:if test="${userAccess == 1}">
 			<hr>

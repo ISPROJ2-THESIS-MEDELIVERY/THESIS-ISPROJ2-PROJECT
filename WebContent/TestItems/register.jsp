@@ -16,7 +16,7 @@
 <form action="RegistrationController" method="post" enctype="multipart/form-data">
 	<h2 class="sr-only">Login Form</h2>
         <div class="form-group">
-        	<input type="text" name="Fullname" required="" placeholder="FullName *" class="form-control"/>
+        	<input type="text" name="FullName" required="" placeholder="FullName *" class="form-control"/>
         </div>
         <div class="form-group">
         	<input type="text" name="Username" required="" placeholder="Username *" class="form-control"/>

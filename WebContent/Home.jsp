@@ -48,7 +48,7 @@
 	<link rel="stylesheet" href="assets/css/Header-Blue.css" />
 </head>
 
-<body><img src="assets/img/MedeliveryLogo.png">
+<body><img src="assets/img/MedeliveryNewLogo.png">
 		<div class="header-blue">
             <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
                 <div class="container">

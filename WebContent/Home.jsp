@@ -47,7 +47,7 @@
 </head>
 
 <body><img src="assets/img/MedeliveryLogo.png">
-    <nav class="navbar navbar-light navbar-expand-md">
+<%--     <nav class="navbar navbar-light navbar-expand-md">
         <div class="container-fluid"><a class="navbar-brand" href="#"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav">
@@ -74,7 +74,7 @@
 				</c:choose>
             </div>
         </div>
-    </nav>
+    </nav> --%>
     <h2 class="text-center">Featured Products</h2>
     
     

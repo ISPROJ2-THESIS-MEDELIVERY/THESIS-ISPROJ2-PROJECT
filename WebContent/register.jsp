@@ -40,7 +40,7 @@
             <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
         </div>
         <a class="already" href="home.jsp">Back</a> -->
-<input type="text" 		name="FullName" 		required="" placeholder="FullName *">
+    <input type="text" 		name="FullName" 		required="" placeholder="FullName *">
 	<input type="text" 		name="Username" 		required="" placeholder="Username *">
 	<input type="text" 		name="CAddress" 		required="" placeholder="Address *">
 	<input type="email" 	name="CusEmail" 		required="" placeholder="Email *">

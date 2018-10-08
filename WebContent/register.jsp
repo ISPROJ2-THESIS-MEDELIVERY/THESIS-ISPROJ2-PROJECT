@@ -14,7 +14,7 @@
 <body>
 <div class="login-clean">
 <form action="RegistrationController" method="post" enctype="multipart/form-data">
-	<h2 class="sr-only">Login Form</h2>
+	<!-- <h2 class="sr-only">Login Form</h2>
         <div class="form-group">
         	<input type="text" name="FullName" required="" placeholder="FullName *" class="form-control"/>
         </div>
@@ -39,8 +39,8 @@
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
         </div>
-        <a class="already" href="login.jsp">Back</a>
-<!--<input type="text" 		name="FullName" 		required="" placeholder="FullName *">
+        <a class="already" href="home.jsp">Back</a> -->
+<input type="text" 		name="FullName" 		required="" placeholder="FullName *">
 	<input type="text" 		name="Username" 		required="" placeholder="Username *">
 	<input type="text" 		name="CAddress" 		required="" placeholder="Address *">
 	<input type="email" 	name="CusEmail" 		required="" placeholder="Email *">
@@ -48,8 +48,9 @@
 	<input type="password" 	name="Password" 		required="" placeholder="Create Password">
 	<input type="password" 	name="Password-repeat" 	required="" placeholder="Re-enter Password" style="margin:0px;">
 	<button type="submit" style="background-color:#56c5ff;">Sign Up</button>
-	<a href="login.jsp" class="already" style="color:#282d32;font-size:20px;">back</a> -->
+	<a href="login.jsp" class="already" style="color:#282d32;font-size:20px;">back</a> 
 </form>
 </div>
+<div role="alert" class="alert alert-info"><span><strong>A confirmation email has been sent to your email address</strong></span></div>
 </body>
 </html>

@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" />
 <link rel="stylesheet" href="assets/css/Header-Blue.css" />
 <link rel="stylesheet" href="assets/css/styles.css" />
+<link rel="stylesheet" href="MUSA_carousel-product-cart-slider-1.css" />
+<link rel="stylesheet" href="MUSA_carousel-product-cart-slider.css" />
 </head>
 	<body>
 	<!-- This will be used as a jumping point to test the controllers -->
@@ -232,5 +234,28 @@
 				<a href="LoginController">Logout</a><br>
 			<hr>
 		</c:if>
+		<footer class="footer text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-5 mb-lg-0">
+                <h4 class="text-uppercase mb-4">Location</h4>
+                <p></p>
+            </div>
+            <div class="col-md-4 mb-5 mb-lg-0">
+                <h4 class="text-uppercase">Around the Web</h4>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a class="btn btn-outline-light btn-social text-center rounded-circle" role="button" href="#"><i class="fa fa-facebook fa-fw"></i></a></li>
+                    <li class="list-inline-item"><a class="btn btn-outline-light btn-social text-center rounded-circle" role="button" href="#"><i class="fa fa-google-plus fa-fw"></i></a></li>
+                    <li class="list-inline-item"><a class="btn btn-outline-light btn-social text-center rounded-circle" role="button" href="#"><i class="fa fa-twitter fa-fw"></i></a></li>
+                    <li class="list-inline-item"><a class="btn btn-outline-light btn-social text-center rounded-circle" role="button" href="#"><i class="fa fa-dribbble fa-fw"></i></a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4 class="text-uppercase mb-4">About medelivery</h4>
+                <p class="lead mb-0"><span></span></p>
+            </div>
+        </div>
+    </div>
+</footer>
 	</body>
 </html>

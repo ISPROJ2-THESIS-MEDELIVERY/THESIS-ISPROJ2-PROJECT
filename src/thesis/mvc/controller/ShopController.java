@@ -15,6 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileItemFactory;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
 import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.OrderDetailImplement;
@@ -144,6 +150,7 @@ public class ShopController extends HttpServlet {
     
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Boolean Test = ServletFileUpload.isMultipartContent(request);
 		HttpSession session = request.getSession(true);
 		List<OrderDetail> OrderDetails = new ArrayList<OrderDetail>();
 		if (session.getAttribute("OrderDetails") != null) {

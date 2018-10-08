@@ -12,8 +12,6 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" />
 <link rel="stylesheet" href="assets/css/Header-Blue.css" />
 <link rel="stylesheet" href="assets/css/styles.css" />
-<link rel="stylesheet" href="MUSA_carousel-product-cart-slider-1.css" />
-<link rel="stylesheet" href="MUSA_carousel-product-cart-slider.css" />
 </head>
 	<body>
 	<!-- This will be used as a jumping point to test the controllers -->
@@ -35,6 +33,7 @@
             </nav>
         </div>
     </div> 
+    <div role="alert" class="alert alert-info"><span><strong>A confirmation email has been sent to your email address</strong></span></div>
 		<!-- <c:if test="${userAccess == null}">
 			<a href="login.jsp">Login</a><br>
 			<a href="register.jsp">Registration</a><br>
@@ -42,7 +41,28 @@
 		
 		<c:if test="${userAccess == 1}">
 			<hr>
-			Customer Details<br>
+		<div class="container">
+    		<div class="row">
+        		<div class="col-md-6">
+        			Customer Details:<br>
+					<c:out value="${userID}" /><br>
+					<c:out value="${username}" /><br>
+					<c:out value="${userAccess}" /><br>
+					<a href="LoginController">Logout</a><br>
+				</div>
+        		<div class="col-md-6">
+        			<br>Pharmacies:<br>
+					<c:forEach items="${PharmcyList}" var="pharmacy">
+					<a href="CustomerController?action=GoToCatalog&PharmaID=<c:out value="${pharmacy.pharmacyID}" />"><c:out value="${pharmacy.pharmacyName}" /></a><br>
+					</c:forEach>
+        		</div>
+        		<div class="col-md-6">
+        			Order History:
+					<a href="CustomerController?action=GoToOrders" />To to Order History</a><br>
+        		</div>
+    		</div>
+		</div>
+			<%-- Customer Details:<br>
 			<c:out value="${userID}" /><br>
 			<c:out value="${username}" /><br>
 			<c:out value="${userAccess}" /><br>
@@ -52,26 +72,49 @@
 				<a href="CustomerController?action=GoToCatalog&PharmaID=<c:out value="${pharmacy.pharmacyID}" />"><c:out value="${pharmacy.pharmacyName}" /></a><br>
 			</c:forEach>
 			Order History:
-				<a href="CustomerController?action=GoToOrders" />To to Order History</a><br>
+				<a href="CustomerController?action=GoToOrders" />To to Order History</a><br> --%>
 			<hr>
 		</c:if>
 		<c:if test="${userAccess == 2}">
-			<hr>
-			Dispatcher<br>
+		<hr>
+		<div class="container">
+    		<div class="row">
+        		<div class="col-md-6">
+        			Dispatcher<br>
+					<c:out value="${userID}" /><br>
+					<c:out value="${username}" /><br>
+					<c:out value="${userAccess}" /><br>
+					<a href="LoginController">Logout</a><br>
+				</div>
+    		</div>
+		</div>		
+			<%-- Dispatcher<br>
 			<c:out value="${userID}" /><br>
 			<c:out value="${username}" /><br>
 			<c:out value="${userAccess}" /><br>
-			<a href="LoginController">Logout</a><br>
-			<hr>
+			<a href="LoginController">Logout</a><br> --%>
+		<hr>
 		</c:if>
 		<c:if test="${userAccess == 3}">
 			<hr>
-			Pharmacist Details<br>
+		<div class="container">
+    		<div class="row">
+        		<div class="col-md-6">
+        			Pharmacist Details<br>
+					<c:out value="${userID}" /><br>
+					<c:out value="${username}" /><br>
+					<c:out value="${userAccess}" /><br>
+					<a href="LoginController">Logout</a><br>
+					<a href="ProductController?Action=AddProduct">Add Product</a><br>
+				</div>
+    		</div>
+		</div>	
+			<%-- Pharmacist Details<br>
 			<c:out value="${userID}" /><br>
 			<c:out value="${username}" /><br>
 			<c:out value="${userAccess}" /><br>
 			<a href="LoginController">Logout</a><br>
-			<a href="ProductController?Action=AddProduct">Add Product</a><br>
+			<a href="ProductController?Action=AddProduct">Add Product</a><br> --%>
 			<hr>
 		</c:if>
 		<c:if test="${userAccess == 4}">
@@ -234,7 +277,7 @@
 				<a href="LoginController">Logout</a><br>
 			<hr>
 		</c:if>
-		<footer class="footer text-center">
+<footer class="footer text-center">
     <div class="container">
         <div class="row">
             <div class="col-md-4 mb-5 mb-lg-0">

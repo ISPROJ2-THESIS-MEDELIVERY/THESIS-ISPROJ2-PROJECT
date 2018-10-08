@@ -11,8 +11,24 @@
 <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="assets/css/Login-Form-Clean.css" />
 <link rel="stylesheet" href="assets/css/styles.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" />
+<link rel="stylesheet" href="assets/css/Header-Blue.css" />
 </head>
 <body>
+	 <div>
+        <div class="header-blue">
+            <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
+                <div class="container"><a href="home.jsp" class="navbar-brand">Medelivery</a>
+                    <div class="collapse navbar-collapse" id="navcol-1">
+                        <ul class="nav navbar-nav"></ul>
+                        <form target="_self" class="form-inline mr-auto">
+                            <div class="form-group"><label for="search-field"></label></div>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div> 
   <div class="login-clean">
 	<form action="InformationController" method="post">
         <div class="form-group">

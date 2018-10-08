@@ -40,7 +40,7 @@
         	<input type="text" name="CompCont" required="" placeholder="Courier Contact" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="hidden" name="Actionthing" value="addCourier class="form-control"/>
+        	<input type="hidden" name="Actionthing" value="addCourier" class="form-control"/>
         </div>
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">Sign Up</button>

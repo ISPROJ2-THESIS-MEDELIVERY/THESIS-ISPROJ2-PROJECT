@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -28,44 +27,93 @@
             </nav>
         </div>
     </div> 
-	<c:forEach items="${OrderHistory}" var="order">
-	Customer ID: <c:out value="${order.customerID}" /><br>
-	Pharmacy ID: <c:out value="${order.pharmacyID}" /><br>
-	City ID: <c:out value="${order.cityID}" /><br>
-	Address: <c:out value="${order.orderAddress}" /><br>
-	Date: <c:out value="${order.dateOrdered}" /><br>
-	Type: <c:out value="${order.orderType}" /><br>
-	Status <c:out value="${order.orderStatus}" /><br>
-	Senior: <c:out value="${order.seniorDiscount}" /><br>
-	Actual: <c:out value="${order.actualCost}" /><br>
+	<h1>CART:</h1>
 	<div class="table-responsive">
 	<table class="table">
-	    <thead>
-	        <tr>
-	            <th>OrderID</th>
-	            <th>ProductID</th>
+		<thead>
+			<tr>
+	            <th>Item</th>
+	            <th>Item Description</th>
+	            <th>Image</th>
+	            <th>Size</th>
+	            <th>Prescription Required</th>
 	            <th>Quantity</th>
-	            <th>Cost Per Unit</th>
+	            <th>Unit Price</th>
 	            <th>Total Cost</th>
-	        </tr>
-	    </thead>
-	    <tbody>
-	    	<c:forEach items="${OrderDetailHistory}" var="orderdetails">
-				<c:if test="${order.orderID == orderdetails.orderID}">
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${CartlistReciept}" var="cartdetails">
 	            <tr>
-	                <td><c:out value="${orderdetails.orderID}" /></td>
-	                <td><c:out value="${orderdetails.productID}" /></td>
-	                <td><c:out value="${orderdetails.quantity}" /></td>
-	                <td><c:out value="${orderdetails.costPerUnit}" /></td>
-	                <td><c:out value="${orderdetails.totalCost}" /></td>
+	                <td><c:out value="${cartdetails.name}" /></td>
+	                <td><c:out value="${cartdetails.description}" /></td>
+	                <td>IMAGE HERE</td>
+	                <!-- <td><img src="data:image/jpeg;base64,${cartdetails.image}" /></td>  -->
+	                <td><c:out value="${cartdetails.size}" /></td>
+	                <td><c:out value="${cartdetails.prescription}" /></td>
+	                <td><c:out value="${cartdetails.quantity}" /></td>
+	                <td><c:out value="${cartdetails.unitCost}" /></td>
+	                <td><c:out value="${cartdetails.totalCost}" /></td>
 	            </tr>
-	            </c:if>
-			</c:forEach>
-	    </tbody>
+            </c:forEach>
+		</tbody>
 	</table>
 	</div>
-	<hr>
-	</c:forEach>
+	<h1>SHOP:</h1>
+	<div class="table-responsive">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Product ID</th>
+				<th>Product Name</th>
+				<th>Generic Name</th>
+				<th>Registration No</th>
+				<th>Product Strength</th>
+				<th>Product Form</th>
+				<th>Product Packaging</th>
+				<th>Product Manufacturer</th>
+				<th>Product Origin</th>
+				<th>Product Description</th>
+				<th>Quantity</th>
+				<th>Buy</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${productList}" var="item">
+				<form action='PurchaseController' method='post'>
+					<tr>
+						<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
+						<td><c:out value="${item.productName}" /></td>
+						<td><c:out value="${item.genericName}" /></td>
+						<td><c:out value="${item.registrationNo}" /></td>
+						<td><c:out value="${item.productStrength}" /></td>
+						<td><c:out value="${item.productForm}" /></td>
+						<td><c:out value="${item.productPackaging}" /></td>
+						<td><c:out value="${item.productManufacturer}" /></td>
+						<td><c:out value="${item.productOrigin}" /></td>
+						<td><c:out value="${item.productDescription}" /></td>
+						<td>
+							<select name='Quantity'>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+							</select>
+						</td>
+						<td>
+							<input type='submit' name='Action' value="Addtocart" style='display: on-hover' />
+						</td>
+					</tr>
+				</form>
+			</c:forEach>
+		</tbody>
+	</table>
+	</div>
 		<footer class="footer text-center">
     		<div class="container">
         		<div class="row">

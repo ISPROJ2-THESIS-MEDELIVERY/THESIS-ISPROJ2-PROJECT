@@ -1,6 +1,8 @@
 package thesis.mvc.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.FileItemFactory;
@@ -26,18 +29,21 @@ import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacyImplement;
+import thesis.mvc.implement.PrescriptionImplement;
 import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.model.Branch;
 import thesis.mvc.model.Customer;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
 import thesis.mvc.model.Pharmacy;
+import thesis.mvc.model.Prescription;
 import thesis.mvc.model.Product;
 import thesis.mvc.pageaction.ApprovalAction;
 import thesis.mvc.pageaction.PurchaseAction;
 import thesis.mvc.pageaction.PurchaseAction.CartList;
 import thesis.mvc.pageaction.SearchAction;
 import thesis.mvc.utility.DBUtility;
+import thesis.mvc.utility.EncryptionFunction;
 import thesis.mvc.utility.SendEmail;
 
 @WebServlet("/ShopController")
@@ -50,6 +56,7 @@ public class ShopController extends HttpServlet {
 	}
 	
 	private static final long serialVersionUID = 1L;
+	private final String UPLOAD_DIRECTORY = "D:/uploads";
 	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Ensures that the person can select what he/she wants to buy
@@ -178,8 +185,8 @@ public class ShopController extends HttpServlet {
 				customer = customerImplement.getCustomerByUserId(UID);
 				int CusID = customer.getCustomerID();
 				String ADD = customer.getAddress();
-				boolean SID = customer.isIsSeniorCitizen();
 				int CID = customer.getCityID();
+				boolean SID = customer.isIsSeniorCitizen();
 
 				order = new PurchaseAction().setInitalOrder(CusID, ADD, SID, CID, PID);
 				session.setAttribute("Order", order );
@@ -221,7 +228,89 @@ public class ShopController extends HttpServlet {
 			session.setAttribute("CartList", cartlists );
 			
 			response.sendRedirect(request.getContextPath() + "/CatalogBasic.jsp");
+		} else if (action.equalsIgnoreCase("CheckoutOrder")) {
+			String forward;
+			Order order = (Order) session.getAttribute("Order");
+			PurchaseAction purchaseAction = new PurchaseAction();
+			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
+			List<CartList> cartList = (List<CartList>) session.getAttribute("CartList");
+			SendEmail sendEmail = new SendEmail();
+			CustomerImplement customerImplement = new CustomerImplement();
+			int userID = (int) session.getAttribute("userID");
+			
+			String CustomerEmail = customerImplement.getCustomerByUserId(userID).getEmail();
+
+			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+			purchaseAction.purchaseOrder(order, OrderDetails);
+			sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, "This is a test message");
+			if(order == null || OrderDetails.isEmpty()) {
+				forward = "/index.jsp"; //or an error page
+			} else {
+				session.setAttribute("CartlistReciept", cartList);
+				session.setAttribute("orderReciept", order);
+				session.setAttribute("ApproveChecker", false);
+				session.removeAttribute("Order");
+				session.removeAttribute("OrderDetails");
+				session.removeAttribute("CartList");
+				forward = "Checkout.jsp";
+			}
+			//order.setPaymentMethod( request.getParameter( "orderPayment" ) );
+			//order.setDateOrdered(today);
+
+			response.sendRedirect(request.getContextPath() + forward);
+		} else if (action.equalsIgnoreCase("AddPrescription")) {
+
+			//Set the branch 
+			Pharmacy selectedPharmacy = new Pharmacy();
+			selectedPharmacy = (Pharmacy) session.getAttribute("SelectedPharmacy");
+			int PID = selectedPharmacy.getPharmacyID();
+			
+			int UID = (int) session.getAttribute("userID");
+			CustomerImplement customerImplement = new CustomerImplement();
+			Customer customer = new Customer();
+			customer = customerImplement.getCustomerByUserId(UID);
+			
+			int CusID = customer.getCustomerID();
+			String ADD = customer.getAddress();
+			int CID = customer.getCityID();
+			boolean SID = customer.isIsSeniorCitizen();
+
+			Order order = new PurchaseAction().setInitalOrder(CusID, ADD, SID, CID, PID);
+			int orderID = new PurchaseAction().addPrescriptionOrder(order);
+			
+			if(ServletFileUpload.isMultipartContent(request)){
+	            try {
+
+	            	Part filePart = request.getPart("file");
+					String name = "Prescription" + orderID;
+					//String end = filePart.getContentType();
+					String end = filePart.getContentType();
+					if (end.startsWith("image")) {
+						String imageType = end.replace("image/", "");
+						String DbaseName = new EncryptionFunction().encrypt(name);
+						String AFileName = new EncryptionFunction().encrypt(name + "THESALTISREAL");
+						Prescription prescription = new Prescription();
+						prescription.setCustomerID(CID);
+						prescription.setPrescription(DbaseName);
+						prescription.setPermissionStatus("PENDING");
+						prescription.setPharmacistID(0);
+						prescription.setRemark("");
+						new PrescriptionImplement().addPrescription(prescription);
+						filePart.write(UPLOAD_DIRECTORY + File.separator + AFileName + "." + imageType);
+		            	request.setAttribute("message", "File Uploaded Successfully: " + UPLOAD_DIRECTORY + File.separator + AFileName + "." + imageType);
+					} else {
+		            	request.setAttribute("message", "File Uploaded is not an image!");
+					}
+	            	
+	            } catch (Exception ex) {
+	            	request.setAttribute("message", "File Upload Failed due to " + ex);
+	            }
+	            
+	        }
+
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}
+			
 	}
 	
 	public static boolean isInteger(String s) {

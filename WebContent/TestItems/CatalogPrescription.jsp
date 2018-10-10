@@ -9,9 +9,9 @@
 <body>
 	<!-- CatalogPrescription -->
 	<form method="post" action="TestController" encType="multipart/form-data">
-	<input type="submit" value="TestJSON"/>
-	<!-- <input type="file" name="file" value="Upload Prescription"/> -->
-	<!-- <input type="submit" value="start upload"/> -->
+	<input type="file" name="file" value="Upload Prescription"/><br>
+	<input type="hidden" name="PharmaID" value="Pharmacy Name"/><br>
+	<input type="submit" name="action" value="AddPrescription"/>
 	</form>
 </body>
 </html>

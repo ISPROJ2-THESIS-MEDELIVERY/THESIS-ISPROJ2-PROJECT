@@ -29,8 +29,9 @@
             </nav>
         </div>
     </div> 
-  <div class="table-responsive">
     <a class="already" href="login.jsp">Insert Product</a>
+    
+  <div class="table-responsive">
     <table class="table">
     	<thead>
     	   <tr>
@@ -104,7 +105,7 @@
      </div>
      <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">Submit</button>
-        </div>
+     </div>
 	
 	<!-- Registration Number:<br>
 		<input type="text" name="RegistrationNo"/><br>

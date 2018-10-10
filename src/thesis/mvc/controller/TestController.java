@@ -100,18 +100,21 @@ public class TestController extends HttpServlet {
         //Loop Here		//item		//List<CartList> cartlists = new ArrayList<CartList>();
         	JSONObject item = new JSONObject();
     		//amount : 
-    			//details
-    				//subtotal : Double (to 2 decimal points)
-    				//tax : Double (to 2 decimal points)
-					//shippingFee : Double (to 2 decimal points)
-					//serviceCharge : Double (to 2 decimal points)
-					//discount : Double (to 2 decimal points)
-    			//currency : "PHP"
-    			//value : Double (to 2 decimal points)
-    		//quantity : int
-    		//description :String 
-    		//code : String
-        	item.put("name", "itemName");
+        	JSONObject amount = new JSONObject();
+        		JSONObject details = new JSONObject();
+        			details.put("subtotal", 50.25);
+        			details.put("tax", 70.75);
+        			details.put("shippingFee", 23.65);
+        			details.put("serviceCharge", 45.95);
+        			details.put("discount", 15.30);
+        		amount.put("details", details);
+        		amount.put("currency", "PHP");
+        		amount.put("value", 50.50);
+        	item.put("amount", amount);
+        	item.put("quantity", 5);
+        	item.put("description", "productInfo");
+        	item.put("code", "ProductCode/ID/Pharma Number");
+        	item.put("name", "ProductName");
         	items.add(item);
         //To Here
         JSONReciept.put("items", items);

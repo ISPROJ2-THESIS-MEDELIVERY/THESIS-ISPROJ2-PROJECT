@@ -1,5 +1,6 @@
 package thesis.mvc.controller;
 
+import java.awt.font.NumericShaper;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,6 +41,7 @@ public class TestController extends HttpServlet {
 	
     @SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+    	/*
         JSONObject obj = new JSONObject();
     	
     	
@@ -77,58 +79,98 @@ public class TestController extends HttpServlet {
         obj.put("testing", full);
         
     	request.setAttribute("message", obj);
+    	*/
     	
     	//This is the final item
     	JSONObject JSONReciept = new JSONObject();
+
+    	//items
+        List<JSONObject> items = new ArrayList<JSONObject>();
+        //foreach(){
+        	JSONObject item = new JSONObject();
+        	item.put("name", "ProductName");
+        	item.put("code", "ProductCode/ID/Pharma Number");
+        	item.put("description", "productInfo");
+        	item.put("quantity", 1);
+        	JSONObject amount = new JSONObject();
+	    		amount.put("value", 205.90);
+	    		amount.put("currency", "PHP");
+	        	JSONObject details0 = new JSONObject();
+		        	details0.put("discount", 15.30);
+	    			details0.put("serviceCharge", 45.95);
+	    			details0.put("shippingFee", 23.65);
+	    			details0.put("tax", 70.75);
+	        		details0.put("subtotal", 50.25);
+	    		amount.put("details", details0);
+	    	item.put("amount", amount);
+        	JSONObject totalAmount = new JSONObject();
+				totalAmount.put("value", 205.90);
+				totalAmount.put("currency", "PHP");
+	    		JSONObject details = new JSONObject();
+					details.put("discount", 15.30);
+					details.put("serviceCharge", 45.95);
+					details.put("shippingFee", 23.65);
+					details.put("tax", 70.75);
+					details.put("subtotal", 50.25);
+				totalAmount.put("details", details);
+			item.put("totalAmount", totalAmount);
+        	items.add(item);
+        //}
+        JSONReciept.put("items", items);
+        
+    	//redirectUrl
+        JSONObject redirectUrl = new JSONObject();
+        redirectUrl.put("success", "www.google.com");
+        redirectUrl.put("failure", "www.google.com");
+        redirectUrl.put("cancel", "www.google.com");
+        JSONReciept.put("redirectUrl", redirectUrl);
+    	
+        //requestReferenceNumber
+        JSONReciept.put("requestReferenceNumber", "000141386713");
     	
     	//metadata
         JSONObject metadata = new JSONObject();        
         JSONReciept.put("metadata", metadata);
-    	
-        //requestReferenceNumber
-        JSONReciept.put("requestReferenceNumber", "000141386713");
         
-    	//redirectUrl
-        JSONObject redirectUrl = new JSONObject();
-        redirectUrl.put("cancel", "www.google.com");
-        redirectUrl.put("failure", "www.google.com");
-        redirectUrl.put("success", "www.google.com");
-        JSONReciept.put("redirectUrl", redirectUrl);
+        //Fixing below
         
-    	//items
-        List<JSONObject> items = new ArrayList<JSONObject>();
-        //Loop Here		//item		//List<CartList> cartlists = new ArrayList<CartList>();
-        	JSONObject item = new JSONObject();
-    		//amount : 
-        	JSONObject amount = new JSONObject();
-        		JSONObject details = new JSONObject();
-        			details.put("subtotal", 50.25);
-        			details.put("tax", 70.75);
-        			details.put("shippingFee", 23.65);
-        			details.put("serviceCharge", 45.95);
-        			details.put("discount", 15.30);
-        		amount.put("details", details);
-        		amount.put("currency", "PHP");
-        		amount.put("value", 50.50);
-        	item.put("amount", amount);
-        	item.put("quantity", 5);
-        	item.put("description", "productInfo");
-        	item.put("code", "ProductCode/ID/Pharma Number");
-        	item.put("name", "ProductName");
-        	items.add(item);
-        //To Here
-        JSONReciept.put("items", items);
+        //Unfixed below
         
     	//buyer
-	    	//ipAddress
-	    	//
-	    	//
-	    	//
-	    	//
-	    	//
-	    	//
-    	//totalAmount
+        JSONObject buyer = new JSONObject();
+        buyer.put("ipAddress", "125.60.148.241");
+        	JSONObject address = new JSONObject();
+        	address.put("countryCode", "PH");
+        	address.put("state", "Metro Manila");
+        	address.put("city", "Muntinlupa City");
+        	address.put("line2", "Alabang hills village");
+        	address.put("line2", "26 Bacolod St.");
+        buyer.put("shippingAddress", address);
+        buyer.put("billingAddress", address);
+    		JSONObject contact = new JSONObject();
+    		contact.put("phone", "+(63)1234567890");
+    		contact.put("email", "edennyyu@gmail.com");
+        buyer.put("contact", contact);
+        buyer.put("lastName", "Yu");
+        buyer.put("middleName", "Tiu");
+        buyer.put("firstName", "Dan");
+    	JSONReciept.put("buyer", buyer);
     	
+        //totalAmount
+    	JSONObject totalAmount1 = new JSONObject();
+    		JSONObject details1 = new JSONObject();
+    		details1.put("subtotal", 205.90);
+    		details1.put("tax", 70.75);
+    		details1.put("shippingFee", 23.65);
+    		details1.put("serviceCharge", 45.95);
+    		details1.put("discount", 15.30);
+        totalAmount1.put("details", details1);
+        totalAmount1.put("value",  205.90);
+        totalAmount1.put("currency", "PHP");
+    	JSONReciept.put("totalAmount", totalAmount1);
+    	
+    	
+        
     	//metadata
     		//Leave blank
     	//requestReferenceNumber
@@ -153,6 +195,7 @@ public class TestController extends HttpServlet {
     		//name : String
     	//buyer
     	//totalAmount
+    	request.setAttribute("message", JSONReciept);
     	
     	
     	

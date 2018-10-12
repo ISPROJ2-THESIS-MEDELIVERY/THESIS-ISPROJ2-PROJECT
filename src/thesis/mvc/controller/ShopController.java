@@ -25,6 +25,7 @@ import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import thesis.mvc.implement.BranchImplement;
+import thesis.mvc.implement.CityListingImplement;
 import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.implement.OrderImplement;
@@ -179,16 +180,22 @@ public class ShopController extends HttpServlet {
 			int PID = selectedPharmacy.getPharmacyID();
 			
 			if (order == null) {
-				int UID = (int) session.getAttribute("userID");
+				int UserID = (int) session.getAttribute("userID");
 				CustomerImplement customerImplement = new CustomerImplement();
 				Customer customer = new Customer();
-				customer = customerImplement.getCustomerByUserId(UID);
+				customer = customerImplement.getCustomerByUserId(UserID);
 				int CusID = customer.getCustomerID();
-				String ADD = customer.getAddress();
-				int CID = customer.getCityID();
-				boolean SID = customer.isIsSeniorCitizen();
-
-				order = new PurchaseAction().setInitalOrder(CusID, ADD, SID, CID, PID);
+				String Adr = customer.getCustomerStreet()
+						+ ", " + customer.getCustomerBarangay()
+						+ ", " + new CityListingImplement().getCityListingById(customer.getCityID())
+						+ ", " + customer.getCustomerProvince();
+				int CityID = customer.getCityID();
+				boolean S = customer.isIsSeniorCitizen();
+				
+				order.setCustomerID(CusID);
+				order.setOrderAddress(Adr);
+				order.setCityID(CityID);
+				order.setSeniorDiscount(S);
 				session.setAttribute("Order", order );
 			}
 			//ProductID & Quantity & Cost per unit
@@ -271,7 +278,10 @@ public class ShopController extends HttpServlet {
 			customer = customerImplement.getCustomerByUserId(UID);
 			
 			int CusID = customer.getCustomerID();
-			String ADD = customer.getAddress();
+			String ADD = customer.getCustomerStreet()
+					+ ", " + customer.getCustomerBarangay()
+					+ ", " + new CityListingImplement().getCityListingById(customer.getCityID())
+					+ ", " + customer.getCustomerProvince();
 			int CID = customer.getCityID();
 			boolean SID = customer.isIsSeniorCitizen();
 

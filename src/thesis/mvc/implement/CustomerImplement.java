@@ -24,16 +24,19 @@ public class CustomerImplement implements CustomerDAO{
 	public int addCustomer(Customer customer) {
 		try(PreparedStatement stmt = conn.prepareStatement(""
         		+ "INSERT INTO Customer "
-        		+ "(UserID, CustomerName, Address, CityID, Email, IsSeniorCitizen, SeniorCitizenID, ContactNumber) " 
-        		+ "VALUES (?,?,?,?,?,?,?,?)")) {
+        		+ "(`CustomerID`, `UserID`, `CustomerName`, `CustomerStreet`, `CustomerBarangay`, `CityID`, `CustomerProvince`, `CustomerLandline`, `CustomerCellular`, `Email`, `IsSeniorCitizen`, `SeniorCitizenID`) " 
+        		+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)")) {
 			stmt.setInt( 1, customer.getUserID() );
 			stmt.setString( 2, customer.getCustomerName() );
-			stmt.setString( 3, customer.getAddress() );
-			stmt.setInt(4, customer.getCityID());
-			stmt.setString( 5, customer.getEmail() );
-			stmt.setBoolean( 6, customer.isIsSeniorCitizen() );
-			stmt.setString( 7, customer.getSeniorCitizenID() );
-			stmt.setInt( 8, customer.getContactNumber() );
+			stmt.setString( 3, customer.getCustomerStreet() );
+			stmt.setString( 4, customer.getCustomerBarangay() );
+			stmt.setInt(5, customer.getCityID());
+			stmt.setString( 6, customer.getCustomerProvince() );
+			stmt.setString( 7, customer.getCustomerLandline() );
+			stmt.setString( 8, customer.getCustomerCellular() );
+			stmt.setString( 9, customer.getEmail() );
+			stmt.setBoolean( 10, customer.isIsSeniorCitizen() );
+			stmt.setString( 11, customer.getSeniorCitizenID() );
 			int NewID = stmt.executeUpdate();
 			stmt.close();
 			return NewID;
@@ -61,17 +64,32 @@ public class CustomerImplement implements CustomerDAO{
 	@Override
 	public void updateCustomer(Customer customer) {
 		try {
-			String query = "UPDATE Customer SET UserID=?, CustomerName=?, Address=?, CityID=?, Email=?, IsSeniorCitizen=?, SeniorCitizenID=?, ContactNumber=? WHERE CustomerID=?";
+			String query = "UPDATE Customer SET "
+					+ "`UserID`=?,"
+					+ "`CustomerName`=?,"
+					+ "`CustomerStreet`=?,"
+					+ "`CustomerBarangay`=?,"
+					+ "`CityID`=?,"
+					+ "`CustomerProvince`=?,"
+					+ "`CustomerLandline`=?,"
+					+ "`CustomerCellular`=?,"
+					+ "`Email`=?,"
+					+ "`IsSeniorCitizen`=?,"
+					+ "`SeniorCitizenID`=?"
+					+ " WHERE CustomerID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, customer.getUserID() );
-			preparedStatement.setString( 2, customer.getCustomerName() );
-			preparedStatement.setString( 3, customer.getAddress() );
-			preparedStatement.setInt(4, customer.getCityID());
-			preparedStatement.setString( 5, customer.getEmail() );
-			preparedStatement.setBoolean( 6, customer.isIsSeniorCitizen() );
-			preparedStatement.setString( 7, customer.getSeniorCitizenID() );
-			preparedStatement.setInt( 8, customer.getContactNumber() );
-			preparedStatement.setInt( 9, customer.getCustomerID() );
+			preparedStatement.setString( 2, customer.getCustomerName() );    
+			preparedStatement.setString( 3, customer.getCustomerStreet() );  
+			preparedStatement.setString( 4, customer.getCustomerBarangay() );
+			preparedStatement.setInt(5, customer.getCityID());               
+			preparedStatement.setString( 6, customer.getCustomerProvince() );
+			preparedStatement.setString( 7, customer.getCustomerLandline() );
+			preparedStatement.setString( 8, customer.getCustomerCellular() );
+			preparedStatement.setString( 9, customer.getEmail() );           
+			preparedStatement.setBoolean( 10, customer.isIsSeniorCitizen() );
+			preparedStatement.setString( 11, customer.getSeniorCitizenID() );
+			preparedStatement.setInt( 12, customer.getCustomerID() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
@@ -91,12 +109,15 @@ public class CustomerImplement implements CustomerDAO{
 				customer.setCustomerID( resultSet.getInt( "CustomerID" ) );
 				customer.setUserID( resultSet.getInt( "UserID" ) );
 				customer.setCustomerName( resultSet.getString( "CustomerName" ) );
-				customer.setAddress( resultSet.getString( "Address" ) );
+				customer.setCustomerStreet( resultSet.getString("CustomerStreet") );
+				customer.setCustomerBarangay( resultSet.getString("CustomerBarangay") );
 				customer.setCityID( resultSet.getInt("CityID") );
+				customer.setCustomerProvince( resultSet.getString("CustomerProvince") );
+				customer.setCustomerLandline( resultSet.getString("CustomerLandline") );
+				customer.setCustomerCellular( resultSet.getString("CustomerCellular") );
 				customer.setEmail( resultSet.getString( "Email" ) );
 				customer.setIsSeniorCitizen( resultSet.getBoolean( "IsSeniorCitizen" ) );
 				customer.setSeniorCitizenID( resultSet.getString( "SeniorCitizenID" ) );
-				customer.setContactNumber( resultSet.getInt( "ContactNumber" ) );
 				customers.add(customer);
 			}
 			resultSet.close();
@@ -119,12 +140,15 @@ public class CustomerImplement implements CustomerDAO{
 				customer.setCustomerID( resultSet.getInt( "CustomerID" ) );
 				customer.setUserID( resultSet.getInt( "UserID" ) );
 				customer.setCustomerName( resultSet.getString( "CustomerName" ) );
-				customer.setAddress( resultSet.getString( "Address" ) );
-				customer.setCityID(resultSet.getInt( "CityID" ) ); 
+				customer.setCustomerStreet( resultSet.getString("CustomerStreet") );
+				customer.setCustomerBarangay( resultSet.getString("CustomerBarangay") );
+				customer.setCityID( resultSet.getInt("CityID") );
+				customer.setCustomerProvince( resultSet.getString("CustomerProvince") );
+				customer.setCustomerLandline( resultSet.getString("CustomerLandline") );
+				customer.setCustomerCellular( resultSet.getString("CustomerCellular") );
 				customer.setEmail( resultSet.getString( "Email" ) );
 				customer.setIsSeniorCitizen( resultSet.getBoolean( "IsSeniorCitizen" ) );
 				customer.setSeniorCitizenID( resultSet.getString( "SeniorCitizenID" ) );
-				customer.setContactNumber( resultSet.getInt( "ContactNumber" ) );
 			}
 			resultSet.close();
 			preparedStatement.close();
@@ -144,12 +168,15 @@ public class CustomerImplement implements CustomerDAO{
 				customer.setCustomerID( resultSet.getInt( "CustomerID" ) );
 				customer.setUserID( resultSet.getInt( "UserID" ) );
 				customer.setCustomerName( resultSet.getString( "CustomerName" ) );
-				customer.setAddress( resultSet.getString( "Address" ) );
-				customer.setCityID(resultSet.getInt( "CityID" ) ); 
+				customer.setCustomerStreet( resultSet.getString("CustomerStreet") );
+				customer.setCustomerBarangay( resultSet.getString("CustomerBarangay") );
+				customer.setCityID( resultSet.getInt("CityID") );
+				customer.setCustomerProvince( resultSet.getString("CustomerProvince") );
+				customer.setCustomerLandline( resultSet.getString("CustomerLandline") );
+				customer.setCustomerCellular( resultSet.getString("CustomerCellular") );
 				customer.setEmail( resultSet.getString( "Email" ) );
 				customer.setIsSeniorCitizen( resultSet.getBoolean( "IsSeniorCitizen" ) );
 				customer.setSeniorCitizenID( resultSet.getString( "SeniorCitizenID" ) );
-				customer.setContactNumber( resultSet.getInt( "ContactNumber" ) );
 			}
 			resultSet.close();
 			preparedStatement.close();

@@ -151,9 +151,13 @@ public class RegistrationController extends HttpServlet {
 			//Initial Information
 			Customer customer = new Customer();
 			customer.setCustomerName( customerFName );
-			//customer.setAddress( customerAddrs );
+			customer.setCustomerStreet(customerStrrt);
+			customer.setCustomerBarangay(customerBrngy);
+			customer.setCityID(customerCtyID);
+			customer.setCustomerProvince(customerProvi);
+			customer.setCustomerLandline(customerLandL);
+			customer.setCustomerCellular(customerCellu);
 			customer.setEmail( customerEMail );
-			customer.setContactNumber( Integer.parseInt( customerConNo ) );
 			customer.setIsSeniorCitizen(false); //This is temporary
 			
 			//Registration

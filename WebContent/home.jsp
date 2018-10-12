@@ -36,7 +36,7 @@
 	    <c:if test="${justReg != null}"> 
 	    	<div role="alert" class="alert alert-info"><span><strong>A confirmation email has been sent to your email address</strong></span></div>
 		</c:if>
-		<c:forEach items="${PharmcyList}" var="pharmacy">
+		<c:forEach items="${FeatureList}" var="feature">
 			
 		</c:forEach>
 			<!-- <c:if test="${userAccess == null}">

@@ -1,7 +1,10 @@
 package thesis.mvc.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.mail.StoreClosedException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +21,11 @@ import thesis.mvc.implement.DispatcherImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacistImplement;
 import thesis.mvc.implement.PharmacyImplement;
+import thesis.mvc.implement.ProductImplement;
+import thesis.mvc.implement.StocksImplement;
 import thesis.mvc.model.Customer;
+import thesis.mvc.model.Product;
+import thesis.mvc.model.Stocks;
 import thesis.mvc.utility.EncryptionFunction;
 
 @WebServlet("/HomeController")
@@ -38,7 +45,12 @@ public class HomeController  extends HttpServlet {
 		
 		EncryptionFunction encryptionFunction = new EncryptionFunction();
 		PharmacyImplement pharmacyImplement = new PharmacyImplement();
-		
+
+		if (request.getAttribute("Featurepharm") == null) {
+		request.setAttribute("Featurepharm", new PharmacyImplement().getAllPharmacys());
+		request.setAttribute("Featurestock", new StocksImplement().getAllFeaturedStocks());
+		request.setAttribute("Featureitems", new ProductImplement().getAllProducts());
+		}
 		switch(Switch) {
 		case 1:
 			//Customer Information

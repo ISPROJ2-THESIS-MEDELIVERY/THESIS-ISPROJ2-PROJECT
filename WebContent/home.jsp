@@ -36,8 +36,20 @@
 	    <c:if test="${justReg != null}"> 
 	    	<div role="alert" class="alert alert-info"><span><strong>A confirmation email has been sent to your email address</strong></span></div>
 		</c:if>
-		<c:forEach items="${FeatureList}" var="feature">
+		<c:forEach items="${Featurepharm}" var="pharm">
+			<h3>Featured products of <c:out value="${pharm.pharmacyName}">: </c:out></h3>
 			
+			<c:forEach items="${Featurestock}" var="stock">
+				<c:forEach items="${Featureitems}" var="items">
+					<c:if test="${stock.productID == items.productID}">
+						<c:if test="${stock.pharmacyID == pharm.pharmacyID}">
+							<h3><c:out value="${items.productName}"></c:out></h3>
+						</c:if>
+					</c:if>
+				</c:forEach>
+			</c:forEach>
+			
+			<hr>
 		</c:forEach>
 			<!-- <c:if test="${userAccess == null}">
 				<a href="login.jsp">Login</a><br>

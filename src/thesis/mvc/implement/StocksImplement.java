@@ -113,4 +113,25 @@ public class StocksImplement implements StocksDAO{
 		return stock;
 	}
 
+	public List<Stocks> getAllFeaturedStocks() {
+		List<Stocks> stocks = new ArrayList<Stocks>();
+			try {
+				Statement statement = conn.createStatement();
+				ResultSet resultSet = statement.executeQuery( "SELECT * FROM Stocks WHERE Feature=1" );
+				while( resultSet.next() ) {
+					Stocks stock = new Stocks();
+					stock.setStockID( resultSet.getInt( "StockID" ) );
+					stock.setProductID( resultSet.getInt( "ProductID" ) );
+					stock.setPharmacyID( resultSet.getInt( "PharmacyID" ) );
+					stock.setFeature( resultSet.getBoolean( "Feature" ) );
+					stocks.add(stock);
+				}
+				resultSet.close();
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return stocks;
+	}
+
 }

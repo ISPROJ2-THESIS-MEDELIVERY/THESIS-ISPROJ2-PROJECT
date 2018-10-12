@@ -13,10 +13,7 @@
 <link rel="stylesheet" href="assets/css/styles.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" />
 <link rel="stylesheet" href="assets/css/Header-Blue.css" />
-<link rel="stylesheet" href="assets/bootstrap/js/jquery.min.js" />
-<link rel="stylesheet" href="assets/bootstrap/js/bootstrap.min.js" />		
-<link rel="stylesheet" href="assets/bootstrap/js/jquery.dataTables.min.js" />
-<link rel="stylesheet" href="assets/bootstrap/js/dataTables.bootstrap.min.js" />
+
 </head>
 
 
@@ -180,6 +177,11 @@
 		</footer>
 
 </body>
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/bootstrap/js/jquery.dataTables.min.js"></script>
+<script src="assets/bootstrap/js/dataTables.bootstrap.min.js"></script>
 
 	<script>
 		 $(document).ready(function() {

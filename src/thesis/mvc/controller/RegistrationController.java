@@ -25,6 +25,7 @@ import javax.websocket.Session;
 import thesis.mvc.implement.AdminImplement;
 import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.CourierServiceImplement;
+import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.LoginImplement;
 import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.model.Admin;
@@ -226,6 +227,23 @@ public class RegistrationController extends HttpServlet {
 			admin.setFirstName( FistName );
 			admin.setSurname( LastName );
 			test = Registration.makeAdmin(login, admin);
+		} else if (secretCode.equalsIgnoreCase("updateCustomer")) {//Admin
+			//Parameter to Variable
+			//Get CID
+			
+			Customer customer = new CustomerImplement().getCustomerById(1);
+			
+			String CustName = request.getParameter( "UpdateName" ) != null ? request.getParameter( "UpdateName" ) : customer.getCustomerID();
+			String CustStrt = request.getParameter( "UpdateStrt" ) != null ? request.getParameter( "UpdateStrt" ) : customer.;
+			String CustBrgy = request.getParameter( "UpdateBrgy" ) != null ? request.getParameter( "UpdateBrgy" ) : customer.;
+			String CustAddr = request.getParameter( "UpdateAddr" ) != null ? request.getParameter( "UpdateAddr" ) : customer.;
+			String CustCity = request.getParameter( "UpdateCity" ) != null ? request.getParameter( "UpdateCity" ) : customer.;
+			String CustProv = request.getParameter( "UpdateProv" ) != null ? request.getParameter( "UpdateProv" ) : customer.;
+			String CustCell = request.getParameter( "UpdateCell" ) != null ? request.getParameter( "UpdateCell" ) : customer.;
+			String CustLand = request.getParameter( "UpdateLand" ) != null ? request.getParameter( "UpdateLand" ) : customer.;
+			String CustEmil = request.getParameter( "UpdateEmil" ) != null ? request.getParameter( "UpdateEmil" ) : customer.;
+			
+			//Initial Information
 		}
 		
 		session.setAttribute("justReg", true);

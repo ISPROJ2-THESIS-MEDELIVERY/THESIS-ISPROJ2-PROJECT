@@ -39,16 +39,34 @@
         	<input type="text" name="FullName" required="" placeholder="FullName *" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="Username" required="" placeholder="Username *" class="form-control"/>
-        </div>
-        <div class="form-group">
         	<input type="text" name="CAddress" required="" placeholder="Address *" class="form-control"/>
         </div>
+        <!-- <div class="form-group">
+        	<input type="text" name="CuStreet" required="" placeholder="Street *" class="form-control"/>
+        </div>
+        <div class="form-group">
+        	<input type="text" name="CuBarngy" required="" placeholder="Barangay *" class="form-control"/>
+        </div>
+        <div class="form-group">
+        	<input type="number" name="CCityID" required="" placeholder="City ID *" class="form-control"/>
+        </div>
+        <div class="form-group">
+        	<input type="text" name="CuProvin" required="" placeholder="Province *" class="form-control"/>
+        </div>
+        <div class="form-group">
+        	<input type="text" name="CuLandLi" required="" placeholder="Landline *" class="form-control"/>
+        </div>
+        <div class="form-group">
+        	<input type="text" name="CuCellul" required="" placeholder="Cellphone No *" class="form-control"/>
+        </div> -->
         <div class="form-group">
         	<input type="email" name="CusEmail" required="" placeholder="Email *" class="form-control"/>
         </div>
         <div class="form-group">
         	<input type="number" name="ContactNumber" required="" placeholder="Contact Number *" class="form-control"/>
+        </div>
+        <div class="form-group">
+        	<input type="text" name="Username" required="" placeholder="Username *" class="form-control"/>
         </div>
         <div class="form-group">
         	<input type="password" name="Password" required="" placeholder="Create Password" class="form-control"/>
@@ -59,7 +77,7 @@
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
         </div>
-        <a class="already" href="home.jsp">Back</a> 
+        <a class="already" href="index.jsp">Back</a> 
     <!-- <input type="text" 		name="FullName" 		required="" placeholder="FullName *">
 	<input type="text" 		name="Username" 		required="" placeholder="Username *">
 	<input type="text" 		name="CAddress" 		required="" placeholder="Address *">

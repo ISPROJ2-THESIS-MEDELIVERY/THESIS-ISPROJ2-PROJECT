@@ -29,6 +29,7 @@
         </div>
     </div> 
 	<c:forEach items="${OrderHistory}" var="order">
+	<c:if test="${order.orderStatus != 'PENDING'}">
 	Customer ID: <c:out value="${order.customerID}" /><br>
 	Pharmacy ID: <c:out value="${order.pharmacyID}" /><br>
 	City ID: <c:out value="${order.cityID}" /><br>
@@ -65,6 +66,7 @@
 	</table>
 	</div>
 	<hr>
+	</c:if>
 	</c:forEach>
 		<footer class="footer text-center">
     		<div class="container">

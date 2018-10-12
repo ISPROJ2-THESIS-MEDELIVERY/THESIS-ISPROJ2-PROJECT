@@ -68,23 +68,25 @@ public class OrderImplement implements OrderDAO{
 	@Override
 	public void updateOrder(Order order) {
 		try {
-			String query = "UPDATE `order` SET CustomerID=?, DeliveryID=?, PharmacistID=?, CityID=?, BranchID-?, PrescriptionID=?, OrderAddress=?, DateOrdered=?, DateProcessed=?, DateDelivered=?, OrderType=?, OrderStatus=?, SeniorDiscount=?, PaymentMethod=?, ActualCost=? WHERE OrderID=?";
+			String query = "UPDATE `order` SET CustomerID=?, DeliveryID=?, PharmacistID=?, PharmacyID=?, CityID=?, BranchID=?, PrescriptionID=?, OrderAddress=?, DateOrdered=?, DateProcessed=?, DateDelivered=?, OrderType=?, OrderStatus=?, SeniorDiscount=?, PaymentMethod=?, ActualCost=? WHERE OrderID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, order.getCustomerID() );
 			preparedStatement.setInt( 2, order.getDeliveryID() );
 			preparedStatement.setInt( 3, order.getPharmacistID() );
-			preparedStatement.setInt( 4, order.getCityID() );
-			preparedStatement.setInt( 5, order.getBranchID() );
-			preparedStatement.setInt( 6, order.getPrescriptionID() );
-			preparedStatement.setString( 7, order.getOrderAddress() );
-			preparedStatement.setDate( 8, order.getDateProcessed() );
-			preparedStatement.setDate( 9, order.getDateDelivered() );
-			preparedStatement.setString( 10, order.getOrderType() );
-			preparedStatement.setString( 11, order.getOrderStatus() );
-			preparedStatement.setBoolean( 12, order.getSeniorDiscount() );
-			preparedStatement.setString( 13, order.getPaymentMethod() );
-			preparedStatement.setDouble(14, order.getActualCost() );
-			preparedStatement.setInt( 15, order.getOrderID() );
+			preparedStatement.setInt( 4, order.getPharmacyID() );
+			preparedStatement.setInt( 5, order.getCityID() );
+			preparedStatement.setInt( 6, order.getBranchID() );
+			preparedStatement.setInt( 7, order.getPrescriptionID() );
+			preparedStatement.setString( 8, order.getOrderAddress() );
+			preparedStatement.setDate( 9, order.getDateOrdered() );
+			preparedStatement.setDate( 10, order.getDateProcessed() );
+			preparedStatement.setDate( 11, order.getDateDelivered() );
+			preparedStatement.setString( 12, order.getOrderType() );
+			preparedStatement.setString( 13, order.getOrderStatus() );
+			preparedStatement.setBoolean( 14, order.getSeniorDiscount() );
+			preparedStatement.setString( 15, order.getPaymentMethod() );
+			preparedStatement.setDouble(16, order.getActualCost() );
+			preparedStatement.setInt( 17, order.getOrderID() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {

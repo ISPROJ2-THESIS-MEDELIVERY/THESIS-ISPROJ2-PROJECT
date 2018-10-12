@@ -66,6 +66,7 @@
 	</table>
 	</div>
 	<hr>
+	<a href="CustomerController?action=CancelOrder&OrderID=<c:out value="${order.orderID}" />" />Cancel Order</a>
 	</c:if>
 	</c:forEach>
 		<footer class="footer text-center">

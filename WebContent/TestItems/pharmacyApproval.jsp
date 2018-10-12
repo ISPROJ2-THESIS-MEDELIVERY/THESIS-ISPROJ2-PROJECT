@@ -32,8 +32,8 @@
 				<td><c:out value="${order.seniorDiscount}" /></td>
 				<td>${order.orderDetails}</td>
 				<td><c:out value="${order.actualCost}" /></td>
-				<td><a href="PharmacistController?action=Reject&orderID=<c:out value="${order.orderID}"/>">REJECT</a></td>
-				<td><a href="PharmacistController?action=Approve&orderID=<c:out value="${order.orderID}"/>">APPROVE</a></td>
+				<td><a href="PurchaseController?action=Reject&orderID=<c:out value="${order.orderID}"/>">REJECT</a></td>
+				<td><a href="PurchaseController?action=Approve&orderID=<c:out value="${order.orderID}"/>">APPROVE</a></td>
 			</tr>
 			</c:forEach>
 		</tbody>

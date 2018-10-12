@@ -75,6 +75,8 @@
         		<div class="col-md-6">
         			Order History:
 					<a href="CustomerController?action=GoToOrders" />To to Order History</a><br>
+        			Order Pending:
+					<a href="CustomerController?action=GoToPending" />To to Pending Orders</a><br>
         		</div>
     		</div>
 		</div>

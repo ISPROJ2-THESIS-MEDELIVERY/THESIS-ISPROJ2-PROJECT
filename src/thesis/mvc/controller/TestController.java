@@ -85,9 +85,42 @@ public class TestController extends HttpServlet {
         
     	request.setAttribute("message", obj);
     	*/
-    	/*
     	//This is the final item
     	JSONObject JSONReciept = new JSONObject();
+    	
+        //totalAmount
+    	JSONObject totalAmount1 = new JSONObject();
+        totalAmount1.put("currency", "PHP");
+        totalAmount1.put("value",  205.90);
+    		JSONObject details1 = new JSONObject();
+    		details1.put("discount", 15.30);
+    		details1.put("serviceCharge", 45.95);
+    		details1.put("shippingFee", 23.65);
+    		details1.put("tax", 70.75);
+    		details1.put("subtotal", 205.90);
+        totalAmount1.put("details", details1);
+    	JSONReciept.put("totalAmount", totalAmount1);
+    	
+
+    	//buyer
+        JSONObject buyer = new JSONObject();
+        buyer.put("firstName", "Dan");
+        buyer.put("middleName", "Tiu");
+        buyer.put("lastName", "Yu");
+    	JSONReciept.put("buyer", buyer);
+			JSONObject contact = new JSONObject();
+			contact.put("email", "edennyyu@gmail.com");
+			contact.put("phone", "+(63)1234567890");
+	    buyer.put("contact", contact);
+	    	JSONObject address = new JSONObject();
+	    	address.put("countryCode", "PH");
+	    	address.put("state", "Metro Manila");
+	    	address.put("city", "Muntinlupa City");
+	    	address.put("line2", "Alabang hills village");
+	    	address.put("line2", "26 Bacolod St.");
+        buyer.put("billingAddress", address);
+        buyer.put("shippingAddress", address);
+        buyer.put("ipAddress", "125.60.148.241");
 
     	//items
         List<JSONObject> items = new ArrayList<JSONObject>();
@@ -138,42 +171,12 @@ public class TestController extends HttpServlet {
         JSONReciept.put("metadata", metadata);
         
         //Fixing below
-        
+
+    	
         //Unfixed below
         
-    	//buyer
-        JSONObject buyer = new JSONObject();
-        buyer.put("ipAddress", "125.60.148.241");
-        	JSONObject address = new JSONObject();
-        	address.put("countryCode", "PH");
-        	address.put("state", "Metro Manila");
-        	address.put("city", "Muntinlupa City");
-        	address.put("line2", "Alabang hills village");
-        	address.put("line2", "26 Bacolod St.");
-        buyer.put("shippingAddress", address);
-        buyer.put("billingAddress", address);
-    		JSONObject contact = new JSONObject();
-    		contact.put("phone", "+(63)1234567890");
-    		contact.put("email", "edennyyu@gmail.com");
-        buyer.put("contact", contact);
-        buyer.put("lastName", "Yu");
-        buyer.put("middleName", "Tiu");
-        buyer.put("firstName", "Dan");
-    	JSONReciept.put("buyer", buyer);
     	
-        //totalAmount
-    	JSONObject totalAmount1 = new JSONObject();
-    		JSONObject details1 = new JSONObject();
-    		details1.put("subtotal", 205.90);
-    		details1.put("tax", 70.75);
-    		details1.put("shippingFee", 23.65);
-    		details1.put("serviceCharge", 45.95);
-    		details1.put("discount", 15.30);
-        totalAmount1.put("details", details1);
-        totalAmount1.put("value",  205.90);
-        totalAmount1.put("currency", "PHP");
-    	JSONReciept.put("totalAmount", totalAmount1);
-    	*/
+    	/*
     	//Test
         URL url = new URL("https://pg-sandbox.paymaya.com/checkout/v1/checkouts");
         String query = "";
@@ -199,7 +202,7 @@ public class TestController extends HttpServlet {
 
         request.setAttribute("message", l);
         br.close();
-        
+        */
     	//metadata
     		//Leave blank
     	//requestReferenceNumber

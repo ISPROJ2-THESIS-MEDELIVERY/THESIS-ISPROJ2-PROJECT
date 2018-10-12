@@ -139,14 +139,19 @@ public class RegistrationController extends HttpServlet {
 		} else if (secretCode == null) { //Customer
 			//Parameter to Variable
 			String customerFName = request.getParameter( "FullName" );
-			String customerAddrs = request.getParameter( "CAddress" );
+			String customerStrrt = request.getParameter( "CuStreet" );
+			String customerBrngy = request.getParameter( "CuBarngy" );
+			int customerCtyID = Integer.parseInt(request.getParameter( "CCityID" ));
+			String customerProvi = request.getParameter( "CuProvin" );
+			String customerLandL = request.getParameter( "CuLandLi" );
+			String customerCellu = request.getParameter( "CuCellul" );
 			String customerEMail = request.getParameter( "CusEmail" );
 			String customerConNo = request.getParameter( "ContactNumber" );
 			
 			//Initial Information
 			Customer customer = new Customer();
 			customer.setCustomerName( customerFName );
-			customer.setAddress( customerAddrs );
+			//customer.setAddress( customerAddrs );
 			customer.setEmail( customerEMail );
 			customer.setContactNumber( Integer.parseInt( customerConNo ) );
 			customer.setIsSeniorCitizen(false); //This is temporary
@@ -219,6 +224,7 @@ public class RegistrationController extends HttpServlet {
 			test = Registration.makeAdmin(login, admin);
 		}
 		
+		session.setAttribute("justReg", true);
 		if(test){
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else {

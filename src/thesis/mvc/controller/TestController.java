@@ -1,11 +1,16 @@
 package thesis.mvc.controller;
 
 import java.awt.font.NumericShaper;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.lang.reflect.Array;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.Connection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -80,7 +85,7 @@ public class TestController extends HttpServlet {
         
     	request.setAttribute("message", obj);
     	*/
-    	
+    	/*
     	//This is the final item
     	JSONObject JSONReciept = new JSONObject();
 
@@ -168,8 +173,32 @@ public class TestController extends HttpServlet {
         totalAmount1.put("value",  205.90);
         totalAmount1.put("currency", "PHP");
     	JSONReciept.put("totalAmount", totalAmount1);
-    	
-    	
+    	*/
+    	//Test
+        URL url = new URL("https://pg-sandbox.paymaya.com/checkout/v1/checkouts");
+        String query = "";
+
+        //make connection
+        URLConnection urlc = url.openConnection();
+
+        //use post mode
+        urlc.setDoOutput(true);
+        urlc.setAllowUserInteraction(false);
+
+        //send query
+        PrintStream ps = new PrintStream(urlc.getOutputStream());
+        ps.print(query);
+        ps.close();
+
+        //get result
+        BufferedReader br = new BufferedReader(new InputStreamReader(urlc.getInputStream()));
+        String l = null;
+        while ((l=br.readLine())!=null) {
+            System.out.println(l);
+        }
+
+        request.setAttribute("message", l);
+        br.close();
         
     	//metadata
     		//Leave blank
@@ -195,8 +224,7 @@ public class TestController extends HttpServlet {
     		//name : String
     	//buyer
     	//totalAmount
-    	request.setAttribute("message", JSONReciept);
-    	
+    	//request.setAttribute("message", JSONReciept);
     	
     	
     	

@@ -38,7 +38,7 @@
 	<h1>CART:</h1>
 	<c:if test="${CartList != null}">
 		<div class="table-responsive">
-    		<table id="druglistTable" class="table">
+    		<table class="table">
         		<thead>
             		<tr>
                 		<th>Item</th>
@@ -100,7 +100,7 @@
 	
 	<h1>SHOP:</h1>
 	<div class="table-responsive">
-	<table class="table">
+	<table id="druglistTable" class="table">
 		<thead>
 			<tr>
 				<th>Product ID</th>

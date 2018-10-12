@@ -183,12 +183,12 @@
 <script src="assets/bootstrap/js/jquery.dataTables.min.js"></script>
 <script src="assets/bootstrap/js/dataTables.bootstrap.min.js"></script>
 
-	<script>
+	<script type="text/javascript">
 		 $(document).ready(function() {
-			$("#drugListTable").DataTable({
-				"lengthMenu": [ [5,10,15,20,-1],[5,10,15,20,"All"] ],
-				"ordering": false,
-				stateSave: true
+			$("#druglistTable").DataTable({
+				"sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
 			});
 		}); 
 	</script>

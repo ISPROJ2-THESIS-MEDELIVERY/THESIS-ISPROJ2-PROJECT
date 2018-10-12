@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" />
 <link rel="stylesheet" href="assets/css/Header-Blue.css" />
 </head>
+
+
 <body>
 	 <div>
         <div class="header-blue">
@@ -31,7 +33,7 @@
 	<h1>CART:</h1>
 	<c:if test="${CartList != null}">
 		<div class="table-responsive">
-    		<table class="table">
+    		<table id="druglistTable" class="table">
         		<thead>
             		<tr>
                 		<th>Item</th>
@@ -172,4 +174,15 @@
     		</div>
 		</footer>
 </body>
+
+	<script>
+		 $(document).ready(function() {
+			$("#drugListTable").DataTable({
+				"lengthMenu": [ [5,10,15,20,-1],[5,10,15,20,"All"] ],
+				"ordering": false,
+				stateSave: true
+			});
+		}); 
+	</script>
+
 </html>

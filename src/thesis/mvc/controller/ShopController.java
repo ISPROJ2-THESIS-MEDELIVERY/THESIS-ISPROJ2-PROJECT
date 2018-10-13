@@ -180,22 +180,24 @@ public class ShopController extends HttpServlet {
 			int PID = selectedPharmacy.getPharmacyID();
 			
 			if (order == null) {
-				int UserID = (int) session.getAttribute("userID");
 				CustomerImplement customerImplement = new CustomerImplement();
-				Customer customer = new Customer();
-				customer = customerImplement.getCustomerByUserId(UserID);
+				Customer customer =  (Customer) session.getAttribute("userID");
+				
+				order.setCustomerID(customer.getUserID());
+				
+				
 				int CusID = customer.getCustomerID();
 				String Adr = customer.getCustomerStreet()
 						+ ", " + customer.getCustomerBarangay()
 						+ ", " + new CityListingImplement().getCityListingById(customer.getCityID())
 						+ ", " + customer.getCustomerProvince();
 				int CityID = customer.getCityID();
-				boolean S = customer.isIsSeniorCitizen();
+				boolean IS = customer.isIsSeniorCitizen();
 				
-				order.setCustomerID(CusID);
+				//order.setCustomerID(CusID);
 				order.setOrderAddress(Adr);
 				order.setCityID(CityID);
-				order.setSeniorDiscount(S);
+				order.setSeniorDiscount(IS);
 				session.setAttribute("Order", order );
 			}
 			//ProductID & Quantity & Cost per unit

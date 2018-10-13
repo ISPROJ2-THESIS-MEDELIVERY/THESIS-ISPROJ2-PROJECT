@@ -113,9 +113,8 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${productList}" var="item">
-				<form action='ShopController' method='post'>
 					<tr>
-						<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
+						<td><c:out value="${item.productID}" /></td>
 						<td><c:out value="${item.productName}" /></td>
 						<td><c:out value="${item.genericName}" /></td>
 						<td><c:out value="${item.productStrength}" /></td>
@@ -124,6 +123,8 @@
 						<td><c:out value="${item.productDescription}" /></td>
 						
 						<c:if test="${item.isRXProduct == false}">
+						
+						<form action='ShopController' method='post'>
 						<td>
 							<select name='Quantity'>
 								<option value="1">1</option>
@@ -138,8 +139,10 @@
 							</select>
 						</td>
 						<td>
+							<input type="hidden" name="ProductID" value="<c:out value="${item.productID}" />" readonly>
 							<input type='submit' name='Action' value="Addtocart" style='display: on-hover' />
 						</td>
+						</form>
 						</c:if>
 						
 						<c:if test="${item.isRXProduct == true}">
@@ -147,7 +150,6 @@
 						<td>PRESCRIPTION ONLY</td>
 						</c:if>
 					</tr>
-				</form>
 			</c:forEach>
 		</tbody>
 	</table>

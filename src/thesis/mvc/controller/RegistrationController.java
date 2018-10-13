@@ -233,17 +233,27 @@ public class RegistrationController extends HttpServlet {
 			
 			Customer customer = new CustomerImplement().getCustomerById(1);
 			
-			String CustName = request.getParameter( "UpdateName" ) != null ? request.getParameter( "UpdateName" ) : customer.getCustomerID();
-			String CustStrt = request.getParameter( "UpdateStrt" ) != null ? request.getParameter( "UpdateStrt" ) : customer.;
-			String CustBrgy = request.getParameter( "UpdateBrgy" ) != null ? request.getParameter( "UpdateBrgy" ) : customer.;
-			String CustAddr = request.getParameter( "UpdateAddr" ) != null ? request.getParameter( "UpdateAddr" ) : customer.;
-			String CustCity = request.getParameter( "UpdateCity" ) != null ? request.getParameter( "UpdateCity" ) : customer.;
-			String CustProv = request.getParameter( "UpdateProv" ) != null ? request.getParameter( "UpdateProv" ) : customer.;
-			String CustCell = request.getParameter( "UpdateCell" ) != null ? request.getParameter( "UpdateCell" ) : customer.;
-			String CustLand = request.getParameter( "UpdateLand" ) != null ? request.getParameter( "UpdateLand" ) : customer.;
-			String CustEmil = request.getParameter( "UpdateEmil" ) != null ? request.getParameter( "UpdateEmil" ) : customer.;
+			String CustName = request.getParameter( "UpdateName" ) != null ? request.getParameter( "UpdateName" ) : customer.getCustomerName();
+			String CustStrt = request.getParameter( "UpdateStrt" ) != null ? request.getParameter( "UpdateStrt" ) : customer.getCustomerStreet();
+			String CustBrgy = request.getParameter( "UpdateBrgy" ) != null ? request.getParameter( "UpdateBrgy" ) : customer.getCustomerBarangay();
+			int CustCity = request.getParameter( "UpdateCity" ) != null ? Integer.parseInt(request.getParameter( "UpdateCity" )) : customer.getCityID();
+			String CustProv = request.getParameter( "UpdateProv" ) != null ? request.getParameter( "UpdateProv" ) : customer.getCustomerProvince();
+			String CustCell = request.getParameter( "UpdateCell" ) != null ? request.getParameter( "UpdateCell" ) : customer.getCustomerCellular();
+			String CustLand = request.getParameter( "UpdateLand" ) != null ? request.getParameter( "UpdateLand" ) : customer.getCustomerLandline();
+			String CustEmil = request.getParameter( "UpdateEmil" ) != null ? request.getParameter( "UpdateEmil" ) : customer.getEmail();
 			
 			//Initial Information
+			customer.setCustomerName(CustName);
+			customer.setCustomerStreet(CustStrt);
+			customer.setCustomerBarangay(CustBrgy);
+			customer.setCityID(CustCity);
+			customer.setCustomerProvince(CustProv);
+			customer.setCustomerCellular(CustCell);
+			customer.setCustomerLandline(CustLand);
+			customer.setEmail(CustEmil);
+			
+			new CustomerImplement().updateCustomer(customer);
+			
 		}
 		
 		session.setAttribute("justReg", true);

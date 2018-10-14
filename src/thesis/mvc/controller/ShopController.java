@@ -180,11 +180,9 @@ public class ShopController extends HttpServlet {
 			int PID = selectedPharmacy.getPharmacyID();
 			
 			if (order == null) {
-				CustomerImplement customerImplement = new CustomerImplement();
-				Customer customer =  (Customer) session.getAttribute("userID");
-				
-				order.setCustomerID(customer.getUserID());
-				
+				order = new Order();
+				Customer customer = new Customer();
+ 				customer = (Customer) session.getAttribute("Customer");
 				
 				int CusID = customer.getCustomerID();
 				String Adr = customer.getCustomerStreet()
@@ -194,7 +192,7 @@ public class ShopController extends HttpServlet {
 				int CityID = customer.getCityID();
 				boolean IS = customer.isIsSeniorCitizen();
 				
-				//order.setCustomerID(CusID);
+				order.setCustomerID(CusID);
 				order.setOrderAddress(Adr);
 				order.setCityID(CityID);
 				order.setSeniorDiscount(IS);

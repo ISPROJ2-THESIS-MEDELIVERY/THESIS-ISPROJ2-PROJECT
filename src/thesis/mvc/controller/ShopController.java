@@ -182,7 +182,9 @@ public class ShopController extends HttpServlet {
 			if (order == null) {
 				order = new Order();
 				Customer customer = new Customer();
- 				customer = (Customer) session.getAttribute("Customer");
+				int CustomerID = (int) session.getAttribute("Customer");
+ 				customer = new CustomerImplement().getCustomerById(CustomerID);
+ 						//(Customer) session.getAttribute("Customer");
 				
 				int CusID = customer.getCustomerID();
 				String Adr = customer.getCustomerStreet()
@@ -259,7 +261,7 @@ public class ShopController extends HttpServlet {
 				session.removeAttribute("Order");
 				session.removeAttribute("OrderDetails");
 				session.removeAttribute("CartList");
-				forward = "Checkout.jsp";
+				forward = "/index.jsp";
 			}
 			//order.setPaymentMethod( request.getParameter( "orderPayment" ) );
 			//order.setDateOrdered(today);

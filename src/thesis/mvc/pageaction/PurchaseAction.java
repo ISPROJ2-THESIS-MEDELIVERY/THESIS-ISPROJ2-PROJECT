@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.Calendar;
 import java.util.List;
 
+import thesis.mvc.implement.CityListingImplement;
 import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
@@ -218,7 +219,10 @@ public class PurchaseAction {
 				if (rs.next()) {
 	            	CityCustomer = rs.getInt("CityID");
 					SeniorStatus = rs.getBoolean("IsSeniorCitizen");
-					CustoAddress = rs.getString("Address");
+					CustoAddress = rs.getString("CustomerStreet")
+							+ ", " + rs.getString("CustomerBarangay")
+							+ ", " + new CityListingImplement().getCityListingById(rs.getInt("CityID")).getCityName()
+							+ ", " + rs.getString("CustomerProvince");
 				}
             }
         } catch (SQLException e) {

@@ -53,6 +53,7 @@
 		            	<tr>
 		                	<td><c:out value="${details.name}" /></td>
 		                	<td><c:out value="${details.description}" /></td>
+		                	<td>IMAGE</td>
 		                	<td><c:out value="${details.size}" /></td>
 		                	<td><c:out value="${details.prescription}" /></td>
 		                	<td><c:out value="${details.quantity}" /></td>
@@ -62,6 +63,14 @@
 	            	</c:forEach>
 	            </tbody>
     		</table>
+    		
+    		
+    		<form action='ShopController' method='post'>
+				<input type='submit' name='Action' value="CheckoutOrder" style='display: on-hover' />
+			</form>
+    		
+    		
+    		
 		</div>
 		<%-- <table border=1>
 			<thead>

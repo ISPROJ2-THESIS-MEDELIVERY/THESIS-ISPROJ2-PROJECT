@@ -1,13 +1,14 @@
 .header-blue {
-  background: linear-gradient(135deg, #172a74, #21a9af);
-  background-color: #184e8e;
-  padding-bottom: 80px;
+  /* background: linear-gradient(135deg, #172a74, #21a9af); */
+  background-color: #12ccb0;
+  padding-bottom: 80 px;
   font-family: 'Source Sans Pro', sans-serif;
+  color: black;
 }
 
 @media (min-width:768px) {
   .header-blue {
-    padding-bottom: 120px;
+    padding-bottom: 20px;
   }
 }
 
@@ -15,7 +16,7 @@
   background: transparent;
   padding-top: .75rem;
   padding-bottom: .75rem;
-  color: #fff;
+  color: black;
   border-radius: 0;
   box-shadow: none;
   border: none;
@@ -30,7 +31,7 @@
 
 .header-blue .navbar .navbar-brand {
   font-weight: bold;
-  color: inherit;
+  color: black;
 }
 
 .header-blue .navbar .navbar-brand:hover {
@@ -50,7 +51,7 @@
 }
 
 .header-blue .navbar .navbar-collapse span .login {
-  color: #d9d9d9;
+  color: black;
   margin-right: .5rem;
   text-decoration: none;
 }
@@ -105,7 +106,7 @@
 .header-blue .action-button, .header-blue .action-button:not(.disabled):active {
   border: 1px solid rgba(255,255,255,0.7);
   border-radius: 40px;
-  color: #ebeff1;
+  color: black;
   box-shadow: none;
   text-shadow: none;
   padding: .3rem .8rem;

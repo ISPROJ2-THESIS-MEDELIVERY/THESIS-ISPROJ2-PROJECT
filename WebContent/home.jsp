@@ -102,6 +102,7 @@
 					<c:out value="${userID}" /><br>
 					<c:out value="${username}" /><br>
 					<c:out value="${userAccess}" /><br>
+					<a href="DispatcherController?Action=DispatchOrder">Add Product</a><br>
 					<a href="LoginController">Logout</a><br>
 				</div>
     		</div>

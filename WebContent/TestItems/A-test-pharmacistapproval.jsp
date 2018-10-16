@@ -30,7 +30,7 @@
 				<td><c:out value="${order.dateOrdered}" /></td>
 				<td><c:out value="${order.orderStatus}" /></td>
 				<td><c:out value="${order.seniorDiscount}" /></td>
-				<td>${order.orderDetails}</td>
+				<td><c:out value="${order.orderDetails}" /></td>
 				<td><c:out value="${order.actualCost}" /></td>
 				<td><a href="PharmacistController?action=Reject&orderID=<c:out value="${order.orderID}"/>">REJECT</a></td>
 				<td><a href="PharmacistController?action=Approve&orderID=<c:out value="${order.orderID}"/>">APPROVE</a></td>

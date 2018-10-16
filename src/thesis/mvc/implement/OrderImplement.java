@@ -26,23 +26,24 @@ public class OrderImplement implements OrderDAO{
 	public int addOrder(Order order) {
 		try {
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-			String query = "INSERT INTO `order` (CustomerID, DeliveryID, PharmacistID, BranchID, CityID, PrescriptionID, OrderAddress, DateOrdered, DateProcessed, DateDelivered, OrderType, OrderStatus, SeniorDiscount, PaymentMethod, ActualCost) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String query = "INSERT INTO `order`(`CustomerID`, `DeliveryID`, `PharmacistID`, `PharmacyID`, `BranchID`, `CityID`, `PrescriptionID`, `OrderAddress`, `DateOrdered`, `DateProcessed`, `DateDelivered`, `OrderType`, `OrderStatus`, `SeniorDiscount`, `PaymentMethod`, `ActualCost`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, order.getCustomerID() );
 			preparedStatement.setInt( 2, order.getDeliveryID() );
 			preparedStatement.setInt( 3, order.getPharmacistID() );
-			preparedStatement.setInt( 4, order.getBranchID() );
-			preparedStatement.setInt( 5, order.getCityID() );
-			preparedStatement.setInt( 6, order.getPrescriptionID() );
-			preparedStatement.setString( 7, order.getOrderAddress() );
-			preparedStatement.setDate( 8, CurrentDate );
-			preparedStatement.setDate( 9, order.getDateProcessed() );
-			preparedStatement.setDate( 10, order.getDateDelivered() );
-			preparedStatement.setString( 11, order.getOrderType() );
-			preparedStatement.setString( 12, order.getOrderStatus() );
-			preparedStatement.setBoolean( 13, order.getSeniorDiscount() );
-			preparedStatement.setString( 14, order.getPaymentMethod() );
-			preparedStatement.setDouble(15, order.getActualCost() );
+			preparedStatement.setInt( 4, order.getPharmacyID() );
+			preparedStatement.setInt( 5, order.getBranchID() );
+			preparedStatement.setInt( 6, order.getCityID() );
+			preparedStatement.setInt( 7, order.getPrescriptionID() );
+			preparedStatement.setString( 8, order.getOrderAddress() );
+			preparedStatement.setDate( 9, CurrentDate );
+			preparedStatement.setDate( 10, order.getDateProcessed() );
+			preparedStatement.setDate( 11, order.getDateDelivered() );
+			preparedStatement.setString( 12, order.getOrderType() );
+			preparedStatement.setString( 13, order.getOrderStatus() );
+			preparedStatement.setBoolean( 14, order.getSeniorDiscount() );
+			preparedStatement.setString( 15, order.getPaymentMethod() );
+			preparedStatement.setDouble( 16, order.getActualCost() );
 			int NewID = preparedStatement.executeUpdate();
 			preparedStatement.close();
 			return NewID;
@@ -106,6 +107,7 @@ public class OrderImplement implements OrderDAO{
 				order.setCustomerID( resultSet.getInt( "CustomerID" ) );
 				order.setDeliveryID( resultSet.getInt( "DeliveryID" ) );
 				order.setPharmacistID( resultSet.getInt( "PharmacistID" ) );
+				order.setPharmacyID( resultSet.getInt("PharmacyID"));
 				order.setCityID( resultSet.getInt( "CityID" ) );
 				order.setBranchID( resultSet.getInt( "BranchID" ));
 				order.setPrescriptionID( resultSet.getInt( "PrescriptionID" ) );
@@ -141,6 +143,7 @@ public class OrderImplement implements OrderDAO{
 				order.setCustomerID( resultSet.getInt( "CustomerID" ) );
 				order.setDeliveryID( resultSet.getInt( "DeliveryID" ) );
 				order.setPharmacistID( resultSet.getInt( "PharmacistID" ) );
+				order.setPharmacyID( resultSet.getInt("PharmacyID"));
 				order.setCityID( resultSet.getInt( "CityID" ) );
 				order.setBranchID( resultSet.getInt( "BranchID" ));
 				order.setPrescriptionID( resultSet.getInt( "PrescriptionID" ) );
@@ -200,6 +203,7 @@ public class OrderImplement implements OrderDAO{
 				order.setCustomerID( resultSet.getInt( "CustomerID" ) );
 				order.setDeliveryID( resultSet.getInt( "DeliveryID" ) );
 				order.setPharmacistID( resultSet.getInt( "PharmacistID" ) );
+				order.setPharmacyID( resultSet.getInt("PharmacyID"));
 				order.setCityID( resultSet.getInt( "CityID" ) );
 				order.setBranchID( resultSet.getInt( "BranchID" ));
 				order.setPrescriptionID( resultSet.getInt( "PrescriptionID" ) );

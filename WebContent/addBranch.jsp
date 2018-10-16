@@ -18,7 +18,7 @@
 	 <div>
         <div class="header-blue">
             <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
-                <div class="container"><a href="home.jsp" class="navbar-brand">Medelivery</a>
+                <div class="container"><a href="index.jsp" class="navbar-brand">Medelivery</a>
                     <div class="collapse navbar-collapse" id="navcol-1">
                         <ul class="nav navbar-nav"></ul>
                         <form target="_self" class="form-inline mr-auto">

@@ -60,7 +60,6 @@ public class DispatcherController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String forward;
 		HttpSession session = request.getSession();
 		
 		String action = "";
@@ -74,6 +73,10 @@ public class DispatcherController extends HttpServlet {
 			int orderID = Integer.parseInt( request.getParameter("OrderID") );
 			int branchID = Integer.parseInt( request.getParameter("BranchID") );
 			new OrderImplement().updateOrderStatus(orderID, "PROCESSED", branchID);
+			session.setAttribute( "DispatcherOrderList" , new OrderImplement().getOrder() );
+			session.setAttribute( "SelectPharmacy", new PharmacyImplement().getAllPharmacys() );
+			session.setAttribute( "ListBranches" , new BranchImplement().getAllBranch() );
+			session.setAttribute( "DispatcherOrderDetailsList" , new OrderDetailImplement().getOrderDetail()  );
 			response.sendRedirect(request.getContextPath() + "/DispatcherDirector.jsp");
 		}
 		

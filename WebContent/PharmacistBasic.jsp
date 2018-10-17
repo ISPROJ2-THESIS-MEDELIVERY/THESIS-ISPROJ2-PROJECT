@@ -4,16 +4,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
-<link rel="stylesheet" href="assets/css/styles.css" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" />
-<link rel="stylesheet" href="assets/css/Header-Blue.css" />
 </head>
 <body>
+
+</body>
 	 <div>
         <div class="header-blue">
             <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
@@ -23,18 +19,6 @@
                         <form target="_self" class="form-inline mr-auto">
                             <div class="form-group"><label for="search-field"></label></div>
                         </form>
-                        <c:if test="${userAccess == 1}">
-                        <span class="navbar-text"><a href="LoginController" class="login">Log Out</a></span>
-                        </c:if>
-                        <c:if test="${userAccess == 2}">
-                        <span class="navbar-text"><a href="DispatcherController?Action=DispatchOrder">Add Product</a></span>
-						<span class="navbar-text"><a href="LoginController">Logout</a></span>
-                        </c:if>
-                        <c:if test="${userAccess == 3}">
-                        <span class="navbar-text"><a href="ProductController?Action=AddProduct">Add Product</a></span>
-                        <span class="navbar-text"><a href="PharmacistController?Action=Prescription">Approve/Disapprove prescription orders</a></span>
-						<span class="navbar-text"><a href="LoginController">Logout</a><br></span>
-                        </c:if>
                     </div>
                 </div>
             </nav>
@@ -56,7 +40,7 @@
 	            <th>Order Details</th>
 	            <th>Total Cost</th>
 	            <th>Pharmacy</th>
-	            <th colspan="2">Set Pharmacy</th>
+	            <th colspan="2">Accept or Reject?</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -106,17 +90,7 @@
 							</c:forEach>
 						</td>
 						<td>
-							<form action='DispatcherController' method='post'>
-								<input name="OrderID" value="${order.orderID}"/>
-								<select name="BranchID">
-									<c:forEach items="${ListBranches}" var="branch">
-										<c:if test="${branch.pharmacyID == order.pharmacyID}">
-											<option value="<c:out value="${branch.branchID}" />"><c:out value="${branch.branchOwner}" /></option>
-										</c:if>
-									</c:forEach>
-								</select>
-								<input type="submit" name="action" value="assignOrder" placeholder="Set Order">
-							</form>
+							
 						</td>
 					</tr>
 				</c:if>
@@ -147,5 +121,4 @@
         		</div>
     		</div>
 		</footer>
-</body>
 </html>

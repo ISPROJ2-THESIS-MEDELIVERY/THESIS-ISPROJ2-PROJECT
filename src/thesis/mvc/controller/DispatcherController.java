@@ -71,7 +71,9 @@ public class DispatcherController extends HttpServlet {
 		if(action.isEmpty()) {
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else if(action.equalsIgnoreCase("assignOrder")) {
-			//new OrderImplement().updateOrderStatus(OrderID, Status);
+			int orderID = Integer.parseInt( request.getParameter("OrderID") );
+			int branchID = Integer.parseInt( request.getParameter("BranchID") );
+			new OrderImplement().updateOrderStatus(orderID, "PROCESSED", branchID);
 			response.sendRedirect(request.getContextPath() + "/DispatcherDirector.jsp");
 		}
 		

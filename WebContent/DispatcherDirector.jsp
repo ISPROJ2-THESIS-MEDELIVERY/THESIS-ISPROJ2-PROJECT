@@ -19,6 +19,7 @@
 	            <th>Type</th>
 	            <th>Status</th>
 	            <th>Senior Citizen?</th>
+	            <th>Order Details</th>
 	            <th>Total Cost</th>
 	            <th>Pharmacy</th>
 	            <th colspan="2">Set Pharmacy</th>
@@ -36,6 +37,32 @@
 			            <td><c:out value="${order.orderType}" /></td>
 			            <td><c:out value="${order.orderStatus}" /></td>
 			            <td><c:out value="${order.seniorDiscount}" /></td>
+			            <td>
+				            <table class="table" border = "2">
+							    <thead>
+							        <tr>
+							            <th>OrderID</th>
+							            <th>ProductID</th>
+							            <th>Quantity</th>
+							            <th>Cost Per Unit</th>
+							            <th>Total Cost</th>
+							        </tr>
+							    </thead>
+							    <tbody>
+							    	<c:forEach items="${DispatcherOrderDetailsList}" var="orderdetails">
+										<c:if test="${order.orderID == orderdetails.orderID}">
+							            <tr>
+							                <td><c:out value="${orderdetails.orderID}" /></td>
+							                <td><c:out value="${orderdetails.productID}" /></td>
+							                <td><c:out value="${orderdetails.quantity}" /></td>
+							                <td><c:out value="${orderdetails.costPerUnit}" /></td>
+							                <td><c:out value="${orderdetails.totalCost}" /></td>
+							            </tr>
+							            </c:if>
+									</c:forEach>
+							    </tbody>
+							</table>
+			            </td>
 			            <td><c:out value="${order.actualCost}" /></td>
 			            <td>
 							<c:forEach items="${SelectPharmacy}" var="pharmacy">
@@ -54,7 +81,7 @@
 										</c:if>
 									</c:forEach>
 								</select>
-								<input type="submit" name="action" value="assignOrder"/>
+								<input type="submit" name="action" value="assignOrder" placeholder="Set Order">
 							</form>
 						</td>
 					</tr>

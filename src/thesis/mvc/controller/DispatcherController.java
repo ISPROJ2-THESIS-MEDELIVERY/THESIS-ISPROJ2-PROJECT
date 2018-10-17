@@ -53,6 +53,7 @@ public class DispatcherController extends HttpServlet {
 			session.setAttribute( "DispatcherOrderList" , new OrderImplement().getOrder() );
 			session.setAttribute( "SelectPharmacy", new PharmacyImplement().getAllPharmacys() );
 			session.setAttribute( "ListBranches" , new BranchImplement().getAllBranch() );
+			session.setAttribute( "DispatcherOrderDetailsList" , new OrderDetailImplement().getOrderDetail()  );
 			response.sendRedirect(request.getContextPath() + "/DispatcherDirector.jsp");
 		}
 		

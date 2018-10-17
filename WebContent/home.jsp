@@ -31,6 +31,15 @@
                         <c:if test="${userAccess == 1}">
                         <span class="navbar-text"><a href="LoginController" class="login">Log Out</a></span>
                         </c:if>
+                        <c:if test="${userAccess == 2}">
+                        <span class="navbar-text"><a href="DispatcherController?Action=DispatchOrder">Add Product</a></span>
+						<span class="navbar-text"><a href="LoginController">Logout</a></span>
+                        </c:if>
+                        <c:if test="${userAccess == 3}">
+                        <span class="navbar-text"><a href="ProductController?Action=AddProduct">Add Product</a></span>
+                        <span class="navbar-text"><a href="PharmacistController?Action=Prescription">Approve/Disapprove prescription orders</a></span>
+						<span class="navbar-text"><a href="LoginController">Logout</a><br></span>
+                        </c:if>
                     </div>
                 </div>
             </nav>

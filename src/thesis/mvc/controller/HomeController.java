@@ -69,6 +69,9 @@ public class HomeController  extends HttpServlet {
 			//Dispatcher
 			break;
 		case 3:
+			int BranchxofPharmacist = new PharmacistImplement().getPharmacistById( (int) session.getAttribute("Pharmacist") ).getBranchID();
+			int PharmacyofBranch = new BranchImplement().getBranchById(BranchxofPharmacist).getPharmacyID();
+			request.setAttribute("PharmacistPharmacy", pharmacyImplement.getPharmacyById(PharmacyofBranch));
 			//PharmacistImplement pharmacistImplement = new PharmacistImplement();
 			//request.setAttribute("PharmacistDetails", session.getAttribute("Pharmacist") );
 			//PharmacyImplement pharmacyImplement1 = new PharmacyImplement();

@@ -44,8 +44,8 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${DispatcherOrderList}" var="order">
-				<c:if test="${order.orderStatus == 'PENDING'}">
+			<c:forEach items="${PharmacyOrders}" var="order">
+				<c:if test="${order.orderStatus == 'PROCESSED'}">
 					<tr>
 			            <td><c:out value="${order.customerID}" /></td>
 			            <td><c:out value="${order.pharmacyID}" /></td>
@@ -82,16 +82,8 @@
 							</table>
 			            </td>
 			            <td><c:out value="${order.actualCost}" /></td>
-			            <td>
-							<c:forEach items="${SelectPharmacy}" var="pharmacy">
-								<c:if test="${pharmacy.pharmacyID == order.pharmacyID}">
-									<c:out value="${pharmacy.pharmacyName}" />
-								</c:if>
-							</c:forEach>
-						</td>
-						<td>
-							
-						</td>
+						<td><a href="PharmacistController?action=RejectOrder&orderID=<c:out value="${order.orderID}"/>">CANCEL</a></td>
+						<td><a href="PharmacistController?action=ApproveOrder&orderID=<c:out value="${order.orderID}"/>"></a></td>
 					</tr>
 				</c:if>
 			</c:forEach>

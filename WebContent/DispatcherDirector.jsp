@@ -107,7 +107,7 @@
 						</td>
 						<td>
 							<form action='DispatcherController' method='post'>
-								<input name="OrderID" value="${order.orderID}"/>
+								<input type="hidden" name="OrderID" value="${order.orderID}"/>
 								<select name="BranchID">
 									<c:forEach items="${ListBranches}" var="branch">
 										<c:if test="${branch.pharmacyID == order.pharmacyID}">

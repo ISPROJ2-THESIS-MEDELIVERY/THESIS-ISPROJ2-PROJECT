@@ -25,26 +25,27 @@ public class ApprovalController {
 	private static final long serialVersionUID = 1L;
 	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    	HttpSession session = request.getSession();
+		String action = "";
 		String forward;
-		HttpSession session = request.getSession();
-		
-		String action = request.getParameter( "action" );
+		if (request.getParameter("action") != null && !request.getParameter("action").isEmpty()) { action = request.getParameter( "action" ); }
 		
 		int PharmaID = 0;
-		if (session.getAttribute("PharmaID") != null) {
-		} else {
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
+		if (request.getParameter("PharmaID") != null && !request.getParameter("PharmaID").isEmpty()){ session.setAttribute("SelectedBranch", request.getParameter( "UserBranch" ) ); }
+		
+	    if (PharmaID != 0) {
+	    	ApprovalAction approvalAction = new ApprovalAction();
+	    
+		    if (action.equals(null)) {
+			   	session.setAttribute("orderPharmacistCheck", approvalAction.getRegularOrder(PharmaID) );
+			} else if (action.equalsIgnoreCase("Approve")) {
+		    	approvalAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ), true );
+		    } else if (action.equalsIgnoreCase("Reject")) {
+			   	approvalAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ) , false );
+		    } 
+		   	RequestDispatcher view = request.getRequestDispatcher( "PharmacistPage.jsp" );
+		   	view.forward(request, response);
 		}
-    	
-		ApprovalAction approvalAction = new ApprovalAction();
-    	if (action.isEmpty()) {
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
-    	} else if (action.equalsIgnoreCase("Approve")) {
-    		approvalAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ), true );
-    	} else if (action.equalsIgnoreCase("Reject")) {
-    		approvalAction.pharmacistApproval( Integer.parseInt( request.getParameter( "orderID" ) ) , false );
-    	}	
     }
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

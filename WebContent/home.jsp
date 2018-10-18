@@ -140,9 +140,8 @@
 					<a href="ProductController?Action=AddProduct">Add Product</a><br>
 					<a href="PharmacistController?Action=Prescription">Approve/Disapprove prescription orders</a><br>
 					Current Orders Heading to your Pharmacy:
-					<c:forEach items="${PharmcyList}" var="pharmacy">
-						<a href="CustomerController?action=GoToCatalog&PharmaID=<c:out value="${pharmacy.pharmacyID}" />"><c:out value="${pharmacy.pharmacyName}" /></a><br>
-					</c:forEach>
+					<a href="PharmacistController?Action=GoToOrders&PharmaID=<c:out value="${PharmacistPharmacy.pharmacyID}" />"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Regular Orders</a>
+					<!--  <a href="PharmacistController?action=GoToOrders&PharmaID=<c:out value="${PharmacistPharmacy.pharmacyID}" />"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Pharmacy Orders</a> -->
 					<br>
 				</div>
     		</div>

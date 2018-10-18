@@ -31,7 +31,7 @@
                         <span class="navbar-text"><a href="LoginController" class="login">Log Out</a></span>
                         </c:if>
                         <c:if test="${userAccess == 2}">
-                        <span class="navbar-text"><a href="DispatcherController?Action=DispatchOrder">Add Product</a></span>
+                        <span class="navbar-text"><a href="DispatcherController?Action=DispatchOrder">Order Dispatch - Regular</a><br></span>
 						<span class="navbar-text"><a href="LoginController">Logout</a></span>
                         </c:if>
                         <c:if test="${userAccess == 3}">

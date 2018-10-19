@@ -76,19 +76,19 @@
 					<c:out value="${userID}" /><br>
 					<c:out value="${username}" /><br>
 					<c:out value="${userAccess}" /><br>
-					<a href="LoginController">Logout</a><br>
+					<!-- <a href="LoginController">Logout</a><br> -->
 				</div>
         		<div class="col-md-6">
         			<br>Pharmacies:<br>
 					<c:forEach items="${PharmcyList}" var="pharmacy">
-					<a href="CustomerController?action=GoToCatalog&PharmaID=<c:out value="${pharmacy.pharmacyID}" />"><c:out value="${pharmacy.pharmacyName}" /></a><br>
+					<a href="CustomerController?action=GoToCatalog&PharmaID=<c:out value="${pharmacy.pharmacyID}" />" class="btn btn-info" role="button"><c:out value="${pharmacy.pharmacyName}" /></a><br>
 					</c:forEach>
         		</div>
         		<div class="col-md-6">
         			Order History:
-					<a href="CustomerController?action=GoToOrders" />To to Order History</a><br>
+					<a href="CustomerController?action=GoToOrders" class="btn btn-info" role="button"/>To to Order History</a><br><br>
         			Order Pending:
-					<a href="CustomerController?action=GoToPending" />To to Pending Orders</a><br>
+					<a href="CustomerController?action=GoToPending" class="btn btn-info" role="button"/>To to Pending Orders</a><br>
         		</div>
     		</div>
 		</div>
@@ -140,7 +140,7 @@
 					<a href="ProductController?Action=AddProduct">Add Product</a><br>
 					<a href="PharmacistController?Action=Prescription">Approve/Disapprove prescription orders</a><br>
 					Current Orders Heading to your Pharmacy:
-					<a href="PharmacistController?Action=GoToOrders&PharmaID=<c:out value="${PharmacistPharmacy.pharmacyID}" />"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Regular Orders</a>
+					<a href="PharmacistController?Action=GoToOrders&PharmaID=<c:out value="${PharmacistPharmacy.pharmacyID}" />" class="btn btn-info" role="button"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Regular Orders</a>
 					<!--  <a href="PharmacistController?action=GoToOrders&PharmaID=<c:out value="${PharmacistPharmacy.pharmacyID}" />"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Pharmacy Orders</a> -->
 					<br>
 				</div>

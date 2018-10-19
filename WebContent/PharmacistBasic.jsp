@@ -83,23 +83,23 @@
 							        </tr>
 							    </thead>
 							    <tbody>
-							    	<c:forEach items="${PharmacyOrdersDetails}" var="orderdetails">
+							    	<c:forEach items="${PharmacyOrderDetailsList}" var="orderdetails">
 										<c:if test="${order.orderID == orderdetails.orderID}">
-								            <tr>
-								                <td><c:out value="${orderdetails.orderID}" /></td>
-								                <td><c:out value="${orderdetails.productID}" /></td>
-								                <td><c:out value="${orderdetails.quantity}" /></td>
-								                <td><c:out value="${orderdetails.costPerUnit}" /></td>
-								                <td><c:out value="${orderdetails.totalCost}" /></td>
-							           		</tr>
+							            <tr>
+							                <td><c:out value="${orderdetails.orderID}" /></td>
+							                <td><c:out value="${orderdetails.productID}" /></td>
+							                <td><c:out value="${orderdetails.quantity}" /></td>
+							                <td><c:out value="${orderdetails.costPerUnit}" /></td>
+							                <td><c:out value="${orderdetails.totalCost}" /></td>
+							            </tr>
 							            </c:if>
 									</c:forEach>
 							    </tbody>
 							</table>
 			            </td>
 			            <td><c:out value="${order.actualCost}" /></td>
-						<td><a href="PharmacistController?action=RejectOrder&orderID=<c:out value="${order.orderID}"/>">CANCEL</a></td>
-						<td><a href="PharmacistController?action=ApproveOrder&orderID=<c:out value="${order.orderID}"/>">CONFIRM</a></td>
+						<td><a href="PharmacistController?PharmaID=<c:out value="${order.pharmacyID}" />&Action=RejectOrder&orderID=<c:out value="${order.orderID}"/>">CANCEL</a></td>
+						<td><a href="PharmacistController?PharmaID=<c:out value="${order.pharmacyID}" />&Action=ApproveOrder&orderID=<c:out value="${order.orderID}"/>">CONFIRM</a></td>
 					</tr>
 				</c:if>
 			</c:forEach>

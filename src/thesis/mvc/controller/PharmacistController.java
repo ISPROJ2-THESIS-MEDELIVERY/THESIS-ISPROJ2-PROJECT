@@ -41,30 +41,28 @@ public class PharmacistController extends HttpServlet{
 
 		HttpSession session = request.getSession();
 		String action = request.getParameter( "Action" );
+    	int PharmaID = Integer.parseInt(request.getParameter( "PharmaID" ));
+    	
+    	//get Pharma Orders
+		List<Order> PharmacyOrders = new ArrayList<Order>();
+		PharmacyOrders = new OrderImplement().getOrderByPharmacyId(PharmaID);
+		session.setAttribute("PharmacyOrders", PharmacyOrders);
+		List<OrderDetail> test = new OrderDetailImplement().getOrderDetail();
+		request.setAttribute("PharmacyOrdersDetails", test );
+		session.setAttribute( "PharmacyOrderDetailsList" , new OrderDetailImplement().getOrderDetail()  );
 		
 	    if (action.equalsIgnoreCase("GoToOrders")) {
-			//Get Pharma ID
-	    	int PharmaID = Integer.parseInt(request.getParameter( "PharmaID" ));
-	    	//get Pharma Orders
-			List<Order> PharmacyOrders = new ArrayList<Order>();
-			PharmacyOrders = new OrderImplement().getOrderByPharmacyId(PharmaID);
-			session.setAttribute("PharmacyOrders", PharmacyOrders);
-			//Get Pharma order Details
-			List<OrderDetail> test = new OrderDetailImplement().getOrderDetail();
-			request.setAttribute("PharmacyOrdersDetails", test );
 			response.sendRedirect(request.getContextPath() + "/PharmacistBasic.jsp");
 		} else if (action.equalsIgnoreCase("RejectOrder")){
-
+			Order order = new OrderImplement().getOrderById( Integer.parseInt(request.getParameter("orderID")));
+			order.setOrderStatus("CANCELLED");
+			new OrderImplement().updateOrder( order );
 			response.sendRedirect(request.getContextPath() + "/PharmacistBasic.jsp");
 		} else if (action.equalsIgnoreCase("ApproveOrder")){
-			/*
-			//Finish this
-			int BranchofPharmacist = new PharmacistImplement().getPharmacistById( (int) session.getAttribute("Pharmacist") ).getBranchID();
-			int PharmacyofBranch = new BranchImplement().getBranchById(BranchofPharmacist).getPharmacyID();
-			request.setAttribute("PharmacistPharmacy", new PharmacyImplement().getPharmacyById(PharmacyofBranch));
-			request.setAttribute("PharmacyOrderDetailsList", new OrderDetailImplement().getOrderDetail());
+			Order order = new OrderImplement().getOrderById( Integer.parseInt(request.getParameter("orderID")));
+			order.setOrderStatus("EN-ROUTE");
+			new OrderImplement().updateOrder( order );
 			response.sendRedirect(request.getContextPath() + "/PharmacistBasic.jsp");
-			*/
 		} else {
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}

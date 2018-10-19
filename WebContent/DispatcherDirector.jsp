@@ -41,8 +41,7 @@
         </div>
     </div>
     
-    <div class="table-responsive"> 
-	<table class="table">
+    <table class="table table-striped table-bordered" width="100%">
 		<thead>
 			<tr>
 	            <th>OrderID</th>
@@ -123,7 +122,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	</div>
 		<footer class="footer text-center">
     		<div class="container">
         		<div class="row">

@@ -36,9 +36,12 @@
 						<span class="navbar-text"><a href="LoginController">Logout</a></span>
                         </c:if>
                         <c:if test="${userAccess == 3}">
-                        <!-- <span class="navbar-text"><a href="ProductController?Action=AddProduct">Add Product</a><br></span>
-                        <span class="navbar-text"><a href="PharmacistController?Action=Prescription">Approve/Disapprove prescription orders</a></span> -->
+                        <span class="navbar-text"><a href="ProductController?Action=AddProduct">Add Product</a><br></span>
+                        <span class="navbar-text"><a href="PharmacistController?Action=Prescription">Approve/Disapprove prescription orders</a></span>
 						<span class="navbar-text"><a href="LoginController">Logout</a><br></span>
+                        </c:if>
+                        <c:if test="${userAccess == 4}">
+                        <span class="navbar-text"><a href="LoginController" class="login">Log Out</a></span>
                         </c:if>
                     </div>
                 </div>
@@ -156,12 +159,12 @@
 		</c:if>
 		<c:if test="${userAccess == 4}">
 			<hr>
-			Admin Details<br>
-			<c:out value="${userID}" /><br>
-			<c:out value="${username}" /><br>
-			<c:out value="${userAccess}" /><br>
+			<p class="font-weight-bold">Admin Details</p>
+			User ID: <c:out value="${userID}" /><br>
+			Username: <c:out value="${username}" /><br>
+			User Type: <c:out value="${userAccess}" /><br>
 			<hr>List of customers:<br>
-				<table border="1">
+				<table class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
 							<th>Customer Name</th>
@@ -188,8 +191,8 @@
 					</tbody>
 				</table>
 			<hr>List of dispatchers:<br>
-				<a href="RegistrationController?Action=AddDispatcher">Register a new Dispatcher</a><br>
-				<table border="1">
+				<a href="RegistrationController?Action=AddDispatcher" class="btn btn-info" role="button">Register a new Dispatcher</a><br>
+				<table class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
 							<th>Dispatcher Name</th>
@@ -211,9 +214,9 @@
 				</table>
 			<hr>List of pharmacists:<br>
 				<c:forEach items="${PharmcyList}" var="pharmacy">
-					<a href="RegistrationController?Action=AddPharmacist&PharmacyID=<c:out value="${pharmacy.pharmacyID}" />">Register a new Pharmacist in <c:out value="${pharmacy.pharmacyName}" /></a><br>
+					<a href="RegistrationController?Action=AddPharmacist&PharmacyID=<c:out value="${pharmacy.pharmacyID}" />" class="btn btn-info" role="button">Register a new Pharmacist in <c:out value="${pharmacy.pharmacyName}" /></a><br>
 				</c:forEach>
-				<table border="1">
+				<table class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
 							<th>Pharmacist Name</th>
@@ -232,8 +235,8 @@
 					</tbody>
 				</table>
 			<hr>List of admin:<br>
-				<a href="RegistrationController?Action=AddAdmin">Register a new Admin</a><br>
-				<table border="1">
+				<a href="RegistrationController?Action=AddAdmin" class="btn btn-info" role="button">Register a new Admin</a><br>
+				<table class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
 							<th>Admin Name</th>
@@ -249,8 +252,8 @@
 				</table>
 			<hr>Add a new Item:<br>
 			<hr>List of Pharmacies:<br>
-				<a href="InformationController?Action=AddPharmacy">Add a new Pharmacy</a><br>
-				<table border="1">
+				<a href="InformationController?Action=AddPharmacy" class="btn btn-info" role="button">Add a new Pharmacy</a><br>
+				<table class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
 							<th>Pharmacy Name</th>
@@ -265,8 +268,8 @@
 					</tbody>
 				</table>
 			<hr>List of branches:<br>
-				<a href="InformationController?Action=AddBranch">Add a new Branch</a><br>
-				<table border="1">
+				<a href="InformationController?Action=AddBranch" class="btn btn-info" role="button">Add a new Branch</a><br>
+				<table class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
 							<th>Branch Address</th>
@@ -287,8 +290,8 @@
 					</tbody>
 				</table>
 			<hr>List of Couriers:<br>
-				<a href="InformationController?Action=AddCourier">Add a new Courier branch</a><br>
-				<table border="1">
+				<a href="InformationController?Action=AddCourier" class="btn btn-info" role="button">Add a new Courier branch</a><br>
+				<table class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
 							<th>Courier Name</th>

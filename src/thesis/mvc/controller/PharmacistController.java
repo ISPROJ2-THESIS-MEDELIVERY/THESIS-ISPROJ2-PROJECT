@@ -46,16 +46,21 @@ public class PharmacistController extends HttpServlet{
 			List<Order> PharmacyOrders = new ArrayList<Order>();
 			PharmacyOrders = new OrderImplement().getOrderByPharmacyId(PharmaID);
 			session.setAttribute("PharmacyOrders", PharmacyOrders);
+			Object test = new OrderDetailImplement().getOrderDetail();
+			request.setAttribute("PharmacyOrdersDetails", new OrderDetailImplement().getOrderDetail() );
 			response.sendRedirect(request.getContextPath() + "/PharmacistBasic.jsp");
 		} else if (action.equalsIgnoreCase("RejectOrder")){
 
 			response.sendRedirect(request.getContextPath() + "/PharmacistBasic.jsp");
 		} else if (action.equalsIgnoreCase("ApproveOrder")){
-//Finish this
-			int BranchxofPharmacist = new PharmacistImplement().getPharmacistById( (int) session.getAttribute("Pharmacist") ).getBranchID();
-			int PharmacyofBranch = new BranchImplement().getBranchById(BranchxofPharmacist).getPharmacyID();
+			/*
+			//Finish this
+			int BranchofPharmacist = new PharmacistImplement().getPharmacistById( (int) session.getAttribute("Pharmacist") ).getBranchID();
+			int PharmacyofBranch = new BranchImplement().getBranchById(BranchofPharmacist).getPharmacyID();
 			request.setAttribute("PharmacistPharmacy", new PharmacyImplement().getPharmacyById(PharmacyofBranch));
+			request.setAttribute("PharmacyOrderDetailsList", new OrderDetailImplement().getOrderDetail());
 			response.sendRedirect(request.getContextPath() + "/PharmacistBasic.jsp");
+			*/
 		} else {
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}

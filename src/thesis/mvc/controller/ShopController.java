@@ -43,6 +43,7 @@ import thesis.mvc.pageaction.ApprovalAction;
 import thesis.mvc.pageaction.PurchaseAction;
 import thesis.mvc.pageaction.PurchaseAction.CartList;
 import thesis.mvc.pageaction.SearchAction;
+import thesis.mvc.pageaction.ShopAction;
 import thesis.mvc.utility.DBUtility;
 import thesis.mvc.utility.EncryptionFunction;
 import thesis.mvc.utility.SendEmail;
@@ -196,6 +197,7 @@ public class ShopController extends HttpServlet {
 				
 				order.setCustomerID(CusID);
 				order.setOrderAddress(Adr);
+				order.setPharmacyID(PID);
 				order.setCityID(CityID);
 				order.setSeniorDiscount(IS);
 				session.setAttribute("Order", order );
@@ -250,10 +252,11 @@ public class ShopController extends HttpServlet {
 			String CustomerEmail = customerImplement.getCustomerByUserId(userID).getEmail();
 
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-			purchaseAction.purchaseOrder(order, OrderDetails);
+			String redirect = new ShopAction().purchaseOrder(order, OrderDetails, "https://www.google.com/");// request.getContextPath()
 			sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, "This is a test message");
 			if(order == null || OrderDetails.isEmpty()) {
 				forward = "/index.jsp"; //or an error page
+				response.sendRedirect(request.getContextPath() + forward);
 			} else {
 				session.setAttribute("CartlistReciept", cartList);
 				session.setAttribute("orderReciept", order);
@@ -261,12 +264,11 @@ public class ShopController extends HttpServlet {
 				session.removeAttribute("Order");
 				session.removeAttribute("OrderDetails");
 				session.removeAttribute("CartList");
-				forward = "/index.jsp";
+				response.sendRedirect(redirect);
 			}
 			//order.setPaymentMethod( request.getParameter( "orderPayment" ) );
 			//order.setDateOrdered(today);
 
-			response.sendRedirect(request.getContextPath() + forward);
 		} else if (action.equalsIgnoreCase("AddPrescription")) {
 
 			//Set the branch 

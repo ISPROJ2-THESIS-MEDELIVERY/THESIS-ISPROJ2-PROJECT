@@ -4,8 +4,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 <title>Insert title here</title>
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" />
+<link rel="stylesheet" href="assets/css/Header-Blue.css" />
+<link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
 
@@ -37,8 +43,7 @@
         </div>
     </div>
     
-    <div class="table-responsive"> 
-	<table class="table">
+	<table class="table table-striped table-bordered" width="100%">
 		<thead>
 			<tr>
 	            <th>OrderID</th>
@@ -100,7 +105,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	</div>
 		<footer class="footer text-center">
     		<div class="container">
         		<div class="row">

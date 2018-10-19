@@ -51,8 +51,7 @@
 	<p class="font-weight-bold">Status:</p> <c:out value="${order.orderStatus}" /><br>
 	<p class="font-weight-bold">Senior:</p> <c:out value="${order.seniorDiscount}" /><br>
 	<p class="font-weight-bold">Actual:</p> <c:out value="${order.actualCost}" /><br>
-	<div class="table-responsive">
-	<table class="table">
+	<table class="table table-striped table-bordered" width="100%">
 	    <thead>
 	        <tr>
 	            <th>OrderID</th>
@@ -76,9 +75,9 @@
 			</c:forEach>
 	    </tbody>
 	</table>
-	</div>
+
 	<hr>
-	<a href="CustomerController?action=CancelOrder&OrderID=<c:out value="${order.orderID}" />" />Cancel Order</a>
+	<a href="CustomerController?action=CancelOrder&OrderID=<c:out value="${order.orderID}" />" class="btn btn-info" role="button"/>Cancel Order</a>
 	</c:if>
 	</c:forEach>
 		<footer class="footer text-center">

@@ -46,8 +46,7 @@
     </div> 
 	<h1>CART:</h1>
 	<c:if test="${CartList != null}">
-		<div class="table-responsive">
-    		<table class="table">
+    		<table class="table table-striped table-bordered" width="100%">
         		<thead>
             		<tr>
                 		<th>Item</th>
@@ -83,7 +82,6 @@
     		
     		
     		
-		</div>
 		<%-- <table border=1>
 			<thead>
 				<tr>
@@ -117,8 +115,7 @@
 	</c:if>
 	
 	<h1>SHOP:</h1>
-	<div class="table-responsive">
-	<table id="druglistTable" class="table">
+	<table id="druglistTable" class="table table-striped table-bordered" width="100%">
 		<thead>
 			<tr>
 				<th>Product ID</th>
@@ -174,7 +171,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	</div>
 		<footer class="footer text-center">
     		<div class="container">
         		<div class="row">

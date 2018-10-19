@@ -36,8 +36,8 @@
 						<span class="navbar-text"><a href="LoginController">Logout</a></span>
                         </c:if>
                         <c:if test="${userAccess == 3}">
-                        <span class="navbar-text"><a href="ProductController?Action=AddProduct">Add Product</a></span>
-                        <span class="navbar-text"><a href="PharmacistController?Action=Prescription">Approve/Disapprove prescription orders</a></span>
+                        <!-- <span class="navbar-text"><a href="ProductController?Action=AddProduct">Add Product</a><br></span>
+                        <span class="navbar-text"><a href="PharmacistController?Action=Prescription">Approve/Disapprove prescription orders</a></span> -->
 						<span class="navbar-text"><a href="LoginController">Logout</a><br></span>
                         </c:if>
                     </div>
@@ -72,23 +72,23 @@
 		<div class="container">
     		<div class="row">
         		<div class="col-md-6">
-        			Customer Details:<br>
-					<c:out value="${userID}" /><br>
-					<c:out value="${username}" /><br>
-					<c:out value="${userAccess}" /><br>
+        			<p class="font-weight-bold">Customer Details:</p>
+					User ID: <c:out value="${userID}" /><br>
+					Username: <c:out value="${username}" /><br>
+					User Type: <c:out value="${userAccess}" /><br>
 					<!-- <a href="LoginController">Logout</a><br> -->
 				</div>
         		<div class="col-md-6">
-        			<br>Pharmacies:<br>
+        			<br>Select Pharmacy:<br>
 					<c:forEach items="${PharmcyList}" var="pharmacy">
-					<a href="CustomerController?action=GoToCatalog&PharmaID=<c:out value="${pharmacy.pharmacyID}" />" class="btn btn-info" role="button"><c:out value="${pharmacy.pharmacyName}" /></a><br>
+					<a href="CustomerController?action=GoToCatalog&PharmaID=<c:out value="${pharmacy.pharmacyID}" />" class="btn btn-info btn-sm" role="button"><c:out value="${pharmacy.pharmacyName}" /></a><br>
 					</c:forEach>
         		</div>
         		<div class="col-md-6">
-        			Order History:
-					<a href="CustomerController?action=GoToOrders" class="btn btn-info" role="button"/>To to Order History</a><br><br>
-        			Order Pending:
-					<a href="CustomerController?action=GoToPending" class="btn btn-info" role="button"/>To to Pending Orders</a><br>
+        			<!-- Order History: -->
+					<a href="CustomerController?action=GoToOrders" class="btn btn-primary" role="button"/>Go to Order History</a><br><br>
+        			<!-- Order Pending: -->
+					<a href="CustomerController?action=GoToPending" class="btn btn-primary" role="button"/>Go to Pending Orders</a><br>
         		</div>
     		</div>
 		</div>
@@ -110,13 +110,13 @@
 		<div class="container">
     		<div class="row">
         		<div class="col-md-6">
-        			Dispatcher<br>
-					<c:out value="${userID}" /><br>
-					<c:out value="${username}" /><br>
-					<c:out value="${userAccess}" /><br>
+        			<p class="font-weight-bold">Dispatcher Details:</p><br>
+					User ID: <c:out value="${userID}" /><br>
+					Username: <c:out value="${username}" /><br>
+					User Type: <c:out value="${userAccess}" /><br>
 					<a href="DispatcherController?Action=DispatchOrder">Order Dispatch - Regular</a><br>
 					<!-- <a href="DispatcherController?Action=DispatchPrescription">Order Dispatch - Prescription</a><br> -->
-					<a href="LoginController">Logout</a><br>
+					<!-- <a href="LoginController">Logout</a><br> -->
 				</div>
     		</div>
 		</div>		
@@ -132,16 +132,16 @@
 		<div class="container">
     		<div class="row">
         		<div class="col-md-6">
-        			Pharmacist Details<br>
-					<c:out value="${userID}" /><br>
-					<c:out value="${username}" /><br>
-					<c:out value="${userAccess}" /><br>
-					<a href="LoginController">Logout</a><br>
-					<a href="ProductController?Action=AddProduct">Add Product</a><br>
-					<a href="PharmacistController?Action=Prescription">Approve/Disapprove prescription orders</a><br>
+        			<p class="font-weight-bold">Pharmacist Details:</p>
+					User ID: <c:out value="${userID}" /><br>
+					Username: <c:out value="${username}" /><br>
+					User Type: <c:out value="${userAccess}" /><br>
+					<!-- <a href="LoginController">Logout</a><br> -->
+					<a href="ProductController?Action=AddProduct" class="btn btn-info" role="button">Add Product</a><br>
+					<a href="PharmacistController?Action=Prescription" class="btn btn-info" role="button">Approve/Disapprove prescription orders</a><br>
 					Current Orders Heading to your Pharmacy:
 					<a href="PharmacistController?Action=GoToOrders&PharmaID=<c:out value="${PharmacistPharmacy.pharmacyID}" />" class="btn btn-info" role="button"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Regular Orders</a>
-					<!--  <a href="PharmacistController?action=GoToOrders&PharmaID=<c:out value="${PharmacistPharmacy.pharmacyID}" />"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Pharmacy Orders</a> -->
+					<%-- <a href="PharmacistController?action=GoToOrders&PharmaID=<c:out value="${PharmacistPharmacy.pharmacyID}" />"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Pharmacy Orders</a> --%>
 					<br>
 				</div>
     		</div>

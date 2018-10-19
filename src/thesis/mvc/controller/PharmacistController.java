@@ -22,6 +22,7 @@ import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacistImplement;
 import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.model.Order;
+import thesis.mvc.model.OrderDetail;
 import thesis.mvc.pageaction.ApprovalAction;
 import thesis.mvc.utility.DBUtility;
 
@@ -42,12 +43,15 @@ public class PharmacistController extends HttpServlet{
 		String action = request.getParameter( "Action" );
 		
 	    if (action.equalsIgnoreCase("GoToOrders")) {
-			int PharmaID = Integer.parseInt(request.getParameter( "PharmaID" ));
+			//Get Pharma ID
+	    	int PharmaID = Integer.parseInt(request.getParameter( "PharmaID" ));
+	    	//get Pharma Orders
 			List<Order> PharmacyOrders = new ArrayList<Order>();
 			PharmacyOrders = new OrderImplement().getOrderByPharmacyId(PharmaID);
 			session.setAttribute("PharmacyOrders", PharmacyOrders);
-			Object test = new OrderDetailImplement().getOrderDetail();
-			request.setAttribute("PharmacyOrdersDetails", new OrderDetailImplement().getOrderDetail() );
+			//Get Pharma order Details
+			List<OrderDetail> test = new OrderDetailImplement().getOrderDetail();
+			request.setAttribute("PharmacyOrdersDetails", test );
 			response.sendRedirect(request.getContextPath() + "/PharmacistBasic.jsp");
 		} else if (action.equalsIgnoreCase("RejectOrder")){
 

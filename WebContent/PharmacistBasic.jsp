@@ -80,7 +80,6 @@
 							    <tbody>
 							    	<c:forEach items="${PharmacyOrdersDetails}" var="orderdetails">
 										<c:if test="${order.orderID == orderdetails.orderID}">
-							            </c:if>
 								            <tr>
 								                <td><c:out value="${orderdetails.orderID}" /></td>
 								                <td><c:out value="${orderdetails.productID}" /></td>
@@ -88,6 +87,7 @@
 								                <td><c:out value="${orderdetails.costPerUnit}" /></td>
 								                <td><c:out value="${orderdetails.totalCost}" /></td>
 							           		</tr>
+							            </c:if>
 									</c:forEach>
 							    </tbody>
 							</table>

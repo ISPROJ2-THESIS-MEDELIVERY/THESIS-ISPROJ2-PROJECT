@@ -7,8 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.mail.Session;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,14 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.implement.OrderImplement;
-import thesis.mvc.implement.PharmacistImplement;
-import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
-import thesis.mvc.pageaction.ApprovalAction;
 import thesis.mvc.utility.DBUtility;
 
 @WebServlet("/PharmacistController")

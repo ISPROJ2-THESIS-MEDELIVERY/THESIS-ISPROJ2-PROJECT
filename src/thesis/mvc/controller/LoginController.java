@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-import javax.mail.Session;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +17,6 @@ import thesis.mvc.implement.AdminImplement;
 import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.DispatcherImplement;
 import thesis.mvc.implement.LoginImplement;
-import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacistImplement;
 import thesis.mvc.model.Login;
 import thesis.mvc.pageaction.LoginAction;

@@ -2,7 +2,6 @@ package thesis.mvc.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -18,13 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.FileItemFactory;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
-import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.CityListingImplement;
 import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.OrderDetailImplement;
@@ -32,14 +26,12 @@ import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.implement.PrescriptionImplement;
 import thesis.mvc.implement.ProductImplement;
-import thesis.mvc.model.Branch;
 import thesis.mvc.model.Customer;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
 import thesis.mvc.model.Pharmacy;
 import thesis.mvc.model.Prescription;
 import thesis.mvc.model.Product;
-import thesis.mvc.pageaction.ApprovalAction;
 import thesis.mvc.pageaction.PurchaseAction;
 import thesis.mvc.pageaction.PurchaseAction.CartList;
 import thesis.mvc.pageaction.SearchAction;

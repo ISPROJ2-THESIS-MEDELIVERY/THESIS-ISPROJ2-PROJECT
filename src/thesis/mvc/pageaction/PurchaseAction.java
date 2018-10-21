@@ -8,12 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
-import java.util.List;
 
-import thesis.mvc.implement.CityListingImplement;
-import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.model.Order;
-import thesis.mvc.model.OrderDetail;
 import thesis.mvc.utility.DBUtility;
 
 public class PurchaseAction {

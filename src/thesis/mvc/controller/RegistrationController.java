@@ -1,17 +1,12 @@
 package thesis.mvc.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Locale;
 
-import javax.servlet.RequestDispatcher;
-//import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -19,22 +14,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
-import javax.websocket.Session;
 
-import thesis.mvc.implement.AdminImplement;
 import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.CourierServiceImplement;
 import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.LoginImplement;
 import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.model.Admin;
-import thesis.mvc.model.CourierService;
 import thesis.mvc.model.Customer;
 import thesis.mvc.model.Dispatcher;
 import thesis.mvc.model.Login;
 import thesis.mvc.model.Pharmacist;
-import thesis.mvc.pageaction.LoginAction;
 import thesis.mvc.pageaction.RegistrationAction;
 import thesis.mvc.utility.DBUtility;
 import thesis.mvc.utility.EncryptionFunction;

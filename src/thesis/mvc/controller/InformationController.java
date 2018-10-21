@@ -1,6 +1,5 @@
 package thesis.mvc.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
@@ -23,7 +22,6 @@ import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.implement.StocksImplement;
 import thesis.mvc.implement.StocksPriceImplement;
 import thesis.mvc.model.Branch;
-import thesis.mvc.model.CityListing;
 import thesis.mvc.model.CourierService;
 import thesis.mvc.model.Pharmacist;
 import thesis.mvc.model.Pharmacy;

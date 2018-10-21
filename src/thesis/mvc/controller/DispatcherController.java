@@ -2,8 +2,6 @@ package thesis.mvc.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import thesis.mvc.implement.BranchImplement;
-import thesis.mvc.implement.CourierServiceImplement;
-import thesis.mvc.implement.LoginImplement;
 import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacyImplement;
-import thesis.mvc.model.Order;
 import thesis.mvc.pageaction.RegistrationAction;
-import thesis.mvc.pageaction.SearchAction;
 import thesis.mvc.utility.DBUtility;
-import thesis.mvc.utility.EncryptionFunction;
 
 @WebServlet("/DispatcherController")
 public class DispatcherController extends HttpServlet {

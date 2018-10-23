@@ -11,7 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
+import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.model.Product;
 import thesis.mvc.utility.DBUtility;
 
@@ -29,7 +32,7 @@ public class ProductController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String forward = "";
-		int productID = Integer.parseInt( request.getParameter( "ProductID" ) );
+		HttpSession session = request.getSession();
 		
 		String Action = request.getParameter( "Action" );
 
@@ -38,7 +41,9 @@ public class ProductController extends HttpServlet {
 		
 		if( Action.isEmpty() ) {
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
-		} else if(Action.equalsIgnoreCase( "asd" )){ //Goto main page
+		} else if(Action.equalsIgnoreCase( "addProduct" )){ //Goto main page
+			session.setAttribute("ProductList", new ProductImplement().getAllProducts());
+			response.sendRedirect(request.getContextPath() + "/pharmacyAdd.jsp");
 		} else { //Goto main page
 			forward = "/error.jsp";
 		}
@@ -47,6 +52,8 @@ public class ProductController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int productID = Integer.parseInt( request.getParameter( "ProductID" ) );
+		/*
 		conn = DBUtility.getConnection();
 		Product product = new Product();
 		
@@ -62,6 +69,7 @@ public class ProductController extends HttpServlet {
 		product.setProductImage(request.getParameter("ProductImage"));
 		product.setRXProduct(Boolean.getBoolean(request.getParameter("RXProduct")));
 		product.setCounterLimit(Integer.getInteger(request.getParameter("CounterLimit")));
+		*/
 	}
 
 }

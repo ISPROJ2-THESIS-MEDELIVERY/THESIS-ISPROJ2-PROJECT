@@ -140,10 +140,10 @@
 					Username: <c:out value="${username}" /><br>
 					User Type: <c:out value="${userAccess}" /><br>
 					<!-- <a href="LoginController">Logout</a><br> -->
-					<a href="ProductController?Action=AddProduct" class="btn btn-info" role="button">Add Product</a><br>
+					<a href="ProductController?Action=addProduct" class="btn btn-info" role="button">Add Product</a><br>
 					<a href="PharmacistController?Action=Prescription" class="btn btn-info" role="button">Approve/Disapprove prescription orders</a><br>
 					Current Orders Heading to your Pharmacy:
-					<a href="PharmacistController?Action=GoToOrders&PharmaID=<c:out value="${PharmacistPharmacy.pharmacyID}" />" class="btn btn-info" role="button"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Regular Orders</a>
+					<a href="PharmacistController?Action=GoToOrders" class="btn btn-info" role="button"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Regular Orders</a>
 					<%-- <a href="PharmacistController?action=GoToOrders&PharmaID=<c:out value="${PharmacistPharmacy.pharmacyID}" />"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Pharmacy Orders</a> --%>
 					<br>
 				</div>

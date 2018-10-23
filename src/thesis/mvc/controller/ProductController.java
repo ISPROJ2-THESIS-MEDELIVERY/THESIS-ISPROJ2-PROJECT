@@ -15,7 +15,9 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import thesis.mvc.implement.ProductImplement;
+import thesis.mvc.implement.StocksImplement;
 import thesis.mvc.model.Product;
+import thesis.mvc.model.Stocks;
 import thesis.mvc.utility.DBUtility;
 
 @WebServlet("/ProductController")
@@ -42,34 +44,37 @@ public class ProductController extends HttpServlet {
 		if( Action.isEmpty() ) {
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else if(Action.equalsIgnoreCase( "addProduct" )){ //Goto main page
+			//Action=addProduct
 			session.setAttribute("ProductList", new ProductImplement().getAllProducts());
+			response.sendRedirect(request.getContextPath() + "/pharmacyStock.jsp");
+		} else if(Action.equalsIgnoreCase( "AddnewProduct" )){ //Goto main page
 			response.sendRedirect(request.getContextPath() + "/pharmacyAdd.jsp");
 		} else { //Goto main page
-			forward = "/error.jsp";
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}
-		RequestDispatcher view = request.getRequestDispatcher( forward );
-		view.forward(request, response);
+		//RequestDispatcher view = request.getRequestDispatcher( forward );
+		//view.forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int productID = Integer.parseInt( request.getParameter( "ProductID" ) );
-		/*
-		conn = DBUtility.getConnection();
-		Product product = new Product();
+		String Action = request.getParameter( "Action" );
+		HttpSession session = request.getSession();
 		
-		product.setProductName(request.getParameter("ProductName"));
-		product.setGenericName(request.getParameter("GenericName"));
-		product.setRegistrationNo(request.getParameter("RegistrationNo"));
-		product.setProductStrength(request.getParameter("ProductStrength"));
-		product.setProductForm(request.getParameter("ProductForm"));
-		product.setProductPackaging(request.getParameter("ProductPackaging"));
-		product.setProductManufacturer(request.getParameter("ProductManufacturer"));
-		product.setProductOrigin(request.getParameter("ProductOrigin"));
-		product.setProductDescription(request.getParameter("ProductDescription"));
-		product.setProductImage(request.getParameter("ProductImage"));
-		product.setRXProduct(Boolean.getBoolean(request.getParameter("RXProduct")));
-		product.setCounterLimit(Integer.getInteger(request.getParameter("CounterLimit")));
-		*/
+		if( Action.isEmpty() ) {
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
+		} else if(Action.equalsIgnoreCase( "addProduct" )){ //Goto main page
+			Stocks stock =  new Stocks();
+			stock.setFeature(request.getParameter("ProductID"));
+			stock.setPharmacyID(Integer.parseInt(request.getParameter("PharmacyID")));
+			stock.setProductID(Integer.parseInt(request.getParameter("ProductID")));
+			new StocksImplement().addStocks(stock);
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
+		} else if(Action.equalsIgnoreCase( "AddnewProduct" )){ //Goto main page
+			
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
+		} 
+		
 	}
 
 }

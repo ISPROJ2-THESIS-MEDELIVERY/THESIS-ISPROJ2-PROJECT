@@ -9,17 +9,33 @@
 </head>
 <body>
 	<form action="/ProductController">
-		<input type="hidden" name="AddStock"/>
-		Product to add: <br>
-		<select name="ProductAdd">
-			<c:forEach items="${ProductList}" var="productList">
-				<option value='<c:out value="${productList.productID}" />'><c:out value="${productList.productName}" /></option>
-			</c:forEach>
-		</select><br>
+		<input type="hidden" />
+		<h2>Product to add: </h2><br><br>
+		Product Name:<br>
+		<input type="text" name=""/><br><br>
+		Generic Name:<br>
+		<input type="text" name=""/><br><br>
+		Registration Number:<br>
+		<input type="text" name=""/><br><br>
+		Product Strength:<br>
+		<input type="text" name=""/><br><br>
+		Product Form:<br>
+		<input type="text" name=""/><br><br>
+		Product Packaging:<br>
+		<input type="text" name=""/><br><br>
+		Product Manufacturing:<br>
+		<input type="text" name=""/><br><br>
+		Product Origin:<br>
+		<input type="text" name=""/><br><br>
+		Product Description:<br>
+		<input type="text" name=""/><br><br>
+		Product is an Rx Product?:<br>
+		<input type="checkbox" name=""/><br><br>
 		Is it Featured?: <br>
-		<input type="checkbox" name="feature"/><br>
+		<input type="checkbox" name="feature"/><br><br>
 		Price: <br>
 		<input type="number" name="Price"/><br>
+		<input type="submit" name="action" value="addnewProduct"/> 
 	</form>
 </body>
 </html>

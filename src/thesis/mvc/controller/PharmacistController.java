@@ -14,10 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.implement.OrderImplement;
+import thesis.mvc.implement.PharmacistImplement;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
+import thesis.mvc.model.Pharmacist;
+import thesis.mvc.model.Pharmacy;
 import thesis.mvc.utility.DBUtility;
 
 @WebServlet("/PharmacistController")
@@ -35,11 +39,12 @@ public class PharmacistController extends HttpServlet{
 
 		HttpSession session = request.getSession();
 		String action = request.getParameter( "Action" );
-    	int PharmaID = Integer.parseInt(request.getParameter( "PharmaID" ));
+    	Pharmacist pharmacist = new PharmacistImplement().getPharmacistById((int) session.getAttribute("Pharmacist")); 
+    	int pharmaID = new BranchImplement().getBranchById(pharmacist.getBranchID()).getPharmacyID();
     	
     	//get Pharma Orders
 		List<Order> PharmacyOrders = new ArrayList<Order>();
-		PharmacyOrders = new OrderImplement().getOrderByPharmacyId(PharmaID);
+		PharmacyOrders = new OrderImplement().getOrderByPharmacyId(pharmaID);
 		session.setAttribute("PharmacyOrders", PharmacyOrders);
 		List<OrderDetail> test = new OrderDetailImplement().getOrderDetail();
 		request.setAttribute("PharmacyOrdersDetails", test );

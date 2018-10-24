@@ -8,11 +8,11 @@
 </head>
 <body>
 	<!-- CatalogPrescription -->
-	<!-- <form method="post" action="TestController" encType="multipart/form-data"> -->
-	<!-- <input type="submit" value="TestJSON"/> -->
-	<!-- <input type="file" name="file" value="Upload Prescription"/> -->
-	<!-- <input type="submit" value="start upload"/> -->
-	<!-- </form> -->
-	<jsp:forward page="/ProductController?Action=addProduct"></jsp:forward>
+	<form method="post" action="TestController" encType="multipart/form-data">
+		<!-- <input type="submit" value="TestJSON"/> -->
+		<!-- <input type="file" name="file" value="Upload Prescription"/> -->
+		<input type="submit" value=""/>
+	</form>
+	<!-- <jsp:forward page="/ProductController?Action=addProduct"></jsp:forward> -->
 </body>
 </html>

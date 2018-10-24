@@ -64,7 +64,7 @@
 		            	<tr>
 		                	<td><c:out value="${details.name}" /></td>
 		                	<td><c:out value="${details.description}" /></td>
-		                	<td>IMAGE</td>
+		                	<td><img src="images/<c:out value="${details.image}" />" alt="Medicine Image" width="100px" height="100px"></td>
 		                	<td><c:out value="${details.size}" /></td>
 		                	<td><c:out value="${details.prescription}" /></td>
 		                	<td><c:out value="${details.quantity}" /></td>
@@ -122,6 +122,7 @@
 				<th>Product Name</th>
 				<th>Generic Name</th>
 				<th>Product Strength</th>
+				<th>Image</th>
 				<th>Product Form</th>
 				<th>Product Packaging</th>
 				<th>Product Description</th>
@@ -136,6 +137,7 @@
 						<td><c:out value="${item.productName}" /></td>
 						<td><c:out value="${item.genericName}" /></td>
 						<td><c:out value="${item.productStrength}" /></td>
+		                <td><img src="images/<c:out value="${item.productImage}" />" alt="Medicine Image" width="100px" height="100px"></td>
 						<td><c:out value="${item.productForm}" /></td>
 						<td><c:out value="${item.productPackaging}" /></td>
 						<td><c:out value="${item.productDescription}" /></td>

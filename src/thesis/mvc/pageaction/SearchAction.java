@@ -10,6 +10,7 @@ import java.util.List;
 
 import thesis.mvc.model.Product;
 import thesis.mvc.utility.DBUtility;
+import thesis.mvc.utility.EncryptionFunction;
 
 public class SearchAction {
 	
@@ -110,7 +111,7 @@ public class SearchAction {
 				productList.setProductForm( resultSet.getString(5) );
 				productList.setProductPackaging( resultSet.getString(6) );
 				productList.setProductDescription( resultSet.getString(7) );
-				productList.setProductImage( resultSet.getString(8) );
+				productList.setProductImage( new EncryptionFunction().decrypt( resultSet.getString(8) ) );
 				productList.setIsRXProduct( resultSet.getBoolean(9) );
 				productList.setPriceSet( resultSet.getDouble(10) );
 				productLists.add(productList);

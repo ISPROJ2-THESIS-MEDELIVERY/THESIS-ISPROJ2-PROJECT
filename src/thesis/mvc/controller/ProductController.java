@@ -65,7 +65,7 @@ public class ProductController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else if(Action.equalsIgnoreCase( "addProduct" )){ //Goto main page
 			Stocks stock =  new Stocks();
-			stock.setFeature(request.getParameter("ProductID"));
+			stock.setFeature(Boolean.parseBoolean(request.getParameter("ProductID")));
 			stock.setPharmacyID(Integer.parseInt(request.getParameter("PharmacyID")));
 			stock.setProductID(Integer.parseInt(request.getParameter("ProductID")));
 			new StocksImplement().addStocks(stock);

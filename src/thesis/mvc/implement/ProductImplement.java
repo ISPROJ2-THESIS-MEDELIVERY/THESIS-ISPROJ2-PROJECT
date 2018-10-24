@@ -11,6 +11,7 @@ import java.util.List;
 import thesis.mvc.dataobjects.ProductDAO;
 import thesis.mvc.model.Product;
 import thesis.mvc.utility.DBUtility;
+import thesis.mvc.utility.EncryptionFunction;
 
 public class ProductImplement implements ProductDAO {
 	
@@ -105,7 +106,7 @@ public class ProductImplement implements ProductDAO {
 				product.setProductManufacturer( resultSet.getString( "ProductManufacturer" ) );
 				product.setProductOrigin( resultSet.getString( "ProductOrigin" ) );
 				product.setProductDescription( resultSet.getString( "ProductDescription" ) );
-				product.setProductImage( resultSet.getString( "ProductImage" ) );
+				product.setProductImage( new EncryptionFunction().decrypt(resultSet.getString( "ProductImage" )));
 				product.setRXProduct( resultSet.getBoolean( "isRXProduct" ) );
 				product.setCounterLimit( resultSet.getInt( "CounterLimit" ) );
 				products.add(product);
@@ -137,7 +138,7 @@ public class ProductImplement implements ProductDAO {
 				product.setProductManufacturer( resultSet.getString( "ProductManufacturer" ) );
 				product.setProductOrigin( resultSet.getString( "ProductOrigin" ) );
 				product.setProductDescription( resultSet.getString( "ProductDescription" ) );
-				product.setProductImage( resultSet.getString( "ProductImage" ) );
+				product.setProductImage( new EncryptionFunction().decrypt(resultSet.getString( "ProductImage" )));
 				product.setRXProduct( resultSet.getBoolean( "isRXProduct" ) );
 				product.setCounterLimit( resultSet.getInt( "CounterLimit" ) );
 			}

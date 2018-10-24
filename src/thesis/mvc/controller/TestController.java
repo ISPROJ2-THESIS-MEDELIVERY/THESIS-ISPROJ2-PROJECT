@@ -22,6 +22,8 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import thesis.mvc.utility.EncryptionFunction;
+
 @WebServlet("/TestController")
 @MultipartConfig
 public class TestController extends HttpServlet {
@@ -70,7 +72,7 @@ public class TestController extends HttpServlet {
     
     @SuppressWarnings("unchecked")
 	public static void main (String args[]) {
-    	
+    	/*
     	JSONObject JSONReciept = new JSONObject();
     	
         //totalAmount
@@ -189,5 +191,13 @@ public class TestController extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
+    	EncryptionFunction encryptionFunction = new EncryptionFunction();
+        System.out.println(encryptionFunction.encrypt("Product1.jpg"));
+        System.out.println(encryptionFunction.encrypt("Product2.jpg"));
+        System.out.println(encryptionFunction.encrypt("Product3.jpg"));
+        System.out.println(encryptionFunction.encrypt("Product4.jpg"));
+        System.out.println(encryptionFunction.encrypt("Product5.jpg"));
+        System.out.println(encryptionFunction.encrypt("Product6.jpg"));
     }
 }

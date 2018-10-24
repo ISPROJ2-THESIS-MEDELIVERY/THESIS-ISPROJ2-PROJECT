@@ -129,7 +129,9 @@ public class ShopController extends HttpServlet {
 		} else {
 		   	SearchAction searchAction = new SearchAction();
 		   	forward = "/Catalog.jsp";
+		   	
 		   	request.setAttribute( "productList", searchAction.GeneralListing(PharmaID) );
+		   	
 		   	RequestDispatcher view = request.getRequestDispatcher( forward );
 		   	view.forward(request, response);
 			

@@ -51,7 +51,34 @@
 	    <c:if test="${justReg != null}"> 
 	    	<div role="alert" class="alert alert-info"><span><strong>A confirmation email has been sent to your email address</strong></span></div>
 		</c:if>
-		<c:forEach items="${Featurepharm}" var="pharm">
+		
+<c:forEach items="${Featurepharm}" var="pharm">		
+<div class="col-md-12 text-center"><h3>Featured products of <c:out value="${pharm.pharmacyName}">: </c:out></h3>
+<div class="col-md-6 col-md-offset-3">
+<div class="carousel slide" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel">
+  <div class="carousel-inner">
+    <div class="item">
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <c:forEach items="${Featurestock}" var="stock">
+			<c:forEach items="${Featureitems}" var="items">
+				<c:if test="${stock.productID == items.productID}">
+					<c:if test="${stock.pharmacyID == pharm.pharmacyID}">
+						<h3><c:out value="${items.productName}"></c:out></h3>
+					</c:if>
+				</c:if>
+			</c:forEach>
+		</c:forEach>
+      </div>
+    </div>
+  </div>
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+</div>
+</div>
+</div>
+</c:forEach>		
+
+		<%-- <c:forEach items="${Featurepharm}" var="pharm">
 			<h3>Featured products of <c:out value="${pharm.pharmacyName}">: </c:out></h3>
 			
 			<c:forEach items="${Featurestock}" var="stock">
@@ -65,7 +92,7 @@
 			</c:forEach>
 			
 			<hr>
-		</c:forEach>
+		</c:forEach> --%>
 			<!-- <c:if test="${userAccess == null}">
 				<a href="login.jsp">Login</a><br>
 				<a href="register.jsp">Registration</a><br>
@@ -86,6 +113,7 @@
 					<a href="CustomerController?action=GoToPrescription&PharmaID=<c:out value="${pharmacy.pharmacyID}" />" class="btn btn-info btn-sm" role="button"><c:out value="${pharmacy.pharmacyName}" /></a><br>
 					</c:forEach>
         		</div>
+        		
         		<div class="col-md-6">
         			<p class="font-weight-bold">Customer Details:</p>
 					User ID: <c:out value="${userID}" /><br>

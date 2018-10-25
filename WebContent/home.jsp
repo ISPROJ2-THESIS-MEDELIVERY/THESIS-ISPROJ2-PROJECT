@@ -75,18 +75,24 @@
 		<div class="container">
     		<div class="row">
         		<div class="col-md-6">
+        			<br>Select Pharmacy to order from:<br>
+					<c:forEach items="${PharmcyList}" var="pharmacy">
+					<a href="CustomerController?action=GoToCatalog&PharmaID=<c:out value="${pharmacy.pharmacyID}" />" class="btn btn-info btn-sm" role="button"><c:out value="${pharmacy.pharmacyName}" /></a><br>
+					</c:forEach>
+        		</div>
+        		<div class="col-md-6">
+        			<br>Select Pharmacy to order from (Prescription):<br>
+					<c:forEach items="${PharmcyList}" var="pharmacy">
+					<a href="CustomerController?action=GoToPrescription&PharmaID=<c:out value="${pharmacy.pharmacyID}" />" class="btn btn-info btn-sm" role="button"><c:out value="${pharmacy.pharmacyName}" /></a><br>
+					</c:forEach>
+        		</div>
+        		<div class="col-md-6">
         			<p class="font-weight-bold">Customer Details:</p>
 					User ID: <c:out value="${userID}" /><br>
 					Username: <c:out value="${username}" /><br>
 					User Type: <c:out value="${userAccess}" /><br>
 					<!-- <a href="LoginController">Logout</a><br> -->
 				</div>
-        		<div class="col-md-6">
-        			<br>Select Pharmacy:<br>
-					<c:forEach items="${PharmcyList}" var="pharmacy">
-					<a href="CustomerController?action=GoToCatalog&PharmaID=<c:out value="${pharmacy.pharmacyID}" />" class="btn btn-info btn-sm" role="button"><c:out value="${pharmacy.pharmacyName}" /></a><br>
-					</c:forEach>
-        		</div>
         		<div class="col-md-6">
         			<!-- Order History: -->
 					<a href="CustomerController?action=GoToOrders" class="btn btn-primary" role="button"/>Go to Order History</a><br><br>

@@ -47,8 +47,6 @@
 	<form method="post" action="TestController" encType="multipart/form-data">
 		<div class="form-group">
         	<input type="file" name="file" value="Upload Prescription" class="form-control"/>
-        </div>
-        <div class="form-group">
         	<input type="hidden" name="PharmaID" value="Pharmacy Name" class="form-control"/>
         </div>
         <div class="form-group">

@@ -26,8 +26,8 @@
                             <div class="form-group"><label for="search-field"></label></div>
                         </form>
                         <c:if test="${userAccess == null}">
-                        <span class="navbar-text"><a href="login.jsp" class="login">Log In</a></span>
                         <a class="btn btn-light action-button" role="button" href="register.jsp">Registration</a>
+                        <span class="navbar-text" style="float: right"><a href="login.jsp" class="login">Log In</a></span>                   
                         </c:if>
                     </div>
                 </div>

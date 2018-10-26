@@ -21,31 +21,30 @@
 	 <div>
         <div class="header-blue">
             <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
-                <div class="container">
-                	<a href="index.jsp"><img class="img-responsive2" src="assets/img/medelivery.png.PNG" style="height:100px;width:120px;"></a>
+                <div class="container"><a href="index.jsp" class="navbar-brand">Medelivery</a>
                     <div class="collapse navbar-collapse" id="navcol-1">
                         <ul class="nav navbar-nav"></ul>
                         <form target="_self" class="form-inline mr-auto">
                             <div class="form-group"><label for="search-field"></label></div>
                         </form>
                         <c:if test="${userAccess == null}">
-                        <span class="navbar-text"><a href="login.jsp" class="login">Log In</a></span>
-                        <span class="navbar-text"><a href="register.jsp" class="login">Register</a></span>
+                        <span class="navbar-text" style="float: right"><a href="login.jsp" class="login">Log In</a></span>
+                        <span class="navbar-text" style="float: right"><a href="register.jsp" class="login">Register</a></span>
                         </c:if>
                         <c:if test="${userAccess == 1}">
-                        <span class="navbar-text"><a href="LoginController" class="login">Log Out</a></span>
+                        <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Log Out</a></span>
                         </c:if>
                         <c:if test="${userAccess == 2}">
-                        <span class="navbar-text"><a href="DispatcherController?Action=DispatchOrder">Order Dispatch - Regular</a><br></span>
-						<span class="navbar-text"><a href="LoginController">Logout</a></span>
+                        <span class="navbar-text" style="float: right"><a href="DispatcherController?Action=DispatchOrder">Order Dispatch - Regular</a><br></span>
+						<span class="navbar-text" style="float: right"><a href="LoginController">Logout</a></span>
                         </c:if>
                         <c:if test="${userAccess == 3}">
-                        <span class="navbar-text"><a href="ProductController?Action=AddProduct">Add Product</a><br></span>
-                        <span class="navbar-text"><a href="PharmacistController?Action=Prescription">Approve/Disapprove prescription orders</a></span>
-						<span class="navbar-text"><a href="LoginController">Logout</a><br></span>
+                        <span class="navbar-text" style="float: right"><a href="ProductController?Action=AddProduct">Add Product</a><br></span>
+                        <span class="navbar-text" style="float: right"><a href="PharmacistController?Action=Prescription">Approve/Disapprove prescription orders</a></span>
+						<span class="navbar-text" style="float: right"><a href="LoginController">Logout</a><br></span>
                         </c:if>
                         <c:if test="${userAccess == 4}">
-                        <span class="navbar-text"><a href="LoginController" class="login">Log Out</a></span>
+                        <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Log Out</a></span>
                         </c:if>
                     </div>
                 </div>
@@ -246,8 +245,7 @@
 
 				<div class="panel panel-default">
 					<div class="panel-body">
-
-						<img src="" class="img-responsive" />
+						<div id="map-canvas" style="height:300px; width:500px"></div>
 					</div>
 				</div>
 			</div>
@@ -557,14 +555,25 @@
     		</div>
 		</footer>
 		
-<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+    src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false
+"></script>
+<script>
+var map;
+function initialize() {
+  var mapOptions = {
+    zoom: 8,
+    center: new google.maps.LatLng(-34.397, 150.644)
+  };
+  map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
 		
 	</body>
 </html>

@@ -65,6 +65,7 @@
 					<c:if test="${stock.productID == items.productID}">
 					<c:if test="${stock.pharmacyID == pharm.pharmacyID}">
 							<%-- <h3><c:out value="${items.productName}"></c:out></h3> --%>
+							<img src="images/<c:out value="${items.productImage}"/>"/>
 							<h3><c:out value="${items.productImage}"></c:out></h3>
 						</c:if>
 					</c:if>

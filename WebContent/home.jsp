@@ -209,6 +209,9 @@
     		<div class="row">
         		<div class="col-md-6">
         			<p class="font-weight-bold">Pharmacist Details:</p>
+					<c:forEach items="${Prescription}" var="prescription">
+						<img src='images/<c:out value="${prescription.prescription}"></c:out>'>
+					</c:forEach>
 					User ID: <c:out value="${userID}" /><br>
 					Username: <c:out value="${username}" /><br>
 					User Type: <c:out value="${userAccess}" /><br>
@@ -218,6 +221,7 @@
 					Current Orders Heading to your Pharmacy:
 					<a href="PharmacistController?Action=GoToOrders" class="btn btn-info" role="button"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Regular Orders</a>
 					<%-- <a href="PharmacistController?action=GoToOrders&PharmaID=<c:out value="${PharmacistPharmacy.pharmacyID}" />"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Pharmacy Orders</a> --%>
+					
 					<br>
 				</div>
     		</div>

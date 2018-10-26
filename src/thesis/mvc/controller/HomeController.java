@@ -17,6 +17,7 @@ import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.DispatcherImplement;
 import thesis.mvc.implement.PharmacistImplement;
 import thesis.mvc.implement.PharmacyImplement;
+import thesis.mvc.implement.PrescriptionImplement;
 import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.implement.StocksImplement;
 import thesis.mvc.utility.EncryptionFunction;
@@ -83,6 +84,7 @@ public class HomeController  extends HttpServlet {
 			request.setAttribute("PharmcyList", pharmacyImplement.getAllPharmacys());
 			request.setAttribute("BranchList", new BranchImplement().getAllBranch());
 			request.setAttribute("CourierList", new CourierServiceImplement().getAllCourierService());
+			request.setAttribute("Prescription", new PrescriptionImplement().getAllPrescription());
 			
 			break;
 		default:

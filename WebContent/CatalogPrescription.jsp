@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -47,10 +48,10 @@
 	<form method="post" action="ShopController" encType="multipart/form-data">
 		<div class="form-group">
         	<input type="file" name="file" value="Upload Prescription" class="form-control"/>
-        	<input type="hidden" name="PharmaID" value="Pharmacy Name" class="form-control"/>
+        	<input type="hidden" name="PharmaID" value="<c:out value="${SelectedPharmacy.pharmacyID}"/>" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="submit" name="action" value="AddPrescription" class="form-control"/>
+        	<input type="submit" name="Action" value="AddPrescription" class="form-control"/>
         </div>
 	<!-- <input type="file" name="file" value="Upload Prescription"/><br>
 	<input type="hidden" name="PharmaID" value="Pharmacy Name"/><br>

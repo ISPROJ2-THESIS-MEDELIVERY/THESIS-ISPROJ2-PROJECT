@@ -2,6 +2,7 @@ package thesis.mvc.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +43,7 @@ import thesis.mvc.utility.EncryptionFunction;
 import thesis.mvc.utility.SendEmail;
 
 @WebServlet("/ShopController")
+@MultipartConfig
 public class ShopController extends HttpServlet {
 	
 	private Connection conn;
@@ -50,7 +53,7 @@ public class ShopController extends HttpServlet {
 	}
 	
 	private static final long serialVersionUID = 1L;
-	private final String UPLOAD_DIRECTORY = "D:/uploads";
+	private final String UPLOAD_DIRECTORY = "C:/Users/edenn/OneDrive/Documents/GitHub/THESIS-ISPROJ2-PROJECT/WebContent/images/";
 	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Ensures that the person can select what he/she wants to buy
@@ -160,7 +163,7 @@ public class ShopController extends HttpServlet {
 			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
 		}
 		
-		String action = null;
+		String action = "";
 		if (request.getParameter( "Action" ) != null) {
 			action = request.getParameter( "Action" );	
 		}
@@ -184,7 +187,7 @@ public class ShopController extends HttpServlet {
 				int CusID = customer.getCustomerID();
 				String Adr = customer.getCustomerStreet()
 						+ ", " + customer.getCustomerBarangay()
-						+ ", " + new CityListingImplement().getCityListingById(customer.getCityID())
+						+ ", " + new CityListingImplement().getCityListingById(customer.getCityID()).getCityName()
 						+ ", " + customer.getCustomerProvince();
 				int CityID = customer.getCityID();
 				boolean IS = customer.isIsSeniorCitizen();
@@ -264,11 +267,8 @@ public class ShopController extends HttpServlet {
 			//order.setDateOrdered(today);
 
 		} else if (action.equalsIgnoreCase("AddPrescription")) {
-
-			//Set the branch 
 			Pharmacy selectedPharmacy = new Pharmacy();
-			selectedPharmacy = (Pharmacy) session.getAttribute("SelectedPharmacy");
-			int PID = selectedPharmacy.getPharmacyID();
+			int PID = Integer.parseInt( request.getParameter( "PharmaID" ) );
 			
 			int UID = (int) session.getAttribute("userID");
 			CustomerImplement customerImplement = new CustomerImplement();
@@ -278,82 +278,55 @@ public class ShopController extends HttpServlet {
 			int CusID = customer.getCustomerID();
 			String ADD = customer.getCustomerStreet()
 					+ ", " + customer.getCustomerBarangay()
-					+ ", " + new CityListingImplement().getCityListingById(customer.getCityID())
+					+ ", " + new CityListingImplement().getCityListingById(customer.getCityID()).getCityName()
 					+ ", " + customer.getCustomerProvince();
 			int CID = customer.getCityID();
 			boolean SID = customer.isIsSeniorCitizen();
 
-			Order order = new PurchaseAction().setInitalOrder(CusID, ADD, SID, CID, PID);
-			int orderID = new PurchaseAction().addPrescriptionOrder(order);
-			
-
-	        if(ServletFileUpload.isMultipartContent(request)){
-	            try {
-					//List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest((RequestContext) request);
-					//for(FileItem item : multiparts){
-					//    if(!item.isFormField()){
-					//        String name = new File(item.getName()).getName();
-					//        item.write( new File(UPLOAD_DIRECTORY + File.separator + name));
-					//    }
-					//}//File uploaded successfully
-	            	//Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
-					//InputStream filecontent = filePart.getInputStream();
-					//String name = filePart.getName();//new File(filePart.getName()).getName();
-					//String end = filePart.getContentType();
-					//filePart.write(UPLOAD_DIRECTORY + File.separator + name + "." + end);
-	            	//request.setAttribute("message", "File Uploaded Successfully " + name + end);
-
-	            	Part filePart = request.getPart("file");
-					String name = "Prescription" + 1;
-					//String end = filePart.getContentType();
-					String end = filePart.getContentType();
-					if (end.startsWith("image")) {
-						String imageType = end.replace("image/", "");
-						filePart.write(UPLOAD_DIRECTORY + File.separator + name + "." + imageType);
-		            	request.setAttribute("message", "File Uploaded Successfully: " + UPLOAD_DIRECTORY + File.separator + name + "." + imageType + "<br> ");
-					} else {
-		            	request.setAttribute("message", "File Uploaded is not an image!");
-					}
-	            	
-	            } catch (Exception ex) {
-	            	request.setAttribute("message", "File Upload Failed due to " + ex);
-	            }
-	            
-	        }else{
-	            request.setAttribute("message", "Sorry this Servlet only handles file upload request");
-	        }
-	        request.getRequestDispatcher("/test2.jsp").forward(request, response);
-			
+			int prescriptionID = 0;
 			if(ServletFileUpload.isMultipartContent(request)){
 	            try {
 
 	            	Part filePart = request.getPart("file");
-					String name = "Prescription" + orderID;
+					String name = "Prescription" + new Date(Calendar.getInstance().getTime().getTime());
 					//String end = filePart.getContentType();
 					String end = filePart.getContentType();
 					if (end.startsWith("image")) {
 						String imageType = end.replace("image/", "");
 						String DbaseName = new EncryptionFunction().encrypt(name);
-						String AFileName = new EncryptionFunction().encrypt(name + "THESALTISREAL");
+						String AFileName = name;
+				        System.out.println(DbaseName);
+				        System.out.println(AFileName);
 						Prescription prescription = new Prescription();
 						prescription.setCustomerID(CID);
 						prescription.setPrescription(DbaseName);
 						prescription.setPermissionStatus("PENDING");
 						prescription.setPharmacistID(0);
 						prescription.setRemark("");
-						new PrescriptionImplement().addPrescription(prescription);
+						prescriptionID = new PrescriptionImplement().addPrescription(prescription);
+				        System.out.println(UPLOAD_DIRECTORY + File.separator + AFileName + "." + imageType);
+				        System.out.println(UPLOAD_DIRECTORY +"|"+ File.separator +"|"+ AFileName +"|"+ "." +"|"+ imageType);
 						filePart.write(UPLOAD_DIRECTORY + File.separator + AFileName + "." + imageType);
-		            	request.setAttribute("message", "File Uploaded Successfully: " + UPLOAD_DIRECTORY + File.separator + AFileName + "." + imageType);
+						System.out.println( "File Uploaded Successfully: " + UPLOAD_DIRECTORY + File.separator + AFileName + "." + imageType);
 					} else {
-		            	request.setAttribute("message", "File Uploaded is not an image!");
+						System.out.println( "File Uploaded is not an image!");
 					}
 	            	
 	            } catch (Exception ex) {
-	            	request.setAttribute("message", "File Upload Failed due to " + ex);
+	            	System.out.println( "File Upload Failed due to " + ex);
 	            }
 	            
 	        }
 
+	        System.out.println(CusID);
+	        System.out.println(ADD);
+	        System.out.println(SID);
+	        System.out.println(CID);
+	        System.out.println(PID);
+	        System.out.println(prescriptionID);
+			Order order = new PurchaseAction().setInitalOrder(CusID, ADD, SID, CID, PID);
+			order.setPrescriptionID(prescriptionID);
+			int orderID = new PurchaseAction().addPrescriptionOrder(order);
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}
 			

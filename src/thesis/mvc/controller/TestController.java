@@ -55,7 +55,7 @@ public class TestController extends HttpServlet {
 				if (end.startsWith("image")) {
 					String imageType = end.replace("image/", "");
 					filePart.write(UPLOAD_DIRECTORY + File.separator + name + "." + imageType);
-	            	request.setAttribute("message", "File Uploaded Successfully: " + UPLOAD_DIRECTORY + File.separator + name + "." + imageType + "<br> ");
+	            	request.setAttribute("message", "File Uploaded Successfully: " + UPLOAD_DIRECTORY + File.separator + name + "." + imageType + "<br> " + request.getParameter("teststring"));
 				} else {
 	            	request.setAttribute("message", "File Uploaded is not an image!");
 				}
@@ -191,6 +191,46 @@ public class TestController extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+			
+
+	        if(ServletFileUpload.isMultipartContent(request)){
+	            try {
+					//List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest((RequestContext) request);
+					//for(FileItem item : multiparts){
+					//    if(!item.isFormField()){
+					//        String name = new File(item.getName()).getName();
+					//        item.write( new File(UPLOAD_DIRECTORY + File.separator + name));
+					//    }
+					//}//File uploaded successfully
+	            	//Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
+					//InputStream filecontent = filePart.getInputStream();
+					//String name = filePart.getName();//new File(filePart.getName()).getName();
+					//String end = filePart.getContentType();
+					//filePart.write(UPLOAD_DIRECTORY + File.separator + name + "." + end);
+	            	//request.setAttribute("message", "File Uploaded Successfully " + name + end);
+
+	            	Part filePart = request.getPart("file");
+					String name = "Prescription" + 1;
+					//String end = filePart.getContentType();
+					String end = filePart.getContentType();
+					if (end.startsWith("image")) {
+						String imageType = end.replace("image/", "");
+						filePart.write(UPLOAD_DIRECTORY + File.separator + name + "." + imageType);
+		            	request.setAttribute("message", "File Uploaded Successfully: " + UPLOAD_DIRECTORY + File.separator + name + "." + imageType + "<br> ");
+					} else {
+		            	request.setAttribute("message", "File Uploaded is not an image!");
+					}
+	            	
+	            } catch (Exception ex) {
+	            	request.setAttribute("message", "File Upload Failed due to " + ex);
+	            }
+	            
+	        }else{
+	            request.setAttribute("message", "Sorry this Servlet only handles file upload request");
+	        }
+	        request.getRequestDispatcher("/test2.jsp").forward(request, response);
 		*/
     	EncryptionFunction encryptionFunction = new EncryptionFunction();
         System.out.println(encryptionFunction.encrypt("Product1.jpg"));

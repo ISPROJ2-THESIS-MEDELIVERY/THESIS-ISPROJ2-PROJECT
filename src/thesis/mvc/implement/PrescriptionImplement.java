@@ -11,6 +11,7 @@ import java.util.List;
 import thesis.mvc.dataobjects.PrescriptionDAO;
 import thesis.mvc.model.Prescription;
 import thesis.mvc.utility.DBUtility;
+import thesis.mvc.utility.EncryptionFunction;
 
 public class PrescriptionImplement implements PrescriptionDAO {
 	
@@ -86,7 +87,7 @@ public class PrescriptionImplement implements PrescriptionDAO {
 				prescription.setCustomerID( resultSet.getInt( "CustomerID" ) );
 				prescription.setPermissionStatus( resultSet.getString( "PermissionStatus" ) );
 				prescription.setRemark( resultSet.getString( "Remark" ) );
-				prescription.setPrescription( resultSet.getString( "Prescription" ) );
+				prescription.setPrescription( new EncryptionFunction().decrypt( resultSet.getString( "Prescription" ) ) );
 				prescriptions.add(prescription);
 			}
 			resultSet.close();
@@ -111,7 +112,7 @@ public class PrescriptionImplement implements PrescriptionDAO {
 				prescription.setCustomerID( resultSet.getInt( "CustomerID" ) );
 				prescription.setPermissionStatus( resultSet.getString( "PermissionStatus" ) );
 				prescription.setRemark( resultSet.getString( "Remark" ) );
-				prescription.setPrescription( resultSet.getString( "Prescription" ) );
+				prescription.setPrescription( new EncryptionFunction().decrypt( resultSet.getString( "Prescription" ) ) );
 			}
 			resultSet.close();
 			preparedStatement.close();

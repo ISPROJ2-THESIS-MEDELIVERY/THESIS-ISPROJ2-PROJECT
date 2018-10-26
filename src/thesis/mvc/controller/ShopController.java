@@ -286,6 +286,44 @@ public class ShopController extends HttpServlet {
 			Order order = new PurchaseAction().setInitalOrder(CusID, ADD, SID, CID, PID);
 			int orderID = new PurchaseAction().addPrescriptionOrder(order);
 			
+
+	        if(ServletFileUpload.isMultipartContent(request)){
+	            try {
+					//List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest((RequestContext) request);
+					//for(FileItem item : multiparts){
+					//    if(!item.isFormField()){
+					//        String name = new File(item.getName()).getName();
+					//        item.write( new File(UPLOAD_DIRECTORY + File.separator + name));
+					//    }
+					//}//File uploaded successfully
+	            	//Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
+					//InputStream filecontent = filePart.getInputStream();
+					//String name = filePart.getName();//new File(filePart.getName()).getName();
+					//String end = filePart.getContentType();
+					//filePart.write(UPLOAD_DIRECTORY + File.separator + name + "." + end);
+	            	//request.setAttribute("message", "File Uploaded Successfully " + name + end);
+
+	            	Part filePart = request.getPart("file");
+					String name = "Prescription" + 1;
+					//String end = filePart.getContentType();
+					String end = filePart.getContentType();
+					if (end.startsWith("image")) {
+						String imageType = end.replace("image/", "");
+						filePart.write(UPLOAD_DIRECTORY + File.separator + name + "." + imageType);
+		            	request.setAttribute("message", "File Uploaded Successfully: " + UPLOAD_DIRECTORY + File.separator + name + "." + imageType + "<br> ");
+					} else {
+		            	request.setAttribute("message", "File Uploaded is not an image!");
+					}
+	            	
+	            } catch (Exception ex) {
+	            	request.setAttribute("message", "File Upload Failed due to " + ex);
+	            }
+	            
+	        }else{
+	            request.setAttribute("message", "Sorry this Servlet only handles file upload request");
+	        }
+	        request.getRequestDispatcher("/test2.jsp").forward(request, response);
+			
 			if(ServletFileUpload.isMultipartContent(request)){
 	            try {
 

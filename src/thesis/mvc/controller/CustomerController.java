@@ -48,6 +48,7 @@ public class CustomerController extends HttpServlet{
 			response.sendRedirect(request.getContextPath() + "/CatalogBasic.jsp");
 		} else if(action.equalsIgnoreCase("GoToPrescription")) {
 			int PharmaID = Integer.parseInt(request.getParameter( "PharmaID" ));
+			session.setAttribute( "productList", new SearchAction().GeneralListing(PharmaID) );
 			response.sendRedirect(request.getContextPath() + "/CatalogPrescription.jsp");
 		} else if (action.equalsIgnoreCase("GoToOrders")) {
 			session.setAttribute("OrderHistory", new OrderImplement().getOrderByCustomerId((int)session.getAttribute("Customer")));

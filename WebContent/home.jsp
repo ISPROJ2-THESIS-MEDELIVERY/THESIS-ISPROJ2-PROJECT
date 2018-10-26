@@ -8,10 +8,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 <title>Home Page</title>
-<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+<!-- <link rel="stylesheet" href="assets/bootstrap/js/bootstrap.min.js" />
+<link rel="stylesheet" href="assets/bootstrap/js/jquery.min.js" />
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" /> -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" />
 <link rel="stylesheet" href="assets/css/Header-Blue.css" />
 <link rel="stylesheet" href="assets/css/styles.css" />
+<link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
 	<!-- This will be used as a jumping point to test the controllers -->
@@ -53,7 +56,7 @@
 	    	<div role="alert" class="alert alert-info"><span><strong>A confirmation email has been sent to your email address</strong></span></div>
 		</c:if>
 		
-	<c:forEach items="${Featurepharm}" var="pharm">		
+	<%-- <c:forEach items="${Featurepharm}" var="pharm">		
 	<div class="col-md-12 text-center"><h3>Featured products of <c:out value="${pharm.pharmacyName}">: </c:out></h3>
 	<div class="col-md-6 col-md-offset-3">
 	<div class="carousel slide" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel">
@@ -64,7 +67,7 @@
 				<c:forEach items="${Featureitems}" var="items">
 					<c:if test="${stock.productID == items.productID}">
 					<c:if test="${stock.pharmacyID == pharm.pharmacyID}">
-							<%-- <h3><c:out value="${items.productName}"></c:out></h3> --%>
+							<h3><c:out value="${items.productName}"></c:out></h3>
 							<img src="images/<c:out value="${items.productImage}"/>"/>
 							<h3><c:out value="${items.productImage}"></c:out></h3>
 						</c:if>
@@ -79,8 +82,141 @@
 	</div>
 	</div>
 	</div>
-	</c:forEach>	
+	</c:forEach> --%>	
 	
+	<c:forEach items="${Featurepharm}" var="pharm">
+	<div class="row">
+	<h3>Featured products of <c:out value="${pharm.pharmacyName}">: </c:out></h3>
+			<div id="featured-products" class="carousel slide"
+				data-ride="carousel">
+				Indicators
+				<ol class="carousel-indicators">
+					<li data-target="#featured-products" data-slide-to="0"
+						class="active"></li>
+					<li data-target="#featured-products" data-slide-to="1"></li>
+					<li data-target="#featured-products" data-slide-to="2"></li>
+				</ol>
+
+				Wrapper for slides
+				<div class="carousel-inner" role="listbox">
+					<div class="item active">
+						<div class="row">
+
+							<div class="col-xs-2">
+							<c:forEach items="${Featurestock}" var="stock">
+								<c:forEach items="${Featureitems}" var="items">
+									<c:if test="${stock.productID == items.productID}">
+									<c:if test="${stock.pharmacyID == pharm.pharmacyID}">
+										<img src="images/<c:out value="${items.productImage}"/>"/>
+									</c:if>
+									</c:if>
+								</c:forEach>
+							</c:forEach>
+							</div>
+							<!-- <div class="col-xs-2">
+								<img class="img-responsive" src="assets/img/sample.jpg" />
+							</div>
+							<div class="col-xs-2">
+								<img class="img-responsive" src="assets/img/sample.jpg" />
+							</div>
+							<div class="col-xs-2">
+								<img class="img-responsive" src="assets/img/sample.jpg" />
+							</div>
+							<div class="col-xs-2">
+								<img class="img-responsive" src="assets/img/sample.jpg" />
+							</div>
+							<div class="col-xs-2">
+								<img class="img-responsive" src="assets/img/sample.jpg" />
+							</div> -->
+
+						</div>
+					</div>
+					<div class="item">
+						<div class="row">
+
+							<div class="col-xs-2">
+							<c:forEach items="${Featurestock}" var="stock">
+								<c:forEach items="${Featureitems}" var="items">
+									<c:if test="${stock.productID == items.productID}">
+									<c:if test="${stock.pharmacyID == pharm.pharmacyID}">
+										<img src="images/<c:out value="${items.productImage}"/>"/>
+									</c:if>
+									</c:if>
+								</c:forEach>
+							</c:forEach>
+							</div>
+							<!-- <div class="col-xs-2">
+								<img class="img-responsive" src="assets/img/sample.jpg" />
+							</div>
+							<div class="col-xs-2">
+								<img class="img-responsive" src="assets/img/sample.jpg" />
+							</div>
+							<div class="col-xs-2">
+								<img class="img-responsive" src="assets/img/sample.jpg" />
+							</div>
+							<div class="col-xs-2">
+								<img class="img-responsive" src="assets/img/sample.jpg" />
+							</div>
+							<div class="col-xs-2">
+								<img class="img-responsive" src="assets/img/sample.jpg" />
+							</div> -->
+
+						</div>
+					</div>
+					<!-- <div class="item">
+						<div class="row">
+
+							<div class="col-xs-2">
+								<img class="img-responsive" src="assets/img/sample.jpg" />
+							</div>
+							<div class="col-xs-2">
+								<img class="img-responsive" src="assets/img/sample.jpg" />
+							</div>
+							<div class="col-xs-2">
+								<img class="img-responsive" src="assets/img/sample.jpg" />
+							</div>
+							<div class="col-xs-2">
+								<img class="img-responsive" src="assets/img/sample.jpg" />
+							</div>
+							<div class="col-xs-2">
+								<img class="img-responsive" src="assets/img/sample.jpg" />
+							</div>
+							<div class="col-xs-2">
+								<img class="img-responsive" src="assets/img/sample.jpg" />
+							</div>
+
+						</div>
+					</div> -->
+				</div>
+
+				Controls
+				<a class="left carousel-control" href="#featured-products"
+					role="button" data-slide="prev"> <span
+					class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a> <a class="right carousel-control" href="#featured-products"
+					role="button" data-slide="next"> <span
+					class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+			</div>
+		</div>
+		</c:forEach>
+		
+	<!-- <div class="carousel slide" data-ride="carousel" id="carousel-1">	
+	<div class="carousel-inner" role="listbox">
+    	<div class="carousel-item active"><img class="img-responsive" src="assets/img/sample.jpg" alt="Slide Image" /></div>
+    	<div class="carousel-item"><img class="img-responsive" src="assets/img/grab-bike.jpg" alt="Slide Image" /></div>
+    	<div class="carousel-item"><img class="img-responsive" src="assets/img/location.jpg" /></div>
+	</div>	
+	<div><a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button"
+            data-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a></div>
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-1" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-1" data-slide-to="1"></li>
+        <li data-target="#carousel-1" data-slide-to="2"></li>
+    </ol>	
+	</div> -->
 	
 	<div class="row">
 			<div class="col-md-4">
@@ -420,5 +556,15 @@
         		</div>
     		</div>
 		</footer>
+		
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
 	</body>
 </html>

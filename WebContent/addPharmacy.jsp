@@ -43,7 +43,7 @@
     <div class="login-clean">
 	<form action="InformationController" method="post">
 		<div class="form-group">
-        	<input type="text" name="PharmaName" required="" placeholder="Pharmacy Name" class="form-control"/>
+        	<input type="text" name="PharmaName" required="required" placeholder="Pharmacy Name" class="form-control"/>
         </div>
         <!-- <div class="form-group">
         	<input type="file" name="PharmaFile" required="" placeholder="Pharmacy Logo" class="form-control"/> enctype="multipart/form-data

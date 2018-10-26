@@ -42,10 +42,10 @@
 		</c:if>
 		<h2 class="sr-only">Login Form</h2>
         <div class="form-group">
-        	<input type="text" name="Username" placeholder="Username" class="form-control" maxlength="25"/>
+        	<input type="text" required="required" name="Username" placeholder="Username" class="form-control" maxlength="25"/>
         </div>
         <div class="form-group">
-        	<input type="password" name="Password" placeholder="Password" class="form-control" maxlength="25"/>
+        	<input type="password" required="required" name="Password" placeholder="Password" class="form-control" maxlength="25"/>
         </div>
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">Log In</button>

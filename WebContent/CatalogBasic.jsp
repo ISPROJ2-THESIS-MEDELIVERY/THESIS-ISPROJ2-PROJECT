@@ -44,6 +44,7 @@
             </nav>
         </div>
     </div> 
+    <div id="container">
 	<h1>CART:</h1>
 	<c:if test="${CartList != null}">
     		<table class="table table-striped table-bordered" width="100%">
@@ -173,6 +174,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
 		<footer class="footer text-center">
     		<div class="container">
         		<div class="row">

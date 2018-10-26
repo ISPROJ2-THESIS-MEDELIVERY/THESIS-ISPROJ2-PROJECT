@@ -44,10 +44,10 @@
   <div class="login-clean">
 	<form action="InformationController" method="post">
         <div class="form-group">
-        	<input type="text" name="BrchStrt" required="" placeholder="Branch Street" class="form-control"/>
+        	<input type="text" name="BrchStrt" required="required" placeholder="Branch Street" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="BrchBngy" required="" placeholder="Branch Barangay" class="form-control"/>
+        	<input type="text" name="BrchBngy" required="required" placeholder="Branch Barangay" class="form-control"/>
         </div>
         <div class="form-group">
           <select name="BrchCity" class="form-control">
@@ -57,16 +57,16 @@
 		  </select>
         </div>
         <div class="form-group">
-        	<input type="text" name="BrchProv" required="" placeholder="Branch Province" class="form-control"/>
+        	<input type="text" name="BrchProv" required="required" placeholder="Branch Province" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="number" name="BrchLand" required="" placeholder="Branch Landline" class="form-control"/>
+        	<input type="number" name="BrchLand" required="required" placeholder="Branch Landline" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="number" name="BrchCell" required="" placeholder="Branch Cellphone" class="form-control"/>
+        	<input type="number" name="BrchCell" required="required" placeholder="Branch Cellphone" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="BrchOwnr" required="" placeholder="Branch Owner" class="form-control"/>
+        	<input type="text" name="BrchOwnr" required="required" placeholder="Branch Owner" class="form-control"/>
         </div>
         <div class="form-group">
           <select name="BrchPHID" class="form-control">

@@ -36,10 +36,10 @@
 <form action="RegistrationController" method="post" enctype="multipart/form-data">
 	<h2 class="sr-only">Login Form</h2>
         <div class="form-group">
-        	<input type="text" name="FullName" required="" placeholder="FullName *" class="form-control"/>
+        	<input type="text" name="FullName" required="required" placeholder="FullName *" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="CAddress" required="" placeholder="Address *" class="form-control"/>
+        	<input type="text" name="CAddress" required="required" placeholder="Address *" class="form-control"/>
         </div>
         <!-- <div class="form-group">
         	<input type="text" name="CuStreet" required="" placeholder="Street *" class="form-control"/>
@@ -60,19 +60,19 @@
         	<input type="text" name="CuCellul" required="" placeholder="Cellphone No *" class="form-control"/>
         </div> -->
         <div class="form-group">
-        	<input type="email" name="CusEmail" required="" placeholder="Email *" class="form-control"/>
+        	<input type="email" name="CusEmail" required="required" placeholder="Email *" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="number" name="ContactNumber" required="" placeholder="Contact Number *" class="form-control"/>
+        	<input type="number" name="ContactNumber" required="required" placeholder="Contact Number *" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="Username" required="" placeholder="Username *" class="form-control"/>
+        	<input type="text" name="Username" required="required" placeholder="Username *" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="password" name="Password" required="" placeholder="Create Password" class="form-control"/>
+        	<input type="password" name="Password" required="required" placeholder="Create Password" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="password" name="Password-repeat" required="" placeholder="Re-enter Password" class="form-control"/>
+        	<input type="password" name="Password-repeat" required="required" placeholder="Re-enter Password" class="form-control"/>
         </div>
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">Sign Up</button>

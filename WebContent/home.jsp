@@ -13,12 +13,13 @@
 <link rel="stylesheet" href="assets/css/Header-Blue.css" />
 <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
-	<body>
+<body>
 	<!-- This will be used as a jumping point to test the controllers -->
 	 <div>
         <div class="header-blue">
             <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
-                <div class="container"><a href="index.jsp" class="navbar-brand">Medelivery</a>
+                <div class="container">
+                	<a href="index.jsp"><img class="img-responsive2" src="assets/img/medelivery.png.PNG" style="height:100px;width:120px;"></a>
                     <div class="collapse navbar-collapse" id="navcol-1">
                         <ul class="nav navbar-nav"></ul>
                         <form target="_self" class="form-inline mr-auto">
@@ -52,31 +53,68 @@
 	    	<div role="alert" class="alert alert-info"><span><strong>A confirmation email has been sent to your email address</strong></span></div>
 		</c:if>
 		
-<c:forEach items="${Featurepharm}" var="pharm">		
-<div class="col-md-12 text-center"><h3>Featured products of <c:out value="${pharm.pharmacyName}">: </c:out></h3>
-<div class="col-md-6 col-md-offset-3">
-<div class="carousel slide" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel">
-  <div class="carousel-inner">
-    <div class="item">
-      <div class="col-md-3 col-sm-6 col-xs-12">
-        <c:forEach items="${Featurestock}" var="stock">
-			<c:forEach items="${Featureitems}" var="items">
-				<c:if test="${stock.productID == items.productID}">
+	<c:forEach items="${Featurepharm}" var="pharm">		
+	<div class="col-md-12 text-center"><h3>Featured products of <c:out value="${pharm.pharmacyName}">: </c:out></h3>
+	<div class="col-md-6 col-md-offset-3">
+	<div class="carousel slide" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel">
+	  <div class="carousel-inner">
+	    <div class="item">
+	      <div class="col-md-3 col-sm-6 col-xs-12">
+	        <c:forEach items="${Featurestock}" var="stock">
+				<c:forEach items="${Featureitems}" var="items">
+					<c:if test="${stock.productID == items.productID}">
 					<c:if test="${stock.pharmacyID == pharm.pharmacyID}">
-						<h3><c:out value="${items.productName}"></c:out></h3>
+							<%-- <h3><c:out value="${items.productName}"></c:out></h3> --%>
+							<h3><c:out value="${items.productImage}"></c:out></h3>
+						</c:if>
 					</c:if>
-				</c:if>
+				</c:forEach>
 			</c:forEach>
-		</c:forEach>
-      </div>
-    </div>
-  </div>
-  <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-  <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
-</div>
-</div>
-</div>
-</c:forEach>		
+	      </div>
+	    </div>
+ 	 </div>
+	  <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+	  <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+	</div>
+	</div>
+	</div>
+	</c:forEach>	
+	
+	
+	<div class="row">
+			<div class="col-md-4">
+				<h2>Product Catalog</h2>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<center><img
+							src="assets/img/Attractive-Pharmaceutical-Packaging-Design-Inspiration-014.jpg"
+							class="img-responsive" style="height:550px;width:400px;"/></center>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<h2>Frequently Asked Questions</h2>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<center><img src="assets/img/DoctorWho.jpg" class="img-responsive" /></center>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<h2>Contact Us</h2>
+				<h5>
+					<strong><center>Phone: 555-0199 </center></strong>
+
+				</h5>
+
+				<div class="panel panel-default">
+					<div class="panel-body">
+
+						<img src="" class="img-responsive" />
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<%-- <c:forEach items="${Featurepharm}" var="pharm">
 			<h3>Featured products of <c:out value="${pharm.pharmacyName}">: </c:out></h3>
@@ -351,6 +389,9 @@
 				<a href="LoginController">Logout</a><br>
 			<hr>
 		</c:if>
+		
+		
+		
 		<footer class="footer text-center">
     		<div class="container">
         		<div class="row">

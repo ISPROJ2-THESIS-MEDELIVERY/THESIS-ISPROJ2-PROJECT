@@ -44,28 +44,28 @@
   <div class="login-clean">
 	<form action="InformationController" method="post">
 		<div class="form-group">
-        	<input type="text" name="CompName" required="" placeholder="Courier Name" class="form-control"/>
+        	<input type="text" name="CompName" required="required" placeholder="Courier Name" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="CompStre" required="" placeholder="Courier Street" class="form-control"/>
+        	<input type="text" name="CompStre" required="required" placeholder="Courier Street" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="CompBara" required="" placeholder="Courier Barangay" class="form-control"/>
+        	<input type="text" name="CompBara" required="required" placeholder="Courier Barangay" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="CompCity" required="" placeholder="Courier City" class="form-control"/>
+        	<input type="text" name="CompCity" required="required" placeholder="Courier City" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="CompProv" required="" placeholder="Courier Province" class="form-control"/>
+        	<input type="text" name="CompProv" required="required" placeholder="Courier Province" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="number" name="CompLand" required="" placeholder="Courier Landline" class="form-control"/>
+        	<input type="number" name="CompLand" required="required" placeholder="Courier Landline" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="number" name="CompCell" required="" placeholder="Courier Cellphone" class="form-control"/>
+        	<input type="number" name="CompCell" required="required" placeholder="Courier Cellphone" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="CompCont" required="" placeholder="Courier Contact" class="form-control"/>
+        	<input type="text" name="CompCont" required="required" placeholder="Courier Contact" class="form-control"/>
         </div>
         <div class="form-group">
         	<input type="hidden" name="Actionthing" value="addCourier" class="form-control"/>

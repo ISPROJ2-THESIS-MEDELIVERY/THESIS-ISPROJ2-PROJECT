@@ -34,6 +34,10 @@
   }
 }
 
+h2{
+	text-align: center;
+}
+
 h1{
   color: white;
   font-size: 2.25em;
@@ -41,6 +45,13 @@ h1{
   margin-top: 1em;
   margin-bottom: 2em;
   text-shadow: 0px 2px 0px rgba(0, 0, 0, 1);
+}
+
+.hr {
+	border: none;
+	height: 1px;
+	color: #333;
+	background-color: #333;
 }
 
 #example {
@@ -65,12 +76,30 @@ table {
   border-collapse: collapse;
 }
 
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
 .footer {
+    background-color: #2c3e50;
+    position: sticky;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+    color: #fff;
+}
+
+/* .footer {
   padding-top: 5rem;
   padding-bottom: 5rem;
   background-color: #2c3e50;
   color: #fff;
-}
+} */
 
 .text-center {
   text-align: center!important;
@@ -93,6 +122,7 @@ body {
   color: #212529;
   text-align: left;
   background-color: #fff;
+  height:100%;
 }
 
 html {

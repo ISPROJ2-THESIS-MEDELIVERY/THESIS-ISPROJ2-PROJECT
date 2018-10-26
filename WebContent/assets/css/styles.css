@@ -50,7 +50,7 @@ h1{
 .hr {
 	border: none;
 	height: 1px;
-	color: #333;
+	color: #0000ff;
 	background-color: #333;
 }
 
@@ -80,6 +80,7 @@ table {
     margin-right: -15px;
     margin-left: -15px;
 }
+
 
 .footer {
     background-color: #2c3e50;

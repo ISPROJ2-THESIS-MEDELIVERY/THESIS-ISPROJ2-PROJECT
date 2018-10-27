@@ -20,11 +20,11 @@ public class SendEmail
 		 * As shown here in the code. 
 		 * Change accordingly, if your email id is not a gmail id
 		 */
-			props.put("mail.smtp.host", "smtp.gmail.com");
+			props.put("mail.smtp.host", "smtp.gmail.com");//localhost
 			//below mentioned mail.smtp.port is optional
-			props.put("mail.smtp.port", "587");		
-			props.put("mail.smtp.auth", "true");
-			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.smtp.port", "587");//25
+			props.put("mail.smtp.auth", "true");//false
+			props.put("mail.smtp.starttls.enable", "true");//false
 		
 		}
 		catch(Exception e)
@@ -35,7 +35,7 @@ public class SendEmail
 		/*
 		 * Pass Properties object(props) and Authenticator object for authentication to Session instance 
 		 */
-		
+		/*
 		Session session = Session.getInstance(props,new javax.mail.Authenticator()
 		{
 			protected PasswordAuthentication getPasswordAuthentication() 
@@ -43,7 +43,9 @@ public class SendEmail
 				return new PasswordAuthentication("testpokerthing@gmail.com","Hey!0821");
 			}
 		});
-		 
+		*/
+
+		Session session = Session.getInstance(props);
 		try
 		{
 		
@@ -53,7 +55,7 @@ public class SendEmail
 			 */
 			
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("testpokerthing@gmail.com"));
+			message.setFrom(new InternetAddress("Medelivery-Notification"));
 			message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
 			message.setSubject(sub);
 			//message.setText(msg);

@@ -39,59 +39,61 @@ public class HomeController  extends HttpServlet {
 		
 		EncryptionFunction encryptionFunction = new EncryptionFunction();
 		PharmacyImplement pharmacyImplement = new PharmacyImplement();
-
+		
+		//(replaced request to session)
 		if (request.getAttribute("Featurepharm") == null) {
-		request.setAttribute("Featurepharm", new PharmacyImplement().getAllPharmacys());
-		request.setAttribute("Featurestock", new StocksImplement().getAllFeaturedStocks());
-		request.setAttribute("Featureitems", new ProductImplement().getAllProducts());
+		session.setAttribute("Featurepharm", new PharmacyImplement().getAllPharmacys());
+		session.setAttribute("Featurestock", new StocksImplement().getAllFeaturedStocks());
+		session.setAttribute("Featureitems", new ProductImplement().getAllProducts());
+		System.out.println(request.getContextPath());
 		}
 		switch(Switch) {
 		case 1:
 			//Customer Information
 			//CustomerImplement customerImplement = new CustomerImplement();
-			//request.setAttribute("CustomerDetails", session.getAttribute("Customer") );
+			//session.setAttribute("CustomerDetails", session.getAttribute("Customer") );
 			//Listing pending orders
 			//OrderImplement orderImplement = new OrderImplement();
-			//request.setAttribute( "PurchasePending", (Customer) session.getAttribute("Customer"));
+			//session.setAttribute( "PurchasePending", (Customer) session.getAttribute("Customer"));
 			//List all the pharmacies
-			request.setAttribute("PharmcyList", pharmacyImplement.getAllPharmacys());
+			session.setAttribute("PharmcyList", pharmacyImplement.getAllPharmacys());
 			//Remember to add a report button
 			break;
 		case 2:
 			//DispatcherImplement dispatcherImplement = new DispatcherImplement();
-			//request.setAttribute("DispatcherDetails", session.getAttribute("Dispatcher") );
+			//session.setAttribute("DispatcherDetails", session.getAttribute("Dispatcher") );
 			//Dispatcher
 			break;
 		case 3:
 			int BranchxofPharmacist = new PharmacistImplement().getPharmacistById( (int) session.getAttribute("Pharmacist") ).getBranchID();
 			int PharmacyofBranch = new BranchImplement().getBranchById(BranchxofPharmacist).getPharmacyID();
-			request.setAttribute("PharmacistPharmacy", pharmacyImplement.getPharmacyById(PharmacyofBranch));
+			session.setAttribute("PharmacistPharmacy", pharmacyImplement.getPharmacyById(PharmacyofBranch));
 			//PharmacistImplement pharmacistImplement = new PharmacistImplement();
-			//request.setAttribute("PharmacistDetails", session.getAttribute("Pharmacist") );
+			//session.setAttribute("PharmacistDetails", session.getAttribute("Pharmacist") );
 			//PharmacyImplement pharmacyImplement1 = new PharmacyImplement();
-			//request.setAttribute("PharmcyofPharmacist", pharmacyImplement1.getPharmacyById(1));
+			//session.setAttribute("PharmcyofPharmacist", pharmacyImplement1.getPharmacyById(1));
 			//Pharmacist
 			break;
 		case 4:
 			//AdminImplement adminImplement = new AdminImplement();
-			//request.setAttribute("AdminDetails", adminImplement.getAdminById( (int) session.getAttribute("AdminID") ) );
+			//session.setAttribute("AdminDetails", adminImplement.getAdminById( (int) session.getAttribute("AdminID") ) );
 			//Users
-			request.setAttribute("CustomerList", new CustomerImplement().getAllCustomers());
-			request.setAttribute("DispatcherList", new DispatcherImplement().getAllDispatchers());
-			request.setAttribute("PharmacistList", new PharmacistImplement().getAllPharmacists());
-			request.setAttribute("AdminList", new AdminImplement().getAllAdmins());
+			session.setAttribute("CustomerList", new CustomerImplement().getAllCustomers());
+			session.setAttribute("DispatcherList", new DispatcherImplement().getAllDispatchers());
+			session.setAttribute("PharmacistList", new PharmacistImplement().getAllPharmacists());
+			session.setAttribute("AdminList", new AdminImplement().getAllAdmins());
 			//Items
-			request.setAttribute("PharmcyList", pharmacyImplement.getAllPharmacys());
-			request.setAttribute("BranchList", new BranchImplement().getAllBranch());
-			request.setAttribute("CourierList", new CourierServiceImplement().getAllCourierService());
-			request.setAttribute("Prescription", new PrescriptionImplement().getAllPrescription());
-			
+			session.setAttribute("PharmcyList", pharmacyImplement.getAllPharmacys());
+			session.setAttribute("BranchList", new BranchImplement().getAllBranch());
+			session.setAttribute("CourierList", new CourierServiceImplement().getAllCourierService());
+			session.setAttribute("Prescription", new PrescriptionImplement().getAllPrescription());
 			break;
 		default:
 			break;
 		}
-		RequestDispatcher view = request.getRequestDispatcher( "/home.jsp" );
-		view.forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/home.jsp");
+		//RequestDispatcher view = request.getRequestDispatcher( "/home.jsp" );
+		//view.forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

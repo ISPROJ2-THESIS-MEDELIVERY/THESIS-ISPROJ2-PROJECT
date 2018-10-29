@@ -52,16 +52,17 @@ public class PurchaseAction {
 	public int addPrescriptionOrder(Order order) {
 		try {
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-			String query = "INSERT INTO `order`(`CustomerID`, `CityID`, `PrescriptionID`, `OrderAddress`, `DateOrdered`, `OrderType`, `OrderStatus`, `SeniorDiscount`) VALUES (?,?,?,?,?,?,?,?)";
+			String query = "INSERT INTO `order`(`CustomerID`, `CityID`, `PrescriptionID`, `PharmacyID`, `OrderAddress`, `DateOrdered`, `OrderType`, `OrderStatus`, `SeniorDiscount`) VALUES (?,?,?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query, Statement.RETURN_GENERATED_KEYS );
 			preparedStatement.setInt( 1, order.getCustomerID() );
 			preparedStatement.setInt( 2, order.getCityID() );
 			preparedStatement.setInt( 3, order.getPrescriptionID() );
-			preparedStatement.setString( 4, order.getOrderAddress() );
-			preparedStatement.setDate( 5, CurrentDate );
-			preparedStatement.setString( 6, order.getOrderType() );
-			preparedStatement.setString( 7, order.getOrderStatus() );
-			preparedStatement.setBoolean( 8, order.getSeniorDiscount() );
+			preparedStatement.setInt( 4, order.getPharmacyID() );
+			preparedStatement.setString( 5, order.getOrderAddress() );
+			preparedStatement.setDate( 6, CurrentDate );
+			preparedStatement.setString( 7, order.getOrderType() );
+			preparedStatement.setString( 8, order.getOrderStatus() );
+			preparedStatement.setBoolean( 9, order.getSeniorDiscount() );
 			
 			preparedStatement.executeUpdate();
 			int NewID = 0;

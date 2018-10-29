@@ -53,7 +53,7 @@ public class ShopController extends HttpServlet {
 	}
 	
 	private static final long serialVersionUID = 1L;
-	private final String UPLOAD_DIRECTORY = "C:/Users/edenn/OneDrive/Documents/GitHub/THESIS-ISPROJ2-PROJECT/WebContent/images/";
+	private final String UPLOAD_DIRECTORY = "../../../../../../../../THESIS-ISPROJ2-PROJECT/WebContent/images/";
 	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Ensures that the person can select what he/she wants to buy
@@ -288,7 +288,7 @@ public class ShopController extends HttpServlet {
 	            try {
 
 	            	Part filePart = request.getPart("file");
-					String name = "Prescription" + new Date(Calendar.getInstance().getTime().getTime());
+					String name = "Prescription" + Calendar.getInstance().getTime().getTime();
 					//String end = filePart.getContentType();
 					String end = filePart.getContentType();
 					if (end.startsWith("image")) {
@@ -304,8 +304,8 @@ public class ShopController extends HttpServlet {
 						prescription.setPharmacistID(0);
 						prescription.setRemark("");
 						prescriptionID = new PrescriptionImplement().addPrescription(prescription);
-				        System.out.println(UPLOAD_DIRECTORY + File.separator + AFileName + "." + imageType);
-				        System.out.println(UPLOAD_DIRECTORY +"|"+ File.separator +"|"+ AFileName +"|"+ "." +"|"+ imageType);
+				        //System.out.println(UPLOAD_DIRECTORY + File.separator + AFileName + "." + imageType);
+				        //System.out.println(UPLOAD_DIRECTORY +"|"+ File.separator +"|"+ AFileName +"|"+ "." +"|"+ imageType);
 						filePart.write(UPLOAD_DIRECTORY + File.separator + AFileName + "." + imageType);
 						System.out.println( "File Uploaded Successfully: " + UPLOAD_DIRECTORY + File.separator + AFileName + "." + imageType);
 					} else {
@@ -317,15 +317,16 @@ public class ShopController extends HttpServlet {
 	            }
 	            
 	        }
-
-	        System.out.println(CusID);
-	        System.out.println(ADD);
-	        System.out.println(SID);
-	        System.out.println(CID);
-	        System.out.println(PID);
-	        System.out.println(prescriptionID);
+	        //System.out.println(CusID);
+	        //System.out.println(ADD);
+	        //System.out.println(SID);
+	        //System.out.println(CID);
+	        //System.out.println(PID);
+	        //System.out.println(prescriptionID);
 			Order order = new PurchaseAction().setInitalOrder(CusID, ADD, SID, CID, PID);
 			order.setPrescriptionID(prescriptionID);
+			order.setOrderType("Prescription");
+			order.setOrderStatus( "PENDING" );
 			int orderID = new PurchaseAction().addPrescriptionOrder(order);
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}

@@ -4,6 +4,11 @@
   text-align:center;
 }
 
+.carousel-inner .img{ 
+	width: 100% !important; 
+	height: auto !important; 
+}
+
 .image-gallery {
   margin:0 auto;
   display:table;

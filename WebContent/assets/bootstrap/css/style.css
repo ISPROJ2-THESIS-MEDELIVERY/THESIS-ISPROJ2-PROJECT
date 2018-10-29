@@ -12,6 +12,10 @@ hr {
 .container {
 	width: 90%;
 }
+.carousel-inner .item {
+ 
+{ width: 100%; height: auto; }
+
 
 .page-top {
 	margin-top: -70px;

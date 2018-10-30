@@ -45,7 +45,7 @@ public class HomeController  extends HttpServlet {
 		session.setAttribute("Featurepharm", new PharmacyImplement().getAllPharmacys());
 		session.setAttribute("Featurestock", new StocksImplement().getAllFeaturedStocks());
 		session.setAttribute("Featureitems", new ProductImplement().getAllProducts());
-		System.out.println(request.getContextPath());
+		//System.out.println(request.getContextPath());
 		}
 		switch(Switch) {
 		case 1:

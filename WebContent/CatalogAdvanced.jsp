@@ -42,8 +42,6 @@
         </div>
     </div> 
     <div id="container">
-    <h1>ORDER INFO</h1>
-    <c:out value="${orders.}" />
 	<h1>CART:</h1>
 	<c:if test="${CartList != null}">
     		<table class="table table-striped table-bordered" width="100%">
@@ -74,10 +72,15 @@
 	            	</c:forEach>
 	            </tbody>
     		</table>
-    		
-    		
-    		<form action='ShopController' method='post'>
-				<input type='submit' name='Action' value="CheckoutOrder" style='display: on-hover' />
+			
+		    <h1>Prescription</h1>
+			<form method="post" action="ShopController" encType="multipart/form-data">
+				<div class="form-group">
+		        	<input type="file" name="file" value="Upload Prescription" class="form-control" required />
+		        	<input type="hidden" name="PharmaID" value="<c:out value="${SelectedPharmacy.pharmacyID}"/>" class="form-control"/>
+		        	<input type="submit" name="Action" value="AddPrescription" class="form-control"/>
+					<input type='submit' name='Action' value="CheckoutOrder" style='display: on-hover' />
+		        </div>
 			</form>
     		
     		

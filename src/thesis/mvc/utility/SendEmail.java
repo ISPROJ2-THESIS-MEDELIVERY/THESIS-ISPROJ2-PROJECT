@@ -35,7 +35,6 @@ public class SendEmail
 		/*
 		 * Pass Properties object(props) and Authenticator object for authentication to Session instance 
 		 */
-		/*
 		Session session = Session.getInstance(props,new javax.mail.Authenticator()
 		{
 			protected PasswordAuthentication getPasswordAuthentication() 
@@ -43,9 +42,8 @@ public class SendEmail
 				return new PasswordAuthentication("testpokerthing@gmail.com","Hey!0821");
 			}
 		});
-		*/
 
-		Session session = Session.getInstance(props);
+		//Session session = Session.getInstance(props);
 		try
 		{
 		
@@ -58,7 +56,7 @@ public class SendEmail
 			message.setFrom(new InternetAddress("Medelivery-Notification"));
 			message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
 			message.setSubject(sub);
-			//message.setText(msg);
+			message.setText(msg);
 			message.setContent(msg, "text/html; charset=utf-8");
 			
 			/* Transport class is used to deliver the message to the recipients */

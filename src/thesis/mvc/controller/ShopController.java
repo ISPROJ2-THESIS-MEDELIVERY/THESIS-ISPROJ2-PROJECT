@@ -2,7 +2,6 @@ package thesis.mvc.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -23,8 +22,6 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import thesis.mvc.implement.CityListingImplement;
 import thesis.mvc.implement.CustomerImplement;
-import thesis.mvc.implement.OrderDetailImplement;
-import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.implement.PrescriptionImplement;
 import thesis.mvc.implement.ProductImplement;
@@ -77,7 +74,7 @@ public class ShopController extends HttpServlet {
     
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Boolean Test = ServletFileUpload.isMultipartContent(request);
+		//Boolean Test = ServletFileUpload.isMultipartContent(request);
 		HttpSession session = request.getSession(true);
 		List<OrderDetail> OrderDetails = new ArrayList<OrderDetail>();
 		if (session.getAttribute("OrderDetails") != null) {
@@ -167,9 +164,7 @@ public class ShopController extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/CatalogAdvanced.jsp");
 			}
 		} else if (action.equalsIgnoreCase("CheckoutOrder")) {
-			String forward;
 			Order order = (Order) session.getAttribute("Order");
-			PurchaseAction purchaseAction = new PurchaseAction();
 			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
 			List<CartList> cartList = (List<CartList>) session.getAttribute("CartList");
 			SendEmail sendEmail = new SendEmail();
@@ -180,10 +175,9 @@ public class ShopController extends HttpServlet {
 
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 			String redirect = new ShopAction().purchaseOrder(order, OrderDetails, "https://www.google.com/");// request.getContextPath()
-			//sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, "This is a test message");
+			sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, "This is a test message");
 			if(order == null || OrderDetails.isEmpty()) {
-				forward = "/index.jsp"; //or an error page
-				response.sendRedirect(request.getContextPath() + forward);
+				response.sendRedirect(request.getContextPath() + "/index.jsp");
 			} else {
 				session.setAttribute("CartlistReciept", cartList);
 				session.setAttribute("orderReciept", order);
@@ -196,23 +190,12 @@ public class ShopController extends HttpServlet {
 			//order.setPaymentMethod( request.getParameter( "orderPayment" ) );
 			//order.setDateOrdered(today);
 
-		} else if (action.equalsIgnoreCase("AddPrescription")) {
-			Pharmacy selectedPharmacy = new Pharmacy();
-			int PID = Integer.parseInt( request.getParameter( "PharmaID" ) );
-			
+		} else if (action.equalsIgnoreCase("CheckoutOrderPrescription")) {			
 			int UID = (int) session.getAttribute("userID");
-			CustomerImplement customerImplement = new CustomerImplement();
-			Customer customer = new Customer();
-			customer = customerImplement.getCustomerByUserId(UID);
 			
-			int CusID = customer.getCustomerID();
-			String ADD = customer.getCustomerStreet()
-					+ ", " + customer.getCustomerBarangay()
-					+ ", " + new CityListingImplement().getCityListingById(customer.getCityID()).getCityName()
-					+ ", " + customer.getCustomerProvince();
-			int CID = customer.getCityID();
-			boolean SID = customer.isIsSeniorCitizen();
-
+			CustomerImplement customerImplement = new CustomerImplement();
+			int CID = customerImplement.getCustomerByUserId(UID).getCustomerID();
+			
 			int prescriptionID = 0;
 			if(ServletFileUpload.isMultipartContent(request)){
 	            try {
@@ -247,18 +230,36 @@ public class ShopController extends HttpServlet {
 	            }
 	            
 	        }
-	        //System.out.println(CusID);
-	        //System.out.println(ADD);
-	        //System.out.println(SID);
-	        //System.out.println(CID);
-	        //System.out.println(PID);
-	        //System.out.println(prescriptionID);
-			Order order = new PurchaseAction().setInitalOrder(CusID, ADD, SID, CID, PID);
+			Order order = new Order();
+			order = (Order) session.getAttribute("Order");
 			order.setPrescriptionID(prescriptionID);
 			order.setOrderType("Prescription");
 			order.setOrderStatus( "PENDING" );
-			int orderID = new PurchaseAction().addPrescriptionOrder(order);
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
+			
+			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
+			List<CartList> cartList = (List<CartList>) session.getAttribute("CartList");
+			SendEmail sendEmail = new SendEmail();
+			int userID = (int) session.getAttribute("userID");
+			
+			String CustomerEmail = customerImplement.getCustomerByUserId(userID).getEmail();
+
+			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+			String redirect = new ShopAction().purchaseOrder(order, OrderDetails, "https://www.google.com/");// request.getContextPath()
+			System.out.println(redirect);
+			sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, "This is a test message");
+			if(order == null || OrderDetails.isEmpty()) {
+				response.sendRedirect(request.getContextPath() + "/index.jsp");
+			} else {
+				session.setAttribute("CartlistReciept", cartList);
+				session.setAttribute("orderReciept", order);
+				session.setAttribute("ApproveChecker", false);
+				session.removeAttribute("Order");
+				session.removeAttribute("OrderDetails");
+				session.removeAttribute("CartList");
+				response.sendRedirect(redirect);
+			}
+			
+			//response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}
 			
 	}

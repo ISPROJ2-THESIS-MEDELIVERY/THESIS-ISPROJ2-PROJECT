@@ -86,8 +86,7 @@
 				<div class="form-group">
 		        	<input type="file" name="file" value="Upload Prescription" class="form-control" required />
 		        	<input type="hidden" name="PharmaID" value="<c:out value="${SelectedPharmacy.pharmacyID}"/>" class="form-control"/>
-		        	<input type="submit" name="Action" value="AddPrescription" class="form-control"/>
-					<input type='submit' name='Action' value="CheckoutOrder" style='display: on-hover' />
+					<input type='submit' name='Action' value="CheckoutOrderPrescription" style='display: on-hover' />
 		        </div>
 			</form>
     		

@@ -65,7 +65,8 @@ public class ShopAction {
 				return null;
 			}
 		}		
-		
+
+		System.out.println(1);
 		//Get the city of the customer & senior status
 		int CityCustomer = 0;
 		boolean SeniorStatus = false;
@@ -86,6 +87,7 @@ public class ShopAction {
             e.printStackTrace();
             return null;
         }
+		System.out.println(2);
 		
 		//Where is the branch located
 		int CityPharmacy = -1;
@@ -102,6 +104,7 @@ public class ShopAction {
 		}
 		order.setSeniorDiscount(SeniorStatus);
 		order.setOrderAddress(CustoAddress);
+		System.out.println(3);
 		
 		//Check if city is equal or not
 		Double DeliveryCost;
@@ -113,11 +116,11 @@ public class ShopAction {
 			order.setOrderType("Intracity Regular");
 			DeliveryCost = 100.0;
 		}
+		System.out.println(4);
 		
 		//Add nessesary information
-		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-		order.setDateOrdered(CurrentDate);
 		order.setOrderStatus( "PENDING" );
+		System.out.println(5);
 		
 		//Add delivery cost and Input order detail
 		Double actualcost = 0.0;
@@ -127,20 +130,24 @@ public class ShopAction {
 		}
 		actualcost += DeliveryCost;
 		order.setActualCost( actualcost );
+		System.out.println(6);
 		
 		//Add to order
-		int orderID = new OrderImplement().addIncompleteOrder(order);
+		//int orderID = new OrderImplement().addIncompleteOrder(order);
+		int orderID = new OrderImplement().addOrder(order);
 		//insert OrderID
 		for (OrderDetail orderDetail : OrderDetails) {
 			orderDetail.setOrderID( orderID );
 			OrderDet.addOrderDetail( orderDetail );
 		}
+		System.out.println(7);
 		
 		return SendOrder(order, OrderDetails, HomePage);
 	}
 	@SuppressWarnings("unchecked")
 	public String SendOrder(Order order, List<OrderDetail> OrderDetails, String HomePage) {
 			JSONObject JSONReciept = new JSONObject();
+			System.out.println(8);
 			
 	        //totalAmount
 	    	JSONObject totalAmount1 = new JSONObject();
@@ -153,10 +160,12 @@ public class ShopAction {
 	    		details1.put("subtotal", (order.getActualCost() * 0.95) - 50.0);
 	        totalAmount1.put("details", details1);
 	    	JSONReciept.put("totalAmount", totalAmount1);
-	    	
+			System.out.println(9);
+			
 	    	Customer customer = new Customer();
 	    	customer = new CustomerImplement().getCustomerById(order.getCustomerID());
-	    	
+			System.out.println(10);
+			
 	    	//buyer
 	        JSONObject buyer = new JSONObject();
 	        buyer.put("firstName", "Dan");
@@ -221,7 +230,8 @@ public class ShopAction {
 	    	//metadata
 	        JSONObject metadata = new JSONObject();        
 	        JSONReciept.put("metadata", metadata);
-	        
+
+			System.out.println(11);
 	        
 	        try {
 	        	
@@ -275,6 +285,7 @@ public class ShopAction {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				System.out.println(e);
 				return null;
 			}
 			return null;

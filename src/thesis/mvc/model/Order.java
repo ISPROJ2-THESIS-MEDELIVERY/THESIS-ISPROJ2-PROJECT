@@ -1,6 +1,7 @@
 package thesis.mvc.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Order {
 	private int OrderID;
@@ -12,9 +13,9 @@ public class Order {
 	private int CityID;
 	private int PrescriptionID;
 	private String OrderAddress;
-	private Date DateOrdered;
-	private Date DateProcessed;
-	private Date DateDelivered;
+	private Timestamp DateOrdered;
+	private Timestamp DateProcessed;
+	private Timestamp DateDelivered;
 	private String OrderType;
 	private String OrderStatus;
 	private Boolean SeniorDiscount;
@@ -75,22 +76,22 @@ public class Order {
 	public void setOrderAddress(String orderAddress) {
 		OrderAddress = orderAddress;
 	}
-	public Date getDateOrdered() {
+	public Timestamp getDateOrdered() {
 		return DateOrdered;
 	}
-	public void setDateOrdered(Date dateOrdered) {
+	public void setDateOrdered(Timestamp dateOrdered) {
 		DateOrdered = dateOrdered;
 	}
-	public Date getDateProcessed() {
+	public Timestamp getDateProcessed() {
 		return DateProcessed;
 	}
-	public void setDateProcessed(Date dateProcessed) {
+	public void setDateProcessed(Timestamp dateProcessed) {
 		DateProcessed = dateProcessed;
 	}
-	public Date getDateDelivered() {
+	public Timestamp getDateDelivered() {
 		return DateDelivered;
 	}
-	public void setDateDelivered(Date dateDelivered) {
+	public void setDateDelivered(Timestamp dateDelivered) {
 		DateDelivered = dateDelivered;
 	}
 	public String getOrderType() {

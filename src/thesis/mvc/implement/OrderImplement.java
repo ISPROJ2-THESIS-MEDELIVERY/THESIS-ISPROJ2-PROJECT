@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -25,7 +26,7 @@ public class OrderImplement implements OrderDAO{
 	@Override
 	public int addOrder(Order order) {
 		try {
-			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+			Timestamp CurrentDate = new Timestamp(Calendar.getInstance().getTime().getTime());
 			String query = "INSERT INTO `order`(`CustomerID`, `DeliveryID`, `PharmacistID`, `PharmacyID`, `BranchID`, `CityID`, `PrescriptionID`, `OrderAddress`, `DateOrdered`, `DateProcessed`, `DateDelivered`, `OrderType`, `OrderStatus`, `SeniorDiscount`, `PaymentMethod`, `ActualCost`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, order.getCustomerID() );
@@ -36,9 +37,9 @@ public class OrderImplement implements OrderDAO{
 			preparedStatement.setInt( 6, order.getCityID() );
 			preparedStatement.setInt( 7, order.getPrescriptionID() );
 			preparedStatement.setString( 8, order.getOrderAddress() );
-			preparedStatement.setDate( 9, CurrentDate );
-			preparedStatement.setDate( 10, order.getDateProcessed() );
-			preparedStatement.setDate( 11, order.getDateDelivered() );
+			preparedStatement.setTimestamp( 9, CurrentDate );
+			preparedStatement.setTimestamp( 10, order.getDateProcessed() );
+			preparedStatement.setTimestamp( 11, order.getDateDelivered() );
 			preparedStatement.setString( 12, order.getOrderType() );
 			preparedStatement.setString( 13, order.getOrderStatus() );
 			preparedStatement.setBoolean( 14, order.getSeniorDiscount() );
@@ -79,9 +80,9 @@ public class OrderImplement implements OrderDAO{
 			preparedStatement.setInt( 6, order.getBranchID() );
 			preparedStatement.setInt( 7, order.getPrescriptionID() );
 			preparedStatement.setString( 8, order.getOrderAddress() );
-			preparedStatement.setDate( 9, order.getDateOrdered() );
-			preparedStatement.setDate( 10, order.getDateProcessed() );
-			preparedStatement.setDate( 11, order.getDateDelivered() );
+			preparedStatement.setTimestamp( 9, order.getDateOrdered() );
+			preparedStatement.setTimestamp( 10, order.getDateProcessed() );
+			preparedStatement.setTimestamp( 11, order.getDateDelivered() );
 			preparedStatement.setString( 12, order.getOrderType() );
 			preparedStatement.setString( 13, order.getOrderStatus() );
 			preparedStatement.setBoolean( 14, order.getSeniorDiscount() );
@@ -112,9 +113,9 @@ public class OrderImplement implements OrderDAO{
 				order.setBranchID( resultSet.getInt( "BranchID" ));
 				order.setPrescriptionID( resultSet.getInt( "PrescriptionID" ) );
 				order.setOrderAddress( resultSet.getString( "OrderAddress" ) );
-				order.setDateOrdered( resultSet.getDate( "DateOrdered" ) );
-				order.setDateProcessed( resultSet.getDate( "DateProcessed" ) );
-				order.setDateDelivered( resultSet.getDate( "DateDelivered" ) );
+				order.setDateOrdered( resultSet.getTimestamp( "DateOrdered" ) );
+				order.setDateProcessed( resultSet.getTimestamp( "DateProcessed" ) );
+				order.setDateDelivered( resultSet.getTimestamp( "DateDelivered" ) );
 				order.setOrderType( resultSet.getString( "OrderType" ) );
 				order.setOrderStatus( resultSet.getString( "OrderStatus" ) );
 				order.setSeniorDiscount( resultSet.getBoolean( "SeniorDiscount" ) );
@@ -148,9 +149,9 @@ public class OrderImplement implements OrderDAO{
 				order.setBranchID( resultSet.getInt( "BranchID" ));
 				order.setPrescriptionID( resultSet.getInt( "PrescriptionID" ) );
 				order.setOrderAddress( resultSet.getString( "OrderAddress" ) );
-				order.setDateOrdered( resultSet.getDate( "DateOrdered" ) );
-				order.setDateProcessed( resultSet.getDate( "DateProcessed" ) );
-				order.setDateDelivered( resultSet.getDate( "DateDelivered" ) );
+				order.setDateOrdered( resultSet.getTimestamp( "DateOrdered" ) );
+				order.setDateProcessed( resultSet.getTimestamp( "DateProcessed" ) );
+				order.setDateDelivered( resultSet.getTimestamp( "DateDelivered" ) );
 				order.setOrderType( resultSet.getString( "OrderType" ) );
 				order.setOrderStatus( resultSet.getString( "OrderStatus" ) );
 				order.setSeniorDiscount( resultSet.getBoolean( "SeniorDiscount" ) );
@@ -209,9 +210,9 @@ public class OrderImplement implements OrderDAO{
 				order.setBranchID( resultSet.getInt( "BranchID" ));
 				order.setPrescriptionID( resultSet.getInt( "PrescriptionID" ) );
 				order.setOrderAddress( resultSet.getString( "OrderAddress" ) );
-				order.setDateOrdered( resultSet.getDate( "DateOrdered" ) );
-				order.setDateProcessed( resultSet.getDate( "DateProcessed" ) );
-				order.setDateDelivered( resultSet.getDate( "DateDelivered" ) );
+				order.setDateOrdered( resultSet.getTimestamp( "DateOrdered" ) );
+				order.setDateProcessed( resultSet.getTimestamp( "DateProcessed" ) );
+				order.setDateDelivered( resultSet.getTimestamp( "DateDelivered" ) );
 				order.setOrderType( resultSet.getString( "OrderType" ) );
 				order.setOrderStatus( resultSet.getString( "OrderStatus" ) );
 				order.setSeniorDiscount( resultSet.getBoolean( "SeniorDiscount" ) );
@@ -245,9 +246,9 @@ public class OrderImplement implements OrderDAO{
 				order.setBranchID( resultSet.getInt( "BranchID" ));
 				order.setPrescriptionID( resultSet.getInt( "PrescriptionID" ) );
 				order.setOrderAddress( resultSet.getString( "OrderAddress" ) );
-				order.setDateOrdered( resultSet.getDate( "DateOrdered" ) );
-				order.setDateProcessed( resultSet.getDate( "DateProcessed" ) );
-				order.setDateDelivered( resultSet.getDate( "DateDelivered" ) );
+				order.setDateOrdered( resultSet.getTimestamp( "DateOrdered" ) );
+				order.setDateProcessed( resultSet.getTimestamp( "DateProcessed" ) );
+				order.setDateDelivered( resultSet.getTimestamp( "DateDelivered" ) );
 				order.setOrderType( resultSet.getString( "OrderType" ) );
 				order.setOrderStatus( resultSet.getString( "OrderStatus" ) );
 				order.setSeniorDiscount( resultSet.getBoolean( "SeniorDiscount" ) );
@@ -281,9 +282,9 @@ public class OrderImplement implements OrderDAO{
 				order.setBranchID( resultSet.getInt( "BranchID" ));
 				order.setPrescriptionID( resultSet.getInt( "PrescriptionID" ) );
 				order.setOrderAddress( resultSet.getString( "OrderAddress" ) );
-				order.setDateOrdered( resultSet.getDate( "DateOrdered" ) );
-				order.setDateProcessed( resultSet.getDate( "DateProcessed" ) );
-				order.setDateDelivered( resultSet.getDate( "DateDelivered" ) );
+				order.setDateOrdered( resultSet.getTimestamp( "DateOrdered" ) );
+				order.setDateProcessed( resultSet.getTimestamp( "DateProcessed" ) );
+				order.setDateDelivered( resultSet.getTimestamp( "DateDelivered" ) );
 				order.setOrderType( resultSet.getString( "OrderType" ) );
 				order.setOrderStatus( resultSet.getString( "OrderStatus" ) );
 				order.setSeniorDiscount( resultSet.getBoolean( "SeniorDiscount" ) );
@@ -299,7 +300,7 @@ public class OrderImplement implements OrderDAO{
 		return orders;
 	}
 
-	
+	/*
 	public int addIncompleteOrder(Order order) {
 		try {
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
@@ -309,7 +310,7 @@ public class OrderImplement implements OrderDAO{
 			preparedStatement.setInt( 2, order.getCityID() );
 			preparedStatement.setInt( 3, order.getPharmacyID() );
 			preparedStatement.setString( 4, order.getOrderAddress() );
-			preparedStatement.setDate( 5, CurrentDate );
+			preparedStatement.setTimestamp( 5, CurrentDate );
 			preparedStatement.setString( 6, order.getOrderType() );
 			preparedStatement.setString( 7, order.getOrderStatus() );
 			preparedStatement.setBoolean( 8, order.getSeniorDiscount() );
@@ -328,4 +329,5 @@ public class OrderImplement implements OrderDAO{
 			return 0;
 		}
 	}
+	*/
 }

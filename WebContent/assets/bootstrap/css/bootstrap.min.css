@@ -81,9 +81,9 @@ body {
 
 hr {
 	border: none;
-	height: 1px;
+	height: 10px;
 	color: #0000ff;
-	background-color: #333;
+	background-color: #21a9af;
 }
 
 /* hr {
@@ -166,10 +166,12 @@ sup {
 }
 
 a {
-	color: #007bff;
+	color: #21a9af;
 	text-decoration: none;
 	background-color: transparent;
+	margin-left: 15px;
 	-webkit-text-decoration-skip: objects
+	
 }
 
 a:hover {

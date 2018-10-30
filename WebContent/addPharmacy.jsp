@@ -60,9 +60,9 @@
         	<input type="hidden" name="Actionthing" value="addPharmacy" class="form-control"/>
         </div>
         <div class="form-group">
-            <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
+            <button class="btn btn-primary btn-block" type="submit">Add Pharmacy</button>
         </div>
-        <a class="already" href="login.jsp">Back</a>
+        <a class="already" href="index.jsp">Back</a>
 		<!-- <input type="text"		name="PharmaName" required="" placeholder="Pharmacy Name">
 		<input type="file"		name="PharmaFile" required="" placeholder="Pharmacy Logo"> enctype="multipart/form-data"
 		<input type="hidden"	name="Actionthing" value="addPharmacy">

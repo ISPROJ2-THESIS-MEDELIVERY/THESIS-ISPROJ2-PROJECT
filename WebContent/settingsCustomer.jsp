@@ -50,8 +50,37 @@
         </div>
     </div>
 			<hr>
+			<div class="login-clean">
 			<form action="RegistrationController" method="post" enctype="multipart/form-data">
-		        Name: 		<input type="text" name="UpdateName" required="" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/><br>
+				<h2 class="sr-only">Edit Customer Settings</h2>
+					<div class="form-group">
+        				<input type="text" name="UpdateName" required="required" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/>
+        			</div>
+        			<div class="form-group">
+        				<input type="text" name="UpdateStrt" required="required" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/>
+        			</div>
+        			<div class="form-group">
+        				<input type="text" name="UpdateBrgy" required="required" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/>
+        			</div>
+        			<div class="form-group">
+        				<input type="text" name="UpdateCity" required="required" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/>
+        			</div>
+        			<div class="form-group">
+        				<input type="text" name="UpdateProv" required="required" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/>
+        			</div>
+        			<div class="form-group">
+        				<input type="text" name="UpdateCell" required="required" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/>
+        			</div>
+        			<div class="form-group">
+        				<input type="text" name="UpdateLand" required="required" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/>
+        			</div>
+        			<div class="form-group">
+        				<input type="text" name="UpdateEmil" required="required" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/>
+        			</div>
+        			<div class="form-group">
+            			<button class="btn btn-primary btn-block" type="submit">Edit</button>
+        			</div>
+		        <%-- Name: 		<input type="text" name="UpdateName" required="" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/><br>
 				Street:		<input type="text" name="UpdateStrt" required="" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/><br>
 				Barangay:	<input type="text" name="UpdateBrgy" required="" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/><br>
 				City:		<input type="text" name="UpdateCity" required="" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/><br>
@@ -59,9 +88,9 @@
 				Cellular:	<input type="text" name="UpdateCell" required="" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/><br>
 				LandLne:	<input type="text" name="UpdateLand" required="" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/><br>
 				Email:		<input type="text" name="UpdateEmil" required="" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/><br>
-				<input type="submit" />
+				<input type="submit" /> --%>
 			</form>
-		</div>
+		    </div>
 <div class="footer-dark">
     <footer>
         <div class="container">

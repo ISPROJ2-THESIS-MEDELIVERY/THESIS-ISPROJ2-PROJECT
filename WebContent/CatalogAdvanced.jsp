@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,6 +13,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" />
 <link rel="stylesheet" href="assets/css/Header-Blue.css" />
 </head>
+
 <body>
 	 <div>
         <div class="header-blue">
@@ -39,52 +41,90 @@
             </nav>
         </div>
     </div> 
+    <div id="container">
+    <h1>ORDER INFO</h1>
+    <c:out value="${orders.}" />
 	<h1>CART:</h1>
-	<div class="table-responsive">
-	<table class="table">
-		<thead>
-			<tr>
-	            <th>Item</th>
-	            <th>Item Description</th>
-	            <th>Image</th>
-	            <th>Size</th>
-	            <th>Prescription Required</th>
-	            <th>Quantity</th>
-	            <th>Unit Price</th>
-	            <th>Total Cost</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${CartlistReciept}" var="cartdetails">
-	            <tr>
-	                <td><c:out value="${cartdetails.name}" /></td>
-	                <td><c:out value="${cartdetails.description}" /></td>
-	                <td>IMAGE HERE</td>
-	                <!-- <td><img src="data:image/jpeg;base64,${cartdetails.image}" /></td>  -->
-	                <td><c:out value="${cartdetails.size}" /></td>
-	                <td><c:out value="${cartdetails.prescription}" /></td>
-	                <td><c:out value="${cartdetails.quantity}" /></td>
-	                <td><c:out value="${cartdetails.unitCost}" /></td>
-	                <td><c:out value="${cartdetails.totalCost}" /></td>
-	            </tr>
-            </c:forEach>
-		</tbody>
-	</table>
-	</div>
+	<c:if test="${CartList != null}">
+    		<table class="table table-striped table-bordered" width="100%">
+        		<thead>
+            		<tr>
+                		<th>Item</th>
+                		<th>Item Description</th>
+                		<th>Image</th>
+                		<th>Size</th>
+                		<th>Prescription Required</th>
+                		<th>Quantity</th>
+                		<th>Unit Price</th>
+                		<th>Total Cost</th>
+            		</tr>
+        		</thead>
+        		<tbody>
+					<c:forEach items="${CartList}" var="details">
+		            	<tr>
+		                	<td><c:out value="${details.name}" /></td>
+		                	<td><c:out value="${details.description}" /></td>
+		                	<td><img src="images/<c:out value="${details.image}" />" alt="Medicine Image" width="100px" height="100px"></td>
+		                	<td><c:out value="${details.size}" /></td>
+		                	<td><c:out value="${details.prescription}" /></td>
+		                	<td><c:out value="${details.quantity}" /></td>
+		                	<td>&#8369;<c:out value="${details.unitCost}" /></td>
+		                	<td>&#8369;<c:out value="${details.totalCost}" /></td>
+		            	</tr>
+	            	</c:forEach>
+	            </tbody>
+    		</table>
+    		
+    		
+    		<form action='ShopController' method='post'>
+				<input type='submit' name='Action' value="CheckoutOrder" style='display: on-hover' />
+			</form>
+    		
+    		
+    		
+		<%-- <table border=1>
+			<thead>
+				<tr>
+		            <th>Item</th>
+		            <th>Item Description</th>
+		            <th>Image</th>
+		            <th>Size</th>
+		            <th>Prescription Required</th>
+		            <th>Quantity</th>
+		            <th>Unit Price</th>
+		            <th>Total Cost</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${CartList}" var="details">
+		            <tr>
+		                <td><c:out value="${details.name}" /></td>
+		                <td><c:out value="${details.description}" /></td>
+		                <td><c:out value="${details.size}" /></td>
+		                <td><c:out value="${details.prescription}" /></td>
+		                <td><c:out value="${details.quantity}" /></td>
+		                <td><c:out value="${details.unitCost}" /></td>
+		                <td><c:out value="${details.totalCost}" /></td>
+		            </tr>
+	            </c:forEach>
+			</tbody>
+		</table> --%>
+	</c:if>
+	<c:if test="${CartList == null}">
+		<h2>NOTHING ORDERED YET</h2>
+	</c:if>
+	
 	<h1>SHOP:</h1>
-	<div class="table-responsive">
-	<table class="table">
+	<table id="druglistTable" class="table table-striped table-bordered" width="100%">
 		<thead>
 			<tr>
 				<th>Product ID</th>
 				<th>Product Name</th>
 				<th>Generic Name</th>
-				<th>Registration No</th>
 				<th>Product Strength</th>
+				<th>Image</th>
 				<th>Product Form</th>
 				<th>Product Packaging</th>
-				<th>Product Manufacturer</th>
-				<th>Product Origin</th>
 				<th>Product Description</th>
 				<th>Quantity</th>
 				<th>Buy</th>
@@ -92,18 +132,17 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${productList}" var="item">
-				<form action='PurchaseController' method='post'>
 					<tr>
-						<td><input type="number" name="ProductID" value="<c:out value="${item.productID}" />" readonly></td>
+						<td><c:out value="${item.productID}" /></td>
 						<td><c:out value="${item.productName}" /></td>
 						<td><c:out value="${item.genericName}" /></td>
-						<td><c:out value="${item.registrationNo}" /></td>
 						<td><c:out value="${item.productStrength}" /></td>
+		                <td><img src="images/<c:out value="${item.productImage}" />" alt="Medicine Image" width="100px" height="100px"></td>
 						<td><c:out value="${item.productForm}" /></td>
 						<td><c:out value="${item.productPackaging}" /></td>
-						<td><c:out value="${item.productManufacturer}" /></td>
-						<td><c:out value="${item.productOrigin}" /></td>
 						<td><c:out value="${item.productDescription}" /></td>
+						
+						<form action='ShopController' method='post'>
 						<td>
 							<select name='Quantity'>
 								<option value="1">1</option>
@@ -118,10 +157,11 @@
 							</select>
 						</td>
 						<td>
+							<input type="hidden" name="ProductID" value="<c:out value="${item.productID}" />" readonly>
 							<input type='submit' name='Action' value="Addtocart" style='display: on-hover' />
 						</td>
+						</form>
 					</tr>
-				</form>
 			</c:forEach>
 		</tbody>
 	</table>
@@ -149,5 +189,6 @@
         		</div>
     		</div>
 		</footer>
+
 </body>
 </html>

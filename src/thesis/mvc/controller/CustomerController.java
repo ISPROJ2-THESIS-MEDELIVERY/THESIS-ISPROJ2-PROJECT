@@ -46,6 +46,11 @@ public class CustomerController extends HttpServlet{
 			session.setAttribute( "productList", new SearchAction().GeneralListing(PharmaID) );
 			session.setAttribute( "SelectedPharmacy", new PharmacyImplement().getPharmacyById(PharmaID) );
 			response.sendRedirect(request.getContextPath() + "/CatalogBasic.jsp");
+		} else if(action.equalsIgnoreCase("GoToCatalogPrescription")) {
+			int PharmaID = Integer.parseInt(request.getParameter( "PharmaID" ));
+			session.setAttribute( "productList", new SearchAction().GeneralListing(PharmaID) );
+			session.setAttribute( "SelectedPharmacy", new PharmacyImplement().getPharmacyById(PharmaID) );
+			response.sendRedirect(request.getContextPath() + "/CatalogAdvanced.jsp");
 		} else if(action.equalsIgnoreCase("GoToPrescription")) {
 			int PharmaID = Integer.parseInt(request.getParameter( "PharmaID" ));
 			session.setAttribute( "SelectedPharmacy", new PharmacyImplement().getPharmacyById(PharmaID) );

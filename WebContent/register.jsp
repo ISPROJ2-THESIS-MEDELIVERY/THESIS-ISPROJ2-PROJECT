@@ -30,11 +30,26 @@
                         <span class="navbar-text" style="float: right"><a href="login.jsp" class="login">Log In</a></span>
                         <span class="navbar-text" style="float: right"><a href="register.jsp" class="login">Register</a></span>
                         </c:if>
+                        <c:if test="${userAccess == 1}">
+                        <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Log Out</a></span>
+                        </c:if>
+                        <c:if test="${userAccess == 2}">
+                        <span class="navbar-text" style="float: right"><a href="DispatcherController?Action=DispatchOrder" class="login">Order Dispatch - Regular</a><br></span>
+						<span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a></span>
+                        </c:if>
+                        <c:if test="${userAccess == 3}">
+                        <span class="navbar-text" style="float: right"><a href="ProductController?Action=AddProduct" class="login">Add Product</a><br></span>
+                        <span class="navbar-text" style="float: right"><a href="PharmacistController?Action=Prescription" class="login">Approve/Disapprove prescription orders</a></span>
+						<span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a><br></span>
+                        </c:if>
+                        <c:if test="${userAccess == 4}">
+                        <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Log Out</a></span>
+                        </c:if>
                     </div>
                 </div>
             </nav>
         </div>
-    </div> 
+    </div>
 <div class="login-clean">
 <form action="RegistrationController" method="post" enctype="multipart/form-data">
 	<h2 class="sr-only">Login Form</h2>
@@ -93,6 +108,7 @@
 </form>
 </div>
 <div class="footer-dark">
+ <div class="footer-dark">
     <footer>
         <div class="container">
             <div class="row">
@@ -122,6 +138,7 @@
             <p class="copyright">Company Name © 2017</p>
         </div>
     </footer>
+</div>
 </div>
 </body>
 </html>

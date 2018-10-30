@@ -43,11 +43,24 @@ public class CustomerController extends HttpServlet{
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else if(action.equalsIgnoreCase("GoToCatalog")) {
 			int PharmaID = Integer.parseInt(request.getParameter( "PharmaID" ));
+			if (session.getAttribute("CatalogType") == null || session.getAttribute("CatalogType") == "Prescription") {
+				session.setAttribute("CatalogType", "Regular");
+				session.removeAttribute("Order");
+				session.removeAttribute("OrderDetails");
+				session.removeAttribute("CartList");
+			}
 			session.setAttribute( "productList", new SearchAction().GeneralListing(PharmaID) );
 			session.setAttribute( "SelectedPharmacy", new PharmacyImplement().getPharmacyById(PharmaID) );
 			response.sendRedirect(request.getContextPath() + "/CatalogBasic.jsp");
 		} else if(action.equalsIgnoreCase("GoToCatalogPrescription")) {
 			int PharmaID = Integer.parseInt(request.getParameter( "PharmaID" ));
+			if (session.getAttribute("CatalogType") == null || session.getAttribute("CatalogType") == "Regular") {
+				session.setAttribute("CatalogType", "Prescription");
+				session.removeAttribute("Order");
+				session.removeAttribute("OrderDetails");
+				session.removeAttribute("CartList");
+			}
+			session.setAttribute("CatalogType", "Prescription");
 			session.setAttribute( "productList", new SearchAction().GeneralListing(PharmaID) );
 			session.setAttribute( "SelectedPharmacy", new PharmacyImplement().getPharmacyById(PharmaID) );
 			response.sendRedirect(request.getContextPath() + "/CatalogAdvanced.jsp");

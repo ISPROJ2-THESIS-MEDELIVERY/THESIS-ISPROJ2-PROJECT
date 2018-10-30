@@ -21,6 +21,7 @@ import thesis.mvc.implement.PrescriptionImplement;
 import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.implement.StocksImplement;
 import thesis.mvc.utility.EncryptionFunction;
+import thesis.mvc.utility.GeneralFunctions;
 
 @WebServlet("/HomeController")
 public class HomeController  extends HttpServlet {
@@ -91,6 +92,7 @@ public class HomeController  extends HttpServlet {
 		default:
 			break;
 		}
+		GeneralFunctions.checkAttributes(session);
 		response.sendRedirect(request.getContextPath() + "/home.jsp");
 		//RequestDispatcher view = request.getRequestDispatcher( "/home.jsp" );
 		//view.forward(request, response);

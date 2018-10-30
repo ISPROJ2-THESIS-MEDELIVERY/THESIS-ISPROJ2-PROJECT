@@ -156,7 +156,16 @@ public class ShopController extends HttpServlet {
 			cartlists.add(cartlist);
 			session.setAttribute("CartList", cartlists );
 			
-			response.sendRedirect(request.getContextPath() + "/CatalogBasic.jsp");
+			if (session.getAttribute("CatalogType") == null) {
+				response.sendRedirect(request.getContextPath() + "/index.jsp");
+				session.removeAttribute("Order");
+				session.removeAttribute("OrderDetails");
+				session.removeAttribute("CartList");
+			} else if (session.getAttribute("CatalogType") == "Regular") {
+				response.sendRedirect(request.getContextPath() + "/CatalogBasic.jsp");
+			} else if (session.getAttribute("CatalogType") == "Prescription") {
+				response.sendRedirect(request.getContextPath() + "/CatalogAdvanced.jsp");
+			}
 		} else if (action.equalsIgnoreCase("CheckoutOrder")) {
 			String forward;
 			Order order = (Order) session.getAttribute("Order");

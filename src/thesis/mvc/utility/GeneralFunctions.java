@@ -2,11 +2,15 @@ package thesis.mvc.utility;
 
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.Enumeration;
+
+import javax.servlet.http.HttpSession;
 
 import thesis.mvc.implement.AuditImplement;
 import thesis.mvc.model.Audit;
 
 public class GeneralFunctions {
+	
 	public static boolean isInteger(String s) {
 	    try { 
 	        Integer.parseInt(s); 
@@ -33,5 +37,16 @@ public class GeneralFunctions {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+	
+	public static void checkAttributes(HttpSession session) {
+
+		Enumeration<String> keys = session.getAttributeNames();
+		while (keys.hasMoreElements())
+		{
+		  String key = (String)keys.nextElement();
+		  System.out.println(key + ": " + session.getAttribute(key) );
+		}
+		System.out.println("=================================================================================================================");
 	}
 }

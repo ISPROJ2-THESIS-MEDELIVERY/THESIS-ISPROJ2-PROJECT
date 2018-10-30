@@ -34,7 +34,7 @@
                 </div>
             </nav>
         </div>
-    </div> 
+    </div>
 	<div class="login-clean">
 	<form action="LoginController" method="post">
 		<c:if test="${RetryLogin != null}">

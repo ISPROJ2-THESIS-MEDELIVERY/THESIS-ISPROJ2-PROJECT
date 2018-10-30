@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="assets/css/styles.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" />
 <link rel="stylesheet" href="assets/css/Header-Blue.css" />
+<link rel="stylesheet" href="assets/css/Footer-Dark.css" />
 </head>
 <body>
 	 <div>
@@ -24,23 +25,30 @@
                         <form target="_self" class="form-inline mr-auto">
                             <div class="form-group"><label for="search-field"></label></div>
                         </form>
+                        <c:if test="${userAccess == null}">
+                        <span class="navbar-text" style="float: right"><a href="login.jsp" class="login">Log In</a></span>
+                        <span class="navbar-text" style="float: right"><a href="register.jsp" class="login">Register</a></span>
+                        </c:if>
                         <c:if test="${userAccess == 1}">
-                        <span class="navbar-text"><a href="LoginController" class="login">Log Out</a></span>
+                        <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Log Out</a></span>
                         </c:if>
                         <c:if test="${userAccess == 2}">
-                        <span class="navbar-text"><a href="DispatcherController?Action=DispatchOrder">Order Dispatch - Regular</a><br></span>
-						<span class="navbar-text"><a href="LoginController">Logout</a></span>
+                        <span class="navbar-text" style="float: right"><a href="DispatcherController?Action=DispatchOrder" class="login">Order Dispatch - Regular</a><br></span>
+						<span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a></span>
                         </c:if>
                         <c:if test="${userAccess == 3}">
-                        <span class="navbar-text"><a href="ProductController?Action=AddProduct">Add Product</a></span>
-                        <span class="navbar-text"><a href="PharmacistController?Action=Prescription">Approve/Disapprove prescription orders</a></span>
-						<span class="navbar-text"><a href="LoginController">Logout</a><br></span>
+                        <span class="navbar-text" style="float: right"><a href="ProductController?Action=AddProduct" class="login">Add Product</a><br></span>
+                        <span class="navbar-text" style="float: right"><a href="PharmacistController?Action=Prescription" class="login">Approve/Disapprove prescription orders</a></span>
+						<span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a><br></span>
+                        </c:if>
+                        <c:if test="${userAccess == 4}">
+                        <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Log Out</a></span>
                         </c:if>
                     </div>
                 </div>
             </nav>
         </div>
-    </div> 
+    </div>
     <a class="already" href="login.jsp">Insert Product</a>
     
   <div class="table-responsive">
@@ -128,28 +136,36 @@
 		
 	</form> 
   </div>
-		<footer class="footer text-center">
-    		<div class="container">
-        		<div class="row">
-            		<div class="col-md-4 mb-5 mb-lg-0">
-                		<h4 class="text-uppercase mb-4">Location</h4>
-                		<p></p>
-            		</div>
-            		<div class="col-md-4 mb-5 mb-lg-0">
-                		<h4 class="text-uppercase">Around the Web</h4>
-                		<ul class="list-inline">
-                    		<li class="list-inline-item"><a class="btn btn-outline-light btn-social text-center rounded-circle" role="button" href="#"><i class="fa fa-facebook fa-fw"></i></a></li>
-                    		<li class="list-inline-item"><a class="btn btn-outline-light btn-social text-center rounded-circle" role="button" href="#"><i class="fa fa-google-plus fa-fw"></i></a></li>
-                    		<li class="list-inline-item"><a class="btn btn-outline-light btn-social text-center rounded-circle" role="button" href="#"><i class="fa fa-twitter fa-fw"></i></a></li>
-                    		<li class="list-inline-item"><a class="btn btn-outline-light btn-social text-center rounded-circle" role="button" href="#"><i class="fa fa-dribbble fa-fw"></i></a></li>
-                		</ul>
-            		</div>
-            		<div class="col-md-4">
-                		<h4 class="text-uppercase mb-4">About medelivery</h4>
-                		<p class="lead mb-0"><span></span></p>
-            		</div>
-        		</div>
-    		</div>
-		</footer>
+<div class="footer-dark">
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-3 item">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Delivery</a></li>
+                        <li><a href="#">Prescription Orders</a></li>
+                        <li><a href="#">Partnership</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-md-3 item">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">Company</a></li>
+                        <li><a href="#">Team</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 item text">
+                    <h3>Medelivery</h3>
+                    <p><br />Our mission is to create a measurable, sustainable and profitable link between pharmacies, couriers and customers.  Providing the best system in storing databases of available pharmacies and delivery couriers, as well as management
+                        of theses deliveries. Our operation is also to bring convenience to customers by filtering their needs according to the type of payment they want and the type of delivery schedule that fits their respective timeframes.<br /><br
+                        /><br /></p>
+                </div>
+            </div>
+            <p class="copyright">Company Name © 2017</p>
+        </div>
+    </footer>
+</div>
 </body>
 </html>

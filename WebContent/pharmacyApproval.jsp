@@ -14,7 +14,7 @@
 			<tr>
 				<th>Order ID</th>
 				<th>Order Address</th>
-				<th>Order Type</th>
+				<th>Prescription</th>
 				<th>Payment Method</th>
 				<th colspan="2">Action</th>
 			</tr>
@@ -25,13 +25,6 @@
 				<td><c:out value="${order.orderID}" /></td>
 				<td><c:out value="${order.customerInfo}" /></td>
 				<td><c:out value="${order.cityName}" /></td>
-				<td><c:out value="${order.prescriptionID}" /></td>
-				<td><c:out value="${order.orderAddress}" /></td>
-				<td><c:out value="${order.dateOrdered}" /></td>
-				<td><c:out value="${order.orderStatus}" /></td>
-				<td><c:out value="${order.seniorDiscount}" /></td>
-				<td>${order.orderDetails}</td>
-				<td><c:out value="${order.actualCost}" /></td>
 				<td><a href="PurchaseController?action=Reject&orderID=<c:out value="${order.orderID}"/>">REJECT</a></td>
 				<td><a href="PurchaseController?action=Approve&orderID=<c:out value="${order.orderID}"/>">APPROVE</a></td>
 			</tr>

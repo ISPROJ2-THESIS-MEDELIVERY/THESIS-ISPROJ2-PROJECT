@@ -52,6 +52,11 @@ public class PharmacistController extends HttpServlet{
 		
 	    if (action.equalsIgnoreCase("GoToOrders")) {
 			response.sendRedirect(request.getContextPath() + "/PharmacistBasic.jsp");
+		} else if (action.equalsIgnoreCase("GoTo")){
+			Order order = new OrderImplement().getOrderById( Integer.parseInt(request.getParameter("orderID")));
+			order.setOrderStatus("CANCELLED");
+			new OrderImplement().updateOrder( order );
+			response.sendRedirect(request.getContextPath() + "/PharmacistBasic.jsp");
 		} else if (action.equalsIgnoreCase("RejectOrder")){
 			Order order = new OrderImplement().getOrderById( Integer.parseInt(request.getParameter("orderID")));
 			order.setOrderStatus("CANCELLED");

@@ -263,24 +263,20 @@
 					<thead>
 						<tr>
 							<th>Customer Name</th>
-							<th>Customer Address</th>
 							<th>Customer CityID</th>
 							<th>Customer Email</th>
 							<th>Senior Citizen?</th>
 							<th>Senior Citizen ID</th>
-							<th>Contact Number</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${CustomerList}" var="customer">
 						<tr>
 							<td><c:out value="${customer.customerName}" /></td>
-							<td><c:out value="${customer.address}" /></td>
 							<td><c:out value="${customer.cityID}" /></td>
 							<td><c:out value="${customer.email}" /></td>
 							<td><c:out value="${customer.isSeniorCitizen}" /></td>
 							<td><c:out value="${customer.seniorCitizenID}" /></td>
-							<td><c:out value="${customer.contactNumber}" /></td>
 						</tr>
 						</c:forEach>
 					</tbody>

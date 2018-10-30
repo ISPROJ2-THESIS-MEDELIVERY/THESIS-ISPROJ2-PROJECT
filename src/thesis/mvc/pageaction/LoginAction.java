@@ -118,7 +118,7 @@ public class LoginAction {
 	    } catch (SQLException e) {
 			e.printStackTrace();
 		}
-		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM mydb.Admin WHERE UserID = ?")) {
+		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Admin WHERE UserID = ?")) {
 	        stmt.setInt(1, loginID);
 	        try(ResultSet rs = stmt.executeQuery()) {
 	           if (rs.next()) { return 4; }

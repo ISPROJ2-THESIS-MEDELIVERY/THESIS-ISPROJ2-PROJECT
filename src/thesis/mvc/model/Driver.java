@@ -6,6 +6,8 @@ public class Driver {
 	private String DriverName;
 	private String DriverAddress;
 	private String DriverContactNumber;
+	private int CourierserviceID;
+	private boolean InTransit;
 	
 	public int getDriverID() {
 		return DriverID;
@@ -30,6 +32,18 @@ public class Driver {
 	}
 	public void setDriverContactNumber(String driverContactNumber) {
 		DriverContactNumber = driverContactNumber;
+	}
+	public int getCourierserviceID() {
+		return CourierserviceID;
+	}
+	public void setCourierserviceID(int courierserviceID) {
+		CourierserviceID = courierserviceID;
+	}
+	public boolean isInTransit() {
+		return InTransit;
+	}
+	public void setInTransit(boolean inTransit) {
+		InTransit = inTransit;
 	}
 	
 }

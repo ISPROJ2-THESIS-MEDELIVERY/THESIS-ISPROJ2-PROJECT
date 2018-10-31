@@ -69,7 +69,7 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${DispatcherOrderList}" var="order">
-				<c:if test="${order.orderStatus == 'PENDING'}">
+				<c:if test="${order.orderStatus == 'PENDING' && order.pharmacyID == 1}">
 					<tr>
 			            <td><c:out value="${order.customerID}" /></td>
 			            <td><c:out value="${order.pharmacyID}" /></td>
@@ -122,7 +122,7 @@
 			            <td><c:out value="${order.actualCost}" /></td>
 			            <td>
 							<c:forEach items="${SelectPharmacy}" var="pharmacy">
-								<c:if test="${pharmacy.pharmacyID == order.pharmacyID}">
+								<c:if test="${pharmacy.pharmacyID == order.pharmacyID && order.pharmacyID == 1}">
 									<c:out value="${pharmacy.pharmacyName}" />
 								</c:if>
 							</c:forEach>

@@ -15,6 +15,7 @@ import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.CourierServiceImplement;
 import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.DispatcherImplement;
+import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacistImplement;
 import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.implement.PrescriptionImplement;
@@ -69,6 +70,7 @@ public class HomeController  extends HttpServlet {
 			int BranchxofPharmacist = new PharmacistImplement().getPharmacistById( (int) session.getAttribute("Pharmacist") ).getBranchID();
 			int PharmacyofBranch = new BranchImplement().getBranchById(BranchxofPharmacist).getPharmacyID();
 			session.setAttribute("PharmacistPharmacy", pharmacyImplement.getPharmacyById(PharmacyofBranch));
+			session.setAttribute("IncomingOrders", new OrderImplement().getOrder());
 			//PharmacistImplement pharmacistImplement = new PharmacistImplement();
 			//session.setAttribute("PharmacistDetails", session.getAttribute("Pharmacist") );
 			//PharmacyImplement pharmacyImplement1 = new PharmacyImplement();

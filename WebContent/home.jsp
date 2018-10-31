@@ -196,7 +196,7 @@
 					User ID: <c:out value="${userID}" /><br>
 					Username: <c:out value="${username}" /><br>
 					User Type: <c:out value="${userAccess}" /><br>
-					<a href="DispatcherController?Action=DispatchOrder">Order Dispatch - Regular</a><br>
+					<a href="DispatcherController?Action=DispatchOrder">Order Dispatch</a><br>
 					<!-- <a href="DispatcherController?Action=DispatchPrescription">Order Dispatch - Prescription</a><br> -->
 					<!-- <a href="LoginController">Logout</a><br> -->
 				</div>

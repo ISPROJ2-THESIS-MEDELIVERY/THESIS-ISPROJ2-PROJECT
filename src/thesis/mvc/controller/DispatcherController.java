@@ -14,6 +14,7 @@ import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacyImplement;
+import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.pageaction.RegistrationAction;
 import thesis.mvc.utility.DBUtility;
 
@@ -47,6 +48,7 @@ public class DispatcherController extends HttpServlet {
 			session.setAttribute( "SelectPharmacy", new PharmacyImplement().getAllPharmacys() );
 			session.setAttribute( "ListBranches" , new BranchImplement().getAllBranch() );
 			session.setAttribute( "DispatcherOrderDetailsList" , new OrderDetailImplement().getOrderDetail()  );
+			session.setAttribute( "ProductTranslation" , new ProductImplement().getAllProducts() );
 			response.sendRedirect(request.getContextPath() + "/DispatcherDirector.jsp");
 		}
 		

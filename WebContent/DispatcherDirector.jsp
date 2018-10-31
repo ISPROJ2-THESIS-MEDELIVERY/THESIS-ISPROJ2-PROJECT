@@ -59,6 +59,7 @@
 	            <th>Date Ordered</th>
 	            <th>Type</th>
 	            <th>Status</th>
+	            <th>Prescription?</th>
 	            <th>Senior Citizen?</th>
 	            <th>Order Details</th>
 	            <th>Total Cost</th>
@@ -77,13 +78,21 @@
 			            <td><c:out value="${order.dateOrdered}" /></td>
 			            <td><c:out value="${order.orderType}" /></td>
 			            <td><c:out value="${order.orderStatus}" /></td>
+			            <td>
+							<c:if test="${order.prescriptionID == 0}">
+								NO PRESCRIPTION
+							</c:if>
+							<c:if test="${order.prescriptionID != 0}">
+								PRESCRIPTION REQUIRED
+							</c:if>
+			            </td>
 			            <td><c:out value="${order.seniorDiscount}" /></td>
 			            <td>
 				            <table class="table" border = "2">
 							    <thead>
 							        <tr>
 							            <th>OrderID</th>
-							            <th>ProductID</th>
+							            <th>Product Name</th>
 							            <th>Quantity</th>
 							            <th>Cost Per Unit</th>
 							            <th>Total Cost</th>
@@ -94,7 +103,13 @@
 										<c:if test="${order.orderID == orderdetails.orderID}">
 							            <tr>
 							                <td><c:out value="${orderdetails.orderID}" /></td>
-							                <td><c:out value="${orderdetails.productID}" /></td>
+							                <td>
+							    				<c:forEach items="${ProductTranslation}" var="product">
+							    					<c:if test="${orderdetails.productID == product.productID}">
+							                			<c:out value="${product.productName}" />
+							    					</c:if>
+							                	</c:forEach>
+							                </td>
 							                <td><c:out value="${orderdetails.quantity}" /></td>
 							                <td><c:out value="${orderdetails.costPerUnit}" /></td>
 							                <td><c:out value="${orderdetails.totalCost}" /></td>

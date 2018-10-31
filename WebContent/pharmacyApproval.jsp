@@ -61,6 +61,13 @@
 			</tr>
 		</thead>
 		<tbody>
+			<tr>
+				<td>1</td>
+				<td>ASdsdfsadfasdfsd</td>
+				<td>A City</td>
+				<td><a href="PurchaseController?action=Reject&orderID=1"/>">REJECT</a></td>
+				<td><a href="PurchaseController?action=Approve&orderID=1"/>">APPROVE</a></td>
+			</tr>
 			<c:forEach items="${orderPharmacistCheck}" var="order">
 			<tr>
 				<td><c:out value="${order.orderID}" /></td>

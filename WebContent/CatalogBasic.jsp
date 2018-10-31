@@ -86,7 +86,7 @@
     		
     		
     		<form action='ShopController' method='post'>
-				<center><input type='submit' name='Action' value="Checkout Order" style='display: on-hover' /></center>
+				<center><input type='submit' name='Action' value="CheckoutOrder" style='display: on-hover' /></center>
 			</form>
 			<hr>
     		

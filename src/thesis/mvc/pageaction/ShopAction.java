@@ -53,8 +53,8 @@ public class ShopAction {
 				try(ResultSet rs = stmt.executeQuery()){
 					if (rs.next()) {
 						limit = rs.getInt("CounterLimit");
-						rx = rs.getBoolean("isRXProduct");
-						if (orderDetail.getQuantity() > limit || rx == true) {
+						//rx = rs.getBoolean("isRXProduct");
+						if (orderDetail.getQuantity() > limit) {// || rx == true
 							return null;
 						}
 					}
@@ -135,6 +135,7 @@ public class ShopAction {
 		//Add to order
 		//int orderID = new OrderImplement().addIncompleteOrder(order);
 		int orderID = new OrderImplement().addOrder(order);
+		System.out.println("OrderID: " + orderID);
 		//insert OrderID
 		for (OrderDetail orderDetail : OrderDetails) {
 			orderDetail.setOrderID( orderID );

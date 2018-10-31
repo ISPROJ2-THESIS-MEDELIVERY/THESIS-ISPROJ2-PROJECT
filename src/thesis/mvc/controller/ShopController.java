@@ -217,6 +217,7 @@ public class ShopController extends HttpServlet {
 						prescription.setPharmacistID(0);
 						prescription.setRemark("");
 						prescriptionID = new PrescriptionImplement().addPrescription(prescription);
+				        System.out.println("PrescriptionID: " + prescriptionID);
 				        //System.out.println(UPLOAD_DIRECTORY + File.separator + AFileName + "." + imageType);
 				        //System.out.println(UPLOAD_DIRECTORY +"|"+ File.separator +"|"+ AFileName +"|"+ "." +"|"+ imageType);
 						filePart.write(UPLOAD_DIRECTORY + File.separator + AFileName + "." + imageType);

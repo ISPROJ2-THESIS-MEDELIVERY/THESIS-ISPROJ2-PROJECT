@@ -233,11 +233,7 @@ public class TestController extends HttpServlet {
 	        request.getRequestDispatcher("/test2.jsp").forward(request, response);
 		*/
     	EncryptionFunction encryptionFunction = new EncryptionFunction();
-        System.out.println(encryptionFunction.encrypt("Product1.jpg"));
-        System.out.println(encryptionFunction.encrypt("Product2.jpg"));
-        System.out.println(encryptionFunction.encrypt("Product3.jpg"));
-        System.out.println(encryptionFunction.encrypt("Product4.jpg"));
-        System.out.println(encryptionFunction.encrypt("Product5.jpg"));
-        System.out.println(encryptionFunction.encrypt("Product6.jpg"));
+        System.out.println(encryptionFunction.encrypt("Pharmacy1.jpg"));
+        System.out.println(encryptionFunction.encrypt("Pharmacy2.png"));
     }
 }

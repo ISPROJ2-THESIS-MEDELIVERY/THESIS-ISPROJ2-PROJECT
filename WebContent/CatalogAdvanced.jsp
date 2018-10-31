@@ -86,7 +86,7 @@
 				<div class="form-group">
 		        	<input type="file" name="file" value="Upload Prescription" class="form-control" required />
 		        	<input type="hidden" name="PharmaID" value="<c:out value="${SelectedPharmacy.pharmacyID}"/>" class="form-control"/>
-					<input type='submit' name='Action' value="CheckoutOrderPrescription" style='display: on-hover' />
+					<center><input type='submit' name='Action' value="CheckoutOrderPrescription" style='display: on-hover' /></center>
 		        </div>
 			</form>
     		
@@ -209,4 +209,21 @@
 </div>
 
 </body>
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/bootstrap/js/jquery.dataTables.min.js"></script>
+<script src="assets/bootstrap/js/dataTables.bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		 $(document).ready(function() {
+			$("#druglistTable").DataTable({
+				"sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+			});
+		}); 
+	</script>
+
+
 </html>

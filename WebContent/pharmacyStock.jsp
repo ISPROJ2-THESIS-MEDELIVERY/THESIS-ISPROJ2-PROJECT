@@ -25,24 +25,10 @@
                         <form target="_self" class="form-inline mr-auto">
                             <div class="form-group"><label for="search-field"></label></div>
                         </form>
-                        <c:if test="${userAccess == null}">
-                        <span class="navbar-text" style="float: right"><a href="login.jsp" class="login">Log In</a></span>
-                        <span class="navbar-text" style="float: right"><a href="register.jsp" class="login">Register</a></span>
-                        </c:if>
-                        <c:if test="${userAccess == 1}">
-                        <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Log Out</a></span>
-                        </c:if>
-                        <c:if test="${userAccess == 2}">
-                        <span class="navbar-text" style="float: right"><a href="DispatcherController?Action=DispatchOrder" class="login">Order Dispatch - Regular</a><br></span>
-						<span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a></span>
-                        </c:if>
                         <c:if test="${userAccess == 3}">
-                        <span class="navbar-text" style="float: right"><a href="ProductController?Action=AddProduct" class="login">Add Product</a><br></span>
+                        <span class="navbar-text" style="float: right"><a href="ProductController?Action=AddnewProduct" class="login">Add New Product</a><br></span>
                         <span class="navbar-text" style="float: right"><a href="PharmacistController?Action=Prescription" class="login">Approve/Disapprove prescription orders</a></span>
 						<span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a><br></span>
-                        </c:if>
-                        <c:if test="${userAccess == 4}">
-                        <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Log Out</a></span>
                         </c:if>
                     </div>
                 </div>
@@ -50,24 +36,36 @@
         </div>
     </div>
     <div class="login-clean">
+    <div id="container">
+	<center><img alt="" src="assets/img/medlogopill.png"></center>    
+	</div> 
+	<br>
 	<form action="/ProductController">
 		<div class="form-group">
         	<input type="hidden"/>
         </div>
 		Product to add: <br>
-		<select name="ProductAdd">
-			<c:forEach items="${ProductList}" var="productList">
-				<option value='<c:out value="${productList.productID}" />'><c:out value="${productList.productName}" /></option>
-			</c:forEach>
-		</select><br>
-		Is it Featured?: <br>
-		<input type="checkbox" name="feature"/><br>
+		<div class="form-group">
+			<select name="ProductAdd" class="form-control">
+				<c:forEach items="${ProductList}" var="productList">
+					<option value='<c:out value="${productList.productID}" />'><c:out value="${productList.productName}" /></option>
+				</c:forEach>
+			</select>
+		</div>
+		<center>Is it Featured?:</center> <br>
+		<div class="form-group">
+			<input type="checkbox" name="feature" class="form-control"/>
+		</div>
 		Price: <br>
-		<input type="number" name="Price"/><br>
-		<input type="submit" name="action" value="addProduct"/> 
+		<div class="form-group">
+			<input type="number" name="Price" class="form-control"/><br>
+		</div>
+		<div class="form-group">
+			<button class="btn btn-primary btn-block" type="submit" name="action" value="addProduct">Add New Product</button>
+		</div>
 	</form>
 	</div>
-	<a href="ProductController?Action=AddnewProduct" class="btn btn-info" role="button">Add a new Product</a>
+	<!-- <a href="ProductController?Action=AddnewProduct" class="btn btn-info" role="button">Add a new Product</a> -->
 <div class="footer-dark">
     <footer>
         <div class="container">

@@ -32,21 +32,21 @@
                         <form target="_self" class="form-inline mr-auto">
                             <div class="form-group"><label for="search-field"></label></div>
                         </form>
-                        <c:if test="${userAccess == null}">
+                        <c:if test="${userAccess == null}">                     
                         <span class="navbar-text" style="float: right"><a href="login.jsp" class="login">Log In</a></span>
-                        <span class="navbar-text" style="float: right"><a href="register.jsp" class="login">Register</a></span>
+                        <span class="navbar-text" style="float: right"><a href="register.jsp" class="login">Register</a></span>             
                         </c:if>
                         <c:if test="${userAccess == 1}">
                         <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Log Out</a></span>
                         </c:if>
                         <c:if test="${userAccess == 2}">
-                        <span class="navbar-text" style="float: right"><a href="DispatcherController?Action=DispatchOrder" class="login">Order Dispatch - Regular</a><br></span>
-						<span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a></span>
+                        <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a></span>
+                        <span class="navbar-text" style="float: right"><a href="DispatcherController?Action=DispatchOrder" class="login">Order Dispatch - Regular</a><br></span>						
                         </c:if>
                         <c:if test="${userAccess == 3}">
-                        <span class="navbar-text" style="float: right"><a href="ProductController?Action=AddProduct" class="login">Add Product</a><br></span>
+                        <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a><br></span>                     
                         <span class="navbar-text" style="float: right"><a href="PharmacistController?Action=Prescription" class="login">Approve/Disapprove prescription orders</a></span>
-						<span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a><br></span>
+						<span class="navbar-text" style="float: right"><a href="ProductController?Action=AddnewProduct" class="login">Add New Product</a><br></span>
                         </c:if>
                         <c:if test="${userAccess == 4}">
                         <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Log Out</a></span>
@@ -60,7 +60,7 @@
 	    	<div role="alert" class="alert alert-info"><span><strong>A confirmation email has been sent to your email address</strong></span></div>
 		</c:if>
 		
-	
+	<c:if test="${userAccess == 1||null}">
 	<c:forEach items="${Featurepharm}" var="pharm">
 	<div class="row">
 	<h3><center>Featured products of <c:out value="${pharm.pharmacyName}">: </c:out></center></h3>
@@ -81,7 +81,7 @@
 								<c:if test="${stock.pharmacyID == pharm.pharmacyID}">	  
 									<div class="item">	
 									<a href="http://www.google.com/">					
-										<img width="500" height="500" class="center-block" src="images/<c:out value="${items.productImage}"/>"/>																											
+										<img class="center-block" src="images/<c:out value="${items.productImage}"/>"/>																											
 									</a>
 									</div>
 								</c:if>
@@ -102,6 +102,7 @@
 			</div>
 		</div>
 		</c:forEach>
+		</c:if>
 		
 
 	
@@ -229,7 +230,7 @@
       						<p class="list-group-item-text">User Type: <c:out value="${userAccess}" /></p>
     					</a>
     				</div>
-					<a href="ProductController?Action=addProduct" class="btn btn-info" role="button">Add Product</a><br><br/>
+					<a href="ProductController?Action=addProduct" class="btn btn-info" role="button">Add Existing Product to Catalog</a><br><br/>
 					<a href="PharmacistController?Action=Prescription" class="btn btn-info" role="button">Approve/Disapprove prescription orders</a><br><br/>
 					<%-- Current Orders Heading to your Pharmacy:
 					<a href="PharmacistController?Action=GoToOrders" class="btn btn-info" role="button"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Regular Orders</a> --%>
@@ -254,11 +255,22 @@
 		</c:if>
 		<c:if test="${userAccess == 4}">
 			<hr>
-			<p class="font-weight-bold">Admin Details</p>
+			<div class="container">
+			<div class="list-group">
+    			<a class="list-group-item">
+      				<h4 class="list-group-item-heading">Admin Details:</h4>
+      				<p class="list-group-item-text">User ID: <c:out value="${userID}" /></p>
+      				<p class="list-group-item-text">Username: <c:out value="${username}" /></p>
+      				<p class="list-group-item-text">User Type: <c:out value="${userAccess}" /></p>
+    			</a>
+    		</div>
+    		</div>
+    		<hr>
+			<%-- <p class="font-weight-bold">Admin Details</p>
 			User ID: <c:out value="${userID}" /><br>
 			Username: <c:out value="${username}" /><br>
-			User Type: <c:out value="${userAccess}" /><br>
-			<hr>List of customers:<br>
+			User Type: <c:out value="${userAccess}" /><br> --%>
+			<hr><h2><center>List of customers:</center></h2><br>
 				<table class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
@@ -281,8 +293,8 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			<hr>List of dispatchers:<br>
-				<a href="RegistrationController?Action=AddDispatcher" class="btn btn-info" role="button">Register a new Dispatcher</a><br>
+			<hr><h2><center>List of dispatchers:</center></h2><br>
+				<a href="RegistrationController?Action=AddDispatcher" class="btn btn-info btn-sm" role="button">Register a new Dispatcher</a><br>
 				<table class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
@@ -303,9 +315,9 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			<hr>List of pharmacists:<br>
+			<hr><h2><center>List of pharmacists:</center></h2><br>
 				<c:forEach items="${PharmcyList}" var="pharmacy">
-					<a href="RegistrationController?Action=AddPharmacist&PharmacyID=<c:out value="${pharmacy.pharmacyID}" />" class="btn btn-info" role="button">Register a new Pharmacist in <c:out value="${pharmacy.pharmacyName}" /></a><br>
+					<a href="RegistrationController?Action=AddPharmacist&PharmacyID=<c:out value="${pharmacy.pharmacyID}" />" class="btn btn-info btn-sm" role="button">Register a new Pharmacist in <c:out value="${pharmacy.pharmacyName}" /></a><br>
 				</c:forEach>
 				<table class="table table-striped table-bordered" width="100%">
 					<thead>
@@ -325,8 +337,8 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			<hr>List of admin:<br>
-				<a href="RegistrationController?Action=AddAdmin" class="btn btn-info" role="button">Register a new Admin</a><br>
+			<hr><h2><center>List of admin:</center></h2><br>
+				<a href="RegistrationController?Action=AddAdmin" class="btn btn-info btn-sm" role="button">Register a new Admin</a><br>
 				<table class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
@@ -341,9 +353,9 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			<hr>Add a new Item:<br>
-			<hr>List of Pharmacies:<br>
-				<a href="InformationController?Action=AddPharmacy" class="btn btn-info" role="button">Add a new Pharmacy</a><br>
+			<hr><h2><center>Add a new Item:</center></h2><br>
+			<hr><h2><center>List of Pharmacies:</center></h2><br>
+				<a href="InformationController?Action=AddPharmacy" class="btn btn-info btn-sm" role="button">Add a new Pharmacy</a><br>
 				<table class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
@@ -358,8 +370,8 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			<hr>List of branches:<br>
-				<a href="InformationController?Action=AddBranch" class="btn btn-info" role="button">Add a new Branch</a><br>
+			<hr><h2><center>List of branches:</center></h2><br>
+				<a href="InformationController?Action=AddBranch" class="btn btn-info btn-sm" role="button">Add a new Branch</a><br>
 				<table class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
@@ -380,8 +392,8 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			<hr>List of Couriers:<br>
-				<a href="InformationController?Action=AddCourier" class="btn btn-info" role="button">Add a new Courier branch</a><br>
+			<hr><h2><center>List of Couriers:</center></h2><br>
+				<a href="InformationController?Action=AddCourier" class="btn btn-info btn-sm" role="button">Add a new Courier branch</a><br>
 				<table class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
@@ -506,6 +518,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
     line-height: 1.5;
     border-radius: 3px;
     margin-top: 15px;
+    margin-left: 100px
 }
 
 
@@ -513,6 +526,20 @@ google.maps.event.addDomListener(window, 'load', initialize);
     width: 50%;
     margin-top: 15px;
 }
+
+.table {
+    /* width: 100%; */
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+.carousel-inner>.item>a>img, .carousel-inner>.item>img {
+    line-height: 1;
+    width: 300px;
+    height: 300px;
+}
+
+
 
 </style>	
 

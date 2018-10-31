@@ -50,8 +50,13 @@
             </nav>
         </div>
     </div>
+   
 <div class="login-clean">
-<form action="RegistrationController" method="post" enctype="multipart/form-data">
+<div id="container">
+<center><img alt="" src="assets/img/medlogopill.png"></center>    
+</div> 
+<br>
+<form onSubmit="return formValidation();" action="RegistrationController" method="post" enctype="multipart/form-data">
 	<h2 class="sr-only">Login Form</h2>
         <div class="form-group">
         	<input type="text" name="FullName" required="required" placeholder="FullName *" class="form-control"/>
@@ -140,5 +145,8 @@
     </footer>
 </div>
 </div>
+
+<script src="sample-registration-form-validation.js"></script>
+
 </body>
 </html>

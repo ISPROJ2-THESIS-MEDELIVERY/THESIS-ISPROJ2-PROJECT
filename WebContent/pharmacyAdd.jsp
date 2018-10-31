@@ -37,7 +37,7 @@
 						<span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a></span>
                         </c:if>
                         <c:if test="${userAccess == 3}">
-                        <span class="navbar-text" style="float: right"><a href="ProductController?Action=AddProduct" class="login">Add Product</a><br></span>
+                        <span class="navbar-text" style="float: right"><a href="ProductController?Action=AddProduct" class="login">Add New Product</a><br></span>
                         <span class="navbar-text" style="float: right"><a href="PharmacistController?Action=Prescription" class="login">Approve/Disapprove prescription orders</a></span>
 						<span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a><br></span>
                         </c:if>
@@ -49,8 +49,22 @@
             </nav>
         </div>
     </div>
+
+    
     <div class="login-clean">
+    <div id="container">
+	<center><img alt="" src="assets/img/medlogopill.png"></center>    
+	</div> 
+	<br>
+    <div class="list-group">
+    	<a class="list-group-item list-group-item-info">
+      		<h4 class="list-group-item-heading"><center>Add Product</center></h4>     						
+    	</a>
+    </div><br>
 	<form action="/ProductController">
+	<div class="container">
+	 <div class="row">
+	  <div class="col-md-6">
 		<div class="form-group">
         	<input type="hidden"/>
         </div>
@@ -73,6 +87,8 @@
         <div class="form-group">
         	<input type="text" name="" placeholder="Product Packaging" class="form-control"/>
         </div>
+      </div>
+      <div class="col-md-6">
         <div class="form-group">
         	<input type="text" name="" placeholder="Product Manufacturing" class="form-control"/>
         </div>
@@ -94,6 +110,10 @@
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit" name="action" value="addnewProduct">Add New Product</button>
         </div>
+        </div>
+      </div>
+      </div>
+      </div>
 		<!-- <input type="hidden" />
 		<h2>Product to add: </h2><br><br>
 		Product Name:<br>
@@ -155,4 +175,14 @@
     </footer>
 </div>
 </body>
+<style>
+
+.list-group-item:last-child {
+    margin-bottom: 0;
+    border-bottom-right-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+    width: 98%;
+}
+
+</style>
 </html>

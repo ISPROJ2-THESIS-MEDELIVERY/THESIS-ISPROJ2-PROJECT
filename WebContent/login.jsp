@@ -36,6 +36,10 @@
         </div>
     </div>
 	<div class="login-clean">
+	<div id="container">
+	<center><img alt="" src="assets/img/medlogopill.png"></center>    
+	</div> 
+	<br>
 	<form action="LoginController" method="post">
 		<c:if test="${RetryLogin != null}">
 			Failed Login Attempts: <c:out value="${LoginTry}" /><br>

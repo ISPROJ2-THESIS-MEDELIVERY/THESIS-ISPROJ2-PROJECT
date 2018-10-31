@@ -24,22 +24,6 @@
                         <form target="_self" class="form-inline mr-auto">
                             <div class="form-group"><label for="search-field"></label></div>
                         </form>
-                        <c:if test="${userAccess == null}">
-                        <span class="navbar-text" style="float: right"><a href="login.jsp" class="login">Log In</a></span>
-                        <span class="navbar-text" style="float: right"><a href="register.jsp" class="login">Register</a></span>
-                        </c:if>
-                        <c:if test="${userAccess == 1}">
-                        <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Log Out</a></span>
-                        </c:if>
-                        <c:if test="${userAccess == 2}">
-                        <span class="navbar-text" style="float: right"><a href="DispatcherController?Action=DispatchOrder" class="login">Order Dispatch - Regular</a><br></span>
-						<span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a></span>
-                        </c:if>
-                        <c:if test="${userAccess == 3}">
-                        <span class="navbar-text" style="float: right"><a href="ProductController?Action=AddProduct" class="login">Add Product</a><br></span>
-                        <span class="navbar-text" style="float: right"><a href="PharmacistController?Action=Prescription" class="login">Approve/Disapprove prescription orders</a></span>
-						<span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a><br></span>
-                        </c:if>
                         <c:if test="${userAccess == 4}">
                         <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Log Out</a></span>
                         </c:if>

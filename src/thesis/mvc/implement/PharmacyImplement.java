@@ -11,6 +11,7 @@ import java.util.List;
 import thesis.mvc.dataobjects.PharmacyDAO;
 import thesis.mvc.model.Pharmacy;
 import thesis.mvc.utility.DBUtility;
+import thesis.mvc.utility.EncryptionFunction;
 
 public class PharmacyImplement implements PharmacyDAO{
 	
@@ -74,7 +75,7 @@ public class PharmacyImplement implements PharmacyDAO{
 				Pharmacy pharmacy = new Pharmacy();
 				pharmacy.setPharmacyID( resultSet.getInt( "PharmacyID" ) );
 				pharmacy.setPharmacyName( resultSet.getString( "PharmacyName" ) );
-				pharmacy.setPharmacyLogo( resultSet.getString( "PharmacyLogo" ) );
+				pharmacy.setPharmacyLogo( new EncryptionFunction().decrypt( resultSet.getString( "PharmacyLogo" ) ) );
 				pharmacys.add(pharmacy);
 			}
 			resultSet.close();
@@ -96,7 +97,7 @@ public class PharmacyImplement implements PharmacyDAO{
 			while( resultSet.next() ) {
 				pharmacy.setPharmacyID( resultSet.getInt( "PharmacyID" ) );
 				pharmacy.setPharmacyName( resultSet.getString( "PharmacyName" ) );
-				pharmacy.setPharmacyLogo( resultSet.getString( "PharmacyLogo" ) );
+				pharmacy.setPharmacyLogo( new EncryptionFunction().decrypt( resultSet.getString( "PharmacyLogo" ) ) );
 			}
 			resultSet.close();
 			preparedStatement.close();

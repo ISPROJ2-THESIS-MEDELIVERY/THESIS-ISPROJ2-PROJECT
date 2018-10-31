@@ -25,13 +25,17 @@ public class PrescriptionImplement implements PrescriptionDAO {
 	public int addPrescription(Prescription prescription) {
 		try {
 			String query = "INSERT INTO Prescription (PharmacistID, CustomerID, PermissionStatus, Remark, Prescription) VALUES (?,?,?,?,?)";
-			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			PreparedStatement preparedStatement = conn.prepareStatement( query, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setInt( 1, prescription.getPharmacistID() );
 			preparedStatement.setInt( 2, prescription.getCustomerID() );
 			preparedStatement.setString( 3, prescription.getPermissionStatus() );
 			preparedStatement.setString( 4, prescription.getRemark() );
 			preparedStatement.setString( 5, prescription.getPrescription() );
 			int NewID = preparedStatement.executeUpdate();
+			ResultSet rs = preparedStatement.getGeneratedKeys();
+			if (rs.next()) {
+				NewID = rs.getInt(1);
+			}
 			preparedStatement.close();
 			return NewID;
 		} catch (SQLException e) {

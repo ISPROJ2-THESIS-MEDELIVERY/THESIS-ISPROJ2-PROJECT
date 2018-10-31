@@ -60,7 +60,7 @@
 	    	<div role="alert" class="alert alert-info"><span><strong>A confirmation email has been sent to your email address</strong></span></div>
 		</c:if>
 		
-	<c:if test="${userAccess == 1||null}">
+	<c:if test="${userAccess == 1 || userAccess == null}">
 	<c:forEach items="${Featurepharm}" var="pharm">
 	<div class="row">
 	<h3><center>Featured products of <c:out value="${pharm.pharmacyName}">: </c:out></center></h3>
@@ -74,7 +74,7 @@
 				</ol>
 
 				<div class="carousel-inner" role="listbox">		
-				<div class="item active"><img class="img-responsive"src="images/product1.jpg"/></div>
+				<div class="item active"><img class="img-responsive" src="images/<c:out value="${pharm.pharmacyLogo}"/>"/></div>
 				<c:forEach items="${Featurestock}" var="stock">
 					<c:forEach items="${Featureitems}" var="items">
 							<c:if test="${stock.productID == items.productID}">

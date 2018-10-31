@@ -28,7 +28,7 @@ public class OrderImplement implements OrderDAO{
 		try {
 			Timestamp CurrentDate = new Timestamp(Calendar.getInstance().getTime().getTime());
 			String query = "INSERT INTO `order`(`CustomerID`, `DeliveryID`, `PharmacistID`, `PharmacyID`, `BranchID`, `CityID`, `PrescriptionID`, `OrderAddress`, `DateOrdered`, `DateProcessed`, `DateDelivered`, `OrderType`, `OrderStatus`, `SeniorDiscount`, `PaymentMethod`, `ActualCost`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			PreparedStatement preparedStatement = conn.prepareStatement( query, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setInt( 1, order.getCustomerID() );
 			preparedStatement.setInt( 2, order.getDeliveryID() );
 			preparedStatement.setInt( 3, order.getPharmacistID() );
@@ -46,6 +46,10 @@ public class OrderImplement implements OrderDAO{
 			preparedStatement.setString( 15, order.getPaymentMethod() );
 			preparedStatement.setDouble( 16, order.getActualCost() );
 			int NewID = preparedStatement.executeUpdate();
+			ResultSet rs = preparedStatement.getGeneratedKeys();
+			if (rs.next()) {
+				NewID = rs.getInt(1);
+			}
 			preparedStatement.close();
 			return NewID;
 		} catch (SQLException e) {

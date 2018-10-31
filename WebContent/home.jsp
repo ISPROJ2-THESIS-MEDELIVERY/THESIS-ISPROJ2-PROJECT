@@ -74,7 +74,7 @@
 				</ol>
 
 				<div class="carousel-inner" role="listbox">		
-				<div class="item active"><img class="img-responsive" src="images/<c:out value="${pharm.pharmacyLogo}"/>"/></div>
+				<div class="item active"><img class="center-block" src="images/<c:out value="${pharm.pharmacyLogo}"/>"/></div>
 				<c:forEach items="${Featurestock}" var="stock">
 					<c:forEach items="${Featureitems}" var="items">
 							<c:if test="${stock.productID == items.productID}">

@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="assets/bootstrap/css/jquery.dataTables.min.css" />
 <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="assets/css/Login-Form-Clean.css" />
 <link rel="stylesheet" href="assets/css/styles.css" />
@@ -50,7 +51,8 @@
             </nav>
         </div>
     </div>
-	<table border = "2">
+    <div id="container">
+	<table id="pharmacistapprovalTable" class="table table-striped table-bordered" width="100%">
 		<thead>
 			<tr>
 				<th>Order ID</th>
@@ -79,6 +81,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
 <div class="footer-dark">
     <footer>
         <div class="container">
@@ -111,4 +114,20 @@
     </footer>
 </div>
 </body>
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/bootstrap/js/jquery.dataTables.min.js"></script>
+<script src="assets/bootstrap/js/dataTables.bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		 $(document).ready(function() {
+			$("#pharmacistapprovalTable").DataTable({
+				"sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+			});
+		}); 
+	</script>
+
 </html>

@@ -14,6 +14,9 @@
 <link rel="stylesheet" href="assets/css/Header-Blue.css" />
 <link rel="stylesheet" href="assets/css/Footer-Dark.css" />
 </head>
+
+
+
 <body>
 	 <div>
         <div class="header-blue">
@@ -50,7 +53,35 @@
     </div>
 	<c:forEach items="${OrderHistory}" var="order">
 	<c:if test="${order.orderStatus == 'PENDING'}">
-	<p class="font-weight-bold">Customer ID:</p> <c:out value="${order.customerID}" /><br>
+	<table class="table table-striped table-bordered" width="100%">
+	    <thead>
+	        <tr>
+	            <th>Customer ID</th>
+	            <th>Pharmacy ID</th>
+	            <th>City ID</th>
+	            <th>Address</th>
+	            <th>Date</th>
+	            <th>Type</th>
+	            <th>Status</th>
+	            <th>Senior Discount</th>
+	            <th>Actual Cost</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	            <tr>
+	                <td><c:out value="${order.customerID}" /></td>
+	                <td><c:out value="${order.pharmacyID}" /></td>
+	                <td><c:out value="${order.cityID}" /></td>
+	                <td><c:out value="${order.orderAddress}" /></td>
+	                <td><c:out value="${order.dateOrdered}" /></td>
+	                <td><c:out value="${order.orderType}" /></td>
+	                <td><c:out value="${order.orderStatus}" /></td>
+	                <td><c:out value="${order.seniorDiscount}" /></td>
+	                <td><c:out value="${order.actualCost}" /></td>
+	            </tr>
+	    </tbody>
+	</table>
+	<%-- <p class="font-weight-bold">Customer ID:</p> <c:out value="${order.customerID}" /><br>
 	<p class="font-weight-bold">Pharmacy ID:</p> <c:out value="${order.pharmacyID}" /><br>
 	<p class="font-weight-bold">City ID:</p> <c:out value="${order.cityID}" /><br>
 	<p class="font-weight-bold">Address:</p> <c:out value="${order.orderAddress}" /><br>
@@ -58,7 +89,7 @@
 	<p class="font-weight-bold">Type:</p> <c:out value="${order.orderType}" /><br>
 	<p class="font-weight-bold">Status:</p> <c:out value="${order.orderStatus}" /><br>
 	<p class="font-weight-bold">Senior:</p> <c:out value="${order.seniorDiscount}" /><br>
-	<p class="font-weight-bold">Actual:</p> <c:out value="${order.actualCost}" /><br>
+	<p class="font-weight-bold">Actual:</p> <c:out value="${order.actualCost}" /><br> --%>
 	<table class="table table-striped table-bordered" width="100%">
 	    <thead>
 	        <tr>
@@ -84,8 +115,9 @@
 	    </tbody>
 	</table>
 
-	<hr>
+
 	<a href="CustomerController?action=CancelOrder&OrderID=<c:out value="${order.orderID}" />" class="btn btn-info" role="button"/>Cancel Order</a>
+		<hr>
 	</c:if>
 	</c:forEach>
 <div class="footer-dark">

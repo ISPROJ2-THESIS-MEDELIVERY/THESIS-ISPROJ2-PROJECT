@@ -16,8 +16,11 @@
 <link rel="stylesheet" href="assets/css/styles.css" />
 <link rel="stylesheet" href="assets/css/style.css" />
 <link rel="stylesheet" href="assets/css/Footer-Dark.css" />
-
+<link rel="icon" href="assets/img/medlogo.png" />
 </head>
+
+
+
 <body>
 	<!-- This will be used as a jumping point to test the controllers -->
 	 <div>
@@ -60,7 +63,7 @@
 	
 	<c:forEach items="${Featurepharm}" var="pharm">
 	<div class="row">
-	<h3>Featured products of <c:out value="${pharm.pharmacyName}">: </c:out></h3>
+	<h3><center>Featured products of <c:out value="${pharm.pharmacyName}">: </c:out></center></h3>
 			<div id="featured-products" class="carousel slide"
 				data-ride="carousel">
 				<ol class="carousel-indicators">
@@ -102,40 +105,7 @@
 		
 
 	
-	<div class="row">
-			<div class="col-md-4">
-				<h2>Product Catalog</h2>
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<center><img
-							src="assets/img/Attractive-Pharmaceutical-Packaging-Design-Inspiration-014.jpg"
-							class="img-responsive" style="height:550px;width:400px;"/></center>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<h2>Frequently Asked Questions</h2>
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<center><img src="assets/img/DoctorWho.jpg" class="img-responsive" /></center>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<h2>Contact Us</h2>
-				<h5>
-					<strong><center>Phone: 555-0199 </center></strong>
-
-				</h5>
-
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<div id="map-canvas" style="height:300px; width:500px"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-
+	
 		<%-- <c:forEach items="${Featurepharm}" var="pharm">
 			<h3>Featured products of <c:out value="${pharm.pharmacyName}">: </c:out></h3>
 			
@@ -160,28 +130,43 @@
 		<div class="container">
     		<div class="row">
         		<div class="col-md-6">
-        			<br>Select Pharmacy to order from:<br>
+        			<div class="list-group">
+    					<a class="list-group-item">
+      						<h4 class="list-group-item-heading">Select Pharmacy to order from:</h4>
+    					</a>
+    				</div>
+        			<!-- <br>Select Pharmacy to order from:<br> -->
 					<c:forEach items="${PharmcyList}" var="pharmacy">
 						<a href="CustomerController?action=GoToCatalog&PharmaID=<c:out value="${pharmacy.pharmacyID}" />" class="btn btn-info btn-sm" role="button"><c:out value="${pharmacy.pharmacyName}" /></a><br>
 					</c:forEach>
         		</div>
+
         		<div class="col-md-6">
-        			<br>Select Pharmacy to order from (Prescription):<br>
+        			<div class="list-group">
+    					<a class="list-group-item">
+      						<h4 class="list-group-item-heading">Select Pharmacy to order from (Prescription):</h4>
+    					</a>
+    				</div>
+        			<!-- <br>Select Pharmacy to order from (Prescription):<br> -->
 					<c:forEach items="${PharmcyList}" var="pharmacy">
 						<!-- <a href="CustomerController?action=GoToPrescription&PharmaID=<c:out value="${pharmacy.pharmacyID}" />" class="btn btn-info btn-sm" role="button"><c:out value="${pharmacy.pharmacyName}" /></a><br> -->
 						<a href="CustomerController?action=GoToCatalogPrescription&PharmaID=<c:out value="${pharmacy.pharmacyID}" />" class="btn btn-info btn-sm" role="button"><c:out value="${pharmacy.pharmacyName}" /></a><br>
 					</c:forEach>
-        		</div>
+        		</div><br>
         		
         		<div class="col-md-6">
-        			<p class="font-weight-bold">Customer Details:</p>
-					User ID: <c:out value="${userID}" /><br>
-					Username: <c:out value="${username}" /><br>
-					User Type: <c:out value="${userAccess}" /><br>
-					<!-- <a href="LoginController">Logout</a><br> -->
+        			<div class="list-group">
+    					<a class="list-group-item">
+      						<h4 class="list-group-item-heading">Customer Details:</h4>
+      						<p class="list-group-item-text">User ID: <c:out value="${userID}" /></p>
+      						<p class="list-group-item-text">Username: <c:out value="${username}" /></p>
+      						<p class="list-group-item-text">User Type: <c:out value="${userAccess}" /></p>
+    					</a>
+    				</div>
 				</div>
         		<div class="col-md-6">
         			<!-- Order History: -->
+        			<br>
 					<a href="CustomerController?action=GoToOrders" class="btn btn-primary" role="button"/>Go to Order History</a><br><br>
         			<!-- Order Pending: -->
 					<a href="CustomerController?action=GoToPending" class="btn btn-primary" role="button"/>Go to Pending Orders</a><br>
@@ -228,20 +213,33 @@
 		<div class="container">
     		<div class="row">
         		<div class="col-md-6">
-        			<p class="font-weight-bold">Pharmacist Details:</p>
+        			<%-- <p class="font-weight-bold">Pharmacist Details:</p>
 					<c:forEach items="${Prescription}" var="prescription">
 						<img src='images/<c:out value="${prescription.prescription}"></c:out>'>
 					</c:forEach>
 					User ID: <c:out value="${userID}" /><br>
 					Username: <c:out value="${username}" /><br>
-					User Type: <c:out value="${userAccess}" /><br>
+					User Type: <c:out value="${userAccess}" /><br> --%>
 					<!-- <a href="LoginController">Logout</a><br> -->
-					<a href="ProductController?Action=addProduct" class="btn btn-info" role="button">Add Product</a><br>
-					<a href="PharmacistController?Action=Prescription" class="btn btn-info" role="button">Approve/Disapprove prescription orders</a><br>
-					Current Orders Heading to your Pharmacy:
-					<a href="PharmacistController?Action=GoToOrders" class="btn btn-info" role="button"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Regular Orders</a>
+					<div class="list-group">
+    					<a class="list-group-item">
+      						<h4 class="list-group-item-heading">Pharmacist Details</h4>
+      						<p class="list-group-item-text">User ID: <c:out value="${userID}" /></p>
+      						<p class="list-group-item-text">Username: <c:out value="${username}" /></p>
+      						<p class="list-group-item-text">User Type: <c:out value="${userAccess}" /></p>
+    					</a>
+    				</div>
+					<a href="ProductController?Action=addProduct" class="btn btn-info" role="button">Add Product</a><br><br/>
+					<a href="PharmacistController?Action=Prescription" class="btn btn-info" role="button">Approve/Disapprove prescription orders</a><br><br/>
+					<%-- Current Orders Heading to your Pharmacy:
+					<a href="PharmacistController?Action=GoToOrders" class="btn btn-info" role="button"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Regular Orders</a> --%>
 					<%-- <a href="PharmacistController?action=GoToOrders&PharmaID=<c:out value="${PharmacistPharmacy.pharmacyID}" />"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Pharmacy Orders</a> --%>
-					
+					<div class="list-group">
+    					<a class="list-group-item list-group-item-info">
+      						<h4 class="list-group-item-heading">Current Orders Heading to your Pharmacy:</h4>     						
+    					</a>
+    				</div><br>
+    				<a href="PharmacistController?Action=GoToOrders" class="btn btn-info" role="button"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Regular Orders</a>
 					<br>
 				</div>
     		</div>
@@ -408,6 +406,41 @@
 				</table>
 		</c:if>
 		
+		<div class="row">
+			<div class="col-md-4">
+				<h2>Product Catalog</h2>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<center><img
+							src="assets/img/Attractive-Pharmaceutical-Packaging-Design-Inspiration-014.jpg"
+							class="img-responsive" style="height:550px;width:400px;"/></center>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<h2>Frequently Asked Questions</h2>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<center><img src="assets/img/DoctorWho.jpg" class="img-responsive" /></center>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<h2>Contact Us</h2>
+				<h5>
+					<strong><center>Phone: 555-0199 </center></strong>
+
+				</h5>
+
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div id="map-canvas" style="height:300px; width:500px"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
 		
 		
 <div class="footer-dark">
@@ -464,4 +497,23 @@ google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 		
 	</body>
+	
+<style>
+
+.btn-group-sm>.btn, .btn-sm {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+    margin-top: 15px;
+}
+
+
+.col-md-6 {
+    width: 50%;
+    margin-top: 15px;
+}
+
+</style>	
+
 </html>

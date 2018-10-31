@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="assets/bootstrap/css/jquery.dataTables.min.css" />
 <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="assets/css/styles.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" />
@@ -49,7 +50,8 @@
         </div>
     </div>
     
-    <table class="table table-striped table-bordered" width="100%">
+    <div id="container-fluid">
+    <table id="druglistTable" class="table-wrapper table-striped table-bordered" width="100%">
 		<thead>
 			<tr>
 	            <th>OrderID</th>
@@ -64,7 +66,7 @@
 	            <th>Order Details</th>
 	            <th>Total Cost</th>
 	            <th>Pharmacy</th>
-	            <th colspan="2">Set Pharmacy</th>
+	            <th >Set Pharmacy</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -88,7 +90,46 @@
 			            </td>
 			            <td><c:out value="${order.seniorDiscount}" /></td>
 			            <td>
-				            <table class="table" border = "2">
+			            	<%-- <p>
+  								<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    							Click to view
+ 		 						</a>
+  						   </p>
+  						   <div class="collapse" id="collapseExample">
+  						       <div class="card card-body">
+    							   <table class="table" border = "2">
+							    <thead>
+							        <tr>
+							            <th>OrderID</th>
+							            <th>Product Name</th>
+							            <th>Quantity</th>
+							            <th>Cost Per Unit</th>
+							            <th>Total Cost</th>
+							        </tr>
+							    </thead>
+							    <tbody>
+							    	<c:forEach items="${DispatcherOrderDetailsList}" var="orderdetails">
+										<c:if test="${order.orderID == orderdetails.orderID}">
+							            <tr>
+							                <td><c:out value="${orderdetails.orderID}" /></td>
+							                <td>
+							    				<c:forEach items="${ProductTranslation}" var="product">
+							    					<c:if test="${orderdetails.productID == product.productID}">
+							                			<c:out value="${product.productName}" />
+							    					</c:if>
+							                	</c:forEach>
+							                </td>
+							                <td><c:out value="${orderdetails.quantity}" /></td>
+							                <td><c:out value="${orderdetails.costPerUnit}" /></td>
+							                <td><c:out value="${orderdetails.totalCost}" /></td>
+							            </tr>
+							            </c:if>
+									</c:forEach>
+							    </tbody>
+							</table>
+  							   </div>
+						   </div> --%>
+				            <table class="table-wrapper table-striped table-bordered" width="100%">
 							    <thead>
 							        <tr>
 							            <th>OrderID</th>
@@ -145,6 +186,9 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
+	
+	
 <div class="footer-dark">
     <footer>
         <div class="container">
@@ -177,4 +221,29 @@
     </footer>
 </div>
 </body>
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/bootstrap/js/jquery.dataTables.min.js"></script>
+<script src="assets/bootstrap/js/dataTables.bootstrap.min.js"></script>
+
+<!-- 	<script type="text/javascript">
+		 $(document).ready(function() {
+			$("#druglistTable").DataTable();
+		}); 
+	</script> -->
+	
+	<script type="text/javascript">
+		 $(document).ready(function() {
+			$("#druglistTable").DataTable({
+				"sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+			});
+		}); 
+	</script>
+
+
+
+
 </html>

@@ -171,10 +171,19 @@
 						<td>
 							<form action='DispatcherController' method='post'>
 								<input type="hidden" name="OrderID" value="${order.orderID}"/>
+								Branch:<br>
 								<select name="BranchID">
 									<c:forEach items="${ListBranches}" var="branch">
 										<c:if test="${branch.pharmacyID == order.pharmacyID}">
 											<option value="<c:out value="${branch.branchID}" />"><c:out value="${branch.branchOwner}" /></option>
+										</c:if>
+									</c:forEach>
+								</select>
+								Delivery Person:<br>
+								<select name="DriverID">
+									<c:forEach items="${DriverList}" var="driver">
+										<c:if test="${CourierService == driver.courierserviceID}">
+											<option value="<c:out value="${driver.driverID}" />"><c:out value="${driver.driverName}" /></option>
 										</c:if>
 									</c:forEach>
 								</select>

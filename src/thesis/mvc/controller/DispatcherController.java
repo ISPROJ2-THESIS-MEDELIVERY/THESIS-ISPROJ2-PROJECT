@@ -55,8 +55,9 @@ public class DispatcherController extends HttpServlet {
 			session.setAttribute( "SelectPharmacy", new PharmacyImplement().getAllPharmacys() );
 			session.setAttribute( "ListBranches" , new BranchImplement().getAllBranch() );
 			session.setAttribute( "DispatcherOrderDetailsList" , new OrderDetailImplement().getOrderDetail()  );
-			session.setAttribute( "DriverList" , new DriverImplement().getAllDrivers()) ;
-			session.setAttribute( "ProductTranslation" , new ProductImplement().getAllProducts() );
+			session.setAttribute( "DriverList" , new DriverImplement().getAllDrivers());
+			session.setAttribute( "ProductTranslation" , new ProductImplement().getAllProducts());
+			session.setAttribute( "CourierService" , CourierID);
 			response.sendRedirect(request.getContextPath() + "/DispatcherDirector.jsp");
 		}
 		
@@ -80,6 +81,8 @@ public class DispatcherController extends HttpServlet {
 			session.setAttribute( "SelectPharmacy", new PharmacyImplement().getAllPharmacys() );
 			session.setAttribute( "ListBranches" , new BranchImplement().getAllBranch() );
 			session.setAttribute( "DispatcherOrderDetailsList" , new OrderDetailImplement().getOrderDetail()  );
+			session.setAttribute( "DriverList" , new DriverImplement().getAllDrivers());
+			session.setAttribute( "ProductTranslation" , new ProductImplement().getAllProducts());
 			response.sendRedirect(request.getContextPath() + "/DispatcherDirector.jsp");
 		}
 		

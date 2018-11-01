@@ -8,6 +8,6 @@
 <title>Home Page</title>
 </head>
 	<body>
-		<jsp:forward page="/HomeController" />
+		<jsp:forward page="HomeController" />
 	</body>
 </html>

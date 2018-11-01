@@ -101,6 +101,9 @@ public class HomeController  extends HttpServlet {
 		}
 		GeneralFunctions.checkAttributes(session);
 		response.sendRedirect(request.getContextPath() + "/home.jsp");
+		System.out.println(request.getContextPath());
+		System.out.println(request.getRealPath(request.getContextPath()));
+		//response.sendRedirect(request.getContextPath() + "/home.jsp");
 		//RequestDispatcher view = request.getRequestDispatcher( "/home.jsp" );
 		//view.forward(request, response);
 	}

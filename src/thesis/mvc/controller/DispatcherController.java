@@ -18,6 +18,7 @@ import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.implement.ProductImplement;
+import thesis.mvc.model.Delivery;
 import thesis.mvc.model.Driver;
 import thesis.mvc.pageaction.RegistrationAction;
 import thesis.mvc.utility.DBUtility;
@@ -77,6 +78,13 @@ public class DispatcherController extends HttpServlet {
 			int orderID = Integer.parseInt( request.getParameter("OrderID") );
 			int branchID = Integer.parseInt( request.getParameter("BranchID") );
 			new OrderImplement().updateOrderStatus(orderID, "PROCESSED", branchID);
+			Delivery delivery = new Delivery();
+			delivery.setComments(request.getParameter("Comments"));
+			delivery.setDispatcherID((int) session.getAttribute("Dispatcher"));
+			delivery.setDriverID(Integer.parseInt( request.getParameter("DriverID") ));
+			delivery.setPlateNumber(request.getParameter("PlateNumber"));
+			
+			//Reload
 			session.setAttribute( "DispatcherOrderList" , new OrderImplement().getOrder() );
 			session.setAttribute( "SelectPharmacy", new PharmacyImplement().getAllPharmacys() );
 			session.setAttribute( "ListBranches" , new BranchImplement().getAllBranch() );

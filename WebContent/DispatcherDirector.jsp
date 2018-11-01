@@ -132,7 +132,6 @@
 				            <table class="table-wrapper table-striped table-bordered" width="100%">
 							    <thead>
 							        <tr>
-							            <th>OrderID</th>
 							            <th>Product Name</th>
 							            <th>Quantity</th>
 							            <th>Cost Per Unit</th>
@@ -143,7 +142,6 @@
 							    	<c:forEach items="${DispatcherOrderDetailsList}" var="orderdetails">
 										<c:if test="${order.orderID == orderdetails.orderID}">
 							            <tr>
-							                <td><c:out value="${orderdetails.orderID}" /></td>
 							                <td>
 							    				<c:forEach items="${ProductTranslation}" var="product">
 							    					<c:if test="${orderdetails.productID == product.productID}">
@@ -178,7 +176,7 @@
 											<option value="<c:out value="${branch.branchID}" />"><c:out value="${branch.branchOwner}" /></option>
 										</c:if>
 									</c:forEach>
-								</select>
+								</select><br>
 								Delivery Person:<br>
 								<select name="DriverID">
 									<c:forEach items="${DriverList}" var="driver">
@@ -186,7 +184,11 @@
 											<option value="<c:out value="${driver.driverID}" />"><c:out value="${driver.driverName}" /></option>
 										</c:if>
 									</c:forEach>
-								</select>
+								</select><br>
+								Plate Number: <br>
+									<input type="text" name="PlateNumber"/><br>
+								Comments: <br>
+									<input type="text" name="Comments"/><br>
 								<input type="submit" name="action" value="assignOrder" placeholder="Set Order">
 							</form>
 						</td>

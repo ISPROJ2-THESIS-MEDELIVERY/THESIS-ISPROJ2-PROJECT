@@ -77,7 +77,7 @@
 	                <td><c:out value="${order.orderType}" /></td>
 	                <td><c:out value="${order.orderStatus}" /></td>
 	                <td><c:out value="${order.seniorDiscount}" /></td>
-	                <td><c:out value="${order.actualCost}" /></td>
+	                <td>&#8369;<c:out value="${order.actualCost}" /></td>
 	            </tr>
 	    </tbody>
 	</table>
@@ -107,8 +107,8 @@
 	                <td><c:out value="${orderdetails.orderID}" /></td>
 	                <td><c:out value="${orderdetails.productID}" /></td>
 	                <td><c:out value="${orderdetails.quantity}" /></td>
-	                <td><c:out value="${orderdetails.costPerUnit}" /></td>
-	                <td><c:out value="${orderdetails.totalCost}" /></td>
+	                <td>&#8369;<c:out value="${orderdetails.costPerUnit}" /></td>
+	                <td>&#8369;<c:out value="${orderdetails.totalCost}" /></td>
 	            </tr>
 	            </c:if>
 			</c:forEach>

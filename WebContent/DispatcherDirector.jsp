@@ -50,6 +50,8 @@
         </div>
     </div>
     
+    <br>
+    
     <div id="container-fluid">
     <table id="druglistTable" class="table-wrapper table-striped table-bordered" width="100%">
 		<thead>
@@ -150,15 +152,15 @@
 							                	</c:forEach>
 							                </td>
 							                <td><c:out value="${orderdetails.quantity}" /></td>
-							                <td><c:out value="${orderdetails.costPerUnit}" /></td>
-							                <td><c:out value="${orderdetails.totalCost}" /></td>
+							                <td>&#8369;<c:out value="${orderdetails.costPerUnit}" /></td>
+							                <td>&#8369;<c:out value="${orderdetails.totalCost}" /></td>
 							            </tr>
 							            </c:if>
 									</c:forEach>
 							    </tbody>
 							</table>
 			            </td>
-			            <td><c:out value="${order.actualCost}" /></td>
+			            <td>&#8369;<c:out value="${order.actualCost}" /></td>
 			            <td>
 							<c:forEach items="${SelectPharmacy}" var="pharmacy">
 								<c:if test="${pharmacy.pharmacyID == order.pharmacyID && order.pharmacyID == 1}">

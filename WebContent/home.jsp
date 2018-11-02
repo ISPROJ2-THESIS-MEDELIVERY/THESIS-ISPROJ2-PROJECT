@@ -192,11 +192,19 @@
 		<div class="container">
     		<div class="row">
         		<div class="col-md-6">
-        			<p class="font-weight-bold">Dispatcher Details:</p><br>
+        			<div class="list-group">
+    					<a class="list-group-item">
+      						<h4 class="list-group-item-heading">Dispatcher Details:</h4>
+      						<p class="list-group-item-text">User ID: <c:out value="${userID}" /></p>
+      						<p class="list-group-item-text">Username: <c:out value="${username}" /></p>
+      						<p class="list-group-item-text">User Type: <c:out value="${userAccess}" /></p>
+    					</a>
+    				</div>
+        			<%-- <p class="font-weight-bold">Dispatcher Details:</p><br>
 					User ID: <c:out value="${userID}" /><br>
 					Username: <c:out value="${username}" /><br>
-					User Type: <c:out value="${userAccess}" /><br>
-					<a href="DispatcherController?Action=DispatchOrder">Order Dispatch</a><br>
+					User Type: <c:out value="${userAccess}" /><br> --%>
+					<a href="DispatcherController?Action=DispatchOrder" class="btn btn-info" role="button">Order Dispatch</a><br>
 					<!-- <a href="DispatcherController?Action=DispatchPrescription">Order Dispatch - Prescription</a><br> -->
 					<!-- <a href="LoginController">Logout</a><br> -->
 				</div>
@@ -238,6 +246,9 @@
 					<div class="list-group">
 						<a class="list-group-item list-group-item-info">
 							<h4 class="list-group-item-heading">Current Orders Heading to your Pharmacy That DO NOT require a prescription:</h4>
+						</a>
+					</div>
+					<div id = "container">	
 							<table class="table table-striped table-bordered" width="100%">
 								<thead>
 									<tr>
@@ -287,25 +298,27 @@
 													                	</c:forEach>
 													                </td>
 													                <td><c:out value="${orderdetails.quantity}" /></td>
-													                <td><c:out value="${orderdetails.costPerUnit}" /></td>
-													                <td><c:out value="${orderdetails.totalCost}" /></td>
+													                <td>&#8369;<c:out value="${orderdetails.costPerUnit}" /></td>
+													                <td>&#8369;<c:out value="${orderdetails.totalCost}" /></td>
 													            </tr>
 													            </c:if>
 															</c:forEach>
 													    </tbody>
 													</table>
 									            </td>
-									            <td><c:out value="${order.actualCost}" /></td>
+									            <td>&#8369;<c:out value="${order.actualCost}" /></td>
 											</tr>
 										</c:if>
 									</c:forEach>
 								</tbody>
 							</table>	
-						</a>
-					</div><br>
+						</div>
+					<div id = "container">
 					<div class="list-group">
 						<a class="list-group-item list-group-item-info">
 							<h4 class="list-group-item-heading">Current Orders Heading to your Pharmacy That DO NOT require a prescription:</h4>
+						</a>
+					</div>
 							<table class="table table-striped table-bordered" width="100%">
 								<thead>
 									<tr>
@@ -369,8 +382,8 @@
 									</c:forEach>
 								</tbody>
 							</table>	
-						</a>
-					</div><br>
+						
+					</div>
 					<a href="PharmacistController?Action=GoToOrders" class="btn btn-info" role="button"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Regular Orders</a>
 					<br>
 				</div>
@@ -662,6 +675,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
     /* width: 100%; */
     max-width: 100%;
     margin-bottom: 20px;
+    margin-left: 1px;
 }
 
 .carousel-inner>.item>a>img, .carousel-inner>.item>img {

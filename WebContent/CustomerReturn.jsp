@@ -52,7 +52,7 @@
         </div>
     </div>
 	<c:forEach items="${OrderHistory}" var="order">
-	<c:if test="${order.orderStatus == 'APPROVED' || order.orderStatus == 'PROCESSED' || order.orderStatus == 'PENDING'}">
+	<c:if test="${order.orderStatus == 'DELIVERING' || order.orderStatus == 'FINISHED'}">
 	<table class="table table-striped table-bordered" width="100%">
 	    <thead>
 	        <tr>
@@ -114,9 +114,7 @@
 			</c:forEach>
 	    </tbody>
 	</table>
-
-
-	<a href="CustomerController?action=CancelOrder&OrderID=<c:out value="${order.orderID}" />" class="btn btn-info" role="button"/>Cancel Order</a>
+	<a href="CustomerController?action=ReturnOrder&OrderID=<c:out value="${order.orderID}" />" class="btn btn-info" role="button"/>Return Order</a>
 		<hr>
 	</c:if>
 	</c:forEach>

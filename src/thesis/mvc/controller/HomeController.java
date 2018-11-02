@@ -76,6 +76,8 @@ public class HomeController  extends HttpServlet {
 			
 			session.setAttribute( "IncomingOrderDetails" , new OrderDetailImplement().getOrderDetail()  );
 			session.setAttribute( "ProductTranslation" , new ProductImplement().getAllProducts() );
+			session.setAttribute("PrescriptionImage", new PrescriptionImplement().getAllPrescription());
+			System.out.println("test this theory" + new PrescriptionImplement().getPrescriptionByID(1).getPrescription());
 			//PharmacistImplement pharmacistImplement = new PharmacistImplement();
 			//session.setAttribute("PharmacistDetails", session.getAttribute("Pharmacist") );
 			//PharmacyImplement pharmacyImplement1 = new PharmacyImplement();

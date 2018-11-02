@@ -21,6 +21,7 @@ public class Order {
 	private Boolean SeniorDiscount;
 	private String PaymentMethod;
 	private double ActualCost;
+	private String PaymayaID;
 	
 	public int getOrderID() {
 		return OrderID;
@@ -124,5 +125,12 @@ public class Order {
 	public void setActualCost(double actualCost) {
 		ActualCost = actualCost;
 	}
+	public String getPaymayaID() {
+		return PaymayaID;
+	}
+	public void setPaymayaID(String paymayaID) {
+		PaymayaID = paymayaID;
+	}
+	
 	
 }

@@ -27,7 +27,7 @@ public class OrderImplement implements OrderDAO{
 	public int addOrder(Order order) {
 		try {
 			Timestamp CurrentDate = new Timestamp(Calendar.getInstance().getTime().getTime());
-			String query = "INSERT INTO `order`(`CustomerID`, `DeliveryID`, `PharmacistID`, `PharmacyID`, `BranchID`, `CityID`, `PrescriptionID`, `OrderAddress`, `DateOrdered`, `DateProcessed`, `DateDelivered`, `OrderType`, `OrderStatus`, `SeniorDiscount`, `PaymentMethod`, `ActualCost`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String query = "INSERT INTO `order`(`CustomerID`, `DeliveryID`, `PharmacistID`, `PharmacyID`, `BranchID`, `CityID`, `PrescriptionID`, `OrderAddress`, `DateOrdered`, `DateProcessed`, `DateDelivered`, `OrderType`, `OrderStatus`, `SeniorDiscount`, `PaymentMethod`, `ActualCost`, `PayMayaID`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement( query, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setInt( 1, order.getCustomerID() );
 			preparedStatement.setInt( 2, order.getDeliveryID() );
@@ -45,6 +45,7 @@ public class OrderImplement implements OrderDAO{
 			preparedStatement.setBoolean( 14, order.getSeniorDiscount() );
 			preparedStatement.setString( 15, order.getPaymentMethod() );
 			preparedStatement.setDouble( 16, order.getActualCost() );
+			preparedStatement.setString( 17, order.getPaymayaID() );
 			int NewID = preparedStatement.executeUpdate();
 			ResultSet rs = preparedStatement.getGeneratedKeys();
 			if (rs.next()) {
@@ -74,7 +75,7 @@ public class OrderImplement implements OrderDAO{
 	@Override
 	public void updateOrder(Order order) {
 		try {
-			String query = "UPDATE `order` SET CustomerID=?, DeliveryID=?, PharmacistID=?, PharmacyID=?, CityID=?, BranchID=?, PrescriptionID=?, OrderAddress=?, DateOrdered=?, DateProcessed=?, DateDelivered=?, OrderType=?, OrderStatus=?, SeniorDiscount=?, PaymentMethod=?, ActualCost=? WHERE OrderID=?";
+			String query = "UPDATE `order` SET CustomerID=?, DeliveryID=?, PharmacistID=?, PharmacyID=?, CityID=?, BranchID=?, PrescriptionID=?, OrderAddress=?, DateOrdered=?, DateProcessed=?, DateDelivered=?, OrderType=?, OrderStatus=?, SeniorDiscount=?, PaymentMethod=?, ActualCost=?, PayMaya=? WHERE OrderID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, order.getCustomerID() );
 			preparedStatement.setInt( 2, order.getDeliveryID() );
@@ -93,6 +94,7 @@ public class OrderImplement implements OrderDAO{
 			preparedStatement.setString( 15, order.getPaymentMethod() );
 			preparedStatement.setDouble(16, order.getActualCost() );
 			preparedStatement.setInt( 17, order.getOrderID() );
+			preparedStatement.setString( 18, order.getPaymayaID() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
@@ -196,6 +198,21 @@ public class OrderImplement implements OrderDAO{
 			e.printStackTrace();
 		}
 	}
+
+	public void updateDeliveryID(int OrderID, int DeliveryID) {
+		try {
+			String query = "UPDATE `order` SET DeliveryID=? WHERE OrderID=?";
+			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			preparedStatement.setInt( 1, DeliveryID );
+			preparedStatement.setInt( 2, OrderID );
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 	public List<Order> getPendingOrder(int CID) {
 		List<Order> orders = new ArrayList<Order>();
 		try {
@@ -303,7 +320,6 @@ public class OrderImplement implements OrderDAO{
 		}
 		return orders;
 	}
-
 	/*
 	public int addIncompleteOrder(Order order) {
 		try {

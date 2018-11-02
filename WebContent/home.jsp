@@ -305,7 +305,7 @@
 					</div><br>
 					<div class="list-group">
 						<a class="list-group-item list-group-item-info">
-							<h4 class="list-group-item-heading">Current Orders Heading to your Pharmacy That DO NOT require a prescription:</h4>
+							<h4 class="list-group-item-heading">Current Orders Heading to your Pharmacy That DO require a prescription:</h4>
 							<table class="table table-striped table-bordered" width="100%">
 								<thead>
 									<tr>
@@ -318,11 +318,13 @@
 							            <th>Senior Citizen?</th>
 							            <th>Product Bought</th>
 							            <th>Total Cost</th>
+							            <th>Prescription</th>
+							            <th colspan="2">Approve or disapprove?</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${IncomingOrders}" var="order">
-										<c:if test="${order.prescriptionID == 1 && order.branchID == 1}">
+										<c:if test="${order.prescriptionID != 0 && order.branchID == 1}">
 											<tr>
 									            <td><c:out value="${order.customerID}" /></td>
 									            <td><c:out value="${order.pharmacyID}" /></td>
@@ -364,6 +366,13 @@
 													</table>
 									            </td>
 									            <td><c:out value="${order.actualCost}" /></td>
+									            <td>
+													<c:forEach items="${PrescriptionImage}" var="prescription">
+														<img src="images/<c:out value="${prescription.prescription}" />" alt="Medicine Image" width="100px" height="100px">
+													</c:forEach>
+									            </td>
+												<td><a href="PurchaseController?action=Reject&orderID=<c:out value="${order.orderID}"/>">REJECT</a></td>
+												<td><a href="PurchaseController?action=Approve&orderID=<c:out value="${order.orderID}"/>">APPROVE</a></td>
 											</tr>
 										</c:if>
 									</c:forEach>

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.CourierServiceImplement;
+import thesis.mvc.implement.DeliveryImplement;
 import thesis.mvc.implement.DispatcherImplement;
 import thesis.mvc.implement.DriverImplement;
 import thesis.mvc.implement.OrderDetailImplement;
@@ -83,7 +84,8 @@ public class DispatcherController extends HttpServlet {
 			delivery.setDispatcherID((int) session.getAttribute("Dispatcher"));
 			delivery.setDriverID(Integer.parseInt( request.getParameter("DriverID") ));
 			delivery.setPlateNumber(request.getParameter("PlateNumber"));
-			
+			int DeliveryID = new DeliveryImplement().addDelivery(delivery);
+			new OrderImplement().updateDeliveryID(orderID, DeliveryID);
 			//Reload
 			session.setAttribute( "DispatcherOrderList" , new OrderImplement().getOrder() );
 			session.setAttribute( "SelectPharmacy", new PharmacyImplement().getAllPharmacys() );

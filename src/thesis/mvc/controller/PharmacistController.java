@@ -18,10 +18,12 @@ import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacistImplement;
+import thesis.mvc.implement.PrescriptionImplement;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
 import thesis.mvc.model.Pharmacist;
 import thesis.mvc.model.Pharmacy;
+import thesis.mvc.model.Prescription;
 import thesis.mvc.utility.DBUtility;
 
 @WebServlet("/PharmacistController")
@@ -54,7 +56,7 @@ public class PharmacistController extends HttpServlet{
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else if (action.equalsIgnoreCase("GoToOrders")) {
 			response.sendRedirect(request.getContextPath() + "/PharmacistBasic.jsp");
-		} else if (action.equalsIgnoreCase("GoTo")){
+		} else if (action.equalsIgnoreCase("")){
 			//Order order = new OrderImplement().getOrderById( Integer.parseInt(request.getParameter("orderID")));
 			//order.setOrderStatus("CANCELLED");
 			//new OrderImplement().updateOrder( order );
@@ -64,6 +66,7 @@ public class PharmacistController extends HttpServlet{
 			if(new OrderImplement().getOrderById(orderID).getOrderStatus().equalsIgnoreCase("CANCELLED")) {
 				Order order = new OrderImplement().getOrderById(orderID);
 				order.setOrderStatus("PENDING");
+				order.setBranchID(0);
 				new OrderImplement().updateOrder( order );
 			} else {
 				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
@@ -74,6 +77,21 @@ public class PharmacistController extends HttpServlet{
 			if(new OrderImplement().getOrderById(orderID).getOrderStatus().equalsIgnoreCase("CANCELLED")) {
 				Order order = new OrderImplement().getOrderById(orderID);
 				order.setOrderStatus("EN-ROUTE");
+				new OrderImplement().updateOrder( order );
+			} else {
+				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
+			}
+			response.sendRedirect(request.getContextPath() + "/PharmacistBasic.jsp");
+		} else if (action.equalsIgnoreCase("InvalidateOrder")){
+			int orderID = Integer.parseInt(request.getParameter("orderID"));
+			if(new OrderImplement().getOrderById(orderID).getOrderStatus().equalsIgnoreCase("CANCELLED")) {
+				Order order = new OrderImplement().getOrderById(orderID);
+				order.setOrderStatus("INVALID");
+				order.setBranchID(0);
+				Prescription prescription = new PrescriptionImplement().getPrescriptionByID(order.getPrescriptionID());
+				prescription.setPermissionStatus("REJECTED");
+				prescription.setRemark(request.getParameter("Reason"));
+				new PrescriptionImplement().updatePrescription(prescription);
 				new OrderImplement().updateOrder( order );
 			} else {
 				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );

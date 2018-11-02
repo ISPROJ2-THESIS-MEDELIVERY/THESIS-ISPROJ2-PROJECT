@@ -27,8 +27,8 @@
                             <div class="form-group"><label for="search-field"></label></div>
                         </form>
                         <c:if test="${userAccess == null}">
-                        <span class="navbar-text" style="float: right"><a href="login.jsp" class="login">Log In</a></span>
                         <span class="navbar-text" style="float: right"><a href="register.jsp" class="login">Register</a></span>
+                        <span class="navbar-text" style="float: right"><a href="login.jsp" class="login">Log In</a></span>       
                         </c:if>
                         <c:if test="${userAccess == 1}">
                         <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Log Out</a></span>

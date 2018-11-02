@@ -326,8 +326,8 @@ table.dataTable, table.dataTable th, table.dataTable td {
 	clear: both;
 	*zoom: 1;
 	zoom: 1;
-	margin-left: 100px;
-	margin-right: 100px;
+	margin-left: 10px;
+	margin-right: 23px;
 }
 
 .dataTables_wrapper .dataTables_length {

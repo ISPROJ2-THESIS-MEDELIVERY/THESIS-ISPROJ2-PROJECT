@@ -81,7 +81,7 @@
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
         </div>
-        <a class="already" href="login.jsp">Back</a>
+        <a class="already" href="index.jsp">Back</a>
    <!-- <input type="text"		name="CompName" required="" placeholder="Courier Name">
 		<input type="text"		name="CompStre" required="" placeholder="Courier Street">
 		<input type="text"		name="CompBara" required="" placeholder="Courier Barangay">

@@ -89,7 +89,7 @@
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
         </div>
-        <a class="already" href="login.jsp">Back</a>
+        <a class="already" href="index.jsp">Back</a>
    <!-- <input type="text"		name="BrchStrt" required="" placeholder="Branch Street">
 		<input type="text"		name="BrchBngy" required="" placeholder="Branch Barangay">
 		<select name="BrchCity">

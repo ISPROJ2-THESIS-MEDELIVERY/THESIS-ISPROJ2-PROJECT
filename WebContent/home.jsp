@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 <title>Home Page</title>
+<link rel="stylesheet" href="assets/bootstrap/css/jquery.dataTables.min.css" />
 <!-- <link rel="stylesheet" href="assets/bootstrap/js/bootstrap.min.js" />
 <link rel="stylesheet" href="assets/bootstrap/js/jquery.min.js" />
 <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" /> -->
@@ -173,7 +174,7 @@
         			<br>
 					<a href="CustomerController?action=GoToOrders" class="btn btn-primary" role="button"/>Go to Order History</a><br><br>
         			<!-- Order Pending: -->
-					<a href="CustomerController?action=GoToPending" class="btn btn-primary" role="button"/>Go to Pending Orders</a><br>
+					<a href="CustomerController?action=GoToPending" class="btn btn-primary" role="button"/>View your Current Orders</a><br>
         		</div>
     		</div>
 		</div>
@@ -235,13 +236,20 @@
     				</div>
 					<a href="ProductController?Action=addProduct" class="btn btn-info" role="button">Add Existing Product to Catalog</a><br><br/>
 					<a href="PharmacistController?Action=Prescription" class="btn btn-info" role="button">Approve/Disapprove prescription orders</a><br><br/>
+				</div>
+			</div>
+				<br>
 					<%-- Current Orders Heading to your Pharmacy:
 					<a href="PharmacistController?Action=GoToOrders" class="btn btn-info" role="button"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Regular Orders</a> --%>
 					<%-- <a href="PharmacistController?action=GoToOrders&PharmaID=<c:out value="${PharmacistPharmacy.pharmacyID}" />"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Pharmacy Orders</a> --%>
+					<div id = "container">
 					<div class="list-group">
 						<a class="list-group-item list-group-item-info">
-							<h4 class="list-group-item-heading">Current Orders Heading to your Pharmacy That DO NOT require a prescription:</h4>
-							<table class="table table-striped table-bordered" width="100%">
+							<h4 class="list-group-item-heading"><center>Current Orders Heading to your Pharmacy That DO NOT require a prescription:</center></h4>
+						</a>
+					</div>
+					<br>
+							<table id="wpres" class="table table-striped table-bordered" width="100%">
 								<thead>
 									<tr>
 							            <th>OrderID</th>
@@ -304,12 +312,13 @@
 									</c:forEach>
 								</tbody>
 							</table>	
-						</a>
-					</div><br>
+						</div>
 					<div class="list-group">
 						<a class="list-group-item list-group-item-info">
-							<h4 class="list-group-item-heading">Current Orders Heading to your Pharmacy That DO require a prescription:</h4>
-							<table class="table table-striped table-bordered" width="100%">
+							<h4 class="list-group-item-heading"><center>Current Orders Heading to your Pharmacy That DO require a prescription:</center></h4>
+						</a>
+					</div><br>
+							<table id="wopres" class="table table-striped table-bordered" width="100%">
 								<thead>
 									<tr>
 							            <th>OrderID</th>
@@ -381,12 +390,11 @@
 									</c:forEach>
 								</tbody>
 							</table>	
-						</a>
-					</div><br>
+						
 					<a href="PharmacistController?Action=GoToOrders" class="btn btn-info" role="button"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Regular Orders</a>
 					<br>
-				</div>
-			</div>
+				
+			
 		</div>	
 			<%-- Pharmacist Details<br>
 			<c:out value="${userID}" /><br>
@@ -414,7 +422,7 @@
 			Username: <c:out value="${username}" /><br>
 			User Type: <c:out value="${userAccess}" /><br> --%>
 			<hr><h2><center>List of customers:</center></h2><br>
-				<table class="table table-striped table-bordered" width="100%">
+				<table id="customerTable" class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
 							<th>Customer Name</th>
@@ -437,8 +445,8 @@
 					</tbody>
 				</table>
 			<hr><h2><center>List of dispatchers:</center></h2><br>
-				<a href="RegistrationController?Action=AddDispatcher" class="btn btn-info btn-sm" role="button">Register a new Dispatcher</a><br>
-				<table class="table table-striped table-bordered" width="100%">
+				<a href="RegistrationController?Action=AddDispatcher" class="btn btn-info btn-sm" role="button">Register a new Dispatcher</a><br><br>
+				<table id="dispatcherTable" class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
 							<th>Dispatcher Name</th>
@@ -460,9 +468,9 @@
 				</table>
 			<hr><h2><center>List of pharmacists:</center></h2><br>
 				<c:forEach items="${PharmcyList}" var="pharmacy">
-					<a href="RegistrationController?Action=AddPharmacist&PharmacyID=<c:out value="${pharmacy.pharmacyID}" />" class="btn btn-info btn-sm" role="button">Register a new Pharmacist in <c:out value="${pharmacy.pharmacyName}" /></a><br>
+					<a href="RegistrationController?Action=AddPharmacist&PharmacyID=<c:out value="${pharmacy.pharmacyID}" />" class="btn btn-info btn-sm" role="button">Register a new Pharmacist in <c:out value="${pharmacy.pharmacyName}" /></a><br><br>
 				</c:forEach>
-				<table class="table table-striped table-bordered" width="100%">
+				<table id="pharmacistTable" class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
 							<th>Pharmacist Name</th>
@@ -481,8 +489,8 @@
 					</tbody>
 				</table>
 			<hr><h2><center>List of admin:</center></h2><br>
-				<a href="RegistrationController?Action=AddAdmin" class="btn btn-info btn-sm" role="button">Register a new Admin</a><br>
-				<table class="table table-striped table-bordered" width="100%">
+				<a href="RegistrationController?Action=AddAdmin" class="btn btn-info btn-sm" role="button">Register a new Admin</a><br><br>
+				<table id="adminTable" class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
 							<th>Admin Name</th>
@@ -498,8 +506,8 @@
 				</table>
 			<hr><h2><center>Add a new Item:</center></h2><br>
 			<hr><h2><center>List of Pharmacies:</center></h2><br>
-				<a href="InformationController?Action=AddPharmacy" class="btn btn-info btn-sm" role="button">Add a new Pharmacy</a><br>
-				<table class="table table-striped table-bordered" width="100%">
+				<a href="InformationController?Action=AddPharmacy" class="btn btn-info btn-sm" role="button">Add a new Pharmacy</a><br><br>
+				<table id="pharmaciesTable" class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
 							<th>Pharmacy Name</th>
@@ -514,8 +522,8 @@
 					</tbody>
 				</table>
 			<hr><h2><center>List of branches:</center></h2><br>
-				<a href="InformationController?Action=AddBranch" class="btn btn-info btn-sm" role="button">Add a new Branch</a><br>
-				<table class="table table-striped table-bordered" width="100%">
+				<a href="InformationController?Action=AddBranch" class="btn btn-info btn-sm" role="button">Add a new Branch</a><br><br>
+				<table id="branchesTable" class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
 							<th>Branch Address</th>
@@ -536,8 +544,8 @@
 					</tbody>
 				</table>
 			<hr><h2><center>List of Couriers:</center></h2><br>
-				<a href="InformationController?Action=AddCourier" class="btn btn-info btn-sm" role="button">Add a new Courier branch</a><br>
-				<table class="table table-striped table-bordered" width="100%">
+				<a href="InformationController?Action=AddCourier" class="btn btn-info btn-sm" role="button">Add a new Courier branch</a><br><br>
+				<table id="courierTable" class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
 							<th>Courier Name</th>
@@ -559,6 +567,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				
 		</c:if>
 		
 		<div class="row">
@@ -685,5 +694,99 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 
 </style>	
+
+<script src="assets/bootstrap/js/jquery.dataTables.min.js"></script>
+<script src="assets/bootstrap/js/dataTables.bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		 $(document).ready(function() {
+			$("#wpres").DataTable({
+				"sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+			});
+		}); 
+	</script>
+	
+	<script type="text/javascript">
+		 $(document).ready(function() {
+			$("#wopres").DataTable({
+				"sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+			});
+		}); 
+	</script>
+
+	<script type="text/javascript">
+		 $(document).ready(function() {
+			$("#customerTable").DataTable({
+				"sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+			});
+		}); 
+	</script>
+	
+	<script type="text/javascript">
+		 $(document).ready(function() {
+			$("#dispatcherTable").DataTable({
+				"sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+			});
+		}); 
+	</script>
+	
+	<script type="text/javascript">
+		 $(document).ready(function() {
+			$("#pharmacistTable").DataTable({
+				"sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+			});
+		}); 
+	</script>
+	
+	<script type="text/javascript">
+		 $(document).ready(function() {
+			$("#adminTable").DataTable({
+				"sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+			});
+		}); 
+	</script>
+	
+	<script type="text/javascript">
+		 $(document).ready(function() {
+			$("#pharmaciesTable").DataTable({
+				"sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+			});
+		}); 
+	</script>
+	
+	<script type="text/javascript">
+		 $(document).ready(function() {
+			$("#branchesTable").DataTable({
+				"sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+			});
+		}); 
+	</script>
+	
+	<script type="text/javascript">
+		 $(document).ready(function() {
+			$("#courierTable").DataTable({
+				"sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+			});
+		}); 
+	</script>
+
 
 </html>

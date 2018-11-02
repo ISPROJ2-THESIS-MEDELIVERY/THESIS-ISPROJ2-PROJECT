@@ -52,7 +52,7 @@
         </div>
     </div>
 	<c:forEach items="${OrderHistory}" var="order">
-	<c:if test="${order.orderStatus == 'DELIVERING' || order.orderStatus == 'FINISHED'}">
+	<c:if test="${order.orderStatus == 'EN-ROUTE' || order.orderStatus == 'COMPLETED'}">
 	<table class="table table-striped table-bordered" width="100%">
 	    <thead>
 	        <tr>

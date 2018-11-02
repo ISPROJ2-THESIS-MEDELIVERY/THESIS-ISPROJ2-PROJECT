@@ -21,6 +21,7 @@ import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.model.Delivery;
 import thesis.mvc.model.Driver;
+import thesis.mvc.model.Order;
 import thesis.mvc.pageaction.RegistrationAction;
 import thesis.mvc.utility.DBUtility;
 
@@ -78,14 +79,37 @@ public class DispatcherController extends HttpServlet {
 		} else if(action.equalsIgnoreCase("assignOrder")) {
 			int orderID = Integer.parseInt( request.getParameter("OrderID") );
 			int branchID = Integer.parseInt( request.getParameter("BranchID") );
-			new OrderImplement().updateOrderStatus(orderID, "PROCESSED", branchID);
-			Delivery delivery = new Delivery();
-			delivery.setComments(request.getParameter("Comments"));
-			delivery.setDispatcherID((int) session.getAttribute("Dispatcher"));
-			delivery.setDriverID(Integer.parseInt( request.getParameter("DriverID") ));
-			delivery.setPlateNumber(request.getParameter("PlateNumber"));
-			int DeliveryID = new DeliveryImplement().addDelivery(delivery);
-			new OrderImplement().updateDeliveryID(orderID, DeliveryID);
+			
+			if(new OrderImplement().getOrderById(orderID).getOrderStatus().equalsIgnoreCase("CANCELLED")) {
+				new OrderImplement().updateOrderStatus(orderID, "PROCESSED", branchID);
+				Delivery delivery = new Delivery();
+				delivery.setComments(request.getParameter("Comments"));
+				delivery.setDispatcherID((int) session.getAttribute("Dispatcher"));
+				delivery.setDriverID(Integer.parseInt( request.getParameter("DriverID") ));
+				delivery.setPlateNumber(request.getParameter("PlateNumber"));
+				int DeliveryID = new DeliveryImplement().addDelivery(delivery);
+				new OrderImplement().updateDeliveryID(orderID, DeliveryID);
+			} else {
+				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
+			}
+			//Reload
+			session.setAttribute( "DispatcherOrderList" , new OrderImplement().getOrder() );
+			session.setAttribute( "SelectPharmacy", new PharmacyImplement().getAllPharmacys() );
+			session.setAttribute( "ListBranches" , new BranchImplement().getAllBranch() );
+			session.setAttribute( "DispatcherOrderDetailsList" , new OrderDetailImplement().getOrderDetail()  );
+			session.setAttribute( "DriverList" , new DriverImplement().getAllDrivers());
+			session.setAttribute( "ProductTranslation" , new ProductImplement().getAllProducts());
+			response.sendRedirect(request.getContextPath() + "/DispatcherDirector.jsp");
+		} else if(action.equalsIgnoreCase("confirmOrder")) {
+			int orderID = Integer.parseInt( request.getParameter("OrderID") );
+			
+			if(new OrderImplement().getOrderById(orderID).getOrderStatus().equalsIgnoreCase("CANCELLED")) {
+				Order order = new OrderImplement().getOrderById(orderID);
+				order.setOrderStatus("COMPLETED");
+				new OrderImplement().updateOrder(order);
+			} else {
+				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
+			}
 			//Reload
 			session.setAttribute( "DispatcherOrderList" , new OrderImplement().getOrder() );
 			session.setAttribute( "SelectPharmacy", new PharmacyImplement().getAllPharmacys() );

@@ -50,25 +50,35 @@ public class PharmacistController extends HttpServlet{
 		request.setAttribute("PharmacyOrdersDetails", test );
 		session.setAttribute( "PharmacyOrderDetailsList" , new OrderDetailImplement().getOrderDetail()  );
 		
-	    if (action.equalsIgnoreCase("GoToOrders")) {
+	    if (action.equalsIgnoreCase("")) {
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
+		} else if (action.equalsIgnoreCase("GoToOrders")) {
 			response.sendRedirect(request.getContextPath() + "/PharmacistBasic.jsp");
 		} else if (action.equalsIgnoreCase("GoTo")){
-			Order order = new OrderImplement().getOrderById( Integer.parseInt(request.getParameter("orderID")));
-			order.setOrderStatus("CANCELLED");
-			new OrderImplement().updateOrder( order );
+			//Order order = new OrderImplement().getOrderById( Integer.parseInt(request.getParameter("orderID")));
+			//order.setOrderStatus("CANCELLED");
+			//new OrderImplement().updateOrder( order );
 			response.sendRedirect(request.getContextPath() + "/PharmacistBasic.jsp");
 		} else if (action.equalsIgnoreCase("RejectOrder")){
-			Order order = new OrderImplement().getOrderById( Integer.parseInt(request.getParameter("orderID")));
-			order.setOrderStatus("CANCELLED");
-			new OrderImplement().updateOrder( order );
+			int orderID = Integer.parseInt(request.getParameter("orderID"));
+			if(new OrderImplement().getOrderById(orderID).getOrderStatus().equalsIgnoreCase("CANCELLED")) {
+				Order order = new OrderImplement().getOrderById(orderID);
+				order.setOrderStatus("PENDING");
+				new OrderImplement().updateOrder( order );
+			} else {
+				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
+			}
 			response.sendRedirect(request.getContextPath() + "/PharmacistBasic.jsp");
 		} else if (action.equalsIgnoreCase("ApproveOrder")){
-			Order order = new OrderImplement().getOrderById( Integer.parseInt(request.getParameter("orderID")));
-			order.setOrderStatus("EN-ROUTE");
-			new OrderImplement().updateOrder( order );
+			int orderID = Integer.parseInt(request.getParameter("orderID"));
+			if(new OrderImplement().getOrderById(orderID).getOrderStatus().equalsIgnoreCase("CANCELLED")) {
+				Order order = new OrderImplement().getOrderById(orderID);
+				order.setOrderStatus("EN-ROUTE");
+				new OrderImplement().updateOrder( order );
+			} else {
+				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
+			}
 			response.sendRedirect(request.getContextPath() + "/PharmacistBasic.jsp");
-		} else {
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}
 			
 	}

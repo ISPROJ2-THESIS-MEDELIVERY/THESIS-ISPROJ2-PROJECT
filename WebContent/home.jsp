@@ -131,6 +131,9 @@
 		<div class="container">
     		<div class="row">
         		<div class="col-md-6">
+					<c:if test="${message != null}">
+						<c:out value="${message}" />
+					</c:if>
         			<div class="list-group">
     					<a class="list-group-item">
       						<h4 class="list-group-item-heading">Select Pharmacy to order from:</h4>

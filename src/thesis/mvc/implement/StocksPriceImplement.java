@@ -64,7 +64,7 @@ public class StocksPriceImplement implements StocksPriceDAO{
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, stocksPrice.getStockID() );
 			preparedStatement.setDouble( 2, stocksPrice.getPriceSet() );
-			preparedStatement.setDate( 3, stocksPrice.getDateSet() );
+			preparedStatement.setTimestamp( 3, stocksPrice.getDateSet() );
 			preparedStatement.setBoolean( 4, stocksPrice.isIsCurrent() );
 			preparedStatement.setInt( 5, stocksPrice.getStocksPriceID() );
 			preparedStatement.executeUpdate();
@@ -86,7 +86,7 @@ public class StocksPriceImplement implements StocksPriceDAO{
 				stocksPrice.setStocksPriceID( resultSet.getInt( "StocksPriceID" ) );
 				stocksPrice.setStockID( resultSet.getInt( "StockID" ) );
 				stocksPrice.setPriceSet( resultSet.getDouble( "PriceSet" ) );
-				stocksPrice.setDateSet( resultSet.getDate( "DateSet" ) );
+				stocksPrice.setDateSet( resultSet.getTimestamp( "DateSet" ) );
 				stocksPrice.setIsCurrent( resultSet.getBoolean( "IsCurrent" ) );
 				stocksPrices.add(stocksPrice);
 			}
@@ -111,7 +111,7 @@ public class StocksPriceImplement implements StocksPriceDAO{
 				stocksPrice.setStocksPriceID( resultSet.getInt( "StocksPriceID" ) );
 				stocksPrice.setStockID( resultSet.getInt( "StockID" ) );
 				stocksPrice.setPriceSet( resultSet.getDouble( "PriceSet" ) );
-				stocksPrice.setDateSet( resultSet.getDate( "DateSet" ) );
+				stocksPrice.setDateSet( resultSet.getTimestamp( "DateSet" ) );
 				stocksPrice.setIsCurrent( resultSet.getBoolean( "IsCurrent" ) );
 			}
 			resultSet.close();

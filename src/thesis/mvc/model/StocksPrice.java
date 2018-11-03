@@ -1,13 +1,13 @@
 package thesis.mvc.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class StocksPrice {
 	
 	private int StocksPriceID;
 	private int StockID;
 	private double PriceSet;
-	private Date DateSet;
+	private Timestamp DateSet;
 	private boolean IsCurrent;
 	
 	public int getStocksPriceID() {
@@ -28,11 +28,11 @@ public class StocksPrice {
 	public void setPriceSet(double priceSet) {
 		PriceSet = priceSet;
 	}
-	public Date getDateSet() {
+	public Timestamp getDateSet() {
 		return DateSet;
 	}
-	public void setDateSet(Date dateSet) {
-		DateSet = dateSet;
+	public void setDateSet(Timestamp currentDate) {
+		DateSet = currentDate;
 	}
 	public boolean isIsCurrent() {
 		return IsCurrent;

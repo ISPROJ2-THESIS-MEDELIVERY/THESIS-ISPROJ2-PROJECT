@@ -24,11 +24,15 @@ public class StocksImplement implements StocksDAO{
 	public int addStocks(Stocks stocks) {
 		try {
 			String query = "INSERT INTO Stocks (ProductID, PharmacyID, Feature) VALUES (?,?,?)";
-			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			PreparedStatement preparedStatement = conn.prepareStatement( query, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setInt( 1, stocks.getProductID() );
 			preparedStatement.setInt( 2, stocks.getPharmacyID() );
 			preparedStatement.setBoolean( 3, stocks.isFeature() );
 			int NewID = preparedStatement.executeUpdate();
+			ResultSet rs = preparedStatement.getGeneratedKeys();
+			if (rs.next()) {
+				NewID = rs.getInt(1);
+			}
 			preparedStatement.close();
 			return NewID;
 		} catch (SQLException e) {

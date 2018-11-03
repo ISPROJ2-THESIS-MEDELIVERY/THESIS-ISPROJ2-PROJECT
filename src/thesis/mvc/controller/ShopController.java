@@ -221,8 +221,8 @@ public class ShopController extends HttpServlet {
 				        System.out.println("PrescriptionID: " + prescriptionID);
 				        //System.out.println(UPLOAD_DIRECTORY + File.separator + AFileName + "." + imageType);
 				        //System.out.println(UPLOAD_DIRECTORY +"|"+ File.separator +"|"+ AFileName +"|"+ "." +"|"+ imageType);
-						filePart.write(UPLOAD_DIRECTORY + File.separator + AFileName + "." + imageType);
-						System.out.println( "File Uploaded Successfully: " + UPLOAD_DIRECTORY + File.separator + AFileName + "." + imageType);
+						filePart.write(UPLOAD_DIRECTORY + File.separator + AFileName);
+						System.out.println( "File Uploaded Successfully: " + UPLOAD_DIRECTORY + File.separator + AFileName);
 					} else {
 						System.out.println( "File Uploaded is not an image!");
 					}

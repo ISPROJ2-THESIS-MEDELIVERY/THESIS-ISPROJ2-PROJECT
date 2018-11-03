@@ -93,8 +93,8 @@ public class OrderImplement implements OrderDAO{
 			preparedStatement.setBoolean( 14, order.getSeniorDiscount() );
 			preparedStatement.setString( 15, order.getPaymentMethod() );
 			preparedStatement.setDouble(16, order.getActualCost() );
-			preparedStatement.setInt( 17, order.getOrderID() );
-			preparedStatement.setString( 18, order.getPaymayaID() );
+			preparedStatement.setString( 17, order.getPaymayaID() );
+			preparedStatement.setInt( 18, order.getOrderID() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
@@ -127,6 +127,7 @@ public class OrderImplement implements OrderDAO{
 				order.setSeniorDiscount( resultSet.getBoolean( "SeniorDiscount" ) );
 				order.setPaymentMethod( resultSet.getString( "PaymentMethod" ) );
 				order.setActualCost( resultSet.getDouble( "ActualCost" ) );
+				order.setPaymayaID( resultSet.getString( "PaymayaID" ) );
 				orders.add(order);
 			}
 			resultSet.close();
@@ -163,6 +164,7 @@ public class OrderImplement implements OrderDAO{
 				order.setSeniorDiscount( resultSet.getBoolean( "SeniorDiscount" ) );
 				order.setPaymentMethod( resultSet.getString( "PaymentMethod" ) );
 				order.setActualCost( resultSet.getDouble( "ActualCost" ) );
+				order.setPaymayaID( resultSet.getString( "PaymayaID" ) );
 			}
 			resultSet.close();
 			preparedStatement.close();
@@ -239,6 +241,7 @@ public class OrderImplement implements OrderDAO{
 				order.setSeniorDiscount( resultSet.getBoolean( "SeniorDiscount" ) );
 				order.setPaymentMethod( resultSet.getString( "PaymentMethod" ) );
 				order.setActualCost( resultSet.getDouble( "ActualCost" ) );
+				order.setPaymayaID( resultSet.getString( "PaymayaID" ) );
 				orders.add(order);
 			}
 			resultSet.close();
@@ -275,6 +278,7 @@ public class OrderImplement implements OrderDAO{
 				order.setSeniorDiscount( resultSet.getBoolean( "SeniorDiscount" ) );
 				order.setPaymentMethod( resultSet.getString( "PaymentMethod" ) );
 				order.setActualCost( resultSet.getDouble( "ActualCost" ) );
+				order.setPaymayaID( resultSet.getString( "PaymayaID" ) );
 				orders.add(order);
 			}
 			resultSet.close();
@@ -311,6 +315,7 @@ public class OrderImplement implements OrderDAO{
 				order.setSeniorDiscount( resultSet.getBoolean( "SeniorDiscount" ) );
 				order.setPaymentMethod( resultSet.getString( "PaymentMethod" ) );
 				order.setActualCost( resultSet.getDouble( "ActualCost" ) );
+				order.setPaymayaID( resultSet.getString( "PaymayaID" ) );
 				orders.add(order);
 			}
 			resultSet.close();

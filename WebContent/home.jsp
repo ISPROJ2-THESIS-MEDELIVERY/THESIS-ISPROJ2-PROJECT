@@ -380,7 +380,9 @@
 									            <td><c:out value="${order.actualCost}" /></td>
 									            <td>
 													<c:forEach items="${PrescriptionImage}" var="prescription">
-														<img src="images/<c:out value="${prescription.prescription}" />" alt="Medicine Image" width="100px" height="100px">
+														<c:if test="${order.prescriptionID == prescription.prescriptionID}">
+															<img src="images/<c:out value="${prescription.prescription}" />" alt="Medicine Image" width="100px" height="100px">
+														</c:if>
 													</c:forEach>
 									            </td>
 												<td><a href="PurchaseController?action=Reject&orderID=<c:out value="${order.orderID}"/>">REJECT</a></td>

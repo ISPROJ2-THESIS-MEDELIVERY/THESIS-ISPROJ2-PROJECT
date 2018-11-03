@@ -61,7 +61,13 @@
         	<input type="text" name="CompBara" required="required" placeholder="Courier Barangay" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="CompCity" required="required" placeholder="Courier City" class="form-control"/>
+        	<select name="CompCity" class="form-control" >
+			<c:forEach items="${CityList}" var="city">
+				<option value=""  disabled selected hidden>Manila City</option>
+				<option value =<c:out value="${city.cityID}"/>><c:out value="${city.cityName}" /></option>
+			</c:forEach>
+		  </select>
+        	<!-- <input type="text" name="CompCity" required="required" placeholder="Courier City" class="form-control"/> -->
         </div>
         <div class="form-group">
         	<input type="text" name="CompProv" required="required" placeholder="Courier Province" class="form-control"/>

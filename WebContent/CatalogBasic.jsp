@@ -55,7 +55,7 @@
     <div id="container">
 	<h1>CART:</h1>
 	<c:if test="${CartList != null}">
-    		<table class="table table-striped table-bordered" width="100%">
+    		<table id="cartlistTable" class="table table-striped table-bordered" width="100%">
         		<thead>
             		<tr>
                 		<th>Item</th>
@@ -227,6 +227,16 @@
 	<script type="text/javascript">
 		 $(document).ready(function() {
 			$("#druglistTable").DataTable({
+				"sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+			});
+		}); 
+	</script>
+	
+	<script type="text/javascript">
+		 $(document).ready(function() {
+			$("#cartlistTable").DataTable({
 				"sPaginationType": "full_numbers",
                 "bJQueryUI": true, "sScrollX": "100%",
                 "bScrollCollapse": true

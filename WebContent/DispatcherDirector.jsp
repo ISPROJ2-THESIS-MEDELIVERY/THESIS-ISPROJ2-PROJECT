@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <link rel="stylesheet" href="assets/bootstrap/css/jquery.dataTables.min.css" />
-<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+<!-- <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" /> -->
 <link rel="stylesheet" href="assets/css/styles.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" />
 <link rel="stylesheet" href="assets/css/Header-Blue.css" />
@@ -33,8 +33,8 @@
                         <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Log Out</a></span>
                         </c:if>
                         <c:if test="${userAccess == 2}">
-                        <span class="navbar-text" style="float: right"><a href="DispatcherController?Action=DispatchOrder" class="login">Order Dispatch - Regular</a><br></span>
-						<span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a></span>
+                        <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a></span>
+                        <span class="navbar-text" style="float: right"><a href="DispatcherController?Action=DispatchOrder" class="login">Order Dispatch - Regular</a><br></span>						
                         </c:if>
                         <c:if test="${userAccess == 3}">
                         <span class="navbar-text" style="float: right"><a href="ProductController?Action=AddProduct" class="login">Add Product</a><br></span>
@@ -54,7 +54,7 @@
     
     <div id="container-fluid">
 	<h2>PENDING DELIVERIES</h2>
-    <table id="druglistTable" class="table-wrapper table-striped table-bordered" width="100%">
+    <table id="pendingTable" class="table-wrapper table-striped table-bordered" width="100%">
 		<thead>
 			<tr>
 	            <th>OrderID</th>
@@ -203,7 +203,7 @@
 	</div>
 	<div id="container-fluid">
 	<h2>APPROVED DELIVERIES</h2>
-    <table id="druglistTable" class="table-wrapper table-striped table-bordered" width="100%">
+    <table id="approvedTable" class="table-wrapper table-striped table-bordered" width="100%">
 		<thead>
 			<tr>
 	            <th>OrderID</th>
@@ -317,7 +317,7 @@
 	</div>
 	<div id="container-fluid">
 	<h2>RETURNING DELIVERIES</h2>
-    <table id="druglistTable" class="table-wrapper table-striped table-bordered" width="100%">
+    <table id="returningTable" class="table-wrapper table-striped table-bordered" width="100%">
 		<thead>
 			<tr>
 	            <th>OrderID</th>
@@ -463,8 +463,9 @@
 </div>
 </body>
 
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="assets/bootstrap/js/jquery.dataTables.min.js"></script>
 <script src="assets/bootstrap/js/dataTables.bootstrap.min.js"></script>
 
@@ -476,7 +477,27 @@
 	
 	<script type="text/javascript">
 		 $(document).ready(function() {
-			$("#druglistTable").DataTable({
+			$("#pendingTable").DataTable({
+				"sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+			});
+		}); 
+	</script>
+	
+	<script type="text/javascript">
+		 $(document).ready(function() {
+			$("#approvedTable").DataTable({
+				"sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+			});
+		}); 
+	</script>
+	
+	<script type="text/javascript">
+		 $(document).ready(function() {
+			$("#returningTable").DataTable({
 				"sPaginationType": "full_numbers",
                 "bJQueryUI": true, "sScrollX": "100%",
                 "bScrollCollapse": true

@@ -9,13 +9,11 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 <title>Home Page</title>
-<link rel="stylesheet"
-	href="assets/bootstrap/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="assets/bootstrap/css/jquery.dataTables.min.css" />
 <!-- <link rel="stylesheet" href="assets/bootstrap/js/bootstrap.min.js" />
 <link rel="stylesheet" href="assets/bootstrap/js/jquery.min.js" />
 <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" /> -->
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" />
 <link rel="stylesheet" href="assets/css/Header-Blue.css" />
 <link rel="stylesheet" href="assets/css/styles.css" />
 <link rel="stylesheet" href="assets/css/style.css" />
@@ -229,6 +227,9 @@
 					<!-- Order Pending: -->
 					<a href="CustomerController?action=GoToPending"
 						class="btn btn-primary" role="button" />View your Current Orders</a><br>
+					<br>
+					<a href=""
+						class="btn btn-primary" role="button" />What do I put here again?</a><br>
 				</div>
 			</div>
 		</div>
@@ -248,29 +249,34 @@
 	<c:if test="${userAccess == 2}">
 		<hr>
 		<div class="container">
-			<div class="row">
-				<div class="col-md-6">
-					<p class="font-weight-bold">Dispatcher Details:</p>
-					<br> User ID:
-					<c:out value="${userID}" />
-					<br> Username:
-					<c:out value="${username}" />
-					<br> User Type:
-					<c:out value="${userAccess}" />
-					<br> <a href="DispatcherController?Action=DispatchOrder">Order
-						Dispatch</a><br>
+    		<div class="row">
+        		<div class="col-md-6">
+        			<div class="list-group">
+    					<a class="list-group-item">
+      						<h4 class="list-group-item-heading">Dispatcher Details:</h4>
+      						<p class="list-group-item-text">User ID: <c:out value="${userID}" /></p>
+      						<p class="list-group-item-text">Username: <c:out value="${username}" /></p>
+      						<p class="list-group-item-text">User Type: <c:out value="${userAccess}" /></p>
+    					</a>
+    				</div>
+    				<a href="DispatcherController?Action=DispatchOrder" class="btn btn-info" role="button">Order Dispatch</a><br>
+        			<%-- <p class="font-weight-bold">Dispatcher Details:</p><br>
+					User ID: <c:out value="${userID}" /><br>
+					Username: <c:out value="${username}" /><br>
+					User Type: <c:out value="${userAccess}" /><br> --%>
+					<!-- <a href="DispatcherController?Action=DispatchOrder">Order Dispatch</a><br> -->
 					<!-- <a href="DispatcherController?Action=DispatchPrescription">Order Dispatch - Prescription</a><br> -->
 					<!-- <a href="LoginController">Logout</a><br> -->
 				</div>
-			</div>
-		</div>
-		<%-- Dispatcher<br>
+    		</div>
+		</div>		
+			<%-- Dispatcher<br>
 			<c:out value="${userID}" /><br>
 			<c:out value="${username}" /><br>
 			<c:out value="${userAccess}" /><br>
 			<a href="LoginController">Logout</a><br> --%>
 		<hr>
-	</c:if>
+		</c:if>
 	<c:if test="${userAccess == 3}">
 		<hr>
 		<div class="container">
@@ -523,7 +529,7 @@
 					</a>
 				</div>
 				<br>
-				<table id="wpres" class="table table-striped table-bordered"
+				<table id="retpres" class="table table-striped table-bordered"
 					width="100%">
 					<thead>
 						<tr>
@@ -926,16 +932,11 @@
 		</footer>
 	</div>
 
-	<link rel="stylesheet"
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 
-	<script
-		src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false
-"></script>
 	<script>
 		var map;
 		function initialize() {
@@ -983,27 +984,35 @@
 <script src="assets/bootstrap/js/jquery.dataTables.min.js"></script>
 <script src="assets/bootstrap/js/dataTables.bootstrap.min.js"></script>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#wpres").DataTable({
-			"sPaginationType" : "full_numbers",
-			"bJQueryUI" : true,
-			"sScrollX" : "100%",
-			"bScrollCollapse" : true
-		});
-	});
-</script>
+	<script type="text/javascript">
+		 $(document).ready(function() {
+			$("#wpres").DataTable({
+				"sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+			});
+		}); 
+	</script>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#wopres").DataTable({
-			"sPaginationType" : "full_numbers",
-			"bJQueryUI" : true,
-			"sScrollX" : "100%",
-			"bScrollCollapse" : true
-		});
-	});
-</script>
+	<script type="text/javascript">
+		 $(document).ready(function() {
+			$("#wopres").DataTable({
+				"sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+			});
+		}); 
+	</script>
+	
+		<script type="text/javascript">
+		 $(document).ready(function() {
+			$("#retpres").DataTable({
+				"sPaginationType": "full_numbers",
+                "bJQueryUI": true, "sScrollX": "100%",
+                "bScrollCollapse": true
+			});
+		}); 
+	</script>
 
 <script type="text/javascript">
 	$(document).ready(function() {

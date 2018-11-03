@@ -48,6 +48,7 @@
             </nav>
         </div>
     </div>
+    <br>
 	<c:forEach items="${OrderHistory}" var="order">
 	<c:if test="${order.orderStatus != 'PENDING'}">
 	<table class="table table-striped table-bordered" width="100%">

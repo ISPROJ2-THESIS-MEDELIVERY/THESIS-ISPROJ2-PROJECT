@@ -92,10 +92,10 @@
         	<input type="text" name="Username" required="required" placeholder="Username *" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="password" name="Password" required="required" placeholder="Create Password" class="form-control"/>
+        	<input type="password" name="Password" required="required" placeholder="Create Password" id="Password" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="password" name="Password-repeat" required="required" placeholder="Re-enter Password" class="form-control"/>
+        	<input type="password" name="Password-repeat" required="required" placeholder="Re-enter Password" id="Passwordrepeat" class="form-control"/>
         </div>
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
@@ -147,6 +147,22 @@
 </div>
 
 <script src="sample-registration-form-validation.js"></script>
+
+<script>
+var Password = document.getElementById("Password")
+  , Passwordrepeat = document.getElementById("Passwordrepeat");
+
+function validatePassword(){
+  if(Password.value != Passwordrepeat.value) {
+    Passwordrepeat.setCustomValidity("Passwords Don't Match");
+  } else {
+    Passwordrepeat.setCustomValidity('');
+  }
+}
+
+Password.onchange = validatePassword;
+Passwordrepeat.onkeyup = validatePassword;
+</script>
 
 </body>
 </html>

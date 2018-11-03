@@ -61,7 +61,11 @@
 			<input type="number" name="Price" class="form-control"/><br>
 		</div>
 		<div class="form-group">
-			<button class="btn btn-primary btn-block" type="submit" name="action" value="addProduct">Add New Product</button>
+			<button class="btn btn-primary btn-block" type="submit" name="action" value="addProduct">Add Existing Product to Catalog</button>
+		</div>
+		<br>
+		<div class="form-group">
+			<a href="ProductController?Action=AddnewProduct" class="btn btn-link" role="button">Click here to add a new product</a>
 		</div>
 	</form>
 	</div>

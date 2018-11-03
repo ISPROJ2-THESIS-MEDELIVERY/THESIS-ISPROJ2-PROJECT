@@ -37,7 +37,7 @@
 						<span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a></span>
                         </c:if>
                         <c:if test="${userAccess == 3}">
-                        <span class="navbar-text" style="float: right"><a href="ProductController?Action=AddnewProduct" class="login">Add Product</a><br></span>
+                        <span class="navbar-text" style="float: right"><a href="ProductController?Action=AddnewProduct" class="login">Add New Product</a><br></span>
                         <span class="navbar-text" style="float: right"><a href="PharmacistController?Action=Prescription" class="login">Approve/Disapprove prescription orders</a></span>
 						<span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a><br></span>
                         </c:if>
@@ -61,7 +61,7 @@
       		<h4 class="list-group-item-heading"><center>Add Product</center></h4>     						
     	</a>
     </div><br>
-	<form action="/ProductController">
+	<form method="post" action="/ProductController" encType="multipart/form-data">
 	<div class="container">
 	 <div class="row">
 	  <div class="col-md-6">
@@ -70,51 +70,51 @@
         </div>
         <h2 class="sr-only">Product to add: </h2>
         <div class="form-group">
-        	<input type="text" name="" placeholder="Product Name" class="form-control"/>
+        	<input type="text" name="ProductName" placeholder="Product Name" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="" placeholder="Generic Name" class="form-control"/>
+        	<input type="text" name="GenericName" placeholder="Generic Name" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="" placeholder="Registration Number" class="form-control"/>
+        	<input type="text" name="RegistrNumn" placeholder="Registration Number" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="" placeholder="Product Strength" class="form-control"/>
+        	<input type="text" name="ProductStrg" placeholder="Product Strength" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="" placeholder="Product Form" class="form-control"/>
+        	<input type="text" name="ProductForm" placeholder="Product Form" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="" placeholder="Product Packaging" class="form-control"/>
+        	<input type="text" name="ProductPack" placeholder="Product Packaging" class="form-control"/>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
-        	<input type="text" name="" placeholder="Product Manufacturing" class="form-control"/>
+        	<input type="text" name="ProductManu" placeholder="Product Manufacturing" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="" placeholder="Product Origin" class="form-control"/>
+        	<input type="text" name="ProductOrgi" placeholder="Product Origin" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="" placeholder="Product Description" class="form-control"/>
+        	<input type="text" name="ProductDesc" placeholder="Product Description" class="form-control"/>
         </div>
         <div class="form-group">
-        	Product is an Rx Product?<input type="checkbox" name="" class="form-control"/>
+        	Product is an Rx Product?<input type="checkbox" name="ProductIsRX" class="form-control"/>
         </div>
         <div class="form-group">
-        	Image: <input type="file" name="" class="form-control"/>
+        	Image: <input type="file" name="ProductImag" class="form-control"/>
         </div>
         <div class="form-group">
         	Is it featured?<input type="checkbox" name="" class="form-control"/>
         </div>
-        <div class="form-group">
-        	<input type="number" name="Price" placeholder="Price" class="form-control"/>
+        <div class="input-group">
+        <span class="input-group-text">&#8369;</span>
+        	<input type="number" min="0" step="0.01" name="Price" placeholder="Price" class="form-control"/>
         </div>
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit" name="action" value="addnewProduct">Add New Product</button>
         </div>
         </div>
-      </div>
       </div>
       </div>
 		<!-- <input type="hidden" />

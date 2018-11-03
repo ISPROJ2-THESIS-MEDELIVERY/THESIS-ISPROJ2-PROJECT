@@ -47,7 +47,7 @@
                         <c:if test="${userAccess == 3}">
                         <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a><br></span>                     
                         <span class="navbar-text" style="float: right"><a href="PharmacistController?Action=Prescription" class="login">Approve/Disapprove prescription orders</a></span>
-						<span class="navbar-text" style="float: right"><a href="ProductController?Action=AddnewProduct" class="login">Add Product</a><br></span>
+						<span class="navbar-text" style="float: right"><a href="ProductController?Action=AddnewProduct" class="login">Add New Product</a><br></span>
                         </c:if>
                         <c:if test="${userAccess == 4}">
                         <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Log Out</a></span>
@@ -298,15 +298,15 @@
 													                	</c:forEach>
 													                </td>
 													                <td><c:out value="${orderdetails.quantity}" /></td>
-													                <td><c:out value="${orderdetails.costPerUnit}" /></td>
-													                <td><c:out value="${orderdetails.totalCost}" /></td>
+													                <td>&#8369;<c:out value="${orderdetails.costPerUnit}" /></td>
+													                <td>&#8369;<c:out value="${orderdetails.totalCost}" /></td>
 													            </tr>
 													            </c:if>
 															</c:forEach>
 													    </tbody>
 													</table>
 									            </td>
-									            <td><c:out value="${order.actualCost}" /></td>
+									            <td>&#8369;<c:out value="${order.actualCost}" /></td>
 											</tr>
 										</c:if>
 									</c:forEach>
@@ -369,15 +369,15 @@
 													                	</c:forEach>
 													                </td>
 													                <td><c:out value="${orderdetails.quantity}" /></td>
-													                <td><c:out value="${orderdetails.costPerUnit}" /></td>
-													                <td><c:out value="${orderdetails.totalCost}" /></td>
+													                <td>&#8369;<c:out value="${orderdetails.costPerUnit}" /></td>
+													                <td>&#8369;<c:out value="${orderdetails.totalCost}" /></td>
 													            </tr>
 													            </c:if>
 															</c:forEach>
 													    </tbody>
 													</table>
 									            </td>
-									            <td><c:out value="${order.actualCost}" /></td>
+									            <td>&#8369;<c:out value="${order.actualCost}" /></td>
 									            <td>
 													<c:forEach items="${PrescriptionImage}" var="prescription">
 														<c:if test="${order.prescriptionID == prescription.prescriptionID}">
@@ -446,8 +446,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			<hr><h2><center>List of dispatchers:</center></h2><br>
-				<a href="RegistrationController?Action=AddDispatcher" class="btn btn-info btn-sm" role="button">Register a new Dispatcher</a><br><br>
+			<hr><h2><center>List of dispatchers:</center></h2><br>				
 				<table id="dispatcherTable" class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
@@ -468,10 +467,8 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			<hr><h2><center>List of pharmacists:</center></h2><br>
-				<c:forEach items="${PharmcyList}" var="pharmacy">
-					<a href="RegistrationController?Action=AddPharmacist&PharmacyID=<c:out value="${pharmacy.pharmacyID}" />" class="btn btn-info btn-sm" role="button">Register a new Pharmacist in <c:out value="${pharmacy.pharmacyName}" /></a><br><br>
-				</c:forEach>
+				<a href="RegistrationController?Action=AddDispatcher" class="btn btn-info btn-sm" role="button">Register a new Dispatcher</a><br><br>
+			<hr><h2><center>List of pharmacists:</center></h2><br>				
 				<table id="pharmacistTable" class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
@@ -490,8 +487,10 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			<hr><h2><center>List of admin:</center></h2><br>
-				<a href="RegistrationController?Action=AddAdmin" class="btn btn-info btn-sm" role="button">Register a new Admin</a><br><br>
+				<c:forEach items="${PharmcyList}" var="pharmacy">
+					<a href="RegistrationController?Action=AddPharmacist&PharmacyID=<c:out value="${pharmacy.pharmacyID}" />" class="btn btn-info btn-sm" role="button">Register a new Pharmacist in <c:out value="${pharmacy.pharmacyName}" /></a><br><br>
+				</c:forEach>
+			<hr><h2><center>List of admin:</center></h2><br>				
 				<table id="adminTable" class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
@@ -506,9 +505,9 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<a href="RegistrationController?Action=AddAdmin" class="btn btn-info btn-sm" role="button">Register a new Admin</a><br><br>
 			<hr><h2><center>Add a new Item:</center></h2><br>
-			<hr><h2><center>List of Pharmacies:</center></h2><br>
-				<a href="InformationController?Action=AddPharmacy" class="btn btn-info btn-sm" role="button">Add a new Pharmacy</a><br><br>
+			<hr><h2><center>List of Pharmacies:</center></h2><br>				
 				<table id="pharmaciesTable" class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
@@ -523,8 +522,8 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			<hr><h2><center>List of branches:</center></h2><br>
-				<a href="InformationController?Action=AddBranch" class="btn btn-info btn-sm" role="button">Add a new Branch</a><br><br>
+				<a href="InformationController?Action=AddPharmacy" class="btn btn-info btn-sm" role="button">Add a new Pharmacy</a><br><br>
+			<hr><h2><center>List of branches:</center></h2><br>				
 				<table id="branchesTable" class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
@@ -545,8 +544,8 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			<hr><h2><center>List of Couriers:</center></h2><br>
-				<a href="InformationController?Action=AddCourier" class="btn btn-info btn-sm" role="button">Add a new Courier branch</a><br><br>
+				<a href="InformationController?Action=AddBranch" class="btn btn-info btn-sm" role="button">Add a new Branch</a><br><br>
+			<hr><h2><center>List of Couriers:</center></h2><br>				
 				<table id="courierTable" class="table table-striped table-bordered" width="100%">
 					<thead>
 						<tr>
@@ -569,7 +568,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				
+				<a href="InformationController?Action=AddCourier" class="btn btn-info btn-sm" role="button">Add a new Courier branch</a><br><br>
 		</c:if>
 		
 		<div class="row">

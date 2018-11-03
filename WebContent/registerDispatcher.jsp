@@ -25,9 +25,8 @@
                         <form target="_self" class="form-inline mr-auto">
                             <div class="form-group"><label for="search-field"></label></div>
                         </form>
-                        <c:if test="${userAccess == null}">
-                        <span class="navbar-text" style="float: right"><a href="login.jsp" class="login">Log In</a></span>
-                        <span class="navbar-text" style="float: right"><a href="register.jsp" class="login">Register</a></span>
+                        <c:if test="${userAccess == 4}">
+                        <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Log Out</a></span>
                         </c:if>
                     </div>
                 </div>
@@ -73,7 +72,7 @@
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
         </div>
-        <a class="already" href="login.jsp">Back</a> 
+        <a class="already" href="index.jsp">Back</a> 
 		<%-- <h6></h6>
 		<input type="text" 		name="Username" 	required="" 	placeholder="User Name *"><br>
 		<input type="password" 	name="Password" 	required="" 	placeholder="Create Password"><br>

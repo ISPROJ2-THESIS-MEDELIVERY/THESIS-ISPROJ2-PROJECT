@@ -46,10 +46,10 @@
         	<input type="text" name="Username" required="" placeholder="User Name *" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="password" name="Password" required="" placeholder="Create Password" class="form-control"/>
+        	<input type="password" name="Password" required="" placeholder="Create Password" id="Password" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="password" name="Password-repeat" required="" placeholder="Re-enter Password" class="form-control"/>
+        	<input type="password" name="Password-repeat" required="" placeholder="Re-enter Password" id="Passwordrepeat" class="form-control"/>
         </div>
         <div class="form-group">
         	<input type="hidden" name="SecretCode" value="i3Up8XmH04Jz151" class="form-control"/>
@@ -57,7 +57,7 @@
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
         </div>
-        <a class="already" href="login.jsp">Back</a> 
+        <a class="already" href="index.jsp">Back</a> 
 		<!-- <input type="text" 		name="FistName" 		required="" 	placeholder="First Name *">
 		<input type="text" 		name="LastName" 		required="" 	placeholder="Last Name *">
 		<input type="text" 		name="Username" 		required="" 	placeholder="User Name *">
@@ -101,4 +101,21 @@
     </footer>
 </div>
 </body>
+
+<script>
+var Password = document.getElementById("Password")
+  , Passwordrepeat = document.getElementById("Passwordrepeat");
+
+function validatePassword(){
+  if(Password.value != Passwordrepeat.value) {
+    Passwordrepeat.setCustomValidity("Passwords Don't Match");
+  } else {
+    Passwordrepeat.setCustomValidity('');
+  }
+}
+
+Password.onchange = validatePassword;
+Passwordrepeat.onkeyup = validatePassword;
+</script>
+
 </html>

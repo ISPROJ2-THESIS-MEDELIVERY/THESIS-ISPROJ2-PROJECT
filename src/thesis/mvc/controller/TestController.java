@@ -235,6 +235,5 @@ public class TestController extends HttpServlet {
     	EncryptionFunction encryptionFunction = new EncryptionFunction();
         System.out.println(encryptionFunction.encrypt("Pharmacy1.jpg"));
         System.out.println(encryptionFunction.encrypt("Prescription1540984857356.png"));
-        System.out.println(encryptionFunction.decrypt("DUp2BWaoPbyYDz9wySddW0Gz1swFLbUK1KHcugzU6Gs="));
     }
 }

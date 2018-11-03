@@ -2,8 +2,10 @@ package thesis.mvc.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,8 +18,10 @@ import javax.websocket.Session;
 
 import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.implement.StocksImplement;
+import thesis.mvc.implement.StocksPriceImplement;
 import thesis.mvc.model.Product;
 import thesis.mvc.model.Stocks;
+import thesis.mvc.model.StocksPrice;
 import thesis.mvc.utility.DBUtility;
 
 @WebServlet("/ProductController")
@@ -71,6 +75,51 @@ public class ProductController extends HttpServlet {
 			new StocksImplement().addStocks(stock);
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else if(Action.equalsIgnoreCase( "AddnewProduct" )){ //Goto main page
+			
+
+			String ProductName = request.getParameter("ProductName");
+			String GenericName = request.getParameter("GenericName");
+			String RegistrNumn = request.getParameter("RegistrNumn");
+			String ProductStrg = request.getParameter("ProductStrg");
+			String ProductForm = request.getParameter("ProductForm");
+			String ProductPack = request.getParameter("ProductPack");
+			String ProductManu = request.getParameter("ProductManu");
+			String ProductOrgi = request.getParameter("ProductOrgi");
+			String ProductDesc = request.getParameter("ProductDesc");
+			String ProductImag = request.getParameter("ProductImag");
+			boolean ProductIsRX = Boolean.getBoolean(request.getParameter("ProductIsRX"));
+			int ProductLimt = Integer.parseInt(request.getParameter("ProductLimt"));
+			Product product = new Product();
+			product.setProductName( ProductName );
+			product.setGenericName( GenericName );
+			product.setRegistrationNo( RegistrNumn );
+			product.setProductStrength( ProductStrg );
+			product.setProductForm( ProductForm );
+			product.setProductPackaging( ProductPack );
+			product.setProductManufacturer( ProductManu );
+			product.setProductOrigin( ProductOrgi );
+			product.setProductDescription( ProductDesc );
+			product.setProductImage( ProductImag );
+			product.setRXProduct(ProductIsRX);
+			product.setCounterLimit(ProductLimt);
+			int ProducID = new ProductImplement().addProduct(product);
+			int PharmaID = Integer.parseInt(request.getParameter("PharmaID"));
+			double Price = Double.parseDouble( request.getParameter("Price"));
+			boolean Feat = Boolean.parseBoolean(request.getParameter("Feat"));
+			Stocks stocks = new Stocks();
+			stocks.setPharmacyID( PharmaID );
+			stocks.setProductID( ProducID );
+			stocks.setFeature( Feat );
+			int StockID = new StocksImplement().addStocks(stocks);
+    		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+			StocksPrice stocksPrice = new StocksPrice();
+			stocksPrice.setIsCurrent(true);
+			stocksPrice.setStockID(StockID);
+			stocksPrice.setDateSet(CurrentDate);
+			stocksPrice.setPriceSet(Price);
+			new StocksPriceImplement().addStocksPrice(stocksPrice);
+			
+			
 			
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} 

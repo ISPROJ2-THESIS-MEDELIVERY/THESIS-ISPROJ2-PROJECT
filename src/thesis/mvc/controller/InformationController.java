@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.CityListingImplement;
 import thesis.mvc.implement.CourierServiceImplement;
+import thesis.mvc.implement.PharmacistImplement;
 import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.implement.StocksImplement;
@@ -60,7 +61,9 @@ public class InformationController extends HttpServlet {
 		
 		//Insert/Add Product
 		} else if (Action.equalsIgnoreCase("InsertProduct")){
+			int pharmacyID = new BranchImplement().getBranchById(new PharmacistImplement().getPharmacistById((int) session.getAttribute("Pharmacist")).getBranchID()).getPharmacyID();
 			session.setAttribute("ProductList", new ProductImplement().getAllProducts() );
+			session.setAttribute("currentStock", new StocksImplement().getStocksByPharmacy(pharmacyID));
 			response.sendRedirect(request.getContextPath() + "/insertProduct.jsp");
 		} else if (Action.equalsIgnoreCase("InsertNewProduct")){
 			response.sendRedirect(request.getContextPath() + "/insertNewProduct.jsp");

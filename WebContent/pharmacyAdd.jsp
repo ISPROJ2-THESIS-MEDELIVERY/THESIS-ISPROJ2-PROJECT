@@ -102,6 +102,9 @@
         	Product is an Rx Product?<input type="checkbox" name="" class="form-control"/>
         </div>
         <div class="form-group">
+        	Image: <input type="file" name="" class="form-control"/>
+        </div>
+        <div class="form-group">
         	Is it featured?<input type="checkbox" name="" class="form-control"/>
         </div>
         <div class="form-group">

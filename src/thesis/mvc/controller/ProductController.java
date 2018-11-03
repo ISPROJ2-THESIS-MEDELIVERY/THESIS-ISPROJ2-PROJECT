@@ -1,5 +1,6 @@
 package thesis.mvc.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Timestamp;
@@ -8,23 +9,31 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import thesis.mvc.implement.BranchImplement;
+import thesis.mvc.implement.PrescriptionImplement;
 import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.implement.StocksImplement;
 import thesis.mvc.implement.StocksPriceImplement;
 import thesis.mvc.model.Pharmacist;
+import thesis.mvc.model.Prescription;
 import thesis.mvc.model.Product;
 import thesis.mvc.model.Stocks;
 import thesis.mvc.model.StocksPrice;
 import thesis.mvc.utility.DBUtility;
+import thesis.mvc.utility.EncryptionFunction;
 
 @WebServlet("/ProductController")
+@MultipartConfig
 public class ProductController extends HttpServlet {
 	
 	private Connection conn;
@@ -35,6 +44,7 @@ public class ProductController extends HttpServlet {
 	}
 	
 	private static final long serialVersionUID = 1L;
+	private final String UPLOAD_DIRECTORY = "../../../../../../../../THESIS-ISPROJ2-PROJECT/WebContent/images/";
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//String forward = "";
@@ -98,7 +108,33 @@ public class ProductController extends HttpServlet {
 			String ProductManu = request.getParameter("ProductManu");
 			String ProductOrgi = request.getParameter("ProductOrgi");
 			String ProductDesc = request.getParameter("ProductDesc");
-			String ProductImag = request.getParameter("ProductImag");
+			String ProductImag = "";
+			if(ServletFileUpload.isMultipartContent(request)){
+	            try {
+
+	            	Part filePart = request.getPart("ProductImag");
+					String name = "Prescription" + Calendar.getInstance().getTime().getTime();
+					//String end = filePart.getContentType();
+					String end = filePart.getContentType();
+					if (end.startsWith("image")) {
+						String imageType = end.replace("image/", "");
+						name = name + "." + imageType;
+						String DbaseName = new EncryptionFunction().encrypt(name);
+						String AFileName = name;
+				        //System.out.println(UPLOAD_DIRECTORY + File.separator + AFileName + "." + imageType);
+				        //System.out.println(UPLOAD_DIRECTORY +"|"+ File.separator +"|"+ AFileName +"|"+ "." +"|"+ imageType);
+						filePart.write(UPLOAD_DIRECTORY + File.separator + AFileName + "." + imageType);
+						System.out.println( "File Uploaded Successfully: " + UPLOAD_DIRECTORY + File.separator + AFileName + "." + imageType);
+					} else {
+						System.out.println( "File Uploaded is not an image!");
+					}
+	            	
+	            } catch (Exception ex) {
+	            	System.out.println( "File Upload Failed due to " + ex);
+	            }
+	            
+	        }
+			
 			boolean ProductIsRX = Boolean.getBoolean(request.getParameter("ProductIsRX"));
 			int ProductLimt = Integer.parseInt(request.getParameter("ProductLimt"));
 			//Add Product

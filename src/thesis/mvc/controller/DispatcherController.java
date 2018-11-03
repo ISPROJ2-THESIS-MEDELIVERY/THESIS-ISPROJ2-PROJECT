@@ -80,7 +80,7 @@ public class DispatcherController extends HttpServlet {
 			int orderID = Integer.parseInt( request.getParameter("OrderID") );
 			int branchID = Integer.parseInt( request.getParameter("BranchID") );
 			
-			if(new OrderImplement().getOrderById(orderID).getOrderStatus().equalsIgnoreCase("CANCELLED")) {
+			if(!new OrderImplement().getOrderById(orderID).getOrderStatus().equalsIgnoreCase("CANCELLED")) {
 				new OrderImplement().updateOrderStatus(orderID, "PROCESSED", branchID);
 				Delivery delivery = new Delivery();
 				delivery.setComments(request.getParameter("Comments"));

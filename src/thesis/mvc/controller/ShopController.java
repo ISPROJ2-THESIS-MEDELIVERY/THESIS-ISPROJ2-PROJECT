@@ -206,6 +206,7 @@ public class ShopController extends HttpServlet {
 					String end = filePart.getContentType();
 					if (end.startsWith("image")) {
 						String imageType = end.replace("image/", "");
+						name = name + "." + imageType;
 						String DbaseName = new EncryptionFunction().encrypt(name);
 						String AFileName = name;
 				        System.out.println(DbaseName);

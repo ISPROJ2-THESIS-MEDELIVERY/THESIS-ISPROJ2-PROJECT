@@ -75,7 +75,7 @@ public class OrderImplement implements OrderDAO{
 	@Override
 	public void updateOrder(Order order) {
 		try {
-			String query = "UPDATE `order` SET CustomerID=?, DeliveryID=?, PharmacistID=?, PharmacyID=?, CityID=?, BranchID=?, PrescriptionID=?, OrderAddress=?, DateOrdered=?, DateProcessed=?, DateDelivered=?, OrderType=?, OrderStatus=?, SeniorDiscount=?, PaymentMethod=?, ActualCost=?, PayMaya=? WHERE OrderID=?";
+			String query = "UPDATE `order` SET CustomerID=?, DeliveryID=?, PharmacistID=?, PharmacyID=?, CityID=?, BranchID=?, PrescriptionID=?, OrderAddress=?, DateOrdered=?, DateProcessed=?, DateDelivered=?, OrderType=?, OrderStatus=?, SeniorDiscount=?, PaymentMethod=?, ActualCost=?, PayMayaID=? WHERE OrderID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, order.getCustomerID() );
 			preparedStatement.setInt( 2, order.getDeliveryID() );

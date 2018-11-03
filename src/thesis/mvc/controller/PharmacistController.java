@@ -53,51 +53,11 @@ public class PharmacistController extends HttpServlet{
 		session.setAttribute( "PharmacyOrderDetailsList" , new OrderDetailImplement().getOrderDetail()  );
 		
 	    if (action.equalsIgnoreCase("")) {
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
+	    	session.setAttribute("message", "Invalid usage, something went wrong");
 		} else if (action.equalsIgnoreCase("GoToOrders")) {
 			response.sendRedirect(request.getContextPath() + "/PharmacistBasic.jsp");
-		} else if (action.equalsIgnoreCase("")){
-			//Order order = new OrderImplement().getOrderById( Integer.parseInt(request.getParameter("orderID")));
-			//order.setOrderStatus("CANCELLED");
-			//new OrderImplement().updateOrder( order );
-			response.sendRedirect(request.getContextPath() + "/PharmacistBasic.jsp");
-		} else if (action.equalsIgnoreCase("RejectOrder")){
-			int orderID = Integer.parseInt(request.getParameter("orderID"));
-			if(new OrderImplement().getOrderById(orderID).getOrderStatus().equalsIgnoreCase("CANCELLED")) {
-				Order order = new OrderImplement().getOrderById(orderID);
-				order.setOrderStatus("PENDING");
-				order.setBranchID(0);
-				new OrderImplement().updateOrder( order );
-			} else {
-				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
-			}
-			response.sendRedirect(request.getContextPath() + "/PharmacistBasic.jsp");
-		} else if (action.equalsIgnoreCase("ApproveOrder")){
-			int orderID = Integer.parseInt(request.getParameter("orderID"));
-			if(new OrderImplement().getOrderById(orderID).getOrderStatus().equalsIgnoreCase("CANCELLED")) {
-				Order order = new OrderImplement().getOrderById(orderID);
-				order.setOrderStatus("EN-ROUTE");
-				new OrderImplement().updateOrder( order );
-			} else {
-				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
-			}
-			response.sendRedirect(request.getContextPath() + "/PharmacistBasic.jsp");
-		} else if (action.equalsIgnoreCase("InvalidateOrder")){
-			int orderID = Integer.parseInt(request.getParameter("orderID"));
-			if(new OrderImplement().getOrderById(orderID).getOrderStatus().equalsIgnoreCase("CANCELLED")) {
-				Order order = new OrderImplement().getOrderById(orderID);
-				order.setOrderStatus("INVALID");
-				order.setBranchID(0);
-				Prescription prescription = new PrescriptionImplement().getPrescriptionByID(order.getPrescriptionID());
-				prescription.setPermissionStatus("REJECTED");
-				prescription.setRemark(request.getParameter("Reason"));
-				new PrescriptionImplement().updatePrescription(prescription);
-				new OrderImplement().updateOrder( order );
-			} else {
-				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
-			}
-			response.sendRedirect(request.getContextPath() + "/PharmacistBasic.jsp");
 		}
+		response.sendRedirect(request.getContextPath() + "/index.jsp");
 			
 	}
 

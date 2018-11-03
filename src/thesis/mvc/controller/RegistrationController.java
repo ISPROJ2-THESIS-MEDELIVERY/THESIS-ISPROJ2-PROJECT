@@ -113,144 +113,144 @@ public class RegistrationController extends HttpServlet {
 		boolean Capcha = true;//request.getParameter( "CapchaRegistration" ) == "true";
 		
 		//Check if passwords match
-		if (Password != PassRept)
-		{
-			//response.sendRedirect(request.getContextPath() + "/RegistrationCustomer.jsp");
-		}
-		
-		//Input the login variables
-		Login login = new Login();
-		login.setUsername( Username );
-		login.setPassword( new EncryptionFunction().encrypt(Password) );
-		
-		//Image Saving Start
-		if (!Capcha) {
-			session.setAttribute("CapchaFail", true);
-			//response.sendRedirect(request.getContextPath() + "/RegistrationCustomer.jsp");
-		} else if (secretCode == null) { //Customer
-			//Parameter to Variable
-			String customerFName = request.getParameter( "FullName" );
-			String customerStrrt = request.getParameter( "CuStreet" );
-			String customerBrngy = request.getParameter( "CuBarngy" );
-			int customerCtyID = Integer.parseInt(request.getParameter( "CCityID" ));
-			String customerProvi = request.getParameter( "CuProvin" );
-			String customerLandL = request.getParameter( "CuLandLi" );
-			String customerCellu = request.getParameter( "CuCellul" );
-			String customerEMail = request.getParameter( "CusEmail" );
-			String customerConNo = request.getParameter( "ContactNumber" );
-			
-			//Initial Information
-			Customer customer = new Customer();
-			customer.setCustomerName( customerFName );
-			customer.setCustomerStreet(customerStrrt);
-			customer.setCustomerBarangay(customerBrngy);
-			customer.setCityID(customerCtyID);
-			customer.setCustomerProvince(customerProvi);
-			customer.setCustomerLandline(customerLandL);
-			customer.setCustomerCellular(customerCellu);
-			customer.setEmail( customerEMail );
-			customer.setIsSeniorCitizen(false); //This is temporary
-			
-			//Registration
-			int ID = Registration.makeCustomer(login, customer);
-			//Email of Confirmation
-			SendEmail sendEmail = new SendEmail();
-			
-			String confirmLink = "http://localhost:8080/" + request.getContextPath() + "/RegistrationController?UserID=" + new EncryptionFunction().encrypt(Integer.toString(ID));
-			sendEmail.send(customer.getEmail(), "Medilivery Account Confirmation",
-					"Dear " + customerFName + "," +  
-					"<p>Thank you for creating your Medelivery Account.<br></p>" + 
-					"<p>To complete your registration, click the link below:<br>" + 
-					"<a href=\"" + confirmLink + "\" target=\"_blank\" data-saferedirecturl=\"\"><span class=\"il\">Confirm</span> your account</a></p>" + 
-					"<p>Yours truly,</p><br>" + 
-					"<p>Medelivery Admin Team</p>" + 
-					"The Medelivery Team Thanks you for your patronage");
-
-		} else if (secretCode.equalsIgnoreCase( "5WLjE4Hik2TC85l" ) ) {//Dispatcher
-			//Parameter To Variable
-			String FistName = request.getParameter( "FistName" );
-			String LastName = request.getParameter( "LastName" );
-			int PhoneNum = Integer.parseInt(request.getParameter( "PhoneNum" ));
-			String UAddress = request.getParameter( "UAddress" );
-			Date date = null;
-			try {
-				java.util.Date utilDate = df.parse(request.getParameter( "BrthDate" ));
-				date = new java.sql.Date(utilDate.getTime());
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			int CourSele = Integer.parseInt( request.getParameter( "CourSele" ) );
-			
-			Dispatcher dispatcher = new Dispatcher();
-			dispatcher.setCourierServiceID( CourSele );
-			dispatcher.setFirstName( FistName );
-			dispatcher.setLastName( LastName );
-			dispatcher.setContactNumber( PhoneNum );
-			dispatcher.setAddress( UAddress );
-			dispatcher.setBirthdate( date );
-			test = Registration.makeDispatcher(login, dispatcher);
-			
-		} else if (secretCode.equalsIgnoreCase( "RjRILW7K7Xz96hD" ) ) {//Pharmacist
-			//Parameter To Variable
-			String FistName = request.getParameter( "FistName" );
-			String LastName = request.getParameter( "LastName" );
-			String PharNumb = request.getParameter( "PharNumb" );
-			int PharSele = Integer.parseInt(request.getParameter( "PharSele" ));
-			String PharPosi = request.getParameter( "PharPosi" );
-			
-			//Initial Information
-			Pharmacist pharmacist = new Pharmacist();
-			pharmacist.setBranchID( PharSele );
-			pharmacist.setFirstName( FistName );
-			pharmacist.setLastName( LastName );
-			pharmacist.setPRCNo( PharNumb );
-			pharmacist.setPosition( PharPosi );
-			test = Registration.makePharmacist(login, pharmacist);
-		} else if (secretCode.equalsIgnoreCase( "i3Up8XmH04Jz151")) {//Admin
-			//Parameter to Variable
-			String FistName = request.getParameter( "FistName" );
-			String LastName = request.getParameter( "LastName" );
-			
-			//Initial Information
-			Admin admin = new Admin();
-			admin.setFirstName( FistName );
-			admin.setSurname( LastName );
-			test = Registration.makeAdmin(login, admin);
-		} else if (secretCode.equalsIgnoreCase("updateCustomer")) {//Admin
-			//Parameter to Variable
-			//Get CID
-			
-			Customer customer = new CustomerImplement().getCustomerById(1);
-			
-			String CustName = request.getParameter( "UpdateName" ) != null ? request.getParameter( "UpdateName" ) : customer.getCustomerName();
-			String CustStrt = request.getParameter( "UpdateStrt" ) != null ? request.getParameter( "UpdateStrt" ) : customer.getCustomerStreet();
-			String CustBrgy = request.getParameter( "UpdateBrgy" ) != null ? request.getParameter( "UpdateBrgy" ) : customer.getCustomerBarangay();
-			int CustCity = request.getParameter( "UpdateCity" ) != null ? Integer.parseInt(request.getParameter( "UpdateCity" )) : customer.getCityID();
-			String CustProv = request.getParameter( "UpdateProv" ) != null ? request.getParameter( "UpdateProv" ) : customer.getCustomerProvince();
-			String CustCell = request.getParameter( "UpdateCell" ) != null ? request.getParameter( "UpdateCell" ) : customer.getCustomerCellular();
-			String CustLand = request.getParameter( "UpdateLand" ) != null ? request.getParameter( "UpdateLand" ) : customer.getCustomerLandline();
-			String CustEmil = request.getParameter( "UpdateEmil" ) != null ? request.getParameter( "UpdateEmil" ) : customer.getEmail();
-			
-			//Initial Information
-			customer.setCustomerName(CustName);
-			customer.setCustomerStreet(CustStrt);
-			customer.setCustomerBarangay(CustBrgy);
-			customer.setCityID(CustCity);
-			customer.setCustomerProvince(CustProv);
-			customer.setCustomerCellular(CustCell);
-			customer.setCustomerLandline(CustLand);
-			customer.setEmail(CustEmil);
-			
-			new CustomerImplement().updateCustomer(customer);
-			
-		}
-		
-		session.setAttribute("justReg", true);
-		if(test){
+		if (Password != PassRept) {
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else {
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
+			
+			//Input the login variables
+			Login login = new Login();
+			login.setUsername( Username );
+			login.setPassword( new EncryptionFunction().encrypt(Password) );
+			
+			//Image Saving Start
+			if (!Capcha) {
+				session.setAttribute("CapchaFail", true);
+				//response.sendRedirect(request.getContextPath() + "/RegistrationCustomer.jsp");
+			} else if (secretCode == null) { //Customer
+				//Parameter to Variable
+				String customerFName = request.getParameter( "FullName" );
+				String customerStrrt = request.getParameter( "CuStreet" );
+				String customerBrngy = request.getParameter( "CuBarngy" );
+				int customerCtyID = Integer.parseInt(request.getParameter( "CCityID" ));
+				String customerProvi = request.getParameter( "CuProvin" );
+				String customerLandL = request.getParameter( "CuLandLi" );
+				String customerCellu = request.getParameter( "CuCellul" );
+				String customerEMail = request.getParameter( "CusEmail" );
+				String customerConNo = request.getParameter( "ContactNumber" );
+				
+				//Initial Information
+				Customer customer = new Customer();
+				customer.setCustomerName( customerFName );
+				customer.setCustomerStreet(customerStrrt);
+				customer.setCustomerBarangay(customerBrngy);
+				customer.setCityID(customerCtyID);
+				customer.setCustomerProvince(customerProvi);
+				customer.setCustomerLandline(customerLandL);
+				customer.setCustomerCellular(customerCellu);
+				customer.setEmail( customerEMail );
+				customer.setIsSeniorCitizen(false); //This is temporary
+				
+				//Registration
+				int ID = Registration.makeCustomer(login, customer);
+				//Email of Confirmation
+				SendEmail sendEmail = new SendEmail();
+				
+				String confirmLink = "http://localhost:8080/" + request.getContextPath() + "/RegistrationController?UserID=" + new EncryptionFunction().encrypt(Integer.toString(ID));
+				sendEmail.send(customer.getEmail(), "Medilivery Account Confirmation",
+						"Dear " + customerFName + "," +  
+						"<p>Thank you for creating your Medelivery Account.<br></p>" + 
+						"<p>To complete your registration, click the link below:<br>" + 
+						"<a href=\"" + confirmLink + "\" target=\"_blank\" data-saferedirecturl=\"\"><span class=\"il\">Confirm</span> your account</a></p>" + 
+						"<p>Yours truly,</p><br>" + 
+						"<p>Medelivery Admin Team</p>" + 
+						"The Medelivery Team Thanks you for your patronage");
+	
+			} else if (secretCode.equalsIgnoreCase( "5WLjE4Hik2TC85l" ) ) {//Dispatcher
+				//Parameter To Variable
+				String FistName = request.getParameter( "FistName" );
+				String LastName = request.getParameter( "LastName" );
+				int PhoneNum = Integer.parseInt(request.getParameter( "PhoneNum" ));
+				String UAddress = request.getParameter( "UAddress" );
+				Date date = null;
+				try {
+					java.util.Date utilDate = df.parse(request.getParameter( "BrthDate" ));
+					date = new java.sql.Date(utilDate.getTime());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				int CourSele = Integer.parseInt( request.getParameter( "CourSele" ) );
+				
+				Dispatcher dispatcher = new Dispatcher();
+				dispatcher.setCourierServiceID( CourSele );
+				dispatcher.setFirstName( FistName );
+				dispatcher.setLastName( LastName );
+				dispatcher.setContactNumber( PhoneNum );
+				dispatcher.setAddress( UAddress );
+				dispatcher.setBirthdate( date );
+				test = Registration.makeDispatcher(login, dispatcher);
+				
+			} else if (secretCode.equalsIgnoreCase( "RjRILW7K7Xz96hD" ) ) {//Pharmacist
+				//Parameter To Variable
+				String FistName = request.getParameter( "FistName" );
+				String LastName = request.getParameter( "LastName" );
+				String PharNumb = request.getParameter( "PharNumb" );
+				int PharSele = Integer.parseInt(request.getParameter( "PharSele" ));
+				String PharPosi = request.getParameter( "PharPosi" );
+				
+				//Initial Information
+				Pharmacist pharmacist = new Pharmacist();
+				pharmacist.setBranchID( PharSele );
+				pharmacist.setFirstName( FistName );
+				pharmacist.setLastName( LastName );
+				pharmacist.setPRCNo( PharNumb );
+				pharmacist.setPosition( PharPosi );
+				test = Registration.makePharmacist(login, pharmacist);
+			} else if (secretCode.equalsIgnoreCase( "i3Up8XmH04Jz151")) {//Admin
+				//Parameter to Variable
+				String FistName = request.getParameter( "FistName" );
+				String LastName = request.getParameter( "LastName" );
+				
+				//Initial Information
+				Admin admin = new Admin();
+				admin.setFirstName( FistName );
+				admin.setSurname( LastName );
+				test = Registration.makeAdmin(login, admin);
+			} else if (secretCode.equalsIgnoreCase("updateCustomer")) {//Admin
+				//Parameter to Variable
+				//Get CID
+				
+				Customer customer = new CustomerImplement().getCustomerById(1);
+				
+				String CustName = request.getParameter( "UpdateName" ) != null ? request.getParameter( "UpdateName" ) : customer.getCustomerName();
+				String CustStrt = request.getParameter( "UpdateStrt" ) != null ? request.getParameter( "UpdateStrt" ) : customer.getCustomerStreet();
+				String CustBrgy = request.getParameter( "UpdateBrgy" ) != null ? request.getParameter( "UpdateBrgy" ) : customer.getCustomerBarangay();
+				int CustCity = request.getParameter( "UpdateCity" ) != null ? Integer.parseInt(request.getParameter( "UpdateCity" )) : customer.getCityID();
+				String CustProv = request.getParameter( "UpdateProv" ) != null ? request.getParameter( "UpdateProv" ) : customer.getCustomerProvince();
+				String CustCell = request.getParameter( "UpdateCell" ) != null ? request.getParameter( "UpdateCell" ) : customer.getCustomerCellular();
+				String CustLand = request.getParameter( "UpdateLand" ) != null ? request.getParameter( "UpdateLand" ) : customer.getCustomerLandline();
+				String CustEmil = request.getParameter( "UpdateEmil" ) != null ? request.getParameter( "UpdateEmil" ) : customer.getEmail();
+				
+				//Initial Information
+				customer.setCustomerName(CustName);
+				customer.setCustomerStreet(CustStrt);
+				customer.setCustomerBarangay(CustBrgy);
+				customer.setCityID(CustCity);
+				customer.setCustomerProvince(CustProv);
+				customer.setCustomerCellular(CustCell);
+				customer.setCustomerLandline(CustLand);
+				customer.setEmail(CustEmil);
+				
+				new CustomerImplement().updateCustomer(customer);
+				
+			}
+			
+			session.setAttribute("justReg", true);
+			if(test){
+				response.sendRedirect(request.getContextPath() + "/index.jsp");
+			} else {
+				response.sendRedirect(request.getContextPath() + "/index.jsp");
+			}
 		}
 	}
 }

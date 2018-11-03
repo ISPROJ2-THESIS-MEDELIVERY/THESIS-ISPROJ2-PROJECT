@@ -277,7 +277,8 @@ public class ShopAction {
 	                JSONObject testobject = (JSONObject) parser.parse(returnMsg);
 	                System.out.println("RESPONSE"+ conn.getResponseCode() + returnMsg);
 	                System.out.println(testobject.get("redirectUrl"));
-	                
+
+	                order = new OrderImplement().getOrderById(order.getOrderID());
 	                order.setPaymayaID((String) testobject.get("redirectUrl"));
 	                new OrderImplement().updateOrder(order);
 	                return (String) testobject.get("redirectUrl");

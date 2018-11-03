@@ -71,13 +71,12 @@ public class HomeController  extends HttpServlet {
 		case 3:
 			int BranchxofPharmacist = new PharmacistImplement().getPharmacistById( (int) session.getAttribute("Pharmacist") ).getBranchID();
 			int PharmacyofBranch = new BranchImplement().getBranchById(BranchxofPharmacist).getPharmacyID();
-			session.setAttribute("PharmacistPharmacy", pharmacyImplement.getPharmacyById(PharmacyofBranch));
+			session.setAttribute("PharmacistBranch", new PharmacistImplement().getPharmacistById( (int) session.getAttribute("Pharmacist") ));
 			session.setAttribute("IncomingOrders", new OrderImplement().getOrderByPharmacyId(PharmacyofBranch));
 			
 			session.setAttribute( "IncomingOrderDetails" , new OrderDetailImplement().getOrderDetail()  );
 			session.setAttribute( "ProductTranslation" , new ProductImplement().getAllProducts() );
-			session.setAttribute("PrescriptionImage", new PrescriptionImplement().getAllPrescription());
-			System.out.println("test this theory" + new PrescriptionImplement().getPrescriptionByID(1).getPrescription());
+			session.setAttribute( "PrescriptionImage" , new PrescriptionImplement().getAllPrescription());
 			//PharmacistImplement pharmacistImplement = new PharmacistImplement();
 			//session.setAttribute("PharmacistDetails", session.getAttribute("Pharmacist") );
 			//PharmacyImplement pharmacyImplement1 = new PharmacyImplement();

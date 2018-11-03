@@ -315,6 +315,120 @@
 		</tbody>
 	</table>
 	</div>
+	<div id="container-fluid">
+	<h2>RETURNING DELIVERIES</h2>
+    <table id="druglistTable" class="table-wrapper table-striped table-bordered" width="100%">
+		<thead>
+			<tr>
+	            <th>OrderID</th>
+	            <th>ProductID</th>
+	            <th>Quantity</th>
+	            <th>Address</th>
+	            <th>Date Ordered</th>
+	            <th>Type</th>
+	            <th>Status</th>
+	            <th>Prescription?</th>
+	            <th>Senior Citizen?</th>
+	            <th>Order Details</th>
+	            <th>Total Cost</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${DispatcherOrderList}" var="order">
+				<c:if test="${order.orderStatus == 'RETURNING' && order.pharmacyID >= 1}">
+					<tr>
+			            <td><c:out value="${order.customerID}" /></td>
+			            <td><c:out value="${order.pharmacyID}" /></td>
+			            <td><c:out value="${order.cityID}" /></td>
+			            <td><c:out value="${order.orderAddress}" /></td>
+			            <td><c:out value="${order.dateOrdered}" /></td>
+			            <td><c:out value="${order.orderType}" /></td>
+			            <td><c:out value="${order.orderStatus}" /></td>
+			            <td>
+							<c:if test="${order.prescriptionID == 0}">
+								NO PRESCRIPTION
+							</c:if>
+							<c:if test="${order.prescriptionID != 0}">
+								PRESCRIPTION REQUIRED
+							</c:if>
+			            </td>
+			            <td><c:out value="${order.seniorDiscount}" /></td>
+			            <td>
+			            	<%-- <p>
+  								<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    							Click to view
+ 		 						</a>
+  						   </p>
+  						   <div class="collapse" id="collapseExample">
+  						       <div class="card card-body">
+    							   <table class="table" border = "2">
+							    <thead>
+							        <tr>
+							            <th>OrderID</th>
+							            <th>Product Name</th>
+							            <th>Quantity</th>
+							            <th>Cost Per Unit</th>
+							            <th>Total Cost</th>
+							        </tr>
+							    </thead>
+							    <tbody>
+							    	<c:forEach items="${DispatcherOrderDetailsList}" var="orderdetails">
+										<c:if test="${order.orderID == orderdetails.orderID}">
+							            <tr>
+							                <td><c:out value="${orderdetails.orderID}" /></td>
+							                <td>
+							    				<c:forEach items="${ProductTranslation}" var="product">
+							    					<c:if test="${orderdetails.productID == product.productID}">
+							                			<c:out value="${product.productName}" />
+							    					</c:if>
+							                	</c:forEach>
+							                </td>
+							                <td><c:out value="${orderdetails.quantity}" /></td>
+							                <td><c:out value="${orderdetails.costPerUnit}" /></td>
+							                <td><c:out value="${orderdetails.totalCost}" /></td>
+							            </tr>
+							            </c:if>
+									</c:forEach>
+							    </tbody>
+							</table>
+  							   </div>
+						   </div> --%>
+				            <table class="table-wrapper table-striped table-bordered" width="100%">
+							    <thead>
+							        <tr>
+							            <th>Product Name</th>
+							            <th>Quantity</th>
+							            <th>Cost Per Unit</th>
+							            <th>Total Cost</th>
+							        </tr>
+							    </thead>
+							    <tbody>
+							    	<c:forEach items="${DispatcherOrderDetailsList}" var="orderdetails">
+										<c:if test="${order.orderID == orderdetails.orderID}">
+							            <tr>
+							                <td>
+							    				<c:forEach items="${ProductTranslation}" var="product">
+							    					<c:if test="${orderdetails.productID == product.productID}">
+							                			<c:out value="${product.productName}" />
+							    					</c:if>
+							                	</c:forEach>
+							                </td>
+							                <td><c:out value="${orderdetails.quantity}" /></td>
+							                <td>&#8369;<c:out value="${orderdetails.costPerUnit}" /></td>
+							                <td>&#8369;<c:out value="${orderdetails.totalCost}" /></td>
+							            </tr>
+							            </c:if>
+									</c:forEach>
+							    </tbody>
+							</table>
+			            </td>
+			            <td>&#8369;<c:out value="${order.actualCost}" /></td>
+					</tr>
+				</c:if>
+			</c:forEach>
+		</tbody>
+	</table>
+	</div>
 	
 <div class="footer-dark">
     <footer>

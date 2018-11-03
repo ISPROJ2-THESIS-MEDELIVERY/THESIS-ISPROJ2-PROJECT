@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -181,31 +182,35 @@ public class ApprovalAction {
 		}
 	}
 	
-	public boolean pharmacistApproval(int orderID, boolean aprroval) {
-		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-		if(aprroval) {
-			try(PreparedStatement stmt = conn.prepareStatement("UPDATE `order` SET OrderStatus = 'APPROVED', DateProcessed = ? WHERE OrderID = ?")) {
-	            stmt.setDate(1, CurrentDate);
-				stmt.setInt(2, orderID);
+	public void pharmacistApproval(int orderID, int aprroval) {
+		Timestamp CurrentDate = new Timestamp(Calendar.getInstance().getTime().getTime());
+		if (aprroval == 1) {
+			try(PreparedStatement stmt = conn.prepareStatement("UPDATE `order` SET OrderStatus = 'PENDING', BranchID = 0 WHERE OrderID = ?")) {
+				stmt.setInt(1, orderID);
 				stmt.executeUpdate();
 				stmt.close();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
-	            return false;
 	        }
-		} else {
-			try(PreparedStatement stmt = conn.prepareStatement("UPDATE `order` SET OrderStatus = 'CANCELLED', DateProcessed = ? WHERE OrderID = ?")) {
-				stmt.setDate(1, CurrentDate);
+		} else if (aprroval == 2) {
+			try(PreparedStatement stmt = conn.prepareStatement("UPDATE `order` SET OrderStatus = 'EN-ROUTE', DateProcessed = ? WHERE OrderID = ?")) {
+				stmt.setTimestamp(1, CurrentDate);
 				stmt.setInt(2, orderID);
 	            stmt.executeUpdate();
 	            stmt.close();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
-	            return false;
+	        }
+		} else if (aprroval == 3) {
+			try(PreparedStatement stmt = conn.prepareStatement("UPDATE `order` SET OrderStatus = 'INVALID', DateProcessed = ? WHERE OrderID = ?")) {
+				stmt.setTimestamp(1, CurrentDate);
+				stmt.setInt(2, orderID);
+	            stmt.executeUpdate();
+	            stmt.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
 	        }
 		}
-		
-		return false;
 	}
 	
 }

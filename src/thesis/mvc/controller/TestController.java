@@ -6,7 +6,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -235,5 +238,16 @@ public class TestController extends HttpServlet {
     	EncryptionFunction encryptionFunction = new EncryptionFunction();
         System.out.println(encryptionFunction.encrypt("Pharmacy1.jpg"));
         System.out.println(encryptionFunction.encrypt("Prescription1540984857356.png"));
+        
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        Timestamp timestamp1 = new Timestamp(calendar.getTimeInMillis());
+        calendar.add(Calendar.HOUR, 24);
+        Timestamp timestamp2 = new Timestamp(calendar.getTimeInMillis());
+        
+        //Timestamp timestamp1 = new Timestamp(Calendar.getInstance().getTime().getTime());
+        //Timestamp timestamp2 = timestamp1;
+        System.out.println(timestamp1);
+        System.out.println(timestamp2);
     }
 }

@@ -135,6 +135,7 @@ public class ShopAction {
 		//Add to order
 		//int orderID = new OrderImplement().addIncompleteOrder(order);
 		int orderID = new OrderImplement().addOrder(order);
+		order.setOrderID(orderID);
 		System.out.println("OrderID: " + orderID);
 		//insert OrderID
 		for (OrderDetail orderDetail : OrderDetails) {
@@ -277,6 +278,8 @@ public class ShopAction {
 	                System.out.println("RESPONSE"+ conn.getResponseCode() + returnMsg);
 	                System.out.println(testobject.get("redirectUrl"));
 	                
+	                order.setPaymayaID((String) testobject.get("redirectUrl"));
+	                new OrderImplement().updateOrder(order);
 	                return (String) testobject.get("redirectUrl");
 	                
 	                

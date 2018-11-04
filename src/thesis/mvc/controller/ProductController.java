@@ -110,11 +110,28 @@ public class ProductController extends HttpServlet {
 			String ProductOrgi = request.getParameter("ProductOrgi");
 			String ProductDesc = request.getParameter("ProductDesc");
 			String ProductImag = "";
+			boolean ProductIsRX = Boolean.getBoolean(request.getParameter("ProductIsRX"));
+			int ProductLimt = 0;//Integer.parseInt(request.getParameter("ProductLimt"));
+			//Add Product
+			Product product = new Product();
+			product.setProductName( ProductName );
+			product.setGenericName( GenericName );
+			product.setRegistrationNo( RegistrNumn );
+			product.setProductStrength( ProductStrg );
+			product.setProductForm( ProductForm );
+			product.setProductPackaging( ProductPack );
+			product.setProductManufacturer( ProductManu );
+			product.setProductOrigin( ProductOrgi );
+			product.setProductDescription( ProductDesc );
+			product.setRXProduct(ProductIsRX);
+			product.setCounterLimit(ProductLimt);
+			int ProductID = new ProductImplement().addProduct(product);
+			product.setProductID(ProductID);
 			if(ServletFileUpload.isMultipartContent(request)){
 	            try {
 
 	            	Part filePart = request.getPart("ProductImag");
-					String name = "Prescription" + Calendar.getInstance().getTime().getTime();
+					String name = "Product" + ProductID;
 					//String end = filePart.getContentType();
 					String end = filePart.getContentType();
 					if (end.startsWith("image")) {
@@ -136,24 +153,8 @@ public class ProductController extends HttpServlet {
 	            }
 	            
 	        }
-			
-			boolean ProductIsRX = Boolean.getBoolean(request.getParameter("ProductIsRX"));
-			int ProductLimt = 0;//Integer.parseInt(request.getParameter("ProductLimt"));
-			//Add Product
-			Product product = new Product();
-			product.setProductName( ProductName );
-			product.setGenericName( GenericName );
-			product.setRegistrationNo( RegistrNumn );
-			product.setProductStrength( ProductStrg );
-			product.setProductForm( ProductForm );
-			product.setProductPackaging( ProductPack );
-			product.setProductManufacturer( ProductManu );
-			product.setProductOrigin( ProductOrgi );
-			product.setProductDescription( ProductDesc );
 			product.setProductImage( ProductImag );
-			product.setRXProduct(ProductIsRX);
-			product.setCounterLimit(ProductLimt);
-			int ProductID = new ProductImplement().addProduct(product);
+			new ProductImplement().updateProduct(product);
 			System.out.println("PRODUCT ID: " + ProductID);
 			//Add to stock
 			Pharmacist pharmacist = new PharmacistImplement().getPharmacistById( (int) session.getAttribute("Pharmacist") );

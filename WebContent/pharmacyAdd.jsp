@@ -105,7 +105,7 @@
         	Image: <input type="file" name="ProductImag" class="form-control"/>
         </div>
         <div class="form-group">
-        	Is it featured?<input type="checkbox" name="" class="form-control"/>
+        	Is it featured?<input type="checkbox" name="feature" class="form-control"/>
         </div>
         <div class="input-group">
         <span class="input-group-text">&#8369;</span>

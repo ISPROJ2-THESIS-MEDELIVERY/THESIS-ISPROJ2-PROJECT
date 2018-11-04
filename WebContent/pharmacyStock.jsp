@@ -26,7 +26,7 @@
                             <div class="form-group"><label for="search-field"></label></div>
                         </form>
                         <c:if test="${userAccess == 3}">
-                        <span class="navbar-text" style="float: right"><a href="ProductController?Action=AddnewProduct" class="login">Add Product</a><br></span>
+                        <span class="navbar-text" style="float: right"><a href="ProductController?Action=AddnewProduct" class="login">Add New Product</a><br></span>
                         <span class="navbar-text" style="float: right"><a href="PharmacistController?Action=Prescription" class="login">Approve/Disapprove prescription orders</a></span>
 						<span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a><br></span>
                         </c:if>

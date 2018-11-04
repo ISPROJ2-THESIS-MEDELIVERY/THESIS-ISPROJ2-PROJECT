@@ -87,7 +87,7 @@ public class ProductController extends HttpServlet {
 			boolean Feat = Boolean.parseBoolean(request.getParameter("feature"));
 			//Add to stock
 			Stocks stocks = new Stocks();
-			stocks.setPharmacyID( PharmaID );
+			stocks.setPharmacyID(PharmaID);
 			stocks.setProductID(ProductID);
 			stocks.setFeature(Feat);
 			int StockID = new StocksImplement().addStocks(stocks);
@@ -111,6 +111,7 @@ public class ProductController extends HttpServlet {
 			String ProductDesc = request.getParameter("ProductDesc");
 			String ProductImag = "";
 			boolean ProductIsRX = Boolean.getBoolean(request.getParameter("ProductIsRX"));
+			System.out.println("STOCK ID: " + ProductIsRX);
 			int ProductLimt = 0;//Integer.parseInt(request.getParameter("ProductLimt"));
 			//Add Product
 			Product product = new Product();
@@ -161,6 +162,7 @@ public class ProductController extends HttpServlet {
 			int PharmaID = new BranchImplement().getBranchById(pharmacist.getBranchID()).getPharmacyID();
 			double Price = Double.parseDouble( request.getParameter("Price"));
 			boolean Feat = Boolean.parseBoolean(request.getParameter("feature"));
+			System.out.println("FEATURE: " + Feat);
 			Stocks stocks = new Stocks();
 			stocks.setPharmacyID( PharmaID );
 			stocks.setProductID(ProductID);

@@ -99,13 +99,13 @@
         	<input type="text" name="ProductDesc" placeholder="Product Description" class="form-control"/>
         </div>
         <div class="form-group">
-        	Product is an Rx Product?<input type="checkbox" name="ProductIsRX" class="form-control"/>
+        	Product is an Rx Product?<input type="checkbox" name="ProductIsRX" value="true" class="form-control"/>
         </div>
         <div class="form-group">
         	Image: <input type="file" name="ProductImag" class="form-control"/>
         </div>
         <div class="form-group">
-        	Is it featured?<input type="checkbox" name="feature" class="form-control"/>
+        	Is it featured?<input type="checkbox" name="feature" value="true" class="form-control"/>
         </div>
         <div class="input-group">
         <span class="input-group-text">&#8369;</span>

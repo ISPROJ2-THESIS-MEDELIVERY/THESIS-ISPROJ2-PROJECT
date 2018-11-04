@@ -61,7 +61,7 @@
       		<h4 class="list-group-item-heading"><center>Add Product</center></h4>     						
     	</a>
     </div><br>
-	<form method="post" action="/ProductController" encType="multipart/form-data">
+	<form method="post" action="ProductController" encType="multipart/form-data">
 	<div class="container">
 	 <div class="row">
 	  <div class="col-md-6">
@@ -112,7 +112,7 @@
         	<input type="number" min="0" step="0.01" name="Price" placeholder="Price" class="form-control"/>
         </div>
         <div class="form-group">
-            <button class="btn btn-primary btn-block" type="submit" name="action" value="addnewProduct">Add New Product</button>
+            <button class="btn btn-primary btn-block" type="submit" name="Action" value="addnewProduct">Add New Product</button>
         </div>
         </div>
       </div>

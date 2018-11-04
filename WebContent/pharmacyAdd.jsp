@@ -168,12 +168,12 @@
                 </div>
                 <div class="col-md-6 item text">
                     <h3>Medelivery</h3>
-                    <p><br />Our mission is to create a measurable, sustainable and profitable link between pharmacies, couriers and customers.  Providing the best system in storing databases of available pharmacies and delivery couriers, as well as management
+                    <p><br />Our mission is to create a measurable, sustainable and profitable link between pharmacies, couriers and customers. ï¿½Providing the best system in storing databases of available pharmacies and delivery couriers, as well as management
                         of theses deliveries. Our operation is also to bring convenience to customers by filtering their needs according to the type of payment they want and the type of delivery schedule that fits their respective timeframes.<br /><br
                         /><br /></p>
                 </div>
             </div>
-            <p class="copyright">Company Name © 2017</p>
+            <p class="copyright">Company Name ï¿½ 2017</p>
         </div>
     </footer>
 </div>

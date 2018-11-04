@@ -92,46 +92,7 @@
 							</c:if>
 			            </td>
 			            <td><c:out value="${order.seniorDiscount}" /></td>
-			            <td>
-			            	<%-- <p>
-  								<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    							Click to view
- 		 						</a>
-  						   </p>
-  						   <div class="collapse" id="collapseExample">
-  						       <div class="card card-body">
-    							   <table class="table" border = "2">
-							    <thead>
-							        <tr>
-							            <th>OrderID</th>
-							            <th>Product Name</th>
-							            <th>Quantity</th>
-							            <th>Cost Per Unit</th>
-							            <th>Total Cost</th>
-							        </tr>
-							    </thead>
-							    <tbody>
-							    	<c:forEach items="${DispatcherOrderDetailsList}" var="orderdetails">
-										<c:if test="${order.orderID == orderdetails.orderID}">
-							            <tr>
-							                <td><c:out value="${orderdetails.orderID}" /></td>
-							                <td>
-							    				<c:forEach items="${ProductTranslation}" var="product">
-							    					<c:if test="${orderdetails.productID == product.productID}">
-							                			<c:out value="${product.productName}" />
-							    					</c:if>
-							                	</c:forEach>
-							                </td>
-							                <td><c:out value="${orderdetails.quantity}" /></td>
-							                <td><c:out value="${orderdetails.costPerUnit}" /></td>
-							                <td><c:out value="${orderdetails.totalCost}" /></td>
-							            </tr>
-							            </c:if>
-									</c:forEach>
-							    </tbody>
-							</table>
-  							   </div>
-						   </div> --%>
+			            <td>			            	
 				            <table class="table-wrapper table-striped table-bordered" width="100%">
 							    <thead>
 							        <tr>
@@ -240,45 +201,6 @@
 			            </td>
 			            <td><c:out value="${order.seniorDiscount}" /></td>
 			            <td>
-			            	<%-- <p>
-  								<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    							Click to view
- 		 						</a>
-  						   </p>
-  						   <div class="collapse" id="collapseExample">
-  						       <div class="card card-body">
-    							   <table class="table" border = "2">
-							    <thead>
-							        <tr>
-							            <th>OrderID</th>
-							            <th>Product Name</th>
-							            <th>Quantity</th>
-							            <th>Cost Per Unit</th>
-							            <th>Total Cost</th>
-							        </tr>
-							    </thead>
-							    <tbody>
-							    	<c:forEach items="${DispatcherOrderDetailsList}" var="orderdetails">
-										<c:if test="${order.orderID == orderdetails.orderID}">
-							            <tr>
-							                <td><c:out value="${orderdetails.orderID}" /></td>
-							                <td>
-							    				<c:forEach items="${ProductTranslation}" var="product">
-							    					<c:if test="${orderdetails.productID == product.productID}">
-							                			<c:out value="${product.productName}" />
-							    					</c:if>
-							                	</c:forEach>
-							                </td>
-							                <td><c:out value="${orderdetails.quantity}" /></td>
-							                <td><c:out value="${orderdetails.costPerUnit}" /></td>
-							                <td><c:out value="${orderdetails.totalCost}" /></td>
-							            </tr>
-							            </c:if>
-									</c:forEach>
-							    </tbody>
-							</table>
-  							   </div>
-						   </div> --%>
 				            <table class="table-wrapper table-striped table-bordered" width="100%">
 							    <thead>
 							        <tr>
@@ -354,45 +276,6 @@
 			            </td>
 			            <td><c:out value="${order.seniorDiscount}" /></td>
 			            <td>
-			            	<%-- <p>
-  								<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    							Click to view
- 		 						</a>
-  						   </p>
-  						   <div class="collapse" id="collapseExample">
-  						       <div class="card card-body">
-    							   <table class="table" border = "2">
-							    <thead>
-							        <tr>
-							            <th>OrderID</th>
-							            <th>Product Name</th>
-							            <th>Quantity</th>
-							            <th>Cost Per Unit</th>
-							            <th>Total Cost</th>
-							        </tr>
-							    </thead>
-							    <tbody>
-							    	<c:forEach items="${DispatcherOrderDetailsList}" var="orderdetails">
-										<c:if test="${order.orderID == orderdetails.orderID}">
-							            <tr>
-							                <td><c:out value="${orderdetails.orderID}" /></td>
-							                <td>
-							    				<c:forEach items="${ProductTranslation}" var="product">
-							    					<c:if test="${orderdetails.productID == product.productID}">
-							                			<c:out value="${product.productName}" />
-							    					</c:if>
-							                	</c:forEach>
-							                </td>
-							                <td><c:out value="${orderdetails.quantity}" /></td>
-							                <td><c:out value="${orderdetails.costPerUnit}" /></td>
-							                <td><c:out value="${orderdetails.totalCost}" /></td>
-							            </tr>
-							            </c:if>
-									</c:forEach>
-							    </tbody>
-							</table>
-  							   </div>
-						   </div> --%>
 				            <table class="table-wrapper table-striped table-bordered" width="100%">
 							    <thead>
 							        <tr>

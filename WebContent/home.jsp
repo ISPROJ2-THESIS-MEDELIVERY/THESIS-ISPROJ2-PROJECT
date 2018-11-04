@@ -314,6 +314,7 @@
 						prescription orders</a><br> <br />
 				</div>
 			</div>
+			</div>
 			<br>
 			<%-- Current Orders Heading to your Pharmacy:
 					<a href="PharmacistController?Action=GoToOrders" class="btn btn-info" role="button"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Regular Orders</a> --%>
@@ -327,6 +328,7 @@
 						</h4>
 					</a>
 				</div>
+			</div>
 				<br>
 				<table id="wpres" class="table table-striped table-bordered"
 					width="100%">
@@ -341,7 +343,7 @@
 							<th>Senior Citizen?</th>
 							<th>Product Bought</th>
 							<th>Total Cost</th>
-							<th colspan="2">Action</th>
+							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -397,8 +399,7 @@
 											<input type="hidden" Name="orderID" value="<c:out value="${order.orderID}"/>" />
 											<input type="submit" value="Reject">
 										</form>
-									</td>
-									<td>
+
 										<form action="ApprovalController" method="post">
 											<input type="hidden" Name="action" value="OrderApprove" />
 											<input type="hidden" Name="orderID" value="<c:out value="${order.orderID}"/>" />
@@ -410,7 +411,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			</div>
+			
 			<div class="list-group">
 				<a class="list-group-item list-group-item-info">
 					<h4 class="list-group-item-heading">
@@ -421,7 +422,7 @@
 			</div>
 			<br>
 			<table id="wopres" class="table table-striped table-bordered"
-				width="100%">
+				width="125%">
 				<thead>
 					<tr>
 						<th>OrderID</th>
@@ -434,7 +435,8 @@
 						<th>Product Bought</th>
 						<th>Total Cost</th>
 						<th>Prescription</th>
-						<th colspan="3">Action</th>
+						<th>Action</th>
+						<th>Reason</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -498,8 +500,6 @@
 										<input type="hidden" Name="orderID" value="<c:out value="${order.orderID}"/>" />
 										<input type="submit" value="Reject">
 									</form>
-								</td>
-								<td>
 									<form action="ApprovalController" method="post">
 										<input type="hidden" Name="action" value="OrderApprove" />
 										<input type="hidden" Name="orderID" value="<c:out value="${order.orderID}"/>" />
@@ -528,6 +528,7 @@
 						</h4>
 					</a>
 				</div>
+			</div>
 				<br>
 				<table id="retpres" class="table table-striped table-bordered"
 					width="100%">
@@ -542,7 +543,7 @@
 							<th>Senior Citizen?</th>
 							<th>Product Bought</th>
 							<th>Total Cost</th>
-							<th colspan="3">Action</th>
+							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -597,8 +598,9 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			</div>
-		</div>
+			
+		
+		
 		<%-- Pharmacist Details<br>
 			<c:out value="${userID}" /><br>
 			<c:out value="${username}" /><br>
@@ -984,12 +986,15 @@
 <script src="assets/bootstrap/js/jquery.dataTables.min.js"></script>
 <script src="assets/bootstrap/js/dataTables.bootstrap.min.js"></script>
 
+
+
 	<script type="text/javascript">
 		 $(document).ready(function() {
 			$("#wpres").DataTable({
 				"sPaginationType": "full_numbers",
                 "bJQueryUI": true, "sScrollX": "100%",
-                "bScrollCollapse": true
+                "bScrollCollapse": true,
+                "autowidth": false
 			});
 		}); 
 	</script>
@@ -999,7 +1004,8 @@
 			$("#wopres").DataTable({
 				"sPaginationType": "full_numbers",
                 "bJQueryUI": true, "sScrollX": "100%",
-                "bScrollCollapse": true
+                "bScrollCollapse": true,
+                "autowidth": false
 			});
 		}); 
 	</script>
@@ -1009,7 +1015,8 @@
 			$("#retpres").DataTable({
 				"sPaginationType": "full_numbers",
                 "bJQueryUI": true, "sScrollX": "100%",
-                "bScrollCollapse": true
+                "bScrollCollapse": true,
+                "autowidth": false
 			});
 		}); 
 	</script>

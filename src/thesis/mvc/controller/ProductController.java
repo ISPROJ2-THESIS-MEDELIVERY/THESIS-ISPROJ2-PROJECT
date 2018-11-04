@@ -20,6 +20,7 @@ import javax.servlet.http.Part;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import thesis.mvc.implement.BranchImplement;
+import thesis.mvc.implement.PharmacistImplement;
 import thesis.mvc.implement.PrescriptionImplement;
 import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.implement.StocksImplement;
@@ -137,7 +138,7 @@ public class ProductController extends HttpServlet {
 	        }
 			
 			boolean ProductIsRX = Boolean.getBoolean(request.getParameter("ProductIsRX"));
-			int ProductLimt = Integer.parseInt(request.getParameter("ProductLimt"));
+			int ProductLimt = 0;//Integer.parseInt(request.getParameter("ProductLimt"));
 			//Add Product
 			Product product = new Product();
 			product.setProductName( ProductName );
@@ -153,8 +154,9 @@ public class ProductController extends HttpServlet {
 			product.setRXProduct(ProductIsRX);
 			product.setCounterLimit(ProductLimt);
 			int ProductID = new ProductImplement().addProduct(product);
+			System.out.println("PRODUCT ID: " + ProductID);
 			//Add to stock
-			Pharmacist pharmacist = (Pharmacist) session.getAttribute("Pharmacist");
+			Pharmacist pharmacist = new PharmacistImplement().getPharmacistById( (int) session.getAttribute("Pharmacist") );
 			int PharmaID = new BranchImplement().getBranchById(pharmacist.getBranchID()).getPharmacyID();
 			double Price = Double.parseDouble( request.getParameter("Price"));
 			boolean Feat = Boolean.parseBoolean(request.getParameter("feature"));
@@ -163,14 +165,17 @@ public class ProductController extends HttpServlet {
 			stocks.setProductID(ProductID);
 			stocks.setFeature(Feat);
 			int StockID = new StocksImplement().addStocks(stocks);
+			System.out.println("STOCK ID: " + StockID);
 			//Add to stock Prices
 			StocksPrice stocksPrice = new StocksPrice();
 			stocksPrice.setIsCurrent(true);
 			stocksPrice.setStockID(StockID);
 			stocksPrice.setDateSet(CurrentDate);
 			stocksPrice.setPriceSet(Price);
-			new StocksPriceImplement().addStocksPrice(stocksPrice);
+			int test = new StocksPriceImplement().addStocksPrice(stocksPrice);
+			System.out.println("PRODUCT ID: " + test);
 		}
+		response.sendRedirect(request.getContextPath() + "/index.jsp");
 		
 	}
 

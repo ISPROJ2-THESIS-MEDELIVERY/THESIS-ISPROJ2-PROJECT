@@ -26,13 +26,17 @@ public class StocksPriceImplement implements StocksPriceDAO{
 	public int addStocksPrice(StocksPrice stocksPrice) {
 		try {
 			String query = "INSERT INTO StocksPrice (StockID, PriceSet, DateSet, IsCurrent) VALUES (?,?,?,?)";
-			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			PreparedStatement preparedStatement = conn.prepareStatement( query, Statement.RETURN_GENERATED_KEYS);
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 			preparedStatement.setInt( 1, stocksPrice.getStockID() );
 			preparedStatement.setDouble( 2, stocksPrice.getPriceSet() );
 			preparedStatement.setDate( 3, CurrentDate );
 			preparedStatement.setBoolean( 4, stocksPrice.isIsCurrent() );
 			int NewID = preparedStatement.executeUpdate();
+			ResultSet rs = preparedStatement.getGeneratedKeys();
+			if (rs.next()) {
+				NewID = rs.getInt(1);
+			}
 			preparedStatement.close();
 			return NewID;
 			

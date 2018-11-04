@@ -112,7 +112,7 @@
         	<input type="number" min="0" step="0.01" name="Price" placeholder="Price" class="form-control"/>
         </div>
         <div class="form-group">
-            <button class="btn btn-primary btn-block" type="submit" name="Action" value="addnewProduct">Add New Product</button>
+            <button class="btn btn-primary btn-block" type="submit" name="Action" value="addProduct">Add New Product</button>
         </div>
         </div>
       </div>

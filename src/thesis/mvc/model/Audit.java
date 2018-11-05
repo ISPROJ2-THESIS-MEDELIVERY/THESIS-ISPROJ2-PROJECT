@@ -7,7 +7,7 @@ public class Audit {
 	private int AuditID;
 	private int UserID;
 	private String LogType;
-	private Date Timestamp;
+	private java.sql.Timestamp Timestamp;
 	private String ActionTaken;
 	
 	public int getAuditID() {
@@ -28,10 +28,10 @@ public class Audit {
 	public void setLogType(String logType) {
 		LogType = logType;
 	}
-	public Date getTimestamp() {
+	public java.sql.Timestamp getTimestamp() {
 		return Timestamp;
 	}
-	public void setTimestamp(Date timestamp) {
+	public void setTimestamp(java.sql.Timestamp timestamp) {
 		Timestamp = timestamp;
 	}
 	public String getActionTaken() {

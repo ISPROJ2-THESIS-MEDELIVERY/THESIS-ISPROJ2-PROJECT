@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -17,6 +18,7 @@ import thesis.mvc.utility.DBUtility;
 public class RegistrationAction {
 	
 	private Connection conn;
+	Timestamp CurrentDate = new Timestamp(Calendar.getInstance().getTime().getTime());
 
 	public RegistrationAction() {
 		conn = DBUtility.getConnection();
@@ -24,7 +26,6 @@ public class RegistrationAction {
 	DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 	
     public int makeCustomer(Login login, Customer customer) {
-		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 		int UserID = 0;
 		
     	//Check if user-name is used
@@ -110,7 +111,6 @@ public class RegistrationAction {
     }
     
     public boolean makeDispatcher(Login login, Dispatcher dispatcher) {
-		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 		int UserID = 0;
 		
     	//Check if user-name is used
@@ -180,7 +180,6 @@ public class RegistrationAction {
     }
     
     public boolean makePharmacist(Login login, Pharmacist pharmacist) {
-		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 		int UserID = 0;
 		
     	//Check if user-name is used
@@ -262,7 +261,6 @@ public class RegistrationAction {
     }
     
 	public boolean makeAdmin(Login login, Admin admin) {
-		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 		int UserID = 0;
 		
     	//Check if user-name is used

@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Calendar;
 
 import thesis.mvc.implement.AuditImplement;
@@ -34,7 +35,7 @@ public class LoginAction {
 
                 if (rs.next()) {
                     //Audit Log
-            		Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+            		Timestamp CurrentDate = new Timestamp(Calendar.getInstance().getTime().getTime());
                     Audit audit = new Audit();
                     audit.setUserID(rs.getInt(1));
                     audit.setLogType("Login");
@@ -63,7 +64,7 @@ public class LoginAction {
 
     public void logoutUser(int UserID, String Username) {
 		//Audit
-    	Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+		Timestamp CurrentDate = new Timestamp(Calendar.getInstance().getTime().getTime());
 		Audit audit = new Audit();
 		audit.setUserID(UserID);
 		audit.setLogType("Logout");

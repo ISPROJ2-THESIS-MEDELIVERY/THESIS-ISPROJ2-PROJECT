@@ -44,9 +44,7 @@ public class DispatcherController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		String action = "";
-		if (request.getParameter("Action") != null) {
-			action = request.getParameter( "Action" );
-		}
+		if (request.getParameter("Action") != null) { action = request.getParameter( "Action" ); }
 		
 		int DispatcherID = (int) session.getAttribute("Dispatcher");
 		int CourierID = new CourierServiceImplement().getCourierServiceById(new DispatcherImplement().getDispatcherById(DispatcherID).getCourierServiceID()).getCourierServiceID();
@@ -75,7 +73,7 @@ public class DispatcherController extends HttpServlet {
 		}
 
 		if(action.isEmpty()) {
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
+			//response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else if(action.equalsIgnoreCase("assignOrder")) {
 			int orderID = Integer.parseInt( request.getParameter("OrderID") );
 			int branchID = Integer.parseInt( request.getParameter("BranchID") );
@@ -93,13 +91,6 @@ public class DispatcherController extends HttpServlet {
 				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
 			}
 			//Reload
-			session.setAttribute( "DispatcherOrderList" , new OrderImplement().getOrder() );
-			session.setAttribute( "SelectPharmacy", new PharmacyImplement().getAllPharmacys() );
-			session.setAttribute( "ListBranches" , new BranchImplement().getAllBranch() );
-			session.setAttribute( "DispatcherOrderDetailsList" , new OrderDetailImplement().getOrderDetail()  );
-			session.setAttribute( "DriverList" , new DriverImplement().getAllDrivers());
-			session.setAttribute( "ProductTranslation" , new ProductImplement().getAllProducts());
-			response.sendRedirect(request.getContextPath() + "/DispatcherDirector.jsp");
 		} else if(action.equalsIgnoreCase("confirmOrder")) {
 			int orderID = Integer.parseInt( request.getParameter("OrderID") );
 			
@@ -110,15 +101,7 @@ public class DispatcherController extends HttpServlet {
 			} else {
 				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
 			}
-			//Reload
-			session.setAttribute( "DispatcherOrderList" , new OrderImplement().getOrder() );
-			session.setAttribute( "SelectPharmacy", new PharmacyImplement().getAllPharmacys() );
-			session.setAttribute( "ListBranches" , new BranchImplement().getAllBranch() );
-			session.setAttribute( "DispatcherOrderDetailsList" , new OrderDetailImplement().getOrderDetail()  );
-			session.setAttribute( "DriverList" , new DriverImplement().getAllDrivers());
-			session.setAttribute( "ProductTranslation" , new ProductImplement().getAllProducts());
-			response.sendRedirect(request.getContextPath() + "/DispatcherDirector.jsp");
 		}
-		
+		response.sendRedirect(request.getContextPath() + "/DispatcherController?Action=DispatchOrder");
 	}
 }

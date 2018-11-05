@@ -145,7 +145,6 @@ public class RegistrationController extends HttpServlet {
 				String customerLandL = request.getParameter( "CuLandLi" );
 				String customerCellu = request.getParameter( "CuCellul" );
 				String customerEMail = request.getParameter( "CusEmail" );
-				String customerConNo = request.getParameter( "ContactNumber" );
 				
 				//Initial Information
 				Customer customer = new Customer();

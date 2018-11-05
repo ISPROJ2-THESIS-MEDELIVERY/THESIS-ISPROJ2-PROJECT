@@ -51,15 +51,18 @@ public class ApprovalController extends HttpServlet{
 		   	approvalAction.pharmacistApproval( orderID, 1 );
 		} else if (action.equalsIgnoreCase("OrderApprove")){
 		   	approvalAction.pharmacistApproval( orderID, 2 );
-			Order order = new OrderImplement().getOrderById(orderID);
 		} else if (action.equalsIgnoreCase("OrderInvalidate")){
-		   	approvalAction.pharmacistApproval( orderID , 3 );
+		   	approvalAction.pharmacistApproval( orderID, 3 );
 			Order order = new OrderImplement().getOrderById(orderID);
 			Prescription prescription = new PrescriptionImplement().getPrescriptionByID(order.getPrescriptionID());
 			prescription.setPermissionStatus("REJECTED");
 			prescription.setRemark(request.getParameter("Reason"));
 			new PrescriptionImplement().updatePrescription(prescription);
 			new OrderImplement().updateOrder( order );
+		} else if (action.equalsIgnoreCase("ReturnReject")){
+		   	approvalAction.pharmacistApproval( orderID, 4 );
+		} else if (action.equalsIgnoreCase("ReturnApprove")){
+		   	approvalAction.pharmacistApproval( orderID, 5 );
 		}
 		response.sendRedirect(request.getContextPath() + "/index.jsp");
 		//RequestDispatcher view = request.getRequestDispatcher( "PharmacistPage.jsp" );

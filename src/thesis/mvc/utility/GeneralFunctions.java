@@ -1,6 +1,7 @@
 package thesis.mvc.utility;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Enumeration;
 
@@ -29,7 +30,7 @@ public class GeneralFunctions {
 			Audit audit = null;
 			audit.setUserID(UID);
 			audit.setLogType(Type);
-			audit.setTimestamp(new Date(Calendar.getInstance().getTime().getTime()));
+			audit.setTimestamp(new Timestamp(Calendar.getInstance().getTime().getTime()));
 			audit.setActionTaken(Action);
 			AuditImplement auditImplement = new AuditImplement();
 			auditImplement.addAudit(audit);

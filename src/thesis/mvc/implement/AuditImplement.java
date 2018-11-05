@@ -25,7 +25,7 @@ public class AuditImplement implements AuditDAO{
 		try (PreparedStatement stmt = conn.prepareStatement( "INSERT INTO Audit (UserID, LogType, Timestamp, ActionTaken) VALUES (?,?,?,?)" );){
 			stmt.setInt( 1, audit.getUserID() );
 			stmt.setString( 2, audit.getLogType() );
-			stmt.setDate( 3, audit.getTimestamp() );
+			stmt.setTimestamp( 3, audit.getTimestamp() );
 			stmt.setString( 4, audit.getActionTaken() );
 			int NewID = stmt.executeUpdate();
 			stmt.close();
@@ -48,7 +48,7 @@ public class AuditImplement implements AuditDAO{
 				audit.setAuditID( resultSet.getInt( "AuditID" ) );
 				audit.setUserID( resultSet.getInt( "UserID" ) );
 				audit.setLogType( resultSet.getString( "LogType" ) );
-				audit.setTimestamp( resultSet.getDate( "Timestamp" ) );
+				audit.setTimestamp( resultSet.getTimestamp( "Timestamp" ) );
 				audit.setActionTaken( resultSet.getString( "ActionTaken" ) );
 				audits.add(audit);
 			}
@@ -71,7 +71,7 @@ public class AuditImplement implements AuditDAO{
 				audit.setAuditID( resultSet.getInt( "AuditID" ) );
 				audit.setUserID( resultSet.getInt( "UserID" ) );
 				audit.setLogType( resultSet.getString( "LogType" ) );
-				audit.setTimestamp( resultSet.getDate( "Timestamp" ) );
+				audit.setTimestamp( resultSet.getTimestamp( "Timestamp" ) );
 				audit.setActionTaken( resultSet.getString( "ActionTaken" ) );
 			}
 			resultSet.close();

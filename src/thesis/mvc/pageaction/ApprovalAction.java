@@ -210,6 +210,22 @@ public class ApprovalAction {
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
+		} else if (aprroval == 3) {
+			try(PreparedStatement stmt = conn.prepareStatement("UPDATE `order` SET OrderStatus = 'COMPLETED-REJECTED-RETURN' WHERE OrderID = ?")) {
+				stmt.setInt(1, orderID);
+	            stmt.executeUpdate();
+	            stmt.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+		} else if (aprroval == 3) {
+			try(PreparedStatement stmt = conn.prepareStatement("UPDATE `order` SET OrderStatus = 'RETURNING' WHERE OrderID = ?")) {
+				stmt.setInt(1, orderID);
+	            stmt.executeUpdate();
+	            stmt.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
 		}
 	}
 	

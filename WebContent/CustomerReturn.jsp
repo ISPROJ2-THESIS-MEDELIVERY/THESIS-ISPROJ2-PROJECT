@@ -114,6 +114,7 @@
 			</c:forEach>
 	    </tbody>
 	</table>
+	<!-- Comments: <br><input type="text" name="Comments"/><br> -->
 	<a href="CustomerController?action=ReturnOrder&OrderID=<c:out value="${order.orderID}" />" class="btn btn-info" role="button"/>Return Order</a>
 		<hr>
 	</c:if>

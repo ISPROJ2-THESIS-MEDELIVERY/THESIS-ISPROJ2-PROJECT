@@ -151,8 +151,6 @@
 								</select><br>
 								Plate Number: <br>
 									<input type="text" name="PlateNumber"/><br>
-								Comments: <br>
-									<input type="text" name="Comments"/><br>
 								<input type="submit" name="action" value="assignOrder" placeholder="Set Order">
 							</form>
 						</td>
@@ -243,7 +241,6 @@
 		<thead>
 			<tr>
 	            <th>OrderID</th>
-	            <th>ProductID</th>
 	            <th>Quantity</th>
 	            <th>Address</th>
 	            <th>Date Ordered</th>
@@ -253,14 +250,14 @@
 	            <th>Senior Citizen?</th>
 	            <th>Order Details</th>
 	            <th>Total Cost</th>
+	            <th>RETURN TO</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${DispatcherOrderList}" var="order">
-				<c:if test="${order.orderStatus == 'RETURNING' && order.pharmacyID >= 1}">
+				<c:if test="${order.orderStatus == 'RETURNING'}">
 					<tr>
 			            <td><c:out value="${order.customerID}" /></td>
-			            <td><c:out value="${order.pharmacyID}" /></td>
 			            <td><c:out value="${order.cityID}" /></td>
 			            <td><c:out value="${order.orderAddress}" /></td>
 			            <td><c:out value="${order.dateOrdered}" /></td>
@@ -306,6 +303,16 @@
 							</table>
 			            </td>
 			            <td>&#8369;<c:out value="${order.actualCost}" /></td>
+			            <td>
+							<c:forEach items="${ListBranches}" var="branch">
+				           		<c:if test="${branch.branchID == order.branchID}">
+									<c:out value="${branch.branchStreet}" />, 
+									<c:out value="${branch.branchBarangay}" />, 
+									<c:out value="${branch.cityID}" />, 
+									<c:out value="${branch.branchProvince}" />
+								</c:if>
+							</c:forEach>
+			            </td>
 					</tr>
 				</c:if>
 			</c:forEach>

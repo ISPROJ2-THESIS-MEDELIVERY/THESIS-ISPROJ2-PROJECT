@@ -543,12 +543,13 @@
 							<th>Senior Citizen?</th>
 							<th>Product Bought</th>
 							<th>Total Cost</th>
+							<th>Reason</th>
 							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${IncomingOrders}" var="order">
-							<c:if test="${order.branchID == PharmacistBranch.branchID && order.orderStatus == 'RETURNING'}">
+							<c:if test="${order.branchID == PharmacistBranch.branchID && order.orderStatus == 'RETURN'}">
 								<tr>
 									<td><c:out value="${order.customerID}" /></td>
 									<td><c:out value="${order.pharmacyID}" /></td>
@@ -593,6 +594,19 @@
 										</table>
 									</td>
 									<td>&#8369;<c:out value="${order.actualCost}" /></td>
+									</td>
+									<td>
+										<form action="ApprovalController" method="post">
+											<input type="hidden" Name="action" value="ReturnReject" />
+											<input type="hidden" Name="orderID" value="<c:out value="${order.orderID}"/>" />
+											<input type="submit" value="Reject">
+										</form>
+										<form action="ApprovalController" method="post">
+											<input type="hidden" Name="action" value="ReturnApprove" />
+											<input type="hidden" Name="orderID" value="<c:out value="${order.orderID}"/>" />
+											<input type="submit" value="Approve">
+										</form>
+									</td>
 								</tr>
 							</c:if>
 						</c:forEach>

@@ -42,7 +42,7 @@
 						<span class="navbar-text" style="float: right"><a
 							href="login.jsp" class="login">Log In</a></span>
 						<span class="navbar-text" style="float: right"><a
-							href="register.jsp" class="login">Register</a></span>
+							href="RegistrationController?Action=AddCustomer" class="login">Register</a></span>
 					</c:if>
 					<c:if test="${userAccess == 1}">
 						<span class="navbar-text" style="float: right"><a

@@ -69,9 +69,9 @@
 		  </select>
         	<!-- <input type="text" name="CompCity" required="required" placeholder="Courier City" class="form-control"/> -->
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
         	<input type="text" name="CompProv" required="required" placeholder="Courier Province" class="form-control"/>
-        </div>
+        </div> -->
         <div class="form-group">
         	<input type="number" name="CompLand" required="required" placeholder="Courier Landline" class="form-control"/>
         </div>

@@ -64,9 +64,9 @@
 			</c:forEach>
 		  </select>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
         	<input type="text" name="BrchProv" required="required" placeholder="Branch Province" class="form-control"/>
-        </div>
+        </div> -->
         <div class="form-group">
         	<input type="number" name="BrchLand" required="required" placeholder="Branch Landline" class="form-control"/>
         </div>

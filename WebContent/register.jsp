@@ -68,11 +68,15 @@
         	<input type="text" name="CuBarngy" required="" placeholder="Barangay *" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="number" name="CCityID" required="" placeholder="City ID *" class="form-control"/>
+        	<select name="CCityID" class="form-control">
+			<c:forEach items="${CityList}" var="city">
+				<option value =<c:out value="${city.cityID}"/>><c:out value="${city.cityName}" /></option>
+			</c:forEach>
+		  </select>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
         	<input type="text" name="CuProvin" required="" placeholder="Province *" class="form-control"/>
-        </div>
+        </div> -->
         <div class="form-group">
         	<input type="text" name="CuLandLi" required="" placeholder="Landline *" class="form-control"/>
         </div>

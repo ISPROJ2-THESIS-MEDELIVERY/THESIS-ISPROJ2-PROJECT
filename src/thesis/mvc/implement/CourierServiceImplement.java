@@ -32,7 +32,7 @@ public class CourierServiceImplement implements CourierServiceDAO{
 			preparedStatement.setString( 2, courierService.getCompanyStreet() );
 			preparedStatement.setString( 3, courierService.getCompanyBarangay() );
 			preparedStatement.setString( 4, courierService.getCompanyCity() );
-			preparedStatement.setString( 5, courierService.getCompanyProvince() );
+			preparedStatement.setString( 5, "METRO MANILA" );
 			preparedStatement.setInt( 6, courierService.getCompanyLandline() );
 			preparedStatement.setInt( 7, courierService.getCompanyCellular() );
 			preparedStatement.setString( 8, courierService.getCompanyContact() );
@@ -70,7 +70,7 @@ public class CourierServiceImplement implements CourierServiceDAO{
 			preparedStatement.setString( 2, courierService.getCompanyStreet() );
 			preparedStatement.setString( 3, courierService.getCompanyBarangay() );
 			preparedStatement.setString( 4, courierService.getCompanyCity() );
-			preparedStatement.setString( 5, courierService.getCompanyProvince() );
+			preparedStatement.setString( 5, "METRO MANILA" );
 			preparedStatement.setInt( 6, courierService.getCompanyLandline() );
 			preparedStatement.setInt( 7, courierService.getCompanyCellular() );
 			preparedStatement.setString( 8, courierService.getCompanyContact() );

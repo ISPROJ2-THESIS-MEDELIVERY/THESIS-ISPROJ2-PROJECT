@@ -87,13 +87,11 @@ public class CustomerController extends HttpServlet{
 			response.sendRedirect(request.getContextPath() + "/CustomerPending.jsp");
 		} else if (action.equalsIgnoreCase("ReturnOrder")) {
 			Order returnedOrder = new OrderImplement().getOrderById( Integer.parseInt(request.getParameter("OrderID")));
-			if(returnedOrder.getDateDelivered() == null){
-				returnedOrder.setOrderStatus("RETURN");
-				new OrderImplement().updateOrder( returnedOrder );
-				session.setAttribute("OrderHistory", new OrderImplement().getOrderByCustomerId((int)session.getAttribute("Customer")));
-				session.setAttribute("OrderDetailHistory", new OrderDetailImplement().getOrderDetail() );
-				response.sendRedirect(request.getContextPath() + "/CustomerPending.jsp");
-			}
+			returnedOrder.setOrderStatus("RETURNING");
+			new OrderImplement().updateOrder( returnedOrder );
+			session.setAttribute("OrderHistory", new OrderImplement().getOrderByCustomerId((int)session.getAttribute("Customer")));
+			session.setAttribute("OrderDetailHistory", new OrderDetailImplement().getOrderDetail() );
+			response.sendRedirect(request.getContextPath() + "/CustomerReturn.jsp");
 		}
 		
     }

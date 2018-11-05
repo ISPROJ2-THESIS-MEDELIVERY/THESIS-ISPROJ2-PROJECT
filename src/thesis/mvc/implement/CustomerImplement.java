@@ -31,7 +31,7 @@ public class CustomerImplement implements CustomerDAO{
 			stmt.setString( 3, customer.getCustomerStreet() );
 			stmt.setString( 4, customer.getCustomerBarangay() );
 			stmt.setInt(5, customer.getCityID());
-			stmt.setString( 6, customer.getCustomerProvince() );
+			stmt.setString( 6, "METRO MANILA" );
 			stmt.setString( 7, customer.getCustomerLandline() );
 			stmt.setString( 8, customer.getCustomerCellular() );
 			stmt.setString( 9, customer.getEmail() );
@@ -83,7 +83,7 @@ public class CustomerImplement implements CustomerDAO{
 			preparedStatement.setString( 3, customer.getCustomerStreet() );  
 			preparedStatement.setString( 4, customer.getCustomerBarangay() );
 			preparedStatement.setInt(5, customer.getCityID());               
-			preparedStatement.setString( 6, customer.getCustomerProvince() );
+			preparedStatement.setString( 6, "METRO MANILA" );
 			preparedStatement.setString( 7, customer.getCustomerLandline() );
 			preparedStatement.setString( 8, customer.getCustomerCellular() );
 			preparedStatement.setString( 9, customer.getEmail() );           

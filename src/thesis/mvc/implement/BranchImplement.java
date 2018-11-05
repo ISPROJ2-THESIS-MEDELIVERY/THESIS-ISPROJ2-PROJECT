@@ -28,7 +28,7 @@ public class BranchImplement implements BranchDAO{
 			preparedStatement.setString( 1, branch.getBranchStreet() );
 			preparedStatement.setString( 2, branch.getBranchBarangay() );
 			preparedStatement.setInt( 3, branch.getCityID() );
-			preparedStatement.setString( 4, branch.getBranchProvince() );
+			preparedStatement.setString( 4, "METRO MANILA" );
 			preparedStatement.setString( 5, branch.getBranchLandline() );
 			preparedStatement.setString( 6, branch.getBranchCellular() );
 			preparedStatement.setString( 7, branch.getBranchOwner() );
@@ -66,7 +66,7 @@ public class BranchImplement implements BranchDAO{
 			preparedStatement.setString( 1, branch.getBranchStreet() );
 			preparedStatement.setString( 2, branch.getBranchBarangay() );
 			preparedStatement.setInt( 3, branch.getCityID() );
-			preparedStatement.setString( 4, branch.getBranchProvince() );
+			preparedStatement.setString( 4, "METRO MANILA" );
 			preparedStatement.setString( 5, branch.getBranchLandline() );
 			preparedStatement.setString( 6, branch.getBranchCellular() );
 			preparedStatement.setString( 7, branch.getBranchOwner() );

@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,13 +48,12 @@ public class InformationController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String Action = request.getParameter("Action");
+		session.setAttribute("CityList", new CityListingImplement().getAllCityListing() );
+		
 		if(Action.equalsIgnoreCase("???")) {
-			
-
 		//Add Other items
 		} else if (Action.equalsIgnoreCase("AddBranch")){
 			session.setAttribute("PharmacyList", new PharmacyImplement().getAllPharmacys() );
-			session.setAttribute("CityList", new CityListingImplement().getAllCityListing() );
 			response.sendRedirect(request.getContextPath() + "/addBranch.jsp");
 		} else if (Action.equalsIgnoreCase("AddCourier")){
 			response.sendRedirect(request.getContextPath() + "/addCourier.jsp");
@@ -62,7 +63,10 @@ public class InformationController extends HttpServlet {
 		//Insert/Add Product
 		} else if (Action.equalsIgnoreCase("InsertProduct")){
 			int pharmacyID = new BranchImplement().getBranchById(new PharmacistImplement().getPharmacistById((int) session.getAttribute("Pharmacist")).getBranchID()).getPharmacyID();
-			session.setAttribute("ProductList", new ProductImplement().getAllProducts() );
+			List<Product> Products = new ArrayList<Product>();
+			Products = new ProductImplement().getAllProducts();
+			
+			session.setAttribute("ProductList", "" );
 			session.setAttribute("currentStock", new StocksImplement().getStocksByPharmacy(pharmacyID));
 			response.sendRedirect(request.getContextPath() + "/insertProduct.jsp");
 		} else if (Action.equalsIgnoreCase("InsertNewProduct")){

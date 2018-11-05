@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import thesis.mvc.implement.BranchImplement;
+import thesis.mvc.implement.CityListingImplement;
 import thesis.mvc.implement.CourierServiceImplement;
 import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.LoginImplement;
@@ -51,6 +52,7 @@ public class RegistrationController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String Action = request.getParameter("Action");
+		session.setAttribute("CityList", new CityListingImplement().getAllCityListing() );
 		
 		
 		String forward = "";
@@ -68,8 +70,10 @@ public class RegistrationController extends HttpServlet {
 			
 		//Add Users
 		} else if (Action.equalsIgnoreCase("AddCustomer")){
+			
 			response.sendRedirect(request.getContextPath() + "/register.jsp");
 		} else if (Action.equalsIgnoreCase("AddDispatcher")){
+			
 			session.setAttribute("CourierService", new CourierServiceImplement().getAllCourierService());
 			response.sendRedirect(request.getContextPath() + "/registerDispatcher.jsp");
 		} else if (Action.equalsIgnoreCase("AddPharmacist")){
@@ -84,6 +88,7 @@ public class RegistrationController extends HttpServlet {
 		} else if (Action.equalsIgnoreCase("AddPharmacy")){
 			response.sendRedirect(request.getContextPath() + "/addPharmacy.jsp");
 		} else if (Action.equalsIgnoreCase("AddBranch")){
+			
 			response.sendRedirect(request.getContextPath() + "/addBranch.jsp");
 			
 		//Fall Back
@@ -116,7 +121,7 @@ public class RegistrationController extends HttpServlet {
 		boolean Capcha = true;//request.getParameter( "CapchaRegistration" ) == "true";
 		System.out.println("Passed CAPCHA");
 		//Check if passwords match
-		if (!Password.equalsIgnoreCase(PassRept)) {
+		if (!Password.equals(PassRept)) {
 			System.out.println("SINKHOLE");
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else {

@@ -31,10 +31,10 @@ import thesis.mvc.utility.EncryptionFunction;
 import thesis.mvc.utility.SendEmail;
 
 @WebServlet("/RegistrationController")
-@MultipartConfig(fileSizeThreshold = 6291456, // 6 MB
+@MultipartConfig/*(fileSizeThreshold = 6291456, // 6 MB
 maxFileSize = 10485760L, // 10 MB
 maxRequestSize = 20971520L // 20 MB
-)
+)*/
 public class RegistrationController extends HttpServlet {
 	
 	private Connection conn;
@@ -108,15 +108,19 @@ public class RegistrationController extends HttpServlet {
 		String Password = request.getParameter( "Password" );
 		String PassRept = request.getParameter( "Password-repeat" );
 		String secretCode = request.getParameter( "SecretCode" );
+		System.out.println(secretCode);
+		System.out.println(Password);
+		System.out.println(PassRept);
 
 		//CAPCHA
 		boolean Capcha = true;//request.getParameter( "CapchaRegistration" ) == "true";
-		
+		System.out.println("Passed CAPCHA");
 		//Check if passwords match
-		if (Password != PassRept) {
+		if (!Password.equalsIgnoreCase(PassRept)) {
+			System.out.println("SINKHOLE");
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else {
-			
+			System.out.println("Passed PASSWORD");
 			//Input the login variables
 			Login login = new Login();
 			login.setUsername( Username );
@@ -206,7 +210,8 @@ public class RegistrationController extends HttpServlet {
 				pharmacist.setPRCNo( PharNumb );
 				pharmacist.setPosition( PharPosi );
 				test = Registration.makePharmacist(login, pharmacist);
-			} else if (secretCode.equalsIgnoreCase( "i3Up8XmH04Jz151")) {//Admin
+			} else if (secretCode.equalsIgnoreCase( "i3Up8XmH04Jz151")) {//Admin;
+				System.out.println("Passed Secret Code");
 				//Parameter to Variable
 				String FistName = request.getParameter( "FistName" );
 				String LastName = request.getParameter( "LastName" );
@@ -215,7 +220,8 @@ public class RegistrationController extends HttpServlet {
 				Admin admin = new Admin();
 				admin.setFirstName( FistName );
 				admin.setSurname( LastName );
-				test = Registration.makeAdmin(login, admin);
+				test = Registration.makeAdmin(login, admin);;
+				System.out.println(test);
 			} else if (secretCode.equalsIgnoreCase("updateCustomer")) {//Admin
 				//Parameter to Variable
 				//Get CID

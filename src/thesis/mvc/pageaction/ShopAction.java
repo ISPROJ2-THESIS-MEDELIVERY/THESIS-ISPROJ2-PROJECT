@@ -39,7 +39,7 @@ public class ShopAction {
 	
 	public String purchaseOrder(Order order, List<OrderDetail> OrderDetails, String HomePage) {
 		//Check if order has less than 5 items
-		if (OrderDetails.size() > 5) { return null; }
+		//if (OrderDetails.size() > 5) { return null; }
 		
 		for (OrderDetail orderDetail : OrderDetails) {
 			try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM product WHERE ProductID = ?")){

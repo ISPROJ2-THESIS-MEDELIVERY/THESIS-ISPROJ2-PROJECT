@@ -78,6 +78,10 @@ public class CustomerController extends HttpServlet{
 			session.setAttribute("OrderHistory", new OrderImplement().getOrderByCustomerId((int)session.getAttribute("Customer")));
 			session.setAttribute("OrderDetailHistory", new OrderDetailImplement().getOrderDetail() );
 			response.sendRedirect(request.getContextPath() + "/CustomerPending.jsp");
+		} else if (action.equalsIgnoreCase("GoToReturns")) {
+			session.setAttribute("OrderHistory", new OrderImplement().getOrderByCustomerId((int)session.getAttribute("Customer")));
+			session.setAttribute("OrderDetailHistory", new OrderDetailImplement().getOrderDetail() );
+			response.sendRedirect(request.getContextPath() + "/CustomerReturn.jsp");
 		} else if (action.equalsIgnoreCase("CancelOrder")) {
 			Order cancelledOrder = new OrderImplement().getOrderById( Integer.parseInt(request.getParameter("OrderID")));
 			cancelledOrder.setOrderStatus("CANCELLED");

@@ -228,8 +228,9 @@
 					<a href="CustomerController?action=GoToPending"
 						class="btn btn-primary" role="button" />View your Current Orders</a><br>
 					<br>
-					<a href=""
-						class="btn btn-primary" role="button" />What do I put here again?</a><br>
+					<a href="CustomerController?action=GoToReturns"
+						class="btn btn-primary" role="button" />View your Orders that can be returned</a><br>
+					<br>
 				</div>
 			</div>
 		</div>

@@ -61,7 +61,7 @@
       		<h4 class="list-group-item-heading"><center>Add Product</center></h4>     						
     	</a>
     </div><br>
-	<form method="post" action="ProductController" encType="multipart/form-data">
+	<form onSubmit="return formValidation();" method="post" action="ProductController" encType="multipart/form-data">
 	<div class="container">
 	 <div class="row">
 	  <div class="col-md-6">
@@ -70,46 +70,46 @@
         </div>
         <h2 class="sr-only">Product to add: </h2>
         <div class="form-group">
-        	<input type="text" name="ProductName" placeholder="Product Name" class="form-control"/>
+        	<input type="text" name="ProductName" required="required" placeholder="Product Name" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="GenericName" placeholder="Generic Name" class="form-control"/>
+        	<input type="text" name="GenericName" required="required" placeholder="Generic Name" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="RegistrNumn" placeholder="Registration Number" class="form-control"/>
+        	<input type="text" name="RegistrNumn" required="required" placeholder="Registration Number" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="ProductStrg" placeholder="Product Strength" class="form-control"/>
+        	<input type="text" name="ProductStrg" required="required" placeholder="Product Strength" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="ProductForm" placeholder="Product Form" class="form-control"/>
+        	<input type="text" name="ProductForm" required="required" placeholder="Product Form" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="ProductPack" placeholder="Product Packaging" class="form-control"/>
+        	<input type="text" name="ProductPack" required="required" placeholder="Product Packaging" class="form-control"/>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
-        	<input type="text" name="ProductManu" placeholder="Product Manufacturing" class="form-control"/>
+        	<input type="text" name="ProductManu" required="required" placeholder="Product Manufacturing" class="form-control"/>
+        </div>
+        <div class="form-group"> 
+        	<input type="text" name="ProductOrgi" required="required" placeholder="Product Origin" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="ProductOrgi" placeholder="Product Origin" class="form-control"/>
-        </div>
-        <div class="form-group">
-        	<input type="text" name="ProductDesc" placeholder="Product Description" class="form-control"/>
+        	<input type="text" name="ProductDesc" required="required" placeholder="Product Description" class="form-control"/>
         </div>
         <div class="form-group">
         	Product is an Rx Product?<input type="checkbox" name="ProductIsRX" value="true" class="form-control"/>
         </div>
         <div class="form-group">
-        	Image: <input type="file" name="ProductImag" class="form-control"/>
+        	Image: <input type="file" name="ProductImag" required="required" class="form-control"/>
         </div>
         <div class="form-group">
         	Is it featured?<input type="checkbox" name="feature" value="true" class="form-control"/>
         </div>
         <div class="input-group">
         <span class="input-group-text">&#8369;</span>
-        	<input type="number" min="0" step="0.01" name="Price" placeholder="Price" class="form-control"/>
+        	<input type="number" min="0" step="0.01" name="Price" required="required" placeholder="Price" class="form-control"/>
         </div>
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit" name="Action" value="addProduct">Add New Product</button>
@@ -188,4 +188,87 @@
 }
 
 </style>
+
+<script src="sample-registration-form-validation.js"></script>
+
+
+<script>
+var Password = document.getElementById("Password")
+  , Passwordrepeat = document.getElementById("Passwordrepeat");
+
+function validatePassword(){
+  if(Password.value != Passwordrepeat.value) {
+    Passwordrepeat.setCustomValidity("Passwords Don't Match");
+  } else {
+    Passwordrepeat.setCustomValidity('');
+  }
+}
+
+Password.onchange = validatePassword;
+Passwordrepeat.onkeyup = validatePassword;
+
+</script>
+
+<script>
+
+var myInput = document.getElementById("Password");
+var letter = document.getElementById("letter");
+var capital = document.getElementById("capital");
+var number = document.getElementById("number");
+var length = document.getElementById("length");
+
+// When the user clicks on the password field, show the message box
+myInput.onfocus = function() {
+    document.getElementById("message").style.display = "block";
+}
+
+// When the user clicks outside of the password field, hide the message box
+myInput.onblur = function() {
+    document.getElementById("message").style.display = "none";
+}
+
+// When the user starts to type something inside the password field
+myInput.onkeyup = function() {
+  // Validate lowercase letters
+  var lowerCaseLetters = /[a-z]/g;
+  if(myInput.value.match(lowerCaseLetters)) {  
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+  }
+  
+  // Validate capital letters
+  var upperCaseLetters = /[A-Z]/g;
+  if(myInput.value.match(upperCaseLetters)) {  
+    capital.classList.remove("invalid");
+    capital.classList.add("valid");
+  } else {
+    capital.classList.remove("valid");
+    capital.classList.add("invalid");
+  }
+
+  // Validate numbers
+  var numbers = /[0-9]/g;
+  if(myInput.value.match(numbers)) {  
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+  }
+  
+  // Validate length
+  if(myInput.value.length >= 😎 {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
+}
+
+</script>
+
 </html>

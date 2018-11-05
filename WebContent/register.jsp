@@ -62,9 +62,6 @@
         	<input type="text" name="FullName" required="required" placeholder="FullName *" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="CAddress" required="required" placeholder="Address *" class="form-control"/>
-        </div>
-        <!-- <div class="form-group">
         	<input type="text" name="CuStreet" required="" placeholder="Street *" class="form-control"/>
         </div>
         <div class="form-group">
@@ -81,7 +78,7 @@
         </div>
         <div class="form-group">
         	<input type="text" name="CuCellul" required="" placeholder="Cellphone No *" class="form-control"/>
-        </div> -->
+        </div>
         <div class="form-group">
         	<input type="email" name="CusEmail" required="required" placeholder="Email *" class="form-control"/>
         </div>

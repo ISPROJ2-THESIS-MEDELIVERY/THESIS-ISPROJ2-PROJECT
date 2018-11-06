@@ -125,7 +125,9 @@ public class ProductController extends HttpServlet {
 			int PharmaID = new BranchImplement().getBranchById(pharmacist.getBranchID()).getPharmacyID();
 			int ProductID = Integer.parseInt(request.getParameter("ProductAdd"));
 			double Price = Double.parseDouble( request.getParameter("Price"));
-			boolean Feat = Boolean.parseBoolean(request.getParameter("feature"));
+			boolean Feat = Boolean.valueOf(request.getParameter("feature"));
+			if (new ProductImplement().getProductById(ProductID).isRXProduct() == true)
+			{	Feat = false;	}
 			//Add to stock
 			Stocks stocks = new Stocks();
 			stocks.setPharmacyID(PharmaID);
@@ -154,7 +156,7 @@ public class ProductController extends HttpServlet {
 			String ProductOrgi = request.getParameter("ProductOrgi");
 			String ProductDesc = request.getParameter("ProductDesc");
 			String ProductImag = "";
-			boolean ProductIsRX = Boolean.getBoolean(request.getParameter("ProductIsRX"));
+			boolean ProductIsRX = Boolean.valueOf(request.getParameter("ProductIsRX"));
 			System.out.println("IS RX: " + ProductIsRX);
 			int ProductLimt = 0;//Integer.parseInt(request.getParameter("ProductLimt"));
 			//Add Product
@@ -205,7 +207,7 @@ public class ProductController extends HttpServlet {
 			Pharmacist pharmacist = new PharmacistImplement().getPharmacistById( (int) session.getAttribute("Pharmacist") );
 			int PharmaID = new BranchImplement().getBranchById(pharmacist.getBranchID()).getPharmacyID();
 			double Price = Double.parseDouble( request.getParameter("Price"));
-			boolean Feat = Boolean.getBoolean(request.getParameter("feature"));
+			boolean Feat = Boolean.valueOf(request.getParameter("feature"));
 			System.out.println("FEATURE: " + Feat);
 			Stocks stocks = new Stocks();
 			stocks.setPharmacyID( PharmaID );

@@ -57,7 +57,7 @@ public class TestController extends HttpServlet {
 				if (end.startsWith("image")) {
 					String imageType = end.replace("image/", "");
 					filePart.write(UPLOAD_DIRECTORY + File.separator + name + "." + imageType);
-	            	request.setAttribute("message", "File Uploaded Successfully: " + "(" + UPLOAD_DIRECTORY + ")" + File.separator + name + "." + imageType + "<br> " + "aeiou");
+	            	request.setAttribute("message", "File Uploaded Successfully: " + "(" + UPLOAD_DIRECTORY + ")" + File.separator + name + "." + imageType + "<br>||| " + request.getContextPath());
 				} else {
 	            	request.setAttribute("message", "File Uploaded is not an image!asdf" + "(" + UPLOAD_DIRECTORY + ")");
 				}

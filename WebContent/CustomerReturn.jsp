@@ -51,6 +51,12 @@
             </nav>
         </div>
     </div>
+    <br>
+    <div id="container">
+	<center><img alt="" src="assets/img/medlogopill.png"></center>    
+	</div> 
+	<h2>Return Orders</h2>
+    <br>
 	<c:forEach items="${OrderHistory}" var="order">
 	<c:if test="${order.orderStatus == 'EN-ROUTE' || order.orderStatus == 'COMPLETED'}">
 	<table class="table table-striped table-bordered" width="100%">
@@ -115,7 +121,7 @@
 	    </tbody>
 	</table>
 	<!-- Comments: <br><input type="text" name="Comments"/><br> -->
-	<a href="CustomerController?action=ReturnOrder&OrderID=<c:out value="${order.orderID}" />" class="btn btn-info" role="button"/>Return Order</a>
+	<center><a href="CustomerController?action=ReturnOrder&OrderID=<c:out value="${order.orderID}" />" class="btn btn-info" role="button"/>Return Order</a></center>
 		<hr>
 	</c:if>
 	</c:forEach>
@@ -150,6 +156,19 @@
         </div>
     </footer>
 </div>
-		</footer>
 </body>
+
+<style>
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    margin-left: 100px;
+    margin-right: 108px;
+}
+
+</style>	
+
 </html>

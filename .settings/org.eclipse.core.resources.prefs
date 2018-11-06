@@ -1,5 +1,8 @@
 eclipse.preferences.version=1
 encoding//WebContent/CatalogBasic.jsp=UTF-8
+encoding//WebContent/addBranch.jsp=UTF-8
+encoding//WebContent/addCourier.jsp=UTF-8
+encoding//WebContent/addPharmacy.jsp=UTF-8
 encoding//WebContent/css/core.css=UTF-8
 encoding//WebContent/pharmacyAdd.jsp=UTF-8
 encoding//WebContent/register.jsp=UTF-8

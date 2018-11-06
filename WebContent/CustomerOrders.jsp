@@ -49,6 +49,11 @@
         </div>
     </div>
     <br>
+    <div id="container">
+	<center><img alt="" src="assets/img/medlogopill.png"></center>    
+	</div> 
+	<h2>Order History</h2>
+    <br>
 	<c:forEach items="${OrderHistory}" var="order">
 	<c:if test="${order.orderStatus != 'PENDING'}">
 	<table class="table table-striped table-bordered" width="100%">
@@ -188,4 +193,18 @@
     </footer>
 </div>
 </body>
+
+<style>
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    margin-left: 100px;
+    margin-right: 108px;
+}
+
+</style>
+
 </html>

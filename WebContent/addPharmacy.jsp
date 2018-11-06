@@ -33,7 +33,8 @@
         </div>
     </div>
     <div class="login-clean">
-	<form action="InformationController" method="post">
+	<form onSubmit="return formValidation();" action="InformationController" method="post">
+	<h2>Add a New Pharmacy</h2>
 		<div class="form-group">
         	<input type="text" name="PharmaName" required="required" placeholder="Pharmacy Name" class="form-control"/>
         </div>
@@ -76,14 +77,77 @@
                 </div>
                 <div class="col-md-6 item text">
                     <h3>Medelivery</h3>
-                    <p><br />Our mission is to create a measurable, sustainable and profitable link between pharmacies, couriers and customers.  Providing the best system in storing databases of available pharmacies and delivery couriers, as well as management
+                    <p><br />Our mission is to create a measurable, sustainable and profitable link between pharmacies, couriers and customers. Â Providing the best system in storing databases of available pharmacies and delivery couriers, as well as management
                         of theses deliveries. Our operation is also to bring convenience to customers by filtering their needs according to the type of payment they want and the type of delivery schedule that fits their respective timeframes.<br /><br
                         /><br /></p>
                 </div>
             </div>
-            <p class="copyright">Company Name © 2017</p>
+            <p class="copyright">Company Name Â© 2017</p>
         </div>
     </footer>
 </div>
 </body>
+
+<script>
+
+var myInput = document.getElementById("Password");
+var letter = document.getElementById("letter");
+var capital = document.getElementById("capital");
+var number = document.getElementById("number");
+var length = document.getElementById("length");
+
+// When the user clicks on the password field, show the message box
+myInput.onfocus = function() {
+    document.getElementById("message").style.display = "block";
+}
+
+// When the user clicks outside of the password field, hide the message box
+myInput.onblur = function() {
+    document.getElementById("message").style.display = "none";
+}
+
+// When the user starts to type something inside the password field
+myInput.onkeyup = function() {
+  // Validate lowercase letters
+  var lowerCaseLetters = /[a-z]/g;
+  if(myInput.value.match(lowerCaseLetters)) {  
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+  }
+  
+  // Validate capital letters
+  var upperCaseLetters = /[A-Z]/g;
+  if(myInput.value.match(upperCaseLetters)) {  
+    capital.classList.remove("invalid");
+    capital.classList.add("valid");
+  } else {
+    capital.classList.remove("valid");
+    capital.classList.add("invalid");
+  }
+
+  // Validate numbers
+  var numbers = /[0-9]/g;
+  if(myInput.value.match(numbers)) {  
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+  }
+  
+  // Validate length
+  if(myInput.value.length >= ðŸ˜Ž {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
+}
+
+</script>
+
 </html>

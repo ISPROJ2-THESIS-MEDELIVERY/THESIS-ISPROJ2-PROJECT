@@ -71,7 +71,11 @@
 		            	<tr>
 		                	<td><c:out value="${details.name}" /></td>
 		                	<td><c:out value="${details.description}" /></td>
-		                	<td><img src="images/<c:out value="${details.image}" />" alt="Medicine Image" width="100px" height="100px"></td>
+		                	<td><div class="pop">
+    						<img id="imageresource" src="images/<c:out value="${details.image}" />" alt="Medicine Image" width="100px" height="100px">
+   						 	Click to Enlarge
+							</div></td>	
+		                	<%-- <td><img src="images/<c:out value="${details.image}" />" alt="Medicine Image" width="100px" height="100px"></td> --%>
 		                	<td><c:out value="${details.size}" /></td>
 		                	<td><c:out value="${details.prescription}" /></td>
 		                	<td><c:out value="${details.quantity}" /></td>
@@ -148,7 +152,11 @@
 						<td><c:out value="${item.productName}" /></td>
 						<td><c:out value="${item.genericName}" /></td>
 						<td><c:out value="${item.productStrength}" /></td>
-		                <td><img src="images/<c:out value="${item.productImage}" />" alt="Medicine Image" width="100px" height="100px"></td>
+						<td><div class="pop">
+    						<img id="imageresource" src="images/<c:out value="${item.productImage}" />" alt="Medicine Image" width="100px" height="100px">
+   						 	Click to Enlarge
+						</div></td>
+		                <%-- <td><img src="images/<c:out value="${item.productImage}" />" alt="Medicine Image" width="100px" height="100px"></td> --%>
 						<td><c:out value="${item.productForm}" /></td>
 						<td><c:out value="${item.productPackaging}" /></td>
 						<td><c:out value="${item.productDescription}" /></td>
@@ -177,6 +185,18 @@
 		</tbody>
 	</table>
 	</div>
+	
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">              
+      <div class="modal-body">
+      	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <img src="" class="imagepreview" style="width: 100%;" >
+      </div>
+    </div>
+  </div>
+</div>	
+	
 <div class="footer-dark">
     <footer>
         <div class="container">
@@ -216,6 +236,18 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="assets/bootstrap/js/jquery.dataTables.min.js"></script>
 <script src="assets/bootstrap/js/dataTables.bootstrap.min.js"></script>
+
+
+<script>
+
+$(function() {
+	$('.pop').on('click', function() {
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodal').modal('show');   
+	});		
+});
+
+</script>
 
 	<script type="text/javascript">
 		 $(document).ready(function() {

@@ -27,7 +27,7 @@
                             <div class="form-group"><label for="search-field"></label></div>
                         </form>
                         <c:if test="${userAccess == null}">
-                        <span class="navbar-text" style="float: right"><a href="register.jsp" class="login">Register</a></span>
+                        <span class="navbar-text" style="float: right"><a href="RegistrationController?Action=AddCustomer" class="login">Register</a></span>
                         <span class="navbar-text" style="float: right"><a href="login.jsp" class="login">Log In</a></span>       
                         </c:if>
                         <c:if test="${userAccess == 1}">
@@ -57,7 +57,7 @@
 </div> 
 <br>
 <form onSubmit="return formValidation();" action="RegistrationController" method="post" enctype="multipart/form-data">
-	<h2 class="sr-only">Login Form</h2>
+	<h2>Register Here</h2><br>
         <div class="form-group">
         	<input type="text" name="FullName" required="required" placeholder="FullName *" class="form-control"/>
         </div>
@@ -78,10 +78,10 @@
         	<input type="text" name="CuProvin" required="" placeholder="Province *" class="form-control"/>
         </div> -->
         <div class="form-group">
-        	<input type="number" name="CuLandLi" required="" placeholder="Landline *" class="form-control"/>
+        	<input id="phonenum" type="tel" pattern="^\d{7}$" title="must contain 7 digits" name="CuLandLi" required="" placeholder="Landline *" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="number" name="CuCellul" required="" placeholder="Cellphone No *" class="form-control"/>
+        	<input id="phonenum" type="tel" pattern="^(09|\+639)\d{9}$" title="must start with 09 or +63 and contain 11 digits" name="CuCellul" required="" placeholder="Cellphone No *" class="form-control"/>
         </div>
         <div class="form-group">
         	<input type="email" name="CusEmail" required="required" placeholder="Email *" class="form-control"/>
@@ -90,7 +90,7 @@
         	<input type="number" name="ContactNumber" required="required" placeholder="Contact Number *" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="Username" required="required" placeholder="Username *" class="form-control"/>
+        	<input type="text" name="Username" pattern="[a-zA-Z0-9_-]{6,12}" autofocus required title="must be alphanumeric in 6-12 chars" required="required" placeholder="Username *" class="form-control"/>
         </div>
         <div class="form-group">
         	<input type="password" name="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 

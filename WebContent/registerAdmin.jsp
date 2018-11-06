@@ -35,6 +35,7 @@
     
     <div class="login-clean"> 
 	<form action="RegistrationController" method="post" enctype="multipart/form-data">
+	<h2>Register a New Admin</h2>
 	    <div class="form-group">
         	<input type="text" name="FistName" required="" placeholder="First Name *" class="form-control"/>
         </div>

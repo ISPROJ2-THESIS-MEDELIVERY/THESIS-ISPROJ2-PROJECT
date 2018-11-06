@@ -36,6 +36,7 @@
      
     <div class="login-clean">
 	<form onSubmit="return formValidation();" action="RegistrationController" method="post" enctype="multipart/form-data">
+	<h2>Register a New Dispatcher</h2>
 		<div class="form-group">
         	<input type="text" name="Username" required="" placeholder="User Name *" class="form-control"/>
         </div>

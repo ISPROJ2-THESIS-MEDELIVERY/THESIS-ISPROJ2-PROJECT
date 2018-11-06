@@ -27,7 +27,7 @@
                             <div class="form-group"><label for="search-field"></label></div>
                         </form>
                         <c:if test="${userAccess == null}">
-                        <span class="navbar-text" style="float: right"><a href="register.jsp" class="login">Register</a></span>
+                        <span class="navbar-text" style="float: right"><a href="RegistrationController?Action=AddCustomer" class="login">Register</a></span>
                         <span class="navbar-text" style="float: right"><a href="login.jsp" class="login">Log In</a></span>          
                         </c:if>
                     </div>
@@ -45,7 +45,7 @@
 			Failed Login Attempts: <c:out value="${LoginTry}" /><br>
 			Only 5 attempts are allowed
 		</c:if>
-		<h2 class="sr-only">Login Form</h2>
+		<h2>Login Here</h2>
         <div class="form-group">
         	<input type="text" required="required" name="Username" placeholder="Username" class="form-control" maxlength="25"/>
         </div>

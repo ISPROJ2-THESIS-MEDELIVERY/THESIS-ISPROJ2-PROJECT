@@ -35,7 +35,8 @@
     </div>
     
     <div class="login-clean"> 
-	<form action="RegistrationController" method="post" enctype="multipart/form-data">
+	<form onSubmit="return formValidation();" action="RegistrationController" method="post" enctype="multipart/form-data">
+	<h2>Register a New Pharmacist</h2>
 		<div class="form-group">
         	<input type="text" name="Username" required="" placeholder="User Name *" class="form-control"/>
         </div>
@@ -54,17 +55,22 @@
         	<input type="text" name="LastName" required="" placeholder="Last Name *" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="PharNumb" required="" placeholder="PRC Number *" class="form-control"/>
+        	<input type="number" name="PharNumb" required="" placeholder="PRC Number *" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="PharPosi" required="" placeholder="Position *" class="form-control"/>
+        	<select name="PharPosi" required="required" class="form-control">
+        		<option value="Pharmacist">Pharmacist</option>
+        		<option value="Pharmacy Assistant">Pharmacy Assistant</option>
+        		<option value="Medicine Counter Assistant">Medicine Counter Assistant</option>
+        		<option value="Pharmacy Technician">Pharmacy Technician</option>
+        	</select>
         </div>
         <div class="form-group">
-        	<input type="text" name="PharText" required="" value="<c:out value="${PharmacySelect.pharmacyName}" />" disabled class="form-control"/>
+        	<input type="text" name="PharText" required="" value="<c:out value="${PharmacySelect.pharmacyName}" />"  class="form-control" disabled/>
         </div>
-        <div class="form-group">
+        <%-- <div class="form-group">
         	<input type="text" name="PharEyeD" required="" value="<c:out value="${PharmacySelect.pharmacyID}"/>" class="form-control"/>
-        </div>
+        </div> --%>
         <div class="form-group">
         	<select name="PharSele" class="form-control">
         		<c:forEach items="${PharmacyBranch}" var="branch">

@@ -41,6 +41,7 @@
 	</div> 
 	<br>
 	<form method="post" action="ProductController">
+	<h2>Add Stock to Existing Product</h2>
 		<div class="form-group">
         	<input type="hidden"/>
         </div>

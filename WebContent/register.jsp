@@ -78,10 +78,10 @@
         	<input type="text" name="CuProvin" required="" placeholder="Province *" class="form-control"/>
         </div> -->
         <div class="form-group">
-        	<input type="text" name="CuLandLi" required="" placeholder="Landline *" class="form-control"/>
+        	<input type="number" name="CuLandLi" required="" placeholder="Landline *" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="CuCellul" required="" placeholder="Cellphone No *" class="form-control"/>
+        	<input type="number" name="CuCellul" required="" placeholder="Cellphone No *" class="form-control"/>
         </div>
         <div class="form-group">
         	<input type="email" name="CusEmail" required="required" placeholder="Email *" class="form-control"/>

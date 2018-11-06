@@ -75,17 +75,27 @@ public class ProductController extends HttpServlet {
 			stockexisting = new StocksImplement().getStocksByPharmacy(PharmaID);
 			
 			//Works better than expected, this automaticaly checks the next iteration due to how lists work
-			for (int ProductInt = 0; ProductInt < productList.size(); ProductInt++){
+			for (int ProductInt = 0; ProductInt <= productList.size(); ProductInt++){
+				System.out.println("LOOP " + ProductInt);
+				System.out.println("SIZE " + productList.size());
+				
 				int Start, End;
 				do {
 					Start = productList.size();
 					System.out.println("Start:  " + Start);
 					for (Stocks stocks : stockexisting) {
+						System.out.println("LOOP " + ProductInt);
+						System.out.println("SIZE " + productList.size());
+						if (ProductInt >= productList.size()) {break;}
+						System.out.println("CURRENTLY INSPECTING: " + productList.get(ProductInt).getProductID() + " AGAINST " + stocks.getProductID() +  " With List size: " + productList.size());
 						if (productList.get(ProductInt).getProductID() == stocks.getProductID()) {
-							productList.remove(productList.get(ProductInt));
+							System.out.println("REMOVED PRODUCT: " + productList.get(ProductInt).getProductName() + " ID: " + productList.get(ProductInt).getProductID() + "|||"+ productList.remove(productList.get(ProductInt)));
+						} else {
+							System.out.println("SKIPED PRODUCT: " + productList.get(ProductInt).getProductName() + " ID: " + productList.get(ProductInt).getProductID());
 						}
 					}
 					End = productList.size();
+					System.out.println("End: " + End);
 				} while (Start != End);
 			}
 			

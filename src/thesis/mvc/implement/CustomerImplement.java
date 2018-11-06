@@ -24,7 +24,7 @@ public class CustomerImplement implements CustomerDAO{
 	public int addCustomer(Customer customer) {
 		try(PreparedStatement stmt = conn.prepareStatement(""
         		+ "INSERT INTO Customer "
-        		+ "(`CustomerID`, `UserID`, `CustomerName`, `CustomerStreet`, `CustomerBarangay`, `CityID`, `CustomerProvince`, `CustomerLandline`, `CustomerCellular`, `Email`, `IsSeniorCitizen`, `SeniorCitizenID`) " 
+        		+ "(`UserID`, `CustomerName`, `CustomerStreet`, `CustomerBarangay`, `CityID`, `CustomerProvince`, `CustomerLandline`, `CustomerCellular`, `Email`, `IsSeniorCitizen`, `SeniorCitizenID`) " 
         		+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)")) {
 			stmt.setInt( 1, customer.getUserID() );
 			stmt.setString( 2, customer.getCustomerName() );
@@ -37,6 +37,7 @@ public class CustomerImplement implements CustomerDAO{
 			stmt.setString( 9, customer.getEmail() );
 			stmt.setBoolean( 10, customer.isIsSeniorCitizen() );
 			stmt.setString( 11, customer.getSeniorCitizenID() );
+			System.out.println(stmt);
 			int NewID = stmt.executeUpdate();
 			stmt.close();
 			return NewID;

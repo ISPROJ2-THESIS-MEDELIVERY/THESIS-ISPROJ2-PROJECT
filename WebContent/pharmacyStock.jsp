@@ -40,7 +40,7 @@
 	<center><img alt="" src="assets/img/medlogopill.png"></center>    
 	</div> 
 	<br>
-	<form action="/ProductController">
+	<form method="post" action="ProductController">
 		<div class="form-group">
         	<input type="hidden"/>
         </div>
@@ -61,13 +61,13 @@
 			<input type="number" name="Price" class="form-control"/><br>
 		</div>
 		<div class="form-group">
-			<button class="btn btn-primary btn-block" type="submit" name="action" value="addProduct">Add Existing Product to Catalog</button>
+			<button class="btn btn-primary btn-block" type="submit" name="Action" value="addStock">Add Existing Product to Catalog</button>
 		</div>
+	</form>
 		<br>
 		<div class="form-group">
 			<a href="ProductController?Action=AddnewProduct" class="btn btn-link" role="button">Click here to add a new product</a>
 		</div>
-	</form>
 	</div>
 	<!-- <a href="ProductController?Action=AddnewProduct" class="btn btn-info" role="button">Add a new Product</a> -->
 <div class="footer-dark">

@@ -60,7 +60,7 @@ public class ProductController extends HttpServlet {
     	//EmailAction emailAction = new EmailAction();
     	//emailAction.sendEmail("fajardokier@yahoo.com", "Bitch ass nigga", "I'mma pop a cap in your ass");
 		
-		if( Action.isEmpty() ) {
+		if( Action.equals(null) ) {
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else if(Action.equalsIgnoreCase( "addProduct" )){ //Goto main page
 			//Action=addProduct
@@ -74,31 +74,23 @@ public class ProductController extends HttpServlet {
 			List<Stocks> stockexisting = new ArrayList<Stocks>();
 			stockexisting = new StocksImplement().getStocksByPharmacy(PharmaID);
 			
+			//Works better than expected, this automaticaly checks the next iteration due to how lists work
 			for (int ProductInt = 0; ProductInt < productList.size(); ProductInt++){
-				//System.out.println("Test PRODUCT: " + productList.get(ProductInt).getProductName() + " ID: " + productList.get(ProductInt).getProductID());
-				for (Stocks stocks : stockexisting) {
-					System.out.println("CURRENTLY INSPECTING: " + productList.get(ProductInt).getProductID() + " AGAINST " + stocks.getProductID());
-					if (productList.get(ProductInt).getProductID() == stocks.getProductID()) {
-						System.out.println("REMOVED PRODUCT: " + productList.get(ProductInt).getProductName() + " ID: " + productList.get(ProductInt).getProductID() + "|||"+ productList.remove(productList.get(ProductInt)));
-					} else {
-						System.out.println("SKIPED PRODUCT: " + productList.get(ProductInt).getProductName() + " ID: " + productList.get(ProductInt).getProductID());
+				int Start, End;
+				do {
+					Start = productList.size();
+					System.out.println("Start:  " + Start);
+					for (Stocks stocks : stockexisting) {
+						if (productList.get(ProductInt).getProductID() == stocks.getProductID()) {
+							productList.remove(productList.get(ProductInt));
+						}
 					}
-				}
+					End = productList.size();
+				} while (Start != End);
 			}
 			
-			System.out.println("==============================================================================================");
-
-			/*
-			System.out.println("LIST PRODUCT: " + product.getProductName() + " ID: " + product.getProductID());
-			for (Stocks stocks : stockexisting) {
-				if (product.getProductID() == stocks.getProductID()) {
-					System.out.println(productListTrimmed.remove((Object) product));
-					System.out.println("REMOVED PRODUCT: " + product.getProductName() + " ID: " + product.getProductID());
-				}
-			}
-
-			System.out.println("==============================================================================================");
-			*/
+			
+			
 			session.setAttribute("ProductList", productList);
 			response.sendRedirect(request.getContextPath() + "/pharmacyStock.jsp");
 		} else if(Action.equalsIgnoreCase( "AddnewProduct" )){ //Goto main page
@@ -114,8 +106,8 @@ public class ProductController extends HttpServlet {
 		Timestamp CurrentDate = new Timestamp(Calendar.getInstance().getTime().getTime());
 		String Action = request.getParameter( "Action" );
 		HttpSession session = request.getSession();
-		
-		if( Action.isEmpty() ) {
+
+		if( Action.equals(null) ) {
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else if (Action.equalsIgnoreCase("addStock")) { //Stock
 			//Variables
@@ -130,13 +122,16 @@ public class ProductController extends HttpServlet {
 			stocks.setProductID(ProductID);
 			stocks.setFeature(Feat);
 			int StockID = new StocksImplement().addStocks(stocks);
+			System.out.println(StockID);
 			//Add to stock Prices
 			StocksPrice stocksPrice = new StocksPrice();
 			stocksPrice.setIsCurrent(true);
 			stocksPrice.setStockID(StockID);
 			stocksPrice.setDateSet(CurrentDate);
 			stocksPrice.setPriceSet(Price);
-			new StocksPriceImplement().addStocksPrice(stocksPrice);
+			int test = new StocksPriceImplement().addStocksPrice(stocksPrice);
+			System.out.println(test);
+			
 		} else if (Action.equalsIgnoreCase("addProduct")) { //Product
 			//Variables
 			String ProductName = request.getParameter("ProductName");

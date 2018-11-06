@@ -6,7 +6,10 @@ import java.sql.Connection;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -30,6 +33,7 @@ import thesis.mvc.model.Prescription;
 import thesis.mvc.model.Product;
 import thesis.mvc.model.Stocks;
 import thesis.mvc.model.StocksPrice;
+import thesis.mvc.pageaction.SearchAction.ProductList;
 import thesis.mvc.utility.DBUtility;
 import thesis.mvc.utility.EncryptionFunction;
 
@@ -60,7 +64,42 @@ public class ProductController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else if(Action.equalsIgnoreCase( "addProduct" )){ //Goto main page
 			//Action=addProduct
-			session.setAttribute("ProductList", new ProductImplement().getAllProducts());
+			Pharmacist pharmacist = new PharmacistImplement().getPharmacistById( (int) session.getAttribute("Pharmacist") );
+			int PharmaID = new BranchImplement().getBranchById(pharmacist.getBranchID()).getPharmacyID();
+
+			List<Product> productList = new ArrayList<Product>();
+			productList = new ProductImplement().getAllProducts();
+			System.out.println(productList.size());
+
+			List<Stocks> stockexisting = new ArrayList<Stocks>();
+			stockexisting = new StocksImplement().getStocksByPharmacy(PharmaID);
+			
+			for (int ProductInt = 0; ProductInt < productList.size(); ProductInt++){
+				//System.out.println("Test PRODUCT: " + productList.get(ProductInt).getProductName() + " ID: " + productList.get(ProductInt).getProductID());
+				for (Stocks stocks : stockexisting) {
+					System.out.println("CURRENTLY INSPECTING: " + productList.get(ProductInt).getProductID() + " AGAINST " + stocks.getProductID());
+					if (productList.get(ProductInt).getProductID() == stocks.getProductID()) {
+						System.out.println("REMOVED PRODUCT: " + productList.get(ProductInt).getProductName() + " ID: " + productList.get(ProductInt).getProductID() + "|||"+ productList.remove(productList.get(ProductInt)));
+					} else {
+						System.out.println("SKIPED PRODUCT: " + productList.get(ProductInt).getProductName() + " ID: " + productList.get(ProductInt).getProductID());
+					}
+				}
+			}
+			
+			System.out.println("==============================================================================================");
+
+			/*
+			System.out.println("LIST PRODUCT: " + product.getProductName() + " ID: " + product.getProductID());
+			for (Stocks stocks : stockexisting) {
+				if (product.getProductID() == stocks.getProductID()) {
+					System.out.println(productListTrimmed.remove((Object) product));
+					System.out.println("REMOVED PRODUCT: " + product.getProductName() + " ID: " + product.getProductID());
+				}
+			}
+
+			System.out.println("==============================================================================================");
+			*/
+			session.setAttribute("ProductList", productList);
 			response.sendRedirect(request.getContextPath() + "/pharmacyStock.jsp");
 		} else if(Action.equalsIgnoreCase( "AddnewProduct" )){ //Goto main page
 			response.sendRedirect(request.getContextPath() + "/pharmacyAdd.jsp");
@@ -80,7 +119,7 @@ public class ProductController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else if (Action.equalsIgnoreCase("addStock")) { //Stock
 			//Variables
-			Pharmacist pharmacist = (Pharmacist) session.getAttribute("Pharmacist");
+			Pharmacist pharmacist = new PharmacistImplement().getPharmacistById( (int) session.getAttribute("Pharmacist") );
 			int PharmaID = new BranchImplement().getBranchById(pharmacist.getBranchID()).getPharmacyID();
 			int ProductID = Integer.parseInt(request.getParameter("ProductAdd"));
 			double Price = Double.parseDouble( request.getParameter("Price"));

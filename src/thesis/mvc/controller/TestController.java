@@ -31,7 +31,7 @@ import thesis.mvc.utility.EncryptionFunction;
 @MultipartConfig
 public class TestController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final String UPLOAD_DIRECTORY = "D:/uploads";
+	private final String UPLOAD_DIRECTORY = "";
 	
     protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         //process only if its multipart content
@@ -53,18 +53,17 @@ public class TestController extends HttpServlet {
 
             	Part filePart = request.getPart("file");
 				String name = "Prescription" + 1;
-				//String end = filePart.getContentType();
 				String end = filePart.getContentType();
 				if (end.startsWith("image")) {
 					String imageType = end.replace("image/", "");
-					filePart.write(UPLOAD_DIRECTORY + File.separator + name + "." + imageType);
-	            	request.setAttribute("message", "File Uploaded Successfully: " + UPLOAD_DIRECTORY + File.separator + name + "." + imageType + "<br> " + request.getParameter("teststring"));
+					//filePart.write(UPLOAD_DIRECTORY + File.separator + name + "." + imageType);
+	            	request.setAttribute("message", "File Uploaded Successfully: " + "(" + UPLOAD_DIRECTORY + ")" + File.separator + name + "." + imageType + "<br> " + request.getParameter("teststring"));
 				} else {
-	            	request.setAttribute("message", "File Uploaded is not an image!");
+	            	request.setAttribute("message", "File Uploaded is not an image!asdf" + "(" + UPLOAD_DIRECTORY + ")");
 				}
             	
             } catch (Exception ex) {
-            	request.setAttribute("message", "File Upload Failed due to " + ex);
+            	request.setAttribute("message", "File Upload Failed due to " + ex + "(" + UPLOAD_DIRECTORY + ")");
             }
             
         }else{

@@ -53,6 +53,11 @@
     <div id="container">
 	<h1>CART:</h1>
 	<c:if test="${CartList != null}">
+					<div class="list-group">
+						<a class="list-group-item">
+							<h4 class="list-group-item list-group-item-info">Orders have a minimum of 300 pesos, please ensure that your total order reaches that.</h4>
+						</a>
+					</div>
     		<table id="cartlistTable" class="table table-striped table-bordered" width="100%">
         		<thead>
             		<tr>
@@ -129,7 +134,7 @@
 						<td><c:out value="${item.productForm}" /></td>
 						<td><c:out value="${item.productPackaging}" /></td>
 						<td><c:out value="${item.productDescription}" /></td>
-						<td><c:out value="${item.priceSet}" /></td>
+						<td>&#8369;<c:out value="${item.priceSet}" /></td>
 						<form action='ShopController' method='post'>
 						<td>
 							<select name='Quantity'>

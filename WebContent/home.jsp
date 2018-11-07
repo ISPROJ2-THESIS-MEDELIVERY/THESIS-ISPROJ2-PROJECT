@@ -194,9 +194,9 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6">
-					<c:if test="${message != null}">
+					<%-- <c:if test="${message != null}">
 						<c:out value="${message}" />
-					</c:if>
+					</c:if> --%>
 					<div class="list-group">
 						<a class="list-group-item">
 							<h4 class="list-group-item-heading">Select Pharmacy to order
@@ -259,7 +259,7 @@
 						class="btn btn-primary" role="button" />View your Current Orders</a><br>
 					<br>
 					<a href="CustomerController?action=GoToReturns"
-						class="btn btn-primary" role="button" />View your Orders that can be returned</a><br>
+						class="btn btn-primary" role="button" />View your Order Returns</a><br>
 					<br>
 				</div>
 			</div>
@@ -280,6 +280,10 @@
     					</a>
     				</div>
     				<a href="DispatcherController?Action=DispatchOrder" class="btn btn-info" role="button">Order Dispatch</a><br>
+    				</div>
+    				</div>
+    				</div>
+    				
 		<hr>
 		</c:if>
 	<c:if test="${userAccess == 3}">
@@ -922,7 +926,16 @@
 		</div>
 	</div>
 
-
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">              
+      <div class="modal-body">
+      	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <img src="" class="imagepreview" style="width: 100%;" >
+      </div>
+    </div>
+  </div>
+</div>
 
 
 	<div class="footer-dark">
@@ -1044,7 +1057,16 @@
 <script src="assets/bootstrap/js/jquery.dataTables.min.js"></script>
 <script src="assets/bootstrap/js/dataTables.bootstrap.min.js"></script>
 
+<script>
 
+$(function() {
+	$('.pop').on('click', function() {
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodal').modal('show');   
+	});		
+});
+
+</script>
 
 	<script type="text/javascript">
 		 $(document).ready(function() {
@@ -1115,6 +1137,17 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#adminTable").DataTable({
+			"sPaginationType" : "full_numbers",
+			"bJQueryUI" : true,
+			"sScrollX" : "100%",
+			"bScrollCollapse" : true
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#druglistTable").DataTable({
 			"sPaginationType" : "full_numbers",
 			"bJQueryUI" : true,
 			"sScrollX" : "100%",

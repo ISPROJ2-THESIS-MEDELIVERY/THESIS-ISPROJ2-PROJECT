@@ -51,7 +51,7 @@
     </div>
   <div class="login-clean">
 	<form onSubmit="return formValidation();" action="InformationController" method="post">
-	<h2>Add a New Courier</h2><br>
+	<h2>Add a New Courier Service</h2><br>
 		<div class="form-group">
         	<input type="text" name="CompName" required="required" placeholder="Courier Name" class="form-control"/>
         </div>
@@ -59,12 +59,11 @@
         	<input type="text" name="CompStre" required="required" placeholder="Courier Street" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="CompBara" required="required" placeholder="Courier Barangay" class="form-control"/>
+        	<input type="text" name="CompBara" required="required" placeholder="Courier District" class="form-control"/>
         </div>
         <div class="form-group">
         	<select name="CompCity" class="form-control" >
 			<c:forEach items="${CityList}" var="city">
-				<option value=""  disabled selected hidden>Manila City</option>
 				<option value =<c:out value="${city.cityID}"/>><c:out value="${city.cityName}" /></option>
 			</c:forEach>
 		  </select>
@@ -74,11 +73,11 @@
         	<input type="text" name="CompProv" required="required" placeholder="Courier Province" class="form-control"/>
         </div> -->
         <div class="form-group">
-        	<input type="number" name="CompLand" required="required" placeholder="Courier Landline" class="form-control"/>
-        </div>
+        	<input id="phonenum" type="tel" pattern="^\d{7}$" title="must contain 7 digits" name="CompLand" required="required" placeholder="Courier Landline" class="form-control"/>
+        </div>      
         <div class="form-group">
-        	<input type="number" name="CompCell" required="required" placeholder="Courier Cellphone" class="form-control"/>
-        </div>
+        	<input id="phonenum" type="tel" pattern="^(09|\+639)\d{9}$" title="must start with 09 or +63 and contain 11 digits" name="CompCell" required="required" placeholder="Courier Cellphone" class="form-control"/>
+        </div> 
         <div class="form-group">
         	<input type="text" name="CompCont" required="required" placeholder="Courier Contact" class="form-control"/>
         </div>

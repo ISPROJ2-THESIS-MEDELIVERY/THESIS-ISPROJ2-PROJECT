@@ -55,7 +55,7 @@
         	<input type="text" name="LastName" required="" placeholder="Last Name *" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="tel" name="PhoneNum"  required="" placeholder="Phone Number *" class="form-control"/>
+        	<input id="phonenum" type="tel" pattern="^\d{7}$" title="must contain 7 digits" name="PhoneNum"  required="" placeholder="Phone Number *" class="form-control"/>
         </div>
         <div class="form-group">
         	<input type="text" name="UAddress" required="" placeholder="Dispatch Address *" class="form-control"/>

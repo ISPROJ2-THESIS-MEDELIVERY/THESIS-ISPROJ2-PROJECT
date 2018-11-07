@@ -346,16 +346,16 @@
         	<textarea name="ProductDesc" required="required" placeholder="Product Description" class="form-control"></textarea>
         </div>
         <div class="form-group">
-        	<!-- <label><input type="checkbox" value="true" name="ProductIsRX" class="form-control"/>Rx Product?</label>
-  			<label><input type="checkbox" value="true" name="feature" class="form-control"/>Featured?</label> -->
-        	Product is an Rx Product?<input type="checkbox" name="ProductIsRX" value="true" class="form-control"/>
+        	<label><input type="checkbox" value="true" name="ProductIsRX" class="form-control"/>Rx Product?</label>
+  			<label><input type="checkbox" value="true" name="feature" class="form-control"/>Featured?</label>
+        	<!-- Product is an Rx Product?<input type="checkbox" name="ProductIsRX" value="true" class="form-control"/> -->
         </div>
         <div class="form-group">
         	Image: <input type="file" name="ProductImag" required="required" class="form-control"/>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
         	Is it featured?<input type="checkbox" name="feature" value="true" class="form-control"/>
-        </div>
+        </div> -->
         <div class="input-group">
         <span class="input-group-text">&#8369;</span>
         	<input type="number" min="0" step="0.01" name="Price" required="required" placeholder="Price" class="form-control"/>

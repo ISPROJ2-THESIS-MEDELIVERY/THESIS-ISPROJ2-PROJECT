@@ -80,8 +80,62 @@
 					your email address</strong></span>
 		</div>
 	</c:if>
+	
+	
+	<c:if test="${userAccess == null}">
+		<c:forEach items="${Featurepharm}" var="pharm">
+			<div class="row">
+				<h3>
+					<center>
+						Featured products of
+						<c:out value="${pharm.pharmacyName}">: </c:out>
+					</center>
+				</h3>
+				<div id="featured-products" class="carousel slide"
+					data-ride="carousel">
+					<ol class="carousel-indicators">
+						<li data-target="#featured-products" data-slide-to="0"
+							class="active"></li>
+						<li data-target="#featured-products" data-slide-to="1"></li>
+						<li data-target="#featured-products" data-slide-to="2"></li>
+						<li data-target="#featured-products" data-slide-to="3"></li>
+					</ol>
 
-	<c:if test="${userAccess == 1 || userAccess == null}">
+					<div class="carousel-inner" role="listbox">
+						<div class="item active">
+							<img class="center-block"
+								src="images/<c:out value="${pharm.pharmacyLogo}"/>" />
+						</div>
+						<c:forEach items="${Featurestock}" var="stock">
+							<c:forEach items="${Featureitems}" var="items">
+								<c:if test="${stock.productID == items.productID}">
+									<c:if test="${stock.pharmacyID == pharm.pharmacyID}">
+										<div class="item">
+											<a> <img class="center-block"
+												src="images/<c:out value="${items.productImage}"/>" />
+											</a>
+										</div>
+									</c:if>
+								</c:if>
+							</c:forEach>
+						</c:forEach>
+					</div>
+
+					<a class="left carousel-control" href="#featured-products"
+						role="button" data-slide="prev"> <span
+						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a> <a class="right carousel-control" href="#featured-products"
+						role="button" data-slide="next"> <span
+						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+			</div>
+		</c:forEach>
+	</c:if>
+	
+	<c:if test="${userAccess == 1}">
 		<c:forEach items="${Featurepharm}" var="pharm">
 			<div class="row">
 				<h3>
@@ -806,23 +860,25 @@
 		<table id="branchesTable" class="table table-striped table-bordered"
 			width="100%">
 			<thead>
-				<tr>
+				<tr>					
 					<th>Branch Address</th>
 					<th>Branch Landline</th>
 					<th>Branch Cellphone</th>
-					<th>Branch Contact</th>
+					<th>Branch Contact</th>		
+					<th>Pharmacy ID</th>		
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${BranchList}" var="branch">
-					<tr>
+					<tr>						
 						<td><c:out value="${branch.branchStreet}" />,<c:out
 								value="${branch.branchBarangay}" />,<c:out
 								value="${branch.cityID}" />,<c:out
 								value="${branch.branchProvince}" /></td>
-						<td><c:out value="${branch.branchProvince}" /></td>
 						<td><c:out value="${branch.branchLandline}" /></td>
+						<td><c:out value="${branch.branchCellular}" /></td>
 						<td><c:out value="${branch.branchOwner}" /></td>
+						<td><c:out value="${branch.pharmacyID}" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -833,13 +889,13 @@
 		<br>
 		<hr>
 		<h2>
-			<center>List of Couriers:</center>
+			<center>List of Courier Services:</center>
 		</h2>
 		<br>
 		<table id="courierTable" class="table table-striped table-bordered"
 			width="100%">
 			<thead>
-				<tr>
+				<tr>					
 					<th>Courier Name</th>
 					<th>Courier Address</th>
 					<th>Courier Landline</th>
@@ -849,14 +905,14 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${CourierList}" var="courier">
-					<tr>
+					<tr>						
 						<td><c:out value="${courier.companyName}" /></td>
 						<td><c:out value="${courier.companyStreet}" />,<c:out
 								value="${courier.companyBarangay}" />,<c:out
 								value="${courier.companyCity}" />,<c:out
 								value="${courier.companyProvince}" /></td>
-						<td><c:out value="${courier.companyProvince}" /></td>
 						<td><c:out value="${courier.companyLandline}" /></td>
+						<td><c:out value="${courier.companyCellular}" /></td>
 						<td><c:out value="${courier.companyContact}" /></td>
 					</tr>
 				</c:forEach>
@@ -864,7 +920,7 @@
 		</table>
 		<a href="InformationController?Action=AddCourier"
 			class="btn btn-info btn-sm" role="button">Add a new Courier
-			branch</a>
+			Service</a>
 		<br>
 		<br>
 	</c:if>
@@ -995,6 +1051,34 @@
 	line-height: 1;
 	width: 300px;
 	height: 300px;
+}
+
+.carousel {
+    position: relative;
+    margin-left: 300px;
+    margin-right: 300px;
+}
+
+.carousel-control.left {
+    background-image: -webkit-linear-gradient(left,rgba(0,0,0,.5) 0,rgba(0,0,0,.0001) 100%);
+    background-image: -o-linear-gradient(left,rgba(0,0,0,.5) 0,rgba(0,0,0,.0001) 100%);
+    background-image: -webkit-gradient(linear,left top,right top,from(rgba(0,0,0,.5)),to(rgba(0,0,0,.0001)));
+    background-image: linear-gradient(to right,rgba(0,0,0,.5) 0,rgba(0,0,0,.0001) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+    background-repeat: repeat-x;
+    background-color: #172a74;
+}
+
+.carousel-control.right {
+    right: 0;
+    left: auto;
+    background-image: -webkit-linear-gradient(left,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);
+    background-image: -o-linear-gradient(left,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);
+    background-image: -webkit-gradient(linear,left top,right top,from(rgba(0,0,0,.0001)),to(rgba(0,0,0,.5)));
+    background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+    background-repeat: repeat-x;
+    background-color: #21a9af;
 }
 </style>
 

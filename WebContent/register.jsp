@@ -86,9 +86,9 @@
         <div class="form-group">
         	<input type="email" name="CusEmail" required="required" placeholder="Email *" class="form-control"/>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
         	<input type="number" name="ContactNumber" required="required" placeholder="Contact Number *" class="form-control"/>
-        </div>
+        </div> -->
         <div class="form-group">
         	<input type="text" name="Username" pattern="[a-zA-Z0-9_-]{6,12}" autofocus required title="must be alphanumeric in 6-12 chars" required="required" placeholder="Username *" class="form-control"/>
         </div>

@@ -33,6 +33,7 @@ import thesis.mvc.model.Prescription;
 import thesis.mvc.model.Product;
 import thesis.mvc.model.Stocks;
 import thesis.mvc.model.StocksPrice;
+import thesis.mvc.pageaction.SearchAction;
 import thesis.mvc.pageaction.SearchAction.ProductList;
 import thesis.mvc.utility.DBUtility;
 import thesis.mvc.utility.EncryptionFunction;
@@ -60,13 +61,13 @@ public class ProductController extends HttpServlet {
 
     	//EmailAction emailAction = new EmailAction();
     	//emailAction.sendEmail("fajardokier@yahoo.com", "Bitch ass nigga", "I'mma pop a cap in your ass");
+		Pharmacist pharmacist = new PharmacistImplement().getPharmacistById( (int) session.getAttribute("Pharmacist") );
+		int PharmaID = new BranchImplement().getBranchById(pharmacist.getBranchID()).getPharmacyID();
 		
 		if( Action.equals(null) ) {
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else if(Action.equalsIgnoreCase( "addProduct" )){ //Goto main page
 			//Action=addProduct
-			Pharmacist pharmacist = new PharmacistImplement().getPharmacistById( (int) session.getAttribute("Pharmacist") );
-			int PharmaID = new BranchImplement().getBranchById(pharmacist.getBranchID()).getPharmacyID();
 
 			List<Product> productList = new ArrayList<Product>();
 			productList = new ProductImplement().getAllProducts();
@@ -105,6 +106,7 @@ public class ProductController extends HttpServlet {
 			session.setAttribute("ProductList", productList);
 			response.sendRedirect(request.getContextPath() + "/pharmacyStock.jsp");
 		} else if(Action.equalsIgnoreCase( "AddnewProduct" )){ //Goto main page
+		   	session.setAttribute( "pharmaProductList", new SearchAction().GeneralListing(PharmaID) );
 			response.sendRedirect(request.getContextPath() + "/pharmacyAdd.jsp");
 		} else { //Goto main page
 			response.sendRedirect(request.getContextPath() + "/index.jsp");

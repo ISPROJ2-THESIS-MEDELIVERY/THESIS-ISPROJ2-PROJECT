@@ -55,7 +55,7 @@
 	<h2>Order History</h2>
     <br>
 	<c:forEach items="${OrderHistory}" var="order">
-	<c:if test="${order.orderStatus != 'PENDING'}">
+	<c:if test="${!order.orderStatus.startsWith('PENDING')}">
 	<table class="table table-striped table-bordered" width="100%">
 	    <thead>
 	        <tr>

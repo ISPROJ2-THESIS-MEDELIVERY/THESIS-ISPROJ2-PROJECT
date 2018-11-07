@@ -25,6 +25,7 @@ import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.implement.PrescriptionImplement;
 import thesis.mvc.implement.ProductImplement;
+import thesis.mvc.implement.StocksPriceImplement;
 import thesis.mvc.model.Customer;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
@@ -66,8 +67,9 @@ public class ShopController extends HttpServlet {
 		} else {
 			//Go home
 		}
-		
+
 	   	request.setAttribute( "productList", searchAction.GeneralListing(PharmaID) );
+	   	request.setAttribute( "productPriceList", new StocksPriceImplement().getAllStocksPrice());
 	   	
 	   	RequestDispatcher view = request.getRequestDispatcher( forward );
 	   	view.forward(request, response);

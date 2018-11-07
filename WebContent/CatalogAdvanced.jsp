@@ -141,6 +141,7 @@
 				<th>Product Form</th>
 				<th>Product Packaging</th>
 				<th>Product Description</th>
+                <th>Unit Price</th>
 				<th>Quantity</th>
 				<th>Buy</th>
 			</tr>
@@ -160,7 +161,7 @@
 						<td><c:out value="${item.productForm}" /></td>
 						<td><c:out value="${item.productPackaging}" /></td>
 						<td><c:out value="${item.productDescription}" /></td>
-						
+						<td><c:out value="${item.priceSet}" /></td>
 						<form action='ShopController' method='post'>
 						<td>
 							<select name='Quantity'>

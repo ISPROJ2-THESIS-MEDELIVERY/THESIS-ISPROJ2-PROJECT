@@ -100,7 +100,7 @@ public class ShopAction {
 		}
 		
 		//Add nessesary information
-		order.setOrderStatus( "PENDING" );
+		order.setOrderStatus( "PENDING1" );
 		
 		//Add delivery cost and Input order detail
 		Double actualcost = 0.0;

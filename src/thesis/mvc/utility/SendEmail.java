@@ -4,6 +4,14 @@ import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 
+import thesis.mvc.implement.CityListingImplement;
+import thesis.mvc.implement.CustomerImplement;
+import thesis.mvc.implement.OrderDetailImplement;
+import thesis.mvc.implement.OrderImplement;
+import thesis.mvc.implement.ProductImplement;
+import thesis.mvc.model.Order;
+import thesis.mvc.model.OrderDetail;
+
 public class SendEmail 
 { 
 	public boolean send(String to, String sub, String msg)
@@ -72,46 +80,77 @@ public class SendEmail
 	return true;
 	}
 	
-	public String OrderEmail() {
-		String HTMLMessage = "\r\n" + 
-				"<h3>Thank you for ordering from us! </br> Your order will arrive within 24 hours! </h3>\r\n" + 
-				"\r\n" + 
-				"If you have any questions Email us at <a href=\"medeliveryincorporated@gmail.com\r\n" + 
-				"\" class=\"es-button\" target=\"_blank\" style=\"font-size: 16px; border-top-width: 10px; border-bottom-width: 10px; \r\n" + 
-				"border-radius: 5px;  none repeat scroll 0% 0%; \">medeliveryincorporated@gmail.com</a>\r\n" + 
-				"\r\n" + 
-				"<hr>\r\n" + 
-				"<span style=\"font-size: 14px; line-height: 150%;\">Order #:</span>\r\n" + 
-				"</br>\r\n" + 
-				"<span style=\"font-size: 14px; line-height: 150%;\">Order Date:</span>\r\n" + 
-				"</br>\r\n" + 
-				"<span style=\"font-size: 14px; line-height: 150%;\">Order Status</span>\r\n" + 
-				"</br>\r\n" + 
-				"<span style=\"font-size: 14px; line-height: 150%;\">Customer Name:</span>\r\n" + 
-				"</br>\r\n" + 
-				"<span style=\"font-size: 14px; line-height: 150%;\">Address:</span>\r\n" + 
-				"</br>\r\n" + 
-				"<span style=\"font-size: 14px; line-height: 150%;\">City:</span>\r\n" + 
-				"\r\n" + 
-				"<h4>ITEMS ORDERED</h4>\r\n" + 
-				"<table cellspacing=\"0\" cellpadding=\"0\" align=\"right\">                                                                                                                                               \r\n" + 
-				"<table>\r\n" + 
-				"    <tbody>\r\n" + 
-				"        <tr>\r\n" + 
-				"            <td>item name</td>\r\n" + 
-				"            <td style=\"text-align: center;\" width=\"60\">1</td>\r\n" + 
-				"            <td style=\"text-align: center;\" width=\"100\">$20.00</td>\r\n" + 
-				"        </tr>\r\n" + 
-				"    </tbody>\r\n" + 
-				"</table>\r\n" + 
-				"</br>\r\n" + 
-				"<span style=\"font-size: 14px; line-height: 150%;\">Delivery Fee:</span>\r\n" + 
-				"</br>\r\n" + 
-				"<span style=\"font-size: 14px; line-height: 150%;\">Discount:</span>\r\n" + 
-				"</br>\r\n" + 
-				"<span style=\"font-size: 14px; line-height: 150%;\">Order Total (Vat inclusive):</span>\r\n" + 
-				"</br>\r\n" + 
-				"\r\n" + 
+	public String OrderEmail(Order orderRecieve) {
+		Order order = new OrderImplement().getOrderById(orderRecieve.getOrderID());
+		List<OrderDetail> OrderDetails = new OrderDetailImplement().getspecificOrderDetail(order.getOrderID());
+		String HTMLMessage = "";
+		
+		if (order.getOrderStatus().equalsIgnoreCase("PENDING1")) {
+			HTMLMessage +=
+					"<h3>Thank you for ordering from us! </br> Your order is currently being processed</h3>\r\n" + 
+					"You'll receive an email when your items have been confirmed. If you have any questions feel free to Email us at <a href=\"medeliveryincorporated@gmail.com\r\n" + 
+					"\" class=\"es-button\" target=\"_blank\" style=\"font-size: 16px; border-top-width: 10px; border-bottom-width: 10px; \r\n" + 
+					"border-radius: 5px;  none repeat scroll 0% 0%; \">medeliveryincorporated@gmail.com</a>"; 
+		} else if (order.getOrderStatus().equalsIgnoreCase("EN-ROUTE")) {
+			HTMLMessage +=
+					"<h3>Thank you for ordering from us! </br> Your order will arrive within 24 hours! </h3>" + 
+					"If you have any questions Email us at <a href=\"medeliveryincorporated@gmail.com" + 
+					"\" class=\"es-button\" target=\"_blank\" style=\"font-size: 16px; border-top-width: 10px; border-bottom-width: 10px; " + 
+					"border-radius: 5px;  none repeat scroll 0% 0%; \">medeliveryincorporated@gmail.com</a><hr>";
+		} else if (order.getOrderStatus().equalsIgnoreCase("CANCELLED")) {
+			HTMLMessage +=
+					"<h3>You have successfully cancelled your order! </h3> </br>" + 
+					"If you have any questions Email us at <a href=\"medeliveryincorporated@gmail.com" + 
+					"\" class=\"es-button\" target=\"_blank\" style=\"font-size: 16px; border-top-width: 10px; border-bottom-width: 10px; " + 
+					"border-radius: 5px;  none repeat scroll 0% 0%; \">medeliveryincorporated@gmail.com</a>";
+		} else if (order.getOrderStatus().equalsIgnoreCase("INVALID")) {
+			HTMLMessage +=
+					"<h3>We're Sorry, unfortunately your order has been cancelled due to your prescription being invalidated</h3>" + 
+					"Disclaimer: Medelivery reserves the right to cancel any such orders with unverifiable identification / falsified prescriptions." + 
+					"For further detail concerning your orders cancellation please kindly Email us at <a href=\"medeliveryincorporated@gmail.com" + 
+					"\" class=\"es-button\" target=\"_blank\" style=\"font-size: 16px; border-top-width: 10px; border-bottom-width: 10px; " + 
+					"border-radius: 5px;  none repeat scroll 0% 0%; \">medeliveryincorporated@gmail.com</a>"; 
+		} else if (order.getOrderStatus().equalsIgnoreCase("PENDING5")) {
+			HTMLMessage +=
+					"<h3>We're Sorry, unfortunately your order has been cancelled due to no pharmacy wanting to pick up your order</h3>" + 
+					"Disclaimer: Medelivery reserves the right to cancel any such orders with unverifiable identification / falsified prescriptions." + 
+					"For further detail concerning your orders cancellation please kindly Email us at <a href=\"medeliveryincorporated@gmail.com" + 
+					"\" class=\"es-button\" target=\"_blank\" style=\"font-size: 16px; border-top-width: 10px; border-bottom-width: 10px; " + 
+					"border-radius: 5px;  none repeat scroll 0% 0%; \">medeliveryincorporated@gmail.com</a>"; 
+		}
+		HTMLMessage +=
+				"<h4>Order #: " + order.getOrderID() + "</h4></br>" + 
+				"<h4>Order Date: " + order.getDateOrdered() + "</h4></br>" + 
+				"<h4>Order Status: "  + order.getOrderStatus() + "</h4></br>" + 
+				"<h4>Customer Name: " + new CustomerImplement().getCustomerById(order.getCustomerID()).getCustomerName() + "</h4></br>" + 
+				"<h4>Address: " + order.getOrderAddress() + "</h4></br>" + 
+				"<h4>City: " + new CityListingImplement().getCityListingById(order.getCityID()).getCityName() + "</h4>" +  
+				"<h4>ITEMS ORDERED</h4>" + 
+				"<table cellspacing=\"0\" cellpadding=\"2\" align=\"Left\">                                                                                                                                               " + 
+				"<table>" +
+				"<thead>" + 
+				"	<tr>" + 
+				"  		<th>Item</th>" + 
+				"  		<th>Quantity</th>" + 
+				"  		<th>Unit Price</th>" + 
+				"	</tr>" + 
+				"</thead>" + 
+				"<tbody>";
+		for (OrderDetail orderDetail : OrderDetails) {
+			HTMLMessage +=
+					"        <tr>" + 
+					"            <td>"+ new ProductImplement().getProductById(orderDetail.getProductID()).getProductName() +"</td>" + 
+					"            <td style=\"text-align: center;\" width=\"60\">" + orderDetail.getQuantity() + "</td>" + 
+					"            <td style=\"text-align: center;\" width=\"100\">"+ orderDetail.getCostPerUnit() + "</td>" + 
+					"        </tr>";
+		}
+
+		HTMLMessage +=
+				"    </tbody>" + 
+				"</table></br>" + 
+				"<h4>Delivery Fee: 50 Pesos</h4></br>" + 
+				"<h4>Discount: N/A</h4></br>" + 
+				"<h4>Order Total (Vat inclusive):" + order.getActualCost() +"</h4></br>" + 
 				"<img src=\"https://isproj2a.benilde.edu.ph/Medelivery/assets/img/medlogopill.png\" alt=\"\" width=\"125\">";
 		return HTMLMessage;
 	}

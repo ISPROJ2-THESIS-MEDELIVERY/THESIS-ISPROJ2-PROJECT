@@ -2,6 +2,8 @@ package thesis.mvc.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PrescriptionImplement;
 import thesis.mvc.model.Order;
@@ -18,6 +21,7 @@ import thesis.mvc.model.Prescription;
 import thesis.mvc.pageaction.ApprovalAction;
 import thesis.mvc.pageaction.ShopAction;
 import thesis.mvc.utility.DBUtility;
+import thesis.mvc.utility.SendEmail;
 
 @WebServlet("/ApprovalController")
 public class ApprovalController extends HttpServlet{
@@ -52,6 +56,9 @@ public class ApprovalController extends HttpServlet{
 		   	approvalAction.pharmacistApproval( orderID, 1 );
 		} else if (action.equalsIgnoreCase("OrderApprove")){
 		   	approvalAction.pharmacistApproval( orderID, 2 );
+			Order order = new OrderImplement().getOrderById(orderID);
+			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+			new SendEmail().send(new CustomerImplement().getCustomerById(order.getCustomerID()).getCustomerName(), "Transaction accepted on " + CurrentDate, new SendEmail().OrderEmail(order));
 		} else if (action.equalsIgnoreCase("OrderInvalidate")){
 			Order order = new OrderImplement().getOrderById(orderID);
 			if (new ShopAction().RefundOrder(order, "Pharmacist Invalidated the order")) {
@@ -61,6 +68,8 @@ public class ApprovalController extends HttpServlet{
 				prescription.setRemark(request.getParameter("Reason"));
 				new PrescriptionImplement().updatePrescription(prescription);
 				new OrderImplement().updateOrder( order );
+				Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+				new SendEmail().send(new CustomerImplement().getCustomerById(order.getCustomerID()).getCustomerName(), "Transaction rejected on " + CurrentDate, new SendEmail().OrderEmail(order));
 			} else {
 				session.setAttribute( "Message" , "Order can't be cancelled for some reason." );
 			}

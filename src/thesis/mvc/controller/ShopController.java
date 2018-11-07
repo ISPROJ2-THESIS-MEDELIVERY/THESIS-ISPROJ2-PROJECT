@@ -191,8 +191,8 @@ public class ShopController extends HttpServlet {
 			} else {
 				String CustomerEmail = customerImplement.getCustomerByUserId(userID).getEmail();
 				Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-				String redirect = new ShopAction().purchaseOrder(order, OrderDetails, "https://www.google.com/");// request.getContextPath()
-				sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, sendEmail.OrderEmail());
+				String redirect = new ShopAction().purchaseOrder(order, OrderDetails, "https://isproj2a.benilde.edu.ph/" + request.getContextPath());// request.getContextPath()
+				sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, sendEmail.OrderEmail(order));
 				session.setAttribute("CartlistReciept", cartList);
 				session.setAttribute("orderReciept", order);
 				session.setAttribute("ApproveChecker", false);
@@ -249,23 +249,34 @@ public class ShopController extends HttpServlet {
 			Order order = new Order();
 			order = (Order) session.getAttribute("Order");
 			order.setPrescriptionID(prescriptionID);
-			order.setOrderType("Prescription");
-			order.setOrderStatus( "PENDING" );
 			
 			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
 			List<CartList> cartList = (List<CartList>) session.getAttribute("CartList");
 			SendEmail sendEmail = new SendEmail();
 			int userID = (int) session.getAttribute("userID");
 			
-			String CustomerEmail = customerImplement.getCustomerByUserId(userID).getEmail();
-
-			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-			String redirect = new ShopAction().purchaseOrder(order, OrderDetails, "https://isproj2a.benilde.edu.ph/" + request.getContextPath());// request.getContextPath()
-			System.out.println(redirect);
-			sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, "This is a test message");
+			double finalAmount = 0.0;
+			for (OrderDetail orderDetail : OrderDetails) {
+				finalAmount += orderDetail.getTotalCost();
+			}
+			
+			if(order == null || OrderDetails.isEmpty()) {
+				response.sendRedirect(request.getContextPath() + "/index.jsp");
+			} else if (finalAmount <= 300.00) {
+				session.setAttribute("message", "Orders have a minimum of 300 pesos, please ensure that your order reaches that.");
+				if (session.getAttribute("CatalogType") == "Regular") {
+					response.sendRedirect(request.getContextPath() + "/CatalogBasic.jsp");
+				} else if (session.getAttribute("CatalogType") == "Prescription") {
+					response.sendRedirect(request.getContextPath() + "/CatalogAdvanced.jsp");
+				}
+			}
 			if(order == null || OrderDetails.isEmpty()) {
 				response.sendRedirect(request.getContextPath() + "/index.jsp");
 			} else {
+				String CustomerEmail = customerImplement.getCustomerByUserId(userID).getEmail();
+				Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+				String redirect = new ShopAction().purchaseOrder(order, OrderDetails, "https://isproj2a.benilde.edu.ph/" + request.getContextPath());// request.getContextPath()
+				sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, sendEmail.OrderEmail(order));
 				session.setAttribute("CartlistReciept", cartList);
 				session.setAttribute("orderReciept", order);
 				session.setAttribute("ApproveChecker", false);

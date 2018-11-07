@@ -57,7 +57,7 @@
 	<c:if test="${CartList != null}">
 					<div class="list-group">
 						<a class="list-group-item">
-							<h4 class="list-group-item-heading">We only accept orders priced in a total of &#8369;300 and above.</h4>
+							<h4 class="list-group-item-heading"><c:out value="${message}" /></h4>
 						</a>
 					</div>
     		<table id="cartlistTable" class="table table-striped table-bordered" width="100%">

@@ -58,7 +58,7 @@
 	<h2>Current Orders</h2>
     <br>
 	<c:forEach items="${OrderHistory}" var="order">
-	<c:if test="${order.orderStatus == 'APPROVED' || order.orderStatus == 'PROCESSED' || order.orderStatus == 'PENDING'}">
+	<c:if test="${order.orderStatus == 'APPROVED' || order.orderStatus == 'PROCESSED' || order.orderStatus.startsWith('PENDING')}">
 	<table class="table table-striped table-bordered" width="100%">
 	    <thead>
 	        <tr>

@@ -76,10 +76,13 @@ public class DispatcherController extends HttpServlet {
 			//response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else if(action.equalsIgnoreCase("assignOrder")) {
 			int orderID = Integer.parseInt( request.getParameter("OrderID") );
+			Order order = new OrderImplement().getOrderById(orderID);
+			System.out.println(order.getOrderStatus().substring(order.getOrderStatus().length() - 1));
 			int branchID = Integer.parseInt( request.getParameter("BranchID") );
 			
-			if(!new OrderImplement().getOrderById(orderID).getOrderStatus().equalsIgnoreCase("CANCELLED")) {
-				new OrderImplement().updateOrderStatus(orderID, "PROCESSED", branchID);
+			if(!order.getOrderStatus().equalsIgnoreCase("CANCELLED")) {
+				String count = order.getOrderStatus().substring(order.getOrderStatus().length() - 1);
+				new OrderImplement().updateOrderStatus(orderID, "PROCESSED" + count, branchID);
 				Delivery delivery = new Delivery();
 				delivery.setComments(request.getParameter("Comments"));
 				delivery.setDispatcherID((int) session.getAttribute("Dispatcher"));

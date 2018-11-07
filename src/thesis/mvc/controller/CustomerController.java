@@ -2,6 +2,8 @@ package thesis.mvc.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
+import java.util.Calendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,14 +12,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacyImplement;
+import thesis.mvc.implement.PrescriptionImplement;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.Pharmacy;
+import thesis.mvc.model.Prescription;
 import thesis.mvc.pageaction.SearchAction;
 import thesis.mvc.pageaction.ShopAction;
 import thesis.mvc.utility.DBUtility;
+import thesis.mvc.utility.SendEmail;
 
 @WebServlet("/CustomerController")
 public class CustomerController extends HttpServlet{
@@ -88,6 +94,8 @@ public class CustomerController extends HttpServlet{
 			if (new ShopAction().RefundOrder(cancelledOrder, "Customer Cancelled the order")) {
 				cancelledOrder.setOrderStatus("CANCELLED");
 				new OrderImplement().updateOrder( cancelledOrder );
+				Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
+				new SendEmail().send(new CustomerImplement().getCustomerById(cancelledOrder.getCustomerID()).getEmail(), "Transaction Cancelled on " + CurrentDate, new SendEmail().OrderEmail(cancelledOrder));
 			}
 			session.setAttribute("OrderHistory", new OrderImplement().getOrderByCustomerId((int)session.getAttribute("Customer")));
 			session.setAttribute("OrderDetailHistory", new OrderDetailImplement().getOrderDetail() );

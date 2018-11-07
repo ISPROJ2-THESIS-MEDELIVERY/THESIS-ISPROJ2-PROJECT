@@ -11,8 +11,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import thesis.mvc.implement.CustomerImplement;
+import thesis.mvc.implement.OrderImplement;
+import thesis.mvc.model.Order;
 import thesis.mvc.model.Product;
 import thesis.mvc.utility.DBUtility;
+import thesis.mvc.utility.SendEmail;
 
 public class ApprovalAction {
 	private Connection conn;
@@ -185,13 +189,31 @@ public class ApprovalAction {
 	public void pharmacistApproval(int orderID, int aprroval) {
 		Timestamp CurrentDate = new Timestamp(Calendar.getInstance().getTime().getTime());
 		if (aprroval == 1) {
-			try(PreparedStatement stmt = conn.prepareStatement("UPDATE `order` SET OrderStatus = 'PENDING', BranchID = 0 WHERE OrderID = ?")) {
-				stmt.setInt(1, orderID);
-				stmt.executeUpdate();
-				stmt.close();
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
+			Order order = new OrderImplement().getOrderById(orderID);
+			int repeat = Integer.valueOf(order.getOrderStatus().substring(order.getOrderStatus().length() - 1));
+			
+			if (order.getOrderStatus().equalsIgnoreCase("PENDING5")) {
+				try(PreparedStatement stmt = conn.prepareStatement("UPDATE `order` SET OrderStatus = ?, BranchID = 0 WHERE OrderID = ?")) {
+					stmt.setString(1, "CANCELLED");
+					stmt.setInt(2, orderID);
+					stmt.executeUpdate();
+					stmt.close();
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		        }
+				new SendEmail().send(new CustomerImplement().getCustomerById(order.getCustomerID()).getEmail(), "Transaction Cancelled on " + CurrentDate + " Due to too many rejections", new SendEmail().OrderEmail(order));
+				new ShopAction().RefundOrder(order, "Customer Cancelled the order");
+			} else {
+				try(PreparedStatement stmt = conn.prepareStatement("UPDATE `order` SET OrderStatus = ?, BranchID = 0 WHERE OrderID = ?")) {
+					stmt.setString(1, "PENDING" + (repeat + 1));
+					stmt.setInt(2, orderID);
+					stmt.executeUpdate();
+					stmt.close();
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		        }
+			}
+			
 		} else if (aprroval == 2) {
 			try(PreparedStatement stmt = conn.prepareStatement("UPDATE `order` SET OrderStatus = 'EN-ROUTE', DateProcessed = ? WHERE OrderID = ?")) {
 				stmt.setTimestamp(1, CurrentDate);

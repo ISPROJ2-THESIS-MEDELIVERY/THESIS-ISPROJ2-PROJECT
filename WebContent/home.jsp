@@ -342,7 +342,7 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${IncomingOrders}" var="order">
-							<c:if test="${order.prescriptionID == 0 && order.branchID == PharmacistBranch.branchID && order.orderStatus == 'PROCESSED'}">
+							<c:if test="${order.prescriptionID == 0 && order.branchID == PharmacistBranch.branchID && order.orderStatus.startsWith('PROCESSED')}">
 								<tr>
 									<td><c:out value="${order.customerID}" /></td>
 									<td><c:out value="${order.pharmacyID}" /></td>
@@ -435,7 +435,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${IncomingOrders}" var="order">
-						<c:if test="${order.prescriptionID != 0 && order.branchID == PharmacistBranch.branchID && order.orderStatus == 'PROCESSED'}">
+						<c:if test="${order.prescriptionID != 0 && order.branchID == PharmacistBranch.branchID && order.orderStatus.startsWith('PROCESSED')}">
 							<tr>
 								<td><c:out value="${order.customerID}" /></td>
 								<td><c:out value="${order.pharmacyID}" /></td>
@@ -753,8 +753,39 @@
 		<br>
 		<hr>
 		<h2>
-			<center>Add a new Item:</center>
+			<center>Items Inventory:</center>
 		</h2>
+		<table id="druglistTable" class="table table-striped table-bordered" width="100%">
+			<thead>
+				<tr>
+					<th>Product ID</th>
+					<th>Product Name</th>
+					<th>Generic Name</th>
+					<th>Product Strength</th>
+					<th>Image</th>
+					<th>Product Form</th>
+					<th>Product Packaging</th>
+					<th>Product Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${ProductList}" var="product">
+					<tr>
+						<td><c:out value="${product.productID}" /></td>
+						<td><c:out value="${product.productName}" /></td>
+						<td><c:out value="${product.genericName}" /></td>
+						<td><c:out value="${product.productStrength}" /></td>
+						<td><div class="pop">
+	    					<img id="imageresource" src="images/<c:out value="${product.productImage}" />" alt="Medicine Image" width="100px" height="100px">
+	   					 	Click to Enlarge
+						</div></td>
+						<td><c:out value="${product.productForm}" /></td>
+						<td><c:out value="${product.productPackaging}" /></td>
+						<td><c:out value="${product.productDescription}" /></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 		<br>
 		<hr>
 		<h2>

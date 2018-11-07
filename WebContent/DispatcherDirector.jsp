@@ -71,7 +71,7 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${DispatcherOrderList}" var="order">
-				<c:if test="${order.orderStatus == 'PENDING' && order.pharmacyID >= 1}">
+				<c:if test="${order.orderStatus.startsWith('PENDING') && order.pharmacyID >= 1}">
 					<tr>
 			            <td><c:out value="${order.orderAddress}" /></td>
 			            <td><c:out value="${order.dateOrdered}" /></td>

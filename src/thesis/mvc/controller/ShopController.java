@@ -248,7 +248,7 @@ public class ShopController extends HttpServlet {
 			String CustomerEmail = customerImplement.getCustomerByUserId(userID).getEmail();
 
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-			String redirect = new ShopAction().purchaseOrder(order, OrderDetails, "https://www.google.com/");// request.getContextPath()
+			String redirect = new ShopAction().purchaseOrder(order, OrderDetails, "https://isproj2a.benilde.edu.ph/" + request.getContextPath());// request.getContextPath()
 			System.out.println(redirect);
 			sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, "This is a test message");
 			if(order == null || OrderDetails.isEmpty()) {

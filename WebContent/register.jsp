@@ -86,9 +86,6 @@
         <div class="form-group">
         	<input type="email" name="CusEmail" required="required" placeholder="Email *" class="form-control"/>
         </div>
-        <!-- <div class="form-group">
-        	<input type="number" name="ContactNumber" required="required" placeholder="Contact Number *" class="form-control"/>
-        </div> -->
         <div class="form-group">
         	<input type="text" name="Username" pattern="[a-zA-Z0-9_-]{6,12}" autofocus required title="must be alphanumeric in 6-12 chars" required="required" placeholder="Username *" class="form-control"/>
         </div>
@@ -113,15 +110,6 @@
   			<p id="length" class="invalid">Minimum <b>8 characters</b></p>
 		</div>
         
-    <!-- <input type="text" 		name="FullName" 		required="" placeholder="FullName *">
-	<input type="text" 		name="Username" 		required="" placeholder="Username *">
-	<input type="text" 		name="CAddress" 		required="" placeholder="Address *">
-	<input type="email" 	name="CusEmail" 		required="" placeholder="Email *">
-	<input type="number" 	name="ContactNumber" 	required="" placeholder="Contact Number *">
-	<input type="password" 	name="Password" 		required="" placeholder="Create Password">
-	<input type="password" 	name="Password-repeat" 	required="" placeholder="Re-enter Password" style="margin:0px;">
-	<button type="submit" style="background-color:#56c5ff;">Sign Up</button>
-	<a href="login.jsp" class="already" style="color:#282d32;font-size:20px;">back</a>  -->
 </form>
 </div>
 <div class="footer-dark">

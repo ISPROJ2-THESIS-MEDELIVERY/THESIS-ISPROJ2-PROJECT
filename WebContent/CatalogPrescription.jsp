@@ -61,9 +61,6 @@
         <div class="form-group">
         	<input type="submit" name="Action" value="AddPrescription" class="form-control"/>
         </div>
-	<!-- <input type="file" name="file" value="Upload Prescription"/><br>
-	<input type="hidden" name="PharmaID" value="Pharmacy Name"/><br>
-	<input type="submit" name="action" value="AddPrescription"/> -->
 	</form>
 	</div>
 <div class="footer-dark">

@@ -80,15 +80,7 @@
         			<div class="form-group">
             			<button class="btn btn-primary btn-block" type="submit">Edit</button>
         			</div>
-		        <%-- Name: 		<input type="text" name="UpdateName" required="" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/><br>
-				Street:		<input type="text" name="UpdateStrt" required="" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/><br>
-				Barangay:	<input type="text" name="UpdateBrgy" required="" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/><br>
-				City:		<input type="text" name="UpdateCity" required="" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/><br>
-				Province:	<input type="text" name="UpdateProv" required="" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/><br>
-				Cellular:	<input type="text" name="UpdateCell" required="" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/><br>
-				LandLne:	<input type="text" name="UpdateLand" required="" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/><br>
-				Email:		<input type="text" name="UpdateEmil" required="" placeholder="<c:out value="${CustomerInfo.customerName}" />" class="form-control"/><br>
-				<input type="submit" /> --%>
+		       
 			</form>
 		    </div>
 <div class="footer-dark">

@@ -87,26 +87,6 @@
             <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
         </div>
         <a class="already" href="index.jsp">Back</a> 
-		<%-- <input type="text" 		name="Username" 	required="" 	placeholder="User Name *"><br>
-		<input type="password" 	name="Password" 	required="" 	placeholder="Create Password"><br>
-		<hr>
-		<input type="text" 		name="FistName" 	required="" 	placeholder="First Name *"><br>
-		<input type="text" 		name="LastName" 	required="" 	placeholder="Last Name *"><br>
-		<input type="text" 		name="PharNumb" 	required="" 	placeholder="PRC Number *"><br>
-		<input type="text" 		name="PharPosi" 	required="" 	placeholder="Position *"><br>
-		<input type="text" 		name="PharText" 	required="" 	value="<c:out value="${PharmacySelect.pharmacyName}" />" disabled><br>
-		<input type="hidden"	name="PharEyeD" 	required=""		value="<c:out value="${PharmacySelect.pharmacyID}" />">
-		<select name="PharSele">
-			<c:forEach items="${PharmacyBranch}" var="branch">
-				<option value =<c:out value="${branch.branchID}"/>>
-					<c:out value="${branch.branchStreet}" /> - <c:out value="${branch.branchBarangay}" /> - <c:out value="${branch.branchProvince}" /> - <c:out value="${branch.branchOwner}" />
-				</option>
-			</c:forEach>
-		</select>
-		<hr>
-		<input type="hidden"	name="SecretCode" 	value="RjRILW7K7Xz96hD">
-		<button type="submit" 	style="background-color:#56c5ff;">Sign Up</button>
-		<a href="index.jsp" class="already" style="color:#282d32;font-size:20px;">back</a> --%>
 	</form>
 	</div>
 	

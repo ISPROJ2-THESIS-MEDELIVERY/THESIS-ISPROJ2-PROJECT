@@ -69,14 +69,6 @@
   			<p id="length" class="invalid">Minimum <b>8 characters</b></p>
 		</div>
         
-		<!-- <input type="text" 		name="FistName" 		required="" 	placeholder="First Name *">
-		<input type="text" 		name="LastName" 		required="" 	placeholder="Last Name *">
-		<input type="text" 		name="Username" 		required="" 	placeholder="User Name *">
-		<input type="password" 	name="Password" 		required="" 	placeholder="Create Password">
-		<input type="password" 	name="Password-repeat" 	required="" 	placeholder="Re-enter Password" style="margin:0px;">
-		<input type="hidden"	name="SecretCode"		value="i3Up8XmH04Jz151">
-		<button type="submit" style="background-color:#56c5ff;">Sign Up</button>
-		<a href="/login.jsp" class="already" style="color:#282d32;font-size:20px;">back</a> -->
 	</form>
 	</div>
 	

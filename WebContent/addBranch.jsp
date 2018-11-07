@@ -50,7 +50,7 @@
         </div>
     </div>
   <div class="login-clean">
-  <div id="container">
+  	<div id="container">
 	<center><img alt="" src="assets/img/medlogopill.png"></center>    
 	</div> 
 	<form onSubmit="return formValidation();" action="InformationController" method="post">
@@ -68,9 +68,6 @@
 			</c:forEach>
 		  </select>
         </div>
-        <!-- <div class="form-group">
-        	<input type="text" name="BrchProv" required="required" placeholder="Branch Province" class="form-control"/>
-        </div> -->
         <div class="form-group">
         	<input type="number" name="BrchLand" required="required" placeholder="Branch Landline" class="form-control"/>
         </div>
@@ -94,25 +91,7 @@
             <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
         </div>
         <a class="already" href="index.jsp">Back</a>
-   <!-- <input type="text"		name="BrchStrt" required="" placeholder="Branch Street">
-		<input type="text"		name="BrchBngy" required="" placeholder="Branch Barangay">
-		<select name="BrchCity">
-			<c:forEach items="${CityList}" var="city">
-				<option value =<c:out value="${city.cityID}"/>><c:out value="${city.cityName}" /></option>
-			</c:forEach>
-		</select>
-		<input type="text"		name="BrchProv" required="" placeholder="Branch Province">
-		<input type="number"	name="BrchLand" required="" placeholder="Branch Landline">
-		<input type="number"	name="BrchCell" required="" placeholder="Branch Cellphone">
-		<input type="text"		name="BrchOwnr" required="" placeholder="Branch Owner">
-		<select name="BrchPHID">
-			<c:forEach items="${PharmacyList}" var="pharmacy">
-				<option value =<c:out value="${pharmacy.pharmacyID}"/>><c:out value="${pharmacy.pharmacyName}" /></option>
-			</c:forEach>
-		</select>
-		<input type="hidden"	name="Actionthing" value="addBranch">
-		<button type="submit" 	style="background-color:#56c5ff;">Sign Up</button>
-		<a href="login.jsp" class="already" style="color:#282d32;font-size:20px;">back</a> -->
+
 	</form>
   </div>
 <div class="footer-dark">

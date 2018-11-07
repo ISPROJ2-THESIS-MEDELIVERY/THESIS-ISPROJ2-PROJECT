@@ -96,12 +96,6 @@
             <button class="btn btn-primary btn-block" type="submit">Submit</button>
      </div>
      
-		<!-- Registration Number:<br>
-		<input type="text" name="RegistrationNo"/><br>
-		Quantity:<br>
-		<input type="number" name="Quantity"/><br>
-		<input type="hidden" name="Action" />
-		<input type="submit" value="Submit" /> -->
 		
 	</form>
 	</div>

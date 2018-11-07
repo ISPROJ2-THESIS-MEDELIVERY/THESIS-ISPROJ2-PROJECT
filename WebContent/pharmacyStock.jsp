@@ -70,7 +70,6 @@
 			<a href="ProductController?Action=AddnewProduct" class="btn btn-link" role="button">Click here to add a new product</a>
 		</div>
 	</div>
-	<!-- <a href="ProductController?Action=AddnewProduct" class="btn btn-info" role="button">Add a new Product</a> -->
 <div class="footer-dark">
     <footer>
         <div class="container">

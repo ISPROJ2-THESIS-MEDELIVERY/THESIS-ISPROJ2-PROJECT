@@ -55,6 +55,11 @@
     <div id="container">
 	<h1>CART:</h1>
 	<c:if test="${CartList != null}">
+					<div class="list-group">
+						<a class="list-group-item">
+							<h4 class="list-group-item-heading">We only accept orders priced in a total of &#8369;300 and above.</h4>
+						</a>
+					</div>
     		<table id="cartlistTable" class="table table-striped table-bordered" width="100%">
         		<thead>
             		<tr>
@@ -77,7 +82,6 @@
     						<img id="imageresource" src="images/<c:out value="${details.image}" />" alt="Medicine Image" width="100px" height="100px">
    						 	Click to Enlarge
 							</div></td>		                	
-		                	<%-- <td><img src="images/<c:out value="${details.image}" />" alt="Medicine Image" width="100px" height="100px"></td> --%>
 		                	<td><c:out value="${details.size}" /></td>
 		                	<td><c:out value="${details.prescription}" /></td>
 		                	<td><c:out value="${details.quantity}" /></td>
@@ -93,36 +97,6 @@
 				<center><input type='submit' name='Action' value="CheckoutOrder" style='display: on-hover' /></center>
 			</form>
 			<hr>
-    		
-    		
-    		
-		<%-- <table border=1>
-			<thead>
-				<tr>
-		            <th>Item</th>
-		            <th>Item Description</th>
-		            <th>Image</th>
-		            <th>Size</th>
-		            <th>Prescription Required</th>
-		            <th>Quantity</th>
-		            <th>Unit Price</th>
-		            <th>Total Cost</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${CartList}" var="details">
-		            <tr>
-		                <td><c:out value="${details.name}" /></td>
-		                <td><c:out value="${details.description}" /></td>
-		                <td><c:out value="${details.size}" /></td>
-		                <td><c:out value="${details.prescription}" /></td>
-		                <td><c:out value="${details.quantity}" /></td>
-		                <td><c:out value="${details.unitCost}" /></td>
-		                <td><c:out value="${details.totalCost}" /></td>
-		            </tr>
-	            </c:forEach>
-			</tbody>
-		</table> --%>
 	</c:if>
 	<c:if test="${CartList == null}">
 		<h2>NOTHING ORDERED YET</h2>
@@ -156,7 +130,6 @@
     						<img id="imageresource" src="images/<c:out value="${item.productImage}" />" alt="Medicine Image" width="100px" height="100px">
    						 	Click to Enlarge
 						</div></td>
-		                <%-- <td><img src="images/<c:out value="${item.productImage}" />" alt="Medicine Image" width="100px" height="100px"></td> --%>
 						<td><c:out value="${item.productForm}" /></td>
 						<td><c:out value="${item.productPackaging}" /></td>
 						<td><c:out value="${item.productDescription}" /></td>

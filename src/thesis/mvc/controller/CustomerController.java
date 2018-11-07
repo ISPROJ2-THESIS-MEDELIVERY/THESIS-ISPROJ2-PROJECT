@@ -13,11 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import thesis.mvc.implement.CustomerImplement;
+import thesis.mvc.implement.DeliveryImplement;
 import thesis.mvc.implement.DriverImplement;
 import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.implement.PrescriptionImplement;
+import thesis.mvc.model.Delivery;
 import thesis.mvc.model.Driver;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.Pharmacy;
@@ -105,8 +107,9 @@ public class CustomerController extends HttpServlet{
 		} else if (action.equalsIgnoreCase("ReturnOrder")) {
 			Order returnedOrder = new OrderImplement().getOrderById( Integer.parseInt(request.getParameter("OrderID")));
 			returnedOrder.setOrderStatus("RETURN");
-			Driver Reason = new DriverImplement().getDriverById(returnedOrder.getDeliveryID());
-			Reason.
+			Delivery Reason = new DeliveryImplement().getDeliverybyID(returnedOrder.getDeliveryID());
+			Reason.setComments(request.getParameter("ReturnReason"));
+			new DeliveryImplement().updateDelivery(Reason);
 			new OrderImplement().updateOrder( returnedOrder );
 			session.setAttribute("OrderHistory", new OrderImplement().getOrderByCustomerId((int)session.getAttribute("Customer")));
 			session.setAttribute("OrderDetailHistory", new OrderDetailImplement().getOrderDetail() );

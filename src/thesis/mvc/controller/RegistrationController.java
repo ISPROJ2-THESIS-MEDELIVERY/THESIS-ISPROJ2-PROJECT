@@ -64,10 +64,7 @@ public class RegistrationController extends HttpServlet {
 			if (loginImplement.getLoginByID(ID).getLoginStatus().equalsIgnoreCase("Just Registered")) {
 				loginImplement.ConfirmLogin(ID);				
 			}
-
-			forward = "/Login.jsp";
-			
-			
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		//Add Users
 		} else if (Action.equalsIgnoreCase("AddCustomer")){
 			

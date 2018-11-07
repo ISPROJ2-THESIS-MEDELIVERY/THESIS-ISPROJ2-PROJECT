@@ -57,9 +57,6 @@
     <table id="pendingTable" class="table-wrapper table-striped table-bordered" width="100%">
 		<thead>
 			<tr>
-	            <th>OrderID</th>
-	            <th>ProductID</th>
-	            <th>Quantity</th>
 	            <th>Address</th>
 	            <th>Date Ordered</th>
 	            <th>Type</th>
@@ -76,9 +73,6 @@
 			<c:forEach items="${DispatcherOrderList}" var="order">
 				<c:if test="${order.orderStatus == 'PENDING' && order.pharmacyID >= 1}">
 					<tr>
-			            <td><c:out value="${order.customerID}" /></td>
-			            <td><c:out value="${order.pharmacyID}" /></td>
-			            <td><c:out value="${order.cityID}" /></td>
 			            <td><c:out value="${order.orderAddress}" /></td>
 			            <td><c:out value="${order.dateOrdered}" /></td>
 			            <td><c:out value="${order.orderType}" /></td>
@@ -165,8 +159,6 @@
     <table id="approvedTable" class="table-wrapper table-striped table-bordered" width="100%">
 		<thead>
 			<tr>
-	            <th>OrderID</th>
-	            <th>ProductID</th>
 	            <th>Quantity</th>
 	            <th>Address</th>
 	            <th>Date Ordered</th>
@@ -176,15 +168,13 @@
 	            <th>Senior Citizen?</th>
 	            <th>Order Details</th>
 	            <th>Total Cost</th>
+	            <th>Confirm Delivery</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${DispatcherOrderList}" var="order">
 				<c:if test="${order.orderStatus == 'EN-ROUTE' && order.pharmacyID >= 1}">
 					<tr>
-			            <td><c:out value="${order.customerID}" /></td>
-			            <td><c:out value="${order.pharmacyID}" /></td>
-			            <td><c:out value="${order.cityID}" /></td>
 			            <td><c:out value="${order.orderAddress}" /></td>
 			            <td><c:out value="${order.dateOrdered}" /></td>
 			            <td><c:out value="${order.orderType}" /></td>
@@ -228,7 +218,13 @@
 							    </tbody>
 							</table>
 			            </td>
-			            <td>&#8369;<c:out value="${order.actualCost}" /></td>
+			            <td>&#8369;<c:out value="${order.actualCost}" /></td>			            
+						<td>
+							<form action='DispatcherController' method='post'>
+								<input type="hidden" name="OrderID" value="${order.orderID}"/>
+								<input type="submit" name="action" value="confirmOrder" placeholder="Order Delivered">
+							</form>
+						</td>
 					</tr>
 				</c:if>
 			</c:forEach>
@@ -240,9 +236,6 @@
     <table id="returningTable" class="table-wrapper table-striped table-bordered" width="100%">
 		<thead>
 			<tr>
-	            <th>OrderID</th>
-	            <th>Quantity</th>
-	            <th>Address</th>
 	            <th>Date Ordered</th>
 	            <th>Type</th>
 	            <th>Status</th>
@@ -250,16 +243,15 @@
 	            <th>Senior Citizen?</th>
 	            <th>Order Details</th>
 	            <th>Total Cost</th>
-	            <th>RETURN TO</th>
+	            <th>Pharmacy Address</th>
+	            <th>Return to</th>
+	            <th>Confirm Delivery</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${DispatcherOrderList}" var="order">
 				<c:if test="${order.orderStatus == 'RETURNING'}">
 					<tr>
-			            <td><c:out value="${order.customerID}" /></td>
-			            <td><c:out value="${order.cityID}" /></td>
-			            <td><c:out value="${order.orderAddress}" /></td>
 			            <td><c:out value="${order.dateOrdered}" /></td>
 			            <td><c:out value="${order.orderType}" /></td>
 			            <td><c:out value="${order.orderStatus}" /></td>
@@ -313,6 +305,13 @@
 								</c:if>
 							</c:forEach>
 			            </td>
+			            <td><c:out value="${order.orderAddress}" /></td>
+						<td>
+							<form action='DispatcherController' method='post'>
+								<input type="hidden" name="OrderID" value="${order.orderID}"/>
+								<input type="submit" name="action" value="returnedOrder" placeholder="Return Order">
+							</form>
+						</td>
 					</tr>
 				</c:if>
 			</c:forEach>

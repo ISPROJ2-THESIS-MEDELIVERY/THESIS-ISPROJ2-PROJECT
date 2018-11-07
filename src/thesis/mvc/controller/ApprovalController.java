@@ -16,6 +16,7 @@ import thesis.mvc.implement.PrescriptionImplement;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.Prescription;
 import thesis.mvc.pageaction.ApprovalAction;
+import thesis.mvc.pageaction.ShopAction;
 import thesis.mvc.utility.DBUtility;
 
 @WebServlet("/ApprovalController")
@@ -52,13 +53,17 @@ public class ApprovalController extends HttpServlet{
 		} else if (action.equalsIgnoreCase("OrderApprove")){
 		   	approvalAction.pharmacistApproval( orderID, 2 );
 		} else if (action.equalsIgnoreCase("OrderInvalidate")){
-		   	approvalAction.pharmacistApproval( orderID, 3 );
 			Order order = new OrderImplement().getOrderById(orderID);
-			Prescription prescription = new PrescriptionImplement().getPrescriptionByID(order.getPrescriptionID());
-			prescription.setPermissionStatus("REJECTED");
-			prescription.setRemark(request.getParameter("Reason"));
-			new PrescriptionImplement().updatePrescription(prescription);
-			new OrderImplement().updateOrder( order );
+			if (new ShopAction().RefundOrder(order, "Pharmacist Invalidated the order")) {
+			   	approvalAction.pharmacistApproval( orderID, 3 );
+				Prescription prescription = new PrescriptionImplement().getPrescriptionByID(order.getPrescriptionID());
+				prescription.setPermissionStatus("REJECTED");
+				prescription.setRemark(request.getParameter("Reason"));
+				new PrescriptionImplement().updatePrescription(prescription);
+				new OrderImplement().updateOrder( order );
+			} else {
+				session.setAttribute( "Message" , "Order can't be cancelled for some reason." );
+			}
 		} else if (action.equalsIgnoreCase("ReturnReject")){
 		   	approvalAction.pharmacistApproval( orderID, 4 );
 		} else if (action.equalsIgnoreCase("ReturnApprove")){

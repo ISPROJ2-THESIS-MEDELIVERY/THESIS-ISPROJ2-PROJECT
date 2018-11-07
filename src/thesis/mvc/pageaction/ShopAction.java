@@ -67,7 +67,6 @@ public class ShopAction {
 		}
 		*/		
 
-		System.out.println(1);
 		//Get the city of the customer & senior status
 		int CityCustomer = 0;
 		boolean SeniorStatus = false;
@@ -88,40 +87,20 @@ public class ShopAction {
             e.printStackTrace();
             return null;
         }
-		System.out.println(2);
 		
-		//Where is the branch located
-		int CityPharmacy = -1;
-		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM branch WHERE CityID = ?")) {
-			stmt.setInt(1, CityCustomer);
-			try(ResultSet rs = stmt.executeQuery()){
-				if (rs.next()) {
-					CityPharmacy = rs.getInt("CityID");
-				}
-			}
-		} catch (SQLException e){
-			e.printStackTrace();
-			return null;
-		}
 		order.setSeniorDiscount(SeniorStatus);
 		order.setOrderAddress(CustoAddress);
-		System.out.println(3);
 		
-		//Check if city is equal or not
-		Double DeliveryCost;
-		if (CityCustomer == CityPharmacy) {
-			order.setOrderType("Intercity Regular");
-			DeliveryCost = 50.0;
-			
+		//Check if is prescription
+		Double DeliveryCost = 50.0;
+		if (order.getPrescriptionID() == 0) {
+			order.setOrderType("Regular");
 		} else {
-			order.setOrderType("Intracity Regular");
-			DeliveryCost = 100.0;
+			order.setOrderType("Prescription");
 		}
-		System.out.println(4);
 		
 		//Add nessesary information
 		order.setOrderStatus( "PENDING" );
-		System.out.println(5);
 		
 		//Add delivery cost and Input order detail
 		Double actualcost = 0.0;
@@ -131,13 +110,11 @@ public class ShopAction {
 		}
 		actualcost += DeliveryCost;
 		order.setActualCost( actualcost );
-		System.out.println(6);
 		
 		//Add to order
 		//int orderID = new OrderImplement().addIncompleteOrder(order);
 		int orderID = new OrderImplement().addOrder(order);
 		order.setOrderID(orderID);
-		System.out.println("OrderID: " + orderID);
 		//insert OrderID
 		for (OrderDetail orderDetail : OrderDetails) {
 			orderDetail.setOrderID( orderID );
@@ -297,34 +274,82 @@ public class ShopAction {
 			return null;
 	}
 
-	public String RefundOrder(Order order) {
-		JSONObject JSONReciept = new JSONObject();
-		
+	@SuppressWarnings("unchecked")
+	public Boolean RefundOrder(Order order, String Reason) {
+		JSONObject JSONCancel = new JSONObject();
+		JSONCancel.put("reason", Reason);
 		try {
-        	
-			URL url = new URL("https://pg-sandbox.paymaya.com/checkout/v1/checkouts");
+			URL url = new URL("https://pg-sandbox.paymaya.com/checkout/v1/checkouts/" + order.getPaymayaID());
 			HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
 			//remove if not working
 			conn.setDoOutput(true);
 			conn.setRequestMethod("DELETE");
 			//Change if not working
-			conn.setRequestProperty("Authorization", "Basic cGstblJPN2NsU2ZKcm9qdVJtU2hxUmJpaEtQTGRHZUNuYjl3aUlXRjhtZUpFOTo=");
+			conn.setRequestProperty("Authorization", "Basic c2stalpLMGk4eVozMHBoOHhRU1dsTnNGOUFNV2ZHT2QzQmF4SmpRMkNEQ0NaYjo=");
 			conn.setRequestProperty("Content-Type", "application/json");
 			
 			//Check later
-			byte[] postData = JSONReciept.toString().getBytes("UTF-8");
-			
-			System.out.println("BODY: " + JSONReciept.toString());
-			
+			byte[] postData = JSONCancel.toString().getBytes("UTF-8");
+			System.out.println("BODY: " + JSONCancel.toString());
 			conn.getOutputStream().write(postData);
 			
 			if (conn.getResponseCode() != 200) {
-
-				
 				System.out.println("FAILED!"+ conn.getResponseCode());
-				
-				
-				
+				JSONObject JSONRefund = new JSONObject();
+				JSONRefund.put("reason", Reason);
+					JSONObject JSONAmmount = new JSONObject();
+					JSONAmmount.put("currency", "PHP");
+					JSONAmmount.put("value", order.getActualCost());
+				JSONRefund.put("amount", JSONAmmount);
+				try {
+					URL url1 = new URL("https://pg-sandbox.paymaya.com/checkout/v1/checkouts/" + order.getPaymayaID() + "/refunds");
+					HttpsURLConnection connRE = (HttpsURLConnection) url1.openConnection();
+					//remove if not working
+					connRE.setDoOutput(true);
+					connRE.setRequestMethod("POST");
+					//Change if not working
+					connRE.setRequestProperty("Authorization", "Basic c2stalpLMGk4eVozMHBoOHhRU1dsTnNGOUFNV2ZHT2QzQmF4SmpRMkNEQ0NaYjo=");
+					connRE.setRequestProperty("Content-Type", "application/json");
+					
+					//Check later
+					byte[] postData1 = JSONRefund.toString().getBytes("UTF-8");
+					System.out.println("BODY: " + JSONRefund.toString());
+					connRE.getOutputStream().write(postData1);
+					
+					if (connRE.getResponseCode() != 200) {
+						System.out.println("FAILED!"+ connRE.getResponseCode());
+						return false;
+					} else {
+						System.out.println("SUCCESS!" + connRE.getResponseCode());
+						Reader in = new BufferedReader(new InputStreamReader(connRE.getInputStream(), "UTF-8"));
+						StringBuilder sb = new StringBuilder();
+		                for (int c; (c = in.read()) >= 0;)
+		                    sb.append((char)c);
+		                String returnMsg = sb.toString();
+		                
+		                
+		                JSONParser parser = new JSONParser();
+		                JSONObject testobject = (JSONObject) parser.parse(returnMsg);
+		                System.out.println("RESPONSE"+ connRE.getResponseCode() + returnMsg);
+		                System.out.println(testobject.get("voidStatus"));
+		    			return true;
+
+		                /*
+		                order = new OrderImplement().getOrderById(order.getOrderID());
+		                order.setPaymayaID((String) testobject.get("checkoutId"));
+		                new OrderImplement().updateOrder(order);
+		                return (String) testobject.get("redirectUrl");
+		                */
+		                
+					}
+					
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println(e);
+					return false;
+				}
 			} else {
 				System.out.println("SUCCESS!" + conn.getResponseCode());
 				Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
@@ -334,17 +359,18 @@ public class ShopAction {
                 String returnMsg = sb.toString();
                 
                 
-               
                 JSONParser parser = new JSONParser();
                 JSONObject testobject = (JSONObject) parser.parse(returnMsg);
                 System.out.println("RESPONSE"+ conn.getResponseCode() + returnMsg);
-                System.out.println(testobject.get("redirectUrl"));
+                System.out.println(testobject.get("voidStatus"));
+    			return true;
 
+                /*
                 order = new OrderImplement().getOrderById(order.getOrderID());
                 order.setPaymayaID((String) testobject.get("checkoutId"));
                 new OrderImplement().updateOrder(order);
                 return (String) testobject.get("redirectUrl");
-                
+                */
                 
 			}
 			
@@ -353,10 +379,8 @@ public class ShopAction {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println(e);
-			return null;
+			return false;
 		}
-
-		return null;
 	}
 
 }

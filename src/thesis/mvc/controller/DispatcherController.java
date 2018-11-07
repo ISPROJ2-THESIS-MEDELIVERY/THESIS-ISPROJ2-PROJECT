@@ -94,13 +94,25 @@ public class DispatcherController extends HttpServlet {
 		} else if(action.equalsIgnoreCase("confirmOrder")) {
 			int orderID = Integer.parseInt( request.getParameter("OrderID") );
 			
-			if(new OrderImplement().getOrderById(orderID).getOrderStatus().equalsIgnoreCase("CANCELLED")) {
+			if(!new OrderImplement().getOrderById(orderID).getOrderStatus().equalsIgnoreCase("CANCELLED")) {
 				Order order = new OrderImplement().getOrderById(orderID);
 				order.setOrderStatus("COMPLETED");
 				new OrderImplement().updateOrder(order);
 			} else {
 				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
 			}
+		} else if(action.equalsIgnoreCase("returnedOrder")) {
+			int orderID = Integer.parseInt( request.getParameter("OrderID") );
+			if(!new OrderImplement().getOrderById(orderID).getOrderStatus().equalsIgnoreCase("CANCELLED")) {
+				Order order = new OrderImplement().getOrderById(orderID);
+				order.setOrderStatus("RETURNED");
+				new OrderImplement().updateOrder(order);
+			} else {
+				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
+			}
+		} else if (action.equalsIgnoreCase("newDriver")) {
+			Driver newDriver = new Driver();
+			newDriver.setCourierserviceID(1);
 		}
 		response.sendRedirect(request.getContextPath() + "/DispatcherController?Action=DispatchOrder");
 	}

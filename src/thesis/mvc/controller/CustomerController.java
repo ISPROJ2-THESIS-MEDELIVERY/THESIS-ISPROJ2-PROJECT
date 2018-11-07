@@ -16,6 +16,7 @@ import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.Pharmacy;
 import thesis.mvc.pageaction.SearchAction;
+import thesis.mvc.pageaction.ShopAction;
 import thesis.mvc.utility.DBUtility;
 
 @WebServlet("/CustomerController")
@@ -84,8 +85,10 @@ public class CustomerController extends HttpServlet{
 			response.sendRedirect(request.getContextPath() + "/CustomerReturn.jsp");
 		} else if (action.equalsIgnoreCase("CancelOrder")) {
 			Order cancelledOrder = new OrderImplement().getOrderById( Integer.parseInt(request.getParameter("OrderID")));
-			cancelledOrder.setOrderStatus("CANCELLED");
-			new OrderImplement().updateOrder( cancelledOrder );
+			if (new ShopAction().RefundOrder(cancelledOrder, "Customer Cancelled the order")) {
+				cancelledOrder.setOrderStatus("CANCELLED");
+				new OrderImplement().updateOrder( cancelledOrder );
+			}
 			session.setAttribute("OrderHistory", new OrderImplement().getOrderByCustomerId((int)session.getAttribute("Customer")));
 			session.setAttribute("OrderDetailHistory", new OrderDetailImplement().getOrderDetail() );
 			response.sendRedirect(request.getContextPath() + "/CustomerPending.jsp");

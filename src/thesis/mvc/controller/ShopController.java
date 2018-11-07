@@ -50,7 +50,8 @@ public class ShopController extends HttpServlet {
 	}
 	
 	private static final long serialVersionUID = 1L;
-	private final String UPLOAD_DIRECTORY = "../../../../../../../../THESIS-ISPROJ2-PROJECT/WebContent/images/";
+	//private final String UPLOAD_DIRECTORY = "../../../../../../../../THESIS-ISPROJ2-PROJECT/WebContent/images/";
+	private final String UPLOAD_DIRECTORY = "/C:/ISPROJ2/Medelivery/webapp/images/";
 	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -153,12 +154,12 @@ public class ShopController extends HttpServlet {
 			cartlists.add(cartlist);
 			session.setAttribute("CartList", cartlists );
 			
-			if (session.getAttribute("CatalogType") == null) {
-				response.sendRedirect(request.getContextPath() + "/index.jsp");
+			if (session.getAttribute("CatalogType") == null && request.getParameter( "FromCarosel" ) == null) {
 				session.removeAttribute("Order");
 				session.removeAttribute("OrderDetails");
 				session.removeAttribute("CartList");
-			} else if (session.getAttribute("CatalogType") == "Regular") {
+				response.sendRedirect(request.getContextPath() + "/index.jsp");
+			} else if (session.getAttribute("CatalogType") == "Regular" || request.getParameter( "FromCarosel" ) == "FromCarosel") {
 				response.sendRedirect(request.getContextPath() + "/CatalogBasic.jsp");
 			} else if (session.getAttribute("CatalogType") == "Prescription") {
 				response.sendRedirect(request.getContextPath() + "/CatalogAdvanced.jsp");
@@ -175,7 +176,8 @@ public class ShopController extends HttpServlet {
 
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 			String redirect = new ShopAction().purchaseOrder(order, OrderDetails, "https://www.google.com/");// request.getContextPath()
-			sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, "This is a test message");
+			
+			sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, sendEmail.OrderEmail());
 			if(order == null || OrderDetails.isEmpty()) {
 				response.sendRedirect(request.getContextPath() + "/index.jsp");
 			} else {

@@ -31,7 +31,7 @@ import thesis.mvc.utility.EncryptionFunction;
 @MultipartConfig
 public class TestController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final String UPLOAD_DIRECTORY = "";
+	private final String UPLOAD_DIRECTORY = "/C:/ISPROJ2/Medelivery/webapp/images/";
 	
     protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         //process only if its multipart content
@@ -52,7 +52,7 @@ public class TestController extends HttpServlet {
             	//request.setAttribute("message", "File Uploaded Successfully " + name + end);
 
             	Part filePart = request.getPart("file");
-				String name = "Prescription" + 1;
+				String name = "TESTIMAGE";
 				String end = filePart.getContentType();
 				if (end.startsWith("image")) {
 					String imageType = end.replace("image/", "");

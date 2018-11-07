@@ -1,6 +1,7 @@
 package thesis.mvc.controller;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.Date;
 import java.text.DateFormat;
@@ -123,7 +124,7 @@ public class InformationController extends HttpServlet {
 			String CompBara = request.getParameter( "CompBara" );
 			String CompCity = request.getParameter( "CompCity" );
 			String CompProv = request.getParameter( "CompProv" );
-			int CompCell = Integer.parseInt(request.getParameter( "CompCell" ));
+			BigInteger CompCell = new BigInteger(request.getParameter( "CompCell" ));
 			int CompLand = Integer.parseInt(request.getParameter( "CompLand" ));
 			String CompCont = request.getParameter( "CompCont" );
 			Date DateAded = new Date(Calendar.getInstance().getTime().getTime());

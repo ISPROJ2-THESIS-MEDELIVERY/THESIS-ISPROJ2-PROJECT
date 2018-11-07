@@ -1,5 +1,7 @@
 package thesis.mvc.implement;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -34,7 +36,7 @@ public class CourierServiceImplement implements CourierServiceDAO{
 			preparedStatement.setString( 4, courierService.getCompanyCity() );
 			preparedStatement.setString( 5, "METRO MANILA" );
 			preparedStatement.setInt( 6, courierService.getCompanyLandline() );
-			preparedStatement.setInt( 7, courierService.getCompanyCellular() );
+			preparedStatement.setBigDecimal(7, new BigDecimal(courierService.getCompanyCellular()));
 			preparedStatement.setString( 8, courierService.getCompanyContact() );
 			preparedStatement.setDate( 9, CurrentDate );
 			int NewID = preparedStatement.executeUpdate();
@@ -72,7 +74,7 @@ public class CourierServiceImplement implements CourierServiceDAO{
 			preparedStatement.setString( 4, courierService.getCompanyCity() );
 			preparedStatement.setString( 5, "METRO MANILA" );
 			preparedStatement.setInt( 6, courierService.getCompanyLandline() );
-			preparedStatement.setInt( 7, courierService.getCompanyCellular() );
+			preparedStatement.setBigDecimal(7, new BigDecimal(courierService.getCompanyCellular()));
 			preparedStatement.setString( 8, courierService.getCompanyContact() );
 			preparedStatement.setDate( 9, courierService.getDateAdded() );
 			preparedStatement.setInt( 10, courierService.getCourierServiceID() );
@@ -99,7 +101,7 @@ public class CourierServiceImplement implements CourierServiceDAO{
 				courierService.setCompanyCity( resultSet.getString( "CompanyCity" ) );
 				courierService.setCompanyProvince( resultSet.getString( "CompanyProvince" ) );
 				courierService.setCompanyLandline( resultSet.getInt( "CompanyLandline" ) );
-				courierService.setCompanyCellular( resultSet.getInt( "CompanyCellular" ) );
+				courierService.setCompanyCellular( resultSet.getBigDecimal( "CompanyCellular" ).toBigInteger() );
 				courierService.setCompanyContact( resultSet.getString( "CompanyContact" ) );
 				courierService.setDateAdded( resultSet.getDate( "DateAdded" ) );
 				courierServices.add(courierService);
@@ -128,7 +130,7 @@ public class CourierServiceImplement implements CourierServiceDAO{
 				courierService.setCompanyCity( resultSet.getString( "CompanyCity" ) );
 				courierService.setCompanyProvince( resultSet.getString( "CompanyProvince" ) );
 				courierService.setCompanyLandline( resultSet.getInt( "CompanyLandline" ) );
-				courierService.setCompanyCellular( resultSet.getInt( "CompanyCellular" ) );
+				courierService.setCompanyCellular( resultSet.getBigDecimal( "CompanyCellular" ).toBigInteger() );
 				courierService.setCompanyContact( resultSet.getString( "CompanyContact" ) );
 				courierService.setDateAdded( resultSet.getDate( "DateAdded" ) );
 			}

@@ -1,5 +1,6 @@
 package thesis.mvc.model;
 
+import java.math.BigInteger;
 import java.sql.Date;
 
 public class CourierService {
@@ -11,7 +12,7 @@ public class CourierService {
 	private String CompanyCity;
 	private String CompanyProvince;
 	private int CompanyLandline;
-	private int CompanyCellular;
+	private BigInteger CompanyCellular;
 	private String CompanyContact; 
 	private Date DateAdded;
 	public int getCourierServiceID() {
@@ -56,11 +57,11 @@ public class CourierService {
 	public void setCompanyLandline(int companyLandline) {
 		CompanyLandline = companyLandline;
 	}
-	public int getCompanyCellular() {
+	public BigInteger getCompanyCellular() {
 		return CompanyCellular;
 	}
-	public void setCompanyCellular(int companyCellular) {
-		CompanyCellular = companyCellular;
+	public void setCompanyCellular(BigInteger compCell) {
+		CompanyCellular = compCell;
 	}
 	public String getCompanyContact() {
 		return CompanyContact;

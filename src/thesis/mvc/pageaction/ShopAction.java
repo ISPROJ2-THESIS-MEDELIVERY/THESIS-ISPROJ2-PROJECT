@@ -280,7 +280,7 @@ public class ShopAction {
 	                System.out.println(testobject.get("redirectUrl"));
 
 	                order = new OrderImplement().getOrderById(order.getOrderID());
-	                order.setPaymayaID((String) testobject.get("redirectUrl"));
+	                order.setPaymayaID((String) testobject.get("checkoutId"));
 	                new OrderImplement().updateOrder(order);
 	                return (String) testobject.get("redirectUrl");
 	                
@@ -297,8 +297,64 @@ public class ShopAction {
 			return null;
 	}
 
-	public String RefundOrder() {
+	public String RefundOrder(Order order) {
 		JSONObject JSONReciept = new JSONObject();
+		
+		try {
+        	
+			URL url = new URL("https://pg-sandbox.paymaya.com/checkout/v1/checkouts");
+			HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+			//remove if not working
+			conn.setDoOutput(true);
+			conn.setRequestMethod("DELETE");
+			//Change if not working
+			conn.setRequestProperty("Authorization", "Basic cGstblJPN2NsU2ZKcm9qdVJtU2hxUmJpaEtQTGRHZUNuYjl3aUlXRjhtZUpFOTo=");
+			conn.setRequestProperty("Content-Type", "application/json");
+			
+			//Check later
+			byte[] postData = JSONReciept.toString().getBytes("UTF-8");
+			
+			System.out.println("BODY: " + JSONReciept.toString());
+			
+			conn.getOutputStream().write(postData);
+			
+			if (conn.getResponseCode() != 200) {
+
+				
+				System.out.println("FAILED!"+ conn.getResponseCode());
+				
+				
+				
+			} else {
+				System.out.println("SUCCESS!" + conn.getResponseCode());
+				Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+				StringBuilder sb = new StringBuilder();
+                for (int c; (c = in.read()) >= 0;)
+                    sb.append((char)c);
+                String returnMsg = sb.toString();
+                
+                
+               
+                JSONParser parser = new JSONParser();
+                JSONObject testobject = (JSONObject) parser.parse(returnMsg);
+                System.out.println("RESPONSE"+ conn.getResponseCode() + returnMsg);
+                System.out.println(testobject.get("redirectUrl"));
+
+                order = new OrderImplement().getOrderById(order.getOrderID());
+                order.setPaymayaID((String) testobject.get("checkoutId"));
+                new OrderImplement().updateOrder(order);
+                return (String) testobject.get("redirectUrl");
+                
+                
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println(e);
+			return null;
+		}
 
 		return null;
 	}

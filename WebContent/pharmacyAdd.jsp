@@ -89,7 +89,6 @@
       </div>
       <div class="col-md-6">      
         <div class="form-group"> 
-        	<!-- <input type="text" name="ProductOrgi" required="required" placeholder="Product Origin" class="form-control"/> -->
         	<select name="ProductOrgi" required="required" class="form-control">
 	<option value="AFG">Afghanistan</option>
 	<option value="ALA">Åland Islands</option>
@@ -348,14 +347,10 @@
         <div class="form-group">
         	<label><input type="checkbox" value="true" name="ProductIsRX" class="form-control"/>Rx Product?</label>
   			<label><input type="checkbox" value="true" name="feature" class="form-control"/>Featured?</label>
-        	<!-- Product is an Rx Product?<input type="checkbox" name="ProductIsRX" value="true" class="form-control"/> -->
         </div>
         <div class="form-group">
         	Image: <input type="file" name="ProductImag" required="required" class="form-control"/>
         </div>
-        <!-- <div class="form-group">
-        	Is it featured?<input type="checkbox" name="feature" value="true" class="form-control"/>
-        </div> -->
         <div class="input-group">
         <span class="input-group-text">&#8369;</span>
         	<input type="number" min="0" step="0.01" name="Price" required="required" placeholder="Price" class="form-control"/>
@@ -366,33 +361,6 @@
         </div>
       </div>
       </div>
-		<!-- <input type="hidden" />
-		<h2>Product to add: </h2><br><br>
-		Product Name:<br>
-		<input type="text" name=""/><br><br>
-		Generic Name:<br>
-		<input type="text" name=""/><br><br>
-		Registration Number:<br>
-		<input type="text" name=""/><br><br>
-		Product Strength:<br>
-		<input type="text" name=""/><br><br>
-		Product Form:<br>
-		<input type="text" name=""/><br><br>
-		Product Packaging:<br>
-		<input type="text" name=""/><br><br>
-		Product Manufacturing:<br>
-		<input type="text" name=""/><br><br>
-		Product Origin:<br>
-		<input type="text" name=""/><br><br>
-		Product Description:<br>
-		<input type="text" name=""/><br><br>
-		Product is an Rx Product?:<br>
-		<input type="checkbox" name=""/><br><br>
-		Is it Featured?: <br>
-		<input type="checkbox" name="feature"/><br><br>
-		Price: <br>
-		<input type="number" name="Price"/><br>
-		<input type="submit" name="action" value="addnewProduct"/>  -->
 	</form>
 	</div>
 <div class="footer-dark">

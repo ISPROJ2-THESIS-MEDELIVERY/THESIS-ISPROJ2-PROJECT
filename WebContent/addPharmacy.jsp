@@ -48,11 +48,6 @@
             <button class="btn btn-primary btn-block" type="submit">Add Pharmacy</button>
         </div>
         <a class="already" href="index.jsp">Back</a>
-		<!-- <input type="text"		name="PharmaName" required="" placeholder="Pharmacy Name">
-		<input type="file"		name="PharmaFile" required="" placeholder="Pharmacy Logo"> enctype="multipart/form-data"
-		<input type="hidden"	name="Actionthing" value="addPharmacy">
-		<button type="submit" 	style="background-color:#56c5ff;">Sign Up</button>
-		<a href="/login.jsp" class="already" style="color:#282d32;font-size:20px;">back</a> -->
 	</form>
 	</div> 
 <div class="footer-dark">

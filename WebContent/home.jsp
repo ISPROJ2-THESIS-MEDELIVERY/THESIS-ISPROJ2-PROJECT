@@ -91,14 +91,14 @@
 						<c:out value="${pharm.pharmacyName}">: </c:out>
 					</center>
 				</h3>
-				<div id="featured-products" class="carousel slide"
+				<div id="${pharm.pharmacyID}" class="carousel slide"
 					data-ride="carousel">
 					<ol class="carousel-indicators">
-						<li data-target="#featured-products" data-slide-to="0"
+						<li data-target="#${pharm.pharmacyID}" data-slide-to="0"
 							class="active"></li>
-						<li data-target="#featured-products" data-slide-to="1"></li>
-						<li data-target="#featured-products" data-slide-to="2"></li>
-						<li data-target="#featured-products" data-slide-to="3"></li>
+						<li data-target="#${pharm.pharmacyID}" data-slide-to="1"></li>
+						<li data-target="#${pharm.pharmacyID}" data-slide-to="2"></li>
+						<li data-target="#${pharm.pharmacyID}" data-slide-to="3"></li>
 					</ol>
 
 					<div class="carousel-inner" role="listbox">
@@ -120,12 +120,12 @@
 							</c:forEach>
 						</c:forEach>
 					</div>
-
-					<a class="left carousel-control" href="#featured-products"
+									
+					<a class="left carousel-control" href="#${pharm.pharmacyID}"
 						role="button" data-slide="prev"> <span
 						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 						<span class="sr-only">Previous</span>
-					</a> <a class="right carousel-control" href="#featured-products"
+					</a> <a class="right carousel-control" href="#${pharm.pharmacyID}"
 						role="button" data-slide="next"> <span
 						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 						<span class="sr-only">Next</span>
@@ -144,14 +144,14 @@
 						<c:out value="${pharm.pharmacyName}">: </c:out>
 					</center>
 				</h3>
-				<div id="featured-products" class="carousel slide"
+				<div id="${pharm.pharmacyID}" class="carousel slide"
 					data-ride="carousel">
 					<ol class="carousel-indicators">
-						<li data-target="#featured-products" data-slide-to="0"
+						<li data-target="#${pharm.pharmacyID}" data-slide-to="0"
 							class="active"></li>
-						<li data-target="#featured-products" data-slide-to="1"></li>
-						<li data-target="#featured-products" data-slide-to="2"></li>
-						<li data-target="#featured-products" data-slide-to="3"></li>
+						<li data-target="#${pharm.pharmacyID}" data-slide-to="1"></li>
+						<li data-target="#${pharm.pharmacyID}" data-slide-to="2"></li>
+						<li data-target="#${pharm.pharmacyID}" data-slide-to="3"></li>
 					</ol>
 
 					<div class="carousel-inner" role="listbox">
@@ -175,11 +175,11 @@
 						</c:forEach>
 					</div>
 
-					<a class="left carousel-control" href="#featured-products"
+					<a class="left carousel-control" href="#${pharm.pharmacyID}"
 						role="button" data-slide="prev"> <span
 						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 						<span class="sr-only">Previous</span>
-					</a> <a class="right carousel-control" href="#featured-products"
+					</a> <a class="right carousel-control" href="#${pharm.pharmacyID}"
 						role="button" data-slide="next"> <span
 						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 						<span class="sr-only">Next</span>
@@ -189,28 +189,6 @@
 		</c:forEach>
 	</c:if>
 
-
-
-
-	<%-- <c:forEach items="${Featurepharm}" var="pharm">
-			<h3>Featured products of <c:out value="${pharm.pharmacyName}">: </c:out></h3>
-			
-			<c:forEach items="${Featurestock}" var="stock">
-				<c:forEach items="${Featureitems}" var="items">
-					<c:if test="${stock.productID == items.productID}">
-						<c:if test="${stock.pharmacyID == pharm.pharmacyID}">
-							<h3><c:out value="${items.productName}"></c:out></h3>
-						</c:if>
-					</c:if>
-				</c:forEach>
-			</c:forEach>
-			
-			<hr>
-		</c:forEach> --%>
-	<!-- <c:if test="${userAccess == null}">
-				<a href="login.jsp">Login</a><br>
-				<a href="register.jsp">Registration</a><br>
-			</c:if> -->
 	<c:if test="${userAccess == 1}">
 		<hr>
 		<div class="container">
@@ -225,7 +203,6 @@
 								from:</h4>
 						</a>
 					</div>
-					<!-- <br>Select Pharmacy to order from:<br> -->
 					<c:forEach items="${PharmcyList}" var="pharmacy">
 						<a
 							href="CustomerController?action=GoToCatalog&PharmaID=<c:out value="${pharmacy.pharmacyID}" />"
@@ -242,7 +219,6 @@
 								from (Prescription):</h4>
 						</a>
 					</div>
-					<!-- <br>Select Pharmacy to order from (Prescription):<br> -->
 					<c:forEach items="${PharmcyList}" var="pharmacy">
 						<!-- <a href="CustomerController?action=GoToPrescription&PharmaID=<c:out value="${pharmacy.pharmacyID}" />" class="btn btn-info btn-sm" role="button"><c:out value="${pharmacy.pharmacyName}" /></a><br> -->
 						<a
@@ -288,17 +264,6 @@
 				</div>
 			</div>
 		</div>
-		<%-- Customer Details:<br>
-			<c:out value="${userID}" /><br>
-			<c:out value="${username}" /><br>
-			<c:out value="${userAccess}" /><br>
-			<a href="LoginController">Logout</a><br>
-			<br>Pharmacies:<br>
-			<c:forEach items="${PharmcyList}" var="pharmacy">
-				<a href="CustomerController?action=GoToCatalog&PharmaID=<c:out value="${pharmacy.pharmacyID}" />"><c:out value="${pharmacy.pharmacyName}" /></a><br>
-			</c:forEach>
-			Order History:
-				<a href="CustomerController?action=GoToOrders" />To to Order History</a><br> --%>
 		<hr>
 	</c:if>
 	<c:if test="${userAccess == 2}">
@@ -315,21 +280,6 @@
     					</a>
     				</div>
     				<a href="DispatcherController?Action=DispatchOrder" class="btn btn-info" role="button">Order Dispatch</a><br>
-        			<%-- <p class="font-weight-bold">Dispatcher Details:</p><br>
-					User ID: <c:out value="${userID}" /><br>
-					Username: <c:out value="${username}" /><br>
-					User Type: <c:out value="${userAccess}" /><br> --%>
-					<!-- <a href="DispatcherController?Action=DispatchOrder">Order Dispatch</a><br> -->
-					<!-- <a href="DispatcherController?Action=DispatchPrescription">Order Dispatch - Prescription</a><br> -->
-					<!-- <a href="LoginController">Logout</a><br> -->
-				</div>
-    		</div>
-		</div>		
-			<%-- Dispatcher<br>
-			<c:out value="${userID}" /><br>
-			<c:out value="${username}" /><br>
-			<c:out value="${userAccess}" /><br>
-			<a href="LoginController">Logout</a><br> --%>
 		<hr>
 		</c:if>
 	<c:if test="${userAccess == 3}">
@@ -337,14 +287,6 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6">
-					<%-- <p class="font-weight-bold">Pharmacist Details:</p>
-					<c:forEach items="${Prescription}" var="prescription">
-						<img src='images/<c:out value="${prescription.prescription}"></c:out>'>
-					</c:forEach>
-					User ID: <c:out value="${userID}" /><br>
-					Username: <c:out value="${username}" /><br>
-					User Type: <c:out value="${userAccess}" /><br> --%>
-					<!-- <a href="LoginController">Logout</a><br> -->
 					<div class="list-group">
 						<a class="list-group-item">
 							<h4 class="list-group-item-heading">Pharmacist Details</h4>
@@ -371,9 +313,6 @@
 			</div>
 			</div>
 			<br>
-			<%-- Current Orders Heading to your Pharmacy:
-					<a href="PharmacistController?Action=GoToOrders" class="btn btn-info" role="button"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Regular Orders</a> --%>
-			<%-- <a href="PharmacistController?action=GoToOrders&PharmaID=<c:out value="${PharmacistPharmacy.pharmacyID}" />"><c:out value="${PharmacistPharmacy.pharmacyName}" />'s Pharmacy Orders</a> --%>
 			<div id="container">
 				<div class="list-group">
 					<a class="list-group-item list-group-item-info">
@@ -668,14 +607,7 @@
 					</tbody>
 				</table>
 			
-		
-		
-		<%-- Pharmacist Details<br>
-			<c:out value="${userID}" /><br>
-			<c:out value="${username}" /><br>
-			<c:out value="${userAccess}" /><br>
-			<a href="LoginController">Logout</a><br>
-			<a href="ProductController?Action=AddProduct">Add Product</a><br> --%>
+
 		<hr>
 	</c:if>
 	<c:if test="${userAccess == 4}">
@@ -700,10 +632,6 @@
 			</div>
 		</div>
 		<hr>
-		<%-- <p class="font-weight-bold">Admin Details</p>
-			User ID: <c:out value="${userID}" /><br>
-			Username: <c:out value="${username}" /><br>
-			User Type: <c:out value="${userAccess}" /><br> --%>
 		<hr>
 		<h2>
 			<center>List of customers:</center>
@@ -1055,8 +983,8 @@
 
 .carousel {
     position: relative;
-    margin-left: 300px;
-    margin-right: 300px;
+    margin-left: 200px;
+    margin-right: 200px;
 }
 
 .carousel-control.left {

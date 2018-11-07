@@ -55,19 +55,7 @@
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">Log In</button>
         </div>
-		<!--  <fieldset>
-			<div align="center">
-				<label for="Username">Username</label><br />
-				<input type="text" name="Username" placeholder="Username" maxlength="25"/>
-			</div>&nbsp;
-			<div align="center">
-				<label for="Password">Password</label><br />
-				<input type="text" name="Password" placeholder="Password" maxlength="25"/>
-			</div>&nbsp;
-			<div align="center">
-				<input type="submit" value="Submit" />
-			</div>
-		</fieldset>  -->
+
 	</form>
 	</div>
 <div class="footer-dark">

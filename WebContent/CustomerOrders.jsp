@@ -84,56 +84,6 @@
 	            </tr>
 	    </tbody>
 	</table>
-	<%-- <div class="container">
-  		<h2>Your Order History</h2>
-  		<div class="list-group">
-    		<a href="#" class="list-group-item">
-      			<h4 class="list-group-item-heading">Customer ID</h4>
-      			<p class="list-group-item-text"><c:out value="${order.customerID}" /></p>
-    		</a>
-    		<a class="list-group-item">
-      			<h4 class="list-group-item-heading">Pharmacy ID</h4>
-      			<p class="list-group-item-text"><c:out value="${order.pharmacyID}" /></p>
-    		</a>
-    		<a class="list-group-item">
-      			<h4 class="list-group-item-heading">City ID</h4>
-      			<p class="list-group-item-text"><c:out value="${order.cityID}" /></p>
-    		</a>
-    		<a class="list-group-item">
-      			<h4 class="list-group-item-heading">Address</h4>
-      			<p class="list-group-item-text"><c:out value="${order.orderAddress}" /></p>
-    		</a>
-    		<a class="list-group-item">
-      			<h4 class="list-group-item-heading">Date</h4>
-      			<p class="list-group-item-text"><c:out value="${order.dateOrdered}" /></p>
-    		</a>
-    		<a class="list-group-item">
-      			<h4 class="list-group-item-heading">Type</h4>
-      			<p class="list-group-item-text"><c:out value="${order.orderType}" /></p>
-    		</a>
-    		<a class="list-group-item">
-      			<h4 class="list-group-item-heading">Status</h4>
-      			<p class="list-group-item-text"><c:out value="${order.orderStatus}" /></p>
-    		</a>
-    		<a class="list-group-item">
-      			<h4 class="list-group-item-heading">Senior Discount</h4>
-      			<p class="list-group-item-text"><c:out value="${order.seniorDiscount}" /></p>
-    		</a>
-    		<a class="list-group-item">
-      			<h4 class="list-group-item-heading">Actual Cost</h4>
-      			<p class="list-group-item-text"><c:out value="${order.actualCost}" /></p>
-    		</a>
-  		</div>
-	</div> --%>
-	<%-- <p class="font-weight-bold">Customer ID:</p> <c:out value="${order.customerID}" /><br>
-	<p class="font-weight-bold">Pharmacy ID:</p> <c:out value="${order.pharmacyID}" /><br>
-	<p class="font-weight-bold">City ID:</p> <c:out value="${order.cityID}" /><br>
-	<p class="font-weight-bold">Address:</p> <c:out value="${order.orderAddress}" /><br>
-	<p class="font-weight-bold">Date:</p> <c:out value="${order.dateOrdered}" /><br>
-	<p class="font-weight-bold">Type:</p> <c:out value="${order.orderType}" /><br>
-	<p class="font-weight-bold">Status:</p> <c:out value="${order.orderStatus}" /><br>
-	<p class="font-weight-bold">Senior:</p> <c:out value="${order.seniorDiscount}" /><br>
-	<p class="font-weight-bold">Actual:</p> <c:out value="${order.actualCost}" /><br> --%>
 	<table class="table table-striped table-bordered" width="100%">
 	    <thead>
 	        <tr>
@@ -202,7 +152,7 @@ hr {
     border: 0;
     border-top: 1px solid rgba(0, 0, 0, .1);
     margin-left: 100px;
-    margin-right: 108px;
+    margin-right: 130px;
 }
 
 </style>

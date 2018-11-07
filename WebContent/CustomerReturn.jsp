@@ -87,15 +87,6 @@
 	            </tr>
 	    </tbody>
 	</table>
-	<%-- <p class="font-weight-bold">Customer ID:</p> <c:out value="${order.customerID}" /><br>
-	<p class="font-weight-bold">Pharmacy ID:</p> <c:out value="${order.pharmacyID}" /><br>
-	<p class="font-weight-bold">City ID:</p> <c:out value="${order.cityID}" /><br>
-	<p class="font-weight-bold">Address:</p> <c:out value="${order.orderAddress}" /><br>
-	<p class="font-weight-bold">Date:</p> <c:out value="${order.dateOrdered}" /><br>
-	<p class="font-weight-bold">Type:</p> <c:out value="${order.orderType}" /><br>
-	<p class="font-weight-bold">Status:</p> <c:out value="${order.orderStatus}" /><br>
-	<p class="font-weight-bold">Senior:</p> <c:out value="${order.seniorDiscount}" /><br>
-	<p class="font-weight-bold">Actual:</p> <c:out value="${order.actualCost}" /><br> --%>
 	<table class="table table-striped table-bordered" width="100%">
 	    <thead>
 	        <tr>

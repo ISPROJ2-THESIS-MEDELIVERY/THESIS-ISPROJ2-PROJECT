@@ -24,6 +24,7 @@ import thesis.mvc.implement.PrescriptionImplement;
 import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.implement.StocksImplement;
 import thesis.mvc.implement.StocksPriceImplement;
+import thesis.mvc.pageaction.SearchAction;
 import thesis.mvc.utility.EncryptionFunction;
 import thesis.mvc.utility.GeneralFunctions;
 
@@ -73,6 +74,7 @@ public class HomeController  extends HttpServlet {
 			int BranchxofPharmacist = new PharmacistImplement().getPharmacistById( (int) session.getAttribute("Pharmacist") ).getBranchID();
 			int PharmacyofBranch = new BranchImplement().getBranchById(BranchxofPharmacist).getPharmacyID();
 			session.setAttribute("PharmacistBranch", new PharmacistImplement().getPharmacistById( (int) session.getAttribute("Pharmacist") ));
+		   	session.setAttribute("pharmaProductList", new SearchAction().GeneralListing(PharmacyofBranch) );
 			session.setAttribute("IncomingOrders", new OrderImplement().getOrderByPharmacyId(PharmacyofBranch));
 			
 			session.setAttribute( "IncomingOrderDetails" , new OrderDetailImplement().getOrderDetail()  );

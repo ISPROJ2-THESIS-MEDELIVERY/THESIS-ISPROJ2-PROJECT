@@ -98,7 +98,7 @@
         	<input type="password" name="Password-repeat" required="required" placeholder="Re-enter Password" id="Passwordrepeat" class="form-control"/>
         </div>
         <div class="form-group">
-            <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
+            <button class="btn btn-primary btn-block" type="submit">Register</button>
         </div>
         <a class="already" href="index.jsp">Back</a> 
         

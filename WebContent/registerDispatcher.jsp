@@ -61,7 +61,7 @@
         	<input type="text" name="UAddress" required="" placeholder="Dispatch Address *" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="date" name="BrthDate" required="" placeholder="Birthday *" class="form-control"/>
+        	<input type="date" name="BrthDate" required="" placeholder="Birthday *" class="form-control" style="width:200px"/>
         </div>
         <div class="form-group">
         	<select name="CourSele" class="form-control">
@@ -76,7 +76,7 @@
         	<input type="hidden" name="SecretCode" value="5WLjE4Hik2TC85l" class="form-control"/>
         </div>
         <div class="form-group">
-            <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
+            <button class="btn btn-primary btn-block" type="submit">Register Dispatcher</button>
         </div>
         <a class="already" href="index.jsp">Back</a> 
 	</form>

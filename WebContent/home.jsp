@@ -59,7 +59,9 @@
 						<span class="navbar-text" style="float: right"><a
 							href="LoginController" class="login">Logout</a><br></span>
 						<span class="navbar-text" style="float: right"><a
-							href="PharmacistController?Action=Prescription" class="login">Approve/Disapprove
+							href="PharmacistController?Action=Prescription && #return" class="login">Return Orders</a></span>
+						<span class="navbar-text" style="float: right"><a
+							href="PharmacistController?Action=Prescription && #approve" class="login">Approve/Disapprove
 								prescription orders</a></span>
 						<span class="navbar-text" style="float: right"><a
 							href="ProductController?Action=AddnewProduct" class="login">Add
@@ -310,15 +312,23 @@
 					</div>
 					<a href="ProductController?Action=addProduct" class="btn btn-info"
 						role="button">Add Existing Product to Catalog</a><br> <br />
-					<a href="PharmacistController?Action=Prescription"
+					<a href="PharmacistController?Action=Prescription && #approve"
 						class="btn btn-info" role="button">Approve/Disapprove
 						prescription orders</a><br> <br />
 				</div>
 			</div>
 			</div>
 			<br>
-			
-	<table id="druglistTable" class="table table-striped table-bordered" width="100%">
+			<div id="container">
+				<div class="list-group">
+					<a class="list-group-item list-group-item-info">
+						<h4 class="list-group-item-heading">
+							<center>Your Pharmacy's Current Catalog</center>
+						</h4>
+					</a>
+				</div>
+			</div>	
+	<table id="phardruglistTable" class="table table-striped table-bordered" width="100%">
 		<thead>
 			<tr>
 				<th>Product ID</th>
@@ -354,7 +364,7 @@
 			<br>
 			<div id="container">
 				<div class="list-group">
-					<a class="list-group-item list-group-item-info">
+					<a id="approve" class="list-group-item list-group-item-info">
 						<h4 class="list-group-item-heading">
 							<center>Current Orders Heading to your Pharmacy That DO
 								NOT require a prescription:</center>
@@ -363,7 +373,7 @@
 				</div>
 			</div>
 				<br>
-				<table id="wpres" class="table table-striped table-bordered"
+				<table id="wopres" class="table table-striped table-bordered"
 					width="100%">
 					<thead>
 						<tr>
@@ -454,7 +464,7 @@
 				</a>
 			</div>
 			<br>
-			<table id="wopres" class="table table-striped table-bordered"
+			<table id="wpres" class="table table-striped table-bordered"
 				width="125%">
 				<thead>
 					<tr>
@@ -517,13 +527,9 @@
 									</table>
 								</td>
 								<td>&#8369;<c:out value="${order.actualCost}" /></td>
-								<td><c:forEach items="${PrescriptionImage}"
-										var="prescription">
-										<c:if
-											test="${order.prescriptionID == prescription.prescriptionID}">
-											<img
-												src="images/<c:out value="${prescription.prescription}" />"
-												alt="Medicine Image" width="100px" height="100px">
+								<td><c:forEach items="${PrescriptionImage}" var="prescription">
+										<c:if test="${order.prescriptionID == prescription.prescriptionID}">
+											<div class = "pop"><img id="imageresource" src="images/<c:out value="${prescription.prescription}" />" alt="Medicine Image" width="100px" height="100px"></div>
 										</c:if>
 									</c:forEach>
 								</td>
@@ -556,7 +562,7 @@
 			<div id="container">
 				<div class="list-group">
 					<a class="list-group-item list-group-item-info">
-						<h4 class="list-group-item-heading">
+						<h4 id="return" class="list-group-item-heading">
 							<center>Current Orders That are requested to be returned:</center>
 						</h4>
 					</a>
@@ -739,6 +745,7 @@
 					<th>Dispatcher Contact Number</th>
 					<th>Dispatcher Address</th>
 					<th>Dispatcher Birthday</th>
+					<th>Courier Company</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -749,6 +756,7 @@
 						<td><c:out value="${dispatcher.contactNumber}" /></td>
 						<td><c:out value="${dispatcher.address}" /></td>
 						<td><c:out value="${dispatcher.birthdate}" /></td>
+						<td></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -770,6 +778,7 @@
 					<th>Pharmacist Name</th>
 					<th>Pharmacist PRC Number</th>
 					<th>Pharmacist Position</th>
+					<th>Pharmacy</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -779,6 +788,7 @@
 								value="${pharmacist.lastName}" /></td>
 						<td><c:out value="${pharmacist.PRCNo}" /></td>
 						<td><c:out value="${pharmacist.position}" /></td>
+						<td></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -1128,6 +1138,17 @@ $(function() {
 	});		
 });
 
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#phardruglistTable").DataTable({
+			"sPaginationType" : "full_numbers",
+			"bJQueryUI" : true,
+			"sScrollX" : "100%",
+			"bScrollCollapse" : true
+		});
+	});
 </script>
 
 	<script type="text/javascript">

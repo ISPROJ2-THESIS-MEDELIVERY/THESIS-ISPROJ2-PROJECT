@@ -33,14 +33,14 @@
         </div>
     </div>
     <div class="login-clean">
-	<form onSubmit="return formValidation();" action="InformationController" method="post">
+	<form onSubmit="return formValidation();" action="InformationController" method="post" encType="multipart/form-data">
 	<h2>Add a New Pharmacy</h2>
 		<div class="form-group">
         	<input type="text" name="PharmaName" required="required" placeholder="Pharmacy Name" class="form-control"/>
         </div>
-        <!-- <div class="form-group">
-        	<input type="file" name="PharmaFile" required="" placeholder="Pharmacy Logo" class="form-control"/> enctype="multipart/form-data
-        </div> -->
+        <div class="form-group">
+        	<input type="file" name="PharmaLogo" value="Upload Image" class="form-control" required />
+        </div>
         <div class="form-group">
         	<input type="hidden" name="Actionthing" value="addPharmacy" class="form-control"/>
         </div>

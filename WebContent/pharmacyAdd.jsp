@@ -363,39 +363,6 @@
       </div>
 	</form>
 	
-	<table id="druglistTable" class="table table-striped table-bordered" width="100%">
-		<thead>
-			<tr>
-				<th>Product ID</th>
-				<th>Product Name</th>
-				<th>Generic Name</th>
-				<th>Product Strength</th>
-				<th>Image</th>
-				<th>Product Form</th>
-				<th>Product Packaging</th>
-				<th>Product Description</th>
-                <th>Unit Price</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${pharmaProductList}" var="item">
-					<tr>
-						<td><c:out value="${item.productID}" /></td>
-						<td><c:out value="${item.productName}" /></td>
-						<td><c:out value="${item.genericName}" /></td>
-						<td><c:out value="${item.productStrength}" /></td>
-						<td><div class="pop">
-    						<img id="imageresource" src="images/<c:out value="${item.productImage}" />" alt="Medicine Image" width="100px" height="100px">
-   						 	Click to Enlarge
-						</div></td>
-						<td><c:out value="${item.productForm}" /></td>
-						<td><c:out value="${item.productPackaging}" /></td>
-						<td><c:out value="${item.productDescription}" /></td>
-						<td><c:out value="${item.priceSet}" /></td>
-					</tr>
-			</c:forEach>
-		</tbody>
-	</table>
 	</div>
 <div class="footer-dark">
     <footer>

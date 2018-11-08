@@ -1,5 +1,6 @@
 package thesis.mvc.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.sql.Connection;
@@ -11,11 +12,15 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.CityListingImplement;
@@ -34,8 +39,10 @@ import thesis.mvc.model.Stocks;
 import thesis.mvc.model.StocksPrice;
 import thesis.mvc.pageaction.RegistrationAction;
 import thesis.mvc.utility.DBUtility;
+import thesis.mvc.utility.EncryptionFunction;
 
 @WebServlet("/InformationController")
+@MultipartConfig
 public class InformationController extends HttpServlet {
 	
 	private Connection conn;
@@ -45,6 +52,9 @@ public class InformationController extends HttpServlet {
 		conn = DBUtility.getConnection();
 	}
 	
+	private static final long serialVersionUID = 1L;
+	//private final String UPLOAD_DIRECTORY = "../../../../../../../../THESIS-ISPROJ2-PROJECT/WebContent/images/";
+	private final String UPLOAD_DIRECTORY = "/C:/ISPROJ2/Medelivery/webapp/images/";
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -93,7 +103,31 @@ public class InformationController extends HttpServlet {
 			//response.sendRedirect(request.getContextPath() + "/RegistrationCustomer.jsp");
 		} else if (Action.equalsIgnoreCase("addPharmacy")) { //Pharmacy
 			String PharName = request.getParameter( "PharmaName" );
-			String PharFile = "test";
+			String PharFile = "";
+
+			if(ServletFileUpload.isMultipartContent(request)){
+	            try {
+
+	            	Part filePart = request.getPart("PharmaLogo");
+					String name = PharName+"Logo";
+					String end = filePart.getContentType();
+					if (end.startsWith("image")) {
+						String imageType = end.replace("image/", "");
+						name = name + "." + imageType;
+						String DbaseName = new EncryptionFunction().encrypt(name);
+						PharFile = DbaseName;
+						String AFileName = name;
+						filePart.write(UPLOAD_DIRECTORY + File.separator + AFileName);
+						System.out.println( "File Uploaded Successfully: " + UPLOAD_DIRECTORY + File.separator + AFileName);
+					} else {
+						System.out.println( "File Uploaded is not an image!");
+					}
+	            	
+	            } catch (Exception ex) {
+	            	System.out.println( "File Upload Failed due to " + ex);
+	            }
+	            
+	        }
 			Pharmacy pharmacy = new Pharmacy();
 			pharmacy.setPharmacyName(PharName);
 			pharmacy.setPharmacyLogo(PharFile);

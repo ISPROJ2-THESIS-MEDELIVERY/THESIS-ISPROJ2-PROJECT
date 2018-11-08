@@ -112,7 +112,13 @@
 	    </tbody>
 	</table>
 	<!-- Comments: <br><input type="text" name="Comments"/><br> -->
-	<center><a href="CustomerController?action=ReturnOrder&OrderID=<c:out value="${order.orderID}" />" class="btn btn-info" role="button"/>Return Order</a></center>
+	<center>
+			<form action='CustomerController' method='get'>
+				<input type="hidden" name="OrderID" value="<c:out value="${order.orderID}" />" readonly>
+				<input type="Text" name="ReturnReason" />
+				<input type='submit' name='action' value="ReturnOrder" style='display: on-hover' />
+			</form>
+		</center>
 		<hr>
 	</c:if>
 	</c:forEach>

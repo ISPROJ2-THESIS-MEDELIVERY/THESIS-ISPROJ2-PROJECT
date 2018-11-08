@@ -53,13 +53,14 @@
     </div>
 	<!-- CatalogPrescription -->
 	<div class="login-clean">
-	<form method="post" action="ShopController" encType="multipart/form-data">
+	<form method="post" action="CustomerController" encType="multipart/form-data">
 		<div class="form-group">
-        	<input type="file" name="file" value="Upload Prescription" class="form-control"/>
-        	<input type="hidden" name="PharmaID" value="<c:out value="${SelectedPharmacy.pharmacyID}"/>" class="form-control"/>
+		<h2>Upload your Senior citizen ID here please</h2>
+        	<input type="file" name="file" value="Upload Senior Citizen ID" class="form-control"/>
+        	<input type="hidden" name="action" value="AddSeniorCitizenID" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="submit" name="Action" value="AddPrescription" class="form-control"/>
+        	<input type="submit" name="Action" value="AddSeniorCitizenID" class="form-control"/>
         </div>
 	</form>
 	</div>

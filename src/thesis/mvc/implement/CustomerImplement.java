@@ -11,6 +11,7 @@ import java.util.List;
 import thesis.mvc.dataobjects.CustomerDAO;
 import thesis.mvc.model.Customer;
 import thesis.mvc.utility.DBUtility;
+import thesis.mvc.utility.EncryptionFunction;
 
 public class CustomerImplement implements CustomerDAO{
 	
@@ -118,7 +119,7 @@ public class CustomerImplement implements CustomerDAO{
 				customer.setCustomerCellular( resultSet.getString("CustomerCellular") );
 				customer.setEmail( resultSet.getString( "Email" ) );
 				customer.setIsSeniorCitizen( resultSet.getBoolean( "IsSeniorCitizen" ) );
-				customer.setSeniorCitizenID( resultSet.getString( "SeniorCitizenID" ) );
+				customer.setSeniorCitizenID( new EncryptionFunction().decrypt( resultSet.getString( "SeniorCitizenID" ) ) );
 				customers.add(customer);
 			}
 			resultSet.close();

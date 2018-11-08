@@ -1,16 +1,19 @@
 package thesis.mvc.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.util.Calendar;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.DeliveryImplement;
@@ -19,6 +22,7 @@ import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.implement.PrescriptionImplement;
+import thesis.mvc.model.Customer;
 import thesis.mvc.model.Delivery;
 import thesis.mvc.model.Driver;
 import thesis.mvc.model.Order;
@@ -27,9 +31,11 @@ import thesis.mvc.model.Prescription;
 import thesis.mvc.pageaction.SearchAction;
 import thesis.mvc.pageaction.ShopAction;
 import thesis.mvc.utility.DBUtility;
+import thesis.mvc.utility.EncryptionFunction;
 import thesis.mvc.utility.SendEmail;
 
 @WebServlet("/CustomerController")
+@MultipartConfig
 public class CustomerController extends HttpServlet{
 	
 	private Connection conn;
@@ -37,6 +43,8 @@ public class CustomerController extends HttpServlet{
 	public CustomerController() {
 		conn = DBUtility.getConnection();
 	}
+	//private final String UPLOAD_DIRECTORY = "../../../../../../../../THESIS-ISPROJ2-PROJECT/WebContent/images/";
+	private final String UPLOAD_DIRECTORY = "/C:/ISPROJ2/Medelivery/webapp/images/";
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -105,21 +113,60 @@ public class CustomerController extends HttpServlet{
 			session.setAttribute("OrderDetailHistory", new OrderDetailImplement().getOrderDetail() );
 			response.sendRedirect(request.getContextPath() + "/CustomerPending.jsp");
 		} else if (action.equalsIgnoreCase("ReturnOrder")) {
+			System.out.println(action);
+			System.out.println(request.getParameter("ReturnReason"));
 			Order returnedOrder = new OrderImplement().getOrderById( Integer.parseInt(request.getParameter("OrderID")));
 			returnedOrder.setOrderStatus("RETURN");
 			Delivery Reason = new DeliveryImplement().getDeliverybyID(returnedOrder.getDeliveryID());
 			Reason.setComments(request.getParameter("ReturnReason"));
+			System.out.println(Reason.getDeliveryID());
+			System.out.println(Reason.getComments());
 			new DeliveryImplement().updateDelivery(Reason);
 			new OrderImplement().updateOrder( returnedOrder );
 			session.setAttribute("OrderHistory", new OrderImplement().getOrderByCustomerId((int)session.getAttribute("Customer")));
 			session.setAttribute("OrderDetailHistory", new OrderDetailImplement().getOrderDetail() );
 			response.sendRedirect(request.getContextPath() + "/CustomerReturn.jsp");
 		}
+		response.sendRedirect(request.getContextPath() + "/index.jsp");
 		
     }
 
-	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+
+		HttpSession session = request.getSession();
+		
+		String action = "";
+		if (request.getParameter("action") != null) {
+			action = request.getParameter( "action" );
+		}
+		
+		if (action.equalsIgnoreCase("AddSeniorCitizenID")) {
+			String SSIDName = "";
+			Customer customer = new CustomerImplement().getCustomerById((int)session.getAttribute("Customer"));			
+			 try {
+
+	            	Part filePart = request.getPart("file");
+					String name = "SSID" + customer.getCustomerID();
+					String end = filePart.getContentType();
+					if (end.startsWith("image")) {
+						String imageType = end.replace("image/", "");
+						name = name + "." + imageType;
+						String DbaseName = new EncryptionFunction().encrypt(name);
+						SSIDName = DbaseName;
+						String AFileName = name;
+						filePart.write(UPLOAD_DIRECTORY + File.separator + AFileName);
+						System.out.println( "File Uploaded Successfully: " + UPLOAD_DIRECTORY + File.separator + AFileName);
+					} else {
+						System.out.println( "File Uploaded is not an image!");
+					}
+	            	
+	            } catch (Exception ex) {
+	            	System.out.println( "File Upload Failed due to " + ex);
+	            }
+
+			customer.setSeniorCitizenID(SSIDName);
+			new CustomerImplement().updateCustomer(customer);
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
+		}
 	}
 }

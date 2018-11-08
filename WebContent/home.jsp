@@ -211,7 +211,7 @@
 						<br>
 					</c:forEach>
 				</div>
-
+					<a href="CustomerSeniorCitizen.jsp" class="login">Are you a senior citizen? Upload your senior citizen ID here</a>
 				<div class="col-md-6">
 					<div class="list-group">
 						<a class="list-group-item">
@@ -627,6 +627,12 @@
 										</table>
 									</td>
 									<td>&#8369;<c:out value="${order.actualCost}" /></td>
+									<td>
+										<c:forEach items="${DeliveryReason}" var="delivery">
+											<c:if test="${order.deliveryID == delivery.deliveryID}">
+												<c:out value="${delivery.comments}" />
+											</c:if>
+										</c:forEach>
 									</td>
 									<td>
 										<form action="ApprovalController" method="post">
@@ -685,6 +691,7 @@
 					<th>Customer Email</th>
 					<th>Senior Citizen?</th>
 					<th>Senior Citizen ID</th>
+					<th>Valid SSID?</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -693,8 +700,28 @@
 						<td><c:out value="${customer.customerName}" /></td>
 						<td><c:out value="${customer.cityID}" /></td>
 						<td><c:out value="${customer.email}" /></td>
-						<td><c:out value="${customer.isSeniorCitizen}" /></td>
-						<td><c:out value="${customer.seniorCitizenID}" /></td>
+						
+						<c:if test="${customer.isSeniorCitizen == false && customer.seniorCitizenID == null}">
+							<td>NO</td>
+							<td>N/A</td>
+							<td>N/A</td>
+						</c:if>
+						<c:if test="${customer.isSeniorCitizen == false && customer.seniorCitizenID != null}">
+							<td>PENDING</td>
+							<td><img class="center-block" src="images/<c:out value="${customer.seniorCitizenID}" />" /></td>
+							<td>
+								<form action="InformationController" method="post">
+									<input type="hidden" Name="customerID" value="<c:out value="${customer.customerID}" />" />
+									<input type="submit" Name="Actionthing" value="SSIDApprove" />
+									<input type="submit" Name="Actionthing" value="SSIDReject" />
+								</form>
+							</td>
+						</c:if>
+						<c:if test="${customer.isSeniorCitizen == true}">
+							<td>YES</td>
+							<td><img class="center-block" src="images/<c:out value="${customer.seniorCitizenID}" />" /></td>
+							<td>N/A</td>
+						</c:if>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -25,6 +25,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.CityListingImplement;
 import thesis.mvc.implement.CourierServiceImplement;
+import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.PharmacistImplement;
 import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.implement.ProductImplement;
@@ -32,6 +33,7 @@ import thesis.mvc.implement.StocksImplement;
 import thesis.mvc.implement.StocksPriceImplement;
 import thesis.mvc.model.Branch;
 import thesis.mvc.model.CourierService;
+import thesis.mvc.model.Customer;
 import thesis.mvc.model.Pharmacist;
 import thesis.mvc.model.Pharmacy;
 import thesis.mvc.model.Product;
@@ -53,8 +55,8 @@ public class InformationController extends HttpServlet {
 	}
 	
 	private static final long serialVersionUID = 1L;
-	private final String UPLOAD_DIRECTORY = "../../../../../../../../THESIS-ISPROJ2-PROJECT/WebContent/images/";
-	//private final String UPLOAD_DIRECTORY = "/C:/ISPROJ2/Medelivery/webapp/images/";
+	//private final String UPLOAD_DIRECTORY = "../../../../../../../../THESIS-ISPROJ2-PROJECT/WebContent/images/";
+	private final String UPLOAD_DIRECTORY = "/C:/ISPROJ2/Medelivery/webapp/images/";
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -77,7 +79,7 @@ public class InformationController extends HttpServlet {
 			List<Product> Products = new ArrayList<Product>();
 			Products = new ProductImplement().getAllProducts();
 			
-			session.setAttribute("ProductList", "" );
+			session.setAttribute("ProductList", Products );
 			session.setAttribute("currentStock", new StocksImplement().getStocksByPharmacy(pharmacyID));
 			response.sendRedirect(request.getContextPath() + "/insertProduct.jsp");
 		} else if (Action.equalsIgnoreCase("InsertNewProduct")){
@@ -97,6 +99,7 @@ public class InformationController extends HttpServlet {
 		String forward;
 
 		String Action = request.getParameter( "Actionthing" );
+		System.out.println(Action);
 		
 		if (Action.equalsIgnoreCase("sakdfdsjf")) {
 			session.setAttribute("CapchaFail", true);
@@ -173,9 +176,18 @@ public class InformationController extends HttpServlet {
 			courierService.setCompanyContact( CompCont );
 			courierService.setDateAdded( DateAded );
 			new CourierServiceImplement().addCourierService( courierService );
+		} else if (Action.equalsIgnoreCase("SSIDApprove")) {
+			int CID = Integer.valueOf( request.getParameter( "customerID" ) );
+			Customer customer = new CustomerImplement().getCustomerById(CID);
+			customer.setIsSeniorCitizen(true);
+			new CustomerImplement().updateCustomer(customer);
+		} else if (Action.equalsIgnoreCase("SSIDReject")) {
+			int CID = Integer.valueOf( request.getParameter( "customerID" ) );
+			Customer customer = new CustomerImplement().getCustomerById(CID);
+			customer.setSeniorCitizenID(null);;
+			new CustomerImplement().updateCustomer(customer);
+			
 		}
 		response.sendRedirect(request.getContextPath() + "/index.jsp");
-		
-		
 	}
 }

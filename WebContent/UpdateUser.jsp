@@ -30,7 +30,9 @@
                         <span class="navbar-text" style="float: right"><a href="register.jsp" class="login">Register</a></span>
                         </c:if>
                         <c:if test="${userAccess == 1}">
-                        <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Log Out</a></span>
+                        <span class="navbar-text" style="float: right"><a href="CustomerController?action=UpdateCustomer" class="login">Update Your Profile</a></span>
+                        <span class="navbar-text" style="float: right"><a href="CustomerSeniorCitizen.jsp" class="login">Senior Citizen/PWD? Click here</a></span>	                       
+                        <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Log Out</a></span>                                      				
                         </c:if>
                         <c:if test="${userAccess == 2}">
                         <span class="navbar-text" style="float: right"><a href="DispatcherController?Action=DispatchOrder" class="login">Order Dispatch - Regular</a><br></span>
@@ -51,27 +53,31 @@
     </div>
 
     
-    
+    <div class="login-clean">
 	<form onSubmit="return formValidation();" action="InformationController" method="post" enctype="multipart/form-data">
-		<input type="update" name="Actionthing" value="update" class="form-control"/>
-        <h3>INPUT ONLY IF YOU WANT TO CHANGE SOMETHING</h3>
-        <h3>LOGIN</h3>
-        <div class="form-group">
+		<input type="hidden" name="Actionthing" value="update" class="form-control"/>
+        <h3>UPDATE YOUR INFORMATION HERE</h3>
+        <br>
+        <h3>LOGIN CREDENTIALS</h3>
+        <div class="input-group">
+        	<span class="input-group-text">New Username:</span>
         	<input type="text" name="Username" pattern="[a-zA-Z0-9_-]{6,12}" autofocus  title="must be alphanumeric in 6-12 chars" placeholder="<c:out value="${LoginInfo.username}"/>" class="form-control"/>
         </div>
-		<div class="form-group">
+        <br>
+		<div class="input-group">
+			<span class="input-group-text">New Password:</span>
         	<input type="password" name="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
 			title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" 
 			 placeholder="<c:out value="${LoginInfo.password}"/>" id="Password" class="form-control"/>
         </div>
-		
+		<br>
         <c:if test="${userAccess == 1}">
-        	<h3>CUSTOMER INFO</h3>
-        	<c:out value="${CustomerInfo.customerID}"/>
-	        <div class="form-group"><input type="text" name="FullName" placeholder="<c:out value="${CustomerInfo.customerName}"/>" class="form-control"/></div>
-	        <div class="form-group"><input type="text" name="CuStreet" placeholder="<c:out value="${CustomerInfo.customerStreet}"/>" class="form-control"/></div>
-	        <div class="form-group"><input type="text" name="CuBarngy" placeholder="<c:out value="${CustomerInfo.customerBarangay}"/>" class="form-control"/></div>
-	        <div class="form-group">
+        	<h3>PROFILE INFORMATION</h3>
+        	<h5>Customer ID: <c:out value="${CustomerInfo.customerID}"/></h5>
+	        <div class="input-group"><span class="input-group-text">New Name:</span><input type="text" name="FullName" placeholder="<c:out value="${CustomerInfo.customerName}"/>" class="form-control"/></div><br>
+	        <div class="input-group"><span class="input-group-text">New Street:</span><input type="text" name="CuStreet" placeholder="<c:out value="${CustomerInfo.customerStreet}"/>" class="form-control"/></div><br>
+	        <div class="input-group"><span class="input-group-text">New Barangay:</span><input type="text" name="CuBarngy" placeholder="<c:out value="${CustomerInfo.customerBarangay}"/>" class="form-control"/></div><br>
+	        <div class="input-group"><span class="input-group-text">New City:</span>
 	        	<select name="CCityID" class="form-control">
 				<c:forEach items="${CityList}" var="city">
 					<c:if test="${CustomerInfo.cityID == city.cityID}">
@@ -83,10 +89,10 @@
 					/c:if>
 				</c:forEach>
 			  </select>
-	        </div>
-	        <div class="form-group"><input id="phonenum" type="tel" pattern="^\d{7}$" title="must contain 7 digits" name="CuLandLi"0 placeholder="Landline *" class="form-control"/></div>
-	        <div class="form-group"><input id="phonenum" type="tel" pattern="^(09|\+639)\d{9}$" title="must start with 09 or +63 and contain 11 digits" name="CuCellul" placeholder="Cellphone No *" class="form-control"/></div>
-	        <div class="form-group"><input type="email" name="CusEmail" placeholder="Email *" class="form-control"/></div>
+	        </div><br>
+	        <div class="input-group"><span class="input-group-text">New Landline:</span><input id="phonenum" type="tel" pattern="^\d{7}$" title="must contain 7 digits" name="CuLandLi" placeholder="<c:out value="${CustomerInfo.customerLandline}"/>" class="form-control"/></div><br>
+	        <div class="input-group"><span class="input-group-text">New Cellphone Number:</span><input id="phonenum" type="tel" pattern="^(09|\+639)\d{9}$" title="must start with 09 or +63 and contain 11 digits" name="CuCellul" placeholder="<c:out value="${CustomerInfo.customerCellular}"/>" class="form-control"/></div><br>
+	        <div class="input-group"><span class="input-group-text">New Email:</span><input type="email" name="CusEmail" placeholder="<c:out value="${CustomerInfo.email}"/>" class="form-control"/></div><br>
 	        <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Update</button></div>
         </c:if>
         <c:if test="${userAccess == 2}">
@@ -95,9 +101,9 @@
         </c:if>
         <c:if test="${userAccess == 4}">
         </c:if>
-        
-	</form>
     <a class="already" href="index.jsp">Back</a> 
+	</form>
+    
 	</div>
 <div class="footer-dark">
     <footer>

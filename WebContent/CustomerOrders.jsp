@@ -155,6 +155,13 @@ hr {
     margin-right: 130px;
 }
 
+.table {
+  width: 86%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  margin-left: 100px;
+  margin-right: 100px;
+}
 </style>
 
 </html>

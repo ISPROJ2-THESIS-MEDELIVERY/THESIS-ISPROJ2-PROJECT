@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="assets/css/styles.css" />
 <link rel="stylesheet" href="assets/css/style.css" />
 <link rel="stylesheet" href="assets/css/Footer-Dark.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="icon" href="assets/img/medlogo.png" />
 </head>
 
@@ -30,6 +31,7 @@
 			<nav
 				class="navbar navbar-dark navbar-expand-md navigation-clean-search">
 			<div class="container">
+						
 				<a href="index.jsp" class="navbar-brand">Medelivery</a>
 				<div class="collapse navbar-collapse" id="navcol-1">
 					<ul class="nav navbar-nav"></ul>
@@ -47,6 +49,7 @@
 					<c:if test="${userAccess == 1}">
 						<span class="navbar-text" style="float: right"><a
 							href="LoginController" class="login">Log Out</a></span>
+						<span class="navbar-text" style="float: right"><a href="CustomerSeniorCitizen.jsp" class="login">Senior Citizen/PWD? Click here</a></span>
 					</c:if>
 					<c:if test="${userAccess == 2}">
 						<span class="navbar-text" style="float: right"><a
@@ -82,6 +85,7 @@
 					your email address</strong></span>
 		</div>
 	</c:if>
+	
 	
 	
 	<c:if test="${userAccess == null}">
@@ -138,6 +142,35 @@
 	</c:if>
 	
 	<c:if test="${userAccess == 1}">
+	<nav class="side-menu">
+    <ul>
+
+		<li class="title"><a>Order OTC<span><i class="fa fa-medkit"></i></span></a></li>
+		<c:forEach items="${PharmcyList}" var="pharmacy">
+      <li><a href="CustomerController?action=GoToCatalog&PharmaID=<c:out value="${pharmacy.pharmacyID}" />"><c:out
+								value="${pharmacy.pharmacyName}" /><span><i></i></span></a></li>
+      	</c:forEach>
+      	<br>
+      	<li class="title"><a>Prescription<span><i class="fa fa-ambulance"></i></span></a></li>
+		<c:forEach items="${PharmcyList}" var="pharmacy">
+      <li><a href="CustomerController?action=GoToCatalogPrescription&PharmaID=<c:out value="${pharmacy.pharmacyID}" />"><c:out
+								value="${pharmacy.pharmacyName}" /><span><i></i></span></a></li>
+      	</c:forEach>
+      	<br>
+      	<li><a href="CustomerController?action=GoToOrders">Go to Order History<span><i></i></span></a></li>
+      	<li><a href="CustomerController?action=GoToPending">View your Current Orders<span><i></i></span></a></li>
+      	<li><a href="CustomerController?action=GoToReturns">View your Order Returns<span><i></i></span></a></li>
+	  <!-- <li><a href="#">Insert Link here<span><i class="fa fa-user-md"></i></span></a></li>
+	  <li><a href="#">Insert Link here<span><i class="fa fa-user-md"></i></span></a></li>
+	  <li><a href="#">Insert Link here<span><i class="fa fa-user-md"></i></span></a></li>
+	  <li><a href="#">Insert Link here<span><i class="fa fa-ambulance"></i></span></a></li>
+	   <li><a href="#">Insert Link here<span><i class="fa fa-ambulance"></i></span></a></li>
+	    <li><a href="#">Insert Link here<span><i class="fa fa-ambulance"></i></span></a></li>
+	    <li><a href="#">Insert Link here<span><i class="fa fa-wheelchair-alt"></i></span></a></li> -->
+	    
+      
+    </ul>
+  	</nav>
 		<c:forEach items="${Featurepharm}" var="pharm">
 			<div class="row">
 				<h3>
@@ -213,7 +246,7 @@
 						<br>
 					</c:forEach>
 				</div>
-					<a href="CustomerSeniorCitizen.jsp" class="login">Are you a senior citizen? Upload your senior citizen ID here</a>
+					
 				<div class="col-md-6">
 					<div class="list-group">
 						<a class="list-group-item">
@@ -250,6 +283,7 @@
 							</p>
 						</a>
 					</div>
+					<a href="CustomerSeniorCitizen.jsp" class="login && btn btn-warning" role="button">Are you a senior citizen?<br> Upload your senior citizen ID here</a>
 				</div>
 				<div class="col-md-6">
 					<!-- Order History: -->
@@ -285,7 +319,7 @@
     			</div>
     		</div>
     	</div>
-		<table id="customerTable" class="table table-striped table-bordered"
+		<table id="driverTable" class="table table-striped table-bordered"
 			width="100%">
 			<thead>
 				<tr>
@@ -304,21 +338,35 @@
 						<td><c:out value="${driver.inTransit}" /></td>
 					</tr>
 				</c:forEach>
-				<tr>
+			</tbody>
+		</table>
+			<div id="container">
+				<div class="list-group">
+					<a class="list-group-item list-group-item-info">
+						<h4 class="list-group-item-heading">
+							<center>Add New Driver</center>
+						</h4>
+					</a>
+				</div>
+			</div>	
+				<!-- <tr>
 					<th colspan ="4">Add New Driver</th>
-				</tr>
+				</tr> -->
+		<table class="table table-striped table-bordered" width="100%">
+			<thead>
 				<tr>
 					<th>Driver Name</th>
 					<th>Driver Address</th>
 					<th>Driver Contact Number</th>
 					<th>Driver In Transit?</th>
 				</tr>
+			</thead>
 			<tbody>
 				<form action="DispatcherController">
 					<tr>
-						<td><input type="text" name="driverName"/></td>
-						<td><input type="text" name="driverAddr"/></td>
-						<td><input type="text" name="driverCont"/></td>
+						<td><input type="text" name="driverName" class="form-control"/></td>
+						<td><input type="text" name="driverAddr" class="form-control"/></td>
+						<td><input type="text" name="driverCont" class="form-control"/></td>
 						<td><input type="submit" name="Action" value="addDriver"/></td>
 					</tr>
 				</form>
@@ -1162,6 +1210,93 @@
     background-repeat: repeat-x;
     background-color: #21a9af;
 }
+
+.btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    margin-left: 100px;
+}
+
+.btn-warning {
+    color: #fff;
+    background-color: #ec971f;
+    border-color: #d58512;
+    margin-left: 100px;
+}
+
+body {
+	background: #f1f7fc;
+}
+
+/* Test */
+.side-menu {
+    width:13em;
+    height: auto;
+    margin:4em auto 0;
+    font-size: 1em;
+    line-height: 2em;
+    color: #fff;
+    font-weight:700;
+    text-transform:uppercase;
+    position:absolute;
+    top:0; 
+    bottom:0;
+    left: -10em;
+    margin-top: 100px;
+}
+.side-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.side-menu ul li {
+  display:block;
+    background-color: #333;
+    height: 6em;
+    padding: 1em 1.5em;
+    position: relative;
+    -webkit-transition: -webkit-transform 0.5s,     background-color .5s, color .5s;
+    transition: transform .5s, background-color .5s, color .5s;
+}
+/*the colors of the different columns*/
+.side-menu ul li:nth-child(1) { background-color: #172a74;}
+.side-menu ul li:nth-child(2) { background-color: #21a9af;}
+.side-menu ul li:nth-child(3) { background-color: #21a9af;}
+.side-menu ul li:nth-child(4) { background-color: #21a9af;}
+.side-menu ul li:nth-child(5) { background-color: #21a9af;}
+.side-menu ul li:nth-child(6) { background-color: #21a9af;}
+.side-menu ul li:nth-child(8) { background-color: #172a74;}
+.side-menu ul li:nth-child(9) { background-color: #21a9af;}
+.side-menu ul li:nth-child(10) { background-color: #21a9af;}
+.side-menu ul li:nth-child(11) { background-color: #21a9af;}
+.side-menu ul li:nth-child(12) { background-color: #21a9af;}
+.side-menu ul li:nth-child(13) { background-color: #21a9af;}
+
+
+.side-menu ul li:hover {
+    background-color: ; /*you can make different colors depending on the nth-child like above*/
+    -webkit-transform: translateX(10em);
+    transform: translateX(10em);/*equal to left in the .side-menu*/
+}
+.side-menu ul li a {
+  display:block;
+    color: #FFF;
+    text-decoration: none;
+}
+.side-menu ul li span {
+    display:block;
+    position: absolute;
+    font-size:1em;
+    line-height: 2em;
+    height:2em;
+    top:0; 
+    bottom:0;
+    margin:0 auto;
+    padding:1em 1.5em;
+    right: 0.16666666666667em;
+    color: #F8F6FF;
+}
 </style>
 
 <script src="assets/bootstrap/js/jquery.dataTables.min.js"></script>
@@ -1176,6 +1311,17 @@ $(function() {
 	});		
 });
 
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#driverTable").DataTable({
+			"sPaginationType" : "full_numbers",
+			"bJQueryUI" : true,
+			"sScrollX" : "100%",
+			"bScrollCollapse" : true
+		});
+	});
 </script>
 
 <script type="text/javascript">

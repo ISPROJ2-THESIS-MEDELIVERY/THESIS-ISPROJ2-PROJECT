@@ -57,7 +57,7 @@
         	<input type="hidden" name="SecretCode" value="i3Up8XmH04Jz151" class="form-control"/>
         </div>
         <div class="form-group">
-            <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
+            <button class="btn btn-primary btn-block" type="submit">Register Admin</button>
         </div>
         <a class="already" href="index.jsp">Back</a> 
         

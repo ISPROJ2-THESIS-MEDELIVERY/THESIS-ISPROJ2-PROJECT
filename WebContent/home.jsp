@@ -179,13 +179,13 @@
 				</h3>
 				<div id="${pharm.pharmacyID}" class="carousel slide"
 					data-ride="carousel">
-					<ol class="carousel-indicators">
+					<!-- <ol class="carousel-indicators">
 						<li data-target="#${pharm.pharmacyID}" data-slide-to="0"
 							class="active"></li>
 						<li data-target="#${pharm.pharmacyID}" data-slide-to="1"></li>
 						<li data-target="#${pharm.pharmacyID}" data-slide-to="2"></li>
 						<li data-target="#${pharm.pharmacyID}" data-slide-to="3"></li>
-					</ol>
+					</ol> -->
 
 					<div class="carousel-inner" role="listbox">
 						<div class="item active">
@@ -197,9 +197,9 @@
 								<c:if test="${stock.productID == items.productID}">
 									<c:if test="${stock.pharmacyID == pharm.pharmacyID}">
 										<div class="item">
-											<img class="center-block" src="images/<c:out value="${items.productImage}"/>" />
+											<img class="center-block" src="images/<c:out value="${items.productImage}"/>" /><br>
 											<form action='ShopController' method='post'>
-												<select name='Quantity'>
+												<select name='Quantity' class="center-block">
 													<option value="1">1</option>
 													<option value="2">2</option>
 													<option value="3">3</option>

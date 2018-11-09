@@ -60,7 +60,7 @@ public class RegistrationController extends HttpServlet {
 		if (Action.equalsIgnoreCase("ConfirmUser")) {
 			String ConfirmID = request.getParameter("UserID");
 			LoginImplement loginImplement = new LoginImplement();
-			int ID = Integer.parseInt(new EncryptionFunction().encrypt(ConfirmID));
+			int ID = Integer.parseInt(new EncryptionFunction().decrypt(ConfirmID));
 			if (loginImplement.getLoginByID(ID).getLoginStatus().equalsIgnoreCase("Just Registered")) {
 				loginImplement.ConfirmLogin(ID);				
 			}
@@ -160,7 +160,8 @@ public class RegistrationController extends HttpServlet {
 				//Email of Confirmation
 				SendEmail sendEmail = new SendEmail();
 				
-				String confirmLink = "http://localhost:8080/" + request.getContextPath() + "/RegistrationController?UserID=" + new EncryptionFunction().encrypt(Integer.toString(ID));
+				//String confirmLink = "http://localhost:8080/" + request.getContextPath() + "/RegistrationController?Action=ConfirmUser&UserID=" + new EncryptionFunction().encrypt(Integer.toString(ID));
+				String confirmLink = "https://isproj2a.benilde.edu.ph/Medelivery/" + request.getContextPath() + "/RegistrationController?Action=ConfirmUser&UserID=" + new EncryptionFunction().encrypt(Integer.toString(ID));
 				sendEmail.send(customer.getEmail(), "Medilivery Account Confirmation",
 						"Dear " + customerFName + "," +  
 						"<p>Thank you for creating your Medelivery Account.<br></p>" + 

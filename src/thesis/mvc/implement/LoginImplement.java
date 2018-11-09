@@ -132,7 +132,7 @@ public class LoginImplement implements LoginDAO {
 
 	public void ConfirmLogin(int confirmID) {
 		try {
-			String query = "UPDATE Login SET LoginStatus='Account Confirmed' WHERE UserID=?";
+			String query = "UPDATE Login SET LoginStatus='Normal' WHERE UserID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, confirmID );
 			preparedStatement.executeUpdate();

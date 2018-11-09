@@ -158,13 +158,6 @@
       	<li><a href="CustomerController?action=GoToOrders">Go to Order History<span><i></i></span></a></li>
       	<li><a href="CustomerController?action=GoToPending">View your Current Orders<span><i></i></span></a></li>
       	<li><a href="CustomerController?action=GoToReturns">View your Order Returns<span><i></i></span></a></li>
-	  <!-- <li><a href="#">Insert Link here<span><i class="fa fa-user-md"></i></span></a></li>
-	  <li><a href="#">Insert Link here<span><i class="fa fa-user-md"></i></span></a></li>
-	  <li><a href="#">Insert Link here<span><i class="fa fa-user-md"></i></span></a></li>
-	  <li><a href="#">Insert Link here<span><i class="fa fa-ambulance"></i></span></a></li>
-	   <li><a href="#">Insert Link here<span><i class="fa fa-ambulance"></i></span></a></li>
-	    <li><a href="#">Insert Link here<span><i class="fa fa-ambulance"></i></span></a></li>
-	    <li><a href="#">Insert Link here<span><i class="fa fa-wheelchair-alt"></i></span></a></li> -->
 	    
       
     </ul>
@@ -179,18 +172,12 @@
 				</h3>
 				<div id="${pharm.pharmacyID}" class="carousel slide"
 					data-ride="carousel">
-					<!-- <ol class="carousel-indicators">
-						<li data-target="#${pharm.pharmacyID}" data-slide-to="0"
-							class="active"></li>
-						<li data-target="#${pharm.pharmacyID}" data-slide-to="1"></li>
-						<li data-target="#${pharm.pharmacyID}" data-slide-to="2"></li>
-						<li data-target="#${pharm.pharmacyID}" data-slide-to="3"></li>
-					</ol> -->
 
 					<div class="carousel-inner" role="listbox">
 						<div class="item active">
 							<img class="center-block"
 								src="images/<c:out value="${pharm.pharmacyLogo}"/>" />
+							<br><br><center>Start browsing <c:out value="${pharm.pharmacyName}"></c:out> items.</center>
 						</div>
 						<c:forEach items="${Featurestock}" var="stock">
 							<c:forEach items="${Featureitems}" var="items">
@@ -213,7 +200,8 @@
 												<input class="center-block" type="hidden" name="ProductID" value="<c:out value="${items.productID}" />" readonly>
 												<input class="center-block" type="hidden" name="SelectedPharmacy" value="<c:out value="${pharm.pharmacyID}" />" readonly>
 												<input class="center-block" type="hidden" name="FromCarosel" value="FromCarosel" readonly />
-												<input class="center-block" type='submit' name='Action' value="Addtocart" style='display: on-hover' />
+												<div class="text-center"><button class="btn btn-success btn-md" type="submit" name="Action" value="Addtocart">Add to Cart</button></div>
+												<!-- <input class="center-block" type='submit' name='Action' value="Addtocart" style='display: on-hover' /> -->
 											</form>
 										</div>
 									</c:if>

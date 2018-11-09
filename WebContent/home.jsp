@@ -50,7 +50,7 @@
 						<span class="navbar-text" style="float: right"><a
 							href="LoginController" class="login">Log Out</a></span>
 						<span class="navbar-text" style="float: right"><a href="CustomerSeniorCitizen.jsp" class="login">Senior Citizen/PWD? Click here</a></span>
-						<span class="navbar-text" style="float: right"><a href="CustomerController?action=UpdateCustomer" class="login">Update User</a></span>
+						<span class="navbar-text" style="float: right"><a href="CustomerController?action=UpdateCustomer" class="login">Update Your Profile</a></span>
 					</c:if>
 					<c:if test="${userAccess == 2}">
 						<span class="navbar-text" style="float: right"><a

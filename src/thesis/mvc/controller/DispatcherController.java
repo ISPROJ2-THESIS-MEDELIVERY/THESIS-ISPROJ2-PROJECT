@@ -60,6 +60,18 @@ public class DispatcherController extends HttpServlet {
 			session.setAttribute( "ProductTranslation" , new ProductImplement().getAllProducts());
 			session.setAttribute( "CourierService" , CourierID);
 			response.sendRedirect(request.getContextPath() + "/DispatcherDirector.jsp");
+		} else if(action.equalsIgnoreCase("addDriver")) {
+			Driver driver = new Driver();
+			System.out.println((String) request.getParameter("driverName"));
+			System.out.println((String) request.getParameter("driverAddr"));
+			System.out.println((String) request.getParameter("driverCont"));
+			driver.setDriverName((String) request.getParameter("driverName"));
+			driver.setDriverAddress((String) request.getParameter("driverAddr"));
+			driver.setDriverContactNumber((String) request.getParameter("driverCont"));
+			driver.setCourierserviceID(CourierID);
+			driver.setInTransit(false);
+			new DriverImplement().addDriver(driver);
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}
 		
 	}
@@ -113,7 +125,7 @@ public class DispatcherController extends HttpServlet {
 			} else {
 				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
 			}
-		} else if (action.equalsIgnoreCase("newDriver")) {
+		} else if (action.equalsIgnoreCase("addDriver")) {
 			Driver newDriver = new Driver();
 			newDriver.setCourierserviceID(1);
 		}

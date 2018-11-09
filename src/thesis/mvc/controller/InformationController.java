@@ -186,7 +186,6 @@ public class InformationController extends HttpServlet {
 			Customer customer = new CustomerImplement().getCustomerById(CID);
 			customer.setSeniorCitizenID(null);;
 			new CustomerImplement().updateCustomer(customer);
-			
 		}
 		response.sendRedirect(request.getContextPath() + "/index.jsp");
 	}

@@ -125,7 +125,7 @@ public class DriverImplement implements DriverDAO {
 	public List<Driver> getDriversbyCourier(int CourierServiceId) {
 		List<Driver> drivers = new ArrayList<Driver>();
 		try {
-			String query = "SELECT * FROM Driver WHERE DriverID=?";
+			String query = "SELECT * FROM Driver WHERE courierserviceID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt(1, CourierServiceId);
 			ResultSet resultSet = preparedStatement.executeQuery();

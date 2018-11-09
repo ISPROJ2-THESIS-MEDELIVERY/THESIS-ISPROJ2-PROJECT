@@ -282,10 +282,48 @@
     					</a>
     				</div>
     				<a href="DispatcherController?Action=DispatchOrder" class="btn btn-info" role="button">Order Dispatch</a><br>
-    				</div>
-    				</div>
-    				</div>
-    				
+    			</div>
+    		</div>
+    	</div>
+		<table id="customerTable" class="table table-striped table-bordered"
+			width="100%">
+			<thead>
+				<tr>
+					<th>Driver Name</th>
+					<th>Driver Address</th>
+					<th>Driver Contact Number</th>
+					<th>Driver In Transit?</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${DriverList}" var="driver">
+					<tr>
+						<td><c:out value="${driver.driverName}" /></td>
+						<td><c:out value="${driver.driverAddress}" /></td>
+						<td><c:out value="${driver.driverContactNumber}" /></td>
+						<td><c:out value="${driver.inTransit}" /></td>
+					</tr>
+				</c:forEach>
+				<tr>
+					<th colspan ="4">Add New Driver</th>
+				</tr>
+				<tr>
+					<th>Driver Name</th>
+					<th>Driver Address</th>
+					<th>Driver Contact Number</th>
+					<th>Driver In Transit?</th>
+				</tr>
+			<tbody>
+				<form action="DispatcherController">
+					<tr>
+						<td><input type="text" name="driverName"/></td>
+						<td><input type="text" name="driverAddr"/></td>
+						<td><input type="text" name="driverCont"/></td>
+						<td><input type="submit" name="Action" value="addDriver"/></td>
+					</tr>
+				</form>
+			</tbody>
+		</table>	
 		<hr>
 		</c:if>
 	<c:if test="${userAccess == 3}">

@@ -68,8 +68,10 @@ public class HomeController  extends HttpServlet {
 			break;
 		case 2:
 			//DispatcherImplement dispatcherImplement = new DispatcherImplement();
-			//session.setAttribute("DispatcherDetails", session.getAttribute("Dispatcher") );
+			//session.setAttribute("DispatcherDetails",  );
 			//Dispatcher
+			int courierServiceId = new DispatcherImplement().getDispatcherById((int) session.getAttribute("Dispatcher")).getCourierServiceID();
+			session.setAttribute("DriverList" , new DriverImplement().getDriversbyCourier(courierServiceId) );
 			break;
 		case 3:
 			int BranchxofPharmacist = new PharmacistImplement().getPharmacistById( (int) session.getAttribute("Pharmacist") ).getBranchID();
@@ -82,6 +84,7 @@ public class HomeController  extends HttpServlet {
 			session.setAttribute("ProductTranslation" , new ProductImplement().getAllProducts() );
 			session.setAttribute("PrescriptionImage" , new PrescriptionImplement().getAllPrescription());
 			session.setAttribute("DeliveryReason" , new DeliveryImplement().getDelivery() );
+			//
 			//PharmacistImplement pharmacistImplement = new PharmacistImplement();
 			//session.setAttribute("PharmacistDetails", session.getAttribute("Pharmacist") );
 			//PharmacyImplement pharmacyImplement1 = new PharmacyImplement();

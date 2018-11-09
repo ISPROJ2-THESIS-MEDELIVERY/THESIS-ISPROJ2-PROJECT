@@ -113,9 +113,7 @@
 								<c:if test="${stock.productID == items.productID}">
 									<c:if test="${stock.pharmacyID == pharm.pharmacyID}">
 										<div class="item">
-											<a> <img class="center-block"
-												src="images/<c:out value="${items.productImage}"/>" />
-											</a>
+											<img class="center-block" src="images/<c:out value="${items.productImage}"/>" />
 										</div>
 									</c:if>
 								</c:if>
@@ -166,10 +164,24 @@
 								<c:if test="${stock.productID == items.productID}">
 									<c:if test="${stock.pharmacyID == pharm.pharmacyID}">
 										<div class="item">
-											<a href="http://www.google.com/"> <img
-												class="center-block"
-												src="images/<c:out value="${items.productImage}"/>" />
-											</a>
+											<img class="center-block" src="images/<c:out value="${items.productImage}"/>" />
+											<form action='ShopController' method='post'>
+												<select name='Quantity'>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+												</select>
+												<input class="center-block" type="hidden" name="ProductID" value="<c:out value="${items.productID}" />" readonly>
+												<input class="center-block" type="hidden" name="SelectedPharmacy" value="<c:out value="${pharm.pharmacyID}" />" readonly>
+												<input class="center-block" type="hidden" name="FromCarosel" value="FromCarosel" readonly />
+												<input class="center-block" type='submit' name='Action' value="Addtocart" style='display: on-hover' />
+											</form>
 										</div>
 									</c:if>
 								</c:if>

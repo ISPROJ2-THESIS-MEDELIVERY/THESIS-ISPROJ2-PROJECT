@@ -26,6 +26,7 @@ import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.CityListingImplement;
 import thesis.mvc.implement.CourierServiceImplement;
 import thesis.mvc.implement.CustomerImplement;
+import thesis.mvc.implement.LoginImplement;
 import thesis.mvc.implement.PharmacistImplement;
 import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.implement.ProductImplement;
@@ -34,6 +35,7 @@ import thesis.mvc.implement.StocksPriceImplement;
 import thesis.mvc.model.Branch;
 import thesis.mvc.model.CourierService;
 import thesis.mvc.model.Customer;
+import thesis.mvc.model.Login;
 import thesis.mvc.model.Pharmacist;
 import thesis.mvc.model.Pharmacy;
 import thesis.mvc.model.Product;
@@ -189,26 +191,36 @@ public class InformationController extends HttpServlet {
 		} else if (Action.equalsIgnoreCase("update")) {//Admin
 			//Parameter to Variable
 			//Get CID
+			Login login = new LoginImplement().getLoginByID((int)session.getAttribute("userID"));
+			String Username = request.getParameter("Username").equalsIgnoreCase("") ? request.getParameter( "Username" ) : login.getUsername();
+			String Password = request.getParameter("Password").equalsIgnoreCase("") ? request.getParameter( "Password" ) : login.getPassword();
 			
-			Customer customer = new CustomerImplement().getCustomerById((int)session.getAttribute("Customer"));
-			String CustName = request.getParameter( "UpdateName" ) != null ? request.getParameter( "UpdateName" ) : customer.getCustomerName();
-			String CustStrt = request.getParameter( "UpdateStrt" ) != null ? request.getParameter( "UpdateStrt" ) : customer.getCustomerStreet();
-			String CustBrgy = request.getParameter( "UpdateBrgy" ) != null ? request.getParameter( "UpdateBrgy" ) : customer.getCustomerBarangay();
-			int CustCity =    request.getParameter( "UpdateCity" ) != null ? Integer.parseInt(request.getParameter( "UpdateCity" )) : customer.getCityID();
-			String CustCell = request.getParameter( "UpdateCell" ) != null ? request.getParameter( "UpdateCell" ) : customer.getCustomerCellular();
-			String CustLand = request.getParameter( "UpdateLand" ) != null ? request.getParameter( "UpdateLand" ) : customer.getCustomerLandline();
-			String CustEmil = request.getParameter( "UpdateEmil" ) != null ? request.getParameter( "UpdateEmil" ) : customer.getEmail();
+			login.setUsername(Username);
+			login.setPassword(new EncryptionFunction().encrypt(Password));
+			new LoginImplement().updateLogin(login);
 			
-			//Initial Information
-			customer.setCustomerName(CustName);
-			customer.setCustomerStreet(CustStrt);
-			customer.setCustomerBarangay(CustBrgy);
-			customer.setCityID(CustCity);
-			customer.setCustomerCellular(CustCell);
-			customer.setCustomerLandline(CustLand);
-			customer.setEmail(CustEmil);
-			
-			new CustomerImplement().updateCustomer(customer);
+			if ((int) session.getAttribute("userAccess") == 1) {
+				Customer customer = new CustomerImplement().getCustomerById((int) session.getAttribute("Customer"));
+				String CustName = request.getParameter( "FullName" ).equalsIgnoreCase("") ? request.getParameter( "FullName" ) : customer.getCustomerName();
+				String CustStrt = request.getParameter( "CuStreet" ).equalsIgnoreCase("") ? request.getParameter( "CuStreet" ) : customer.getCustomerStreet();
+				String CustBrgy = request.getParameter( "CuBarngy" ).equalsIgnoreCase("") ? request.getParameter( "CuBarngy" ) : customer.getCustomerBarangay();
+				int CustCity =    request.getParameter( "CCityID" ).equalsIgnoreCase("") ? Integer.parseInt(request.getParameter( "CCityID" )) : customer.getCityID();
+				String CustCell = request.getParameter( "CuCellul" ).equalsIgnoreCase("") ? request.getParameter( "CuCellul" ) : customer.getCustomerCellular();
+				String CustLand = request.getParameter( "CuLandLi" ).equalsIgnoreCase("") ? request.getParameter( "CuLandLi" ) : customer.getCustomerLandline();
+				String CustEmil = request.getParameter( "CusEmail" ).equalsIgnoreCase("") ? request.getParameter( "CusEmail" ) : customer.getEmail();
+				
+				//Initial Information
+				customer.setCustomerName(CustName);
+				customer.setCustomerStreet(CustStrt);
+				customer.setCustomerBarangay(CustBrgy);
+				customer.setCityID(CustCity);
+				customer.setCustomerCellular(CustCell);
+				customer.setCustomerLandline(CustLand);
+				customer.setEmail(CustEmil);
+				
+				new CustomerImplement().updateCustomer(customer);
+				
+			}
 			
 		}
 		response.sendRedirect(request.getContextPath() + "/index.jsp");

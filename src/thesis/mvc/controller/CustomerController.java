@@ -15,9 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import thesis.mvc.implement.CityListingImplement;
 import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.DeliveryImplement;
 import thesis.mvc.implement.DriverImplement;
+import thesis.mvc.implement.LoginImplement;
 import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacyImplement;
@@ -126,6 +128,11 @@ public class CustomerController extends HttpServlet{
 			session.setAttribute("OrderHistory", new OrderImplement().getOrderByCustomerId((int)session.getAttribute("Customer")));
 			session.setAttribute("OrderDetailHistory", new OrderDetailImplement().getOrderDetail() );
 			response.sendRedirect(request.getContextPath() + "/CustomerReturn.jsp");
+		} else if (action.equalsIgnoreCase("UpdateCustomer")) {
+			session.setAttribute("CityList", new CityListingImplement().getAllCityListing() );
+			session.setAttribute("LoginInfo", new LoginImplement().getLoginByID((int)session.getAttribute("userID")));
+			session.setAttribute("CustomerInfo", new CustomerImplement().getCustomerById((int) session.getAttribute("Customer")));
+			response.sendRedirect(request.getContextPath() + "/UpdateUser.jsp");
 		}
 		
     }

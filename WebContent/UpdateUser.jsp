@@ -52,50 +52,42 @@
 
     
     
-	<form onSubmit="return formValidation();" action="RegistrationController" method="post" enctype="multipart/form-data">
+	<form onSubmit="return formValidation();" action="InformationController" method="post" enctype="multipart/form-data">
+		<input type="update" name="Actionthing" value="update" class="form-control"/>
         <h3>INPUT ONLY IF YOU WANT TO CHANGE SOMETHING</h3>
-	
+        <h3>LOGIN</h3>
         <div class="form-group">
-        	<input type="text" name="Username" pattern="[a-zA-Z0-9_-]{6,12}" autofocus required title="must be alphanumeric in 6-12 chars" required="required" placeholder="" class="form-control"/>
+        	<input type="text" name="Username" pattern="[a-zA-Z0-9_-]{6,12}" autofocus  title="must be alphanumeric in 6-12 chars" placeholder="<c:out value="${LoginInfo.username}"/>" class="form-control"/>
         </div>
 		<div class="form-group">
         	<input type="password" name="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
 			title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" 
-			required="" placeholder="Create New Password" id="Password" class="form-control"/>
+			 placeholder="<c:out value="${LoginInfo.password}"/>" id="Password" class="form-control"/>
         </div>
-        <div class="form-group">
-        	<input type="password" name="Password-repeat" required="required" placeholder="Re-enter New Password" id="Passwordrepeat" class="form-control"/>
-        </div>
-        <div id="message">
-  			<h3>Password must contain the following:</h3>
-  			<p id="letter" class="invalid">A <b>lowercase</b> letter</p>
-  			<p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
-  			<p id="number" class="invalid">A <b>number</b></p>
-  			<p id="length" class="invalid">Minimum <b>8 characters</b></p>
-		</div>
 		
         <c:if test="${userAccess == 1}">
-        UpdateName
-		UpdateStrt
-		UpdateBrgy
-		UpdateCity
-		UpdateCell
-		UpdateLand
-		UpdateEmil
-	        <div class="form-group"><input type="text" name="FullName" required="required" placeholder="FullName *" class="form-control"/></div>
-	        <div class="form-group"><input type="text" name="CuStreet" required="" placeholder="Street *" class="form-control"/></div>
-	        <div class="form-group"><input type="text" name="CuBarngy" required="" placeholder="Barangay *" class="form-control"/></div>
+        	<h3>CUSTOMER INFO</h3>
+        	<c:out value="${CustomerInfo.customerID}"/>
+	        <div class="form-group"><input type="text" name="FullName" placeholder="<c:out value="${CustomerInfo.customerName}"/>" class="form-control"/></div>
+	        <div class="form-group"><input type="text" name="CuStreet" placeholder="<c:out value="${CustomerInfo.customerStreet}"/>" class="form-control"/></div>
+	        <div class="form-group"><input type="text" name="CuBarngy" placeholder="<c:out value="${CustomerInfo.customerBarangay}"/>" class="form-control"/></div>
 	        <div class="form-group">
 	        	<select name="CCityID" class="form-control">
 				<c:forEach items="${CityList}" var="city">
-					<option value =<c:out value="${city.cityID}"/>><c:out value="${city.cityName}" /></option>
+					<c:if test="${CustomerInfo.cityID == city.cityID}">
+						<option value =<c:out value="${city.cityID}"/> selected><c:out value="${city.cityName}" /></option>
+					</c:if>
+					<c:if test="${CustomerInfo.cityID != city.cityID}">
+						<option value =<c:out value="${city.cityID}"/>><c:out value="${city.cityName}" /></option>
+					</c:if>
+					/c:if>
 				</c:forEach>
 			  </select>
 	        </div>
-	        <div class="form-group"><input id="phonenum" type="tel" pattern="^\d{7}$" title="must contain 7 digits" name="CuLandLi" required="" placeholder="Landline *" class="form-control"/></div>
-	        <div class="form-group"><input id="phonenum" type="tel" pattern="^(09|\+639)\d{9}$" title="must start with 09 or +63 and contain 11 digits" name="CuCellul" required="" placeholder="Cellphone No *" class="form-control"/></div>
-	        <div class="form-group"><input type="email" name="CusEmail" required="required" placeholder="Email *" class="form-control"/></div>
-	        <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Register</button></div>
+	        <div class="form-group"><input id="phonenum" type="tel" pattern="^\d{7}$" title="must contain 7 digits" name="CuLandLi"0 placeholder="Landline *" class="form-control"/></div>
+	        <div class="form-group"><input id="phonenum" type="tel" pattern="^(09|\+639)\d{9}$" title="must start with 09 or +63 and contain 11 digits" name="CuCellul" placeholder="Cellphone No *" class="form-control"/></div>
+	        <div class="form-group"><input type="email" name="CusEmail" placeholder="Email *" class="form-control"/></div>
+	        <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Update</button></div>
         </c:if>
         <c:if test="${userAccess == 2}">
         </c:if>

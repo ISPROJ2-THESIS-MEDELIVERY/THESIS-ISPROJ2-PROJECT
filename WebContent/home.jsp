@@ -368,7 +368,8 @@
 						<td><input type="text" name="driverName" class="form-control"/></td>
 						<td><input type="text" name="driverAddr" class="form-control"/></td>
 						<td><input type="text" name="driverCont" class="form-control"/></td>
-						<td><input type="submit" name="Action" value="addDriver"/></td>
+						<td><div class="text-center"><button class="btn btn-success btn-md" type="submit" name="Action" value="addDriver">Add to Cart</button></div></td>
+						<!-- <td><input type="submit" name="Action" value="addDriver"/></td> -->
 					</tr>
 				</form>
 			</tbody>
@@ -443,7 +444,7 @@
 						<td><c:out value="${item.productForm}" /></td>
 						<td><c:out value="${item.productPackaging}" /></td>
 						<td><c:out value="${item.productDescription}" /></td>
-						<td><c:out value="${item.priceSet}" /></td>
+						<td>&#8369;<c:out value="${item.priceSet}" /></td>
 					</tr>
 			</c:forEach>
 		</tbody>
@@ -527,13 +528,15 @@
 										<form action="ApprovalController" method="post">
 											<input type="hidden" Name="action" value="OrderReject" />
 											<input type="hidden" Name="orderID" value="<c:out value="${order.orderID}"/>" />
-											<input type="submit" value="Reject">
+											<div class="text-center"><button class="btn btn-danger btn-md" type="submit" value="Reject">Reject</button></div>
+											<!-- <input type="submit" value="Reject"> -->
 										</form>
-
+										<br>
 										<form action="ApprovalController" method="post">
 											<input type="hidden" Name="action" value="OrderApprove" />
 											<input type="hidden" Name="orderID" value="<c:out value="${order.orderID}"/>" />
-											<input type="submit" value="Approve">
+											<div class="text-center"><button class="btn btn-success btn-md" type="submit" value="Approve">Approve</button></div>
+											<!-- <input type="submit" value="Approve"> -->
 										</form>
 									</td>
 								</tr>
@@ -624,12 +627,15 @@
 									<form action="ApprovalController" method="post">
 										<input type="hidden" Name="action" value="OrderReject" />
 										<input type="hidden" Name="orderID" value="<c:out value="${order.orderID}"/>" />
-										<input type="submit" value="Reject">
+										<div class="text-center"><button class="btn btn-danger btn-md" type="submit" value="Reject">Reject</button></div>
+										<!-- <input type="submit" value="Reject"> -->
 									</form>
+									<br>
 									<form action="ApprovalController" method="post">
 										<input type="hidden" Name="action" value="OrderApprove" />
 										<input type="hidden" Name="orderID" value="<c:out value="${order.orderID}"/>" />
-										<input type="submit" value="Approve">
+										<div class="text-center"><button class="btn btn-success btn-md" type="submit" value="Approve">Approve</button></div>
+										<!-- <input type="submit" value="Approve"> -->
 									</form>
 								</td>
 								<td>
@@ -637,8 +643,9 @@
 										<input type="hidden" Name="action"  value="OrderInvalidate" />
 										<input type="hidden" Name="orderID" value="<c:out value="${order.orderID}"/>" />
 										REASON:
-										<input type="text"   Name="Reason" required/>
-										<input type="submit" value="Invalidate">
+										<input type="text"   Name="Reason" class="form-control" required/>
+										<div class="text-center"><button class="btn btn-success btn-md" type="submit" value="Invalidate">Invalidate</button></div>
+										<!-- <input type="submit" value="Invalidate"> -->
 									</form>
 								</td>
 							</tr>
@@ -731,12 +738,15 @@
 										<form action="ApprovalController" method="post">
 											<input type="hidden" Name="action" value="ReturnReject" />
 											<input type="hidden" Name="orderID" value="<c:out value="${order.orderID}"/>" />
-											<input type="submit" value="Reject">
+											<div class="text-center"><button class="btn btn-danger btn-md" type="submit" value="Reject">Reject</button></div>
+											<!-- <input type="submit" value="Reject"> -->
 										</form>
+										<br>
 										<form action="ApprovalController" method="post">
 											<input type="hidden" Name="action" value="ReturnApprove" />
 											<input type="hidden" Name="orderID" value="<c:out value="${order.orderID}"/>" />
-											<input type="submit" value="Approve">
+											<div class="text-center"><button class="btn btn-success btn-md" type="submit" value="Approve">Approve</button></div>
+											<!-- <input type="submit" value="Approve"> -->
 										</form>
 									</td>
 								</tr>
@@ -805,8 +815,11 @@
 							<td>
 								<form action="InformationController" method="post">
 									<input type="hidden" Name="customerID" value="<c:out value="${customer.customerID}" />" />
-									<input type="submit" Name="Actionthing" value="SSIDApprove" />
-									<input type="submit" Name="Actionthing" value="SSIDReject" />
+									<div class="text-center"><button class="btn btn-success btn-md" type="submit" Name="Actionthing" value="SSIDApprove">SSIDApprove</button></div>
+									<!-- <input type="submit" Name="Actionthing" value="SSIDApprove" /> -->
+									<br>
+									<div class="text-center"><button class="btn btn-danger btn-md" type="submit" Name="Actionthing" value="SSIDReject">SSIDReject</button></div>
+									<!-- <input type="submit" Name="Actionthing" value="SSIDReject" /> -->
 								</form>
 							</td>
 						</c:if>

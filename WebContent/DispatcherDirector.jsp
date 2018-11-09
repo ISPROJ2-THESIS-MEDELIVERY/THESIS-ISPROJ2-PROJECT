@@ -128,7 +128,7 @@
 							<form action='DispatcherController' method='post'>
 								<input type="hidden" name="OrderID" value="${order.orderID}"/>
 								Branch:<br>
-								<select name="BranchID">
+								<select name="BranchID" class="form-control">
 									<c:forEach items="${ListBranches}" var="branch">
 										<c:if test="${branch.pharmacyID == order.pharmacyID}">
 											<option value="<c:out value="${branch.branchID}" />"><c:out value="${branch.branchOwner}" /></option>
@@ -136,7 +136,7 @@
 									</c:forEach>
 								</select><br>
 								Delivery Person:<br>
-								<select name="DriverID">
+								<select name="DriverID" class="form-control">
 									<c:forEach items="${DriverList}" var="driver">
 										<c:if test="${CourierService == driver.courierserviceID}">
 											<option value="<c:out value="${driver.driverID}" />"><c:out value="${driver.driverName}" /></option>
@@ -144,8 +144,9 @@
 									</c:forEach>
 								</select><br>
 								Plate Number: <br>
-									<input type="text" name="PlateNumber"/><br>
-								<input type="submit" name="action" value="assignOrder" placeholder="Set Order">
+									<input type="text" name="PlateNumber" class="form-control"/><br>
+									<div class="text-center"><button class="btn btn-success btn-md" type="submit" name="action" value="assignOrder">Assign Order</button></div>
+								<!-- <input type="submit" name="action" value="assignOrder" placeholder="Set Order"> -->
 							</form>
 						</td>
 					</tr>
@@ -222,7 +223,8 @@
 						<td>
 							<form action='DispatcherController' method='post'>
 								<input type="hidden" name="OrderID" value="${order.orderID}"/>
-								<input type="submit" name="action" value="confirmOrder" placeholder="Order Delivered">
+								<div class="text-center"><button class="btn btn-success btn-md" type="submit" name="action" value="confirmOrder">Confirm Order</button></div>
+								<!-- <input type="submit" name="action" value="confirmOrder" placeholder="Order Delivered"> -->
 							</form>
 						</td>
 					</tr>
@@ -309,7 +311,8 @@
 						<td>
 							<form action='DispatcherController' method='post'>
 								<input type="hidden" name="OrderID" value="${order.orderID}"/>
-								<input type="submit" name="action" value="returnedOrder" placeholder="Return Order">
+								<div class="text-center"><button class="btn btn-success btn-md" type="submit" name="action" value="returnedOrder">Return Order</button></div>
+								<!-- <input type="submit" name="action" value="returnedOrder" placeholder="Return Order"> -->
 							</form>
 						</td>
 					</tr>

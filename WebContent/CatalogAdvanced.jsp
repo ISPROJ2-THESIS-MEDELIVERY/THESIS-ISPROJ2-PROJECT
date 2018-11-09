@@ -151,7 +151,8 @@
 						</td>
 						<td>
 							<input type="hidden" name="ProductID" value="<c:out value="${item.productID}" />" readonly>
-							<input type='submit' name='Action' value="Addtocart" style='display: on-hover' />
+							<div class="text-center"><button class="btn btn-success btn-md" type="submit" name="Action" value="Addtocart">Add to Cart</button></div>
+							<!-- <input type='submit' name='Action' value="Addtocart" style='display: on-hover' /> -->
 						</td>
 						</form>
 					</tr>

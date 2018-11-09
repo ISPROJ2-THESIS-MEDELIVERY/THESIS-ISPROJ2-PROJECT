@@ -313,6 +313,7 @@
       						<p class="list-group-item-text">User ID: <c:out value="${userID}" /></p>
       						<p class="list-group-item-text">Username: <c:out value="${username}" /></p>
       						<p class="list-group-item-text">User Type: <c:out value="${userAccess}" /></p>
+      						<a href="UpdateUser.jsp">Update User Details</a>
     					</a>
     				</div>
     				<a href="DispatcherController?Action=DispatchOrder" class="btn btn-info" role="button">Order Dispatch</a><br>

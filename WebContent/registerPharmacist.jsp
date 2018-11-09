@@ -84,7 +84,7 @@
         	<input type="hidden" name="SecretCode" value="RjRILW7K7Xz96hD" class="form-control"/>
         </div>
         <div class="form-group">
-            <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
+            <button class="btn btn-primary btn-block" type="submit">Register Pharmacist</button>
         </div>
         <a class="already" href="index.jsp">Back</a> 
 	</form>

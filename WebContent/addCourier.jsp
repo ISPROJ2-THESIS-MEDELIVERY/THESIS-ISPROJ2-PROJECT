@@ -85,7 +85,7 @@
         	<input type="hidden" name="Actionthing" value="addCourier" class="form-control"/>
         </div>
         <div class="form-group">
-            <button class="btn btn-primary btn-block" type="submit">Add Courier</button>
+            <button class="btn btn-primary btn-block" type="submit">Add Courier Service</button>
         </div>
         <a class="already" href="index.jsp">Back</a>
 	</form>

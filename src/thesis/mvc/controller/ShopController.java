@@ -167,18 +167,18 @@ public class ShopController extends HttpServlet {
 				session.removeAttribute("OrderDetails");
 				session.removeAttribute("CartList");
 				response.sendRedirect(request.getContextPath() + "/index.jsp");
-			} else if (session.getAttribute("CatalogType") == "Regular" || request.getParameter( "FromCarosel" ).equalsIgnoreCase("FromCarosel") ){
-				session.setAttribute("CatalogType", "Regular");
-				session.setAttribute("productList", new SearchAction().GeneralListing(PID) );
-				session.setAttribute("SelectedPharmacy", new PharmacyImplement().getPharmacyById(PID) );
-				session.setAttribute("SelectedPharmacyID", PID);
-				response.sendRedirect(request.getContextPath() + "/CatalogBasic.jsp");
 			} else if (session.getAttribute("CatalogType") == "Prescription") {
 				session.setAttribute("CatalogType", "Prescription");
 				session.setAttribute("productList", new SearchAction().GeneralListing(PID) );
 				session.setAttribute("SelectedPharmacy", new PharmacyImplement().getPharmacyById(PID) );
 				session.setAttribute("SelectedPharmacyID", PID);
 				response.sendRedirect(request.getContextPath() + "/CatalogAdvanced.jsp");
+			} else if (session.getAttribute("CatalogType") == "Regular" || request.getParameter( "FromCarosel" ).equalsIgnoreCase("FromCarosel") ){
+				session.setAttribute("CatalogType", "Regular");
+				session.setAttribute("productList", new SearchAction().GeneralListing(PID) );
+				session.setAttribute("SelectedPharmacy", new PharmacyImplement().getPharmacyById(PID) );
+				session.setAttribute("SelectedPharmacyID", PID);
+				response.sendRedirect(request.getContextPath() + "/CatalogBasic.jsp");
 			}
 		} else if (action.equalsIgnoreCase("CheckoutOrder")) {
 			Order order = (Order) session.getAttribute("Order");

@@ -68,14 +68,12 @@ public class ShopAction {
 		*/		
 
 		//Get the city of the customer & senior status
-		int CityCustomer = 0;
 		boolean SeniorStatus = false;
 		String CustoAddress = "Error";
 		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM customer WHERE CustomerID = ?")) {
             stmt.setInt(1, order.getCustomerID());
             try(ResultSet rs = stmt.executeQuery()) {
 				if (rs.next()) {
-	            	CityCustomer = rs.getInt("CityID");
 					SeniorStatus = rs.getBoolean("IsSeniorCitizen");
 					CustoAddress = rs.getString("CustomerStreet")
 							+ ", " + rs.getString("CustomerBarangay")
@@ -109,6 +107,11 @@ public class ShopAction {
 			actualcost += orderDetail.getTotalCost();
 		}
 		actualcost += DeliveryCost;
+		
+		if (order.getSeniorDiscount() == true) {
+			actualcost *= 0.80;
+		}
+		
 		order.setActualCost( actualcost );
 		
 		//Add to order
@@ -134,6 +137,9 @@ public class ShopAction {
 	        totalAmount1.put("currency", "PHP");
 	        totalAmount1.put("value",  order.getActualCost());
 	    		JSONObject details1 = new JSONObject();
+	    		if (order.getSeniorDiscount() == true) {
+		    		details1.put("discount", order.getActualCost() * 0.25);
+	    		}
 	    		details1.put("serviceCharge", 25.0);
 	    		details1.put("shippingFee", 25.0);
 	    		details1.put("tax", order.getActualCost() * 0.05);

@@ -235,7 +235,7 @@ public class TestController extends HttpServlet {
 	        request.getRequestDispatcher("/test2.jsp").forward(request, response);
 		*/
     	EncryptionFunction encryptionFunction = new EncryptionFunction();
-        System.out.println(encryptionFunction.encrypt("Pharmacy1.jpg"));
+        System.out.println(encryptionFunction.decrypt("joOaU42fMTvGlrxW9Hm1tQ=="));
         System.out.println(encryptionFunction.encrypt("Prescription1540984857356.png"));
         
         Calendar calendar = Calendar.getInstance();

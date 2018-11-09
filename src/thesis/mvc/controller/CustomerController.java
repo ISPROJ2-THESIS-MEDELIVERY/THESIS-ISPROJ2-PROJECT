@@ -127,7 +127,6 @@ public class CustomerController extends HttpServlet{
 			session.setAttribute("OrderDetailHistory", new OrderDetailImplement().getOrderDetail() );
 			response.sendRedirect(request.getContextPath() + "/CustomerReturn.jsp");
 		}
-		response.sendRedirect(request.getContextPath() + "/index.jsp");
 		
     }
 

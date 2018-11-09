@@ -26,7 +26,7 @@ public class LoginAction {
     public int loginUser(String Username, String Password) {
         
     	try(PreparedStatement stmt = conn.prepareStatement(""
-    			+ "SELECT UserID FROM login WHERE Username = ? AND Password = ?")) {
+    			+ "SELECT UserID, LoginStatus FROM login WHERE Username = ? AND Password = ?")) {
 
             stmt.setString(1, Username);
             stmt.setString(2, Password);
@@ -49,7 +49,12 @@ public class LoginAction {
             		login = loginImplement.getLoginByID(rs.getInt(1));
             		login.setLoginStatus("Logged In");
             		
-                	return rs.getInt(1);
+            		if (rs.getString(2).equalsIgnoreCase("Just Registered")) {
+            			return -1;
+            		}
+            		else {
+            			return rs.getInt(1);
+            		}
                 }  else {
                     return 0;
                 }

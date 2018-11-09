@@ -186,6 +186,30 @@ public class InformationController extends HttpServlet {
 			Customer customer = new CustomerImplement().getCustomerById(CID);
 			customer.setSeniorCitizenID(null);;
 			new CustomerImplement().updateCustomer(customer);
+		} else if (Action.equalsIgnoreCase("update")) {//Admin
+			//Parameter to Variable
+			//Get CID
+			
+			Customer customer = new CustomerImplement().getCustomerById((int)session.getAttribute("Customer"));
+			String CustName = request.getParameter( "UpdateName" ) != null ? request.getParameter( "UpdateName" ) : customer.getCustomerName();
+			String CustStrt = request.getParameter( "UpdateStrt" ) != null ? request.getParameter( "UpdateStrt" ) : customer.getCustomerStreet();
+			String CustBrgy = request.getParameter( "UpdateBrgy" ) != null ? request.getParameter( "UpdateBrgy" ) : customer.getCustomerBarangay();
+			int CustCity =    request.getParameter( "UpdateCity" ) != null ? Integer.parseInt(request.getParameter( "UpdateCity" )) : customer.getCityID();
+			String CustCell = request.getParameter( "UpdateCell" ) != null ? request.getParameter( "UpdateCell" ) : customer.getCustomerCellular();
+			String CustLand = request.getParameter( "UpdateLand" ) != null ? request.getParameter( "UpdateLand" ) : customer.getCustomerLandline();
+			String CustEmil = request.getParameter( "UpdateEmil" ) != null ? request.getParameter( "UpdateEmil" ) : customer.getEmail();
+			
+			//Initial Information
+			customer.setCustomerName(CustName);
+			customer.setCustomerStreet(CustStrt);
+			customer.setCustomerBarangay(CustBrgy);
+			customer.setCityID(CustCity);
+			customer.setCustomerCellular(CustCell);
+			customer.setCustomerLandline(CustLand);
+			customer.setEmail(CustEmil);
+			
+			new CustomerImplement().updateCustomer(customer);
+			
 		}
 		response.sendRedirect(request.getContextPath() + "/index.jsp");
 	}

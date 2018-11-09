@@ -51,50 +51,61 @@
     </div>
 
     
-    <div class="login-clean">
-    <div id="container">
-	<center><img alt="" src="assets/img/medlogopill.png"></center>    
-	</div> 
-	<br>
-	<form method="post" action="ProductController" encType="multipart/form-data">
-	<h2>Add a New Product</h2><br>
-	<div class="container">
-	 <div class="row">
-	  <div class="col-md-6">
-		<div class="form-group">
-        	<input type="hidden"/>
-        </div>
-        <h2 class="sr-only">Product to add: </h2>
-        <div class="form-group"><input type="text" name="ProductName" required="required" placeholder="Product Name" class="form-control"/></div>
-        <div class="form-group"><input type="text" name="GenericName" required="required" placeholder="Generic Name" class="form-control"/></div>
-        <div class="form-group">
-        	<input type="text" name="RegistrNumn" required="required" placeholder="Registration Number" class="form-control"/>
-        </div>
-        <div class="form-group">
-        	<input type="text" name="ProductStrg" required="required" placeholder="Product Strength" class="form-control"/>
-        </div>
-        <div class="form-group">
-        	<input type="text" name="ProductForm" required="required" placeholder="Product Form" class="form-control"/>
-        </div>
-        <div class="form-group">
-        	<input type="text" name="ProductPack" required="required" placeholder="Product Packaging" class="form-control"/>
-        </div>
-        <div class="form-group">
-        	<input type="text" name="ProductManu" required="required" placeholder="Product Manufacturer" class="form-control"/>
-        </div>
-      </div>
-        <div class="input-group">
-        <span class="input-group-text">&#8369;</span>
-        	<input type="number" min="0" step="0.01" name="Price" required="required" placeholder="Price" class="form-control"/>
-        </div>
-        <div class="form-group">
-            <button class="btn btn-primary btn-block" type="submit" name="Action" value="addProduct">Add New Product</button>
-        </div>
-        </div>
-      </div>
-      </div>
-	</form>
+    
+	<form onSubmit="return formValidation();" action="RegistrationController" method="post" enctype="multipart/form-data">
+        <h3>INPUT ONLY IF YOU WANT TO CHANGE SOMETHING</h3>
 	
+        <div class="form-group">
+        	<input type="text" name="Username" pattern="[a-zA-Z0-9_-]{6,12}" autofocus required title="must be alphanumeric in 6-12 chars" required="required" placeholder="" class="form-control"/>
+        </div>
+		<div class="form-group">
+        	<input type="password" name="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+			title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" 
+			required="" placeholder="Create New Password" id="Password" class="form-control"/>
+        </div>
+        <div class="form-group">
+        	<input type="password" name="Password-repeat" required="required" placeholder="Re-enter New Password" id="Passwordrepeat" class="form-control"/>
+        </div>
+        <div id="message">
+  			<h3>Password must contain the following:</h3>
+  			<p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+  			<p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+  			<p id="number" class="invalid">A <b>number</b></p>
+  			<p id="length" class="invalid">Minimum <b>8 characters</b></p>
+		</div>
+		
+        <c:if test="${userAccess == 1}">
+        UpdateName
+		UpdateStrt
+		UpdateBrgy
+		UpdateCity
+		UpdateCell
+		UpdateLand
+		UpdateEmil
+	        <div class="form-group"><input type="text" name="FullName" required="required" placeholder="FullName *" class="form-control"/></div>
+	        <div class="form-group"><input type="text" name="CuStreet" required="" placeholder="Street *" class="form-control"/></div>
+	        <div class="form-group"><input type="text" name="CuBarngy" required="" placeholder="Barangay *" class="form-control"/></div>
+	        <div class="form-group">
+	        	<select name="CCityID" class="form-control">
+				<c:forEach items="${CityList}" var="city">
+					<option value =<c:out value="${city.cityID}"/>><c:out value="${city.cityName}" /></option>
+				</c:forEach>
+			  </select>
+	        </div>
+	        <div class="form-group"><input id="phonenum" type="tel" pattern="^\d{7}$" title="must contain 7 digits" name="CuLandLi" required="" placeholder="Landline *" class="form-control"/></div>
+	        <div class="form-group"><input id="phonenum" type="tel" pattern="^(09|\+639)\d{9}$" title="must start with 09 or +63 and contain 11 digits" name="CuCellul" required="" placeholder="Cellphone No *" class="form-control"/></div>
+	        <div class="form-group"><input type="email" name="CusEmail" required="required" placeholder="Email *" class="form-control"/></div>
+	        <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Register</button></div>
+        </c:if>
+        <c:if test="${userAccess == 2}">
+        </c:if>
+        <c:if test="${userAccess == 3}">
+        </c:if>
+        <c:if test="${userAccess == 4}">
+        </c:if>
+        
+	</form>
+    <a class="already" href="index.jsp">Back</a> 
 	</div>
 <div class="footer-dark">
     <footer>

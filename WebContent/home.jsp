@@ -856,7 +856,13 @@
 						<td><c:out value="${dispatcher.contactNumber}" /></td>
 						<td><c:out value="${dispatcher.address}" /></td>
 						<td><c:out value="${dispatcher.birthdate}" /></td>
-						<td></td>
+						<td>
+							<c:forEach items="${CourierList}" var="courier">
+								<c:if test="${courier.courierServiceID == dispatcher.courierServiceID}">
+									<c:out value="${courier.companyName}" />
+								</c:if>
+							</c:forEach>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -888,7 +894,15 @@
 								value="${pharmacist.lastName}" /></td>
 						<td><c:out value="${pharmacist.PRCNo}" /></td>
 						<td><c:out value="${pharmacist.position}" /></td>
-						<td></td>
+						<td>
+						<c:forEach items="${PharmcyList}" var="pharmacy">
+							<c:forEach items="${BranchList}" var="branch">
+								<c:if test="${pharmacy.pharmacyID == branch.pharmacyID && pharmacist.branchID == branch.branchID}">
+									<c:out value="${pharmacy.pharmacyName}" />
+								</c:if>
+							</c:forEach>
+						</c:forEach>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -1013,7 +1027,13 @@
 						<td><c:out value="${branch.branchLandline}" /></td>
 						<td><c:out value="${branch.branchCellular}" /></td>
 						<td><c:out value="${branch.branchOwner}" /></td>
-						<td><c:out value="${branch.pharmacyID}" /></td>
+						<td>
+							<c:forEach items="${PharmcyList}" var="pharmacy">
+								<c:if test="${pharmacy.pharmacyID == branch.pharmacyID}">
+									<c:out value="${pharmacy.pharmacyName}" />
+								</c:if>
+							</c:forEach>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

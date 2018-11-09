@@ -205,7 +205,7 @@ public class ShopController extends HttpServlet {
 			} else {
 				String CustomerEmail = customerImplement.getCustomerByUserId(userID).getEmail();
 				Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-				String redirect = new ShopAction().purchaseOrder(order, OrderDetails, "https://isproj2a.benilde.edu.ph/" + request.getContextPath());// request.getContextPath()
+				String redirect = new ShopAction().purchaseOrder(order, OrderDetails, "https://isproj2a.benilde.edu.ph" + request.getContextPath() + "/index.jsp");// request.getContextPath()
 				sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, sendEmail.OrderEmail(order));
 				session.setAttribute("CartlistReciept", cartList);
 				session.setAttribute("orderReciept", order);
@@ -289,7 +289,7 @@ public class ShopController extends HttpServlet {
 			} else {
 				String CustomerEmail = customerImplement.getCustomerByUserId(userID).getEmail();
 				Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-				String redirect = new ShopAction().purchaseOrder(order, OrderDetails, "https://isproj2a.benilde.edu.ph/" + request.getContextPath());// request.getContextPath()
+				String redirect = new ShopAction().purchaseOrder(order, OrderDetails, "https://isproj2a.benilde.edu.ph" + request.getContextPath() + "/index.jsp");// request.getContextPath()
 				sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, sendEmail.OrderEmail(order));
 				session.setAttribute("CartlistReciept", cartList);
 				session.setAttribute("orderReciept", order);

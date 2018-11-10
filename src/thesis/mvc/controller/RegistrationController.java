@@ -161,7 +161,7 @@ public class RegistrationController extends HttpServlet {
 				SendEmail sendEmail = new SendEmail();
 				
 				//String confirmLink = "http://localhost:8080/" + request.getContextPath() + "/RegistrationController?Action=ConfirmUser&UserID=" + new EncryptionFunction().encrypt(Integer.toString(ID));
-				String confirmLink = "https://isproj2a.benilde.edu.ph/Medelivery/" + request.getContextPath() + "/RegistrationController?Action=ConfirmUser&UserID=" + new EncryptionFunction().encrypt(Integer.toString(ID));
+				String confirmLink = "https://isproj2a.benilde.edu.ph" + request.getContextPath() + "/RegistrationController?Action=ConfirmUser&UserID=" + new EncryptionFunction().encrypt(Integer.toString(ID));
 				sendEmail.send(customer.getEmail(), "Medilivery Account Confirmation",
 						"Dear " + customerFName + "," +  
 						"<p>Thank you for creating your Medelivery Account.<br></p>" + 

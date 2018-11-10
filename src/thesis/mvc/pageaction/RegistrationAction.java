@@ -127,7 +127,7 @@ public class RegistrationAction {
     	
     	//Insert into Login table
     	LoginImplement LoginImp = new LoginImplement();
-    	login.setLoginStatus("Just Registered");
+    	login.setLoginStatus("Normal");
     	login.setUsertypeID(2);
     	try {
     		LoginImp.addLogin(login);
@@ -196,7 +196,7 @@ public class RegistrationAction {
     	
     	//Insert into Login table
     	LoginImplement LoginImp = new LoginImplement();
-    	login.setLoginStatus("Just Registered");
+    	login.setLoginStatus("Normal");
     	login.setUsertypeID(3);
     	try {
     		LoginImp.addLogin(login);
@@ -277,7 +277,7 @@ public class RegistrationAction {
     	
     	//Insert into Login table
     	LoginImplement LoginImp = new LoginImplement();
-    	login.setLoginStatus("Just Registered");
+    	login.setLoginStatus("Normal");
     	login.setUsertypeID(4);
     	try {
     		LoginImp.addLogin(login);

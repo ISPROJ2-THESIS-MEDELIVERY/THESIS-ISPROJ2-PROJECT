@@ -389,4 +389,29 @@ public class ShopAction {
 		}
 	}
 
+	public boolean CheckOrder(Order order) {	        
+	        try {
+				URL url = new URL("https://pg-sandbox.paymaya.com/checkout/v1/checkouts/" + order.getPaymayaID());
+				HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+				conn.setDoOutput(true);
+				conn.setRequestMethod("GET");
+				conn.setRequestProperty("Authorization", "Basic c2stalpLMGk4eVozMHBoOHhRU1dsTnNGOUFNV2ZHT2QzQmF4SmpRMkNEQ0NaYjo=");
+				conn.setRequestProperty("Content-Type", "application/json");
+				
+				if (conn.getResponseCode() != 200) {
+					System.out.println("FAILED!"+ conn.getResponseCode());
+					return false;
+				} else {
+					System.out.println("SUCCESS!" + conn.getResponseCode());
+					return true;
+				}
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(e);
+				return false;
+			}
+	}
+
 }

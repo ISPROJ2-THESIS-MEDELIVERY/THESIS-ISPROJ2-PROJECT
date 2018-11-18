@@ -9,7 +9,6 @@
 <body>
 	<!-- CatalogPrescription -->
 	<form method="post" action="TestController" encType="multipart/form-data">
-		<input type="file" name="file" value="Upload Prescription"/>
 		<input type="submit" name="teststring" value="TestJSON"/>
 	</form>
 </body>

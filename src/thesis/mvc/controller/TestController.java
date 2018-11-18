@@ -6,7 +6,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,6 +28,9 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import thesis.mvc.implement.OrderImplement;
+import thesis.mvc.pageaction.ShopAction;
+import thesis.mvc.utility.DBUtility;
 import thesis.mvc.utility.EncryptionFunction;
 
 @WebServlet("/TestController")
@@ -33,9 +39,23 @@ public class TestController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final String UPLOAD_DIRECTORY = "/C:/ISPROJ2/Medelivery/webapp/images/";
 	
+	private Connection conn;
+	private static final String UPLOAD_DIR = "images";
+	DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+	public TestController() {
+		conn = DBUtility.getConnection();
+	}
+	
     protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+    	int x = 22;
+    	//for (int x = 20; x <= 29; x++ ) {
+            System.out.println(x +  ": " + new OrderImplement().getOrderById(x).getDateOrdered());
+            System.out.println(new ShopAction().CheckOrder(new OrderImplement().getOrderById(x)));
+    	//}
         //process only if its multipart content
-        if(ServletFileUpload.isMultipartContent(request)){
+    	/*
+    	if(ServletFileUpload.isMultipartContent(request)){
             try {
 				//List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest((RequestContext) request);
 				//for(FileItem item : multiparts){
@@ -69,10 +89,10 @@ public class TestController extends HttpServlet {
         }else{
             request.setAttribute("message", "Sorry this Servlet only handles file upload request");
         }
+        */
         request.getRequestDispatcher("/test2.jsp").forward(request, response);
     }
     
-    @SuppressWarnings("unchecked")
 	public static void main (String args[]) {
     	/*
     	JSONObject JSONReciept = new JSONObject();
@@ -233,7 +253,7 @@ public class TestController extends HttpServlet {
 	            request.setAttribute("message", "Sorry this Servlet only handles file upload request");
 	        }
 	        request.getRequestDispatcher("/test2.jsp").forward(request, response);
-		*/
+		
     	EncryptionFunction encryptionFunction = new EncryptionFunction();
         System.out.println(encryptionFunction.decrypt("joOaU42fMTvGlrxW9Hm1tQ=="));
         System.out.println(encryptionFunction.encrypt("27"));
@@ -248,5 +268,6 @@ public class TestController extends HttpServlet {
         //Timestamp timestamp2 = timestamp1;
         System.out.println(timestamp1);
         System.out.println(timestamp2);
+        */
     }
 }

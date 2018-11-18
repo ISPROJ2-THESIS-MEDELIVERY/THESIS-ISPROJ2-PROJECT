@@ -94,7 +94,8 @@
     		
     		
     		<form action='ShopController' method='post'>
-				<center><input type='submit' name='Action' value="CheckoutOrder" style='display: on-hover' /></center>
+    			<center><button class="btn btn-success btn-md" type="submit" name="Action" value="CheckoutOrder">Checkout Order</button></center>
+				<%-- <center><input type='submit' name='Action' value="CheckoutOrder" style='display: on-hover' /></center> --%>
 			</form>
 			<hr>
 	</c:if>

@@ -90,14 +90,18 @@
 	            </tbody>
     		</table>
 			
+			<div class="container">
 		    <h1>Prescription</h1>
 			<form method="post" action="ShopController" encType="multipart/form-data">
 				<div class="form-group">
 		        	<input type="file" name="file" value="Upload Prescription" class="form-control" required />
 		        	<input type="hidden" name="PharmaID" value="<c:out value="${SelectedPharmacy.pharmacyID}"/>" class="form-control"/>
-					<center><input type='submit' name='Action' value="CheckoutOrderPrescription" style='display: on-hover' /></center>
+		        	<br>
+		        	<center><button class="btn btn-success btn-md" type="submit" name="Action" value="CheckoutOrderPrescription">Checkout Order</button></center>
+					<%-- <center><input type='submit' name='Action' value="CheckoutOrderPrescription" style='display: on-hover' /></center> --%>
 		        </div>
 			</form>
+			</div>
 	</c:if>
 	<c:if test="${CartList == null}">
 		<h2>NOTHING ORDERED YET</h2>

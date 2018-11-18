@@ -45,7 +45,7 @@ public class CustomerController extends HttpServlet{
 	public CustomerController() {
 		conn = DBUtility.getConnection();
 	}
-	//private final String UPLOAD_DIRECTORY = "../../../../../../../../THESIS-ISPROJ2-PROJECT/WebContent/images/";
+	//private final String UPLOAD_DIRECTORY = "C:/xampp/tomcat/webapps/Medelivery/images/";
 	private final String UPLOAD_DIRECTORY = "/C:/ISPROJ2/Medelivery/webapp/images/";
 	
 	private static final long serialVersionUID = 1L;

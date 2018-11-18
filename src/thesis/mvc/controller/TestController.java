@@ -236,7 +236,7 @@ public class TestController extends HttpServlet {
 		*/
     	EncryptionFunction encryptionFunction = new EncryptionFunction();
         System.out.println(encryptionFunction.decrypt("joOaU42fMTvGlrxW9Hm1tQ=="));
-        System.out.println(encryptionFunction.encrypt("Prescription1540984857356.png"));
+        System.out.println(encryptionFunction.encrypt("27"));
         
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());

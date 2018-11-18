@@ -67,9 +67,8 @@ public class ApprovalController extends HttpServlet{
 				prescription.setPermissionStatus("REJECTED");
 				prescription.setRemark(request.getParameter("Reason"));
 				new PrescriptionImplement().updatePrescription(prescription);
-				new OrderImplement().updateOrder( order );
 				Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-				new SendEmail().send(new CustomerImplement().getCustomerById(order.getCustomerID()).getCustomerName(), "Transaction rejected on " + CurrentDate, new SendEmail().OrderEmail(order));
+				new SendEmail().send(new CustomerImplement().getCustomerById(order.getCustomerID()).getEmail(), "Transaction rejected on " + CurrentDate, new SendEmail().OrderEmail(order));
 			} else {
 				session.setAttribute( "Message" , "Order can't be cancelled for some reason." );
 			}

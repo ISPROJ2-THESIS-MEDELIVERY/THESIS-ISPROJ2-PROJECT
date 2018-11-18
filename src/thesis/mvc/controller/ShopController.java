@@ -51,7 +51,7 @@ public class ShopController extends HttpServlet {
 	}
 	
 	private static final long serialVersionUID = 1L;
-	//private final String UPLOAD_DIRECTORY = "../../../../../../../../THESIS-ISPROJ2-PROJECT/WebContent/images/";
+	//private final String UPLOAD_DIRECTORY = "C:/xampp/tomcat/webapps/Medelivery/images/";
 	private final String UPLOAD_DIRECTORY = "/C:/ISPROJ2/Medelivery/webapp/images/";
 	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -213,7 +213,9 @@ public class ShopController extends HttpServlet {
 				session.removeAttribute("Order");
 				session.removeAttribute("OrderDetails");
 				session.removeAttribute("CartList");
-				response.sendRedirect(redirect);
+				session.setAttribute("kick", redirect);
+				response.sendRedirect(request.getContextPath() + "/kick.jsp");
+				//response.sendRedirect("https://" + redirect);
 			}
 			//order.setPaymentMethod( request.getParameter( "orderPayment" ) );
 			//order.setDateOrdered(today);
@@ -297,7 +299,8 @@ public class ShopController extends HttpServlet {
 				session.removeAttribute("Order");
 				session.removeAttribute("OrderDetails");
 				session.removeAttribute("CartList");
-				response.sendRedirect(redirect);
+				session.setAttribute("kick", redirect);
+				response.sendRedirect(request.getContextPath() + "/kick.jsp");
 			}
 			
 			//response.sendRedirect(request.getContextPath() + "/index.jsp");

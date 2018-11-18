@@ -58,7 +58,7 @@ public class ApprovalController extends HttpServlet{
 		   	approvalAction.pharmacistApproval( orderID, 2 );
 			Order order = new OrderImplement().getOrderById(orderID);
 			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-			new SendEmail().send(new CustomerImplement().getCustomerById(order.getCustomerID()).getCustomerName(), "Transaction accepted on " + CurrentDate, new SendEmail().OrderEmail(order));
+			new SendEmail().send(new CustomerImplement().getCustomerById(order.getCustomerID()).getEmail(), "Transaction accepted on " + CurrentDate, new SendEmail().OrderEmail(order));
 		} else if (action.equalsIgnoreCase("OrderInvalidate")){
 			Order order = new OrderImplement().getOrderById(orderID);
 			if (new ShopAction().RefundOrder(order, "Pharmacist Invalidated the order")) {

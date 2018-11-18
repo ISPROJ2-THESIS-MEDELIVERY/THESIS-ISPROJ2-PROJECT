@@ -9,7 +9,6 @@
 <title>Home Page</title>
 </head>
 	<body>
-		You will be ejected to paymaya
-		
+		You will now be transported to paymaya in order to pay for the transaction, Please Wait.
 	</body>
 </html>

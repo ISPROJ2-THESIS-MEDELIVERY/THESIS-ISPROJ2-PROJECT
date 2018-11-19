@@ -1,5 +1,7 @@
 package thesis.mvc.utility;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -81,6 +83,7 @@ public class SendEmail
 	}
 	
 	public String OrderEmail(Order orderRecieve) {
+		DateFormat dateFormat = new SimpleDateFormat("yy/MM/dd hh:mm a");
 		Order order = new OrderImplement().getOrderById(orderRecieve.getOrderID());
 		List<OrderDetail> OrderDetails = new OrderDetailImplement().getspecificOrderDetail(order.getOrderID());
 		String HTMLMessage = "";
@@ -120,7 +123,7 @@ public class SendEmail
 		}
 		HTMLMessage +=
 				"<h4>Order #: " + order.getOrderID() + "</h4></br>" + 
-				"<h4>Order Date: " + order.getDateOrdered() + "</h4></br>" + 
+				"<h4>Order Date: " + dateFormat.format(order.getDateOrdered()) + "</h4></br>" + 
 				"<h4>Order Status: "  + order.getOrderStatus() + "</h4></br>" + 
 				"<h4>Customer Name: " + new CustomerImplement().getCustomerById(order.getCustomerID()).getCustomerName() + "</h4></br>" + 
 				"<h4>Address: " + order.getOrderAddress() + "</h4></br>" + 

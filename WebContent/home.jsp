@@ -369,7 +369,7 @@
 						<td><input type="text" name="driverName" class="form-control"/></td>
 						<td><input type="text" name="driverAddr" class="form-control"/></td>
 						<td><input type="text" name="driverCont" class="form-control"/></td>
-						<td><div class="text-center"><button class="btn btn-success btn-md" type="submit" name="Action" value="addDriver">Add to Cart</button></div></td>
+						<td><div class="text-center"><button class="btn btn-success btn-md" type="submit" name="Action" value="addDriver">Add Driver</button></div></td>
 						<!-- <td><input type="submit" name="Action" value="addDriver"/></td> -->
 					</tr>
 				</form>
@@ -826,7 +826,7 @@
 						</c:if>
 						<c:if test="${customer.isSeniorCitizen == true}">
 							<td>YES</td>
-							<td><img class="center-block" src="images/<c:out value="${customer.seniorCitizenID}" />" /></td>
+							<td><img class="center-block" src="images/<c:out value="${customer.seniorCitizenID}" />" width="300px" height="300px"/></td>
 							<td>N/A</td>
 						</c:if>
 					</tr>

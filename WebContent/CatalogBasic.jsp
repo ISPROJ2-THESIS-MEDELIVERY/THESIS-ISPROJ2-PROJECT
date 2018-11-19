@@ -134,7 +134,7 @@
 						<td><c:out value="${item.productForm}" /></td>
 						<td><c:out value="${item.productPackaging}" /></td>
 						<td><c:out value="${item.productDescription}" /></td>
-						<td>&#8369;<c:out value="${item.priceSet}" /></td>
+						<td>&#8369;<fmt:formatNumber value = "${item.priceSet}"/></td>
 						<c:if test="${item.isRXProduct == false}">
 						
 						<form action='ShopController' method='post'>

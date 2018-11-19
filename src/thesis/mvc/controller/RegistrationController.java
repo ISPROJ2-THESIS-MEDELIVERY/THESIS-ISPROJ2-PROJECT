@@ -1,5 +1,6 @@
 package thesis.mvc.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.CityListingImplement;
@@ -154,7 +156,32 @@ public class RegistrationController extends HttpServlet {
 				customer.setCustomerCellular(customerCellu);
 				customer.setEmail( customerEMail );
 				customer.setIsSeniorCitizen(false); //This is temporary
-				
+				String birthCertificate = "";
+				/*
+				Customer customer = new CustomerImplement().getCustomerById((int)session.getAttribute("Customer"));			
+				 try {
+
+		            	Part filePart = request.getPart("file");
+						String name = "SSID" + customer.getCustomerID();
+						String end = filePart.getContentType();
+						if (end.startsWith("image")) {
+							String imageType = end.replace("image/", "");
+							name = name + "." + imageType;
+							String DbaseName = new EncryptionFunction().encrypt(name);
+							SSIDName = DbaseName;
+							String AFileName = name;
+							filePart.write(UPLOAD_DIRECTORY + File.separator + AFileName);
+							System.out.println( "File Uploaded Successfully: " + UPLOAD_DIRECTORY + File.separator + AFileName);
+						} else {
+							System.out.println( "File Uploaded is not an image!");
+						}
+		            	
+		            } catch (Exception ex) {
+		            	System.out.println( "File Upload Failed due to " + ex);
+		            }
+
+				customer.setBirthCertificate(birthCertificate);
+				*/
 				//Registration
 				int ID = Registration.makeCustomer(login, customer);
 				//Email of Confirmation

@@ -25,8 +25,8 @@ public class CustomerImplement implements CustomerDAO{
 	public int addCustomer(Customer customer) {
 		try(PreparedStatement stmt = conn.prepareStatement(""
         		+ "INSERT INTO Customer "
-        		+ "(`UserID`, `CustomerName`, `CustomerStreet`, `CustomerBarangay`, `CityID`, `CustomerProvince`, `CustomerLandline`, `CustomerCellular`, `Email`, `IsSeniorCitizen`, `SeniorCitizenID`) " 
-        		+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)")) {
+        		+ "(`UserID`, `CustomerName`, `CustomerStreet`, `CustomerBarangay`, `CityID`, `CustomerProvince`, `CustomerLandline`, `CustomerCellular`, `Email`, `IsSeniorCitizen`, `SeniorCitizenID`, `BirthCertificate`) " 
+        		+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)")) {
 			stmt.setInt( 1, customer.getUserID() );
 			stmt.setString( 2, customer.getCustomerName() );
 			stmt.setString( 3, customer.getCustomerStreet() );
@@ -38,6 +38,7 @@ public class CustomerImplement implements CustomerDAO{
 			stmt.setString( 9, customer.getEmail() );
 			stmt.setBoolean( 10, customer.isIsSeniorCitizen() );
 			stmt.setString( 11, customer.getSeniorCitizenID() );
+			stmt.setString( 12, customer.getBirthCertificate() );
 			System.out.println(stmt);
 			int NewID = stmt.executeUpdate();
 			stmt.close();
@@ -78,6 +79,7 @@ public class CustomerImplement implements CustomerDAO{
 					+ "`Email`=?,"
 					+ "`IsSeniorCitizen`=?,"
 					+ "`SeniorCitizenID`=?"
+					+ "`BirthCertificate`=?"
 					+ " WHERE CustomerID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, customer.getUserID() );
@@ -91,7 +93,8 @@ public class CustomerImplement implements CustomerDAO{
 			preparedStatement.setString( 9, customer.getEmail() );           
 			preparedStatement.setBoolean( 10, customer.isIsSeniorCitizen() );
 			preparedStatement.setString( 11, customer.getSeniorCitizenID() );
-			preparedStatement.setInt( 12, customer.getCustomerID() );
+			preparedStatement.setString( 12, customer.getBirthCertificate() );
+			preparedStatement.setInt( 13, customer.getCustomerID() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
@@ -120,6 +123,7 @@ public class CustomerImplement implements CustomerDAO{
 				customer.setEmail( resultSet.getString( "Email" ) );
 				customer.setIsSeniorCitizen( resultSet.getBoolean( "IsSeniorCitizen" ) );
 				customer.setSeniorCitizenID( new EncryptionFunction().decrypt( resultSet.getString( "SeniorCitizenID" ) ) );
+				customer.setBirthCertificate( new EncryptionFunction().decrypt( resultSet.getString( "BirthCertificate" ) ) );
 				customers.add(customer);
 			}
 			resultSet.close();
@@ -151,6 +155,7 @@ public class CustomerImplement implements CustomerDAO{
 				customer.setEmail( resultSet.getString( "Email" ) );
 				customer.setIsSeniorCitizen( resultSet.getBoolean( "IsSeniorCitizen" ) );
 				customer.setSeniorCitizenID( resultSet.getString( "SeniorCitizenID" ) );
+				customer.setBirthCertificate( new EncryptionFunction().decrypt( resultSet.getString( "BirthCertificate" ) ) );
 			}
 			resultSet.close();
 			preparedStatement.close();
@@ -179,6 +184,7 @@ public class CustomerImplement implements CustomerDAO{
 				customer.setEmail( resultSet.getString( "Email" ) );
 				customer.setIsSeniorCitizen( resultSet.getBoolean( "IsSeniorCitizen" ) );
 				customer.setSeniorCitizenID( resultSet.getString( "SeniorCitizenID" ) );
+				customer.setBirthCertificate( new EncryptionFunction().decrypt( resultSet.getString( "BirthCertificate" ) ) ); 
 			}
 			resultSet.close();
 			preparedStatement.close();

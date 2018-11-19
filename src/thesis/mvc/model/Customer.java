@@ -14,6 +14,7 @@ public class Customer {
 	private String Email;
 	private boolean IsSeniorCitizen;
 	private String SeniorCitizenID;
+	private String BirthCertificate;
 	
 	public int getCustomerID() {
 		return CustomerID;
@@ -87,7 +88,11 @@ public class Customer {
 	public void setSeniorCitizenID(String seniorCitizenID) {
 		SeniorCitizenID = seniorCitizenID;
 	}
+	public String getBirthCertificate() {
+		return BirthCertificate;
+	}
+	public void setBirthCertificate(String birthCertificate) {
+		BirthCertificate = birthCertificate;
+	}
 	
-	
-
 }

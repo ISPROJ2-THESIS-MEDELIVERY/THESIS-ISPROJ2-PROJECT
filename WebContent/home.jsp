@@ -89,8 +89,111 @@
 	</c:if>
 	
 	
+
+<c:if test="${userAccess == null}">
+<div class="container">
+<div class="w3-container w3-center">
+<h2>Our Partner Pharmacies </h2>
+<p>Kindly select the pharmacy of your choosing</p>
+
+<div class="tab">
+	<c:forEach items="${Featurepharm}" var="pharm">
+  <button class="tablinks" onclick="openCity(event, '${pharm.pharmacyID}')"><c:out value="${pharm.pharmacyName}">: </c:out></button>
+   </c:forEach>
+</div>
+<br><br>
+<c:forEach items="${Featurepharm}" var="pharm">
+<div id="${pharm.pharmacyID}" class="tabcontent">
+  <%-- <h3>${pharm.pharmacyName}</h3> --%>
+  <p>
+  <h2 style="text-align:center">Welcome to our catalog page/featured products page</h2>
+<p style="text-align:center">Kindly select the amount</p>
+<c:forEach items="${Featurestock}" var="stock">
+	<c:forEach items="${Featureitems}" var="items">
+		<c:if test="${stock.productID == items.productID}">
+			<c:if test="${stock.pharmacyID == pharm.pharmacyID}">
+<div class="columns">
+  
+				<div class="item">
+					<div class="pop">
+					<img id="imageresource" class="center-block" src="images/<c:out value="${items.productImage}"/>" width="200px" height="200px"/><br>
+					</div>
+						<center><c:out value="${items.productName}" /></center>
+				</div>
+			
+</div>
+</c:if>
+		</c:if>
+	</c:forEach>
+  </c:forEach>
+  </p>
+</div>
+</c:forEach>
+</div>
+</div>
+</c:if>
+
+
+<c:if test="${userAccess == 1}">
+<div class = "container">
+<div class="w3-container w3-center">
+<h2>Our Partner Pharmacies </h2>
+<p>Kindly select the pharmacy of your choosing</p>
+
+<div class="tab">
+	<c:forEach items="${Featurepharm}" var="pharm">
+  <button class="tablinks" onclick="openCity(event, '${pharm.pharmacyID}')"><c:out value="${pharm.pharmacyName}">: </c:out></button>
+   </c:forEach>
+</div>
+<br><br>
+<c:forEach items="${Featurepharm}" var="pharm">
+<div id="${pharm.pharmacyID}" class="tabcontent">
+  <%-- <h3>${pharm.pharmacyName}</h3> --%>
+  <img class="center-block" src="images/<c:out value="${pharm.pharmacyLogo}"/>" />
+  <p>
+  <h2 style="text-align:center">Welcome to <c:out value="${pharm.pharmacyName}">: </c:out>'s featured products page</h2>
+<p style="text-align:center">You may input your desired amount in the textbox provided.</p>
+<c:forEach items="${Featurestock}" var="stock">
+	<c:forEach items="${Featureitems}" var="items">
+		<c:if test="${stock.productID == items.productID}">
+			<c:if test="${stock.pharmacyID == pharm.pharmacyID}">
+<div class="columns">
+  
+				<div class="item">
+					<div class="pop">
+					<img id="imageresource" class="center-block" src="images/<c:out value="${items.productImage}"/>" width="200px" height="200px"/><br>
+					</div>
+						<center><c:out value="${items.productName}" /></center>
+					  <form action='ShopController' method='post'>
+					
+						<div class="form-group">
+        					<input type="number" name="Quantity" required="required" class="form-control && center-block" style="width: 80px"/>
+       					</div>
+						<input class="center-block" type="hidden" name="ProductID" value="<c:out value="${items.productID}" />" readonly>
+						<input class="center-block" type="hidden" name="SelectedPharmacy" value="<c:out value="${pharm.pharmacyID}" />" readonly>
+						<input class="center-block" type="hidden" name="FromCarosel" value="FromCarosel" readonly />
+						<div class="text-center"><button class="btn btn-success btn-md" type="submit" name="Action" value="Addtocart">Add to Cart</button></div>
+						<!-- <input class="center-block" type='submit' name='Action' value="Addtocart" style='display: on-hover' /> -->
+					</form>
+				</div>
+			
+</div>
+</c:if>
+		</c:if>
+	</c:forEach>
+  </c:forEach>
+  </p>
+</div>
+</c:forEach>
+  </p>
+</div>
+</div>
+</c:if>
+
+
+
 	
-	<c:if test="${userAccess == null}">
+	<%-- <c:if test="${userAccess == null}">
 		<c:forEach items="${Featurepharm}" var="pharm">
 			<div class="row">
 				<h3>
@@ -139,7 +242,7 @@
 				</div>
 			</div>
 		</c:forEach>
-	</c:if>
+	</c:if> --%>
 	
 	<c:if test="${userAccess == 1}">
 	<nav class="side-menu">
@@ -157,14 +260,14 @@
 								value="${pharmacy.pharmacyName}" /><span><i></i></span></a></li>
       	</c:forEach>
       	<br>
-      	<li><a href="CustomerController?action=GoToOrders">Go to Order History<span><i></i></span></a></li>
+<!--       	<li><a href="CustomerController?action=GoToOrders">Go to Order History<span><i></i></span></a></li>
       	<li><a href="CustomerController?action=GoToPending">View your Current Orders<span><i></i></span></a></li>
-      	<li><a href="CustomerController?action=GoToReturns">View your Order Returns<span><i></i></span></a></li>
+      	<li><a href="CustomerController?action=GoToReturns">View your Order Returns<span><i></i></span></a></li> -->
 	    
       
     </ul>
   	</nav>
-		<c:forEach items="${Featurepharm}" var="pharm">
+		<%-- <c:forEach items="${Featurepharm}" var="pharm">
 			<div class="row">
 				<h3>
 					<center>
@@ -223,7 +326,7 @@
 					</a>
 				</div>
 			</div>
-		</c:forEach>
+		</c:forEach> --%>
 	</c:if>
 
 	<c:if test="${userAccess == 1}">
@@ -1290,7 +1393,7 @@ body {
   display:block;
     background-color: #333;
     height: 6em;
-    padding: 1em 1.5em;
+    padding: 0.2em 10em;
     position: relative;
     -webkit-transition: -webkit-transform 0.5s,     background-color .5s, color .5s;
     transition: transform .5s, background-color .5s, color .5s;
@@ -1333,6 +1436,118 @@ body {
     right: 0.16666666666667em;
     color: #F8F6FF;
 }
+
+.w3-container, .w3-panel {
+    padding: 0.01em 16px;
+    margin-left: 75px;
+    margin-right: 25px;
+    margin-top: 25px;
+}
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #21a9afa6;
+	border-radius: 5rem;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+.tab button.active {
+    background-color: #ffffff;
+}
+
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+     -webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 1s;
+}
+
+@-webkit-keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+ {
+    box-sizing: border-box;
+}
+
+.columns {
+    float: left;
+    width: 30%;
+    padding: 1px;
+	margin-left: 25px;
+}
+
+.price {
+    list-style-type: none;
+    border: 1px solid #eee;
+    margin: 0;
+    padding: 0;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.price:hover {
+    box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2)
+}
+
+.price .header {
+    background-color: #111;
+    color: white;
+    font-size: 25px;
+}
+
+.price li {
+    border-bottom: 1px solid #eee;
+    padding: 20px;
+    text-align: center;
+}
+
+.price .grey {
+    background-color: #eee;
+    font-size: 20px;
+}
+
+.button {
+    background-color: #21a9afa6;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+	 border-radius: 5rem;
+	
+}
+
+
+
+
+@media only screen and (max-width: 600px) {
+    .columns {
+        width: 100%;
+    }
 </style>
 
 <script src="assets/bootstrap/js/jquery.dataTables.min.js"></script>
@@ -1347,6 +1562,22 @@ $(function() {
 	});		
 });
 
+</script>
+
+<script>
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
 </script>
 
 <script type="text/javascript">

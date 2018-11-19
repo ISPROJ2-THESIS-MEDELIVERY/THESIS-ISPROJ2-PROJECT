@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix = "fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -74,9 +75,9 @@
 			</c:forEach>
 		  </select>
         </div>
-        <!-- <div class="form-group">
+        <div class="form-group">
         	<input type="text" name="CuProvin" required="" placeholder="Province *" class="form-control"/>
-        </div> -->
+        </div>
         <div class="form-group">
         	<input id="phonenum" type="tel" pattern="^\d{7}$" title="must contain 7 digits" name="CuLandLi" required="" placeholder="Landline *" class="form-control"/>
         </div>
@@ -96,6 +97,11 @@
         </div>
         <div class="form-group">
         	<input type="password" name="Password-repeat" required="required" placeholder="Re-enter Password" id="Passwordrepeat" class="form-control"/>
+        </div>
+        <div class="form-group">
+		<h2>Upload your birth certificate here please</h2>
+        	<input type="file" name="file" required="required" value="Upload Senior Citizen ID" class="form-control"/>
+        	<input type="hidden" name="action" required="required" value="AddSeniorCitizenID" class="form-control"/>
         </div>
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">Register</button>

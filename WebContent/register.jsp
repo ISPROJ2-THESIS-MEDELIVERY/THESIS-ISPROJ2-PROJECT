@@ -59,8 +59,17 @@
 <br>
 <form onSubmit="return formValidation();" action="RegistrationController" method="post" enctype="multipart/form-data">
 	<h2>Register Here</h2><br>
+	 <div class="container">
+	 <div class="row">
+	  <div class="col-md-6">
         <div class="form-group">
-        	<input type="text" name="FullName" required="required" placeholder="FullName *" class="form-control"/>
+        	<input type="text" name="FrstName" required="required" placeholder="First Name *" class="form-control"/>
+        </div>
+        <div class="form-group">
+        	<input type="text" name="MddlName" required="required" placeholder="Middle Name *" class="form-control"/>
+        </div>
+        <div class="form-group">
+        	<input type="text" name="LastlName" required="required" placeholder="Last Name *" class="form-control"/>
         </div>
         <div class="form-group">
         	<input type="text" name="CuStreet" required="" placeholder="Street *" class="form-control"/>
@@ -79,10 +88,12 @@
         	<input type="text" name="CuProvin" required="" placeholder="Province *" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input id="phonenum" type="tel" pattern="^\d{7}$" title="must contain 7 digits" name="CuLandLi" required="" placeholder="Landline *" class="form-control"/>
+        	<input id="phonenum" type="tel" pattern="^\d{7}$" title="must contain 7 digits" name="CuLandLi"  placeholder="Landline *" class="form-control"/>
         </div>
+        </div>
+        <div class="col-md-6">
         <div class="form-group">
-        	<input id="phonenum" type="tel" pattern="^(09|\+639)\d{9}$" title="must start with 09 or +63 and contain 11 digits" name="CuCellul" required="" placeholder="Cellphone No *" class="form-control"/>
+        	<input id="phonenum" type="tel" pattern="^(09|\+639)\d{9}$" title="must start with 09 or +63 and contain 11 digits" name="CuCellul"  placeholder="Cellphone No *" class="form-control"/>
         </div>
         <div class="form-group">
         	<input type="email" name="CusEmail" required="required" placeholder="Email *" class="form-control"/>
@@ -99,7 +110,7 @@
         	<input type="password" name="Password-repeat" required="required" placeholder="Re-enter Password" id="Passwordrepeat" class="form-control"/>
         </div>
         <div class="form-group">
-		<h2>Upload your birth certificate here please</h2>
+		<h5>Upload your birth certificate here please</h5>
         	<input type="file" name="file" required="required" value="Upload Senior Citizen ID" class="form-control"/>
         	<input type="hidden" name="action" required="required" value="AddSeniorCitizenID" class="form-control"/>
         </div>
@@ -115,7 +126,9 @@
   			<p id="number" class="invalid">A <b>number</b></p>
   			<p id="length" class="invalid">Minimum <b>8 characters</b></p>
 		</div>
-        
+        </div>
+        </div>
+        </div>
 </form>
 </div>
 <div class="footer-dark">
@@ -304,6 +317,17 @@ function ValidateEmail(CusEmail)
     position: relative;
     left: -35px;
     content: "✖";
+}
+
+.login-clean form {
+  max-width:1000px;
+  width:90%;
+  margin:0 auto;
+  background-color:#ffffff;
+  padding:40px;
+  border-radius:4px;
+  color:#505e6c;
+  box-shadow:1px 1px 5px rgba(0,0,0,0.1);
 }
 </style>
 

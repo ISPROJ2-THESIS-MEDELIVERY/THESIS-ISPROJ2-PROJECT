@@ -95,7 +95,7 @@
 		    <h1>Prescription</h1>
 			<form method="post" action="ShopController" encType="multipart/form-data">
 				<div class="form-group">
-		        	<input type="file" name="file" value="Upload Prescription" class="form-control" required />
+		        	<input type="file" name="file" value="Upload Prescription" class="form-control && center-block" required />
 		        	<input type="hidden" name="PharmaID" value="<c:out value="${SelectedPharmacy.pharmacyID}"/>" class="form-control"/>
 		        	<br>
 		        	<center><button class="btn btn-success btn-md" type="submit" name="Action" value="CheckoutOrderPrescription">Checkout Order</button></center>
@@ -241,5 +241,27 @@ $(function() {
 		}); 
 	</script>
 
+<style>
+
+.form-control {
+    display: block;
+    width: 25%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+</style>
 
 </html>

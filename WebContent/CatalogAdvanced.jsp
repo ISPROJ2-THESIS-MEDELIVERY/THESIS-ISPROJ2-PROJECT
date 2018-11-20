@@ -143,7 +143,7 @@
 						<form action='ShopController' method='post'>
 						<td>
 							<div class="form-group">
-        						<input type="number" name="Quantity" required="required" class="form-control && center-block" style="width: 80px"/>
+        						<input type="number" name="Quantity" required="required" class="form-control && center-block" min = "1" style="width: 80px"/>
        						</div>
 						</td>
 						<td>

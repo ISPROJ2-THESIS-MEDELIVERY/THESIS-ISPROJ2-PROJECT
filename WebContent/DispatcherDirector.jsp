@@ -77,7 +77,23 @@
 			            <td><c:out value="${order.orderAddress}" /></td>
 			            <td><c:out value="${order.dateOrdered}" /></td>
 			            <td><c:out value="${order.orderType}" /></td>
-			            <td><c:out value="${order.orderStatus}" /></td>
+			            <td>			            
+		                	<c:if test="${order.orderStatus.endsWith('1')}">
+		                	PENDING: First Try
+		                	</c:if>
+		                	<c:if test="${order.orderStatus.endsWith('2')}">
+		                	PENDING: Second Try
+		                	</c:if>
+		                	<c:if test="${order.orderStatus.endsWith('3')}">
+		                	PENDING: Third Try
+		                	</c:if>
+		                	<c:if test="${order.orderStatus.endsWith('4')}">
+		                	PENDING: Fourth Try
+		                	</c:if>
+		                	<c:if test="${order.orderStatus.endsWith('5')}">
+		                	PENDING: Fifth Try
+		                	</c:if>
+			            </td>
 			            <td>
 							<c:if test="${order.prescriptionID == 0}">
 								NO PRESCRIPTION
@@ -109,15 +125,15 @@
 							                	</c:forEach>
 							                </td>
 							                <td><c:out value="${orderdetails.quantity}" /></td>
-							                <td>&#8369;<c:out value="${orderdetails.costPerUnit}" /></td>
-							                <td>&#8369;<c:out value="${orderdetails.totalCost}" /></td>
+											<td>&#8369;<fmt:formatNumber value = "${orderdetails.costPerUnit}" /></td> 
+											<td>&#8369;<fmt:formatNumber value = "${orderdetails.totalCost}" /></td>   
 							            </tr>
 							            </c:if>
 									</c:forEach>
 							    </tbody>
 							</table>
 			            </td>
-			            <td>&#8369;<c:out value="${order.actualCost}" /></td>
+						<td>&#8369;<fmt:formatNumber value = "${order.actualCost}" /></td>   
 			            <td>
 							<c:forEach items="${SelectPharmacy}" var="pharmacy">
 								<c:if test="${pharmacy.pharmacyID == order.pharmacyID}">

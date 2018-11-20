@@ -84,8 +84,8 @@
 		                	<td><c:out value="${details.size}" /></td>
 		                	<td><c:out value="${details.prescription}" /></td>
 		                	<td><c:out value="${details.quantity}" /></td>
-		                	<td>&#8369;<c:out value="${details.unitCost}" /></td>
-		                	<td>&#8369;<c:out value="${details.totalCost}" /></td>
+							<td>&#8369;<fmt:formatNumber value = "${details.unitCost}"/></td>
+							<td>&#8369;<fmt:formatNumber value = "${details.totalCost}"/></td>
 		            	</tr>
 	            	</c:forEach>
 	            </tbody>
@@ -139,7 +139,7 @@
 						<td><c:out value="${item.productForm}" /></td>
 						<td><c:out value="${item.productPackaging}" /></td>
 						<td><c:out value="${item.productDescription}" /></td>
-						<td>&#8369;<c:out value="${item.priceSet}" /></td>
+						<td>&#8369;<fmt:formatNumber value = "${item.priceSet}"/></td>
 						<form action='ShopController' method='post'>
 						<td>
 							<div class="form-group">

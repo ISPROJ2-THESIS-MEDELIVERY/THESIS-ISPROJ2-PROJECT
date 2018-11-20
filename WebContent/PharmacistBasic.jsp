@@ -98,15 +98,15 @@
 							                <td><c:out value="${orderdetails.orderID}" /></td>
 							                <td><c:out value="${orderdetails.productID}" /></td>
 							                <td><c:out value="${orderdetails.quantity}" /></td>
-							                <td><c:out value="${orderdetails.costPerUnit}" /></td>
-							                <td><c:out value="${orderdetails.totalCost}" /></td>
+											<td>&#8369;<fmt:formatNumber value = "${orderdetails.costPerUnit}" /></td>
+											<td>&#8369;<fmt:formatNumber value = "${orderdetails.totalCost}" /></td>  
 							            </tr>
 							            </c:if>
 									</c:forEach>
 							    </tbody>
 							</table>
 			            </td>
-			            <td><c:out value="${order.actualCost}" /></td>
+						<td>&#8369;<fmt:formatNumber value = "${order.actualCost}"/></td>
 						<td><a href="PharmacistController?PharmaID=<c:out value="${order.pharmacyID}" />&Action=RejectOrder&orderID=<c:out value="${order.orderID}"/>">CANCEL</a></td>
 						<td><a href="PharmacistController?PharmaID=<c:out value="${order.pharmacyID}" />&Action=ApproveOrder&orderID=<c:out value="${order.orderID}"/>">CONFIRM</a></td>
 					</tr>

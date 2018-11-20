@@ -167,7 +167,7 @@
 					<div class="pop">
 					<img id="imageresource" class="center-block" src="images/<c:out value="${items.productImage}"/>" width="200px" height="200px"/><br>
 					</div>
-						<center><c:out value="${items.productName}" /></center>
+						<center><c:out value="${items.productName}" /></center> 
 					  <form action='ShopController' method='post'>
 					
 						<div class="form-group">
@@ -695,16 +695,15 @@
 																	</c:if>
 																</c:forEach></td>
 															<td><c:out value="${orderdetails.quantity}" /></td>
-															<td>&#8369;<c:out
-																	value="${orderdetails.costPerUnit}" /></td>
-															<td>&#8369;<c:out value="${orderdetails.totalCost}" /></td>
+															<td>&#8369;<fmt:formatNumber value = "${{orderdetails.costPerUnit}" /></td>   
+															<td>&#8369;<fmt:formatNumber value = "${orderdetails.totalCost}" /></td>   
 														</tr>
 													</c:if>
 												</c:forEach>
 											</tbody>
 										</table>
 									</td>
-									<td>&#8369;<c:out value="${order.actualCost}" /></td>
+									<td>&#8369;<fmt:formatNumber value = "${order.actualCost}" /></td>   
 									<td>
 										<form action="ApprovalController" method="post">
 											<input type="hidden" Name="action" value="OrderReject" />
@@ -794,15 +793,15 @@
 																</c:if>
 															</c:forEach></td>
 														<td><c:out value="${orderdetails.quantity}" /></td>
-														<td>&#8369;<c:out value="${orderdetails.costPerUnit}" /></td>
-														<td>&#8369;<c:out value="${orderdetails.totalCost}" /></td>
+															<td>&#8369;<fmt:formatNumber value = "${{orderdetails.costPerUnit}" /></td>   
+															<td>&#8369;<fmt:formatNumber value = "${orderdetails.totalCost}" /></td>   
 													</tr>
 												</c:if>
 											</c:forEach>
 										</tbody>
 									</table>
 								</td>
-								<td>&#8369;<c:out value="${order.actualCost}" /></td>
+								<td>&#8369;<fmt:formatNumber value = "${order.actualCost}" /></td>   
 								<td><c:forEach items="${PrescriptionImage}" var="prescription">
 										<c:if test="${order.prescriptionID == prescription.prescriptionID}">
 											<div class = "pop"><img id="imageresource" src="images/<c:out value="${prescription.prescription}" />" alt="Medicine Image" width="100px" height="100px"></div>
@@ -908,16 +907,15 @@
 																	</c:if>
 																</c:forEach></td>
 															<td><c:out value="${orderdetails.quantity}" /></td>
-															<td>&#8369;<c:out
-																	value="${orderdetails.costPerUnit}" /></td>
-															<td>&#8369;<c:out value="${orderdetails.totalCost}" /></td>
+															<td>&#8369;<fmt:formatNumber value = "${orderdetails.costPerUnit}" /></td>
+															<td>&#8369;<fmt:formatNumber value = "${orderdetails.totalCost}" /></td>    
 														</tr>
 													</c:if>
 												</c:forEach>
 											</tbody>
 										</table>
 									</td>
-									<td>&#8369;<c:out value="${order.actualCost}" /></td>
+									<td>&#8369;<fmt:formatNumber value = "${order.actualCost}" /></td>
 									<td>
 										<c:forEach items="${DeliveryReason}" var="delivery">
 											<c:if test="${order.deliveryID == delivery.deliveryID}">

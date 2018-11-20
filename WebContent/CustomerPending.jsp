@@ -83,7 +83,12 @@
 	                <td><c:out value="${order.dateOrdered}" /></td>
 	                <td><c:out value="${order.orderType}" /></td>
 	                <td><c:out value="${order.orderStatus}" /></td>
-	                <td><c:out value="${order.seniorDiscount}" /></td>
+	                <td><c:if test="${order.seniorDiscount == true}">
+         					Yes
+     					</c:if>
+     					<c:if test="${order.seniorDiscount == false}">
+         					No
+     					</c:if></td>
 	                <td>&#8369;<c:out value="${order.actualCost}" /></td>
 	            </tr>
 	    </tbody>

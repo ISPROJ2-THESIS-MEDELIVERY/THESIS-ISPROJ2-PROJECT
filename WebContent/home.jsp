@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix = "fmt" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,11 +16,12 @@
 <link rel="stylesheet" href="assets/bootstrap/js/jquery.min.js" />
 <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" /> -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" />
+<link rel="stylesheet" href="assets/css/Login-Form-Clean.css" />
 <link rel="stylesheet" href="assets/css/Header-Blue.css" />
 <link rel="stylesheet" href="assets/css/styles.css" />
 <link rel="stylesheet" href="assets/css/style.css" />
 <link rel="stylesheet" href="assets/css/Footer-Dark.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <link rel="icon" href="assets/img/medlogo.png" />
 </head>
 
@@ -56,6 +58,8 @@
 					<c:if test="${userAccess == 2}">
 						<span class="navbar-text" style="float: right"><a
 							href="LoginController" class="login">Logout</a></span>
+						<span class="navbar-text" style="float: right"><a
+							href="UpdateUser.jsp" class="login">Update User Details</a></span>
 						<span class="navbar-text" style="float: right"><a
 							href="DispatcherController?Action=DispatchOrder" class="login">Order
 								Dispatch - Regular</a><br></span>
@@ -172,7 +176,7 @@
 						<input class="center-block" type="hidden" name="ProductID" value="<c:out value="${items.productID}" />" readonly>
 						<input class="center-block" type="hidden" name="SelectedPharmacy" value="<c:out value="${pharm.pharmacyID}" />" readonly>
 						<input class="center-block" type="hidden" name="FromCarosel" value="FromCarosel" readonly />
-						<div class="text-center"><button class="btn btn-success btn-md" type="submit" name="Action" value="Addtocart">Add to Cart</button></div>
+						<div class="text-center"><button class="btn btn-info btn-md" type="submit" name="Action" value="Addtocart">Add to Cart</button></div>
 						<!-- <input class="center-block" type='submit' name='Action' value="Addtocart" style='display: on-hover' /> -->
 					</form>
 				</div>
@@ -188,6 +192,8 @@
   </p>
 </div>
 </div>
+
+ 
 </c:if>
 
 
@@ -248,13 +254,13 @@
 	<nav class="side-menu">
     <ul>
 
-		<li class="title"><a>Order OTC<span><i class="fa fa-medkit"></i></span></a></li>
+		<li class="title"><a>Order OTC<span><i></i></span></a></li>
 		<c:forEach items="${PharmcyList}" var="pharmacy">
       <li><a href="CustomerController?action=GoToCatalog&PharmaID=<c:out value="${pharmacy.pharmacyID}" />"><c:out
 								value="${pharmacy.pharmacyName}" /><span><i></i></span></a></li>
       	</c:forEach>
       	<br>
-      	<li class="title"><a>Prescription<span><i class="fa fa-ambulance"></i></span></a></li>
+      	<li class="title"><a>Prescription<span><i></i></span></a></li>
 		<c:forEach items="${PharmcyList}" var="pharmacy">
       <li><a href="CustomerController?action=GoToCatalogPrescription&PharmaID=<c:out value="${pharmacy.pharmacyID}" />"><c:out
 								value="${pharmacy.pharmacyName}" /><span><i></i></span></a></li>
@@ -331,6 +337,10 @@
 
 	<c:if test="${userAccess == 1}">
 		<hr>
+		<div id="container">
+			<center><img alt="" src="assets/img/medlogopill.png" width="400px" height="400px"></center>    
+		</div>
+		<hr>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6">
@@ -391,6 +401,11 @@
 					<a href="CustomerSeniorCitizen.jsp" class="login && btn btn-warning" role="button">Are you a senior citizen?<br> Upload your senior citizen ID here</a>
 				</div>
 				<div class="col-md-6">
+					<div class="list-group">
+						<a class="list-group-item">
+							<h4 class="list-group-item-heading">Your Orders:</h4>
+						</a>
+					</div>
 					<!-- Order History: -->
 					<br> <a href="CustomerController?action=GoToOrders"
 						class="btn btn-primary" role="button" />Go to Order History</a><br>
@@ -418,10 +433,11 @@
       						<p class="list-group-item-text">User ID: <c:out value="${userID}" /></p>
       						<p class="list-group-item-text">Username: <c:out value="${username}" /></p>
       						<p class="list-group-item-text">User Type: <c:out value="${userAccess}" /></p>
-      						<a href="UpdateUser.jsp">Update User Details</a>
     					</a>
     				</div>
-    				<a href="DispatcherController?Action=DispatchOrder" class="btn btn-info" role="button">Order Dispatch</a><br>
+    				<!-- <a href="DispatcherController?Action=DispatchOrder" class="btn btn-info" role="button">Order Dispatch</a><br>
+    				<br>
+    				<a href="UpdateUser.jsp" class="btn btn-info" role="button">Update User Details</a><br> -->
     			</div>
     		</div>
     	</div>
@@ -441,12 +457,18 @@
 						<td><c:out value="${driver.driverName}" /></td>
 						<td><c:out value="${driver.driverAddress}" /></td>
 						<td><c:out value="${driver.driverContactNumber}" /></td>
-						<td><c:out value="${driver.inTransit}" /></td>
+						<td><c:if test="${driver.inTransit == true}">
+         						Yes
+     						</c:if>
+     						<c:if test="${driver.inTransit == false}">
+         						No
+     						</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-			<div id="container">
+			<%-- <div id="container">
 				<div class="list-group">
 					<a class="list-group-item list-group-item-info">
 						<h4 class="list-group-item-heading">
@@ -464,6 +486,7 @@
 					<th>Driver Name</th>
 					<th>Driver Address</th>
 					<th>Driver Contact Number</th>
+					<th>Vehicle Plate Number</th>
 					<th>Driver In Transit?</th>
 				</tr>
 			</thead>
@@ -473,12 +496,65 @@
 						<td><input type="text" name="driverName" class="form-control"/></td>
 						<td><input type="text" name="driverAddr" class="form-control"/></td>
 						<td><input type="text" name="driverCont" class="form-control"/></td>
+						<td><input type="text" name="driverPlNo" id="license" pattern="[A-Z]{2}-[0-9]{4}$" placeholder="e.g.  MC-3884"  title="Please input the correct license plate number format for Motorcycle (A-Z)-(0-9)" maxlength="7" class="form-control"/></td>
 						<td><div class="text-center"><button class="btn btn-success btn-md" type="submit" name="Action" value="addDriver">Add Driver</button></div></td>
 						<!-- <td><input type="submit" name="Action" value="addDriver"/></td> -->
 					</tr>
 				</form>
 			</tbody>
-		</table>	
+		</table>	 --%>
+		<hr>
+
+<div class="w3-container w3-center">
+
+<p>Select which to add</p>
+
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'Driver')">Add Driver</button>
+  <button class="tablinks" onclick="openCity(event, 'Vehicle')">Add Vehicle</button>
+</div>
+
+<div id="Driver" class="tabcontent">
+<div class="login-clean"> 
+	<br>
+	<form action="DispatcherController" method="post">
+		<h2>Add Driver Here</h2>
+        <div class="form-group">
+        	<input type="text" required="required" name="driverName" placeholder="Driver Name" class="form-control"/>
+        </div>
+        <div class="form-group">
+        	<input type="text" required="required" name="driverAddr" placeholder="Driver Address" class="form-control"/>
+        </div>
+        <div class="form-group">
+        	<input type="text" required="required" name="driverCont" placeholder="Driver Contact Number" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success btn-block" type="submit">Add Driver</button>
+        </div>
+
+	</form>
+	</div>
+</div>
+<div id="Vehicle" class="tabcontent">
+<div class="login-clean"> 
+	<form id="form" action="DispatcherController" method="post">
+		<h2>Add Vehicle Here</h2>
+		<div class="form-group">
+        	<input type="text" name="Vehicle" placeholder="Vehicle" class="form-control"/>
+        </div>
+        <div class="form-group">
+        	<input type="text" name="PlateNumber" id="license" pattern="[A-Z]{2}-[0-9]{4}$" placeholder="e.g.  MC-3884"  title="Please input the correct license plate number format for Motorcycle (A-Z)-(0-9)" maxlength="7" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success btn-block" type="submit">Add Vehicle</button>
+        </div>
+
+	</form>
+	</div>
+</div>
+	
+</div>
+
 		<hr>
 		</c:if>
 	<c:if test="${userAccess == 3}">
@@ -687,7 +763,12 @@
 								<td><c:out value="${order.orderAddress}" /></td>
 								<td><c:out value="${order.dateOrdered}" /></td>
 								<td><c:out value="${order.orderType}" /></td>
-								<td><c:out value="${order.seniorDiscount}" /></td>
+								<td><c:if test="${order.seniorDiscount == true}">
+         								Yes
+     								</c:if>
+     								<c:if test="${order.seniorDiscount == false}">
+         								No
+     								</c:if></td>
 								<td>
 									<table class="table-wrapper table-striped table-bordered"
 										width="100%">
@@ -795,7 +876,12 @@
 									<td><c:out value="${order.orderAddress}" /></td>
 									<td><c:out value="${order.dateOrdered}" /></td>
 									<td><c:out value="${order.orderType}" /></td>
-									<td><c:out value="${order.seniorDiscount}" /></td>
+									<td><c:if test="${order.seniorDiscount == true}">
+         									Yes
+     								</c:if>
+     								<c:if test="${order.seniorDiscount == false}">
+         								No
+     								</c:if></td>
 									<td>
 										<table class="table-wrapper table-striped table-bordered"
 											width="100%">
@@ -885,6 +971,320 @@
 			</div>
 		</div>
 		<hr>
+
+<%-- <h2>Select table to view</h2>
+<center><p>Please click on the column title to normalize the tables</p></center>
+
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'Customer')">Customers</button>
+  <button class="tablinks" onclick="openCity(event, 'Dispatcher')">Dispatchers</button>
+  <button class="tablinks" onclick="openCity(event, 'Pharmacist')">Pharmacists</button>
+  <button class="tablinks" onclick="openCity(event, 'Admin')">Admins</button>
+  <button class="tablinks" onclick="openCity(event, 'Items')">Items</button>
+  <button class="tablinks" onclick="openCity(event, 'Pharmacy')">Pharmacies</button>
+  <button class="tablinks" onclick="openCity(event, 'Branch')">Branches</button>
+  <button class="tablinks" onclick="openCity(event, 'Courier')">Courier Services</button>
+</div>
+
+<div id="Customer" class="tabcontent">
+		<h2>
+			<center>List of customers:</center>
+		</h2>
+		<br>
+		<table id="customerTable" class="table table-striped table-bordered"
+			width="100%">
+			<thead>
+				<tr>
+					<th style="width: 150.8px;">Customer Name</th>
+					<th style="width: 154px;">Customer CityID</th>
+					<th style="width: 150px;">Customer Email</th>
+					<th style="width: 143.6px;">Senior Citizen?</th>
+					<th style="width: 156.4px;">Senior Citizen ID</th>
+					<th style="width: 111.6px;">Valid SSID?</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${CustomerList}" var="customer">
+				
+					<tr>
+						<td><c:out value="${customer.customerName}" /></td>
+						<td><c:out value="${customer.cityID}" /></td>
+						<td><c:out value="${customer.email}" /></td>
+						
+						<c:if test="${customer.isSeniorCitizen == false && customer.seniorCitizenID == null}">
+							<td>NO</td>
+							<td>N/A</td>
+							<td>N/A</td>
+						</c:if>
+						<c:if test="${customer.isSeniorCitizen == false && customer.seniorCitizenID != null}">
+							<td>PENDING</td>
+							<td><img class="center-block" src="images/<c:out value="${customer.seniorCitizenID}" />" /></td>
+							<td>
+								<form action="InformationController" method="post">
+									<input type="hidden" Name="customerID" value="<c:out value="${customer.customerID}" />" />
+									<div class="text-center"><button class="btn btn-success btn-md" type="submit" Name="Actionthing" value="SSIDApprove">SSIDApprove</button></div>
+									<!-- <input type="submit" Name="Actionthing" value="SSIDApprove" /> -->
+									<br>
+									<div class="text-center"><button class="btn btn-danger btn-md" type="submit" Name="Actionthing" value="SSIDReject">SSIDReject</button></div>
+									<!-- <input type="submit" Name="Actionthing" value="SSIDReject" /> -->
+								</form>
+							</td>
+						</c:if>
+						<c:if test="${customer.isSeniorCitizen == true}">
+							<td>YES</td>
+							<td><img class="center-block" src="images/<c:out value="${customer.seniorCitizenID}" />" width="300px" height="300px"/></td>
+							<td>N/A</td>
+						</c:if>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+</div>
+<div id="Dispatcher" class="tabcontent">
+		<h2>
+			<center>List of dispatchers:</center>
+		</h2>
+		<br>
+		<table id="dispatcherTable" class="table table-striped table-bordered"
+			width="100%">
+			<thead>
+				<tr>
+					<th>Dispatcher Name</th>
+					<th>Dispatcher Contact Number</th>
+					<th>Dispatcher Address</th>
+					<th>Dispatcher Birthday</th>
+					<th>Courier Company</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${DispatcherList}" var="dispatcher">
+					<tr>
+						<td><c:out value="${dispatcher.firstName}" /> <c:out
+								value="${dispatcher.lastName}" /></td>
+						<td><c:out value="${dispatcher.contactNumber}" /></td>
+						<td><c:out value="${dispatcher.address}" /></td>
+						<td><c:out value="${dispatcher.birthdate}" /></td>
+						<td>
+							<c:forEach items="${CourierList}" var="courier">
+								<c:if test="${courier.courierServiceID == dispatcher.courierServiceID}">
+									<c:out value="${courier.companyName}" />
+								</c:if>
+							</c:forEach>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<a href="RegistrationController?Action=AddDispatcher"
+			class="btn btn-info btn-sm" role="button">Register a new
+			Dispatcher</a>
+</div>
+<div id="Pharmacist" class="tabcontent">
+		<h2>
+			<center>List of pharmacists:</center>
+		</h2>
+		<br>
+		<table id="pharmacistTable" class="table table-striped table-bordered"
+			width="100%">
+			<thead>
+				<tr>
+					<th>Pharmacist Name</th>
+					<th>Pharmacist PRC Number</th>
+					<th>Pharmacist Position</th>
+					<th>Pharmacy</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${PharmacistList}" var="pharmacist">
+					<tr>
+						<td><c:out value="${pharmacist.firstName}" /> <c:out
+								value="${pharmacist.lastName}" /></td>
+						<td><c:out value="${pharmacist.PRCNo}" /></td>
+						<td><c:out value="${pharmacist.position}" /></td>
+						<td>
+						<c:forEach items="${PharmcyList}" var="pharmacy">
+							<c:forEach items="${BranchList}" var="branch">
+								<c:if test="${pharmacy.pharmacyID == branch.pharmacyID && pharmacist.branchID == branch.branchID}">
+									<c:out value="${pharmacy.pharmacyName}" />
+								</c:if>
+							</c:forEach>
+						</c:forEach>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<c:forEach items="${PharmcyList}" var="pharmacy">
+			<a
+				href="RegistrationController?Action=AddPharmacist&PharmacyID=<c:out value="${pharmacy.pharmacyID}" />"
+				class="btn btn-info btn-sm" role="button">Register a new
+				Pharmacist in <c:out value="${pharmacy.pharmacyName}" />
+			</a>
+			<br>
+			<br>
+		</c:forEach>
+</div>
+<div id="Admin" class="tabcontent">
+	<div id = "container">
+		<h2>
+			<center>List of admin:</center>
+		</h2>
+		<br>
+		<table id="adminTable" class="table table-striped table-bordered"
+			width="100%">
+			<thead>
+				<tr>
+					<th>Admin Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${AdminList}" var="admin">
+					<tr>
+						<td><c:out value="${admin.firstName}" /> <c:out
+								value="${admin.surname}" /></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<a href="RegistrationController?Action=AddAdmin"
+			class="btn btn-info btn-sm" role="button">Register a new Admin</a>
+		</div>
+</div>
+<div id = "Items" class = "tabcontent">
+		<h2>
+			<center>Items Inventory:</center>
+		</h2>
+		<table id="druglistTable" class="table table-striped table-bordered" width="100%">
+			<thead>
+				<tr>
+					<th>Product ID</th>
+					<th>Product Name</th>
+					<th>Generic Name</th>
+					<th>Product Strength</th>
+					<th>Image</th>
+					<th>Product Form</th>
+					<th>Product Packaging</th>
+					<th>Product Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${ProductList}" var="product">
+					<tr>
+						<td><c:out value="${product.productID}" /></td>
+						<td><c:out value="${product.productName}" /></td>
+						<td><c:out value="${product.genericName}" /></td>
+						<td><c:out value="${product.productStrength}" /></td>
+						<td><div class="pop">
+	    					<img id="imageresource" src="images/<c:out value="${product.productImage}" />" alt="Medicine Image" width="100px" height="100px">
+	   					 	Click to Enlarge
+						</div></td>
+						<td><c:out value="${product.productForm}" /></td>
+						<td><c:out value="${product.productPackaging}" /></td>
+						<td><c:out value="${product.productDescription}" /></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+</div>
+<div id = "Pharmacy" class = "tabcontent">
+		<h2>
+			<center>List of Pharmacies:</center>
+		</h2>
+		<br>
+		<table id="pharmaciesTable" class="table table-striped table-bordered"
+			width="100%">
+			<thead>
+				<tr>
+					<th>Pharmacy Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${PharmcyList}" var="pharmacy">
+					<tr>
+						<td><c:out value="${pharmacy.pharmacyName}" /></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<a href="InformationController?Action=AddPharmacy"
+			class="btn btn-info btn-sm" role="button">Add a new Pharmacy</a>
+</div>
+<div id = "Branch" class = "tabcontent">
+		<h2>
+			<center>List of branches:</center>
+		</h2>
+		<br>
+		<table id="branchesTable" class="table table-striped table-bordered"
+			width="100%">
+			<thead>
+				<tr>					
+					<th>Branch Address</th>
+					<th>Branch Landline</th>
+					<th>Branch Cellphone</th>
+					<th>Branch Contact</th>		
+					<th>Pharmacy ID</th>		
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${BranchList}" var="branch">
+					<tr>						
+						<td><c:out value="${branch.branchStreet}" />,<c:out
+								value="${branch.branchBarangay}" />,<c:out
+								value="${branch.cityID}" />,<c:out
+								value="${branch.branchProvince}" /></td>
+						<td><c:out value="${branch.branchLandline}" /></td>
+						<td><c:out value="${branch.branchCellular}" /></td>
+						<td><c:out value="${branch.branchOwner}" /></td>
+						<td>
+							<c:forEach items="${PharmcyList}" var="pharmacy">
+								<c:if test="${pharmacy.pharmacyID == branch.pharmacyID}">
+									<c:out value="${pharmacy.pharmacyName}" />
+								</c:if>
+							</c:forEach>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<a href="InformationController?Action=AddBranch"
+			class="btn btn-info btn-sm" role="button">Add a new Branch</a>
+</div>
+<div id = "Courier" class = "tabcontent">
+		<h2>
+			<center>List of Courier Services:</center>
+		</h2>
+		<br>
+		<table id="courierTable" class="table table-striped table-bordered"
+			width="100%">
+			<thead>
+				<tr>					
+					<th>Courier Name</th>
+					<th>Courier Address</th>
+					<th>Courier Landline</th>
+					<th>Courier Cellphone</th>
+					<th>Courier Contact</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${CourierList}" var="courier">
+					<tr>						
+						<td><c:out value="${courier.companyName}" /></td>
+						<td><c:out value="${courier.companyStreet}" />,<c:out
+								value="${courier.companyBarangay}" />,<c:out
+								value="${courier.companyCity}" />,<c:out
+								value="${courier.companyProvince}" /></td>
+						<td><c:out value="${courier.companyLandline}" /></td>
+						<td><c:out value="${courier.companyCellular}" /></td>
+						<td><c:out value="${courier.companyContact}" /></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<a href="InformationController?Action=AddCourier"
+			class="btn btn-info btn-sm" role="button">Add a new Courier
+			Service</a>
+</div> --%>
+	
 		<hr>
 		<h2>
 			<center>List of customers:</center>
@@ -1366,6 +1766,7 @@
 
 body {
 	background: #f1f7fc;
+	font-family: 'Montserrat', sans-serif;
 }
 
 /* Test */
@@ -1397,6 +1798,7 @@ body {
     position: relative;
     -webkit-transition: -webkit-transform 0.5s,     background-color .5s, color .5s;
     transition: transform .5s, background-color .5s, color .5s;
+    border-radius: 5rem;
 }
 /*the colors of the different columns*/
 .side-menu ul li:nth-child(1) { background-color: #172a74;}
@@ -1529,7 +1931,7 @@ body {
     font-size: 20px;
 }
 
-.button {
+.btn {
     background-color: #21a9afa6;
     border: none;
     color: white;
@@ -1537,7 +1939,7 @@ body {
     text-align: center;
     text-decoration: none;
     font-size: 18px;
-	 border-radius: 5rem;
+	border-radius: 5rem;
 	
 }
 
@@ -1548,10 +1950,19 @@ body {
     .columns {
         width: 100%;
     }
+    
+
+
 </style>
+
+
 
 <script src="assets/bootstrap/js/jquery.dataTables.min.js"></script>
 <script src="assets/bootstrap/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 
 <script>
 
@@ -1723,5 +2134,40 @@ function openCity(evt, cityName) {
 	});
 </script>
 
+
+
+<script>
+
+(function($, undefined) {
+	"use strict";
+	$(function() {
+		var $form = $( "#form" );
+		var $input = $form.find( "input" );
+		$input.on( "keyup", function( event ) {
+			var selection = window.getSelection().toString();
+			if ( selection !== '' ) {
+				return;
+			}
+			if ( $.inArray( event.keyCode, [38,40,37,39] ) !== -1 ) {
+				return;
+			}
+			var $this = $(this);
+			var input = $this.val();
+					input = input.replace(/[\W\s\._\-]+/g, '');	
+				var split = 1;
+				var chunk = [];
+				for (var i = 0, len = input.length; i < len; i += split) {
+					split = ( i >= 1 && i <= 2 ) ? 8 : 2;
+					chunk.push( input.substr( i, split ) );
+				}
+				$this.val(function() {
+					return chunk.join("-").toUpperCase();
+				});
+		} );
+	});
+})(jQuery);
+
+
+</script>
 
 </html>

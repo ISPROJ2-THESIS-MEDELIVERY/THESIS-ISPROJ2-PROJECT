@@ -86,7 +86,12 @@
 								PRESCRIPTION REQUIRED
 							</c:if>
 			            </td>
-			            <td><c:out value="${order.seniorDiscount}" /></td>
+			            <td><c:if test="${order.seniorDiscount == true}">
+         						Yes
+     						</c:if>
+     						<c:if test="${order.seniorDiscount == false}">
+         						No
+     						</c:if></td>
 			            <td>			            	
 				            <table class="table-wrapper table-striped table-bordered" width="100%">
 							    <thead>
@@ -189,7 +194,12 @@
 								PRESCRIPTION REQUIRED
 							</c:if>
 			            </td>
-			            <td><c:out value="${order.seniorDiscount}" /></td>
+			            <td><c:if test="${order.seniorDiscount == true}">
+         						Yes
+     						</c:if>
+     						<c:if test="${order.seniorDiscount == false}">
+         						No
+     						</c:if></td>
 			            <td>
 				            <table class="table-wrapper table-striped table-bordered" width="100%">
 							    <thead>
@@ -266,7 +276,12 @@
 								PRESCRIPTION REQUIRED
 							</c:if>
 			            </td>
-			            <td><c:out value="${order.seniorDiscount}" /></td>
+			            <td><c:if test="${order.seniorDiscount == true}">
+         						Yes
+     						</c:if>
+     						<c:if test="${order.seniorDiscount == false}">
+         						No
+     						</c:if></td>
 			            <td>
 				            <table class="table-wrapper table-striped table-bordered" width="100%">
 							    <thead>

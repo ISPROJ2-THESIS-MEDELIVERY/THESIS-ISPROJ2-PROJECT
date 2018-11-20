@@ -63,46 +63,53 @@
 	<table class="table table-striped table-bordered" width="100%">
 	    <thead>
 	        <tr>
+	            <th>Customer ID</th>
+	            <th>Pharmacy ID</th>
+	            <th>City ID</th>
+	            <th>Address</th>
 	            <th>Date</th>
 	            <th>Type</th>
 	            <th>Status</th>
 	            <th>Senior Discount</th>
-	            <th>Orders</th>
 	            <th>Actual Cost</th>
 	        </tr>
 	    </thead>
 	    <tbody>
 	            <tr>
-	                <td><fmt:formatDate type = "both" value = "${order.dateOrdered}" /></td>
+	                <td><c:out value="${order.customerID}" /></td>
+	                <td><c:out value="${order.pharmacyID}" /></td>
+	                <td><c:out value="${order.cityID}" /></td>
+	                <td><c:out value="${order.orderAddress}" /></td>
+	                <td><c:out value="${order.dateOrdered}" /></td>
 	                <td><c:out value="${order.orderType}" /></td>
-	                <td>PENDING</td>
+	                <td><c:out value="${order.orderStatus}" /></td>
 	                <td><c:out value="${order.seniorDiscount}" /></td>
-	                <td>
-		                <table class="" width="100%">
-						    <thead>
-						        <tr>
-						            <th>ProductID</th>
-						            <th>Quantity</th>
-						            <th>Cost Per Unit</th>
-						            <th>Total Cost</th>
-						        </tr>
-						    </thead>
-						    <tbody>
-						    	<c:forEach items="${OrderDetailHistory}" var="orderdetails">
-									<c:if test="${order.orderID == orderdetails.orderID}">
-						            <tr>
-						                <td><c:out value="${orderdetails.productID}" /></td>
-						                <td><c:out value="${orderdetails.quantity}" /></td>
-										<td>&#8369;<fmt:formatNumber value = "${orderdetails.costPerUnit}" /></td>
-										<td>&#8369;<fmt:formatNumber value = "${orderdetails.totalCost}" /></td>  
-						            </tr>
-						            </c:if>
-								</c:forEach>
-						    </tbody>
-						</table>
-	                </td>
-					<td>&#8369;<fmt:formatNumber value = "${order.actualCost}" /></td>
+	                <td><c:out value="${order.actualCost}" /></td>
 	            </tr>
+	    </tbody>
+	</table>
+	<table class="table table-striped table-bordered" width="100%">
+	    <thead>
+	        <tr>
+	            <th>OrderID</th>
+	            <th>ProductID</th>
+	            <th>Quantity</th>
+	            <th>Cost Per Unit</th>
+	            <th>Total Cost</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    	<c:forEach items="${OrderDetailHistory}" var="orderdetails">
+				<c:if test="${order.orderID == orderdetails.orderID}">
+	            <tr>
+	                <td><c:out value="${orderdetails.orderID}" /></td>
+	                <td><c:out value="${orderdetails.productID}" /></td>
+	                <td><c:out value="${orderdetails.quantity}" /></td>
+	                <td><c:out value="${orderdetails.costPerUnit}" /></td>
+	                <td><c:out value="${orderdetails.totalCost}" /></td>
+	            </tr>
+	            </c:if>
+			</c:forEach>
 	    </tbody>
 	</table>
 	<!-- Comments: <br><input type="text" name="Comments"/><br> -->

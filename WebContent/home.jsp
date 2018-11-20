@@ -619,7 +619,7 @@
 																	</c:if>
 																</c:forEach></td>
 															<td><c:out value="${orderdetails.quantity}" /></td>
-															<td>&#8369;<fmt:formatNumber value = "${{orderdetails.costPerUnit}" /></td>   
+															<td>&#8369;<fmt:formatNumber value = "${orderdetails.costPerUnit}" /></td>   
 															<td>&#8369;<fmt:formatNumber value = "${orderdetails.totalCost}" /></td>   
 														</tr>
 													</c:if>
@@ -712,7 +712,7 @@
 																</c:if>
 															</c:forEach></td>
 														<td><c:out value="${orderdetails.quantity}" /></td>
-															<td>&#8369;<fmt:formatNumber value = "${{orderdetails.costPerUnit}" /></td>   
+															<td>&#8369;<fmt:formatNumber value = "${orderdetails.costPerUnit}" /></td>   
 															<td>&#8369;<fmt:formatNumber value = "${orderdetails.totalCost}" /></td>   
 													</tr>
 												</c:if>

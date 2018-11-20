@@ -72,23 +72,7 @@
 	            <tr>
 	                <td><fmt:formatDate type = "both" value = "${order.dateOrdered}" /></td>
 	                <td><c:out value="${order.orderType}" /></td>
-	                <td>
-	                	<c:if test="${!order.orderStatus.endsWith('1')}">
-	                	PENDING: First Try
-	                	</c:if>
-	                	<c:if test="${!order.orderStatus.endsWith('2')}">
-	                	PENDING: Second Try
-	                	</c:if>
-	                	<c:if test="${!order.orderStatus.endsWith('3')}">
-	                	PENDING: Third Try
-	                	</c:if>
-	                	<c:if test="${!order.orderStatus.endsWith('4')}">
-	                	PENDING: Fourth Try
-	                	</c:if>
-	                	<c:if test="${!order.orderStatus.endsWith('5')}">
-	                	PENDING: Fifth Try
-	                	</c:if>
-	                </td>
+	                <td>PENDING</td>
 	                <td><c:out value="${order.seniorDiscount}" /></td>
 	                <td>
 		                <table class="" width="100%">
@@ -106,15 +90,15 @@
 						            <tr>
 						                <td><c:out value="${orderdetails.productID}" /></td>
 						                <td><c:out value="${orderdetails.quantity}" /></td>
-						                <td>&#8369;<c:out value="${orderdetails.costPerUnit}" /></td>
-						                <td>&#8369;<c:out value="${orderdetails.totalCost}" /></td>
+										<td>&#8369;<fmt:formatNumber value = "${orderdetails.costPerUnit}" /></td>
+										<td>&#8369;<fmt:formatNumber value = "${orderdetails.totalCost}" /></td>  
 						            </tr>
 						            </c:if>
 								</c:forEach>
 						    </tbody>
 						</table>
 	                </td>
-	                <td><c:out value="${order.actualCost}" /></td>
+					<td>&#8369;<fmt:formatNumber value = "${order.actualCost}" /></td>
 	            </tr>
 	    </tbody>
 	</table>

@@ -114,7 +114,7 @@
 	<center>
 			<form action='CustomerController' method='get'>
 				<input type="hidden" name="OrderID" value="<c:out value="${order.orderID}" />" readonly>
-				<input type="Text" name="ReturnReason" />
+				<input type="Text" name="ReturnReason" required="" placeholder=" Kindly state your reason for returning this item. " />
 				<button class="btn btn-success btn-md" type="submit" name="action" value="ReturnOrder">Return Order</button>
 				<!-- <input type='submit' name='action' value="ReturnOrder" style='display: on-hover' /> -->
 			</form>
@@ -182,6 +182,14 @@ hr {
     text-align: center;
     text-decoration: none;
     font-size: 18px;
+    border-radius: 5rem;
+}
+.button, input, optgroup, select, textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    width: 350px;
     border-radius: 5rem;
 }
 </style>	

@@ -53,10 +53,11 @@
     </div>
     <div id="container">
 	<h1>CART:</h1>
+	
 	<c:if test="${CartList != null}">
 					<div class="list-group">
 						<a class="list-group-item">
-							<h4 class="list-group-item list-group-item-info">Orders have a minimum of 300 pesos, please ensure that your total order reaches that.</h4>
+							<center><h4 class="list-group-item list-group-item-info">Orders must reach a minimum of 50 pesos.</h4></center>
 						</a>
 					</div>
     		<table id="cartlistTable" class="table table-striped table-bordered" width="100%">

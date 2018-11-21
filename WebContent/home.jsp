@@ -95,8 +95,8 @@
 	
 	<c:if test="${justReg != null}">
 		<div role="alert" class="alert alert-info">
-			<span><strong>A confirmation email has been sent to
-					your email address</strong></span>
+			<center><span><strong>A confirmation email has been sent to
+					your email address</strong></span></center>
 		</div>
 	</c:if>
 	

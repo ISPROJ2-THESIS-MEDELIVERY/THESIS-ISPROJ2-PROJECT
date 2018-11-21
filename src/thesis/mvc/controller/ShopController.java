@@ -197,7 +197,7 @@ public class ShopController extends HttpServlet {
 			if(order == null || OrderDetails.isEmpty()) {
 				response.sendRedirect(request.getContextPath() + "/index.jsp");
 			} else if (finalAmount <= 300.00) {
-				session.setAttribute("message", "Orders have a minimum of 300 pesos, please ensure that your order reaches that.");
+				session.setAttribute("message", "Orders must reach a minimum of 50 pesos");
 				if (session.getAttribute("CatalogType") == "Regular") {
 					response.sendRedirect(request.getContextPath() + "/CatalogBasic.jsp");
 				} else if (session.getAttribute("CatalogType") == "Prescription") {
@@ -280,7 +280,7 @@ public class ShopController extends HttpServlet {
 			if(order == null || OrderDetails.isEmpty()) {
 				response.sendRedirect(request.getContextPath() + "/index.jsp");
 			} else if (finalAmount <= 300.00) {
-				session.setAttribute("message", "Orders have a minimum of 300 pesos, please ensure that your order reaches that.");
+				session.setAttribute("message", "Orders must reach a minimum of 50 pesos.");
 				if (session.getAttribute("CatalogType") == "Regular") {
 					response.sendRedirect(request.getContextPath() + "/CatalogBasic.jsp");
 				} else if (session.getAttribute("CatalogType") == "Prescription") {

@@ -55,10 +55,11 @@
     </div>
     <div id="container">
 	<h1>CART:</h1>
+	
 	<c:if test="${CartList != null}">
 					<div class="list-group">
 						<a class="list-group-item">
-							<h4 class="list-group-item-heading"><c:out value="${message}" /></h4>
+							<center><h4 class="list-group-item-heading"><c:out value="${message}" /></h4></center>
 						</a>
 					</div>
     		<table id="cartlistTable" class="table table-striped table-bordered" width="100%">

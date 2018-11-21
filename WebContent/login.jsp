@@ -42,11 +42,7 @@
 	</div> 
 	<br>
 	<form action="LoginController" method="post">
-		<c:if test="${RetryLogin != null}">
-			Failed Login Attempts: <c:out value="${LoginTry}" /><br>
-			Only 5 attempts are allowed
-		</c:if>
-		<c:out value="${specialMessage}" />
+		
 		<h2>Login Here</h2>
         <div class="form-group">
         	<input type="text" required="required" name="Username" placeholder="Username" class="form-control" maxlength="25"/>
@@ -57,7 +53,10 @@
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">Log In</button>
         </div>
-
+<c:if test="${RetryLogin != null}"> 
+			The username or password you have entered is invalid. You have <c:out value="${LoginTry}" />
+		attempts left.</c:if>
+		<c:out value="${specialMessage}" />
 	</form>
 	</div>
 <div class="footer-dark">

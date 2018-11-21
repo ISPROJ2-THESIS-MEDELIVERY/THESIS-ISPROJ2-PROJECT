@@ -262,6 +262,16 @@ $(function() {
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 
+.btn {
+    background-color: #21a9afa6;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5rem;
+}
 </style>
 
 </html>

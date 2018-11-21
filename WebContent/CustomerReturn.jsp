@@ -115,7 +115,8 @@
 			<form action='CustomerController' method='get'>
 				<input type="hidden" name="OrderID" value="<c:out value="${order.orderID}" />" readonly>
 				<input type="Text" name="ReturnReason" />
-				<input type='submit' name='action' value="ReturnOrder" style='display: on-hover' />
+				<button class="btn btn-success btn-md" type="submit" name="action" value="ReturnOrder">Return Order</button>
+				<!-- <input type='submit' name='action' value="ReturnOrder" style='display: on-hover' /> -->
 			</form>
 		</center>
 		<hr>
@@ -171,6 +172,17 @@ hr {
   background-color: transparent;
   margin-left: 100px;
   margin-right: 100px;
+}
+
+.btn {
+    background-color: #21a9afa6;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5rem;
 }
 </style>	
 

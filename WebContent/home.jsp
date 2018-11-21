@@ -1369,7 +1369,7 @@
 						</c:if>
 						<c:if test="${customer.isSeniorCitizen == false && customer.seniorCitizenID != null}">
 							<td>PENDING</td>
-							<td><img class="center-block" src="images/<c:out value="${customer.seniorCitizenID}" />" /></td>
+							<td><div class="pop"><img id="imageresource" class="center-block" src="images/<c:out value="${customer.seniorCitizenID}" />" /></div></td>
 							<td>
 								<form action="InformationController" method="post">
 									<input type="hidden" Name="customerID" value="<c:out value="${customer.customerID}" />" />
@@ -1383,7 +1383,7 @@
 						</c:if>
 						<c:if test="${customer.isSeniorCitizen == true}">
 							<td>YES</td>
-							<td><img class="center-block" src="images/<c:out value="${customer.seniorCitizenID}" />" width="300px" height="300px"/></td>
+							<td><div class="pop"><img id="imageresource" class="center-block" src="images/<c:out value="${customer.seniorCitizenID}" />" width="300px" height="300px"/></div></td>
 							<td>N/A</td>
 						</c:if>
 						<td><img class="center-block" src="images/<c:out value="${customer.birthCertificate}" />" width="300px" height="300px"/></td>

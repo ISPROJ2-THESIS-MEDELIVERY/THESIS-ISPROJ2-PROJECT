@@ -146,9 +146,14 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="assets/bootstrap/js/jquery.dataTables.min.js"></script>
 <script src="assets/bootstrap/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 
 
-	<script type="text/javascript">
+
+	<!-- <script type="text/javascript">
 		 $(document).ready(function() {
 			$("#auditTable").DataTable({
 				"sPaginationType": "full_numbers",
@@ -156,7 +161,21 @@
                 "bScrollCollapse": true
 			});
 		}); 
-	</script>
+	</script> -->
 
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#auditTable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'pdfHtml5',
+                orientation: 'landscape',
+                pageSize: 'LEGAL'
+            }
+        ]
+    } );
+} );
+</script>
 
 </html>

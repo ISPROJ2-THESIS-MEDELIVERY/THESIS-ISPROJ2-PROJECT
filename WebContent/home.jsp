@@ -613,7 +613,7 @@
 					</a>
 				</div>
 			</div>	
-			<table id="phardruglistTable" class="table table-striped table-bordered" width="100%">
+			<table id="salesTable" class="table table-striped table-bordered" width="100%">
 				<thead>
 					<tr>
 						<th>Product Name</th>
@@ -1369,7 +1369,7 @@
 						</c:if>
 						<c:if test="${customer.isSeniorCitizen == false && customer.seniorCitizenID != null}">
 							<td>PENDING</td>
-							<td><img class="center-block" src="images/<c:out value="${customer.seniorCitizenID}" />" /></td>
+							<td><div class="pop"><img id="imageresource" class="center-block" src="images/<c:out value="${customer.seniorCitizenID}" />" /></div></td>
 							<td>
 								<form action="InformationController" method="post">
 									<input type="hidden" Name="customerID" value="<c:out value="${customer.customerID}" />" />
@@ -1383,7 +1383,7 @@
 						</c:if>
 						<c:if test="${customer.isSeniorCitizen == true}">
 							<td>YES</td>
-							<td><img class="center-block" src="images/<c:out value="${customer.seniorCitizenID}" />" width="300px" height="300px"/></td>
+							<td><div class="pop"><img id="imageresource" class="center-block" src="images/<c:out value="${customer.seniorCitizenID}" />" width="300px" height="300px"/></div></td>
 							<td>N/A</td>
 						</c:if>
 						<td><img class="center-block" src="images/<c:out value="${customer.birthCertificate}" />" width="300px" height="300px"/></td>
@@ -2074,6 +2074,21 @@ function openCity(evt, cityName) {
 			"bScrollCollapse" : true
 		});
 	});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#salesTable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'pdfHtml5',
+                orientation: 'landscape',
+                pageSize: 'LEGAL'
+            }
+        ]
+    } );
+} );
 </script>
 
 <script type="text/javascript">

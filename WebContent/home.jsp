@@ -1359,7 +1359,7 @@
 						<td>
 							<form action="InformationController">
 								<input type="hidden" Name="AccountID" value="<c:out value="${customer.customerID}" />" />
-								<div class="text-center"><button class="btn btn-success btn-md" type="submit" Name="Action" value="AuditPageCustomer">Audit PAge</button></div>
+								<div class="text-center"><button class="btn btn-success btn-md" type="submit" Name="Action" value="AuditPageCustomer">Audit Page</button></div>
 							</form>
 						</td>
 					</tr>

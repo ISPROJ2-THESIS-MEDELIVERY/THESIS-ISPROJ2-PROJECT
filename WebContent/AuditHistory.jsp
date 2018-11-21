@@ -83,7 +83,7 @@
 		</div>
 	
 	<h1>Audit:</h1>
-	<table id="druglistTable" class="table table-striped table-bordered" width="100%">
+	<table id="auditTable" class="table table-striped table-bordered" width="100%">
 		<thead>
 			<tr>
                 <th>Log Type</th>
@@ -93,28 +93,19 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${AuditList}" var="item">
-					<tr>
-						<c:if test="${item.userID == UserID}">
+				<c:if test="${item.userID == UserID}">
+					<tr>						
 							<td><c:out value="${item.logType}" /></td>
 							<td><c:out value="${item.timestamp}" /></td>
-							<td><c:out value="${item.actionTaken}" /></td>
-						</c:if>
+							<td><c:out value="${item.actionTaken}" /></td>						
 					</tr>
+				</c:if>
 			</c:forEach>
 		</tbody>
 	</table>
 	</div>
-	
-<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">              
-      <div class="modal-body">
-      	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <img src="" class="imagepreview" style="width: 100%;" >
-      </div>
-    </div>
-  </div>
-</div>
+	<br>
+			
 
 <div class="footer-dark">
     <footer>
@@ -156,35 +147,16 @@
 <script src="assets/bootstrap/js/jquery.dataTables.min.js"></script>
 <script src="assets/bootstrap/js/dataTables.bootstrap.min.js"></script>
 
-<script>
-
-$(function() {
-	$('.pop').on('click', function() {
-		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-		$('#imagemodal').modal('show');   
-	});		
-});
-
-</script>
 
 	<script type="text/javascript">
 		 $(document).ready(function() {
-			$("#druglistTable").DataTable({
+			$("#auditTable").DataTable({
 				"sPaginationType": "full_numbers",
                 "bJQueryUI": true, "sScrollX": "100%",
                 "bScrollCollapse": true
 			});
 		}); 
 	</script>
-	
-	<script type="text/javascript">
-		 $(document).ready(function() {
-			$("#cartlistTable").DataTable({
-				"sPaginationType": "full_numbers",
-                "bJQueryUI": true, "sScrollX": "100%",
-                "bScrollCollapse": true
-			});
-		}); 
-	</script>
+
 
 </html>

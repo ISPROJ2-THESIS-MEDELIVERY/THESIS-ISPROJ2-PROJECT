@@ -606,7 +606,7 @@
 					</a>
 				</div>
 			</div>	
-			<table id="phardruglistTable" class="table table-striped table-bordered" width="100%">
+			<table id="salesTable" class="table table-striped table-bordered" width="100%">
 				<thead>
 					<tr>
 						<th>Product Name</th>
@@ -2067,6 +2067,21 @@ function openCity(evt, cityName) {
 			"bScrollCollapse" : true
 		});
 	});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#salesTable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'pdfHtml5',
+                orientation: 'landscape',
+                pageSize: 'LEGAL'
+            }
+        ]
+    } );
+} );
 </script>
 
 <script type="text/javascript">

@@ -601,6 +601,15 @@
 				</div>
 			</div>
 			</div>
+			<div id="container">
+				<div class="list-group">
+					<a class="list-group-item list-group-item-info">
+						<h4 class="list-group-item-heading">
+							<center>Reports</center>
+						</h4>
+					</a>
+				</div>
+			</div>	
 			<table id="phardruglistTable" class="table table-striped table-bordered" width="100%">
 				<thead>
 					<tr>

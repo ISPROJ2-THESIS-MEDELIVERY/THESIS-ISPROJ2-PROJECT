@@ -63,9 +63,9 @@
 	<table class="table table-striped table-bordered" width="100%">
 	    <thead>
 	        <tr>
-	            <th>Customer ID</th>
+	           
 	            <th>Pharmacy ID</th>
-	            <th>City ID</th>
+	           
 	            <th>Address</th>
 	            <th>Date</th>
 	            <th>Type</th>
@@ -76,9 +76,9 @@
 	    </thead>
 	    <tbody>
 	            <tr>
-	                <td><c:out value="${order.customerID}" /></td>
+	               
 	                <td><c:out value="${order.pharmacyID}" /></td>
-	                <td><c:out value="${order.cityID}" /></td>
+	                
 	                <td><c:out value="${order.orderAddress}" /></td>
 	                <td><c:out value="${order.dateOrdered}" /></td>
 	                <td><c:out value="${order.orderType}" /></td>

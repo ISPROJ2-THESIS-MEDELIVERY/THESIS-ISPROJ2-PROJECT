@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="assets/css/Footer-Dark.css" />
 </head>
 <body>
+<!-- comment -->
 	 <div>
         <div class="header-blue">
             <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
@@ -73,7 +74,12 @@
 	                <td><fmt:formatDate type = "both" value = "${order.dateOrdered}" /></td>
 	                <td><c:out value="${order.orderType}" /></td>
 	                <td>PENDING</td>
-	                <td><c:out value="${order.seniorDiscount}" /></td>
+	                <td><c:if test="${order.seniorDiscount == true}">
+         					Yes
+     					</c:if>
+     					<c:if test="${order.seniorDiscount == false}">
+         					No
+     					</c:if></td>
 	                <td>
 		                <table class="" width="100%">
 						    <thead>

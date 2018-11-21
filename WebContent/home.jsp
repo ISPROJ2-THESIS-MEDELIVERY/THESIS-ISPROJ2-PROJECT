@@ -171,7 +171,7 @@
 					  <form action='ShopController' method='post'>
 					
 						<div class="form-group">
-        					<input type="number" name="Quantity" required="required" class="form-control && center-block" style="width: 80px"/>
+        					<input type="number" name="Quantity" required="required" class="form-control && center-block" min = "1" style="width: 80px"/>
        					</div>
 						<input class="center-block" type="hidden" name="ProductID" value="<c:out value="${items.productID}" />" readonly>
 						<input class="center-block" type="hidden" name="SelectedPharmacy" value="<c:out value="${pharm.pharmacyID}" />" readonly>
@@ -385,8 +385,8 @@
 						<a class="list-group-item">
 							<h4 class="list-group-item-heading">Customer Details:</h4>
 							<p class="list-group-item-text">
-								User ID:
-								<c:out value="${userID}" />
+								User Name:
+								<c:out value="${CustomerInfo.customerName}"/>
 							</p>
 							<p class="list-group-item-text">
 								Username:
@@ -394,7 +394,7 @@
 							</p>
 							<p class="list-group-item-text">
 								User Type:
-								<c:out value="${userAccess}" />
+								Customer
 							</p>
 						</a>
 					</div>
@@ -432,7 +432,7 @@
       						<h4 class="list-group-item-heading">Dispatcher Details:</h4>
       						<p class="list-group-item-text">User ID: <c:out value="${userID}" /></p>
       						<p class="list-group-item-text">Username: <c:out value="${username}" /></p>
-      						<p class="list-group-item-text">User Type: <c:out value="${userAccess}" /></p>
+      						<p class="list-group-item-text">User Type: Dispatcher </p>
     					</a>
     				</div>
     				<!-- <a href="DispatcherController?Action=DispatchOrder" class="btn btn-info" role="button">Order Dispatch</a><br>
@@ -575,7 +575,7 @@
 							</p>
 							<p class="list-group-item-text">
 								User Type:
-								<c:out value="${userAccess}" />
+								Pharmacist
 							</p>
 						</a>
 					</div>
@@ -985,7 +985,7 @@
 					</p>
 					<p class="list-group-item-text">
 						User Type:
-						<c:out value="${userAccess}" />
+						Admin"
 					</p>
 				</a>
 			</div>

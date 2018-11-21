@@ -173,6 +173,7 @@ public class RegistrationController extends HttpServlet {
 							String AFileName = name;
 							filePart.write(UPLOAD_DIRECTORY + File.separator + AFileName);
 							System.out.println( "File Uploaded Successfully: " + UPLOAD_DIRECTORY + File.separator + AFileName);
+							birthCertificate = DbaseName;
 						} else {
 							System.out.println( "File Uploaded is not an image!");
 						}

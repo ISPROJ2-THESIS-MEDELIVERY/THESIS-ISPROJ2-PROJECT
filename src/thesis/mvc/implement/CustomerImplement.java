@@ -183,7 +183,7 @@ public class CustomerImplement implements CustomerDAO{
 				customer.setCustomerCellular( resultSet.getString("CustomerCellular") );
 				customer.setEmail( resultSet.getString( "Email" ) );
 				customer.setIsSeniorCitizen( resultSet.getBoolean( "IsSeniorCitizen" ) );
-				customer.setSeniorCitizenID( resultSet.getString( "SeniorCitizenID" ) );
+				customer.setSeniorCitizenID( new EncryptionFunction().decrypt( resultSet.getString( "SeniorCitizenID" ) ) );
 				customer.setBirthCertificate( new EncryptionFunction().decrypt( resultSet.getString( "BirthCertificate" ) ) ); 
 			}
 			resultSet.close();

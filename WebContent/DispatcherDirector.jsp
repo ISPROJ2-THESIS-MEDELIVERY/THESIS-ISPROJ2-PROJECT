@@ -75,7 +75,7 @@
 				<c:if test="${order.orderStatus.startsWith('PENDING') && order.pharmacyID >= 1}">
 					<tr>
 			            <td><c:out value="${order.orderAddress}" /></td>
-			            <td><c:out value="${order.dateOrdered}" /></td>
+	                	<td><fmt:formatDate type = "both" value = "${order.dateOrdered}" /></td>
 			            <td><c:out value="${order.orderType}" /></td>
 			            <td>			            
 		                	<c:if test="${order.orderStatus.endsWith('1')}">
@@ -199,7 +199,7 @@
 				<c:if test="${order.orderStatus == 'EN-ROUTE' && order.pharmacyID >= 1}">
 					<tr>
 			            <td><c:out value="${order.orderAddress}" /></td>
-			            <td><c:out value="${order.dateOrdered}" /></td>
+	                	<td><fmt:formatDate type = "both" value = "${order.dateOrdered}" /></td>
 			            <td><c:out value="${order.orderType}" /></td>
 			            <td><c:out value="${order.orderStatus}" /></td>
 			            <td>
@@ -281,7 +281,7 @@
 			<c:forEach items="${DispatcherOrderList}" var="order">
 				<c:if test="${order.orderStatus == 'RETURNING'}">
 					<tr>
-			            <td><c:out value="${order.dateOrdered}" /></td>
+	                	<td><fmt:formatDate type = "both" value = "${order.dateOrdered}" /></td>
 			            <td><c:out value="${order.orderType}" /></td>
 			            <td><c:out value="${order.orderStatus}" /></td>
 			            <td>

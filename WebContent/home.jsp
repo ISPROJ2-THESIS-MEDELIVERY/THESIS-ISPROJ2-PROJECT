@@ -85,6 +85,7 @@
 			</nav>
 		</div>
 	</div>
+	
 	<c:if test="${justReg != null}">
 		<div role="alert" class="alert alert-info">
 			<span><strong>A confirmation email has been sent to
@@ -97,8 +98,11 @@
 <c:if test="${userAccess == null}">
 <div class="container">
 <div class="w3-container w3-center">
+
+
+
 <h2>Our Partner Pharmacies </h2>
-<p>Kindly select the pharmacy of your choosing</p>
+<center><h5>Kindly select the pharmacy of your choosing</h5></center>
 
 <div class="tab">
 	<c:forEach items="${Featurepharm}" var="pharm">
@@ -137,12 +141,22 @@
 </div>
 </c:if>
 
+	<hr>
+		<div id="container">
+			<center><img alt="" src="assets/img/medlogopill.png" width="300px" height="300px"></center>    
+		</div>
+		<hr>
 
 <c:if test="${userAccess == 1}">
 <div class = "container">
 <div class="w3-container w3-center">
+
+
+
+
+
 <h2>Our Partner Pharmacies </h2>
-<p>Kindly select the pharmacy of your choosing</p>
+<center><h5>Kindly select the pharmacy of your choosing</h5></center>
 
 <div class="tab">
 	<c:forEach items="${Featurepharm}" var="pharm">
@@ -338,7 +352,7 @@
 	<c:if test="${userAccess == 1}">
 		<hr>
 		<div id="container">
-			<center><img alt="" src="assets/img/medlogopill.png" width="400px" height="400px"></center>    
+			<center><img alt="" src="assets/img/medlogopill.png" width="300px" height="300px"></center>    
 		</div>
 		<hr>
 		<div class="container">
@@ -688,7 +702,7 @@
 									<td><c:out value="${order.pharmacyID}" /></td>
 									<td><c:out value="${order.cityID}" /></td>
 									<td><c:out value="${order.orderAddress}" /></td>
-									<td><c:out value="${order.dateOrdered}" /></td>
+	                				<td><fmt:formatDate type = "both" value = "${order.dateOrdered}" /></td>
 									<td><c:out value="${order.orderType}" /></td>
 									<td><c:out value="${order.seniorDiscount}" /></td>
 									<td>
@@ -782,7 +796,7 @@
 								<td><c:out value="${order.pharmacyID}" /></td>
 								<td><c:out value="${order.cityID}" /></td>
 								<td><c:out value="${order.orderAddress}" /></td>
-								<td><c:out value="${order.dateOrdered}" /></td>
+	                			<td><fmt:formatDate type = "both" value = "${order.dateOrdered}" /></td>
 								<td><c:out value="${order.orderType}" /></td>
 								<td><c:if test="${order.seniorDiscount == true}">
          								Yes
@@ -895,7 +909,7 @@
 									<td><c:out value="${order.pharmacyID}" /></td>
 									<td><c:out value="${order.cityID}" /></td>
 									<td><c:out value="${order.orderAddress}" /></td>
-									<td><c:out value="${order.dateOrdered}" /></td>
+	                				<td><fmt:formatDate type = "both" value = "${order.dateOrdered}" /></td>
 									<td><c:out value="${order.orderType}" /></td>
 									<td><c:if test="${order.seniorDiscount == true}">
          									Yes

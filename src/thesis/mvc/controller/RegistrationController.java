@@ -164,7 +164,7 @@ public class RegistrationController extends HttpServlet {
 				 try {
 
 		            	Part filePart = request.getPart("file");
-						String name = "SSID" + customerFName;
+						String name = "BirthID" + customerFName;
 						String end = filePart.getContentType();
 						if (end.startsWith("image")) {
 							String imageType = end.replace("image/", "");

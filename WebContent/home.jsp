@@ -688,7 +688,7 @@
 									<td><c:out value="${order.pharmacyID}" /></td>
 									<td><c:out value="${order.cityID}" /></td>
 									<td><c:out value="${order.orderAddress}" /></td>
-									<td><c:out value="${order.dateOrdered}" /></td>
+	                				<td><fmt:formatDate type = "both" value = "${order.dateOrdered}" /></td>
 									<td><c:out value="${order.orderType}" /></td>
 									<td><c:out value="${order.seniorDiscount}" /></td>
 									<td>
@@ -782,7 +782,7 @@
 								<td><c:out value="${order.pharmacyID}" /></td>
 								<td><c:out value="${order.cityID}" /></td>
 								<td><c:out value="${order.orderAddress}" /></td>
-								<td><c:out value="${order.dateOrdered}" /></td>
+	                			<td><fmt:formatDate type = "both" value = "${order.dateOrdered}" /></td>
 								<td><c:out value="${order.orderType}" /></td>
 								<td><c:if test="${order.seniorDiscount == true}">
          								Yes
@@ -895,7 +895,7 @@
 									<td><c:out value="${order.pharmacyID}" /></td>
 									<td><c:out value="${order.cityID}" /></td>
 									<td><c:out value="${order.orderAddress}" /></td>
-									<td><c:out value="${order.dateOrdered}" /></td>
+	                				<td><fmt:formatDate type = "both" value = "${order.dateOrdered}" /></td>
 									<td><c:out value="${order.orderType}" /></td>
 									<td><c:if test="${order.seniorDiscount == true}">
          									Yes

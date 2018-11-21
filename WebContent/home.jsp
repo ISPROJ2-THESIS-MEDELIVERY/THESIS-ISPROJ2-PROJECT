@@ -69,9 +69,16 @@
 							href="LoginController" class="login">Logout</a><br></span>
 						<span class="navbar-text" style="float: right"><a
 							href="PharmacistController?Action=Prescription && #return" class="login">Return Orders</a></span>
+						
 						<span class="navbar-text" style="float: right"><a
-							href="PharmacistController?Action=Prescription && #approve" class="login">Approve/Disapprove
+							href="PharmacistController?Action=Prescription && #prescription" class="login">Validate Prescription Request
+								</a></span>
+						<span class="navbar-text" style="float: right"><a
+							href="PharmacistController?Action=Prescription && #otcrequest" class="login">Validate OTC Request
 								prescription orders</a></span>
+								<span class="navbar-text" style="float: right"><a
+							href="PharmacistController?Action=Prescription && #catalog" class="login">Your Catalog</a></span>
+								
 						<span class="navbar-text" style="float: right"><a
 							href="ProductController?Action=AddnewProduct" class="login">Add
 								New Product</a><br></span>
@@ -603,7 +610,7 @@
 			</div>
 			<div id="container">
 				<div class="list-group">
-					<a class="list-group-item list-group-item-info">
+					<a id="reports"class="list-group-item list-group-item-info">
 						<h4 class="list-group-item-heading">
 							<center>Reports</center>
 						</h4>
@@ -635,7 +642,7 @@
 			<br>
 			<div id="container">
 				<div class="list-group">
-					<a class="list-group-item list-group-item-info">
+					<a id="catalog" class="list-group-item list-group-item-info">
 						<h4 class="list-group-item-heading">
 							<center>Your Pharmacy's Current Catalog</center>
 						</h4>
@@ -678,7 +685,7 @@
 			<br>
 			<div id="container">
 				<div class="list-group">
-					<a id="approve" class="list-group-item list-group-item-info">
+					<a id="otcrequest" class="list-group-item list-group-item-info">
 						<h4 class="list-group-item-heading">
 							<center>Current Orders Heading to your Pharmacy That DO
 								NOT require a prescription:</center>
@@ -691,9 +698,9 @@
 					width="100%">
 					<thead>
 						<tr>
-							<th>OrderID</th>
+							<!-- <th>CustomerID</th>
 							<th>ProductID</th>
-							<th>Quantity</th>
+							<th>Quantity</th> -->
 							<th>Address</th>
 							<th>Date Ordered</th>
 							<th>Type</th>
@@ -707,9 +714,9 @@
 						<c:forEach items="${IncomingOrders}" var="order">
 							<c:if test="${order.prescriptionID == 0 && order.branchID == PharmacistBranch.branchID && order.orderStatus.startsWith('PROCESSED')}">
 								<tr>
-									<td><c:out value="${order.customerID}" /></td>
+									<%-- <td><c:out value="${order.customerID}" /></td>
 									<td><c:out value="${order.pharmacyID}" /></td>
-									<td><c:out value="${order.cityID}" /></td>
+									<td><c:out value="${order.cityID}" /></td> --%>
 									<td><c:out value="${order.orderAddress}" /></td>
 	                				<td><fmt:formatDate type = "both" value = "${order.dateOrdered}" /></td>
 									<td><c:out value="${order.orderType}" /></td>
@@ -771,7 +778,7 @@
 				</table>
 			
 			<div class="list-group">
-				<a class="list-group-item list-group-item-info">
+				<a id="prescription" class="list-group-item list-group-item-info">
 					<h4 class="list-group-item-heading">
 						<center>Current Orders Heading to your Pharmacy That DO
 							require a prescription:</center>
@@ -783,9 +790,9 @@
 				width="125%">
 				<thead>
 					<tr>
-						<th>OrderID</th>
+						<!-- <th>OrderID</th>
 						<th>ProductID</th>
-						<th>Quantity</th>
+						<th>Quantity</th> -->
 						<th>Address</th>
 						<th>Date Ordered</th>
 						<th>Type</th>
@@ -801,9 +808,9 @@
 					<c:forEach items="${IncomingOrders}" var="order">
 						<c:if test="${order.prescriptionID != 0 && order.branchID == PharmacistBranch.branchID && order.orderStatus.startsWith('PROCESSED')}">
 							<tr>
-								<td><c:out value="${order.customerID}" /></td>
+							<%-- 	<td><c:out value="${order.customerID}" /></td>
 								<td><c:out value="${order.pharmacyID}" /></td>
-								<td><c:out value="${order.cityID}" /></td>
+								<td><c:out value="${order.cityID}" /></td> --%>
 								<td><c:out value="${order.orderAddress}" /></td>
 	                			<td><fmt:formatDate type = "both" value = "${order.dateOrdered}" /></td>
 								<td><c:out value="${order.orderType}" /></td>
@@ -897,9 +904,9 @@
 					width="100%">
 					<thead>
 						<tr>
-							<th>OrderID</th>
+							<!-- <th>OrderID</th>
 							<th>ProductID</th>
-							<th>Quantity</th>
+							<th>Quantity</th> -->
 							<th>Address</th>
 							<th>Date Ordered</th>
 							<th>Type</th>
@@ -914,9 +921,9 @@
 						<c:forEach items="${IncomingOrders}" var="order">
 							<c:if test="${order.branchID == PharmacistBranch.branchID && order.orderStatus == 'RETURN'}">
 								<tr>
-									<td><c:out value="${order.customerID}" /></td>
+									<%-- <td><c:out value="${order.customerID}" /></td>
 									<td><c:out value="${order.pharmacyID}" /></td>
-									<td><c:out value="${order.cityID}" /></td>
+									<td><c:out value="${order.cityID}" /></td> --%>
 									<td><c:out value="${order.orderAddress}" /></td>
 	                				<td><fmt:formatDate type = "both" value = "${order.dateOrdered}" /></td>
 									<td><c:out value="${order.orderType}" /></td>

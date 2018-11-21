@@ -587,6 +587,28 @@
 				</div>
 			</div>
 			</div>
+			<table id="phardruglistTable" class="table table-striped table-bordered" width="100%">
+				<thead>
+					<tr>
+						<th>Product Name</th>
+						<th>Generic Name</th>
+						<th>Registration Number</th>
+						<th>Quantity</th>
+						<th>Sales</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${BranchSales}" var="sales">
+							<tr>
+								<td><c:out value="${sales.productName}" /></td>
+								<td><c:out value="${sales.genericName}" /></td>
+								<td><c:out value="${sales.registrationNo}" /></td>
+								<td><c:out value="${sales.quantity}" /></td>
+								<td>&#8369;<fmt:formatNumber value="${sales.totalSales}" /></td>
+							</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 			<br>
 			<div id="container">
 				<div class="list-group">
@@ -625,7 +647,7 @@
 						<td><c:out value="${item.productForm}" /></td>
 						<td><c:out value="${item.productPackaging}" /></td>
 						<td><c:out value="${item.productDescription}" /></td>
-						<td>&#8369;<c:out value="${item.priceSet}" /></td>
+						<td>&#8369;<fmt:formatNumber value = "${item.priceSet}" /></td>
 					</tr>
 			</c:forEach>
 		</tbody>
@@ -1298,6 +1320,7 @@
 					<th>Senior Citizen?</th>
 					<th>Senior Citizen ID</th>
 					<th>Valid SSID?</th>
+					<th>Audit Trail</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -1331,6 +1354,12 @@
 							<td><img class="center-block" src="images/<c:out value="${customer.seniorCitizenID}" />" width="300px" height="300px"/></td>
 							<td>N/A</td>
 						</c:if>
+						<td>
+							<form action="InformationController">
+								<input type="hidden" Name="AccountID" value="<c:out value="${customer.customerID}" />" />
+								<div class="text-center"><button class="btn btn-success btn-md" type="submit" Name="Action" value="AuditPageCustomer">Audit PAge</button></div>
+							</form>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -1349,6 +1378,7 @@
 					<th>Dispatcher Address</th>
 					<th>Dispatcher Birthday</th>
 					<th>Courier Company</th>
+					<th>Audit Trail</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -1365,6 +1395,12 @@
 									<c:out value="${courier.companyName}" />
 								</c:if>
 							</c:forEach>
+						</td>
+						<td>
+							<form action="InformationController">
+								<input type="hidden" Name="AccountID" value="<c:out value="${dispatcher.dispatcherID}" />" />
+								<div class="text-center"><button class="btn btn-success btn-md" type="submit" Name="Action" value="AuditPageDispatcher">Audit Page</button></div>
+							</form>
 						</td>
 					</tr>
 				</c:forEach>
@@ -1388,6 +1424,7 @@
 					<th>Pharmacist PRC Number</th>
 					<th>Pharmacist Position</th>
 					<th>Pharmacy</th>
+					<th>Audit Trail</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -1406,6 +1443,12 @@
 							</c:forEach>
 						</c:forEach>
 						</td>
+						<td>
+							<form action="InformationController">
+								<input type="hidden" Name="AccountID" value="<c:out value="${pharmacist.pharmacistID}" />" />
+								<div class="text-center"><button class="btn btn-success btn-md" type="submit" Name="Action" value="AuditPagePharmacist">Audit Page</button></div>
+							</form>
+						</td>3
 					</tr>
 				</c:forEach>
 			</tbody>

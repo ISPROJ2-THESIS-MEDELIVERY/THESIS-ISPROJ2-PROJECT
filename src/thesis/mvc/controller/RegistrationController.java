@@ -43,6 +43,10 @@ public class RegistrationController extends HttpServlet {
 	private Connection conn;
 	private static final String UPLOAD_DIR = "images";
 	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	
+	private final String UPLOAD_DIRECTORY = "../../../../../../../../THESIS-ISPROJ2-PROJECT/WebContent/images/";
+	//private final String UPLOAD_DIRECTORY = "C:/xampp/tomcat/webapps/Medelivery/images/";
+	//private final String UPLOAD_DIRECTORY = "/C:/ISPROJ2/Medelivery/webapp/images/";
 
 	public RegistrationController() {
 		conn = DBUtility.getConnection();
@@ -147,7 +151,7 @@ public class RegistrationController extends HttpServlet {
 				
 				//Initial Information
 				Customer customer = new Customer();
-				customer.setCustomerName( customerFName );
+				customer.setCustomerName(customerFName);
 				customer.setCustomerStreet(customerStrrt);
 				customer.setCustomerBarangay(customerBrngy);
 				customer.setCityID(customerCtyID);
@@ -156,19 +160,16 @@ public class RegistrationController extends HttpServlet {
 				customer.setCustomerCellular(customerCellu);
 				customer.setEmail( customerEMail );
 				customer.setIsSeniorCitizen(false); //This is temporary
-				String birthCertificate = "";
-				/*
-				Customer customer = new CustomerImplement().getCustomerById((int)session.getAttribute("Customer"));			
+				String birthCertificate = "";	
 				 try {
 
 		            	Part filePart = request.getPart("file");
-						String name = "SSID" + customer.getCustomerID();
+						String name = "SSID" + customerFName;
 						String end = filePart.getContentType();
 						if (end.startsWith("image")) {
 							String imageType = end.replace("image/", "");
 							name = name + "." + imageType;
 							String DbaseName = new EncryptionFunction().encrypt(name);
-							SSIDName = DbaseName;
 							String AFileName = name;
 							filePart.write(UPLOAD_DIRECTORY + File.separator + AFileName);
 							System.out.println( "File Uploaded Successfully: " + UPLOAD_DIRECTORY + File.separator + AFileName);
@@ -181,7 +182,6 @@ public class RegistrationController extends HttpServlet {
 		            }
 
 				customer.setBirthCertificate(birthCertificate);
-				*/
 				//Registration
 				int ID = Registration.makeCustomer(login, customer);
 				//Email of Confirmation

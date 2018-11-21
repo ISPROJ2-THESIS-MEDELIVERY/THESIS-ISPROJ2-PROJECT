@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -18,12 +19,16 @@ import javax.net.ssl.HttpsURLConnection;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import thesis.mvc.implement.AuditImplement;
 import thesis.mvc.implement.CityListingImplement;
 import thesis.mvc.implement.CustomerImplement;
+import thesis.mvc.implement.LoginImplement;
 import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.ProductImplement;
+import thesis.mvc.model.Audit;
 import thesis.mvc.model.Customer;
+import thesis.mvc.model.Login;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
 import thesis.mvc.model.Product;
@@ -265,6 +270,24 @@ public class ShopAction {
 	                order = new OrderImplement().getOrderById(order.getOrderID());
 	                order.setPaymayaID((String) testobject.get("checkoutId"));
 	                new OrderImplement().updateOrder(order);
+
+	                //Audit Log
+	                Timestamp CurrentDate = new Timestamp(Calendar.getInstance().getTime().getTime());
+	                Audit audit = new Audit();
+	                audit.setUserID(order.getCustomerID());
+	                audit.setLogType("Transaction");
+	                audit.setTimestamp(CurrentDate);
+	                audit.setActionTaken("User ID "
+	                + new CustomerImplement().getCustomerById(order.getCustomerID()).getUserID()
+	                + " With the Name "
+	                + new CustomerImplement().getCustomerById(order.getCustomerID()).getCustomerName()
+	                + " made an order. With order ID: " + order.getOrderID());
+	                AuditImplement AuditImp = new AuditImplement();
+	                AuditImp.addAudit(audit);
+	                
+	                
+	                
+	                
 	                return (String) testobject.get("redirectUrl");
 	                
 	                

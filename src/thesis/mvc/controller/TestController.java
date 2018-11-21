@@ -12,8 +12,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.ServletException;
@@ -29,7 +32,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import thesis.mvc.implement.OrderImplement;
+import thesis.mvc.pageaction.ReportAction;
 import thesis.mvc.pageaction.ShopAction;
+import thesis.mvc.pageaction.ReportAction.ReportList;
 import thesis.mvc.utility.DBUtility;
 import thesis.mvc.utility.EncryptionFunction;
 
@@ -48,10 +53,15 @@ public class TestController extends HttpServlet {
 	}
 	
     protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-    	int x = 22;
+    	List<ReportList> reportLists = new ReportAction().GeneralListing(1);
+    	for (ReportList report : reportLists) {
+    		System.out.println(report.getProductName() + "|" + report.getGenericName() + "|" + report.getRegistrationNo() + "|" + report.getQuantity() + "|" + report.getTotalSales());
+    	}
+    	
+    	//int x = 22;
     	//for (int x = 20; x <= 29; x++ ) {
-            System.out.println(x +  ": " + new OrderImplement().getOrderById(x).getDateOrdered());
-            System.out.println(new ShopAction().CheckOrder(new OrderImplement().getOrderById(x)));
+            //System.out.println(x +  ": " + new OrderImplement().getOrderById(x).getDateOrdered());
+            //System.out.println(new ShopAction().CheckOrder(new OrderImplement().getOrderById(x)));
     	//}
         //process only if its multipart content
     	/*

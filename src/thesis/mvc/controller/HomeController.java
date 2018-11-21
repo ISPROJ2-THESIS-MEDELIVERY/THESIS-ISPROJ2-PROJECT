@@ -25,6 +25,7 @@ import thesis.mvc.implement.PrescriptionImplement;
 import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.implement.StocksImplement;
 import thesis.mvc.implement.StocksPriceImplement;
+import thesis.mvc.pageaction.ReportAction;
 import thesis.mvc.pageaction.SearchAction;
 import thesis.mvc.utility.EncryptionFunction;
 import thesis.mvc.utility.GeneralFunctions;
@@ -84,6 +85,7 @@ public class HomeController  extends HttpServlet {
 			session.setAttribute("ProductTranslation" , new ProductImplement().getAllProducts() );
 			session.setAttribute("PrescriptionImage" , new PrescriptionImplement().getAllPrescription());
 			session.setAttribute("DeliveryReason" , new DeliveryImplement().getDelivery() );
+			session.setAttribute("BranchSales", new ReportAction().GeneralListing(BranchxofPharmacist));
 			//
 			//PharmacistImplement pharmacistImplement = new PharmacistImplement();
 			//session.setAttribute("PharmacistDetails", session.getAttribute("Pharmacist") );

@@ -55,105 +55,49 @@
     </div>
     <div id="container">
 	<h1>Info:</h1>
-	<c:if test="${CartList != null}">
-					<div class="list-group">
-						<a class="list-group-item">
-							<h4 class="list-group-item-heading"><c:out value="${message}" /></h4>
-						</a>
-					</div>
-    		<table id="cartlistTable" class="table table-striped table-bordered" width="100%">
-        		<thead>
-            		<tr>
-                		<th>Item</th>
-                		<th>Item Description</th>
-                		<th>Image</th>
-                		<th>Size</th>
-                		<th>Prescription Required</th>
-                		<th>Quantity</th>
-                		<th>Unit Price</th>
-                		<th>Total Cost</th>
-            		</tr>
-        		</thead>
-        		<tbody>
-					<c:forEach items="${CartList}" var="details">
-		            	<tr>
-		                	<td><c:out value="${details.name}" /></td>
-		                	<td><c:out value="${details.description}" /></td>
-		                	<td><div class="pop">
-    						<img id="imageresource" src="images/<c:out value="${details.image}" />" alt="Medicine Image" width="100px" height="100px">
-   						 	Click to Enlarge
-							</div></td>		                	
-		                	<td><c:out value="${details.size}" /></td>
-		                	<td><c:out value="${details.prescription}" /></td>
-		                	<td><c:out value="${details.quantity}" /></td>
-							<td>&#8369;<fmt:formatNumber value = "${details.unitCost}"/></td>
-							<td>&#8369;<fmt:formatNumber value = "${details.totalCost}"/></td>
-		            	</tr>
-	            	</c:forEach>
-	            </tbody>
-    		</table>
-    		
-    		
-    		<form action='ShopController' method='post'>
-    			<center><button class="btn btn-success btn-md" type="submit" name="Action" value="CheckoutOrder">Checkout Order</button></center>
-				<%-- <center><input type='submit' name='Action' value="CheckoutOrder" style='display: on-hover' /></center> --%>
-			</form>
-			<hr>
-	</c:if>
-	<c:if test="${CartList == null}">
-		<h2>NOTHING ORDERED YET</h2>
-	</c:if>
+		<div class="container">
+			<div class="list-group">
+				<a class="list-group-item">
+					<c:if test="${UserType == 1}">
+						<h4 class="list-group-item-heading">UserDetails:</h4>
+						<p class="list-group-item-text">Name:<c:out value="${UserInfo.customerName}" /></p>
+						<p class="list-group-item-text">User Type: Customer</p>
+					</c:if>
+					<c:if test="${UserType == 2}">
+						<h4 class="list-group-item-heading">UserDetails:</h4>
+						<p class="list-group-item-text">Name:<c:out value="${UserInfo.firstName}" /> <c:out value="${UserInfo.lastName}" /></p>
+						<p class="list-group-item-text">User Type: Dispatcher</p>
+					</c:if>
+					<c:if test="${UserType == 3}">
+						<h4 class="list-group-item-heading">UserDetails:</h4>
+						<p class="list-group-item-text">Name:<c:out value="${UserInfo.firstName}" /> <c:out value="${UserInfo.lastName}" /></p>
+						<p class="list-group-item-text">User Type: Pharmacist</p>
+					</c:if>
+					<c:if test="${UserType == 4}">
+						<h4 class="list-group-item-heading">UserDetails:</h4>
+						<p class="list-group-item-text">Name:<c:out value="${UserInfo.firstName}" /> <c:out value="${UserInfo.surname}" /></p>
+						<p class="list-group-item-text">User Type: Admin</p>
+					</c:if>
+				</a>
+			</div>
+		</div>
 	
-	<h1>SHOP:</h1>
+	<h1>Audit:</h1>
 	<table id="druglistTable" class="table table-striped table-bordered" width="100%">
 		<thead>
 			<tr>
-				<th>Product ID</th>
-				<th>Product Name</th>
-				<th>Generic Name</th>
-				<th>Product Strength</th>
-				<th>Image</th>
-				<th>Product Form</th>
-				<th>Product Packaging</th>
-				<th>Product Description</th>
-                <th>Unit Price</th>
-				<th>Quantity</th>
-				<th>Buy</th>
+                <th>Log Type</th>
+				<th>Timestamp</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${productList}" var="item">
+			<c:forEach items="${AuditList}" var="item">
 					<tr>
-						<td><c:out value="${item.productID}" /></td>
-						<td><c:out value="${item.productName}" /></td>
-						<td><c:out value="${item.genericName}" /></td>
-						<td><c:out value="${item.productStrength}" /></td>
-						<td><div class="pop">
-    						<img id="imageresource" src="images/<c:out value="${item.productImage}" />" alt="Medicine Image" width="100px" height="100px">
-   						 	Click to Enlarge
-						</div></td>
-						<td><c:out value="${item.productForm}" /></td>
-						<td><c:out value="${item.productPackaging}" /></td>
-						<td><c:out value="${item.productDescription}" /></td>
-						<td>&#8369;<fmt:formatNumber value = "${item.priceSet}"/></td>
-						<c:if test="${item.isRXProduct == false}">
-						
-						<form action='ShopController' method='post'>
-						<td>
-							<div class="form-group">
-        						<input type="number" name="Quantity" required="required" class="form-control && center-block" style="width: 80px"/>
-       						</div>
-						</td>
-						<td>
-							<input type="hidden" name="ProductID" value="<c:out value="${item.productID}" />" readonly>
-							<div class="text-center"><button class="btn btn-success btn-md" type="submit" name="Action" value="Addtocart">Add to Cart</button></div>
-						</td>
-						</form>
-						</c:if>
-						
-						<c:if test="${item.isRXProduct == true}">
-						<td>UNAVAILABLE</td>
-						<td>PRESCRIPTION ONLY</td>
+						<c:if test="${item.userID == UserID}">
+							<td><c:out value="${item.logType}" /></td>
+							<td><c:out value="${item.timestamp}" /></td>
+							<td><c:out value="${item.actionTaken}" /></td>
 						</c:if>
 					</tr>
 			</c:forEach>

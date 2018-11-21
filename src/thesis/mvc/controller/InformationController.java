@@ -22,10 +22,13 @@ import javax.servlet.http.Part;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
+import thesis.mvc.implement.AdminImplement;
+import thesis.mvc.implement.AuditImplement;
 import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.CityListingImplement;
 import thesis.mvc.implement.CourierServiceImplement;
 import thesis.mvc.implement.CustomerImplement;
+import thesis.mvc.implement.DispatcherImplement;
 import thesis.mvc.implement.LoginImplement;
 import thesis.mvc.implement.PharmacistImplement;
 import thesis.mvc.implement.PharmacyImplement;
@@ -87,6 +90,36 @@ public class InformationController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/insertProduct.jsp");
 		} else if (Action.equalsIgnoreCase("InsertNewProduct")){
 			response.sendRedirect(request.getContextPath() + "/insertNewProduct.jsp");
+		
+		//Audit Page
+		} else if (Action.equalsIgnoreCase("AuditPageCustomer")){
+			int AccountID = Integer.valueOf(request.getParameter("AccountID"));
+		   	session.setAttribute("AuditList", new AuditImplement().getAllAudit());
+		   	session.setAttribute("UserID", new CustomerImplement().getCustomerById(AccountID).getUserID());
+		   	session.setAttribute("UserInfo", new CustomerImplement().getCustomerById(AccountID));
+		   	session.setAttribute("UserType", 1);
+			response.sendRedirect(request.getContextPath() + "/AuditHistory.jsp");
+		} else if (Action.equalsIgnoreCase("AuditPageDispatcher")){
+			int AccountID = Integer.valueOf(request.getParameter("AccountID"));
+		   	session.setAttribute("AuditList", new AuditImplement().getAllAudit());
+		   	session.setAttribute("UserID", new DispatcherImplement().getDispatcherById(AccountID).getUserID());
+		   	session.setAttribute("UserInfo", new DispatcherImplement().getDispatcherById(AccountID));
+		   	session.setAttribute("UserType", 2);
+			response.sendRedirect(request.getContextPath() + "/AuditHistory.jsp");
+		} else if (Action.equalsIgnoreCase("AuditPagePharmacist")){
+			int AccountID = Integer.valueOf(request.getParameter("AccountID"));
+		   	session.setAttribute("AuditList", new AuditImplement().getAllAudit());
+		   	session.setAttribute("UserID", new PharmacistImplement().getPharmacistById(AccountID).getUserID());
+		   	session.setAttribute("UserInfo", new PharmacistImplement().getPharmacistById(AccountID));
+		   	session.setAttribute("UserType", 3);
+			response.sendRedirect(request.getContextPath() + "/AuditHistory.jsp");
+		} else if (Action.equalsIgnoreCase("AuditPageAdmin")){
+			int AccountID = Integer.valueOf(request.getParameter("AccountID"));
+		   	session.setAttribute("AuditList", new AuditImplement().getAllAudit());
+		   	session.setAttribute("UserID", new AdminImplement().getAdminById(AccountID).getUserID());
+		   	session.setAttribute("UserInfo", new AdminImplement().getAdminById(AccountID));
+		   	session.setAttribute("UserType", 4);
+			response.sendRedirect(request.getContextPath() + "/AuditHistory.jsp");
 		
 		//Fall Back
 		} else {

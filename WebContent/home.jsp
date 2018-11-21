@@ -251,7 +251,7 @@
 	</c:if> --%>
 	
 	<c:if test="${userAccess == 1}">
-	<nav class="side-menu">
+	<%-- <nav class="side-menu">
     <ul>
 
 		<li class="title"><a>Order OTC<span><i></i></span></a></li>
@@ -266,13 +266,13 @@
 								value="${pharmacy.pharmacyName}" /><span><i></i></span></a></li>
       	</c:forEach>
       	<br>
-<!--       	<li><a href="CustomerController?action=GoToOrders">Go to Order History<span><i></i></span></a></li>
+       	<li><a href="CustomerController?action=GoToOrders">Go to Order History<span><i></i></span></a></li>
       	<li><a href="CustomerController?action=GoToPending">View your Current Orders<span><i></i></span></a></li>
-      	<li><a href="CustomerController?action=GoToReturns">View your Order Returns<span><i></i></span></a></li> -->
+      	<li><a href="CustomerController?action=GoToReturns">View your Order Returns<span><i></i></span></a></li> 
 	    
       
     </ul>
-  	</nav>
+  	</nav> --%>
 		<%-- <c:forEach items="${Featurepharm}" var="pharm">
 			<div class="row">
 				<h3>

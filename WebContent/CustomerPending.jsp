@@ -95,15 +95,15 @@
 						            <tr>
 						                <td><c:out value="${orderdetails.productID}" /></td>
 						                <td><c:out value="${orderdetails.quantity}" /></td>
-										<td>&#8369;<fmt:formatNumber value = "${orderdetails.costPerUnit}" /></td>
-										<td>&#8369;<fmt:formatNumber value = "${orderdetails.totalCost}" /></td>  
+										<td>&#8369;<fmt:formatNumber minFractionDigits="2" value = "${orderdetails.costPerUnit}" /></td>
+										<td>&#8369;<fmt:formatNumber minFractionDigits="2" value = "${orderdetails.totalCost}" /></td>  
 						            </tr>
 						            </c:if>
 								</c:forEach>
 						    </tbody>
 						</table>
 	                </td>
-					<td>&#8369;<fmt:formatNumber value = "${order.actualCost}" /></td>
+					<td>&#8369;<fmt:formatNumber minFractionDigits="2" value = "${order.actualCost}" /></td>
 	            </tr>
 	    </tbody>
 	</table>

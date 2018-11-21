@@ -128,14 +128,12 @@ public class ShopAction {
 			orderDetail.setOrderID( orderID );
 			OrderDet.addOrderDetail( orderDetail );
 		}
-		System.out.println(7);
 		
 		return SendOrder(order, OrderDetails, HomePage);
 	}
 	@SuppressWarnings("unchecked")
 	public String SendOrder(Order order, List<OrderDetail> OrderDetails, String HomePage) {
 			JSONObject JSONReciept = new JSONObject();
-			System.out.println(8);
 			
 	        //totalAmount
 	    	JSONObject totalAmount1 = new JSONObject();
@@ -151,11 +149,9 @@ public class ShopAction {
 	    		details1.put("subtotal", (order.getActualCost() * 0.95) - 50.0);
 	        totalAmount1.put("details", details1);
 	    	JSONReciept.put("totalAmount", totalAmount1);
-			System.out.println(9);
 			
 	    	Customer customer = new Customer();
 	    	customer = new CustomerImplement().getCustomerById(order.getCustomerID());
-			System.out.println(10);
 			
 	    	//buyer
 	        JSONObject buyer = new JSONObject();
@@ -222,7 +218,6 @@ public class ShopAction {
 	        JSONObject metadata = new JSONObject();        
 	        JSONReciept.put("metadata", metadata);
 
-			System.out.println(11);
 	        
 	        try {
 	        	

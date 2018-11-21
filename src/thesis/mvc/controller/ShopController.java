@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -137,7 +138,8 @@ public class ShopController extends HttpServlet {
 			orderDetail.setProductID(ProductID);
 			orderDetail.setQuantity(Quantity);
 			orderDetail.setCostPerUnit(CostPerUnit);
-			orderDetail.setTotalCost( Math.round(CostPerUnit * Quantity * 100) / 100 );
+	        DecimalFormat df = new DecimalFormat("#.##");
+			orderDetail.setTotalCost(Double.valueOf( df.format(CostPerUnit * Quantity) ) );
 			OrderDetails.add( orderDetail );
 			session.setAttribute("OrderDetails", OrderDetails );
 

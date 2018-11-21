@@ -148,11 +148,7 @@
 </div>
 </c:if>
 
-	<hr>
-		<div id="container">
-			<center><img alt="" src="assets/img/medlogopill.png" width="300px" height="300px"></center>    
-		</div>
-		<hr>
+
 
 <c:if test="${userAccess == 1}">
 <div class = "container">
@@ -720,7 +716,12 @@
 									<td><c:out value="${order.orderAddress}" /></td>
 	                				<td><fmt:formatDate type = "both" value = "${order.dateOrdered}" /></td>
 									<td><c:out value="${order.orderType}" /></td>
-									<td><c:out value="${order.seniorDiscount}" /></td>
+									<td><c:if test="${order.seniorDiscount == true}">
+         									Yes
+     									</c:if>
+     									<c:if test="${order.seniorDiscount == false}">
+         									No
+     									</c:if></td>
 									<td>
 										<table class="table-wrapper table-striped table-bordered"
 											width="100%">
@@ -1015,7 +1016,7 @@
 					</p>
 					<p class="list-group-item-text">
 						User Type:
-						Admin"
+						Admin
 					</p>
 				</a>
 			</div>

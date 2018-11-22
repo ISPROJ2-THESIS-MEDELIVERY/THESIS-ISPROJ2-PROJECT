@@ -91,12 +91,12 @@
         	<input type="text" name="CuProvin" required="" placeholder="Province *" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input id="phonenum" type="tel" pattern="^\d{7}$" title="must contain 7 digits" name="CuLandLi"  placeholder="Landline *" class="form-control"/>
+        	<input id="phonenum" type="tel" pattern="^\d{7}$" title="must contain 7 digits" name="CuLandLi"  placeholder="Landline (Optional)" class="form-control"/>
         </div>
         </div>
         <div class="col-md-6">
         <div class="form-group">
-        	<input id="phonenum" type="tel" pattern="^(09|\+639)\d{9}$" title="must start with 09 or +63 and contain 11 digits" name="CuCellul"  placeholder="Cellphone No *" class="form-control"/>
+        	<input id="phonenum" type="tel" pattern="^(09|\+639)\d{9}$" title="must start with 09 or +63 and contain 11 digits" name="CuCellul"  placeholder="Cellphone No " class="form-control"/>
         </div>
         <div class="form-group">
         	<input type="email" name="CusEmail" required="required" placeholder="Email *" class="form-control"/>

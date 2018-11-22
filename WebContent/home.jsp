@@ -621,7 +621,7 @@ Welcome, <c:out value="${username}"/>
 					
 					<a href="ProductController?Action=addProduct" class="btn btn-info"
 						role="button">Add Existing Product to Catalog</a><br> <br />
-					<a href="PharmacistController?Action=Prescription && #approve"
+					<a href="PharmacistController?Action=Prescription && #prescription"
 						class="btn btn-info" role="button">Approve/Disapprove
 						prescription orders</a><br> <br />
 				</div>

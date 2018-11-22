@@ -84,7 +84,7 @@
 		                <table class="" width="100%" style="border: 2px solid black">
 						    <thead>
 						        <tr>
-						            <th style="border: 1px solid black">ProductID</th>
+						            <th style="border: 1px solid black">Product Name</th>
 						            <th style="border: 1px solid black">Quantity</th>
 						            <th style="border: 1px solid black">Cost Per Unit</th>
 						            <th style="border: 1px solid black">Total Cost</th>
@@ -94,7 +94,13 @@
 						    	<c:forEach items="${OrderDetailHistory}" var="orderdetails">
 									<c:if test="${order.orderID == orderdetails.orderID}">
 						            <tr>
-						                <td style="border: 1px solid black"><c:out value="${orderdetails.productID}" /></td>
+						                <td style="border: 1px solid black">
+						    				<c:forEach items="${ProductList}" var="product">
+												<c:if test="${product.productID == orderdetails.productID}">
+						                			<c:out value="${product.productName}" />
+						                		</c:if>
+						                	</c:forEach>
+						                </td>
 						                <td style="border: 1px solid black"><c:out value="${orderdetails.quantity}" /></td>
 										<td style="border: 1px solid black">&#8369;<fmt:formatNumber minFractionDigits="2" value = "${orderdetails.costPerUnit}" /></td>
 										<td style="border: 1px solid black">&#8369;<fmt:formatNumber minFractionDigits="2" value = "${orderdetails.totalCost}" /></td>  

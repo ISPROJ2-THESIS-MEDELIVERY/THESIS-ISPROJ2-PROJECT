@@ -1372,7 +1372,9 @@ Welcome, <c:out value="${username}"/>
 			width="100%">
 			<thead>
 				<tr>
-					<th>Customer Name</th>
+					<th>Customer First Name</th>
+					<th>Customer Middle Name</th>
+					<th>Customer Last Name</th>
 					<th>Customer CityID</th>
 					<th>Customer Email</th>
 					<th>Senior Citizen?</th>
@@ -1385,7 +1387,9 @@ Welcome, <c:out value="${username}"/>
 			<tbody>
 				<c:forEach items="${CustomerList}" var="customer">
 					<tr>
-						<td><c:out value="${customer.customerName}" /></td>
+						<td><c:out value="${customer.customerFirstName}" /></td>
+						<td><c:out value="${customer.customerMiddleName}" /></td>
+						<td><c:out value="${customer.customerSurName}" /></td>
 						<td><c:out value="${customer.cityID}" /></td>
 						<td><c:out value="${customer.email}" /></td>
 						

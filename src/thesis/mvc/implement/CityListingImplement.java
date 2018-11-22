@@ -23,10 +23,11 @@ public class CityListingImplement implements CityListingDAO{
 	@Override
 	public int addCityListing(CityListing cityListing) {
 		try {
-		String query = "INSERT INTO CityListing (CityName, CityCost) VALUES (?,?)";
+		String query = "INSERT INTO CityListing (CityName, CityCost, CityProvince) VALUES (?,?,?)";
 		PreparedStatement preparedStatement = conn.prepareStatement( query );
 		preparedStatement.setString( 1, cityListing.getCityName() );
 		preparedStatement.setBigDecimal( 2, cityListing.getCityCost() );
+		preparedStatement.setString( 3, cityListing.getCityProvince() );
 		int NewID = preparedStatement.executeUpdate();
 		preparedStatement.close();
 		return NewID;
@@ -54,11 +55,12 @@ public class CityListingImplement implements CityListingDAO{
 	@Override
 	public void updateCityListing(CityListing cityListing) {
 		try {
-		String query = "UPDATE CityListing SET CityName=?, CityCost=? WHERE CityID=?";
+		String query = "UPDATE CityListing SET CityName=?, CityCost=?, CityProvince=? WHERE CityID=?";
 		PreparedStatement preparedStatement = conn.prepareStatement( query );
 		preparedStatement.setString( 1, cityListing.getCityName() );
 		preparedStatement.setBigDecimal( 2, cityListing.getCityCost() );
-		preparedStatement.setInt( 3, cityListing.getCityID() );
+		preparedStatement.setString( 3, cityListing.getCityProvince() );
+		preparedStatement.setInt( 4, cityListing.getCityID() );
 		preparedStatement.executeUpdate();
 		preparedStatement.close();
 	} catch (SQLException e) {
@@ -78,6 +80,7 @@ public class CityListingImplement implements CityListingDAO{
 				cityListing.setCityID( resultSet.getInt( "CityID" ) );
 				cityListing.setCityName( resultSet.getString( "CityName" ) );
 				cityListing.setCityCost( resultSet.getBigDecimal( "CityCost" ) );
+				cityListing.setCityProvince( resultSet.getString( "CityProvince" ) );
 				cityListings.add(cityListing);
 			}
 			resultSet.close();
@@ -100,6 +103,7 @@ public class CityListingImplement implements CityListingDAO{
 				cityListing.setCityID( resultSet.getInt( "CityID" ) );
 				cityListing.setCityName( resultSet.getString( "CityName" ) );
 				cityListing.setCityCost( resultSet.getBigDecimal( "CityCost" ) );
+				cityListing.setCityProvince( resultSet.getString( "CityProvince" ) );
 			}
 			resultSet.close();
 			preparedStatement.close();

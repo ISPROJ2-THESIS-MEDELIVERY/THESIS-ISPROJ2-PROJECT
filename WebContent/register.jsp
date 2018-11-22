@@ -83,7 +83,7 @@
         <div class="form-group">
         	<select name="CCityID" class="form-control">
 			<c:forEach items="${CityList}" var="city">
-				<option value =<c:out value="${city.cityID}"/>><c:out value="${city.cityName}" /></option>
+				<option value =<c:out value="${city.cityID}"/>><c:out value="${city.cityProvince}"/> - <c:out value="${city.cityName}" /></option>
 			</c:forEach>
 		  </select>
         </div>

@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -133,20 +134,23 @@ public class ShopAction {
 	}
 	@SuppressWarnings("unchecked")
 	public String SendOrder(Order order, List<OrderDetail> OrderDetails, String HomePage) {
+        	DecimalFormat df = new DecimalFormat("#.##");
+        	Double TaxRate = 0.05;
+		
 			JSONObject JSONReciept = new JSONObject();
 			
 	        //totalAmount
 	    	JSONObject totalAmount1 = new JSONObject();
 	        totalAmount1.put("currency", "PHP");
-	        totalAmount1.put("value",  order.getActualCost());
+	        totalAmount1.put("value",  df.format(order.getActualCost()));
 	    		JSONObject details1 = new JSONObject();
 	    		if (order.getSeniorDiscount() == true) {
-		    		details1.put("discount", order.getActualCost() * 0.25);
+		    		details1.put("discount", df.format(order.getActualCost() * 0.25));
 	    		}
-	    		details1.put("serviceCharge", 25.0);
-	    		details1.put("shippingFee", 25.0);
-	    		details1.put("tax", order.getActualCost() * 0.05);
-	    		details1.put("subtotal", (order.getActualCost() * 0.95) - 50.0);
+	    		details1.put("serviceCharge", df.format(25.0 * TaxRate));
+	    		details1.put("shippingFee", df.format(25.0 * TaxRate));
+	    		details1.put("tax", df.format(order.getActualCost() * TaxRate));
+	    		details1.put("subtotal", df.format((order.getActualCost() - 50.0) * (1.0 - TaxRate)));
 	        totalAmount1.put("details", details1);
 	    	JSONReciept.put("totalAmount", totalAmount1);
 			
@@ -185,19 +189,19 @@ public class ShopAction {
 	        	item.put("description", checkin.getProductDescription());
 	        	item.put("quantity", detail.getQuantity());
 	        	JSONObject amount = new JSONObject();
-		    		amount.put("value", detail.getCostPerUnit());
+		    		amount.put("value", df.format(detail.getCostPerUnit()));
 		    		amount.put("currency", "PHP");
 		        	JSONObject details0 = new JSONObject();
-		    			details0.put("tax", detail.getCostPerUnit() * 0.05);
-		        		details0.put("subtotal", detail.getCostPerUnit() * 0.95);
+		    			details0.put("tax", df.format(detail.getCostPerUnit() * TaxRate));
+		        		details0.put("subtotal", df.format(detail.getCostPerUnit() * (1.0 - TaxRate)));
 		    		amount.put("details", details0);
 		    	item.put("amount", amount);
 	        	JSONObject totalAmount = new JSONObject();
-					totalAmount.put("value", detail.getTotalCost() );
+					totalAmount.put("value", df.format(detail.getTotalCost()) );
 					totalAmount.put("currency", "PHP");
 		    		JSONObject details = new JSONObject();
-		    			details.put("tax", detail.getTotalCost() * 0.05);
-		        		details.put("subtotal", detail.getTotalCost() * 0.95);
+		    			details.put("tax", df.format(detail.getTotalCost() * TaxRate));
+		        		details.put("subtotal", df.format(detail.getTotalCost() * (1.0 -  TaxRate)));
 					totalAmount.put("details", details);
 				item.put("totalAmount", totalAmount);
 	        	items.add(item);
@@ -270,7 +274,7 @@ public class ShopAction {
 	                Timestamp CurrentDate = new Timestamp(Calendar.getInstance().getTime().getTime());
 	                Audit audit = new Audit();
 	                audit.setUserID(order.getCustomerID());
-	                audit.setLogType("Transaction");
+	                audit.setLogType("Purchase");
 	                audit.setTimestamp(CurrentDate);
 	                audit.setActionTaken("User ID "
 	                + new CustomerImplement().getCustomerById(order.getCustomerID()).getUserID()

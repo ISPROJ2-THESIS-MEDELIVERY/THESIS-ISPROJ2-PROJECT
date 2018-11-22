@@ -83,7 +83,12 @@
    						 	Click to Enlarge
 							</div></td>
 		                	<td><c:out value="${details.size}" /></td>
-		                	<td><c:out value="${details.prescription}" /></td>
+		                	<td><c:if test="${details.prescription == true}">
+         							Yes
+     							</c:if>
+     							<c:if test="${details.prescription == false}">
+         							No
+     							</c:if></td>
 		                	<td><c:out value="${details.quantity}" /></td>
 							<td>&#8369;<fmt:formatNumber minFractionDigits="2" value = "${details.unitCost}"/></td>
 							<td>&#8369;<fmt:formatNumber minFractionDigits="2" value = "${details.totalCost}"/></td>

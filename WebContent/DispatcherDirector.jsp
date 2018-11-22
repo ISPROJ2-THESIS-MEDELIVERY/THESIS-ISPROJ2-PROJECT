@@ -36,6 +36,16 @@
                         <c:if test="${userAccess == 2}">
                         <span class="navbar-text" style="float: right"><a href="LoginController" class="login">Logout</a></span>
                         <span class="navbar-text" style="float: right"><a href="DispatcherController?Action=DispatchOrder" class="login">Order Dispatch - Regular</a><br></span>						
+                      
+                     		 <span class="navbar-text" style="float: right"><a
+							href="#pendingdelivery" class="login">Courier Services</a></span>
+							
+							<span class="navbar-text" style="float: right"><a
+							href="#pendingdelivery" class="login">Courier Services</a></span>
+							
+							<span class="navbar-text" style="float: right"><a
+							href="#CourierServices" class="login">Courier Services</a></span>
+                      
                         </c:if>
                         <c:if test="${userAccess == 3}">
                         <span class="navbar-text" style="float: right"><a href="ProductController?Action=AddProduct" class="login">Add Product</a><br></span>

@@ -62,18 +62,15 @@
 	 <div class="container">
 	 <div class="row">
 	  <div class="col-md-6">
-	  	<div class="form-group">
-        	<input type="text" name="FullName" required="required" placeholder="Full Name *" class="form-control"/>
-        </div>
-        <!-- <div class="form-group">
+        <div class="form-group">
         	<input type="text" name="FrstName" required="required" placeholder="First Name *" class="form-control"/>
         </div>
         <div class="form-group">
         	<input type="text" name="MddlName" required="required" placeholder="Middle Name *" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="LastlName" required="required" placeholder="Last Name *" class="form-control"/>
-        </div> -->
+        	<input type="text" name="LastName" required="required" placeholder="Last Name *" class="form-control"/>
+        </div>
         <div class="form-group">
         	<input type="text" name="CuStreet" required="" placeholder="Street *" class="form-control"/>
         </div>

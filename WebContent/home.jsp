@@ -107,12 +107,12 @@
 		</div>
 	</div>
 	
-	<c:if test="${justReg != null}">
+	<%-- <c:if test="${justReg != null}">
 		<div role="alert" class="alert alert-info">
 			<center><span><strong>A confirmation email has been sent to
 					your email address</strong></span></center>
 		</div>
-	</c:if>
+	</c:if> --%>
 	
 	
 
@@ -581,13 +581,13 @@ Welcome, <c:out value="${username}"/>
 </div>
 <div id="Vehicle" class="tabcontent">
 <div class="login-clean"> 
-	<form id="form" action="DispatcherController">
+	<form action="DispatcherController">
 		<h2>Add Vehicle Details</h2>
 		<div class="form-group">
-        	<input type="text" name="Vehicle" placeholder="Motorcycle Model" class="form-control"/>
+        	<input type="text" name="Vehicle" required = "" placeholder="Motorcycle Model" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="PlateNumber" id="license" pattern="[A-Z]{2}-[0-9]{4}$" placeholder="e.g.  MC-3884"  title="Please input the correct license plate number format for Motorcycle (A-Z)-(0-9)" maxlength="7" class="form-control"/>
+        	<input type="text" name="PlateNumber" required = "" id="license" pattern="[A-Z]{2}-[0-9]{4}$" placeholder="e.g.  MC-3884"  title="Please input the correct license plate number format for Motorcycle (A-Z)-(0-9)" maxlength="7" class="form-control"/>
         </div>
         <div class="form-group">
         	<input type="hidden" name="Action" value="addVehicle"/>
@@ -621,7 +621,7 @@ Welcome, <c:out value="${username}"/>
 					
 					<a href="ProductController?Action=addProduct" class="btn btn-info"
 						role="button">Add Existing Product to Catalog</a><br> <br />
-					<a href="PharmacistController?Action=Prescription && #approve"
+					<a href="PharmacistController?Action=Prescription && #prescription"
 						class="btn btn-info" role="button">Approve/Disapprove
 						prescription orders</a><br> <br />
 				</div>
@@ -2322,7 +2322,7 @@ $(document).ready(function() {
 
 
 
-<script>
+<!-- <script>
 
 (function($, undefined) {
 	"use strict";
@@ -2354,6 +2354,6 @@ $(document).ready(function() {
 })(jQuery);
 
 
-</script>
+</script> -->
 
 </html>

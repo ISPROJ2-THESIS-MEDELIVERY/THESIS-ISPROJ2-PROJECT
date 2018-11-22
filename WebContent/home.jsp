@@ -1572,8 +1572,13 @@ Welcome, <c:out value="${username}"/>
 			<tbody>
 				<c:forEach items="${AdminList}" var="admin">
 					<tr>
-						<td><c:out value="${admin.firstName}" /> <c:out
-								value="${admin.surname}" /></td>
+						<td><c:out value="${admin.firstName}" /> <c:out value="${admin.surname}" /></td>
+						<td>
+							<form action="InformationController">
+								<input type="hidden" Name="AccountID" value="<c:out value="${admin.adminID}" />" />
+								<div class="text-center"><button class="btn btn-success btn-md" type="submit" Name="Action" value="AuditPageAdmin">Audit Page</button></div>
+							</form>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

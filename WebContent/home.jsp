@@ -107,12 +107,11 @@
 		</div>
 	</div>
 	
-	<%-- <c:if test="${justReg != null}">
+	<c:out value = "${pharm.pharmacyName}">
 		<div role="alert" class="alert alert-info">
-			<center><span><strong>A confirmation email has been sent to
-					your email address</strong></span></center>
+			<center><span><strong>Notification Message</strong></span></center>
 		</div>
-	</c:if> --%>
+	</c:out>
 	
 	
 

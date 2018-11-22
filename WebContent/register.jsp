@@ -84,9 +84,9 @@
 			</c:forEach>
 		  </select>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
         	<input type="text" name="CuProvin" required="" placeholder="Province *" class="form-control"/>
-        </div>
+        </div> -->
         <div class="form-group">
         	<input id="phonenum" type="tel" pattern="^\d{7}$" title="must contain 7 digits" name="CuLandLi"  placeholder="Landline (Optional)" class="form-control"/>
         </div>

@@ -147,7 +147,7 @@ public class RegistrationController extends HttpServlet {
 				String customerBrngy = request.getParameter( "CuBarngy" );
 				int customerCtyID = Integer.parseInt(request.getParameter( "CCityID" ));
 				String customerProvi = new CityListingImplement().getCityListingById(customerCtyID).getCityProvince();
-				String customerLandL = request.getParameter( "CuLandLi" );
+				String customerLandL = request.getParameter( "CuLandLi" ).isEmpty() ? "0" : request.getParameter( "CuLandLi" );
 				String customerCellu = request.getParameter( "CuCellul" ).isEmpty() ? "0" : request.getParameter( "CuCellul" );
 				String customerEMail = request.getParameter( "CusEmail" );
 				

@@ -3,6 +3,7 @@ package thesis.mvc.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
@@ -13,9 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import thesis.mvc.implement.AuditImplement;
 import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PrescriptionImplement;
+import thesis.mvc.model.Audit;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.Prescription;
 import thesis.mvc.pageaction.ApprovalAction;
@@ -49,34 +52,44 @@ public class ApprovalController extends HttpServlet{
 
 		int orderID = Integer.parseInt(request.getParameter("orderID"));
 	    ApprovalAction approvalAction = new ApprovalAction();
+		Timestamp CurrentDate = new Timestamp(Calendar.getInstance().getTime().getTime());
+        Audit audit = new Audit();
+        audit.setUserID((int) session.getAttribute("Pharmacist"));
+        audit.setLogType("Approval");
+        audit.setTimestamp(CurrentDate);
 	    
 		if (new OrderImplement().getOrderById(orderID).getOrderStatus().equalsIgnoreCase("CANCELLED")) {
 			session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
 		} else if (action.equalsIgnoreCase("OrderReject")){
 		   	approvalAction.pharmacistApproval( orderID, 1 );
+	        audit.setActionTaken("order ID: " + orderID + " was rejected by user ID No:" + session.getAttribute("Pharmacist"));
 		} else if (action.equalsIgnoreCase("OrderApprove")){
 		   	approvalAction.pharmacistApproval( orderID, 2 );
 			Order order = new OrderImplement().getOrderById(orderID);
-			Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 			new SendEmail().send(new CustomerImplement().getCustomerById(order.getCustomerID()).getEmail(), "Transaction accepted on " + CurrentDate, new SendEmail().OrderEmail(order));
+	        audit.setActionTaken("order ID: " + orderID + " was approved by user ID No:" + session.getAttribute("Pharmacist"));
 		} else if (action.equalsIgnoreCase("OrderInvalidate")){
 			Order order = new OrderImplement().getOrderById(orderID);
 			if (new ShopAction().RefundOrder(order, "Pharmacist Invalidated the order")) {
-			   	approvalAction.pharmacistApproval( orderID, 3 );
-				Prescription prescription = new PrescriptionImplement().getPrescriptionByID(order.getPrescriptionID());
-				prescription.setPermissionStatus("REJECTED");
-				prescription.setRemark(request.getParameter("Reason"));
-				new PrescriptionImplement().updatePrescription(prescription);
-				Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
-				new SendEmail().send(new CustomerImplement().getCustomerById(order.getCustomerID()).getEmail(), "Transaction rejected on " + CurrentDate, new SendEmail().OrderEmail(order));
+		        audit.setActionTaken("order ID:" + orderID + " was invalidated and cancelled by user ID No:" + session.getAttribute("Pharmacist"));
 			} else {
-				session.setAttribute( "Message" , "Order can't be cancelled for some reason." );
+		        audit.setActionTaken("order ID:" + orderID + " was invalidated and cancelled by user ID No:" + session.getAttribute("Pharmacist") + " But Failed to refund due to error");
 			}
+		   	approvalAction.pharmacistApproval( orderID, 3 );
+			Prescription prescription = new PrescriptionImplement().getPrescriptionByID(order.getPrescriptionID());
+			prescription.setPermissionStatus("REJECTED");
+			prescription.setRemark(request.getParameter("Reason"));
+			new PrescriptionImplement().updatePrescription(prescription);
+			new SendEmail().send(new CustomerImplement().getCustomerById(order.getCustomerID()).getEmail(), "Transaction rejected on " + CurrentDate, new SendEmail().OrderEmail(order));
 		} else if (action.equalsIgnoreCase("ReturnReject")){
 		   	approvalAction.pharmacistApproval( orderID, 4 );
+	        audit.setActionTaken("order ID: " + orderID + " was approved for returns by user ID No:" + session.getAttribute("Pharmacist"));
 		} else if (action.equalsIgnoreCase("ReturnApprove")){
 		   	approvalAction.pharmacistApproval( orderID, 5 );
+	        audit.setActionTaken("order ID: " + orderID + " was disapproved for returns by user ID No:" + session.getAttribute("Pharmacist"));
 		}
+        AuditImplement AuditImp = new AuditImplement();
+        AuditImp.addAudit(audit);
 		response.sendRedirect(request.getContextPath() + "/index.jsp");
 		//RequestDispatcher view = request.getRequestDispatcher( "PharmacistPage.jsp" );
 		//view.forward(request, response);

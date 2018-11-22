@@ -2,6 +2,8 @@ package thesis.mvc.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Timestamp;
+import java.util.Calendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import thesis.mvc.implement.AuditImplement;
 import thesis.mvc.implement.BranchImplement;
 import thesis.mvc.implement.CourierServiceImplement;
 import thesis.mvc.implement.DeliveryImplement;
@@ -20,6 +23,7 @@ import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.implement.VehicleImplement;
+import thesis.mvc.model.Audit;
 import thesis.mvc.model.Delivery;
 import thesis.mvc.model.Driver;
 import thesis.mvc.model.Order;
@@ -90,7 +94,11 @@ public class DispatcherController extends HttpServlet {
 		if (request.getParameter("action") != null) {
 			action = request.getParameter( "action" );
 		}
-
+		Timestamp CurrentDate = new Timestamp(Calendar.getInstance().getTime().getTime());
+        Audit audit = new Audit();
+        audit.setUserID((int) session.getAttribute("Dispatcher"));
+        audit.setLogType("Login");
+        audit.setTimestamp(CurrentDate);
 		if(action.isEmpty()) {
 			//response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else if(action.equalsIgnoreCase("assignOrder")) {
@@ -109,19 +117,22 @@ public class DispatcherController extends HttpServlet {
 				delivery.setPlateNumber(request.getParameter("PlateNumber"));
 				int DeliveryID = new DeliveryImplement().addDelivery(delivery);
 				new OrderImplement().updateDeliveryID(orderID, DeliveryID);
+		        audit.setActionTaken("User Dispatched the order with the order ID:" +  orderID);
 			} else {
 				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
+		        audit.setActionTaken("User was unable to dispatch order due to Cancellation of order ID:" +  orderID);
 			}
 			//Reload
 		} else if(action.equalsIgnoreCase("confirmOrder")) {
 			int orderID = Integer.parseInt( request.getParameter("OrderID") );
-			
 			if(!new OrderImplement().getOrderById(orderID).getOrderStatus().equalsIgnoreCase("CANCELLED")) {
 				Order order = new OrderImplement().getOrderById(orderID);
 				order.setOrderStatus("COMPLETED");
 				new OrderImplement().updateOrder(order);
+		        audit.setActionTaken("User confirmed the order with order ID:" + order.getOrderID());
 			} else {
 				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
+		        audit.setActionTaken("User was unable to dispatch order due to Cancellation of order ID:" + orderID);
 			}
 		} else if(action.equalsIgnoreCase("returnedOrder")) {
 			int orderID = Integer.parseInt( request.getParameter("OrderID") );
@@ -129,10 +140,14 @@ public class DispatcherController extends HttpServlet {
 				Order order = new OrderImplement().getOrderById(orderID);
 				order.setOrderStatus("RETURNED");
 				new OrderImplement().updateOrder(order);
+		        audit.setActionTaken("User cancelled the order with order ID:" + order.getOrderID());
 			} else {
 				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
+		        audit.setActionTaken("User was unable to dispatch order due to Cancellation of order ID:" + orderID);
 			}
 		}
+        AuditImplement AuditImp = new AuditImplement();
+        AuditImp.addAudit(audit);
 		response.sendRedirect(request.getContextPath() + "/DispatcherController?Action=DispatchOrder");
 	}
 }

@@ -534,7 +534,7 @@
 <div id="Driver" class="tabcontent">
 <div class="login-clean"> 
 	<br>
-	<form action="DispatcherController" method="post">
+	<form action="DispatcherController">
 		<h2>Add Driver Here</h2>
         <div class="form-group">
         	<input type="text" required="required" name="driverName" placeholder="Driver Name" class="form-control"/>
@@ -546,6 +546,7 @@
         	<input type="text" required="required" name="driverCont" placeholder="Driver Contact Number" class="form-control"/>
         </div>
         <div class="form-group">
+        	<input type="hidden" name="Action" value="addDriver"/>
             <button class="btn btn-success btn-block" type="submit">Add Driver</button>
         </div>
 
@@ -554,7 +555,7 @@
 </div>
 <div id="Vehicle" class="tabcontent">
 <div class="login-clean"> 
-	<form id="form" action="DispatcherController" method="post">
+	<form id="form" action="DispatcherController">
 		<h2>Add Vehicle Here</h2>
 		<div class="form-group">
         	<input type="text" name="Vehicle" placeholder="Vehicle" class="form-control"/>

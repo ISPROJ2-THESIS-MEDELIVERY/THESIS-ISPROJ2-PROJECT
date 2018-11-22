@@ -62,9 +62,6 @@ public class DispatcherController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/DispatcherDirector.jsp");
 		} else if(action.equalsIgnoreCase("addDriver")) {
 			Driver driver = new Driver();
-			System.out.println((String) request.getParameter("driverName"));
-			System.out.println((String) request.getParameter("driverAddr"));
-			System.out.println((String) request.getParameter("driverCont"));
 			driver.setDriverName((String) request.getParameter("driverName"));
 			driver.setDriverAddress((String) request.getParameter("driverAddr"));
 			driver.setDriverContactNumber((String) request.getParameter("driverCont"));
@@ -125,9 +122,6 @@ public class DispatcherController extends HttpServlet {
 			} else {
 				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
 			}
-		} else if (action.equalsIgnoreCase("addDriver")) {
-			Driver newDriver = new Driver();
-			newDriver.setCourierserviceID(1);
 		}
 		response.sendRedirect(request.getContextPath() + "/DispatcherController?Action=DispatchOrder");
 	}

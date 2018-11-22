@@ -114,7 +114,6 @@
 	<table id="druglistTable" class="table table-striped table-bordered" width="100%">
 		<thead>
 			<tr>
-				<th>Product ID</th>
 				<th>Product Name</th>
 				<th>Generic Name</th>
 				<th>Product Strength</th>
@@ -130,7 +129,6 @@
 		<tbody>
 			<c:forEach items="${productList}" var="item">
 					<tr>
-						<td><c:out value="${item.productID}" /></td>
 						<td><c:out value="${item.productName}" /></td>
 						<td><c:out value="${item.genericName}" /></td>
 						<td><c:out value="${item.productStrength}" /></td>

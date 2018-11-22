@@ -505,8 +505,6 @@ table.dataTable, table.dataTable th, table.dataTable td {
 	height: 0
 }
 
-
-
 @media screen and (max-width: 767px) {
 	.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
 		{

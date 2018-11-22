@@ -97,10 +97,13 @@
 	        <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Update</button></div>
         </c:if>
         <c:if test="${userAccess == 2}">
+        	<div class="form-group"><button class="btn btn-primary btn-block" type="submit">Update</button></div>
         </c:if>
         <c:if test="${userAccess == 3}">
+        	<div class="form-group"><button class="btn btn-primary btn-block" type="submit">Update</button></div>
         </c:if>
         <c:if test="${userAccess == 4}">
+         <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Update</button></div>
         </c:if>
     <a class="already" href="index.jsp">Back</a> 
 	</form>

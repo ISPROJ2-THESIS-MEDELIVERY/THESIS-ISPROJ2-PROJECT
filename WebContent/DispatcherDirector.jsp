@@ -166,7 +166,13 @@
 									</c:forEach>
 								</select><br>
 								Plate Number: <br>
-									<input type="text" name="PlateNumber" class="form-control"/><br>
+								<select name="PlateNumber" class="form-control">
+									<c:forEach items="${Vehicles}" var="vehicle">
+										<c:if test="${CourierService == vehicle.courierServiceID}">
+											<option value="<c:out value="${vehicle.plateNumber}" />"><c:out value="${vehicle.plateNumber}" /></option>
+										</c:if>
+									</c:forEach>
+								</select><br>
 									<div class="text-center"><button class="btn btn-success btn-md" type="submit" name="action" value="assignOrder">Assign Order</button></div>
 								<!-- <input type="submit" name="action" value="assignOrder" placeholder="Set Order"> -->
 							</form>

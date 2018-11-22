@@ -60,6 +60,7 @@ public class DispatcherController extends HttpServlet {
 			session.setAttribute( "DispatcherOrderDetailsList" , new OrderDetailImplement().getOrderDetail()  );
 			session.setAttribute( "DriverList" , new DriverImplement().getAllDrivers());
 			session.setAttribute( "ProductTranslation" , new ProductImplement().getAllProducts());
+			session.setAttribute( "Vehicles" , new VehicleImplement().getVehicles());
 			session.setAttribute( "CourierService" , CourierID);
 			response.sendRedirect(request.getContextPath() + "/DispatcherDirector.jsp");
 		} else if(action.equalsIgnoreCase("addDriver")) {

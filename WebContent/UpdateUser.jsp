@@ -97,10 +97,13 @@
 	        <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Update</button></div>
         </c:if>
         <c:if test="${userAccess == 2}">
+        	<div class="form-group"><button class="btn btn-primary btn-block" type="submit">Update</button></div>
         </c:if>
         <c:if test="${userAccess == 3}">
+        	<div class="form-group"><button class="btn btn-primary btn-block" type="submit">Update</button></div>
         </c:if>
         <c:if test="${userAccess == 4}">
+         <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Update</button></div>
         </c:if>
     <a class="already" href="index.jsp">Back</a> 
 	</form>
@@ -146,6 +149,16 @@
     border-bottom-left-radius: .25rem;
     width: 98%;
 }
+
+.btn {
+    background-color: #21a9afa6;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5rem;
 
 </style>
 

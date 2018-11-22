@@ -1386,7 +1386,7 @@
 							<td><div class="pop"><img id="imageresource" class="center-block" src="images/<c:out value="${customer.seniorCitizenID}" />" width="300px" height="300px"/></div></td>
 							<td>N/A</td>
 						</c:if>
-						<td><img class="center-block" src="images/<c:out value="${customer.birthCertificate}" />" width="300px" height="300px"/></td>
+						<td><div class="pop"><img id="imageresource" class="center-block" src="images/<c:out value="${customer.birthCertificate}" />" width="300px" height="300px"/></div></td>
 						<td>
 							<form action="InformationController">
 								<input type="hidden" Name="AccountID" value="<c:out value="${customer.customerID}" />" />

@@ -57,7 +57,7 @@
 	<c:if test="${CartList != null}">
 					<div class="list-group">
 						<a class="list-group-item">
-							<center><h4 class="list-group-item list-group-item-info">Orders must reach a minimum of 50 pesos.</h4></center>
+								<center><h4 class="list-group-item-heading"><c:out value="${message}" /></h4></center>
 						</a>
 					</div>
     		<table id="cartlistTable" class="table table-striped table-bordered" width="100%">

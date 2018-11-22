@@ -1566,6 +1566,7 @@ Welcome, <c:out value="${username}"/>
 			<thead>
 				<tr>
 					<th>Admin Name</th>
+					<th>Audit</th>
 				</tr>
 			</thead>
 			<tbody>

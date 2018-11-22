@@ -65,7 +65,7 @@
 				<a class="list-group-item">
 					<c:if test="${UserType == 1}">
 						<h4 class="list-group-item-heading">UserDetails:</h4>
-						<p class="list-group-item-text">Name:<c:out value="${UserInfo.customerName}" /></p>
+						<p class="list-group-item-text">Name:<c:out value="${UserInfo.customerFirstName}" /> <c:out value="${UserInfo.customerMiddleName}" /> <c:out value="${UserInfo.customerSurName}" /></p>
 						<p class="list-group-item-text">User Type: Customer</p>
 					</c:if>
 					<c:if test="${UserType == 2}">

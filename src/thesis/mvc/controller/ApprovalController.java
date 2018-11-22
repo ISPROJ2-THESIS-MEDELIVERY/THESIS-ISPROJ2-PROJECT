@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
@@ -51,6 +53,7 @@ public class ApprovalController extends HttpServlet{
 		//if (request.getParameter("PharmaID") != null && !request.getParameter("PharmaID").isEmpty()){ session.setAttribute("SelectedBranch", request.getParameter( "UserBranch" ) ); }
 
 		int orderID = Integer.parseInt(request.getParameter("orderID"));
+		DateFormat dateFormat = new SimpleDateFormat("yy/MM/dd hh:mm a");
 	    ApprovalAction approvalAction = new ApprovalAction();
 		Timestamp CurrentDate = new Timestamp(Calendar.getInstance().getTime().getTime());
         Audit audit = new Audit();
@@ -66,7 +69,7 @@ public class ApprovalController extends HttpServlet{
 		} else if (action.equalsIgnoreCase("OrderApprove")){
 		   	approvalAction.pharmacistApproval( orderID, 2 );
 			Order order = new OrderImplement().getOrderById(orderID);
-			new SendEmail().send(new CustomerImplement().getCustomerById(order.getCustomerID()).getEmail(), "Transaction accepted on " + CurrentDate, new SendEmail().OrderEmail(order));
+			new SendEmail().send(new CustomerImplement().getCustomerById(order.getCustomerID()).getEmail(), "Transaction accepted on " + dateFormat.format(CurrentDate), new SendEmail().OrderEmail(order));
 	        audit.setActionTaken("order ID: " + orderID + " was approved by user ID No:" + session.getAttribute("Pharmacist"));
 		} else if (action.equalsIgnoreCase("OrderInvalidate")){
 			Order order = new OrderImplement().getOrderById(orderID);
@@ -80,7 +83,7 @@ public class ApprovalController extends HttpServlet{
 			prescription.setPermissionStatus("REJECTED");
 			prescription.setRemark(request.getParameter("Reason"));
 			new PrescriptionImplement().updatePrescription(prescription);
-			new SendEmail().send(new CustomerImplement().getCustomerById(order.getCustomerID()).getEmail(), "Transaction rejected on " + CurrentDate, new SendEmail().OrderEmail(order));
+			new SendEmail().send(new CustomerImplement().getCustomerById(order.getCustomerID()).getEmail(), "Transaction rejected on " + dateFormat.format(CurrentDate), new SendEmail().OrderEmail(order));
 		} else if (action.equalsIgnoreCase("ReturnReject")){
 		   	approvalAction.pharmacistApproval( orderID, 4 );
 	        audit.setActionTaken("order ID: " + orderID + " was approved for returns by user ID No:" + session.getAttribute("Pharmacist"));

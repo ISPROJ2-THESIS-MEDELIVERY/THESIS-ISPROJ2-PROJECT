@@ -822,6 +822,7 @@ Welcome, <c:out value="${username}"/>
 						<th>Product Bought</th>
 						<th>Total Cost</th>
 						<th>Prescription</th>
+						<th>Birth Certificate</th>
 						<th>Action</th>
 						<th>Reason</th>
 					</tr>
@@ -877,6 +878,13 @@ Welcome, <c:out value="${username}"/>
 								<td><c:forEach items="${PrescriptionImage}" var="prescription">
 										<c:if test="${order.prescriptionID == prescription.prescriptionID}">
 											<div class = "pop"><img id="imageresource" src="images/<c:out value="${prescription.prescription}" />" alt="Medicine Image" width="100px" height="100px"></div>
+										</c:if>
+									</c:forEach>
+								</td>
+								<td>
+									<c:forEach items="${CustomerList}" var="customer">
+										<c:if test="${customer.customerID == order.customerID}">
+											<div class="pop"><img id="imageresource" class="center-block" src="images/<c:out value="${customer.birthCertificate}" />" width="300px" height="300px"/></div>
 										</c:if>
 									</c:forEach>
 								</td>

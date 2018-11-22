@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -209,7 +211,8 @@ public class ShopController extends HttpServlet {
 				String CustomerEmail = customerImplement.getCustomerByUserId(userID).getEmail();
 				Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 				String redirect = new ShopAction().purchaseOrder(order, OrderDetails, "https://isproj2a.benilde.edu.ph" + request.getContextPath() + "/index.jsp");// request.getContextPath()
-				sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, sendEmail.OrderEmail(order));
+				DateFormat dateFormat = new SimpleDateFormat("yy/MM/dd hh:mm a");
+				sendEmail.send(CustomerEmail, "Reciept of transaction on " + dateFormat.format(CurrentDate), sendEmail.OrderEmail(order));
 				session.setAttribute("CartlistReciept", cartList);
 				session.setAttribute("orderReciept", order);
 				session.setAttribute("ApproveChecker", false);
@@ -271,6 +274,7 @@ public class ShopController extends HttpServlet {
 			
 			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");
 			List<CartList> cartList = (List<CartList>) session.getAttribute("CartList");
+			DateFormat dateFormat = new SimpleDateFormat("yy/MM/dd hh:mm a");
 			SendEmail sendEmail = new SendEmail();
 			int userID = (int) session.getAttribute("userID");
 			
@@ -295,7 +299,7 @@ public class ShopController extends HttpServlet {
 				String CustomerEmail = customerImplement.getCustomerByUserId(userID).getEmail();
 				Date CurrentDate = new Date(Calendar.getInstance().getTime().getTime());
 				String redirect = new ShopAction().purchaseOrder(order, OrderDetails, "https://isproj2a.benilde.edu.ph" + request.getContextPath() + "/index.jsp");// request.getContextPath()
-				sendEmail.send(CustomerEmail, "Reciept of transaction on " + CurrentDate, sendEmail.OrderEmail(order));
+				sendEmail.send(CustomerEmail, "Reciept of transaction on " + dateFormat.format(CurrentDate), sendEmail.OrderEmail(order));
 				session.setAttribute("CartlistReciept", cartList);
 				session.setAttribute("orderReciept", order);
 				session.setAttribute("ApproveChecker", false);

@@ -228,6 +228,7 @@ public class ProductController extends HttpServlet {
 			int test = new StocksPriceImplement().addStocksPrice(stocksPrice);
 			System.out.println("PRODUCT ID: " + test);
 		}
+		session.setAttribute("Message", "The product has been successfully added");
 		response.sendRedirect(request.getContextPath() + "/index.jsp");
 		
 	}

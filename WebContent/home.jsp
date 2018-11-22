@@ -750,7 +750,6 @@ Welcome, <c:out value="${username}"/>
 											width="100%">
 											<thead>
 												<tr>
-													<th>OrderID</th>
 													<th>Product Name</th>
 													<th>Quantity</th>
 													<th>Cost Per Unit</th>
@@ -762,7 +761,6 @@ Welcome, <c:out value="${username}"/>
 													var="orderdetails">
 													<c:if test="${order.orderID == orderdetails.orderID}">
 														<tr>
-															<td><c:out value="${orderdetails.orderID}" /></td>
 															<td><c:forEach items="${ProductTranslation}"
 																	var="product">
 																	<c:if
@@ -849,7 +847,6 @@ Welcome, <c:out value="${username}"/>
 										width="100%">
 										<thead>
 											<tr>
-												<th>OrderID</th>
 												<th>Product Name</th>
 												<th>Quantity</th>
 												<th>Cost Per Unit</th>
@@ -860,7 +857,6 @@ Welcome, <c:out value="${username}"/>
 											<c:forEach items="${IncomingOrderDetails}" var="orderdetails">
 												<c:if test="${order.orderID == orderdetails.orderID}">
 													<tr>
-														<td><c:out value="${orderdetails.orderID}" /></td>
 														<td><c:forEach items="${ProductTranslation}"
 																var="product">
 																<c:if
@@ -962,7 +958,6 @@ Welcome, <c:out value="${username}"/>
 											width="100%">
 											<thead>
 												<tr>
-													<th>OrderID</th>
 													<th>Product Name</th>
 													<th>Quantity</th>
 													<th>Cost Per Unit</th>
@@ -974,7 +969,6 @@ Welcome, <c:out value="${username}"/>
 													var="orderdetails">
 													<c:if test="${order.orderID == orderdetails.orderID}">
 														<tr>
-															<td><c:out value="${orderdetails.orderID}" /></td>
 															<td><c:forEach items="${ProductTranslation}"
 																	var="product">
 																	<c:if

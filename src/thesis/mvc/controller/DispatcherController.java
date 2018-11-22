@@ -117,6 +117,7 @@ public class DispatcherController extends HttpServlet {
 				delivery.setPlateNumber(request.getParameter("PlateNumber"));
 				int DeliveryID = new DeliveryImplement().addDelivery(delivery);
 				new OrderImplement().updateDeliveryID(orderID, DeliveryID);
+				session.setAttribute( "Message" , "Order Has been dispatched" );
 		        audit.setActionTaken("User Dispatched the order with the order ID:" +  orderID);
 			} else {
 				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
@@ -129,6 +130,7 @@ public class DispatcherController extends HttpServlet {
 				Order order = new OrderImplement().getOrderById(orderID);
 				order.setOrderStatus("COMPLETED");
 				new OrderImplement().updateOrder(order);
+				session.setAttribute( "Message" , "Order Has been confirmed" );
 		        audit.setActionTaken("User confirmed the order with order ID:" + order.getOrderID());
 			} else {
 				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
@@ -140,6 +142,7 @@ public class DispatcherController extends HttpServlet {
 				Order order = new OrderImplement().getOrderById(orderID);
 				order.setOrderStatus("RETURNED");
 				new OrderImplement().updateOrder(order);
+				session.setAttribute( "Message" , "Order has been returned" );
 		        audit.setActionTaken("User finished the returning of product the order with order ID:" + order.getOrderID());
 			} else {
 				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );

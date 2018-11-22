@@ -563,6 +563,7 @@
         	<input type="text" name="PlateNumber" id="license" pattern="[A-Z]{2}-[0-9]{4}$" placeholder="e.g.  MC-3884"  title="Please input the correct license plate number format for Motorcycle (A-Z)-(0-9)" maxlength="7" class="form-control"/>
         </div>
         <div class="form-group">
+        	<input type="hidden" name="Action" value="addVehicle"/>
             <button class="btn btn-success btn-block" type="submit">Add Vehicle</button>
         </div>
 

@@ -19,9 +19,11 @@ import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.implement.ProductImplement;
+import thesis.mvc.implement.VehicleImplement;
 import thesis.mvc.model.Delivery;
 import thesis.mvc.model.Driver;
 import thesis.mvc.model.Order;
+import thesis.mvc.model.Vehicle;
 import thesis.mvc.pageaction.RegistrationAction;
 import thesis.mvc.utility.DBUtility;
 
@@ -68,6 +70,13 @@ public class DispatcherController extends HttpServlet {
 			driver.setCourierserviceID(CourierID);
 			driver.setInTransit(false);
 			new DriverImplement().addDriver(driver);
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
+		} else if(action.equalsIgnoreCase("addVehicle")) {
+			Vehicle vehicle = new Vehicle();
+			vehicle.setPlateNumber((String) request.getParameter("PlateNumber"));
+			vehicle.setCourierServiceID(CourierID);
+			vehicle.setVehicleModel((String) request.getParameter("Vehicle"));
+			new VehicleImplement().addVehicle(vehicle);
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}
 		

@@ -176,7 +176,21 @@ public class PurchaseAction {
 		
 		return productCost.doubleValue();
 	}
-	
+	public Double GetTax() {
+		BigDecimal productCost = null;
+		try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM `Tax`")) {
+            try(ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                	return rs.getDouble(1);
+                }  else {
+                    return 0.0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0.0;
+        }
+	}
 	
 	
 }

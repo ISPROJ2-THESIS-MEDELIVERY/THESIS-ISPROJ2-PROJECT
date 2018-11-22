@@ -135,7 +135,7 @@ public class ShopAction {
 	@SuppressWarnings("unchecked")
 	public String SendOrder(Order order, List<OrderDetail> OrderDetails, String HomePage) {
         	DecimalFormat df = new DecimalFormat("#.##");
-        	Double TaxRate = 0.05;
+        	Double TaxRate = new PurchaseAction().GetTax();
 		
 			JSONObject JSONReciept = new JSONObject();
 			
@@ -147,8 +147,8 @@ public class ShopAction {
 	    		if (order.getSeniorDiscount() == true) {
 		    		details1.put("discount", df.format(order.getActualCost() * 0.25));
 	    		}
-	    		details1.put("serviceCharge", df.format(25.0 * TaxRate));
-	    		details1.put("shippingFee", df.format(25.0 * TaxRate));
+	    		details1.put("serviceCharge", df.format(25.0 * (1.0 - TaxRate)));
+	    		details1.put("shippingFee", df.format(25.0 * (1.0 - TaxRate)));
 	    		details1.put("tax", df.format(order.getActualCost() * TaxRate));
 	    		details1.put("subtotal", df.format((order.getActualCost() - 50.0) * (1.0 - TaxRate)));
 	        totalAmount1.put("details", details1);

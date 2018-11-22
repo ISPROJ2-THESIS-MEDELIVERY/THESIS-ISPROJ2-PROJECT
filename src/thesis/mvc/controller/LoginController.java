@@ -76,6 +76,7 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("specialMessage", "YOU HAVE NOT CONFIRMED YOUR ACCOUNT YET, PLEASE DO SO ASAP");
 			response.sendRedirect(request.getContextPath() + "/login.jsp");
 		} else if (LoginID > 0 && Capcha == null) {
+			session.removeAttribute("specialMessage");
 			
 			//Set ID
 			session.setAttribute("userID", LoginID);

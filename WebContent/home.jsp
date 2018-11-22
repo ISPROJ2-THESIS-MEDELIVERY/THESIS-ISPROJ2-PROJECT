@@ -86,6 +86,20 @@
 					<c:if test="${userAccess == 4}">
 						<span class="navbar-text" style="float: right"><a
 							href="LoginController" class="login">Log Out</a></span>
+							<span class="navbar-text" style="float: right"><a
+							href="#Dispatcherlist" class="login">Dispatcher list</a></span>
+							<span class="navbar-text" style="float: right"><a
+							href="#Pharmacistlist" class="login">Pharmacist list</a></span>
+							<span class="navbar-text" style="float: right"><a
+							href="#Adminlist" class="login">Admin list</a></span>
+							<span class="navbar-text" style="float: right"><a
+							href="#Itemsinventory" class="login">Inventory</a></span>
+							<span class="navbar-text" style="float: right"><a
+							href="#Pharmacylist" class="login">Pharmacy list</a></span>
+							<span class="navbar-text" style="float: right"><a
+							href="#branchlist" class="login">Branch list</a></span>
+							<span class="navbar-text" style="float: right"><a
+							href="#CourierServices" class="login">Courier Services</a></span>
 					</c:if>
 				</div>
 			</div>
@@ -155,6 +169,9 @@
 <div class="w3-container w3-center">
 
 
+<h3 style="color:#21a9af;" class="list-group-item-text">
+Welcome, <c:out value="${username}"/>
+							</h3>
 
 
 
@@ -400,8 +417,8 @@
 				<div class="col-md-6">
 					<div class="list-group">
 						<a class="list-group-item">
-							<h4 class="list-group-item-heading">Customer Details:</h4>
-							<p class="list-group-item-text">
+							<h4 class="list-group-item-heading">For Senior Citizen or Persons with Disability/s:</h4>
+							<%-- <p class="list-group-item-text">
 								User Name:
 								<c:out value="${customerName}"/>
 							</p>
@@ -412,10 +429,10 @@
 							<p class="list-group-item-text">
 								User Type:
 								Customer
-							</p>
+							</p> --%>
 						</a>
 					</div>
-					<a href="CustomerSeniorCitizen.jsp" class="login && btn btn-warning" role="button">Are you a senior citizen?<br> Upload your senior citizen ID here</a>
+					<a href="CustomerSeniorCitizen.jsp" class="login && btn btn-warning" role="button">Upload your Valid ID here</a>
 				</div>
 				<div class="col-md-6">
 					<div class="list-group">
@@ -441,22 +458,31 @@
 	</c:if>
 	<c:if test="${userAccess == 2}">
 		<hr>
-		<div class="container">
-    		<div class="row">
-        		<div class="col-md-6">
-        			<div class="list-group">
-    					<a class="list-group-item">
-      						<h4 class="list-group-item-heading">Dispatcher Details:</h4>
-      						<p class="list-group-item-text">Username: <c:out value="${username}" /></p>
-      						<p class="list-group-item-text">User Type: Dispatcher </p>
-    					</a>
-    				</div>
-    				<!-- <a href="DispatcherController?Action=DispatchOrder" class="btn btn-info" role="button">Order Dispatch</a><br>
-    				<br>
-    				<a href="UpdateUser.jsp" class="btn btn-info" role="button">Update User Details</a><br> -->
-    			</div>
-    		</div>
-    	</div>
+		
+		
+		
+		<h3 style="color:#21a9af; margin-left:20px;" class="list-group-item-text">
+Welcome, <c:out value="${username}"/>
+							</h3>
+		
+		<br>
+		
+    	<i style="font-size:200px; color:#21a9af; margin-left:20px;" class="fa">&#xf21c;</i>
+    	
+    	<div id="container">
+				<div class="list-group">
+					<a id="Customerlist"class="list-group-item list-group-item-info">
+						<h4 class="list-group-item-heading">
+							<center>List of Drivers</center>
+						</h4>
+					</a>
+				</div>
+			</div>	
+		
+		
+		
+		
+		
 		<table id="driverTable" class="table table-striped table-bordered"
 			width="100%">
 			<thead>
@@ -523,9 +549,10 @@
 
 <div class="w3-container w3-center">
 
-<p>Select which to add</p>
+<center><h4>Kindly select which to item you want to add</h4></center>
 
-<div class="tab">
+<div class="tab" style="margin-left: 490px;
+    margin-right: 490px;">
   <button class="tablinks" onclick="openCity(event, 'Driver')">Add Driver</button>
   <button class="tablinks" onclick="openCity(event, 'Vehicle')">Add Vehicle</button>
 </div>
@@ -534,7 +561,7 @@
 <div class="login-clean"> 
 	<br>
 	<form action="DispatcherController">
-		<h2>Add Driver Here</h2>
+		<h2>Add Driver Details</h2>
         <div class="form-group">
         	<input type="text" required="required" name="driverName" placeholder="Driver Name" class="form-control"/>
         </div>
@@ -555,9 +582,9 @@
 <div id="Vehicle" class="tabcontent">
 <div class="login-clean"> 
 	<form id="form" action="DispatcherController">
-		<h2>Add Vehicle Here</h2>
+		<h2>Add Vehicle Details</h2>
 		<div class="form-group">
-        	<input type="text" name="Vehicle" placeholder="Vehicle" class="form-control"/>
+        	<input type="text" name="Vehicle" placeholder="Motorcycle Model" class="form-control"/>
         </div>
         <div class="form-group">
         	<input type="text" name="PlateNumber" id="license" pattern="[A-Z]{2}-[0-9]{4}$" placeholder="e.g.  MC-3884"  title="Please input the correct license plate number format for Motorcycle (A-Z)-(0-9)" maxlength="7" class="form-control"/>
@@ -580,24 +607,18 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6">
-					<div class="list-group">
-						<a class="list-group-item">
-							<h4 class="list-group-item-heading">Pharmacist Details</h4>
-							<p class="list-group-item-text">
-								Pharmacist Name:
-								<c:out value="${pharmacist.firstName}" /> <c:out
-								value="${pharmacist.lastName}" />
-							</p>
-							<p class="list-group-item-text">
-								Username:
-								<c:out value="${username}" />
-							</p>
-							<p class="list-group-item-text">
-								User Type:
-								Pharmacist
-							</p>
-						</a>
-					</div>
+					
+					
+						<h3 style="color:#21a9af; margin-left: 20px;" class="list-group-item-text">
+Welcome, <c:out value="${username}"/>
+							</h3>
+		
+		<br>
+		
+    	<center><i style="font-size:200px; color:#21a9af; margin-right:300px;" class="fa">&#xf0f0;</i></center>
+					
+					
+					
 					<a href="ProductController?Action=addProduct" class="btn btn-info"
 						role="button">Add Existing Product to Catalog</a><br> <br />
 					<a href="PharmacistController?Action=Prescription && #approve"
@@ -1004,25 +1025,20 @@
 	</c:if>
 	<c:if test="${userAccess == 4}">
 		<hr>
-		<div class="container">
-			<div class="list-group">
-				<a class="list-group-item">
-					<h4 class="list-group-item-heading">Admin Details:</h4>
-					<%-- <p class="list-group-item-text">
-						User ID:
-						<c:out value="${userID}" />
-					</p> --%>
-					<p class="list-group-item-text">
-						Username:
-						<c:out value="${username}" />
-					</p>
-					<p class="list-group-item-text">
-						User Type:
-						Admin
-					</p>
-				</a>
-			</div>
-		</div>
+		
+		
+			
+		<h3 style="color:#21a9af; margin-left: 20px;" class="list-group-item-text">
+Welcome, <c:out value="${username}"/>
+							</h3>
+		
+		<br>
+		
+    	<i style="font-size:200px; color:#21a9af; margin-left:20px;" class="fa">&#xf080;</i> 
+    	
+		
+		
+		
 		<hr>
 
 <%-- <h2>Select table to view</h2>
@@ -1339,9 +1355,18 @@
 </div> --%>
 	
 		<hr>
-		<h2>
-			<center>List of customers:</center>
-		</h2>
+		
+		<div id="container">
+				<div class="list-group">
+					<a id="Customerlist"class="list-group-item list-group-item-info">
+						<h4 class="list-group-item-heading">
+							<center>List of Customers</center>
+						</h4>
+					</a>
+				</div>
+			</div>	
+		
+		
 		<br>
 		<table id="customerTable" class="table table-striped table-bordered"
 			width="100%">
@@ -1400,9 +1425,18 @@
 			</tbody>
 		</table>
 		<hr>
-		<h2>
-			<center>List of dispatchers:</center>
-		</h2>
+		
+		<div id="container">
+				<div class="list-group">
+					<a id="Dispatcherlist"class="list-group-item list-group-item-info">
+						<h4 class="list-group-item-heading">
+							<center>List of Dispatchers:</center>
+						</h4>
+					</a>
+				</div>
+			</div>	
+		
+		
 		<br>
 		<table id="dispatcherTable" class="table table-striped table-bordered"
 			width="100%">
@@ -1447,9 +1481,18 @@
 		<br>
 		<br>
 		<hr>
-		<h2>
-			<center>List of pharmacists:</center>
-		</h2>
+		
+		<div id="container">
+				<div class="list-group">
+					<a id="Pharmacistlist"class="list-group-item list-group-item-info">
+						<h4 class="list-group-item-heading">
+							<center>List of Pharmacists:</center>
+						</h4>
+					</a>
+				</div>
+			</div>	
+		
+		
 		<br>
 		<table id="pharmacistTable" class="table table-striped table-bordered"
 			width="100%">
@@ -1483,7 +1526,7 @@
 								<input type="hidden" Name="AccountID" value="<c:out value="${pharmacist.pharmacistID}" />" />
 								<div class="text-center"><button class="btn btn-success btn-md" type="submit" Name="Action" value="AuditPagePharmacist">Audit Page</button></div>
 							</form>
-						</td>3
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -1498,9 +1541,19 @@
 			<br>
 		</c:forEach>
 		<hr>
-		<h2>
-			<center>List of admin:</center>
-		</h2>
+		
+		<div id="container">
+				<div class="list-group">
+					<a id="Adminlist"class="list-group-item list-group-item-info">
+						<h4 class="list-group-item-heading">
+							<center>List of admin:
+</center>
+						</h4>
+					</a>
+				</div>
+			</div>	
+		
+		
 		<br>
 		<table id="adminTable" class="table table-striped table-bordered"
 			width="100%">
@@ -1523,9 +1576,18 @@
 		<br>
 		<br>
 		<hr>
-		<h2>
-			<center>Items Inventory:</center>
-		</h2>
+		
+		
+		<div id="container">
+				<div class="list-group">
+					<a id="Itemsinventory"class="list-group-item list-group-item-info">
+						<h4 class="list-group-item-heading">
+							<center>Items Inventory:</center>
+						</h4>
+					</a>
+				</div>
+			</div>	
+		
 		<table id="druglistTable" class="table table-striped table-bordered" width="100%">
 			<thead>
 				<tr>
@@ -1559,9 +1621,17 @@
 		</table>
 		<br>
 		<hr>
-		<h2>
-			<center>List of Pharmacies:</center>
-		</h2>
+		
+		 <div class="list-group">
+					<a id="Pharmacylist"class="list-group-item list-group-item-info">
+						<h4 class="list-group-item-heading">
+							<center>List of Pharmacies:</center>
+						</h4>
+					</a>
+				</div>
+		
+		
+		
 		<br>
 		<table id="pharmaciesTable" class="table table-striped table-bordered"
 			width="100%">
@@ -1583,9 +1653,19 @@
 		<br>
 		<br>
 		<hr>
-		<h2>
-			<center>List of branches:</center>
-		</h2>
+		
+		
+		<div id="container">
+				<div class="list-group">
+					<a id="branchlist"class="list-group-item list-group-item-info">
+						<h4 class="list-group-item-heading">
+							<center>List of branches:</center>
+						</h4>
+					</a>
+				</div>
+			</div>	
+		
+		
 		<br>
 		<table id="branchesTable" class="table table-striped table-bordered"
 			width="100%">
@@ -1624,9 +1704,18 @@
 		<br>
 		<br>
 		<hr>
-		<h2>
-			<center>List of Courier Services:</center>
-		</h2>
+		
+		<div id="container">
+				<div class="list-group">
+					<a id="CourierServices"class="list-group-item list-group-item-info">
+						<h4 class="list-group-item-heading">
+							<center>List of Courier Services:</center>
+						</h4>
+					</a>
+				</div>
+			</div>	
+		
+		
 		<br>
 		<table id="courierTable" class="table table-striped table-bordered"
 			width="100%">

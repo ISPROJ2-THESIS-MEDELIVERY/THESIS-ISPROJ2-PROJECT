@@ -77,6 +77,7 @@ public class LoginController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/login.jsp");
 		} else if (LoginID > 0 && Capcha == null) {
 			session.removeAttribute("specialMessage");
+			session.removeAttribute("LoginTry");
 			
 			//Set ID
 			session.setAttribute("userID", LoginID);

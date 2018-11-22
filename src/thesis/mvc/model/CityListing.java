@@ -6,6 +6,7 @@ public class CityListing {
 	
 	private int CityID;
 	private String CityName;
+	private String CityProvince;
 	private BigDecimal CityCost;
 	public int getCityID() {
 		return CityID;
@@ -18,6 +19,12 @@ public class CityListing {
 	}
 	public void setCityName(String cityName) {
 		CityName = cityName;
+	}
+	public String getCityProvince() {
+		return CityProvince;
+	}
+	public void setCityProvince(String cityProvince) {
+		CityProvince = cityProvince;
 	}
 	public BigDecimal getCityCost() {
 		return CityCost;

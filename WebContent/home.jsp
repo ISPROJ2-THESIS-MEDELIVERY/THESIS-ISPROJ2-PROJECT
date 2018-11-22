@@ -107,12 +107,12 @@
 		</div>
 	</div>
 	
-	<c:if test="${justReg != null}">
+	<%-- <c:if test="${justReg != null}">
 		<div role="alert" class="alert alert-info">
 			<center><span><strong>A confirmation email has been sent to
 					your email address</strong></span></center>
 		</div>
-	</c:if>
+	</c:if> --%>
 	
 	
 
@@ -581,13 +581,13 @@ Welcome, <c:out value="${username}"/>
 </div>
 <div id="Vehicle" class="tabcontent">
 <div class="login-clean"> 
-	<form id="form" action="DispatcherController">
+	<form action="DispatcherController">
 		<h2>Add Vehicle Details</h2>
 		<div class="form-group">
-        	<input type="text" name="Vehicle" placeholder="Motorcycle Model" class="form-control"/>
+        	<input type="text" name="Vehicle" required = "" placeholder="Motorcycle Model" class="form-control"/>
         </div>
         <div class="form-group">
-        	<input type="text" name="PlateNumber" id="license" pattern="[A-Z]{2}-[0-9]{4}$" placeholder="e.g.  MC-3884"  title="Please input the correct license plate number format for Motorcycle (A-Z)-(0-9)" maxlength="7" class="form-control"/>
+        	<input type="text" name="PlateNumber" required = "" id="license" pattern="[A-Z]{2}-[0-9]{4}$" placeholder="e.g.  MC-3884"  title="Please input the correct license plate number format for Motorcycle (A-Z)-(0-9)" maxlength="7" class="form-control"/>
         </div>
         <div class="form-group">
         	<input type="hidden" name="Action" value="addVehicle"/>
@@ -750,7 +750,6 @@ Welcome, <c:out value="${username}"/>
 											width="100%">
 											<thead>
 												<tr>
-													<th>OrderID</th>
 													<th>Product Name</th>
 													<th>Quantity</th>
 													<th>Cost Per Unit</th>
@@ -762,7 +761,6 @@ Welcome, <c:out value="${username}"/>
 													var="orderdetails">
 													<c:if test="${order.orderID == orderdetails.orderID}">
 														<tr>
-															<td><c:out value="${orderdetails.orderID}" /></td>
 															<td><c:forEach items="${ProductTranslation}"
 																	var="product">
 																	<c:if
@@ -849,7 +847,6 @@ Welcome, <c:out value="${username}"/>
 										width="100%">
 										<thead>
 											<tr>
-												<th>OrderID</th>
 												<th>Product Name</th>
 												<th>Quantity</th>
 												<th>Cost Per Unit</th>
@@ -860,7 +857,6 @@ Welcome, <c:out value="${username}"/>
 											<c:forEach items="${IncomingOrderDetails}" var="orderdetails">
 												<c:if test="${order.orderID == orderdetails.orderID}">
 													<tr>
-														<td><c:out value="${orderdetails.orderID}" /></td>
 														<td><c:forEach items="${ProductTranslation}"
 																var="product">
 																<c:if
@@ -962,7 +958,6 @@ Welcome, <c:out value="${username}"/>
 											width="100%">
 											<thead>
 												<tr>
-													<th>OrderID</th>
 													<th>Product Name</th>
 													<th>Quantity</th>
 													<th>Cost Per Unit</th>
@@ -974,7 +969,6 @@ Welcome, <c:out value="${username}"/>
 													var="orderdetails">
 													<c:if test="${order.orderID == orderdetails.orderID}">
 														<tr>
-															<td><c:out value="${orderdetails.orderID}" /></td>
 															<td><c:forEach items="${ProductTranslation}"
 																	var="product">
 																	<c:if
@@ -1372,7 +1366,9 @@ Welcome, <c:out value="${username}"/>
 			width="100%">
 			<thead>
 				<tr>
-					<th>Customer Name</th>
+					<th>Customer First Name</th>
+					<th>Customer Middle Name</th>
+					<th>Customer Last Name</th>
 					<th>Customer CityID</th>
 					<th>Customer Email</th>
 					<th>Senior Citizen?</th>
@@ -1385,7 +1381,9 @@ Welcome, <c:out value="${username}"/>
 			<tbody>
 				<c:forEach items="${CustomerList}" var="customer">
 					<tr>
-						<td><c:out value="${customer.customerName}" /></td>
+						<td><c:out value="${customer.customerFirstName}" /></td>
+						<td><c:out value="${customer.customerMiddleName}" /></td>
+						<td><c:out value="${customer.customerSurName}" /></td>
 						<td><c:out value="${customer.cityID}" /></td>
 						<td><c:out value="${customer.email}" /></td>
 						
@@ -2316,7 +2314,7 @@ $(document).ready(function() {
 
 
 
-<script>
+<!-- <script>
 
 (function($, undefined) {
 	"use strict";
@@ -2348,6 +2346,6 @@ $(document).ready(function() {
 })(jQuery);
 
 
-</script>
+</script> -->
 
 </html>

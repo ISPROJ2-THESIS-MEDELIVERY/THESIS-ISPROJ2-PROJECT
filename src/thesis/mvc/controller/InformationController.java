@@ -175,7 +175,7 @@ public class InformationController extends HttpServlet {
 			String BrchStrt = request.getParameter( "BrchStrt" );
 			String BrchBngy = request.getParameter( "BrchBngy" );
 			int	BrchCity = Integer.parseInt( request.getParameter( "BrchCity" ) );
-			String BrchProv = request.getParameter( "BrchProv" );
+			String BrchProv = new CityListingImplement().getCityListingById(BrchCity).getCityProvince();
 			String BrchLand = request.getParameter( "BrchLand" );
 			String BrchCell = request.getParameter( "BrchCell" );
 			String BrchOwnr = request.getParameter( "BrchOwnr" );
@@ -195,8 +195,9 @@ public class InformationController extends HttpServlet {
 			String CompName = request.getParameter( "CompName" );
 			String CompStre = request.getParameter( "CompStre" );
 			String CompBara = request.getParameter( "CompBara" );
-			String CompCity = request.getParameter( "CompCity" );
-			String CompProv = request.getParameter( "CompProv" );
+			int courierCityID = Integer.parseInt(request.getParameter( "CompCity" ));
+			String CompCity =  new CityListingImplement().getCityListingById(courierCityID).getCityName();
+			String CompProv =  new CityListingImplement().getCityListingById(courierCityID).getCityProvince();
 			BigInteger CompCell = new BigInteger(request.getParameter( "CompCell" ));
 			int CompLand = Integer.parseInt(request.getParameter( "CompLand" ));
 			String CompCont = request.getParameter( "CompCont" );

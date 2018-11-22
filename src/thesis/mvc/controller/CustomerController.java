@@ -24,12 +24,14 @@ import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.PharmacyImplement;
 import thesis.mvc.implement.PrescriptionImplement;
+import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.model.Customer;
 import thesis.mvc.model.Delivery;
 import thesis.mvc.model.Driver;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.Pharmacy;
 import thesis.mvc.model.Prescription;
+import thesis.mvc.model.Product;
 import thesis.mvc.pageaction.SearchAction;
 import thesis.mvc.pageaction.ShopAction;
 import thesis.mvc.utility.DBUtility;
@@ -94,14 +96,17 @@ public class CustomerController extends HttpServlet{
 			response.sendRedirect(request.getContextPath() + "/CatalogAdvanced.jsp");
 		} else if (action.equalsIgnoreCase("GoToOrders")) {
 			session.setAttribute("OrderHistory", new OrderImplement().getOrderByCustomerId((int)session.getAttribute("Customer")));
+			session.setAttribute("ProductList", new ProductImplement().getAllProducts());
 			session.setAttribute("OrderDetailHistory", new OrderDetailImplement().getOrderDetail() );
 			response.sendRedirect(request.getContextPath() + "/CustomerOrders.jsp");
 		} else if (action.equalsIgnoreCase("GoToPending")) {
 			session.setAttribute("OrderHistory", new OrderImplement().getOrderByCustomerId((int)session.getAttribute("Customer")));
+			session.setAttribute("ProductList", new ProductImplement().getAllProducts());
 			session.setAttribute("OrderDetailHistory", new OrderDetailImplement().getOrderDetail() );
 			response.sendRedirect(request.getContextPath() + "/CustomerPending.jsp");
 		} else if (action.equalsIgnoreCase("GoToReturns")) {
 			session.setAttribute("OrderHistory", new OrderImplement().getOrderByCustomerId((int)session.getAttribute("Customer")));
+			session.setAttribute("ProductList", new ProductImplement().getAllProducts());
 			session.setAttribute("OrderDetailHistory", new OrderDetailImplement().getOrderDetail() );
 			response.sendRedirect(request.getContextPath() + "/CustomerReturn.jsp");
 		} else if (action.equalsIgnoreCase("CancelOrder")) {

@@ -630,7 +630,7 @@
 								<td><c:out value="${sales.genericName}" /></td>
 								<td><c:out value="${sales.registrationNo}" /></td>
 								<td><c:out value="${sales.quantity}" /></td>
-								<td>&#8369;<fmt:formatNumber value="${sales.totalSales}" /></td>
+								<td>&#8369;<fmt:formatNumber minFractionDigits="2" value="${sales.totalSales}" /></td>
 							</tr>
 					</c:forEach>
 				</tbody>
@@ -673,7 +673,7 @@
 						<td><c:out value="${item.productForm}" /></td>
 						<td><c:out value="${item.productPackaging}" /></td>
 						<td><c:out value="${item.productDescription}" /></td>
-						<td>&#8369;<fmt:formatNumber value = "${item.priceSet}" /></td>
+						<td>&#8369;<fmt:formatNumber minFractionDigits="2" value = "${item.priceSet}" /></td>
 					</tr>
 			</c:forEach>
 		</tbody>
@@ -748,15 +748,15 @@
 																	</c:if>
 																</c:forEach></td>
 															<td><c:out value="${orderdetails.quantity}" /></td>
-															<td>&#8369;<fmt:formatNumber value = "${orderdetails.costPerUnit}" /></td>   
-															<td>&#8369;<fmt:formatNumber value = "${orderdetails.totalCost}" /></td>   
+															<td>&#8369;<fmt:formatNumber minFractionDigits="2" value = "${orderdetails.costPerUnit}" /></td>   
+															<td>&#8369;<fmt:formatNumber minFractionDigits="2" value = "${orderdetails.totalCost}" /></td>   
 														</tr>
 													</c:if>
 												</c:forEach>
 											</tbody>
 										</table>
 									</td>
-									<td>&#8369;<fmt:formatNumber value = "${order.actualCost}" /></td>   
+									<td>&#8369;<fmt:formatNumber minFractionDigits="2" value = "${order.actualCost}" /></td>   
 									<td>
 										<form action="ApprovalController" method="post">
 											<input type="hidden" Name="action" value="OrderReject" />
@@ -846,15 +846,15 @@
 																</c:if>
 															</c:forEach></td>
 														<td><c:out value="${orderdetails.quantity}" /></td>
-															<td>&#8369;<fmt:formatNumber value = "${orderdetails.costPerUnit}" /></td>   
-															<td>&#8369;<fmt:formatNumber value = "${orderdetails.totalCost}" /></td>   
+															<td>&#8369;<fmt:formatNumber minFractionDigits="2" value = "${orderdetails.costPerUnit}" /></td>   
+															<td>&#8369;<fmt:formatNumber minFractionDigits="2" value = "${orderdetails.totalCost}" /></td>   
 													</tr>
 												</c:if>
 											</c:forEach>
 										</tbody>
 									</table>
 								</td>
-								<td>&#8369;<fmt:formatNumber value = "${order.actualCost}" /></td>   
+								<td>&#8369;<fmt:formatNumber minFractionDigits="2" value = "${order.actualCost}" /></td>   
 								<td><c:forEach items="${PrescriptionImage}" var="prescription">
 										<c:if test="${order.prescriptionID == prescription.prescriptionID}">
 											<div class = "pop"><img id="imageresource" src="images/<c:out value="${prescription.prescription}" />" alt="Medicine Image" width="100px" height="100px"></div>
@@ -960,15 +960,15 @@
 																	</c:if>
 																</c:forEach></td>
 															<td><c:out value="${orderdetails.quantity}" /></td>
-															<td>&#8369;<fmt:formatNumber value = "${orderdetails.costPerUnit}" /></td>
-															<td>&#8369;<fmt:formatNumber value = "${orderdetails.totalCost}" /></td>    
+															<td>&#8369;<fmt:formatNumber minFractionDigits="2" value = "${orderdetails.costPerUnit}" /></td>
+															<td>&#8369;<fmt:formatNumber minFractionDigits="2" value = "${orderdetails.totalCost}" /></td>    
 														</tr>
 													</c:if>
 												</c:forEach>
 											</tbody>
 										</table>
 									</td>
-									<td>&#8369;<fmt:formatNumber value = "${order.actualCost}" /></td>
+									<td>&#8369;<fmt:formatNumber minFractionDigits="2" value = "${order.actualCost}" /></td>
 									<td>
 										<c:forEach items="${DeliveryReason}" var="delivery">
 											<c:if test="${order.deliveryID == delivery.deliveryID}">

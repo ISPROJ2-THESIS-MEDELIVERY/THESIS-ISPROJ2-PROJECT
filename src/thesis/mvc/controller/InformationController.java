@@ -235,7 +235,7 @@ public class InformationController extends HttpServlet {
 			
 			if ((int) session.getAttribute("userAccess") == 1) {
 				Customer customer = new CustomerImplement().getCustomerById((int) session.getAttribute("Customer"));
-				String CustName = request.getParameter( "FullName" ).equalsIgnoreCase("") ? request.getParameter( "FullName" ) : customer.getCustomerName();
+				//String CustName = request.getParameter( "FullName" ).equalsIgnoreCase("") ? request.getParameter( "FullName" ) : customer.getCustomerName();
 				String CustStrt = request.getParameter( "CuStreet" ).equalsIgnoreCase("") ? request.getParameter( "CuStreet" ) : customer.getCustomerStreet();
 				String CustBrgy = request.getParameter( "CuBarngy" ).equalsIgnoreCase("") ? request.getParameter( "CuBarngy" ) : customer.getCustomerBarangay();
 				int CustCity =    request.getParameter( "CCityID" ).equalsIgnoreCase("") ? Integer.parseInt(request.getParameter( "CCityID" )) : customer.getCityID();
@@ -244,7 +244,7 @@ public class InformationController extends HttpServlet {
 				String CustEmil = request.getParameter( "CusEmail" ).equalsIgnoreCase("") ? request.getParameter( "CusEmail" ) : customer.getEmail();
 				
 				//Initial Information
-				customer.setCustomerName(CustName);
+				//customer.setCustomerName(CustName);
 				customer.setCustomerStreet(CustStrt);
 				customer.setCustomerBarangay(CustBrgy);
 				customer.setCityID(CustCity);

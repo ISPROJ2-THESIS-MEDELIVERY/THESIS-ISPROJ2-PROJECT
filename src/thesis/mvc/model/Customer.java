@@ -4,7 +4,9 @@ public class Customer {
 	
 	private int CustomerID;
 	private int UserID;
-	private String CustomerName;
+	private String CustomerFirstName;
+	private String CustomerMiddleName;
+	private String CustomerSurName;
 	private String CustomerStreet;
 	private String CustomerBarangay;
 	private int CityID;
@@ -28,11 +30,23 @@ public class Customer {
 	public void setUserID(int userID) {
 		UserID = userID;
 	}
-	public String getCustomerName() {
-		return CustomerName;
+	public String getCustomerFirstName() {
+		return CustomerFirstName;
 	}
-	public void setCustomerName(String customerName) {
-		CustomerName = customerName;
+	public void setCustomerFirstName(String customerFirstName) {
+		CustomerFirstName = customerFirstName;
+	}
+	public String getCustomerMiddleName() {
+		return CustomerMiddleName;
+	}
+	public void setCustomerMiddleName(String customerMiddleName) {
+		CustomerMiddleName = customerMiddleName;
+	}
+	public String getCustomerSurName() {
+		return CustomerSurName;
+	}
+	public void setCustomerSurName(String customerSurName) {
+		CustomerSurName = customerSurName;
 	}
 	public String getCustomerStreet() {
 		return CustomerStreet;

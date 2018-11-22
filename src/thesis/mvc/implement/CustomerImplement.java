@@ -25,20 +25,22 @@ public class CustomerImplement implements CustomerDAO{
 	public int addCustomer(Customer customer) {
 		try(PreparedStatement stmt = conn.prepareStatement(""
         		+ "INSERT INTO Customer "
-        		+ "(`UserID`, `CustomerName`, `CustomerStreet`, `CustomerBarangay`, `CityID`, `CustomerProvince`, `CustomerLandline`, `CustomerCellular`, `Email`, `IsSeniorCitizen`, `SeniorCitizenID`, `BirthCertificate`) " 
+        		+ "(`UserID`, `CustomerFirstName`, `CustomerMiddleName`, `CustomerLastName`, `CustomerStreet`, `CustomerBarangay`, `CityID`, `CustomerProvince`, `CustomerLandline`, `CustomerCellular`, `Email`, `IsSeniorCitizen`, `SeniorCitizenID`, `BirthCertificate`) " 
         		+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)")) {
 			stmt.setInt( 1, customer.getUserID() );
-			stmt.setString( 2, customer.getCustomerName() );
-			stmt.setString( 3, customer.getCustomerStreet() );
-			stmt.setString( 4, customer.getCustomerBarangay() );
-			stmt.setInt(5, customer.getCityID());
-			stmt.setString( 6, "METRO MANILA" );
-			stmt.setString( 7, customer.getCustomerLandline() );
-			stmt.setString( 8, customer.getCustomerCellular() );
-			stmt.setString( 9, customer.getEmail() );
-			stmt.setBoolean( 10, customer.isIsSeniorCitizen() );
-			stmt.setString( 11, customer.getSeniorCitizenID() );
-			stmt.setString( 12, customer.getBirthCertificate() );
+			stmt.setString( 2, customer.getCustomerFirstName() );
+			stmt.setString( 3, customer.getCustomerMiddleName() );
+			stmt.setString( 4, customer.getCustomerSurName() );
+			stmt.setString( 5, customer.getCustomerStreet() );
+			stmt.setString( 6, customer.getCustomerBarangay() );
+			stmt.setInt(7, customer.getCityID());
+			stmt.setString( 8, "METRO MANILA" );
+			stmt.setString( 9, customer.getCustomerLandline() );
+			stmt.setString( 10, customer.getCustomerCellular() );
+			stmt.setString( 11, customer.getEmail() );
+			stmt.setBoolean( 12, customer.isIsSeniorCitizen() );
+			stmt.setString( 13, customer.getSeniorCitizenID() );
+			stmt.setString( 14, customer.getBirthCertificate() );
 			System.out.println(stmt);
 			int NewID = stmt.executeUpdate();
 			stmt.close();
@@ -69,7 +71,9 @@ public class CustomerImplement implements CustomerDAO{
 		try {
 			String query = "UPDATE Customer SET "
 					+ "`UserID`=?,"
-					+ "`CustomerName`=?,"
+					+ "`CustomerFirstName`=?,"
+					+ "`CustomerMiddleName`=?,"
+					+ "`CustomerLastName`=?,"
 					+ "`CustomerStreet`=?,"
 					+ "`CustomerBarangay`=?,"
 					+ "`CityID`=?,"
@@ -83,18 +87,20 @@ public class CustomerImplement implements CustomerDAO{
 					+ " WHERE CustomerID=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setInt( 1, customer.getUserID() );
-			preparedStatement.setString( 2, customer.getCustomerName() );    
-			preparedStatement.setString( 3, customer.getCustomerStreet() );  
-			preparedStatement.setString( 4, customer.getCustomerBarangay() );
-			preparedStatement.setInt(5, customer.getCityID());               
-			preparedStatement.setString( 6, "METRO MANILA" );
-			preparedStatement.setString( 7, customer.getCustomerLandline() );
-			preparedStatement.setString( 8, customer.getCustomerCellular() );
-			preparedStatement.setString( 9, customer.getEmail() );           
-			preparedStatement.setBoolean( 10, customer.isIsSeniorCitizen() );
-			preparedStatement.setString( 11, customer.getSeniorCitizenID() );
-			preparedStatement.setString( 12, customer.getBirthCertificate() );
-			preparedStatement.setInt( 13, customer.getCustomerID() );
+			preparedStatement.setString( 2, customer.getCustomerFirstName() );
+			preparedStatement.setString( 3, customer.getCustomerMiddleName() );
+			preparedStatement.setString( 4, customer.getCustomerSurName() );   
+			preparedStatement.setString( 5, customer.getCustomerStreet() );  
+			preparedStatement.setString( 6, customer.getCustomerBarangay() );
+			preparedStatement.setInt(7, customer.getCityID());               
+			preparedStatement.setString( 8, "METRO MANILA" );
+			preparedStatement.setString( 9, customer.getCustomerLandline() );
+			preparedStatement.setString( 10, customer.getCustomerCellular() );
+			preparedStatement.setString( 11, customer.getEmail() );           
+			preparedStatement.setBoolean( 12, customer.isIsSeniorCitizen() );
+			preparedStatement.setString( 13, customer.getSeniorCitizenID() );
+			preparedStatement.setString( 14, customer.getBirthCertificate() );
+			preparedStatement.setInt( 15, customer.getCustomerID() );
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
@@ -113,7 +119,9 @@ public class CustomerImplement implements CustomerDAO{
 				Customer customer = new Customer();
 				customer.setCustomerID( resultSet.getInt( "CustomerID" ) );
 				customer.setUserID( resultSet.getInt( "UserID" ) );
-				customer.setCustomerName( resultSet.getString( "CustomerName" ) );
+				customer.setCustomerFirstName( resultSet.getString( "CustomerFirstName" ) );
+				customer.setCustomerMiddleName( resultSet.getString( "CustomerMiddleName" ) );
+				customer.setCustomerSurName( resultSet.getString( "CustomerLastName" ) );
 				customer.setCustomerStreet( resultSet.getString("CustomerStreet") );
 				customer.setCustomerBarangay( resultSet.getString("CustomerBarangay") );
 				customer.setCityID( resultSet.getInt("CityID") );
@@ -145,7 +153,9 @@ public class CustomerImplement implements CustomerDAO{
 			while( resultSet.next() ) {
 				customer.setCustomerID( resultSet.getInt( "CustomerID" ) );
 				customer.setUserID( resultSet.getInt( "UserID" ) );
-				customer.setCustomerName( resultSet.getString( "CustomerName" ) );
+				customer.setCustomerFirstName( resultSet.getString( "CustomerFirstName" ) );
+				customer.setCustomerMiddleName( resultSet.getString( "CustomerMiddleName" ) );
+				customer.setCustomerSurName( resultSet.getString( "CustomerLastName" ) );
 				customer.setCustomerStreet( resultSet.getString("CustomerStreet") );
 				customer.setCustomerBarangay( resultSet.getString("CustomerBarangay") );
 				customer.setCityID( resultSet.getInt("CityID") );
@@ -174,7 +184,9 @@ public class CustomerImplement implements CustomerDAO{
 			while( resultSet.next() ) {
 				customer.setCustomerID( resultSet.getInt( "CustomerID" ) );
 				customer.setUserID( resultSet.getInt( "UserID" ) );
-				customer.setCustomerName( resultSet.getString( "CustomerName" ) );
+				customer.setCustomerFirstName( resultSet.getString( "CustomerFirstName" ) );
+				customer.setCustomerMiddleName( resultSet.getString( "CustomerMiddleName" ) );
+				customer.setCustomerSurName( resultSet.getString( "CustomerLastName" ) );
 				customer.setCustomerStreet( resultSet.getString("CustomerStreet") );
 				customer.setCustomerBarangay( resultSet.getString("CustomerBarangay") );
 				customer.setCityID( resultSet.getInt("CityID") );

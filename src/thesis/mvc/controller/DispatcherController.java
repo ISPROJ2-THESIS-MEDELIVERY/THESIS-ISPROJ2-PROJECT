@@ -140,7 +140,7 @@ public class DispatcherController extends HttpServlet {
 				Order order = new OrderImplement().getOrderById(orderID);
 				order.setOrderStatus("RETURNED");
 				new OrderImplement().updateOrder(order);
-		        audit.setActionTaken("User cancelled the order with order ID:" + order.getOrderID());
+		        audit.setActionTaken("User finished the returning of product the order with order ID:" + order.getOrderID());
 			} else {
 				session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
 		        audit.setActionTaken("User was unable to dispatch order due to Cancellation of order ID:" + orderID);

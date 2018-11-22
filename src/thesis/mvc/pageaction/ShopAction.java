@@ -277,9 +277,9 @@ public class ShopAction {
 	                audit.setLogType("Purchase");
 	                audit.setTimestamp(CurrentDate);
 	                audit.setActionTaken("User ID "
-	                + new CustomerImplement().getCustomerById(order.getCustomerID()).getUserID()
+	                + customer.getUserID()
 	                + " With the Name "
-	                + new CustomerImplement().getCustomerById(order.getCustomerID()).getCustomerName()
+	                + customer.getCustomerFirstName() + " " + customer.getCustomerMiddleName() + " " + customer.getCustomerSurName()
 	                + " made an order. With order ID: " + order.getOrderID());
 	                AuditImplement AuditImp = new AuditImplement();
 	                AuditImp.addAudit(audit);

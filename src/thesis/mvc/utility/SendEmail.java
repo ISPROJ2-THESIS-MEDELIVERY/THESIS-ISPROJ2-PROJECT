@@ -11,6 +11,7 @@ import thesis.mvc.implement.CustomerImplement;
 import thesis.mvc.implement.OrderDetailImplement;
 import thesis.mvc.implement.OrderImplement;
 import thesis.mvc.implement.ProductImplement;
+import thesis.mvc.model.Customer;
 import thesis.mvc.model.Order;
 import thesis.mvc.model.OrderDetail;
 
@@ -121,15 +122,16 @@ public class SendEmail
 					"\" class=\"es-button\" target=\"_blank\" style=\"font-size: 16px; border-top-width: 10px; border-bottom-width: 10px; " + 
 					"border-radius: 5px;  none repeat scroll 0% 0%; \">medeliveryincorporated@gmail.com</a>"; 
 		}
+		Customer customer = new CustomerImplement().getCustomerById(order.getCustomerID());
 		HTMLMessage +=
 				"<h4>Order #: " + order.getOrderID() + "</h4></br>" + 
 				"<h4>Order Date: " + dateFormat.format(order.getDateOrdered()) + "</h4></br>" + 
 				"<h4>Order Status: "  + order.getOrderStatus() + "</h4></br>" + 
-				"<h4>Customer Name: " + new CustomerImplement().getCustomerById(order.getCustomerID()).getCustomerName() + "</h4></br>" + 
+				"<h4>Customer Name: " + customer.getCustomerFirstName() + " " + customer.getCustomerMiddleName() + " " + customer.getCustomerSurName() + "</h4></br>" + 
 				"<h4>Address: " + order.getOrderAddress() + "</h4></br>" + 
 				"<h4>City: " + new CityListingImplement().getCityListingById(order.getCityID()).getCityName() + "</h4>" +  
 				"<h4>ITEMS ORDERED</h4>" + 
-				"<table cellspacing=\"0\" cellpadding=\"2\" align=\"Left\">                                                                                                                                               " + 
+				"<table cellspacing=\"0\" cellpadding=\"2\" align=\"Left\">" + 
 				"<table>" +
 				"<thead>" + 
 				"	<tr>" + 

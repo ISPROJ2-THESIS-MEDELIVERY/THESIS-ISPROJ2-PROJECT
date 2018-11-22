@@ -26,7 +26,7 @@ public class CustomerImplement implements CustomerDAO{
 		try(PreparedStatement stmt = conn.prepareStatement(""
         		+ "INSERT INTO Customer "
         		+ "(`UserID`, `CustomerFirstName`, `CustomerMiddleName`, `CustomerLastName`, `CustomerStreet`, `CustomerBarangay`, `CityID`, `CustomerProvince`, `CustomerLandline`, `CustomerCellular`, `Email`, `IsSeniorCitizen`, `SeniorCitizenID`, `BirthCertificate`) " 
-        		+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
+        		+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
 			stmt.setInt( 1, customer.getUserID() );
 			stmt.setString( 2, customer.getCustomerFirstName() );
 			stmt.setString( 3, customer.getCustomerMiddleName() );

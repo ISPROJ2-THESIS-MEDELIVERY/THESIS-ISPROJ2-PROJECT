@@ -403,7 +403,7 @@
 							<h4 class="list-group-item-heading">Customer Details:</h4>
 							<p class="list-group-item-text">
 								User Name:
-								<c:out value="${CustomerInfo.customerName}"/>
+								<c:out value="${customerName}"/>
 							</p>
 							<p class="list-group-item-text">
 								Username:
@@ -447,7 +447,6 @@
         			<div class="list-group">
     					<a class="list-group-item">
       						<h4 class="list-group-item-heading">Dispatcher Details:</h4>
-      						<p class="list-group-item-text">User ID: <c:out value="${userID}" /></p>
       						<p class="list-group-item-text">Username: <c:out value="${username}" /></p>
       						<p class="list-group-item-text">User Type: Dispatcher </p>
     					</a>
@@ -583,8 +582,9 @@
 						<a class="list-group-item">
 							<h4 class="list-group-item-heading">Pharmacist Details</h4>
 							<p class="list-group-item-text">
-								User ID:
-								<c:out value="${userID}" />
+								Pharmacist Name:
+								<c:out value="${pharmacist.firstName}" /> <c:out
+								value="${pharmacist.lastName}" />
 							</p>
 							<p class="list-group-item-text">
 								Username:
@@ -1006,10 +1006,10 @@
 			<div class="list-group">
 				<a class="list-group-item">
 					<h4 class="list-group-item-heading">Admin Details:</h4>
-					<p class="list-group-item-text">
+					<%-- <p class="list-group-item-text">
 						User ID:
 						<c:out value="${userID}" />
-					</p>
+					</p> --%>
 					<p class="list-group-item-text">
 						Username:
 						<c:out value="${username}" />

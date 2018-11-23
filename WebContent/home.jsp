@@ -612,8 +612,8 @@ Welcome, <c:out value="${username}"/>
 				<div class="col-md-6">
 					
 					
-					<c:if test="${message != null}">
-						<c:out value="${message}" />
+					<c:if test="${Message != null}">
+						<c:out value="${Message}" />
 					</c:if>
 					
 						<h3 style="color:#21a9af; margin-left: 20px;" class="list-group-item-text">

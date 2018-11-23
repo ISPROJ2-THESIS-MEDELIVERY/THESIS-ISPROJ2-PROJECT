@@ -265,7 +265,6 @@ public class TestController extends HttpServlet {
 	        request.getRequestDispatcher("/test2.jsp").forward(request, response);
 		
     	EncryptionFunction encryptionFunction = new EncryptionFunction();
-        System.out.println(encryptionFunction.decrypt("joOaU42fMTvGlrxW9Hm1tQ=="));
         System.out.println(encryptionFunction.encrypt("27"));
         
         Calendar calendar = Calendar.getInstance();
@@ -279,5 +278,8 @@ public class TestController extends HttpServlet {
         System.out.println(timestamp1);
         System.out.println(timestamp2);
         */
+    	EncryptionFunction encryptionFunction = new EncryptionFunction();
+        System.out.println(encryptionFunction.decrypt("QQGX/BHUOsEIR/1L17wiNg=="));
+        System.out.println(encryptionFunction.encrypt("SSID8.jpeg"));
     }
 }

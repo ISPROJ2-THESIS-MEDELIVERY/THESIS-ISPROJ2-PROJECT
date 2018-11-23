@@ -44,9 +44,7 @@ public class RegistrationController extends HttpServlet {
 	private static final String UPLOAD_DIR = "images";
 	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	
-	private final String UPLOAD_DIRECTORY = "../../../../../../../../THESIS-ISPROJ2-PROJECT/WebContent/images/";
-	//private final String UPLOAD_DIRECTORY = "C:/xampp/tomcat/webapps/Medelivery/images/";
-	//private final String UPLOAD_DIRECTORY = "/C:/ISPROJ2/Medelivery/webapp/images/";
+	private final String UPLOAD_DIRECTORY = "/C:/ISPROJ2/Medelivery/webapp/images/";
 
 	public RegistrationController() {
 		conn = DBUtility.getConnection();

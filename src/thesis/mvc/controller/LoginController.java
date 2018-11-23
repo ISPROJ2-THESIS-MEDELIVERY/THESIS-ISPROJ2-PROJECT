@@ -38,6 +38,7 @@ public class LoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String forward;
 		HttpSession session = request.getSession();
+		session.removeAttribute("Message");
 		
 		//Logout
 		if ((int) session.getAttribute("userID") > 0) {
@@ -55,6 +56,7 @@ public class LoginController extends HttpServlet {
 		LoginAction loginAction = new LoginAction();
 		conn = DBUtility.getConnection();
 		HttpSession session = request.getSession();
+		session.removeAttribute("Message");
 		RequestDispatcher view;
 		
 		//Username and password check

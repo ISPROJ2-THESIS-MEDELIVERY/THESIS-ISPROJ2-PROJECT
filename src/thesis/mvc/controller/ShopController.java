@@ -59,8 +59,9 @@ public class ShopController extends HttpServlet {
 	//private final String UPLOAD_DIRECTORY = "/C:/ISPROJ2/Medelivery/webapp/images/";
 	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    	
 		HttpSession session = request.getSession();
+		session.removeAttribute("Message");
 	   	SearchAction searchAction = new SearchAction();
 	   	String forward = "/Catalog.jsp";
 
@@ -83,6 +84,7 @@ public class ShopController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Boolean Test = ServletFileUpload.isMultipartContent(request);
 		HttpSession session = request.getSession(true);
+		session.removeAttribute("Message");
 		List<OrderDetail> OrderDetails = new ArrayList<OrderDetail>();
 		if (session.getAttribute("OrderDetails") != null) {
 			OrderDetails = (List<OrderDetail>) session.getAttribute("OrderDetails");

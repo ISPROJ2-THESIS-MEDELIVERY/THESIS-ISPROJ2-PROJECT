@@ -45,6 +45,7 @@ public class ApprovalController extends HttpServlet{
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	HttpSession session = request.getSession();
+		session.removeAttribute("Message");
 		String action = "";
 		//String forward;
 		if (request.getParameter("action") != null && !request.getParameter("action").isEmpty()) { action = request.getParameter( "action" ); }

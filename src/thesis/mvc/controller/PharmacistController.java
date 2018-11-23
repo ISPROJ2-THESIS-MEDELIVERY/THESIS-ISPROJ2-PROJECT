@@ -40,6 +40,7 @@ public class PharmacistController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
+		session.removeAttribute("Message");
 		String action = request.getParameter( "Action" );
     	Pharmacist pharmacist = new PharmacistImplement().getPharmacistById((int) session.getAttribute("Pharmacist")); 
     	int pharmaID = new BranchImplement().getBranchById(pharmacist.getBranchID()).getPharmacyID();

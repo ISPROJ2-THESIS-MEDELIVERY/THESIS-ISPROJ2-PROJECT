@@ -66,6 +66,7 @@ public class InformationController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		session.removeAttribute("Message");
 		String Action = request.getParameter("Action");
 		session.setAttribute("CityList", new CityListingImplement().getAllCityListing() );
 		
@@ -129,6 +130,7 @@ public class InformationController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		session.removeAttribute("Message");
 		RegistrationAction Registration = new RegistrationAction();
 		Boolean test = false;
 		conn = DBUtility.getConnection();

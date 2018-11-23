@@ -208,7 +208,7 @@ $(document).ready(function() {
 			"paging": true,
 			"autoWidth": true,
 			"buttons": [
-				
+				'colvis',
 				'excelHtml5',
         		'pdfHtml5',
 				'print'

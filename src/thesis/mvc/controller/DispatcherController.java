@@ -89,6 +89,7 @@ public class DispatcherController extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		session.removeAttribute("Message");
 		
 		String action = "";
 		if (request.getParameter("action") != null) {

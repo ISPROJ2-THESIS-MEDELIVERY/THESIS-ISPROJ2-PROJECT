@@ -57,6 +57,7 @@ public class ProductController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//String forward = "";
 		HttpSession session = request.getSession();
+		session.removeAttribute("Message");
 		
 		String Action = request.getParameter( "Action" );
 
@@ -120,6 +121,7 @@ public class ProductController extends HttpServlet {
 		Timestamp CurrentDate = new Timestamp(Calendar.getInstance().getTime().getTime());
 		String Action = request.getParameter( "Action" );
 		HttpSession session = request.getSession();
+		session.removeAttribute("Message");
 
 		if( Action.equals(null) ) {
 			response.sendRedirect(request.getContextPath() + "/index.jsp");

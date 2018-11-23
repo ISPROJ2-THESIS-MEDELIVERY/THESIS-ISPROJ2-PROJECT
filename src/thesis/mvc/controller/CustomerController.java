@@ -58,6 +58,7 @@ public class CustomerController extends HttpServlet{
 		//Ensures that the person can select what he/she wants to buy
 		String forward;
 		HttpSession session = request.getSession();
+		session.removeAttribute("Message");
 		
 		String action = "";
 		if (request.getParameter("action") != null) {
@@ -146,6 +147,7 @@ public class CustomerController extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
+		session.removeAttribute("Message");
 		
 		String action = "";
 		if (request.getParameter("action") != null) {

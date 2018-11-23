@@ -675,7 +675,6 @@ Welcome, <c:out value="${username}"/>
 	<table id="phardruglistTable" class="table table-striped table-bordered" width="100%">
 		<thead>
 			<tr>
-				<th>Product ID</th>
 				<th>Product Name</th>
 				<th>Generic Name</th>
 				<th>Product Strength</th>
@@ -689,7 +688,6 @@ Welcome, <c:out value="${username}"/>
 		<tbody>
 			<c:forEach items="${pharmaProductList}" var="item">
 					<tr>
-						<td><c:out value="${item.productID}" /></td>
 						<td><c:out value="${item.productName}" /></td>
 						<td><c:out value="${item.genericName}" /></td>
 						<td><c:out value="${item.productStrength}" /></td>

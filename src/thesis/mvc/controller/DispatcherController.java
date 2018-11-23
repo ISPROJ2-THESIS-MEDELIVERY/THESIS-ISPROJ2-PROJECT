@@ -75,6 +75,7 @@ public class DispatcherController extends HttpServlet {
 			driver.setCourierserviceID(CourierID);
 			driver.setInTransit(false);
 			new DriverImplement().addDriver(driver);
+			session.setAttribute( "Message" , "Driver has been added" );
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		} else if(action.equalsIgnoreCase("addVehicle")) {
 			Vehicle vehicle = new Vehicle();
@@ -82,6 +83,7 @@ public class DispatcherController extends HttpServlet {
 			vehicle.setCourierServiceID(CourierID);
 			vehicle.setVehicleModel((String) request.getParameter("Vehicle"));
 			new VehicleImplement().addVehicle(vehicle);
+			session.setAttribute( "Message" , "Vehicle has been added" );
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}
 		

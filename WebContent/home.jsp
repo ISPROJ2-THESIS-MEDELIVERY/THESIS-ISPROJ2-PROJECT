@@ -107,12 +107,6 @@
 		</div>
 	</div>
 	
-	<%-- <c:out value = "${pharm.pharmacyName}">
-		<div role="alert" class="alert alert-info">
-			<center><span><strong>Notification Message</strong></span></center>
-		</div>
-	</c:out> --%>
-	
 	
 
 <c:if test="${userAccess == null}">

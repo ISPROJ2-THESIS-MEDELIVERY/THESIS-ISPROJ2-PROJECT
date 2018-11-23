@@ -180,7 +180,7 @@ Welcome, <c:out value="${username}"/>
 <c:forEach items="${Featurepharm}" var="pharm">
 <div id="${pharm.pharmacyID}" class="tabcontent">
   <%-- <h3>${pharm.pharmacyName}</h3> --%>
-  <img class="center-block" src="images/<c:out value="${pharm.pharmacyLogo}"/>" />
+  <img class="center-block" src="images/<c:out value="${pharm.pharmacyLogo}"/>" width="400px" height="400px"/>
   <p>
   <h2 style="text-align:center">Welcome to <c:out value="${pharm.pharmacyName}">: </c:out>'s featured products page</h2>
 <p style="text-align:center">You may input your desired amount in the textbox provided.</p>

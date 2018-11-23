@@ -63,7 +63,13 @@
     
     <br>
     
+    
+    
+    
     <div id="container-fluid">
+    <c:if test="${Message != null}">
+						<c:out value="${Message}" />
+					</c:if>
 	<h2>PENDING DELIVERIES</h2>
     <table id="pendingTable" class="table-wrapper table-striped table-bordered" width="100%">
 		<thead>

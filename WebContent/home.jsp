@@ -107,11 +107,11 @@
 		</div>
 	</div>
 	
-	<c:out value = "${pharm.pharmacyName}">
+	<%-- <c:out value = "${pharm.pharmacyName}">
 		<div role="alert" class="alert alert-info">
 			<center><span><strong>Notification Message</strong></span></center>
 		</div>
-	</c:out>
+	</c:out> --%>
 	
 	
 
@@ -464,6 +464,10 @@ Welcome, <c:out value="${username}"/>
 Welcome, <c:out value="${username}"/>
 							</h3>
 		
+		<c:if test="${message != null}">
+						<c:out value="${message}" />
+					</c:if>
+		
 		<br>
 		
     	<i style="font-size:200px; color:#21a9af; margin-left:20px;" class="fa">&#xf21c;</i>
@@ -607,6 +611,10 @@ Welcome, <c:out value="${username}"/>
 			<div class="row">
 				<div class="col-md-6">
 					
+					
+					<c:if test="${message != null}">
+						<c:out value="${message}" />
+					</c:if>
 					
 						<h3 style="color:#21a9af; margin-left: 20px;" class="list-group-item-text">
 Welcome, <c:out value="${username}"/>
@@ -804,8 +812,12 @@ Welcome, <c:out value="${username}"/>
 						<center>Current Orders Heading to your Pharmacy That DO
 							require a prescription:</center>
 					</h4>
+					
 				</a>
 			</div>
+			
+			
+			
 			<br>
 			<table id="wpres" class="table table-striped table-bordered"
 				width="125%">
@@ -1867,7 +1879,16 @@ Welcome, <c:out value="${username}"/>
 		}
 
 		google.maps.event.addDomListener(window, 'load', initialize);
-	</script>
+	
+		</script>
+
+
+  
+
+   
+
+
+
 
 </body>
 
@@ -2129,6 +2150,8 @@ body {
     
 
 
+
+
 </style>
 
 
@@ -2139,6 +2162,16 @@ body {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+
+
+
+
+
+
+
+
+
+
 
 <script>
 
@@ -2360,5 +2393,7 @@ $(document).ready(function() {
 
 
 </script> -->
+
+
 
 </html>

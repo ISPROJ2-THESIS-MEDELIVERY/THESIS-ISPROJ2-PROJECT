@@ -67,9 +67,11 @@
     
     
     <div id="container-fluid">
-    <c:if test="${Message != null}">
-						<c:out value="${Message}" />
-					</c:if>
+   				<c:if test="${Message != null}">
+					<div class="alert" style="padding: 20px; background-color: #21a9afa6; color: white; font-weight: bold;">  						
+					<c:out value="${Message}" />
+					<span class="closebtn" style="margin-left: 250px; font-size: 22px;" onclick="this.parentElement.style.display='none';">&times;</span> </div>
+				</c:if>
 	<h2>PENDING DELIVERIES</h2>
     <table id="pendingTable" class="table-wrapper table-striped table-bordered" width="100%">
 		<thead>

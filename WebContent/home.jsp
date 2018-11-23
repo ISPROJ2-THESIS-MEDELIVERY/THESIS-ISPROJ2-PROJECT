@@ -606,17 +606,12 @@ Welcome, <c:out value="${username}"/>
 				<div class="col-md-6">
 					
 				<c:if test="${Message != null}">
-					<div class="alert">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-						<c:out value="${Message}" /></div>
-					</c:if>
-
+					<div class="alert" style="padding: 20px; background-color: #21a9afa6; color: white; font-weight: bold;">  						
+					<c:out value="${Message}" />
+					<span class="closebtn" style="margin-left: 250px; font-size: 22px;" onclick="this.parentElement.style.display='none';">&times;</span> </div>
+				</c:if>
+				
 					
-					
-					
-					<c:if test="${Message != null}">
-						<c:out value="${Message}" />
-					</c:if>
 					
 						<h3 style="color:#21a9af; margin-left: 20px;" class="list-group-item-text">
 Welcome, <c:out value="${username}"/>

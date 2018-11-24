@@ -85,6 +85,14 @@ public class DispatcherController extends HttpServlet {
 			new VehicleImplement().addVehicle(vehicle);
 			session.setAttribute( "Message" , "Vehicle has been added" );
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
+		} else if(action.equalsIgnoreCase("DeleteDriver")) {
+			new DriverImplement().deleteDriver(Integer.valueOf(request.getParameter("DriverID")));
+			session.setAttribute( "Message" , "Driver has been Deleted" );
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
+		} else if(action.equalsIgnoreCase("DeleteVehicle")) {
+			new VehicleImplement().deleteVehicle((String) request.getParameter("PlateNumber"));
+			session.setAttribute( "Message" , "Vehicle has been Deleted" );
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
 		}
 		
 	}
@@ -99,7 +107,7 @@ public class DispatcherController extends HttpServlet {
 		}
 		Timestamp CurrentDate = new Timestamp(Calendar.getInstance().getTime().getTime());
         Audit audit = new Audit();
-        audit.setUserID((int) session.getAttribute("Dispatcher"));
+        audit.setUserID((int) session.getAttribute("userID"));
         audit.setLogType("Login");
         audit.setTimestamp(CurrentDate);
 		if(action.isEmpty()) {

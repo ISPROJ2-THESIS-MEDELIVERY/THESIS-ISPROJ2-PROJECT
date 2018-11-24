@@ -25,6 +25,7 @@ import thesis.mvc.implement.PrescriptionImplement;
 import thesis.mvc.implement.ProductImplement;
 import thesis.mvc.implement.StocksImplement;
 import thesis.mvc.implement.StocksPriceImplement;
+import thesis.mvc.implement.VehicleImplement;
 import thesis.mvc.pageaction.ReportAction;
 import thesis.mvc.pageaction.SearchAction;
 import thesis.mvc.utility.EncryptionFunction;
@@ -73,6 +74,8 @@ public class HomeController  extends HttpServlet {
 			//Dispatcher
 			int courierServiceId = new DispatcherImplement().getDispatcherById((int) session.getAttribute("Dispatcher")).getCourierServiceID();
 			session.setAttribute("DriverList" , new DriverImplement().getDriversbyCourier(courierServiceId) );
+			session.setAttribute("CourierService" , courierServiceId);
+			session.setAttribute("VehicleList" , new VehicleImplement().getVehicles() );
 			break;
 		case 3:
 			int BranchxofPharmacist = new PharmacistImplement().getPharmacistById( (int) session.getAttribute("Pharmacist") ).getBranchID();

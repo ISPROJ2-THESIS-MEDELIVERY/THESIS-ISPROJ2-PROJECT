@@ -488,6 +488,7 @@ Welcome, <c:out value="${username}"/>
 					<th>Driver Address</th>
 					<th>Driver Contact Number</th>
 					<th>Driver In Transit?</th>
+					<th>Delete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -503,7 +504,41 @@ Welcome, <c:out value="${username}"/>
          						No
      						</c:if>
 						</td>
+						<td>
+							<form action="DispatcherController">
+					        	<input type="hidden" name="Action" value="DeleteDriver"/>
+					        	<input type="hidden" name="DriverID" value="<c:out value="${driver.driverID}" />"/>
+					            <button class="btn btn-success btn-block" type="submit">Delete Driver</button>
+					        </form>
+						</td>
 					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<table id="driverTable" class="table table-striped table-bordered"
+			width="100%">
+			<thead>
+				<tr>
+					<th>Vehicle Plate</th>
+					<th>Vehicle Model</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${VehicleList}" var="vehicle">
+					<c:if test="${CourierService == vehicle.courierServiceID}">
+					<tr>
+						<td><c:out value="${vehicle.plateNumber}" /></td>
+						<td><c:out value="${vehicle.vehicleModel}" /></td>
+						<td>
+							<form action="DispatcherController">
+					        	<input type="hidden" name="Action" value="DeleteVehicle"/>
+					        	<input type="hidden" name="PlateNumber" value="<c:out value="${vehicle.plateNumber}" />"/>
+					            <button class="btn btn-success btn-block" type="submit">Delete Vehicle</button>
+					        </form>
+						</td>
+					</tr>
+					</c:if>
 				</c:forEach>
 			</tbody>
 		</table>

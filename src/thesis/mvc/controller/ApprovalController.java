@@ -58,7 +58,7 @@ public class ApprovalController extends HttpServlet{
 	    ApprovalAction approvalAction = new ApprovalAction();
 		Timestamp CurrentDate = new Timestamp(Calendar.getInstance().getTime().getTime());
         Audit audit = new Audit();
-        audit.setUserID((int) session.getAttribute("Pharmacist"));
+        audit.setUserID((int) session.getAttribute("userID"));
         audit.setLogType("Approval");
         audit.setTimestamp(CurrentDate);
 	    
@@ -66,20 +66,20 @@ public class ApprovalController extends HttpServlet{
 			session.setAttribute( "Message" , "Order Has been Cancelled by the user" );
 		} else if (action.equalsIgnoreCase("OrderReject")){
 		   	approvalAction.pharmacistApproval( orderID, 1 );
-	        audit.setActionTaken("order ID: " + orderID + " was rejected by user ID No:" + session.getAttribute("Pharmacist"));
+	        audit.setActionTaken("order ID: " + orderID + " was rejected by Pharmacist ID No:" + session.getAttribute("Pharmacist"));
 			session.setAttribute( "Message" , "Order Has been Rejected by the user" );
 		} else if (action.equalsIgnoreCase("OrderApprove")){
 		   	approvalAction.pharmacistApproval( orderID, 2 );
 			Order order = new OrderImplement().getOrderById(orderID);
 			new SendEmail().send(new CustomerImplement().getCustomerById(order.getCustomerID()).getEmail(), "Transaction accepted on " + dateFormat.format(CurrentDate), new SendEmail().OrderEmail(order));
-	        audit.setActionTaken("order ID: " + orderID + " was approved by user ID No:" + session.getAttribute("Pharmacist"));
+	        audit.setActionTaken("order ID: " + orderID + " was approved by Pharmacist ID No:" + session.getAttribute("Pharmacist"));
 			session.setAttribute( "Message" , "Order Has been Approved by the user" );
 		} else if (action.equalsIgnoreCase("OrderInvalidate")){
 			Order order = new OrderImplement().getOrderById(orderID);
 			if (new ShopAction().RefundOrder(order, "Pharmacist Invalidated the order")) {
-		        audit.setActionTaken("order ID:" + orderID + " was invalidated and cancelled by user ID No:" + session.getAttribute("Pharmacist"));
+		        audit.setActionTaken("order ID:" + orderID + " was invalidated and cancelled by Pharmacist ID No:" + session.getAttribute("Pharmacist"));
 			} else {
-		        audit.setActionTaken("order ID:" + orderID + " was invalidated and cancelled by user ID No:" + session.getAttribute("Pharmacist") + " But Failed to refund due to error");
+		        audit.setActionTaken("order ID:" + orderID + " was invalidated and cancelled by Pharmacist ID No:" + session.getAttribute("Pharmacist") + " But Failed to refund due to error");
 			}
 		   	approvalAction.pharmacistApproval( orderID, 3 );
 			session.setAttribute( "Message" , "Order Has been invalidated by the user" );
@@ -91,11 +91,11 @@ public class ApprovalController extends HttpServlet{
 		} else if (action.equalsIgnoreCase("ReturnReject")){
 		   	approvalAction.pharmacistApproval( orderID, 4 );
 			session.setAttribute( "Message" , "Return order Has been approved by the user" );
-	        audit.setActionTaken("order ID: " + orderID + " was approved for returns by user ID No:" + session.getAttribute("Pharmacist"));
+	        audit.setActionTaken("order ID: " + orderID + " was approved for returns by Pharmacist ID No:" + session.getAttribute("Pharmacist"));
 		} else if (action.equalsIgnoreCase("ReturnApprove")){
 		   	approvalAction.pharmacistApproval( orderID, 5 );
 			session.setAttribute( "Message" , "Return order Has been rejected by the user" );
-	        audit.setActionTaken("order ID: " + orderID + " was disapproved for returns by user ID No:" + session.getAttribute("Pharmacist"));
+	        audit.setActionTaken("order ID: " + orderID + " was disapproved for returns by Pharmacist ID No:" + session.getAttribute("Pharmacist"));
 		}
         AuditImplement AuditImp = new AuditImplement();
         AuditImp.addAudit(audit);

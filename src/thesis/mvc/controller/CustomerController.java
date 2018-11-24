@@ -154,7 +154,6 @@ public class CustomerController extends HttpServlet{
 		}
 		
 		if (action.equalsIgnoreCase("AddSeniorCitizenID")) {
-			String SSIDName = "";
 			Customer customer = new CustomerImplement().getCustomerById((int)session.getAttribute("Customer"));			
 			 try {
 
@@ -165,7 +164,7 @@ public class CustomerController extends HttpServlet{
 						String imageType = end.replace("image/", "");
 						name = name + "." + imageType;
 						String DbaseName = new EncryptionFunction().encrypt(name);
-						SSIDName = DbaseName;
+						customer.setSeniorCitizenID(DbaseName);
 						String AFileName = name;
 						filePart.write(UPLOAD_DIRECTORY + File.separator + AFileName);
 						System.out.println( "File Uploaded Successfully: " + UPLOAD_DIRECTORY + File.separator + AFileName);
@@ -177,7 +176,6 @@ public class CustomerController extends HttpServlet{
 	            	System.out.println( "File Upload Failed due to " + ex);
 	            }
 
-			customer.setSeniorCitizenID(SSIDName);
 			customer.setBirthCertificate(new EncryptionFunction().encrypt(customer.getBirthCertificate()));
 			new CustomerImplement().updateCustomer(customer);
 			response.sendRedirect(request.getContextPath() + "/index.jsp");

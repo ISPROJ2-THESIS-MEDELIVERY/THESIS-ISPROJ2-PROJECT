@@ -1,6 +1,7 @@
 package thesis.mvc.utility;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.mail.*;
@@ -85,6 +86,9 @@ public class SendEmail
 	
 	public String OrderEmail(Order orderRecieve) {
 		DateFormat dateFormat = new SimpleDateFormat("yy/MM/dd hh:mm a");
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setGroupingUsed(true);
+        df.setGroupingSize(3);
 		Order order = new OrderImplement().getOrderById(orderRecieve.getOrderID());
 		List<OrderDetail> OrderDetails = new OrderDetailImplement().getspecificOrderDetail(order.getOrderID());
 		String HTMLMessage = "";
@@ -146,16 +150,16 @@ public class SendEmail
 					"        <tr>" + 
 					"            <td>"+ new ProductImplement().getProductById(orderDetail.getProductID()).getProductName() +"</td>" + 
 					"            <td style=\"text-align: center;\" width=\"60\">" + orderDetail.getQuantity() + "</td>" + 
-					"            <td style=\"text-align: center;\" width=\"100\">"+ orderDetail.getCostPerUnit() + "</td>" + 
+					"            <td style=\"text-align: center;\" width=\"100\">&#8369;"+ df.format(orderDetail.getCostPerUnit()) + "</td>" + 
 					"        </tr>";
 		}
 
 		HTMLMessage +=
 				"    </tbody>" + 
 				"</table></br>" + 
-				"<h4>Delivery Fee: 50 Pesos</h4></br>" + 
+				"<h4>Delivery Fee: &#8369;50</h4></br>" + 
 				"<h4>Discount: N/A</h4></br>" + 
-				"<h4>Order Total (Vat inclusive):" + order.getActualCost() +"</h4></br>" + 
+				"<h4>Order Total (Vat inclusive):&#8369;" + df.format(order.getActualCost()) +"</h4></br>" + 
 				"<img src=\"https://isproj2a.benilde.edu.ph/Medelivery/assets/img/medlogopill.png\" alt=\"\" width=\"125\">";
 		return HTMLMessage;
 	}
